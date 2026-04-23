@@ -1,4 +1,5 @@
-"use client";   ////zare_nk_041108_okk
+ ////zare_nk_050124_okk
+"use client";   
 import "bootstrap/dist/css/bootstrap.min.css";
 // import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
 import * as bootstrap from "bootstrap";

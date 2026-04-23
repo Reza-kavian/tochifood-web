@@ -1,3 +1,4 @@
+ ////zare_nk_050124_okk
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef, useMemo } from "react";
@@ -433,7 +434,14 @@ export function MiddleCountTedadSefr({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),
+                    // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
+                    // barmigardoone va ...(Number(bishAzMaxTedadYaMojoodi) === 1 ham ya true ya false barmigardoone,va darkol ba and(&&) natijeye kolli ya true 
+                    // midshe ya false,pas opacity meghdare nemigireh va faghat meghdari boolean barmigardooneh!!  )
+
+                    // opacity: Number(bishAzMaxTedadYaMojoodi) === 1 ? 0.3 : 1, //zare_nk_050124_nokteh(rahe1-in dastoor dorosteh va javab mideh)
+                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 }:{opacity: 1}), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
+                    ////zare_nk_050124_nokteh(rahe1 age gharare hamin opacity faghat meghdar begire khanatare,vali age bakhaim chandin khasiat ra meghdar bedim rahe2
+                    // tosiyeh mishe (masalan ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3,color:'silver' }:{opacity: 1,color:'red'}),))
                   }}
                   className="plussMinus"
                 // disabled={Boolean(Number(bishAzMaxTedadYaMojoodi))}
@@ -597,7 +605,14 @@ export function MiddleCountTedadSefr({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),
+                     // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
+                    // barmigardoone va ...(Number(bishAzMaxTedadYaMojoodi) === 1 ham ya true ya false barmigardoone,va darkol ba and(&&) natijeye kolli ya true 
+                    // midshe ya false,pas opacity meghdare nemigireh va faghat meghdari boolean barmigardooneh!!  )
+
+                    // opacity: Number(bishAzMaxTedadYaMojoodi) === 1 ? 0.3 : 1, //zare_nk_050124_nokteh(rahe1-in dastoor dorosteh va javab mideh)
+                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 }:{opacity: 1}), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
+                    ////zare_nk_050124_nokteh(rahe1 age gharare hamin opacity faghat meghdar begire khanatare,vali age bakhaim chandin khasiat ra meghdar bedim rahe2
+                    // tosiyeh mishe (masalan ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3,color:'silver' }:{opacity: 1,color:'red'}),))
                   }}
                   className="plussMinus"
                 // disabled={Boolean(Number(bishAzMaxTedadYaMojoodi))}
@@ -656,32 +671,32 @@ type ForCartContInProdDetValType = {
   idTag: string;
 };
 
-type SabadRowType = {
-  tedadInSabadOrDet: number;
-  ZaribForoosh: number;
-  IdKala: number;
-  NameKala: string | null;
-  DarsadTakhfif: number | null;
-  NameBerand: string | null;
-  FeeForoosh: number;
-  FeeMasraf: number;
-  BarcodeKala: string;
-  Mojoodi: number;
-  MaxTedad: number;
-  MasrafSatr: number;
-  father: any;
-  refForfather: RefObject<string | null>;
-  fromShowDetails: boolean;
-  idTag: string;
-};
+// type SabadRowType = {
+//   tedadInSabadOrDet: number;
+//   ZaribForoosh: number;
+//   IdKala: number;
+//   NameKala: string | null;
+//   DarsadTakhfif: number | null;
+//   NameBerand: string | null;
+//   FeeForoosh: number;
+//   FeeMasraf: number;
+//   BarcodeKala: string;
+//   Mojoodi: number;
+//   MaxTedad: number;
+//   MasrafSatr: number;
+//   father: any;
+//   refForfather: RefObject<string | null>;
+//   fromShowDetails: boolean;
+//   idTag: string;
+// };
 
-type SabadTitrType = {
-  IdSabadKharidTitr: number;
-  SumFeeMasraf: number;
-  soodAzKharid: number;
-  MablaghNahaee: number;
-  [key: string]: any;
-};
+// type SabadTitrType = {
+//   IdSabadKharidTitr: number;
+//   SumFeeMasraf: number;
+//   soodAzKharid: number;
+//   MablaghNahaee: number;
+//   [key: string]: any;
+// };
 
 type SabadSatrProps = {
   SabadRow: ForCartContInProdDetValType
@@ -795,8 +810,12 @@ export function SabadSatrComponent({
             className="card-img-top"
             alt={SabadRow.NameKala ? SabadRow.NameKala : ''}
             style={{ width: "100%", backgroundColor: "#EFEFEF" }}
-          //  onError={this.onerror=null;this.src=\'https://img.tochikala.com/Logo/tochi.png\';$(this).css(\'height\',\'auto\') }}
-          //  onLoad="$(this).css(\'background-color\',\'inherit\');$(this).css(\'height\',\'auto\');"
+            ////zare_nk_041213_added_st
+            onError={(e) => {
+              e.currentTarget.src = 'https://img.tochikala.com/Logo/tochi.png';
+              e.currentTarget.style.backgroundColor = 'white';
+            }}
+          ////zare_nk_041213_added_end
           />
         </div>
 
@@ -1048,7 +1067,7 @@ export default function ShallowRoutingExample() {
     useState<ForCartContInProdDetValType>();   //zare_nk_041121_updated(for shopToDiscount)
   const refForfather = useRef<string | null>(null);
   ////zare_nk_041115_added_st(albate felan niazam nemisheh)
-  const [sabadTitr, setSabadTitr] = useState<SabadTitrType[] | null>(null);
+  // const [sabadTitr, setSabadTitr] = useState<SabadTitrType[] | null>(null);
   ////zare_nk_041115_added_end(albate felan niazam nemisheh)
 
   const [bisatr, setBisatr] = useState(true);
@@ -1096,7 +1115,7 @@ export default function ShallowRoutingExample() {
       },
       body: JSON.stringify({
         BarcodeKala: barcodeKala,
-        IdShobeh: 7,
+        IdShobeh: 6,
         // IdKala: 1111 //zare_nk_041115_nokteh(api Api_SelectKalaShobeh ham BarcodeKala ro voroodi migireh ham IdKala ro.ma alan chon dar 
         //// barkode kala hanooz kala va keshi nashodeh va IdKala nadarim pas hamoon BarcodeKala ro miferestim va IdKala ro comment mikonim,meghdare 1111 ha soori neveshtam)
       }),
@@ -1329,7 +1348,7 @@ export default function ShallowRoutingExample() {
         };
 
         const inputData: InputDataType = {
-          IdShobeh: 7,
+          IdShobeh: 6,
           IsJashnvareh: 1,
           NameKala: "",
           IdG1: -1,
@@ -1507,7 +1526,7 @@ export default function ShallowRoutingExample() {
           BarcodeKala: addRemParam.BarcodeKala,
           Tedad: TedadOut,
           IdKala: addRemParam.IdKala,
-          IdShobeh: 7,
+          IdShobeh: 6,
           IdAddress: 23990
         }),
       });
@@ -1645,7 +1664,7 @@ export default function ShallowRoutingExample() {
           BarcodeKala: addRemParam.BarcodeKala,
           Tedad: TedadOut,
           IdKala: addRemParam.IdKala,
-          IdShobeh: 7,
+          IdShobeh: 6,
           IdAddress: 23990
         }),
       });
@@ -1772,7 +1791,7 @@ export default function ShallowRoutingExample() {
             ////zare_nk_041129_commented_end
           }
           else if (Tedad == addRemParam.ZaribForoosh) {
-             ////zare_nk_041129_commented_st
+            ////zare_nk_041129_commented_st
             // let htmlTag;
             // if (addRemParam.event) {
             //   htmlTag = addRemParam.event.target as HTMLElement;
@@ -2021,6 +2040,12 @@ export default function ShallowRoutingExample() {
                               style={{ height: "fit-content" }}
                               src={`https://img.tochikala.com/Product/${ForCartContInProdDetVal.IdKala}.webp`}
                               alt={ForCartContInProdDetVal.NameKala ?? ""}
+                              ////zare_nk_041213_added_st
+                              onError={(e) => {
+                                e.currentTarget.src = 'https://img.tochikala.com/Logo/tochi.png';
+                                e.currentTarget.style.backgroundColor = 'white';
+                              }}
+                            ////zare_nk_041213_added_end
                             />
                           )}
                         </div>

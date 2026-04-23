@@ -1,4 +1,4 @@
-////zare_nk_041124_okk
+////zare_nk_050124_okk
 //src\app\about\page.tsx
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -7,8 +7,8 @@ import Image002 from "../../../public/images/002.jpg";  //zare_nk_041105_nokteh(
 // az tage img mostaghiman estefadeh kard va baraye atribute src ham az / be onvane poosheye public estefadeh mikonim,masalan <img src="/Images/..." /> yani masire /public/Images/...)
 import { metadata as layoutMetadata} from "../layout"; //zare_nk_040131_nokteh(mitavan metadata ra az layout import nakard,inja import kardam ta roosh dastkari konam)
 // metadata.title = metadata.title + '-abouuttiimm';  //zare_nk_040416_nokteh(in khat az nazare manteghi khatarnake ke metadataye import shodeh ro dastkari konim va momkene dar builde proujeh error bedeh)
-export const metadata = { //zare_nk_041013_nokteh(be khatere in dastkari majboor shodim metadata ra az layout import konim vagarnah barnameh automat metadata ra dar tage html title gharar midad)
-    title: `${layoutMetadata.title} - About`, 
+export const metadata = { //zare_nk_041013_nokteh(be khatere in dastkari majboor shodim metadata ra az layout import konim vagarnah barnameh automat in const ba lafze metadata(faghat metadata) ra dar tage html title gharar midad)
+    title: `${layoutMetadata.title} - About03`, 
 };
 
 export default function Page() { 
@@ -24,7 +24,7 @@ export default function Page() {
       <h1 className={styles.shape}>salam 002</h1>
       <img src="./images/002.jpg" style={{ border: "4px dashed silver" }} />
       <br />
-      <Image alt="ggg" src={Image002} style={{ border: "4px dashed yellow" }} />   {/* zare_nk_041112_nokteh(albateh estefadeh az Image mamoolan makhsoos masir haye dakhele /src 
+      <Image alt="ggg" src={Image002} style={{ border: "7px dashed yellow" }} />   {/* zare_nk_041112_nokteh(albateh estefadeh az Image mamoolan makhsoos masir haye dakhele /src 
       hast va baraye masire /public tosiyeh nemishe az nazare standarde nextJs va hatta momkene error ham mideh va javab nadeh,baraye tasavire masire /public behtare az estafadeye
       mostaghime tage <img /> ba src="./..." estefadeh shavad ke ./ neshanaye mohtavaye dakhele public ast ) */}
       <br />

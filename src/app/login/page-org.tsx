@@ -1,4 +1,4 @@
-////zare_nk_041113_okk
+////zare_nk_050124_okk
 "use client";
 
 import { useState, useEffect } from "react";
@@ -74,7 +74,9 @@ export default function LoginPage() {
   };
 
   const handleGoogleLogin = () => {
-    // window.location.href = `/api/auth/google?redirect=${redirect}`; //rahe1(in karbordi nist chon vaghti baraye ehraze hoviat be khode site google ferestede mishe parametre redirect dar site google hazf mishe va vaghti google pas az ehrazehoviat be masire src\app\api\auth\callback\google hedayat mikone parametre redirect ra dar queryStringe src\app\api\auth\callback\google nemifereste va dige dastresi vojood nadare )
+    // window.location.href = `/api/auth/google?redirect=${redirect}`; //rahe1(in karbordi nist chon vaghti baraye ehraze hoviat be khode site google
+    // ferestede mishe parametre redirect dar site google hazf mishe va vaghti google pas az ehrazehoviat be masire src\app\api\auth\callback\google
+    // hedayat mikone parametre redirect ra dar queryStringe src\app\api\auth\callback\google nemifereste va dige dastresi vojood nadare )
     // sessionStorage.setItem('redirect', redirect); //rahe2(baraye rafe moshkele rahe1 az sessionStorage baraye zakhireye moteghayere redirect estefade mikonim)
     //ba lahaz kardane cookie be jaye sessionStorage rahe2 ham comment shod
     window.location.href = `/api/auth/google`; // هدایت به گوگل
@@ -82,7 +84,7 @@ export default function LoginPage() {
   
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <form
+      <form  
         onSubmit={handleLogin}
         className="p-6 bg-white rounded-lg shadow-md"
       >

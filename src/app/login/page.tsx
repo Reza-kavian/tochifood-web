@@ -1,4 +1,4 @@
-////zare_nk_041124_okk
+////zare_nk_050202_okk
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -8,6 +8,7 @@ import { ReactNode } from "react";
 import { ChangeEvent } from "react";
 import jwt from "jsonwebtoken"; //zare_nk_040603_added
 import { JwtPayload } from "jsonwebtoken";  //zare_nk_040603_added
+import { factchecktools } from "googleapis/build/src/apis/factchecktools";
 
 function getCookie(name: any) {
   const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
@@ -36,6 +37,9 @@ type FirstPageProps = {
   backBtnCliked: boolean; //zare_nk_040527_nokteh(state shamele meghdare booliane clicke dokmeye backToFirsPage)
   setBackBtnCliked: React.Dispatch<React.SetStateAction<boolean>>; //zare_nk_040527_nokteh(setState meghdardehiye booleane state backBtnCliked marboot be dokmeye backToFirsPage)
   handleGoogleLogin: () => void; //zare_nk_040527_nokteh(rooydade clicke dokmeye handleGoogleBtn)
+  isMobileTextEmty: boolean  //zare_nk_041227_added
+  setIsMobileTextEmty: React.Dispatch<React.SetStateAction<boolean>>;  //zare_nk_041227_added 
+  error: string | null;  //zare_nk_050105_added
   children?: ReactNode; //zare_nk_040527_nokteh(mohtaviati ke dakhele blocke seda zadane componente FirstPageComponent minevisim)
 };
 
@@ -51,8 +55,23 @@ function FirstPageComponent({
   backBtnCliked,
   setBackBtnCliked,
   handleGoogleLogin,
+  isMobileTextEmty,  //zare_nk_041227_added
+  setIsMobileTextEmty,   //zare_nk_041227_added
+  error, //zare_nk_050105_added
   children,
 }: FirstPageProps) {
+
+  const [isInputFocused, setIsInputFocused] = useState(false); // state برای مدیریت فوکوس
+
+  const handleFocus = () => {
+    setIsInputFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsInputFocused(false);
+  };
+
+
   useEffect(() => {
     if (backBtnCliked == true) {
       if (refForMobileInput.current[0]) {
@@ -63,59 +82,70 @@ function FirstPageComponent({
 
   return (
     <>
-      <div className={`${Styles.formsRow} ${Styles.titleStyle}`}>
-        <span>ورود | ثبت نام</span>
-      </div>
-      <div
-        className={`${Styles.lablAndInputCont}  `}
-        style={{ marginBottom: "15px" }}
-      >
-        <span style={{ marginLeft: "15px", marginBottom: "10px" }}>
-          شماره تماس
-        </span>
-        <input
-          style={{ textAlign: "center" }}
-          className={Styles.txtBox}
-          id="mobileTxt"
-          value={mobileVal}
-          onChange={mobileChanged}
-          ref={(e) => {
-            refForMobileInput.current[0] = e;
+      <div style={{ position: 'absolute', padding: '1rem', width: "100%", backgroundColor: 'white', }}>
+        {error && <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>{error}</p>}
+        <form
+          id="loginForm"
+          onSubmit={(event) => {
+            event.preventDefault();
           }}
-        />
-      </div>
-      {/* zare_nk_040224_added_st(rahe1-ba useRef) */}
-      {/* <div className={`${Styles.formsRow} ${Styles.warningCont}`}>
+          className={`${Styles.loginForm} ${Styles.valueStyle}`}
+        >
+          <div className={`${Styles.formsRow}`}>
+            <p className={`${Styles.titleStyle}`} style={{ fontSize: '16px', color: '#1b1c1d', marginBottom: '0px', }}>ثبت&zwnj;نام یا ورود</p>
+            <p className={`${Styles.valueStyle}`} style={{ fontSize: '14px', color: '#878b92', marginBottom: '0px', paddingTop: '.25rem' }}>برای آمدن به تپسی&zwnj;فود، شماره موبایلت را وارد کن</p>
+          </div>
+
+          <div className={`${Styles.MobileInputAndCheckBtnCont}`} >
+            <button
+              ref={refForMobileCheckBtn}
+              id="mobileCheckBtn"
+              className={Styles.disabledBtn}
+              onClick={mobileButtonClick}
+              disabled={isDisabledMobileCheckBtn}
+            >
+              <img
+                style={{ transform: 'rotate(180deg)' }}
+                src="/images/login/checkMobile.svg"
+                alt="ذخیره موبایل"
+              />
+            </button>
+
+            <div style={{
+              display: "flex",
+              position: 'relative',
+              flex: '1 0 auto'
+            }}>
+              <div className={`${Styles.translateDiv} ${isInputFocused || !isMobileTextEmty ? Styles.animateFocus : Styles.animateBlur}`}>
+                <span style={{ width: '100%' }}>شماره موبایل</span>
+              </div>
+              <input
+                className={Styles.mobileTxtBox}
+                id="mobileTxt"
+                value={mobileVal}
+                onChange={mobileChanged}
+                ref={(e) => {
+                  refForMobileInput.current[0] = e;
+                }}
+                onFocus={handleFocus} // اضافه کردن onFocus
+                onBlur={handleBlur}   // اضافه کردن onBlur 
+              />
+            </div>
+          </div>
+          {/* zare_nk_040224_added_st(rahe1-ba useRef) */}
+          {/* <div className={`${Styles.formsRow} ${Styles.warningCont}`}>
                 <span ref={refForforErrorMobile} className="forErrorMobile error" >ورود شماره تماس الزامی است</span>
             </div> */}
-      {/* zare_nk_040224_added_end(rahe1-ba useRef) */}
-      {/* zare_nk_040224_added_st(rahe1-ba useState-ke reactpasandtare) */}
-      {mobileError && (
-        <div className={`${Styles.formsRow} ${Styles.warningCont}`}>
-          <span className="forErrorMobile error">{mobileError}</span>
-        </div>
-      )}
-      {/* zare_nk_040224_added_end(rahe1-ba useState-ke reactpasandtare) */}
-      <div className={Styles.formsRow}>
-        <button
-          ref={refForMobileCheckBtn}
-          id="mobileCheckBtn"
-          className={Styles.disabledBtn}
-          onClick={mobileButtonClick}
-          disabled={isDisabledMobileCheckBtn}
-        >
-          {children}
-        </button>
-      </div>
-      <div className={Styles.formsRow}>
-        <button
-          type="button"
-          id="handleGoogleBtn"
-          className={Styles.btn}
-          onClick={handleGoogleLogin}
-        >
-          ورود با حساب گوگل
-        </button>
+          {/* zare_nk_040224_added_end(rahe1-ba useRef) */}
+          {/* zare_nk_040224_added_st(rahe1-ba useState-ke reactpasandtare) */}
+          {mobileError && (
+            <div className={`${Styles.formsRow} ${Styles.warningCont}`}>
+              <span className="forErrorMobile error">{mobileError}</span>
+            </div>
+          )}
+          {/* zare_nk_040224_added_end(rahe1-ba useState-ke reactpasandtare) */}
+          <p style={{ color: '#878b92', fontSize: '.75rem', lineHeight: '1rem', }}>با ثبت&zwnj;نام در تپسی&zwnj;فود، <a style={{ fontWeight: 500, color: '#ff5900', textDecoration: 'none', }} href="/terms-and-conditions">شرایط و قوانین</a> را قبول می&zwnj;کنم</p>
+        </form>
       </div>
     </>
   );
@@ -124,9 +154,9 @@ function FirstPageComponent({
 type SecondPageProps = {
   smsVal: string; //zare_nk_040525_nokteh(shamele meghdare sms varedehye karbar)
   smsTxtChanged: (e: ChangeEvent<HTMLInputElement>) => void; //zare_nk_040525_nokteh(rooydade onChange textboxe smsValTxt)
-  smsTxtKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void; //zare_nk_040525_nokteh(rooydade onKeyDown textboxe smsValTxt)
+  // smsTxtKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void; //zare_nk_040525_nokteh(rooydade onKeyDown textboxe smsValTxt)
   backBtnClick: () => void; //zare_nk_040525_nokteh(rooydade clicke dokmeye backToFirsPage)
-  checkSmsForLogin: () => void; //zare_nk_040525_nokteh(rooydade clicke dokmeye vorood)
+  checkSmsForLogin: (sms: string) => void; //zare_nk_040525_nokteh(rooydade clicke dokmeye vorood)
   ResendCodefunc: () => void; //zare_nk_040525_nokteh(rooydade clicke dokmeye ResendCode)
   isDisabledCheckSmsBtn: boolean; //zare_nk_040527_nokteh(state shamele meghdare booliane attribute disabled dokmeye vorood dar safheye second )
   setIsDisabledCheckSmsBtn: React.Dispatch<React.SetStateAction<boolean>>; //zare_nk_040527_nokteh(setState meghdardehiye booleane attribute disabled dokmeye vorood dar safheye second )
@@ -145,12 +175,18 @@ type SecondPageProps = {
   setIsDisabledResendCode: React.Dispatch<React.SetStateAction<boolean>>; //zare_nk_040527_nokteh(setState meghdardehiye state isDisabledResendCode)
   isDisabledRemovTimerBtn: boolean; //zare_nk_040527_nokteh(state shamele meghdare booliane attribute disabled dokmeye risete timer )
   setIsDisabledRemovTimerBtn: React.Dispatch<React.SetStateAction<boolean>>; //zare_nk_040527_nokteh(setState meghdardehiye state isDisabledRemovTimerBtn)
+
+  newSmsVal: string,  //zare_nk_050103_added
+  setNewSmsVal: React.Dispatch<React.SetStateAction<string>>;  //zare_nk_050103_added
+  newSmsTxtChanged: (textVaredeh: string, index: number) => void;  //zare_nk_050103_added
+  smsInputKeyDown: (e: React.KeyboardEvent<HTMLInputElement>, index: number) => void;  //zare_nk_050105_added
+  SmsInputRefs: RefObject<(HTMLInputElement | null)[]>;  //zare_nk_050105_added
 };
 
 function SecondPageComponent({
   smsVal,
   smsTxtChanged,
-  smsTxtKeyDown,
+  // smsTxtKeyDown,
   backBtnClick,
   checkSmsForLogin,
   ResendCodefunc,
@@ -171,6 +207,11 @@ function SecondPageComponent({
   setIsDisabledResendCode,
   isDisabledRemovTimerBtn,
   setIsDisabledRemovTimerBtn,
+  newSmsVal,     //zare_nk_050103_added
+  setNewSmsVal,  //zare_nk_050103_added
+  newSmsTxtChanged,  //zare_nk_050103_added
+  smsInputKeyDown,  //zare_nk_050105_added
+  SmsInputRefs,  //zare_nk_050105_added 
 }: SecondPageProps) {
   var refForResendCode = useRef(null); //zare_nk_040527_nokteh(useRefe dokmeye ersale mojadad )
   var refForRemovTimer = useRef(null); //zare_nk_040527_nokteh(useRefe dokmeye resete timer )
@@ -179,6 +220,9 @@ function SecondPageComponent({
   const refForTimer = useRef<HTMLDivElement | null>(null); // zare_nk_040527_nokteh(useRefe tage timermoveOpportunity ke timer ra namayesh midad )
   var refForTimerCont = useRef(null); //zare_nk_040527_nokteh(useRefe tage timermoveOpportunityCont pedare tage timermoveOpportunity ast)
   const intervalRef = useRef<null | ReturnType<typeof setInterval>>(null); //zare_nk_040527_nokteh(useRefe modiriate timer)
+
+  const [arrayForSmsVal, setArrayForSmsVal] = useState(['', '', '', '', '']);  //zare_nk_050103_added
+  // const [newSmsVal, setNewSmsVal] = useState('');  //zare_nk_050103_added
 
   useEffect(() => {
     intervalRef.current = setInterval(function () {
@@ -278,103 +322,178 @@ function SecondPageComponent({
 
   return (
     <>
-      <div
-        ref={refForTimerCont}
-        id="timermoveOpportunityCont"
-        style={{
-          display: timerDisplay,
-          flexFlow: "row",
-        }}
-      >
-        <div
-          ref={refForTimer}
-          id="timermoveOpportunity"
-          style={{ display: "flex", flexFlow: "row", color: "red" }}
-        ></div>
-      </div>
+      <div style={{ position: 'absolute', padding: '1rem', width: "100%", backgroundColor: 'white', }}>
+        {error && <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>{error}</p>}
 
-      <div className={Styles.formsRow} style={{ direction: "rtl" }}>
-        <button
-          id="backToFirsPage"
-          className={`${Styles.BackBtn}  ${Styles.buttonHover}`}
-          onClick={backBtnClick}
-        >
-          <div className={`${Styles.BackImgCont} `}>
-            <img
-              src="https://img.tochikala.com/tochikala/back-icon-in-cardcontainer.svg"
-              style={{ width: "18px" }}
-              alt="بازگشت به صفحه شماره تماس"
-            />
-          </div>
-          <div className={`${Styles.BackBtnTitleCont} `}>
-            <span>بازگشت</span>
-          </div>
-        </button>
-      </div>
+        <div className={`${Styles.darkFont}`}
+          style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', justifyItems: 'flex-start', textAlign: 'right', }}>
 
-      <div className={`${Styles.formsRow}  ${Styles.darkFont}`}>
-        <span>کد تایید را وارد کنید</span>
-      </div>
+          <p className={`${Styles.titleStyle}`} style={{ fontSize: '16px', color: '#1b1c1d', marginBottom: '0px', }}>تایید شماره موبایل</p>
 
-      <div
-        className={`${Styles.lablAndInputCont}  `}
-        style={{ marginBottom: "15px" }}
-      >
-        <span style={{ marginLeft: "15px", marginBottom: "10px" }}>
-          کد تایید
-        </span>
-        <input
-          className={Styles.txtBox}
-          id="smsValTxt"
-          value={smsVal}
-          onChange={smsTxtChanged}
-          onKeyDown={smsTxtKeyDown}
-          ref={(e) => {
-            refForSmsInput.current[0] = e;
-          }}
-        />
-      </div>
-
-      {smsError && (
-        <div className={`${Styles.formsRow} ${Styles.warningCont}`}>
-          <span className="forErrorMobile error">{smsError}</span>
+          <p className={`${Styles.valueStyle}`} style={{ fontSize: '14px', color: '#878b92', marginBottom: '0px', paddingTop: '.25rem' }}>کد تأیید ارسال&zwnj;شده به شماره
+            &zwnj;{mobileVal}&zwnj;
+            را وارد کن</p>
         </div>
-      )}
 
-      <div className={Styles.formsRow}>
-        <button
-          ref={refForCheckSmsBtn}
-          className={Styles.disabledBtn}
-          onClick={checkSmsForLogin}
-          disabled={isDisabledCheckSmsBtn}
-        >
-          ورود
-        </button>
-      </div>
+        <div style={{ display: 'flex', flexFlow: 'row', justifyContent: 'center', columnGap: '1rem', marginTop: '2.5rem', }}>
+          {
+            arrayForSmsVal.map((valueAndGrad, index) => {
+              return (
+                <div
+                  key={index}
+                  style={{
+                    backgroundColor: 'white', border: '1px solid #e0e3e5', maxWidth: '3.5rem', display: 'flex', justifyContent: 'center',
+                    alignItems: 'center', height: '3.5rem', padding: '1rem 0.75rem', borderRadius: '0.75rem',
+                  }}>
+                  <input
+                    key={index}
+                    maxLength={1}   // فقط یک کاراکتر مجاز است
+                    // className={Styles.txtBox}
+                    // id="smsValTxt"
+                    // value={arrayForSmsVal[index]}
+                    // onChange={newSmsTxtChanged(valueAndGrad, index)}
+                    onChange={(e) => {
+                      let tempArrayForSmsVal = arrayForSmsVal;
+                      // tempArrayForSmsVal[index];  //zare_nk_050128_commented
+                      tempArrayForSmsVal[index] = e.target.value;  //zare_nk_050128_added
+                      console.log('arrayForSmsVal is: ' + JSON.stringify(arrayForSmsVal));
+                      setArrayForSmsVal(tempArrayForSmsVal);
+                      //                       setArrayForSmsVal((cur)=>{
+                      // [...cur,]
+                      //                       })
 
-      <div className={Styles.formsRow}>
-        <button
-          id="ResendCode"
-          ref={refForResendCode}
-          className={Styles.btn}
-          onClick={ResendCodefunc}
-          disabled={isDisabledResendCode}
-        >
-          ارسال مجدد
-        </button>
-      </div>
+                      newSmsTxtChanged(e.target.value, index);
+                    }}
+                    onKeyDown={(e) => {
+                      // alert('onKeyDown');
+                      smsInputKeyDown(e, index);
+                    }}
 
-      <div className={Styles.formsRow}>
-        <button
-          ref={refForRemovTimer}
-          className={Styles.btn}
-          onClick={() => {
-            return setRemovTimer(true);
-          }}
-          disabled={isDisabledRemovTimerBtn}
-        >
-          ریست تایمر
-        </button>
+                    // onKeyDown={smsTxtKeyDown}
+                    ref={(e) => {
+                      // refForSmsInput.current[0] = e;
+                      SmsInputRefs.current[index] = e;
+                    }}
+                    style={{ border: 'none', width: '100%', color: '#a5abb1', fontSize: '0.875rem', lineHeight: '1.25rem', textAlign: 'center', outline: '2px solid transparent' }}
+                    onFocus={(e) => {
+                      setTimeout(() => {
+                        e.target.select();
+                        //  SmsInputRefs.current[index]?.select();
+                      }, 0);
+                    }}
+                  // onBlur={handleBlur}          //zare_nk_050105_olgu
+                  />
+                </div>
+              )
+            })
+          }
+
+        </div>
+
+        {smsError && (
+          <div className={`${Styles.formsRow} ${Styles.warningCont}`}>
+            <span className="forErrorMobile error">{smsError}</span>
+          </div>
+        )}
+
+        {/* <div className={Styles.formsRow}>
+          <button
+            ref={refForCheckSmsBtn}
+            className={Styles.disabledBtn}
+            onClick={checkSmsForLogin}
+            disabled={isDisabledCheckSmsBtn}
+          >
+            ورود
+          </button>
+        </div> */}
+
+        <div style={{
+          display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
+          paddingBottom: '1.25rem', paddingLeft: '1.25rem', paddingRight: '1.25rem', marginTop: '1.75rem',
+        }}>
+          {/* <button
+            id="ResendCode"
+            ref={refForResendCode}
+            className={Styles.btn}
+            onClick={ResendCodefunc}
+            disabled={isDisabledResendCode}
+          >
+            درخواست دوباره
+          </button> */}
+          {!isDisabledResendCode ?
+            (<button
+              id="ResendCode"
+              ref={refForResendCode}
+              onClick={ResendCodefunc}
+              disabled={isDisabledResendCode}
+              className={`${Styles.BackBtn}  ${Styles.buttonHover}`}
+
+            >
+              <div className={`${Styles.BackImgCont} `}>
+                <img
+                  src="/images/login/request-again.svg"
+                  style={{ width: "18px" }}
+                  alt="درخواست مجدد"
+                />
+              </div>
+              <div className={`${Styles.BackBtnTitleCont} `}>
+                <span style={{ color: '#ff5900' }}>درخواست دوباره</span>
+              </div>
+            </button>
+            ) :
+            (<div
+              ref={refForTimerCont}
+              id="timermoveOpportunityCont"
+              style={{
+                display: timerDisplay,
+                flexFlow: "row",
+              }}
+            >
+              <div
+                ref={refForTimer}
+                id="timermoveOpportunity"
+                style={{ display: "flex", flexFlow: "row", color: "red" }}
+              ></div>
+            </div>)
+          }
+          {/* zare_nk_050102_added_st */}
+          {/* <div className={Styles.formsRow} style={{ direction: "rtl" }}> */}
+          <button
+            id="backToFirsPage"
+            className={`${Styles.BackBtn}  ${Styles.buttonHover}`}
+            onClick={backBtnClick}
+          >
+            <div className={`${Styles.BackImgCont} `}>
+              <img
+                // src="https://img.tochikala.com/tochikala/back-icon-in-cardcontainer.svg"
+                src="/images/login/return-to-mpbilenumber.svg"
+                style={{ width: "18px" }}
+                alt="ویرایش موبایل"
+              />
+            </div>
+            <div className={`${Styles.BackBtnTitleCont} `}>
+              <span style={{ color: '#ff5900' }}>ویرایش موبایل</span>
+            </div>
+          </button>
+          {/* </div> */}
+          {/* zare_nk_050102_added_end */}
+        </div>
+
+        <div className={Styles.formsRow}>
+          {/* <button
+            ref={refForRemovTimer}
+            className={Styles.btn}
+            onClick={() => {
+              return setRemovTimer(true);
+            }}
+            disabled={isDisabledRemovTimerBtn}
+          >
+            ریست تایمر
+          </button> */}
+
+        </div>
+
+
       </div>
     </>
   );
@@ -383,6 +502,7 @@ function SecondPageComponent({
 export default function Toolbar() {
   const [currentPage, setCurrentPage] = useState("firstPage");
   const [mobileVal, setMobileVal] = useState("");
+  const [isMobileTextEmty, setIsMobileTextEmty] = useState(true);  //zare_nk_041227_added
   const [smsVal, setSmsVal] = useState("");
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
@@ -405,6 +525,14 @@ export default function Toolbar() {
   const [timer, setTimer] = useState(initialTimer);
   const [isDisabledResendCode, setIsDisabledResendCode] = useState(true);
   const [isDisabledRemovTimerBtn, setIsDisabledRemovTimerBtn] = useState(true);
+
+  const [newSmsVal, setNewSmsVal] = useState('');  //zare_nk_050103_added
+
+  const SmsInputRefs = useRef<HTMLInputElement[]>(Array(5).fill(null));   //zare_nk_050105_added(and commented(baraye reactNative mehvar boodan))
+  // const [focusArray, setFocusArray] = useState<number[] | null>(Array(5).fill(null));  //zare_nk_050105_added(baraye reactNative mehvar boodan)
+  // const inputsRef = Array.from({ length: 5 }, () => React.createRef());  //zare_nk_050105_added(mansookh dar noskhehaye jadide react)
+  // const inputRefs = useRef<(number[])[]>(Array(5).fill(null)); //zare_nk_050105_added(modern dar noskhehaye jadide react)
+  const [focusItem, setFocusItem] = useState<number>(0);  //zare_nk_050105_added
 
   useEffect(() => {
     const google_Invalid_credentials = getCookie("google_Invalid_credentials");
@@ -496,7 +624,7 @@ export default function Toolbar() {
     // window.location.href = `https://testotm.sarinmehr.com/api/auth/google`; //zare_nk_040422_added
   };
 
-  async function checkSmsForLogin() {
+  async function checkSmsForLogin(sms: string) {
     setError("");
     var errorFree = true;
     const inputs = Array.from(document.querySelectorAll("#loginForm input"))
@@ -521,6 +649,7 @@ export default function Toolbar() {
     }
     // const token = getCookie("token");  //zare_nk_041125_commented(chon token null hast ke be login oomadim digeh!!) 
     let ApiUrl = "https://api.tochikala.com/api/";
+    console.log('mobileVal: ' + mobileVal + '-newSmsVal: ' + newSmsVal);
     const response = await fetch(ApiUrl + "User/Api_LoginUser2", {
       method: "POST",
       headers: {
@@ -529,7 +658,8 @@ export default function Toolbar() {
       },
       body: JSON.stringify({
         Mobile: mobileVal,
-        SmsCode: smsVal,
+        // SmsCode: smsVal,  //zare_nk_050105_commented
+        SmsCode: sms,  //zare_nk_050105_added
         Password: ""
       }),
       // credentials: "include", //zare_nk_040202_commented
@@ -567,7 +697,7 @@ export default function Toolbar() {
           //             headers: { "Content-Type": "application/json" },
           //             body: JSON.stringify({ token }),
           //           });
-          ////zare_nk_041114_added_end(and commented. chon methode HttpContext.SignInAsync rp anjam mideh baraye online kardan be sabke HttpContext marboot be .net core c# 
+          ////zare_nk_041114_added_end(and commented. chon methode HttpContext.SignInAsync ra anjam mideh baraye online kardan be sabke HttpContext marboot be .net core c# 
           // vali man ino nemikham chon hamin cookie token sakhtan baram kafiye be onvane amale online kardan va amale estelame online boodane karbar. dar zemn ma dar view haye c#
           // ke nistim ba hamin emkanate HttpContext mesle(HttpContextAccessor.HttpContext!.User.Identity!.IsAuthenticated)baraye estelame online boodan estefadeh konim!
           // pas az haman sakhte va vakeshiye cookie haviye token ke name token ra behesh dadam baraye moshakhas kardane online shodan va estelame online boodaanesh estefadeh mikonam
@@ -586,13 +716,17 @@ export default function Toolbar() {
             ////zare_nk_040925-decodedToken: {"IdUser":"10006","Mobile":"9351091287","FullName":"رضا کاویان","Type":"User","nbf":1770193087,"exp":1772785087,"iat":1770193087}  //zare_nk_041115_nokteh(from api tochikala)
             ////zare_nk_040925-decodedToken: {"unique_name":"20109","CodeMoshtari":"20109","Mobile":"9351091287","NameMoshtari":"","nbf":1750740741,"exp":1751345541,"iat":1750740741}  //zare_nk_041115_nokteh(from api testotmapi)
 
-            // const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString(); // 3 ساعت بعد //zare_nk_040219-nokteh(zamane monghazi ra khodam taein kardam)   //zare_nk_040305_updated(dasti ra az 3 be 30 tagheir dadam)
-            const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString();
-            //  const expires = data.decoded.exp;//zare_nk_040219-nokteh(zamane monghazi ra az dadeye parsafar taein kardam)
+            // const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString();  //zare_nk_040219-nokteh(zamane monghazi ra khodam taein kardam, 1 saate bad)   
+            // const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();  //zare_nk_050118-nokteh(zamane monghazi ra khodam taein kardam, 30 rooze bad) 
+            const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString();  //zare_nk_050118-nokteh(zamane monghazi ra khodam taein kardam, 1 rooze bad) 
+            // const expires = data.decoded.exp;//zare_nk_040219-nokteh(zamane monghazi ra az dadeye parsafar taein kardam)
+
             document.cookie = `token=${token}; path=/; expires=${expires}; secure; samesite=None`;
             const redirect = getCookie("redirect") || "/";
             document.cookie =
               "redirect=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC"; // حذف کوکی
+            console.log('redirect iss: ' + getCookie("redirect"));
+            console.log('zare_nk_050110-token is: ' + getCookie("token"));
             router.replace(redirect); //zare_nk_040228_commented(and zare_nk_040312 uncommented(chon safheh ro refresh nemikoneh va behtare ehtemalan))
             // NextResponse.redirect(new URL("/login", request.url));//zare_nk_040228_added
             // window.location.href = redirect;
@@ -600,7 +734,7 @@ export default function Toolbar() {
           } else {
             document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
             document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-            setError("متاسفانه خطایی رخ داده است313:" + (data?.errorMessage ? ": " + data.errorMessage : ""));  //zare_nk_041107_added_tahlilshe(niaz bood??!!)
+            setError("متاسفانه خطایی رخ داده است313:" + (data?.errorMessage ? ": " + data.errorMessage : ""));  //zare_nk_041107_added_tahlilshe(niaz bood??!!) 
           }
         } catch (error) {
           document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
@@ -616,9 +750,25 @@ export default function Toolbar() {
           ////zare_nk_041107_added_end
         }
       } else {
+        ////zare_nk_050111_commented_movaghat_st(hengame nayamadane sms az sms.ir bekhatere ekhtelele zirsakht)
         document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
         document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
         setError("متاسفانه خطایی رخ داده است34:" + data.errors);
+        ////zare_nk_050111_commented_movaghat_end(hengame nayamadane sms az sms.ir bekhatere ekhtelele zirsakht)
+
+        ////zare_nk_050111_added_movaghat_st(hengame nayamadane sms az sms.ir bekhatere ekhtelele zirsakht)
+        // alert('ddddddddddddddddd');
+        // const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();
+        // //  const expires = data.decoded.exp;//zare_nk_040219-nokteh(zamane monghazi ra az dadeye parsafar taein kardam)
+        // let token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjIwMTA5IiwiQ29kZU1vc2h0YXJpIjoiMjAxMDkiLCJNb2JpbGUiOiI5MzUxMDkxMjg3IiwiTmFtZU1vc2h0YXJpIjoiIiwibmJmIjoxNzQ2NzI1OTI4LCJleHAiOjE3NDczMzA3MjgsImlhdCI6MTc0NjcyNTkyOH0.9Jfv71v3D_s13gSyf3gXqgEfiXaV-lx93hDey4DSLM8";
+        // document.cookie = `token=${token}; path=/; expires=${expires}; secure; samesite=None`;
+        // const redirect = getCookie("redirect") || "/";
+        // document.cookie =
+        //   "redirect=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC"; // حذف کوکی
+        // console.log('zare_nk_050111-redirect iss: ' + getCookie("redirect"));
+        // console.log('zare_nk_050111-token is: ' + getCookie("token"));
+        // router.replace(redirect);
+        ////zare_nk_050111_added_movaghat_end(hengame nayamadane sms az sms.ir bekhatere ekhtelele zirsakht)
       }
     } else {
       console.log("zare_nk_040925--!!response.ok");
@@ -629,7 +779,7 @@ export default function Toolbar() {
   }
 
   async function ResendCodefunc() {
-    alert('ResendCodefunc called!!');
+    // alert('ResendCodefunc called!!');
     let token = "";
     if (typeof window !== "undefined") {
       token = localStorage.getItem("Token") || "";
@@ -710,6 +860,7 @@ export default function Toolbar() {
     var pat = new RegExp("^[0]{1}[0123456789]{10}$");
     var isMobileNum = pat.test(vall);
     if (!vall) {
+      setIsMobileTextEmty(true);
       if (input) {
         input.classList.remove("valid");
         input.classList.add("invalid");
@@ -728,6 +879,7 @@ export default function Toolbar() {
         refForMobileCheckBtn.current.classList.remove(Styles.btn);
       }
     } else if (!isMobileNum) {
+      setIsMobileTextEmty(false);
       if (input) {
         input.classList.remove("valid");
         input.classList.add("invalid");
@@ -743,6 +895,7 @@ export default function Toolbar() {
         refForMobileCheckBtn.current.classList.remove(Styles.btn);
       }
     } else {
+      setIsMobileTextEmty(false);
       if (input) {
         input.classList.remove("invalid");
         input.classList.add("valid");
@@ -764,7 +917,7 @@ export default function Toolbar() {
     }
   }
 
-  function smsTxtChanged(event: React.ChangeEvent<HTMLInputElement>) { 
+  function smsTxtChanged(event: React.ChangeEvent<HTMLInputElement>) {
     setError("");
     var input = null;
     var vall = null;
@@ -774,6 +927,7 @@ export default function Toolbar() {
       vall = input.value;
     } else {
       //zare_nk_040224_nokteh(age ba taghire mohtavaye smsValTxt tavasote dokmeye mobileCheckBtn biaim dar methode smsTxtChanged)
+      ////zare_nk_050119_nokteh(albateh ba estefadeh az tarfande evente fake hamvare be if balaei mirim yani event.target khahim dasht)
       input = refForSmsInput.current[0];
       vall = input?.value;
     }
@@ -803,12 +957,114 @@ export default function Toolbar() {
     }
   }
 
-  function smsTxtKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      checkSmsForLogin();
+  function newSmsTxtChanged(textVaredeh: string, index: number) {
+    // alert('newSmsTxtChanged');
+    setError("");
+    // var input = null;
+    // var vall = null;
+    // if (event.target != undefined) {
+    //   //zare_nk_040224_nokteh(age ba taghire mohtavaye smsValTxt tavasote karbar biaim dar methode smsTxtChanged)
+    //   input = event.target;
+    //   vall = input.value;
+    // } else {
+    //   //zare_nk_040224_nokteh(age ba taghire mohtavaye smsValTxt tavasote dokmeye mobileCheckBtn biaim dar methode smsTxtChanged)
+    //   input = refForSmsInput.current[0];
+    //   vall = input?.value;
+    // }
+    ////zare_nk_050103_added_st
+    let vall: string = textVaredeh;
+    let tempnewSmsVal = newSmsVal;
+    tempnewSmsVal += vall;
+    // setNewSmsVal(tempnewSmsVal);
+    console.log('rahe ghabli-tempnewSmsVal: ' + tempnewSmsVal);
+
+    tempnewSmsVal = '';
+    SmsInputRefs.current.map((inputItem, index) => {
+      let inputItemVal = SmsInputRefs.current[index].value;
+      tempnewSmsVal += inputItemVal;
+      console.log('index: ' + index + '-tempnewSmsVal: ' + tempnewSmsVal);
+      if (index == 4) {
+        console.log('index is chahar-tempnewSmsVal: ' + tempnewSmsVal);
+        setNewSmsVal(tempnewSmsVal);
+      }
+    });
+
+    ////zare_nk_050103_added_end
+
+    if (!tempnewSmsVal) {
+      // setFocusItem(0);  //zare_nk_050105_aaded(shayad niazi behesh nabashe!)
+      SmsInputRefs.current[0]?.focus();
+      // if (input !== null) {
+      //   input.classList.remove("valid");
+      //   input.classList.add("invalid");
+      // }
+      setSmsError("ورود کد پیامکی الزامی است");
+      setIsDisabledCheckSmsBtn(true);
+      // refForCheckSmsBtn.current?.classList.add(Styles.disabledBtn);
+      // refForCheckSmsBtn.current?.classList.remove(Styles.btn);
+    } else {
+      // if (input !== null) {
+      //   input.classList.remove("invalid");
+      //   input.classList.add("valid");
+      // }
+      setSmsError("");
+      setIsDisabledCheckSmsBtn(false);
+      // refForCheckSmsBtn.current?.classList.remove(Styles.disabledBtn);
+      // refForCheckSmsBtn.current?.classList.add(Styles.btn);
+      if (index < 4) {
+        // setFocusItem(index + 1);  //zare_nk_050105_aaded 
+        SmsInputRefs.current[index + 1]?.focus();
+      }
+      else {
+        // alert('ddd');
+        checkSmsForLogin(tempnewSmsVal);
+      }
     }
+
+    // if (input) {
+    //   setSmsVal(input.value);
+    // }
   }
+
+  // alert('Toolbar rerendered!!');
+  // useEffect(() => {
+  //   // if (backBtnCliked == true) {
+  //   //   if (refForMobileInput.current[0]) {
+  //   //     mobileChanged(refForMobileInput.current[0]); //zare_nk_040527_nokteh(shabihsaziye rooydade onChange textboxe mobile ke metode mobileChanged seda zadeh mishod)
+  //   //   }
+  //   // }
+  //   alert('useEffect focusItem called!!');
+  //   SmsInputRefs.current[focusItem]?.focus();
+  // },[focusItem]);
+
+  // function smsTxtKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+  //   if (event.key === "Enter") {
+  //     event.preventDefault();
+  //     checkSmsForLogin();
+  //   }
+  // }
+
+  const smsInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+    // alert('smsInputKeyDown');
+    if (event.key === " " || event.key === "Space") {
+      event.preventDefault();
+    }
+    if (event.key === "Enter") {
+      // alert('smsInputKeyDown-Enter-index: ' + index);  
+      // setFocusItem(index + 1);
+      SmsInputRefs.current[index + 1]?.focus();
+    }
+    if (event.key === "ArrowRight") {
+      // alert('smsInputKeyDown-ArrowRight-index: ' + index);
+      // setFocusItem(index + 1);
+      SmsInputRefs.current[index + 1]?.focus();
+    }
+    if (event.key === "ArrowLeft") {
+      // alert('smsInputKeyDown-ArrowLeft-index: ' + index);
+      // setFocusItem(index - 1);
+      SmsInputRefs.current[index - 1]?.focus();
+    }
+  };
 
   function backBtnClick() {
     setError("");
@@ -819,80 +1075,189 @@ export default function Toolbar() {
   }
 
   return (
-    <div
-      style={{
-        width: "100%",
-        display: "flex",
-        flexFlow: "row",
-        justifyContent: "center",
-        minHeight: "100vh",
-        alignItems: "center",
-        backgroundColor: 'white',
-      }}
-    >
-      <form
-        id="loginForm"
-        onSubmit={(event) => {
-          event.preventDefault();
-        }}
-        className={`${Styles.loginForm} ${Styles.valueStyle}`}
-      >
+    <>
+      <header></header>
+      <main
+        style={{
+          backgroundColor: 'white',
+          height: '100dvh',
+          display: "flex",
+          flexDirection: 'column',
+          overflow: 'hidden',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flex: '1 0 auto',
+          border: '2px dashed red',
+        }}>
         <div
-          className={Styles.formsRow}
-          style={{ display: "flex", justifyContent: "center" }}
+          style={{
+            width: "100%",
+            flexShrink: 0,
+            // flexFlow: "row",            
+            // display: "flex",
+            // justifyContent: "center", 
+            // border: '2px solid black',
+          }}
         >
-          <img
-            src="https://img.tochikala.com/Logo/photo14359415832-Copy.jpg"
-            style={{ width: "55px" }}
-            alt="کرفو"
-          ></img>
+          <svg
+            viewBox="0 0 500 500"
+            width="500"
+            height="500"
+            preserveAspectRatio="xMidYMid meet"
+            style={{
+              width: '100%',
+              height: '100%',
+              transform: 'translate3d(0px, 0px, 0px)',
+              contentVisibility: 'visible',
+            }}
+          >
+            <defs>
+              <clipPath id="__lottie_element_2">
+                <rect width="500" height="500" x="0" y="0" />
+              </clipPath>
+            </defs>
+
+            <g clipPath="url(#__lottie_element_2)">
+              <g style={{ display: 'block' }} transform="matrix(1,0,0,1,0,0)" opacity="1">
+                <g opacity="1" transform="matrix(1,0,0,1,250,194.48699951171875)">
+                  <path
+                    fill="rgb(223,227,228)"
+                    fillOpacity="1"
+                    d="M0,-41.6349983215332C-22.89900016784668,-41.6349983215332-41.6349983215332,-22.89900016784668-41.6349983215332,0C-41.6349983215332,22.89900016784668-22.89900016784668,41.6349983215332,0,41.6349983215332C22.89900016784668,41.6349983215332,41.6349983215332,22.89900016784668,41.6349983215332,0C41.6349983215332,-23.593000411987305,22.89900016784668,-41.6349983215332,0,-41.6349983215332z"
+                  />
+                </g>
+
+                <g opacity="1" transform="matrix(1,0,0,1,250,188.93600463867188)">
+                  <path
+                    fill="rgb(245,245,246)"
+                    fillOpacity="1"
+                    d="M0,-16.65399932861328C9.197999954223633,-16.65399932861328,16.65399932861328,-9.197999954223633,16.65399932861328,0C16.65399932861328,9.197999954223633,9.197999954223633,16.65399932861328,0,16.65399932861328C-9.197999954223633,16.65399932861328,-16.65399932861328,9.197999954223633,-16.65399932861328,0C-16.65399932861328,-9.197999954223633,-9.197999954223633,-16.65399932861328,0,-16.65399932861328z"
+                  />
+                </g>
+
+                <g opacity="1" transform="matrix(1,0,0,1,250,223.28399658203125)">
+                  <path
+                    fill="rgb(182,189,194)"
+                    fillOpacity="1"
+                    d="M0,12.836999893188477C10.409000396728516,12.836999893188477,19.43000030517578,9.368000030517578,27.062999725341797,2.428999900817871C24.28700065612793,-8.673999786376953,13.184000015258789,-12.836999893188477,0,-12.836999893188477C-13.184000015258789,-12.836999893188477,-24.28700065612793,-8.673999786376953,-27.062999725341797,2.428999900817871C-20.124000549316406,9.368000030517578,-10.409000396728516,12.836999893188477,0,12.836999893188477z"
+                  />
+                </g>
+              </g>
+
+              <g transform="matrix(1,0,0,1,250,270.8169860839844)" opacity="1" style={{ display: 'block' }}>
+                <g opacity="1" transform="matrix(1,0,0,1,0,0)">
+                  <path
+                    fill="rgb(237,240,241)"
+                    fillOpacity="1"
+                    d="M76.33049774169922,-13.878499984741211C76.33049774169922,-13.878499984741211,76.33049774169922,13.878499984741211,76.33049774169922,13.878499984741211C76.33049774169922,13.878499984741211,-76.33049774169922,13.878499984741211,-76.33049774169922,13.878499984741211C-76.33049774169922,13.878499984741211,-76.33049774169922,-13.878499984741211,-76.33049774169922,-13.878499984741211C-76.33049774169922,-13.878499984741211,76.33049774169922,-13.878499984741211,76.33049774169922,-13.878499984741211z"
+                  />
+                </g>
+              </g>
+
+              <g
+                transform="matrix(0.7697734832763672,0,0,1,226.48165893554688,270.8169860839844)"
+                opacity="1"
+                style={{ display: 'block' }}
+              >
+                <g opacity="1" transform="matrix(1,0,0,1,0,0)">
+                  <path
+                    fill="rgb(204,208,212)"
+                    fillOpacity="1"
+                    d="M55.92850112915039,-4.800000190734863C55.92850112915039,-4.800000190734863,55.92850112915039,4.800000190734863,55.92850112915039,4.800000190734863C55.92850112915039,4.800000190734863,-55.92850112915039,4.800000190734863,-55.92850112915039,4.800000190734863C-55.92850112915039,4.800000190734863,-55.92850112915039,-4.800000190734863,-55.92850112915039,-4.800000190734863C-55.92850112915039,-4.800000190734863,55.92850112915039,-4.800000190734863,55.92850112915039,-4.800000190734863z"
+                  />
+                </g>
+              </g>
+            </g>
+          </svg>
         </div>
 
-        {error && <p style={{ color: "red", fontSize: "14px" }}>{error}</p>}
-        {currentPage == "firstPage" ? (
-          <FirstPageComponent
-            mobileButtonClick={mobileButtonClick}
-            mobileVal={mobileVal}
-            mobileChanged={mobileChanged}
-            mobileError={mobileError}
-            refForMobileInput={refForMobileInput}
-            refForMobileCheckBtn={refForMobileCheckBtn}
-            isDisabledMobileCheckBtn={isDisabledMobileCheckBtn}
-            setIsDisabledMobileCheckBtn={setIsDisabledMobileCheckBtn}
-            backBtnCliked={backBtnCliked}
-            setBackBtnCliked={setBackBtnCliked}
-            handleGoogleLogin={handleGoogleLogin}
-          >
-            تایید
-          </FirstPageComponent>
-        ) : (
-          <SecondPageComponent
-            smsVal={smsVal}
-            smsTxtChanged={smsTxtChanged}
-            smsTxtKeyDown={smsTxtKeyDown}
-            backBtnClick={backBtnClick}
-            checkSmsForLogin={checkSmsForLogin}
-            ResendCodefunc={ResendCodefunc} //zare_nk_040226_added
-            isDisabledCheckSmsBtn={isDisabledCheckSmsBtn}
-            setIsDisabledCheckSmsBtn={setIsDisabledCheckSmsBtn}
-            refForCheckSmsBtn={refForCheckSmsBtn}
-            refForSmsInput={refForSmsInput}
-            smsError={smsError}
-            mobileCheckBtn={mobileCheckBtn}
-            setMobileCheckBtn={setMobileCheckBtn}
-            mobileVal={mobileVal}
-            setMobileVal={setMobileVal}
-            error={error}
-            setError={setError}
-            timer={timer}
-            setTimer={setTimer}
-            isDisabledResendCode={isDisabledResendCode}
-            setIsDisabledResendCode={setIsDisabledResendCode}
-            isDisabledRemovTimerBtn={isDisabledRemovTimerBtn}
-            setIsDisabledRemovTimerBtn={setIsDisabledRemovTimerBtn}
-          ></SecondPageComponent>
-        )}
-      </form>
-    </div>
+        <div
+          style={{
+            width: "100%",
+            height: '100%',
+            display: "flex",
+            flexDirection: 'column',
+            // justifyContent: "center",
+            // minHeight: "100vh",
+            alignItems: 'stretch',
+            backgroundColor: 'white',
+            // padding: '1rem',
+            position: 'relative',
+            justifyContent: 'flex-end',
+            border: '2px dashed green',
+          }}
+        >
+          {/* zare_nk_050102_commented_st(move to FirstPageComponent component) */}
+          {/* <div style={{ position: 'absolute', padding: '1rem', width: "100%", backgroundColor: 'white', border:'3px dotted yellow', }}>
+            <form
+              id="loginForm"
+              onSubmit={(event) => {
+                event.preventDefault();
+              }}
+              className={`${Styles.loginForm} ${Styles.valueStyle}`}
+            > */}
+          {/* zare_nk_050102_commented_end(move to FirstPageComponent component) */}
+
+          {error && <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>{error}</p>}
+
+          {currentPage == "firstPage" ? (
+            <FirstPageComponent
+              mobileButtonClick={mobileButtonClick}
+              mobileVal={mobileVal}
+              mobileChanged={mobileChanged}
+              mobileError={mobileError}
+              refForMobileInput={refForMobileInput}
+              refForMobileCheckBtn={refForMobileCheckBtn}
+              isDisabledMobileCheckBtn={isDisabledMobileCheckBtn}
+              setIsDisabledMobileCheckBtn={setIsDisabledMobileCheckBtn}
+              backBtnCliked={backBtnCliked}
+              setBackBtnCliked={setBackBtnCliked}
+              handleGoogleLogin={handleGoogleLogin}
+              isMobileTextEmty={isMobileTextEmty}
+              setIsMobileTextEmty={setIsMobileTextEmty}
+              error={error}   //zare_nk_050105_added
+            >
+              تایید
+            </FirstPageComponent>
+          ) : (
+            <SecondPageComponent
+              smsVal={smsVal}
+              smsTxtChanged={smsTxtChanged}
+              // smsTxtKeyDown={smsTxtKeyDown}
+              backBtnClick={backBtnClick}
+              checkSmsForLogin={checkSmsForLogin}
+              ResendCodefunc={ResendCodefunc} //zare_nk_040226_added
+              isDisabledCheckSmsBtn={isDisabledCheckSmsBtn}
+              setIsDisabledCheckSmsBtn={setIsDisabledCheckSmsBtn}
+              refForCheckSmsBtn={refForCheckSmsBtn}
+              refForSmsInput={refForSmsInput}
+              smsError={smsError}
+              mobileCheckBtn={mobileCheckBtn}
+              setMobileCheckBtn={setMobileCheckBtn}
+              mobileVal={mobileVal}
+              setMobileVal={setMobileVal}
+              error={error}
+              setError={setError}
+              timer={timer}
+              setTimer={setTimer}
+              isDisabledResendCode={isDisabledResendCode}
+              setIsDisabledResendCode={setIsDisabledResendCode}
+              isDisabledRemovTimerBtn={isDisabledRemovTimerBtn}
+              setIsDisabledRemovTimerBtn={setIsDisabledRemovTimerBtn}
+              newSmsVal={newSmsVal}     //zare_nk_050103_added
+              setNewSmsVal={setNewSmsVal}  //zare_nk_050103_added
+              newSmsTxtChanged={newSmsTxtChanged}
+              smsInputKeyDown={smsInputKeyDown}  //zare_nk_050105_added
+              SmsInputRefs={SmsInputRefs}
+            ></SecondPageComponent>
+          )}
+          {/* zare_nk_050102_commented_st(move to FirstPageComponent component) */}
+          {/* </form>
+          </div> */}
+          {/* zare_nk_050102_commented_end(move to FirstPageComponent component) */}
+        </div>
+      </main >
+      <footer></footer>
+    </>
   );
 }

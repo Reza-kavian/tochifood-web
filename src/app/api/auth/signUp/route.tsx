@@ -1,4 +1,4 @@
-////zare_nk_041124_okk
+////zare_nk_050124_okk
 import { NextRequest , NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { getConnection, sql } from "../../../../../lib/db";
@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
       { status: 405 }
     );
     response.cookies.delete("token");
-     response.cookies.delete("google_Invalid_credentials"); //zare_nk_031226_added
+    response.cookies.delete("google_Invalid_credentials"); //zare_nk_031226_added
     return response;
   }
   try {
@@ -84,7 +84,8 @@ export async function POST(request: NextRequest) {
     }
     if (
       error instanceof Error &&
-      error.message.includes("Cannot read properties of undefined")
+      error.message.includes("Cannot read properties of undefined")  //zare_nk_041219_nokteh(ehtemalan dastoore const { username, password } = await request.json(); dar soorate meghdare motabar nagereftane 
+      // username, password be inja miad(moadele parametrhaye voroodiye actione api .netcore hast) )
     ) {
       //return NextResponse.json({ message: 'درخواست نامعتبر - برخی داده‌ها ارسال نشده‌اند' }, { status: 400 });
       const response = NextResponse.json(

@@ -39,9 +39,7 @@ input.textcreator:focus {
   box-shadow: none;
 }
 
-#chooseDeliveryTimeInSabadSafheInMobile
-  #collapseBtnInSabadSafhe
-  .forCollapseIcon:after {
+#chooseDeliveryTimeInSabadSafheInMobile #collapseBtnInSabadSafhe .forCollapseIcon:after {
   content: "\f107";
   font-family: "Font Awesome 5 Free";
   font-weight: 700;
@@ -49,11 +47,16 @@ input.textcreator:focus {
   margin-left: 5px;
 }
 
-#chooseDeliveryTimeInSabadSafheInMobile
-  #collapseBtnInSabadSafhe.collapsed
-  .forCollapseIcon:after {
+#chooseDeliveryTimeInSabadSafheInMobile #collapseBtnInSabadSafhe.collapsed .forCollapseIcon:after {
   content: "\f106";
 }
+
+.sabadSatrImgcont {
+  border-radius: 10;
+  overflow: hidden;
+  box-shadow: #5e5e5e 0px 0px 3px 0px;
+}
+
 /* zare_nk_040522_added_st */
 @media screen and (min-width: 576px) {
   #CurrentImg {
@@ -62,14 +65,17 @@ input.textcreator:focus {
     /* height: fit-content; */
   }
 }
+
 /* zare_nk_040522_added_end */
 
 @media screen and (min-width: 768px) {
+
   /* zare_nk_040522_added_st */
   #CurrentImg {
     width: 270px;
     height: fit-content;
   }
+
   /* zare_nk_040522_added_end */
 
   /*zare_nk_1219 display: none;*/
@@ -107,8 +113,8 @@ input.textcreator:focus {
   }
 
   #listGroupAccordionInSafhe {
-    flex-flow: row;  
-    padding: 15px 10px; 
+    flex-flow: row;
+    padding: 15px 10px;
   }
 
   #sabadHeaderAndItemsCont {
@@ -133,7 +139,7 @@ input.textcreator:focus {
 
   #listGroupAccordionInSafhe {
     flex-flow: column;
-    padding: 10px 5px; 
+    padding: 10px 5px;
   }
 
   #sabadHeaderAndItemsCont {
@@ -147,7 +153,8 @@ input.textcreator:focus {
 
   #chooseDeliveryTimeInSabadSafheInMobileCont
 
-    /*, #chooseDeliveryTimeInSabadSafheInMobileCont-checkout*/ {
+  /*, #chooseDeliveryTimeInSabadSafheInMobileCont-checkout*/
+    {
     display: flex;
   }
 
@@ -162,6 +169,7 @@ input.textcreator:focus {
 }
 
 @media screen and (max-width: 768px) {
+
   #chooseDeliveryTimeInSabadSafheInMobileCont,
   #chooseDeliveryTimeInSabadSafheInMobileCont-checkout {
     /*padding: 5px 5px 60px 5px;*/
@@ -184,6 +192,7 @@ input.textcreator:focus {
     width: 100%;
   }
 }
+
 /* zare_nk_040522_added_st */
 @media screen and (max-width: 576px) {
   #CurrentImg {
@@ -191,6 +200,7 @@ input.textcreator:focus {
     height: fit-content;
   }
 }
+
 /* zare_nk_040522_added_end */
 
 #LayOutFooterAndRightsReserved {
@@ -217,8 +227,7 @@ input.textcreator:focus {
   margin: 10px 0px 20px 0px;
 }
 
-.slideItemsInZamanbandiModal {
-}
+.slideItemsInZamanbandiModal {}
 
 .slideItemsInZamanbandiModal label {
   flex: 0 0 auto;

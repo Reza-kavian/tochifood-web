@@ -1,4 +1,4 @@
-////zare_nk_041124_okk
+////zare_nk_041220_okk
 "use client";
 import { useState, useEffect } from "react";
 import { ReactNode } from "react";
@@ -37,6 +37,7 @@ function AlertButton({
     </>
   );
 }
+
 interface ShowTextBoxProps {
   mobileVal: string; // یا number اگر عدد بود
   mobileChanged: (e: React.ChangeEvent<HTMLInputElement>) => void;

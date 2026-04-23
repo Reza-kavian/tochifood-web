@@ -1,11 +1,11 @@
-//\src\app\redirect-mobile\page.tsx  //zare_nk_041124_okk
+//\src\app\redirect-mobile\page.tsx  //zare_nk_041219_okk
 "use client";
 import { useEffect } from "react";
-import { redirect } from "next/navigation";
+import { redirect } from "next/navigation"; 
 
 export default function MobileRedirectPage({ searchParams }: any) {
   if (searchParams?.verified !== "1") {
-    alert('rooo!!!');
+    console.log('verified !== "1"');
     redirect("/login");
   }
   const deepLink =
@@ -16,7 +16,7 @@ export default function MobileRedirectPage({ searchParams }: any) {
         : null;
 
   useEffect(() => {
-    if (!deepLink) { alert('ddddddddddddd'); return; }
+    if (!deepLink) { console.log('deepLink undefined!!'); return; }
 
     const t = setTimeout(() => {
       window.location.href = deepLink;

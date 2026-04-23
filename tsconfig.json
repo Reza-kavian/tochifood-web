@@ -1,6 +1,8 @@
+////zare_nk_050129_okk
+////zare_nk_050128(file tsconfig.json haviye tanzimate makhsoose typeScript hast)
 {
   "compilerOptions": {
-     "typeRoots": ["./types", "./node_modules/@types"],
+    "typeRoots": ["./types", "./node_modules/@types"],
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,

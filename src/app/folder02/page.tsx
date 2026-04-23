@@ -1,111 +1,76 @@
-////zare_nk_041124_okk
-"use client";
-import { useRouter, useParams, useSearchParams } from "next/navigation";
-import { useEffect, useRef } from "react";
+// app/page.tsx
+'use client'; // برای استفاده از state و event handlers لازم است
 
-function getCookie(name: any) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) {
-    return parts.pop()?.split(";").shift() ?? null;
-  }
-  return null; // اگر کوکی پیدا نشد
-}
+import React, { useState } from 'react';
+import { Collapse, Button, Box, Paper, Typography } from '@mui/material';
 
-export default function ProductPage() {
-  const idUSerRef = useRef<HTMLHeadingElement | null>(null);
-  const router = useRouter();
-  useEffect(() => {
-    const asyncFunctionInUseEffect = async () => {
-      const token = getCookie("token");
-      console.log('040530-033-token: ' + token);
-      if (token != null) {
-        try {
-          const response = await fetch("/api/auth/verifyToken", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ token }),
-          });
+// این کامپوننت LayoutWrapper رو هم که در layout.tsx داشتید، اینجا در نظر می‌گیریم
+// فرض می‌کنیم LayoutWrapper استایل‌های کلی یا wrapperهای لازم رو اعمال می‌کنه
+// اگر LayoutWrapper شما نیاز به padding خاصی داره، می‌تونید اینجا تنظیم کنید.
 
-          // const data = await response.json();  //zare_nk_041112_commented
-          ////zare_nk_041112_added_st
-          let data: any = null;
+export default function HomePage() {
+    const [open, setOpen] = useState(false);
 
-          try {
-            if (response.headers.get("content-type")?.includes("application/json")) {
-              data = await response.json();
-            }
-          } catch (e) {
-            data = null;
-          }
-          ////zare_nk_041112_added_end
-
-          const decoded = data?.decoded;//zare_nk_041113_added
-          if (response.ok && decoded) {  //zare_nk_041113_added
-            // if (response.ok) {  //zare_nk_041113_commented
-            ////zare_nk_041115_commented_st
-            // var idUser = data.decoded.IdUser;
-            // var email = data.decoded.email;
-            ////zare_nk_041115_commented_send
-            ////zare_nk_041115_added_st
-            var FullName = data.decoded.FullName;
-            var Mobile = data.decoded.Mobile;
-            var name = data.decoded.name;
-            ////zare_nk_041115_added_end       
-            if (idUSerRef.current) {
-              document.getElementById("idUSer")!.innerText =
-                // idUser != null ? idUser : email;  //zare_nk_041115_commented
-                FullName ? FullName :
-                  (Mobile ? Mobile : name
-                  )
-            }
-          } else {
-            const idUSerRefTag = idUSerRef.current;
-            if (idUSerRefTag instanceof HTMLElement) {
-              idUSerRefTag.innerText = "ffffffferer----" + (data?.errorMessage ?? "خطای نامشخص از سرور");
-              //zare_nk_040224-nokteh(age az useState estefadeh mikardim reactpasandtar bood)
-              //zare_nk_041112-nokteh(age ba eshtebah vared kardane voroodihaye fetch va ya name eshtebahe fetch va ... !response.ok beshe, data.errorMessage
-              // vojood nadare chon barnameh aslan be api narafteh ke dar codehaye dastiye api bekhaim errorMessage ra ijad konim,pas az alamate ?? estefadeh kardim
-              // ke age errorMessage vojood nadasht pas matni ra benevisim
-            }
-          }
-        } catch (error) { //mamoolan mavarede ghtiye shabakeh va net va adame dastrasi be api be catch miad(vali mavarede eshtebah vared kardane name api va paramethaye naghes dadan be api va ... barnameh dar try 
-          // mimooneh va automat statuse 4xx ya 5xx tolid mikoneh)
-          console.error("❌ خطااااااااااااااااااای JWT:", error);
-          if (error instanceof Error) {
-            idUSerRef.current!.innerText = error.message;
-          } else {
-            idUSerRef.current!.innerText = String(error);
-          }
-        }
-      } else {
-        if (idUSerRef.current) {
-          idUSerRef.current.innerText = "offlinim";
-        }
-      }
+    const handleToggle = () => {
+        setOpen(!open);
     };
-    asyncFunctionInUseEffect();
-  });
-  // const params = useParams();  //zare_nk_040224_comment(chon makhsoose safahate dynamic hast va inja kar nemikoneh)
-  const params = useSearchParams();
-  const id = params.get("id") || "Unknown";
-  const name = params.get("name") || "Unknown";
-  const handleClick = () => {
-    router.push("/folder03?tab=comments2");
-  };
-  const loginClick = () => {
-    router.push("/login");
-  };
-  return (
-    <div>
-      <h1></h1>
-      <h1 id="idUSer" ref={idUSerRef}>
-        this is:: /folder02
-      </h1>
-      <h1>Product {id}</h1>
-      <p>This is the product page for name: {name}</p>
-      <button onClick={handleClick}>go to folder03 </button>
-      <button onClick={loginClick}>go to login </button>
-    </div>
-  );
+
+    return (
+        <Box  ////zare_nk_050202_nokteh(tage <Box> shabiye <div class="container"> dar bootstarp has)
+            sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', border: '2px dashed green', }}>
+            <Typography variant="h4" gutterBottom sx={{ border: '2px dashed black', }}>
+                مثال دکمه و Collapse با MUI
+            </Typography>
+
+            <Button
+                variant="contained"  //zare_nk_050202_nokteh(moadele background-color va box-shadow va hover baraye designe zaheri)
+                color="primary"    //zare_nk_050202_nokteh(moadele btn-primary dar bootstrap)
+                onClick={handleToggle}
+                sx={{ mb: 2 }} //zare_nk_050202_nokteh( margin-bottom)
+            >
+                {open ? 'بستن محتوا' : 'باز کردن محتوا'}
+            </Button>
+
+            <Collapse
+                style={{
+                    // position: open ? 'absolute' : 'relative', // یا 'fixed' اگر بخواهید روی کل صفحه باشد
+                    // bottom: open ? 0 : 'auto', // تنظیم موقعیت بالا (مثلاً 100px از بالا) 
+                    position: 'absolute', // یا 'fixed' اگر بخواهید روی کل صفحه باشد
+                    bottom: 0, // تنظیم موقعیت بالا (مثلاً 100px از بالا)
+                }}
+                in={open} //zare_nk_050202_nokteh(moadele show() va hide() dar bootstrap)
+                timeout="auto"
+                unmountOnExit  //zare_nk_050202_nokteh(age in attribute ra benevisim age in={false} beshe az dom hazf mishe,age in attribute ra nanevisim 
+            // age in={false} beshe az dom hazf nemishe va dar inspect vojood dareh va faghat hidden mishe)
+            >
+                <Paper  //zare_nk_050202_nokteh(tage Paper manade divi hast ke shaddow dadim behesh,va mesle zahere modal hast(yani engar roye safhe miyad va saye ijad mikoneh))
+                    elevation={4}  //zare_nk_050202_nokteh(shabihe opacity dar css)
+                    sx={{ p: 3, mt: 3, width: '100%', maxWidth: '500px', textAlign: 'center', border: '2px dashed orange', }}>
+                    <Typography
+                        variant="body1" //zare_nk_050202_nokteh(inam engar mesle h1 ta h6 rooye andazeye font tasir mizare!)
+                        sx={{ p: 3, border: '2px dashed blue', }}>
+                        این محتوای درون کامپوننت Collapse است 🌿
+                        با انیمیشن نرم باز و بسته می‌شود.
+                    </Typography>
+
+                    <Typography
+                        variant="body2"
+                        // color="primary"   //zare_nk_050203_nokteh(shabihe range primary bootstarp tarif shodeh hast)
+                        color="primaryDasti"  //zare_nk_050203_nokteh(range dastiye khodam ke dar palette tarif kardam,baname delkhah(age name tarifshodeye MUI yani primary bedam jaigizine primarye MUI mishe))
+                        sx={{ mt: 1 }}>
+                        (این بخش تنها زمانی نمایش داده می‌شود که Collapse باز باشد)
+                    </Typography>
+                </Paper>
+            </Collapse>
+
+            <Box sx={{ mt: 4 }}>
+                <Typography variant="h6" gutterBottom>
+                    محتوای دیگر صفحه...
+                </Typography>
+                <Typography variant="body1">
+                    این بخش از صفحه همیشه قابل مشاهده است.
+                </Typography>
+            </Box>
+        </Box>
+    );
 }

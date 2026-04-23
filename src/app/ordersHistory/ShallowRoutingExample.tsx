@@ -1,3 +1,4 @@
+ ////zare_nk_050124_okk
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
@@ -54,8 +55,8 @@ export default function ShallowRoutingExample() {
     IdKala: number;
     NameKala: string;
     Tedad: number;
-    IsVazni:number;
-    ForooshSatr:number;
+    IsVazni: number;
+    ForooshSatr: number;
     // [key: string]: any; //yani az IdKala motmaen hastim vali fildhaye digare db ra parsa ina tagheir dadan dar in peroujeh shayad aslan
     //  be man nagan va timi kar nakonim,pas [key: string]: any; gozashtam ke kolli hast(chon hameye fieldha ro neveshtam commentesh kardam)
   };
@@ -490,11 +491,12 @@ export default function ShallowRoutingExample() {
                           src={`https://img.tochikala.com/Product/${item.IdKala}.webp`}
                           alt={item.NameKala || ""}
                           style={{ width: "64px", height: "64px" }}
-                        // onError={(e) => {
-                        //   e.target.onerror = null;
-                        //   e.target.src =
-                        //     "https://img.tochikala.com/Logo/photo14359415832-Copy.webp";
-                        // }}
+                          ////zare_nk_041213_added_st
+                          onError={(e) => {
+                            e.currentTarget.src = 'https://img.tochikala.com/Logo/tochi.png';
+                            e.currentTarget.style.backgroundColor = 'white';
+                          }}
+                        ////zare_nk_041213_added_end
                         />
                       </div>
 
