@@ -29,7 +29,8 @@ const publicPaths = [
   // "/ordersHistory",
   // "/shoppingbasket",
   ////zare_nk_040522_added_end_movaghat(pak kardani)
-  //  "/location",  //zare_nk_050108_added(and commented)
+  "/location",  //zare_nk_050108_added(and commented)
+  "/onboarding", //zare_nk_050205_added 
 ];
 
 async function verifyToken(token: string) {
@@ -40,12 +41,12 @@ async function verifyToken(token: string) {
     ).toString("utf-8"); //zare_nk_040219_added(baraye adame moshkel dar verify kardane secretKey vaghti az lafze $ estefadeh shod dar mohtavaye secretKey)
 
     console.log(
-      "zare_nk_041009-03-POST called!!-decoded secretKey: " + secretKey
+      "zare_nk_050205-03-POST called!!-decoded secretKey: " + secretKey
     );
 
     const SECRET = new TextEncoder().encode(secretKey);
     const { payload } = await jwtVerify(token, SECRET);  //zare_nk_041009_nokteh(jwtVerify lafze payload ra barmigardooneh )
-    console.log("zare_nk_041009-04-payload: " + JSON.stringify(payload));
+    console.log("zare_nk_050205-04-payload: " + JSON.stringify(payload));
     //zare_nk_041009-04-payload: {"unique_name":"20109","CodeMoshtari":"20109","Mobile":"9351091287",
     // "NameMoshtari":"","nbf":1750759349,"exp":1751364149,"iat":1750759349}
     return payload;
@@ -63,7 +64,7 @@ export async function middleware(request: NextRequest) {
   // console.log("zare_nk_040317-fullUrl: " + kolli);
 
   console.log(
-    "zare_nk_050108-00-Middleware called!!-All cookies: " +
+    "zare_nk_050205-00-Middleware called!!-All cookies: " +
     request.headers.get("cookie")
   );
 
@@ -96,36 +97,37 @@ export async function middleware(request: NextRequest) {
   ////zare_nk_040520_rahe2_end(sadehtare va baraye masirhaye sade mesle projeye man tosiye mishe)
   ////zare_nk_040520_added_end
 
-  if (isPublic || request.nextUrl.pathname == "/") {
+  // if (isPublic || request.nextUrl.pathname == "/") {  //zare_nk_050205_commented
+  if (isPublic) {  //zare_nk_050205_added
     const response = NextResponse.next();
     const fullUrl = request.nextUrl.href;
     const pathname = request.nextUrl.pathname;
     // ست کردن header برای استفاده در layout
     response.headers.set("x-url", fullUrl);
     response.headers.set("x-pathname", pathname);
-    console.log("zare_nk_050108-fullUrl001: " + fullUrl);
+    console.log("zare_nk_050205-fullUrl001: " + fullUrl);
     return response;
   }
-  console.log("zare_nk_050108 from:", request.nextUrl.pathname);
+  console.log("zare_nk_050205 from:", request.nextUrl.pathname);
 
   const token = request.cookies.get("token")?.value;  //zare_nk_050111_commented_movaghat
-  console.log("zare_nk_050108-Cookies in middleware:", request.cookies);
+  console.log("zare_nk_050205-Cookies in middleware:", request.cookies);
   // console.log("zare_nk_050108-Token from cookie:", token);
   ////zare_nk_050111_added_movaghat_st
   // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjIwMTA5IiwiQ29kZU1vc2h0YXJpIjoiMjAxMDkiLCJNb2JpbGUiOiI5MzUxMDkxMjg3IiwiTmFtZU1vc2h0YXJpIjoiIiwibmJmIjoxNzQ2NzI1OTI4LCJleHAiOjE3NDczMzA3MjgsImlhdCI6MTc0NjcyNTkyOH0.9Jfv71v3D_s13gSyf3gXqgEfiXaV-lx93hDey4DSLM8";
   ////zare_nk_050111_added_movaghat_ثدی
   if (token) {
-    console.log("zare_nk_050108-01-taghiir-tempTest-inja 004-token daaarim1");
+    console.log("zare_nk_050205-01-taghiir-tempTest-inja 004-token daaarim1");
     try {
-      console.log("zare_nk_050108-02-taghiir-tempTest-inja 004-token daaarim2");
+      console.log("zare_nk_050205-02-taghiir-tempTest-inja 004-token daaarim2");
       console.log(
-        "zare_nk_050108-02-taghiir-tempTest-inja 004-token daaarim2.01"
+        "zare_nk_050205-02-taghiir-tempTest-inja 004-token daaarim2.01"
       );
       ////zare_nk_040403_added_st
       const validPayload = await verifyToken(token);
       ////zare_nk_040403_alan
       console.log(
-        "zare_nk_050108-04-validPayload is: " + JSON.stringify(validPayload)
+        "zare_nk_050205-04-validPayload is: " + JSON.stringify(validPayload)
       );
 
       ////zare_nk_050111_added_movaghat_st
@@ -134,20 +136,27 @@ export async function middleware(request: NextRequest) {
       ////zare_nk_050111_added_movaghat_end
 
       if (!validPayload) {
-        const response = NextResponse.redirect(new URL("/login", request.url));
+        var ishomePage: boolean = request.nextUrl.pathname == "/" ? true : false;  //zare_nk_050205_added
+
+        // const response = NextResponse.redirect(new URL("/login", request.url));   //zare_nk_050205_commented
+        const response = ishomePage ? NextResponse.redirect(new URL("/onboarding", request.url)) :
+          NextResponse.redirect(new URL("/login", request.url));  //zare_nk_050205_added
+
+
         const isValidRedirectPath = !publicPaths.some((path) =>
           request.nextUrl.pathname.startsWith(path)
         );
-        if (isValidRedirectPath) {
+        // if (isValidRedirectPath) {  //zare_nk_050205_commented
+        if (isValidRedirectPath || ishomePage) {  //zare_nk_050205_added
           response.cookies.set("redirect", request.nextUrl.pathname, {
             path: "/",
             httpOnly: false,
           });
         }
         var tempTest = response.cookies.get("redirect")?.value;
-        console.log("zare_nk_050108-taghiir-tempTest: " + tempTest);
+        console.log("zare_nk_050205-taghiir-tempTest: " + tempTest);
         console.log(
-          "zare_nk_050108-response.Cookies(not ok) in middleware:",
+          "zare_nk_050205-response.Cookies(not ok) in middleware:",
           response.cookies.get("token")?.value
         );
 
@@ -157,11 +166,11 @@ export async function middleware(request: NextRequest) {
         // ست کردن header برای استفاده در layout
         response.headers.set("x-url", fullUrl);
         response.headers.set("x-pathname", pathname);
-        console.log("zare_nk_050108-fullUrl003: " + fullUrl);
+        console.log("zare_nk_050205-fullUrl003: " + fullUrl);
         return response;
       }
       // console.log(
-      //   "zare_nk_040403-04-taghiir-decodedToken: " +
+      //   "zare_nk_050205-04-taghiir-decodedToken: " +
       //     JSON.stringify(data.decoded)
       // );
       //zare_nk_040209-taghiir-decodedToken: {"unique_name":"20109","CodeMoshtari":"20109",
@@ -177,7 +186,7 @@ export async function middleware(request: NextRequest) {
       // ست کردن header برای استفاده در layout
       response.headers.set("x-url", fullUrl);
       response.headers.set("x-pathname", pathname);
-      console.log("zare_nk_050108-fullUrl002: " + fullUrl);
+      console.log("zare_nk_050205-fullUrl002: " + fullUrl);
       return response;
 
       ////zare_nk_040403_added_end
@@ -254,38 +263,51 @@ export async function middleware(request: NextRequest) {
       ////zare_nk_040403_commented_end
     } catch (error) {
       console.log(
-        "zare_nk_050108-02-taghiir-tempTest-inja 003-amaliate barrasiye token ba khata movajeh shod-error: " +
+        "zare_nk_050205-02-taghiir-tempTest-inja 003-amaliate barrasiye token ba khata movajeh shod-error: " +
         error
         //zare_nk_040403-taghiir-tempTest-inja 003-amaliate barrasiye token ba khata movajeh shod-error: TypeError: fetch failed
       );
       // return NextResponse.json({ error: "توکن نامعتبر است" }, { status: 401 });
-      const response = NextResponse.redirect(new URL("/login", request.url));
+
+      var ishomePage: boolean = request.nextUrl.pathname == "/" ? true : false;  //zare_nk_050205_added
+
+      // const response = NextResponse.redirect(new URL("/login", request.url));  //zare_nk_050205_commented
+      const response = ishomePage ? NextResponse.redirect(new URL("/onboarding", request.url)) :
+        NextResponse.redirect(new URL("/login", request.url));    //zare_nk_050205_added
+
+
       response.cookies.set("redirect", request.nextUrl.pathname, {
         path: "/",
         httpOnly: false,
       });
       var tempTest = response.cookies.get("redirect")?.value;
-      console.log("zare_nk_041009-taghiir-tempTest: " + tempTest);
+      console.log("zare_nk_050205-taghiir-tempTest: " + tempTest);
 
       const fullUrl = request.nextUrl.href;
       const pathname = request.nextUrl.pathname;
       // ست کردن header برای استفاده در layout
       response.headers.set("x-url", fullUrl);
       response.headers.set("x-pathname", pathname);
-      console.log("zare_nk_050108-fullUrl004: " + fullUrl);
+      console.log("zare_nk_050205-fullUrl004: " + fullUrl);
       return response;
     }
   } else {
-    console.log("zare_nk_050108-01-taghiir-tempTest-inja 004-token nadarim!!!");
+    console.log("zare_nk_050205-01-taghiir-tempTest-inja 004-token nadarim!!!");
     // return NextResponse.redirect(new URL(`/login?redirect=${request.nextUrl.pathname}`, request.url));   //zare_nk_031221_added(and commented. chon khastam be jaye gharar dadane request.nextUrl.pathname dar querystring an ra dar cookie gharar bedam)
 
-    const response = NextResponse.redirect(new URL("/login", request.url));
+    var ishomePage: boolean = request.nextUrl.pathname == "/" ? true : false;  //zare_nk_050205_added
+
+    // const response = NextResponse.redirect(new URL("/login", request.url));  //zare_nk_050205_commented
+    const response = ishomePage ? NextResponse.redirect(new URL("/onboarding", request.url)) :
+      NextResponse.redirect(new URL("/login", request.url));    //zare_nk_050205_added
+
+
     response.cookies.set("redirect", request.nextUrl.pathname, {
       path: "/",
       httpOnly: false,
     });
     var tempTest = response.cookies.get("redirect")?.value;
-    console.log("zare_nk_050108-tempTest: " + tempTest);
+    console.log("zare_nk_050205-tempTest: " + tempTest);
 
     const fullUrl = request.nextUrl.href;
     const pathname = request.nextUrl.pathname;

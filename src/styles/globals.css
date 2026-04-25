@@ -106,16 +106,13 @@
     url("../../public/fonts/webfont(farsi_adad_hast)/eot/IRANSansWeb(FaNum).eot") format("embedded-opentype");
 }
 
-body {   
-  font-family: "IRANSansWeb_ms(adad_fa)", "IRANSansWeb_Medium(adad_fa)",
-    "IRANSansWeb_ms", "IRANSansWeb_Medium", "IranSans", "b nazanin", "IRNazanin";
+body {  
+  /* zare_nk_050204_comment(baraye bazi propertyha mesle font-family barname pishfarzhaye designi baraye body lahaz mikoneh ke ehtemalan olaviate balatari ham daran
+   nesbat be code css dastiye ma baraye body,pas behtare be khode tagha mostaghim font-family bedim,ke man az class dadan be tag dar globals.module.css estefade kardam)  */
+  /* font-family: "IRANSansWeb_ms(adad_fa)", "IRANSansWeb_Medium(adad_fa)",
+    "IRANSansWeb_ms", "IRANSansWeb_Medium", "IranSans", "b nazanin", "IRNazanin"; */
   background-color: #f6f6f6 !important;
-}
-
-*{
-   font-family: "IRANSansWeb_ms(adad_fa)", "IRANSansWeb_Medium(adad_fa)",
-    "IRANSansWeb_ms", "IRANSansWeb_Medium", "IranSans", "b nazanin", "IRNazanin"; 
-}
+} 
 
 .vorsab:hover,
 .vorsab:link,

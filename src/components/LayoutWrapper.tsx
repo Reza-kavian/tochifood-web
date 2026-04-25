@@ -13,6 +13,8 @@ import { useAuthentication } from '../context/AuthenticationContext'; //zare_nk_
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 ////zare_nk_050202_added_end(for use MUI)
+ 
+import Styles from "@/styles/components/globals.module.css"; //zare_nk_050204_added 
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -58,13 +60,15 @@ export default function LayoutWrapper({ children }: RootLayoutProps) {
 
   return (
     //// zare_nk_050202_added_st(for use MUI) 
-    < ThemeProvider theme={theme} >
+    <ThemeProvider theme={theme} >
       <CssBaseline />
       {/* zare_nk_050202_added_end(for use MUI) */}
-      <body style={{
-        color: "#3f3f3f", 
-        fontFamily: 'IRANSansWeb_Medium(adad_fa)',
-      }}> 
+      <body         
+        className={`${Styles.ISW_Medium_fa}`} 
+        style={{
+          // color: "#3f3f3f",
+          // fontFamily: 'IRANSansWeb_Medium(adad_fa)', 
+        }}> 
         {/* zare_nk_041225_commented_st(tebghe revale tapsifood header ra baraye aksare safahat motefavet ast,pas dar safahat mizaraim) */}
         {/* {!isLoginPageOrPage && (
         <div className="layoutHeader sticky-top">
@@ -88,8 +92,7 @@ export default function LayoutWrapper({ children }: RootLayoutProps) {
       )} */}
         {/* zare_nk_041225_commented_end(tebghe revale tapsifood header ra baraye aksare safahat motefavet ast,pas dar safahat mizaraim) */}
         <main className="main-in-LayoutWrapper">
-          <section className="section-in-LayoutWrapper">
-
+          <section className="section-in-LayoutWrapper"> 
             {/* {isLogin ? (
             <div>
               <p>شما وارد شده‌اید  -  {isLogin} </p>
@@ -99,6 +102,16 @@ export default function LayoutWrapper({ children }: RootLayoutProps) {
               <p>شما وارد نشده‌اید  -  {isLogin} </p>
             </div>
           )} */}
+
+
+           {/* {isLogin ? (<>
+              {children}
+            </>
+            ) : (
+              <div>
+                <p>شما وارد نشده‌اید  -  {isLogin} </p>
+              </div>
+            )} */}
 
             {children}
             {/* zare_nk_041225_added_st(baraye collapse paeine safhe(ehtemalan tapsifood dar layout gozashteh!shayad khodam tooye safheh bebaram!)) */}

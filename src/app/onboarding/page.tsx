@@ -105,7 +105,7 @@ export default function Page() {
               width: '100%',
               height: '50px',
             }}>
-            ورود gggg به عنوان مهمان
+            ورود به عنوان مهمان
           </button>
         </div>
         <div style={{ display: 'flex', padding: '0px 10px', flex: '1 1 47%' }}>

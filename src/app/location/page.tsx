@@ -2,7 +2,8 @@
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import Styles from "@/styles/components/login.module.css";
+import Styles from "@/styles/components/location.module.css";
+import globalsStyles from "@/styles/components/globals.module.css";
 import { RefObject } from "react";
 import { ReactNode } from "react";
 import { ChangeEvent } from "react";
@@ -10,7 +11,8 @@ import jwt from "jsonwebtoken"; //zare_nk_040603_added
 import { JwtPayload } from "jsonwebtoken";  //zare_nk_040603_added
 import { factchecktools } from "googleapis/build/src/apis/factchecktools";
 
-import { Collapse, Button, Box, Paper, Typography, Grow } from '@mui/material';  //zare_nk_050203_added
+import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog)
 
 ////zare_nk_050109_added_st
 
@@ -87,7 +89,9 @@ type BoxHtmlComponentType = {
   isEpmtyHeightBox: boolean;
   setIsEpmtyHeightBox: React.Dispatch<React.SetStateAction<boolean>>;
   refForBox: RefObject<HTMLDivElement | null>;
-  saveAddress: () => void;
+  saveAddress: (isOnline: boolean) => void;
+  addressFormInputsVal: any;   //zare_nk_050205_added(noe any update she)
+  setAddressFormInputsVal: React.Dispatch<React.SetStateAction<any>>;   //zare_nk_050205_added(noe any update she)
 };
 
 function BoxHtmlComponent({
@@ -97,14 +101,30 @@ function BoxHtmlComponent({
   setIsEpmtyHeightBox,
   refForBox,
   saveAddress,
+  addressFormInputsVal,
+  setAddressFormInputsVal
 }: BoxHtmlComponentType) {
   console.log('zare_nk_050126_BoxHtmlComponent called!!-isEpmtyHeightBox: ' + isEpmtyHeightBox);
 
-  const [error, setError] = useState<string | null>(null);  
+  const [error, setError] = useState<string | null>(null);
 
   // const [mobileError, setMobileError] = useState("");
-  const [addressMatnError, setAddressMatnError] = useState("");
+  // const [addressMatnError, setAddressMatnError] = useState<string | null>(null);   //zare_nk_050205_commented
+  ////zare_nk_050205_added_st
+  type AddressFormInputsMatnErrorType = {
+    Address: string | null;
+    pelak: string | null;
+    vahed: string | null;
+    addressName: string | null;
+  };
 
+  const [addressFormInputsMatnError, setAddressFormInputsMatnError] = useState<AddressFormInputsMatnErrorType>({
+    Address: '',
+    pelak: '',
+    vahed: '',
+    addressName: '',
+  });
+  ////zare_nk_050205_added_end
 
   type IsAddressFormInputsFocusedType = {
     Address: boolean;
@@ -142,23 +162,23 @@ function BoxHtmlComponent({
   ////zare_nk_050201_commented_end
   // const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<boolean[]>(Array(4).fill(true));   //zare_nk_050201_added   
   const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<IsAddressFormInputsTextType>({
-    Address: false,
-    pelak: false,
-    vahed: false,
-    addressName: false,
+    Address: true,
+    pelak: true,
+    vahed: true,
+    addressName: true,
   });
 
 
-  type AddressFormInputsType = {
-    Address: string;
-    pelak: string;
-    vahed: string;
-    addressName: string;
-    // onSquareClick: () => void;
-    // andis: number;
-    // refForBtn: React.RefObject<(HTMLButtonElement | null)[]>;
-    // className?: string;
-  };
+  // type AddressFormInputsType = {
+  //   Address: string;
+  //   pelak: string;
+  //   vahed: string;
+  //   addressName: string;
+  //   // onSquareClick: () => void;
+  //   // andis: number;
+  //   // refForBtn: React.RefObject<(HTMLButtonElement | null)[]>;
+  //   // className?: string;
+  // };
 
   //// const [mobileVal, setMobileVal] = useState("");
   ////zare_nk_050201_commented_st
@@ -168,12 +188,12 @@ function BoxHtmlComponent({
   // const [addressNameVal, setAddressNameVal] = useState("");
   ////zare_nk_050201_commented_end
   ////zare_nk_050201_added_st
-  const [addressFormInputsVal, setAddressFormInputsVal] = useState<AddressFormInputsType>({
-    Address: '',
-    pelak: '',
-    vahed: '',
-    addressName: '',
-  });
+  // const [addressFormInputsVal, setAddressFormInputsVal] = useState<AddressFormInputsType>({
+  //   Address: '',
+  //   pelak: '',
+  //   vahed: '',
+  //   addressName: '',
+  // });
   ////zare_nk_050201_added_end
 
 
@@ -284,8 +304,8 @@ function BoxHtmlComponent({
   ////zare_nk_050201_commented_end
 
 
-  const refForMobileCheckBtn = useRef<HTMLButtonElement | null>(null);
-  const [isDisabledMobileCheckBtn, setIsDisabledMobileCheckBtn] =
+  const refForSaveAddressFormInputsBtn = useRef<HTMLButtonElement | null>(null);
+  const [isDisabledsaveAddressFormInputsBtn, setIsDisabledsaveAddressFormInputsBtn] =
     useState(true);
 
   // function mobileChanged(
@@ -351,13 +371,13 @@ function BoxHtmlComponent({
   // function addressMatnChanged(
   //   eventOrElement: ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null
   // ) { 
-
+  console.log('050205-reRebdered Box');
   function AddressFormInputsChanged(
     eventOrElement: ChangeEvent<HTMLInputElement> | HTMLInputElement | ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null
-  ) { 
+  ) {
     var inputsName = '';
     //AddressFormInputs
-    setError("");
+    setError(null);
     // let input: HTMLTextAreaElement | null = null;
     let input: HTMLInputElement | HTMLTextAreaElement | null = null;
     let vall: string = "";
@@ -387,12 +407,18 @@ function BoxHtmlComponent({
         input.classList.remove("valid");
         input.classList.add("invalid");
       }
-      setAddressMatnError("ورود متن آدرس الزامی است");
-      setIsDisabledMobileCheckBtn(true);
-      if (refForMobileCheckBtn.current) {
-        refForMobileCheckBtn.current.classList.add(Styles.disabledBtn);
-        refForMobileCheckBtn.current.classList.remove(Styles.btn);
-      }
+      // setAddressMatnError("ورود متن آدرس الزامی است");
+      setAddressFormInputsMatnError((cur) => {
+        return (
+          { ...cur, [inputsName]: 'این بخش را خالی نگذارید' }
+        );
+      });
+
+      // setIsDisabledsaveAddressFormInputsBtn(true);
+      // if (refForSaveAddressFormInputsBtn.current) {
+      //   refForSaveAddressFormInputsBtn.current.classList.add(Styles.disabledBtn);
+      //   refForSaveAddressFormInputsBtn.current.classList.remove(Styles.btn);
+      // }
     }
     // else if (!isMobileNum) {
     //   setIsAddressTextEmty(false);
@@ -401,10 +427,15 @@ function BoxHtmlComponent({
     //     input.classList.add("invalid");
     //   }
     //   setAddressMatnError("فرمت متن آدرس وارده نادرست است");
-    //   setIsDisabledMobileCheckBtn(true);
-    //   if (refForMobileCheckBtn.current) {
-    //     refForMobileCheckBtn.current.classList.add(Styles.disabledBtn);
-    //     refForMobileCheckBtn.current.classList.remove(Styles.btn);
+    // setAddressFormInputsMatnError((cur) => {
+    //   return (
+    //     { ...cur, [inputsName]: 'فرمت وارده اشتباه است' }
+    //   );
+    // });
+    //   setIsDisabledsaveAddressFormInputsBtn(true);
+    //   if (refForSaveAddressFormInputsBtn.current) {
+    //     refForSaveAddressFormInputsBtn.current.classList.add(Styles.disabledBtn);
+    //     refForSaveAddressFormInputsBtn.current.classList.remove(Styles.btn);
     //   }
     // } 
     else {
@@ -420,22 +451,68 @@ function BoxHtmlComponent({
         input.classList.remove("invalid");
         input.classList.add("valid");
       }
-      setAddressMatnError("");
-      setIsDisabledMobileCheckBtn(false);
-      if (refForMobileCheckBtn.current) {
-        refForMobileCheckBtn.current.classList.remove(Styles.disabledBtn);
-        refForMobileCheckBtn.current.classList.add(Styles.btn);
-      }
+      // setAddressMatnError(null);
+      setAddressFormInputsMatnError((cur) => {
+        return (
+          { ...cur, [inputsName]: null }
+        );
+      });
+      // setIsDisabledsaveAddressFormInputsBtn(false);
+      // if (refForSaveAddressFormInputsBtn.current) {
+      //   refForSaveAddressFormInputsBtn.current.classList.remove(Styles.disabledBtn);
+      //   refForSaveAddressFormInputsBtn.current.classList.add(Styles.btn);
+      // }
     }
     if (input) {
       // setAddressVal(input.value);
-      setAddressFormInputsVal((cur) => {
+      setAddressFormInputsVal((cur: any) => {  //zare_nk_050205_nokteh(noe any update she)
         return (
           { ...cur, [inputsName]: vall }
         );
       });
     }
+
+    // const hasNotNullValue = Object.values(addressFormInputsMatnError).some(value => value !== null);
+    // console.log('050205-addressFormInputsMatnError: ' + JSON.stringify(addressFormInputsMatnError));
+    // if (hasNotNullValue) {
+    //   console.log('050205-hasNullValue');
+    //   setIsDisabledsaveAddressFormInputsBtn(true);
+    //   if (refForSaveAddressFormInputsBtn.current) {
+    //     refForSaveAddressFormInputsBtn.current.classList.add(Styles.disabledBtn);
+    //     refForSaveAddressFormInputsBtn.current.classList.remove(Styles.btn);
+    //   }
+    // }
+    // else {
+    //   console.log('050205-has not NullValue');
+    //   setIsDisabledsaveAddressFormInputsBtn(false);
+    //   if (refForSaveAddressFormInputsBtn.current) {
+    //     refForSaveAddressFormInputsBtn.current.classList.remove(Styles.disabledBtn);
+    //     refForSaveAddressFormInputsBtn.current.classList.add(Styles.btn);
+    //   }
+    // }
   }
+
+  useEffect(() => {
+    const hasNotNullValue = Object.values(addressFormInputsMatnError).some(value => value !== null);
+    console.log('050205-addressFormInputsMatnError: ' + JSON.stringify(addressFormInputsMatnError));
+    if (hasNotNullValue) {
+      console.log('050205-hasNullValue');
+      setIsDisabledsaveAddressFormInputsBtn(true);
+      if (refForSaveAddressFormInputsBtn.current) {
+        refForSaveAddressFormInputsBtn.current.classList.add(Styles.disabledBtn);
+        refForSaveAddressFormInputsBtn.current.classList.remove(Styles.btn);
+      }
+    }
+    else {
+      console.log('050205-has not NullValue');
+      setIsDisabledsaveAddressFormInputsBtn(false);
+      if (refForSaveAddressFormInputsBtn.current) {
+        refForSaveAddressFormInputsBtn.current.classList.remove(Styles.disabledBtn);
+        refForSaveAddressFormInputsBtn.current.classList.add(Styles.btn);
+      }
+    }
+  }, [addressFormInputsMatnError]);
+
   ////zare_nk_050201_commented_st
   // function pelakChanged(
   //   eventOrElement: ChangeEvent<HTMLInputElement> | HTMLInputElement | null
@@ -1010,178 +1087,325 @@ function BoxHtmlComponent({
   // </>)
 
   return (<>
-    <Collapse
-      ref={refForBox}
-      id="box"
-      style={{
-        // overflow: 'hidden',
-        // width: '450px',
-        // maxWidth: '100%', 
-        // ...(Number(isEpmtyHeightBox) === 1 ? { height: '0px' } : { height: '100%' }),
-        // position: 'fixed',
-        position: 'absolute',
-        bottom: '0px',
-        backgroundColor: 'white',
-        //// backgroundColor: 'red',
-        //// transition: 'height 3s ease',
-        borderRadius: '20px 20px 0px 0px',
-        boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.2)',
-        // boxShadow: '0px 2px 4px 2px rgba(255, 0, 64, 0.2)',
+    {/* zare_nk_050204_rahe1_st(ClickAwayListener+Collapse baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
+    {/* zare_nk_050204_nokteh(ClickAwayListener componente MUI hast ke rooyadade click kharej az taghayei ke dar mohtavayash moshakhas mikonim ra modiriat mikonih, 
+va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast) */}
+    <ClickAwayListener
+      onClickAway={(event) => {
+        const target = event.target as HTMLElement;
+        const isToggleButton = target.id === 'bigShooBtn';
+        if (!isEpmtyHeightBox && !isToggleButton) {
+          setIsEpmtyHeightBox(true); // ببند
+        }
       }}
-      in={!isEpmtyHeightBox} //zare_nk_050202_nokteh(moadele show() va hide() dar bootstrap) 
-      timeout="auto"
-      unmountOnExit  //zare_nk_050202_nokteh(age in attribute ra benevisim age in={false} beshe az dom hazf mishe,age in attribute ra nanevisim 
-    // age in={false} beshe az dom hazf nemishe va dar inspect vojood dareh va faghat hidden mishe)
     >
-        
-      {error && <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>{error}</p>}
-      {/* <Paper> */}
-      <form 
-        id="addressInfForm"
-        className={`${Styles.loginForm} ${Styles.valueStyle}`}
-        style={{ padding: '1rem', }}
-        onSubmit={(event) => {
-          event.preventDefault();
+      <Collapse
+        ref={refForBox}
+        id="box"
+        style={{
+          position: 'absolute',
+          bottom: '0px',
+          backgroundColor: 'white',
+          borderRadius: '20px 20px 0px 0px',
+          boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.2)',
         }}
+        in={!isEpmtyHeightBox} //zare_nk_050202_nokteh(moadele show() va hide() dar bootstrap) 
+        timeout="auto"
+        unmountOnExit  //zare_nk_050202_nokteh(age in attribute ra benevisim age in={false} beshe az dom hazf mishe,age in attribute ra nanevisim 
+      // age in={false} beshe az dom hazf nemishe va dar inspect vojood dareh va faghat hidden mishe)
       >
-        <div style={{
-          paddingTop: '2rem',
-          padding: '1rem',
-          width: '100',
-        }}>
-          {/* <p className={`${Styles.titleStyle}`} style={{ fontSize: '16px', color: '#1b1c1d', marginBottom: '0px', }}>ثبت&zwnj;نام یا ورود</p> */}
-          <p className={`${Styles.titleStyle}`} style={{
-            fontSize: '16px',
-            color: '#1b1c1d',
-            fontWeight: 600,
-            marginBottom: '0px',
-          }}>ذخیره آدرس</p>
-          {/* <p className={`${Styles.valueStyle}`} style={{ fontSize: '14px', color: '#878b92', marginBottom: '0px', paddingTop: '.25rem' }}>برای آمدن به تپسی&zwnj;فود، شماره موبایلت را وارد کن</p> */}
-        </div>
-
-        <div style={{
-          display: "flex",
-          position: 'relative',
-          marginBottom: '3.25rem',
-        }}>
-          {/* <div className={`${Styles.translateDiv} ${isInputFocused || !isMobileTextEmty ? Styles.animateFocus : Styles.animateBlur}`} */}
-          <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.Address || !isAddressFormInputsTextEmty.Address ? Styles.animateFocus : Styles.animateBlur}`}
-          >
-            <span style={{ width: '100%' }}>جزئیات آدرس</span>
+        {/* zare_nk_050204_rahe1_end(ClickAwayListener+Collapse baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
+        {/* zare_nk_050204_rahe2_st(Drawer baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
+        {/* <Drawer
+        id="box"
+        ref={refForBox}
+        anchor="bottom"
+        open={!isEpmtyHeightBox}
+        onClose={() => {
+          console.log('zare_nk_050204-Drawer closed!');
+          setIsEpmtyHeightBox(true)
+        }}
+        hideBackdrop={true} //zare_nk_040502(albateh hideBackdrop={true} baes mishe alave bar hazfe triye poshte drawer,ba click dar fazaye poshtesh,automat 
+        // basteh nashe va niaz be modiriate dastiye document.addEventListener dar useEffect dashteh bashim)
+        slotProps={{
+          paper: {
+            sx: {
+              borderRadius: '20px 20px 0 0',
+              boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2)',
+              backgroundColor: 'white',
+            },
+          },
+          ////zare_nk_050204_nokteh(chon ba hideBackdrop={true} goftim range fazaya poshtesh ro nemikhaim tagheir bedim pas backdrop ro comment kardim)
+          // backdrop: {
+          //   sx: {
+          //     backgroundColor: 'rgba(0,0,0,0.3)',  
+          //   },
+          // },
+        }}
+        ModalProps={{
+          keepMounted: true,
+        }}
+      > */}
+        {/* zare_nk_050204_rahe2_end(Drawer baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
+        {error && <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>{error}</p>}
+        {/* <Paper> */}
+        <form
+          id="addressInfForm"
+          className={`${Styles.loginForm} ${Styles.valueStyle}`}
+          style={{ padding: '1rem', }}
+          onSubmit={(event) => {
+            event.preventDefault();
+          }}
+        >
+          <div style={{
+            paddingTop: '2rem',
+            padding: '1rem',
+            width: '100',
+          }}>
+            {/* <p className={`${Styles.titleStyle}`} style={{ fontSize: '16px', color: '#1b1c1d', marginBottom: '0px', }}>ثبت&zwnj;نام یا ورود</p> */}
+            <p className={`${Styles.titleStyle}`} style={{
+              fontSize: '16px',
+              color: '#1b1c1d',
+              fontWeight: 600,
+              marginBottom: '0px',
+            }}>ذخیره آدرس</p>
+            {/* <p className={`${Styles.valueStyle}`} style={{ fontSize: '14px', color: '#878b92', marginBottom: '0px', paddingTop: '.25rem' }}>برای آمدن به تپسی&zwnj;فود، شماره موبایلت را وارد کن</p> */}
           </div>
 
-          <textarea
-            id="AddressTxt"
-            name="Address"  //zare_nk_050201_added
-            // value={addressVal}
-            value={addressFormInputsVal.Address}
-            // onChange={addressMatnChanged}
-            onChange={AddressFormInputsChanged}
-            // onChange={(e) => {
-            //   return AddressFormInputsChanged(0, e);
-            // }}
-            ref={(e) => {
-              // refForAddressInput.current[0] = e;
-              // refForAddressFormInputs.current[0] = e;
-              refForAddressFormInputs.current.Address = e;
-            }}
+          <div style={{
+            display: "flex",
+            position: 'relative',
+            marginBottom: '3.25rem',
+          }}>
+            {/* <div className={`${Styles.translateDiv} ${isInputFocused || !isMobileTextEmty ? Styles.animateFocus : Styles.animateBlur}`} */}
+            <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.Address || !isAddressFormInputsTextEmty.Address ? Styles.animateFocus : Styles.animateBlur}`}
+            >
+              <span style={{ width: '100%' }}>جزئیات آدرس</span>
+            </div>
 
-            // onFocus={handleAddressInputFocus}
-            onFocus={handleAddressFormInputsFocus}
+            <textarea
+              id="AddressTxt"
+              name="Address"  //zare_nk_050201_added
+              // value={addressVal}
+              value={addressFormInputsVal.Address}
+              // onChange={addressMatnChanged}
+              onChange={AddressFormInputsChanged}
+              // onChange={(e) => {
+              //   return AddressFormInputsChanged(0, e);
+              // }}
+              ref={(e) => {
+                // refForAddressInput.current[0] = e;
+                // refForAddressFormInputs.current[0] = e;
+                refForAddressFormInputs.current.Address = e;
+              }}
 
-            // onBlur={handleAddressInputBlur}
-            onBlur={handleAddressFormInputsBlur}
+              // onFocus={handleAddressInputFocus}
+              onFocus={handleAddressFormInputsFocus}
 
-            ///////////////////////////////////////
-            // spellCheck="false"
-            // contentEditable="false"
-            // name="details"
-            // aria-describedby=":r8:-form-item-description"
-            // aria-invalid="false"
-            // placeholder=" "
-            //////////////////////////////////////  
-            // className={isAddressTextEmty ? `${Styles.invalid} ` : `${Styles.valid} `}
-            className={isAddressFormInputsTextEmty.Address ? `${Styles.invalid} ` : `${Styles.valid} `}
+              // onBlur={handleAddressInputBlur}
+              onBlur={handleAddressFormInputsBlur}
 
-            style={{
-              //   outline: '2px solid transparent',  // .outline-none
-              //   outlineOffset: '2px',    //.outline-none
-              //   color: '#1b1c1d',     //.text-foreground
-              //   backgroundColor: 'white',  //.bg-white
-              //   borderStyle: 'none',  //.border-none
-              //   appearance: 'none',   //.appearance-none
-              //   resize: 'none',  //.resize-none
-              //   flex: '1 1 auto',
-              //   display: 'flex',
-              //   margin: '0px',
-              //   padding: '0px',
-              ////////////////////////////////////
-              // height: '56px',
-              height: '96px',
-              borderRadius: '.75rem',
-              // border: '1px solid #e0e3e5',
-              width: '186px',
-              flex: '1 0 auto',
-              outline: 'none',
-              textAlign: 'right',
-              // padding: '0px 10px', 
-              padding: '.75rem',
-              fontSize: '.875rem',
-            }}
-          >
-            ب محمد جواد تندگویان جنوب، خانی آباد، خ. مهدی لطیفی
-          </textarea>
+              ///////////////////////////////////////
+              // spellCheck="false"
+              // contentEditable="false"
+              // name="details"
+              // aria-describedby=":r8:-form-item-description"
+              // aria-invalid="false"
+              // placeholder=" "
+              //////////////////////////////////////  
+              // className={isAddressTextEmty ? `${Styles.invalid} ` : `${Styles.valid} `}
+              //className={isAddressFormInputsTextEmty.Address ? `${Styles.invalid} ` : `${Styles.valid} `}  //zare_nk_050205_commented(ta ebteda ghermez nabashe)
+              className={addressFormInputsMatnError.Address ? `${Styles.invalid} ` : `${Styles.valid} `}  //zare_nk_050205_added(ta ebteda ghermez nabashe)
+              ////zare_nk_050205_nokteh(addressFormInputsMatnError.Address yani na null va na '')
 
-        </div>
+              style={{
+                //   outline: '2px solid transparent',  // .outline-none
+                //   outlineOffset: '2px',    //.outline-none
+                //   color: '#1b1c1d',     //.text-foreground
+                //   backgroundColor: 'white',  //.bg-white
+                //   borderStyle: 'none',  //.border-none
+                //   appearance: 'none',   //.appearance-none
+                //   resize: 'none',  //.resize-none
+                //   flex: '1 1 auto',
+                //   display: 'flex',
+                //   margin: '0px',
+                //   padding: '0px',
+                ////////////////////////////////////
+                // height: '56px',
+                height: '96px',
+                borderRadius: '.75rem',
+                // border: '1px solid #e0e3e5',
+                width: '186px',
+                flex: '1 0 auto',
+                outline: 'none',
+                textAlign: 'right',
+                // padding: '0px 10px', 
+                padding: '.75rem',
+                fontSize: '.875rem',
+              }}
 
-        {/* {addressMatnError && (
+              autoComplete="street-address"
+            >
+              ب محمد جواد تندگویان جنوب، خانی آباد، خ. مهدی لطیفی
+            </textarea>
+
+          </div>
+
+          {/* {addressMatnError && (
               <div className={`${Styles.formsRow} ${Styles.warningCont}`}>
                 <span className="forErrorMobile error">{addressMatnError}</span>
               </div>
             )} */}
 
-        <div style={{
-          display: "flex",
-          flexFlow: 'row',
-          columnGap: '1rem',
-          marginBottom: '2rem',
-        }}>
+          <div style={{
+            display: "flex",
+            flexFlow: 'row',
+            columnGap: '1rem',
+            marginBottom: '2rem',
+          }}>
+
+            <div style={{
+              display: "flex",
+              position: 'relative',
+              //marginBottom: '2rem',
+              flex: '1 1 47%'
+            }}>
+              {/* <div className={`${Styles.translateDiv} ${isInputFocused || !isMobileTextEmty ? Styles.animateFocus : Styles.animateBlur}`} */}
+              <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.pelak || !isAddressFormInputsTextEmty.pelak ? Styles.animateFocus : Styles.animateBlur}`}
+              >
+                <span style={{ width: '100%' }}>پلاک</span>
+              </div>
+
+              <input
+                id="pelakTxt"
+                name="pelak"  //zare_nk_050201_added
+
+                // value={pelakVal}  
+                value={addressFormInputsVal.pelak}
+
+                // onChange={pelakChanged}
+                onChange={AddressFormInputsChanged}
+
+                ref={(e) => {  //zare_nk_050118_commented_felan(olgu)
+                  // refForPelakInput.current[0] = e;
+                  // refForAddressFormInputs.current[1] = e;
+                  refForAddressFormInputs.current.pelak = e;
+                }}
+                // onFocus={handlePelakInputFocus} // اضافه کردن onFocus
+                onFocus={handleAddressFormInputsFocus}
+
+                // onBlur={handlePelakInputBlur}   // اضافه کردن onBlur 
+                onBlur={handleAddressFormInputsBlur}
+
+                // className={isPelakTextEmty ? `${Styles.invalid} ` : `${Styles.valid} `}
+                // className={isAddressFormInputsTextEmty.pelak ? `${Styles.invalid} ` : `${Styles.valid} `}  //zare_nk_050205_commented(ta ebteda ghermez nabashe)
+                className={addressFormInputsMatnError.pelak ? `${Styles.invalid} ` : `${Styles.valid} `}  //zare_nk_050205_added(ta ebteda ghermez nabashe)
+
+                style={{
+                  // height: '56px',
+                  height: '3rem',
+                  borderRadius: '.75rem',
+                  // border: '1px solid #e0e3e5',
+                  width: '100%',
+                  // flex: '1 0 auto',
+                  outline: 'none',
+                  textAlign: 'right',
+                  padding: '.75rem',
+                  fontSize: '.875rem',
+                }}
+              />
+            </div>
+
+
+            <div style={{
+              display: "flex",
+              position: 'relative',
+              //marginBottom: '2rem',
+              flex: '1 1 47%'
+            }}>
+              {/* <div className={`${Styles.translateDiv} ${isInputFocused || !isMobileTextEmty ? Styles.animateFocus : Styles.animateBlur}`} */}
+              <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.vahed || !isAddressFormInputsTextEmty.vahed ? Styles.animateFocus : Styles.animateBlur}`}
+              >
+                <span style={{ width: '100%' }}>واحد</span>
+              </div>
+
+              <input
+                id="vahedTxt"
+                name="vahed"  //zare_nk_050201_added
+
+                // value={vahedVal}  
+                value={addressFormInputsVal.vahed}
+
+                // onChange={vahedChanged}
+                onChange={AddressFormInputsChanged}
+
+                ref={(e) => {  //zare_nk_050118_commented_felan(olgu)
+                  // refForVahedInput.current[0] = e;
+                  // refForAddressFormInputs.current[2] = e;
+                  refForAddressFormInputs.current.vahed = e;
+                }}
+                // onFocus={handleVahedInputFocus} // اضافه کردن onFocus
+                onFocus={handleAddressFormInputsFocus}
+
+                // onBlur={handleVahedInputBlur}   // اضافه کردن onBlur 
+                onBlur={handleAddressFormInputsBlur}
+
+                // className={isVahedTextEmty ? `${Styles.invalid} ` : `${Styles.valid} `}
+                // className={isAddressFormInputsTextEmty.vahed ? `${Styles.invalid} ` : `${Styles.valid} `}   //zare_nk_050205_commented(ta ebteda ghermez nabashe)
+                className={addressFormInputsMatnError.vahed ? `${Styles.invalid} ` : `${Styles.valid} `}  //zare_nk_050205_added(ta ebteda ghermez nabashe)
+
+                style={{
+                  // height: '56px',
+                  height: '3rem',
+                  borderRadius: '.75rem',
+                  // border: '1px solid #e0e3e5',
+                  width: '100%',
+                  // flex: '1 0 auto',
+                  outline: 'none',
+                  textAlign: 'right',
+                  padding: '.75rem',
+                  fontSize: '.875rem',
+                }}
+              />
+            </div>
+
+
+          </div>
 
           <div style={{
             display: "flex",
             position: 'relative',
-            //marginBottom: '2rem',
-            flex: '1 1 47%'
+            marginBottom: '1.25rem',
           }}>
-            {/* <div className={`${Styles.translateDiv} ${isInputFocused || !isMobileTextEmty ? Styles.animateFocus : Styles.animateBlur}`} */}
-            <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.pelak || !isAddressFormInputsTextEmty.pelak ? Styles.animateFocus : Styles.animateBlur}`}
+            {/* <div className={`${Styles.translateDiv} ${isAddressNameFocused || !isAddressNameTextEmty ? Styles.animateFocus : Styles.animateBlur}`} */}
+            <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.addressName || !isAddressFormInputsTextEmty.addressName ? Styles.animateFocus : Styles.animateBlur}`}
             >
-              <span style={{ width: '100%' }}>پلاک</span>
+              <span style={{ width: '100%' }}>اسم آدرس (اختیاری)</span>
             </div>
-
             <input
-              id="pelakTxt"
-              name="pelak"  //zare_nk_050201_added
+              id="addressNameTxt"
+              name="addressName"  //zare_nk_050201_added
 
-              // value={pelakVal}  
-              value={addressFormInputsVal.pelak}
+              // value={addressNameVal}  
+              value={addressFormInputsVal.addressName}
 
-              // onChange={pelakChanged}
+              // onChange={addressNameChanged}
               onChange={AddressFormInputsChanged}
 
               ref={(e) => {  //zare_nk_050118_commented_felan(olgu)
-                // refForPelakInput.current[0] = e;
-                // refForAddressFormInputs.current[1] = e;
-                refForAddressFormInputs.current.pelak = e;
+                // refForAddressNameInput.current[0] = e;
+                // refForAddressFormInputs.current[3] = e;
+                refForAddressFormInputs.current.addressName = e;
               }}
-              // onFocus={handlePelakInputFocus} // اضافه کردن onFocus
+              // onFocus={handleAddressNameInputFocus} // اضافه کردن onFocus
               onFocus={handleAddressFormInputsFocus}
 
-              // onBlur={handlePelakInputBlur}   // اضافه کردن onBlur 
+              // onBlur={handleAddressNameInputBlur}   // اضافه کردن onBlur 
               onBlur={handleAddressFormInputsBlur}
 
-              // className={isPelakTextEmty ? `${Styles.invalid} ` : `${Styles.valid} `}
-              className={isAddressFormInputsTextEmty.pelak ? `${Styles.invalid} ` : `${Styles.valid} `}
+              // className={isAddressNameTextEmty ? `${Styles.invalid} ` : `${Styles.valid} `}
+              // className={isAddressFormInputsTextEmty.addressName ? `${Styles.invalid} ` : `${Styles.valid} `}  //zare_nk_050205_commented(ta ebteda ghermez nabashe)
+              className={addressFormInputsMatnError.addressName ? `${Styles.invalid} ` : `${Styles.valid} `}  //zare_nk_050205_added(ta ebteda ghermez nabashe)
 
               style={{
                 // height: '56px',
@@ -1198,168 +1422,78 @@ function BoxHtmlComponent({
             />
           </div>
 
-
           <div style={{
             display: "flex",
-            position: 'relative',
-            //marginBottom: '2rem',
-            flex: '1 1 47%'
+            position: 'sticky',
+            bottom: '0px',
+            marginBottom: '1.25rem',
+            width: '100%',
+            paddingBottom: '.5rem',
           }}>
-            {/* <div className={`${Styles.translateDiv} ${isInputFocused || !isMobileTextEmty ? Styles.animateFocus : Styles.animateBlur}`} */}
-            <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.vahed || !isAddressFormInputsTextEmty.vahed ? Styles.animateFocus : Styles.animateBlur}`}
-            >
-              <span style={{ width: '100%' }}>واحد</span>
-            </div>
-
-            <input
-              id="vahedTxt"
-              name="vahed"  //zare_nk_050201_added
-
-              // value={vahedVal}  
-              value={addressFormInputsVal.vahed}
-
-              // onChange={vahedChanged}
-              onChange={AddressFormInputsChanged}
-
-              ref={(e) => {  //zare_nk_050118_commented_felan(olgu)
-                // refForVahedInput.current[0] = e;
-                // refForAddressFormInputs.current[2] = e;
-                refForAddressFormInputs.current.vahed = e;
+            <button
+              ref={refForSaveAddressFormInputsBtn}
+              id="saveAddressFormInputsBtn"
+              onClick={() => {
+                saveAddress(true);
               }}
-              // onFocus={handleVahedInputFocus} // اضافه کردن onFocus
-              onFocus={handleAddressFormInputsFocus}
-
-              // onBlur={handleVahedInputBlur}   // اضافه کردن onBlur 
-              onBlur={handleAddressFormInputsBlur}
-
-              // className={isVahedTextEmty ? `${Styles.invalid} ` : `${Styles.valid} `}
-              className={isAddressFormInputsTextEmty.vahed ? `${Styles.invalid} ` : `${Styles.valid} `}
-
               style={{
-                // height: '56px',
-                height: '3rem',
-                borderRadius: '.75rem',
-                // border: '1px solid #e0e3e5',
-                width: '100%',
-                // flex: '1 0 auto',
-                outline: 'none',
-                textAlign: 'right',
-                padding: '.75rem',
-                fontSize: '.875rem',
+                width: '100%', height: '3rem',
+                fontSize: '.875rem', padding: '1rem .75rem',
+                borderRadius: '.75rem', border: 'none', color: '#ffffff',
+                //color: '#ffffff',  backgroundColor: '#ff5900',   //zare_nk_050205_commented
+                // marginTop: '0.78rem', marginBottom: "1.75rem",
               }}
-            />
+              disabled={isDisabledsaveAddressFormInputsBtn}
+            >ذخیره تغییرات</button>
           </div>
+        </form >
+        {/* </Paper> */}
+        {/* zare_nk_050204_rahe2_st(Drawer baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
+        {/* </Drawer> */}
+        {/* zare_nk_050204_rahe2_end(Drawer baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
+
+        {/* zare_nk_050204_rahe1_st(ClickAwayListener+Collapse baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
+      </Collapse>
+    </ClickAwayListener>
+    {/* zare_nk_050204_rahe1_end(ClickAwayListener+Collapse baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
 
 
-        </div>
-
-        <div style={{
-          display: "flex",
-          position: 'relative',
-          marginBottom: '1.25rem',
-        }}>
-          {/* <div className={`${Styles.translateDiv} ${isAddressNameFocused || !isAddressNameTextEmty ? Styles.animateFocus : Styles.animateBlur}`} */}
-          <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.addressName || !isAddressFormInputsTextEmty.addressName ? Styles.animateFocus : Styles.animateBlur}`}
-          >
-            <span style={{ width: '100%' }}>اسم آدرس (اختیاری)</span>
-          </div>
-          <input
-            id="addressNameTxt"
-            name="addressName"  //zare_nk_050201_added
-
-            // value={addressNameVal}  
-            value={addressFormInputsVal.addressName}
-
-            // onChange={addressNameChanged}
-            onChange={AddressFormInputsChanged}
-
-            ref={(e) => {  //zare_nk_050118_commented_felan(olgu)
-              // refForAddressNameInput.current[0] = e;
-              // refForAddressFormInputs.current[3] = e;
-              refForAddressFormInputs.current.addressName = e;
-            }}
-            // onFocus={handleAddressNameInputFocus} // اضافه کردن onFocus
-            onFocus={handleAddressFormInputsFocus}
-
-            // onBlur={handleAddressNameInputBlur}   // اضافه کردن onBlur 
-            onBlur={handleAddressFormInputsBlur}
-
-            // className={isAddressNameTextEmty ? `${Styles.invalid} ` : `${Styles.valid} `}
-            className={isAddressFormInputsTextEmty.addressName ? `${Styles.invalid} ` : `${Styles.valid} `}
-
-            style={{
-              // height: '56px',
-              height: '3rem',
-              borderRadius: '.75rem',
-              // border: '1px solid #e0e3e5',
-              width: '100%',
-              // flex: '1 0 auto',
-              outline: 'none',
-              textAlign: 'right',
-              padding: '.75rem',
-              fontSize: '.875rem',
-            }}
-          />
-        </div>
-
-        <div style={{
-          display: "flex",
-          position: 'sticky',
-          bottom: '0px',
-          marginBottom: '1.25rem',
-          width: '100%',
-          paddingBottom: '.5rem',
-        }}>
-          <button
-            id="bigShooBtn"
-            onClick={saveAddress}
-            style={{
-              width: '100%', color: '#ffffff',
-              fontSize: '.875rem', padding: '1rem .75rem', backgroundColor: '#ff5900',
-              borderRadius: '.75rem', height: '3rem', border: 'none',
-              // marginTop: '0.78rem', marginBottom: "1.75rem",
-            }}
-          >ذخیره تغییرات</button>
-        </div>
-      </form >
-      {/* </Paper> */}
-    </Collapse>
   </>)
 
   // }  //zare_nk_050203_commented
 }
 
 export default function LocationPage() {
-  const [currentPage, setCurrentPage] = useState("firstPage");
+  // const [currentPage, setCurrentPage] = useState("firstPage");
   const [mobileVal, setMobileVal] = useState("");
-  const [isMobileTextEmty, setIsMobileTextEmty] = useState(true);  //zare_nk_041227_added
-  const [smsVal, setSmsVal] = useState("");
-  const router = useRouter();
+  // const [isMobileTextEmty, setIsMobileTextEmty] = useState(true);  //zare_nk_041227_added
+  // const [smsVal, setSmsVal] = useState("");
+  // const router = useRouter();
   const [error, setError] = useState<string | null>(null);
-  const [mobileError, setMobileError] = useState("");
-  const [smsError, setSmsError] = useState("");
-  const refForMobileInput = useRef<(HTMLInputElement | null)[]>([]);
-  const refForSmsInput = useRef<(HTMLInputElement | null)[]>([null]);
-  const refForMobileCheckBtn = useRef<HTMLButtonElement | null>(null);
-  const refForCheckSmsBtn = useRef<HTMLButtonElement | null>(null);
-  const [isDisabledMobileCheckBtn, setIsDisabledMobileCheckBtn] =
-    useState(true);
-  const [isDisabledCheckSmsBtn, setIsDisabledCheckSmsBtn] = useState(true);
-  const [backBtnCliked, setBackBtnCliked] = useState(false);
-  const [mobileCheckBtn, setMobileCheckBtn] = useState(false);
+  // const [mobileError, setMobileError] = useState("");
+  // const [smsError, setSmsError] = useState("");
+  // const refForMobileInput = useRef<(HTMLInputElement | null)[]>([]);
+  // const refForSmsInput = useRef<(HTMLInputElement | null)[]>([null]);
+  // const refForMobileCheckBtn = useRef<HTMLButtonElement | null>(null);
+  // const refForCheckSmsBtn = useRef<HTMLButtonElement | null>(null);
+  // const [isDisabledMobileCheckBtn, setIsDisabledMobileCheckBtn] =
+  //   useState(true);
+  // const [isDisabledCheckSmsBtn, setIsDisabledCheckSmsBtn] = useState(true);
+  // const [backBtnCliked, setBackBtnCliked] = useState(false);
+  // const [mobileCheckBtn, setMobileCheckBtn] = useState(false);
   // let timerStr = null;
   // if (typeof window !== "undefined") {
   //   timerStr = localStorage.getItem("timer");
   // }
   // const initialTimer = timerStr !== null ? JSON.parse(timerStr) : 40000;
   // const [timer, setTimer] = useState(initialTimer);
-  const [isDisabledResendCode, setIsDisabledResendCode] = useState(true);
-  const [isDisabledRemovTimerBtn, setIsDisabledRemovTimerBtn] = useState(true);
+  // const [isDisabledResendCode, setIsDisabledResendCode] = useState(true);
+  // const [isDisabledRemovTimerBtn, setIsDisabledRemovTimerBtn] = useState(true);
 
-  const [newSmsVal, setNewSmsVal] = useState('');
+  // const [newSmsVal, setNewSmsVal] = useState('');
 
-  const SmsInputRefs = useRef<HTMLInputElement[]>(Array(5).fill(null));
-  const [focusItem, setFocusItem] = useState<number>(0);
+  // const SmsInputRefs = useRef<HTMLInputElement[]>(Array(5).fill(null));
+  // const [focusItem, setFocusItem] = useState<number>(0);
 
   ////zare_nk_050117_added_st
   const [isEpmtyHeightBox, setIsEpmtyHeightBox] = useState(true);
@@ -1371,6 +1505,24 @@ export default function LocationPage() {
   // const { userData, login, logout } = useAuthentication(); //zare_nk_050111_added
   const { isLogin } = useAuthentication(); //zare_nk_050111_added
   console.log('zare_nk_050111-isLogin from context:', isLogin);
+
+  type AddressFormInputsType = {
+    Address: string;
+    pelak: string;
+    vahed: string;
+    addressName: string;
+    // onSquareClick: () => void;
+    // andis: number;
+    // refForBtn: React.RefObject<(HTMLButtonElement | null)[]>;
+    // className?: string;
+  };
+
+  const [addressFormInputsVal, setAddressFormInputsVal] = useState<AddressFormInputsType>({
+    Address: '',
+    pelak: '',
+    vahed: '',
+    addressName: '',
+  });
 
   ////zare_nk_050109_added_st
   var defZoom: number | undefined = 18;
@@ -1456,12 +1608,10 @@ export default function LocationPage() {
         }),
     });
 
-
     setStyles1(() => {
       console.log('rezam-setStyles1');
       return (newStyle);
     });
-
 
     const newVectorSource = new VectorSource({
       // projection: 'EPSG:4326', //zare_nk_050109_commented(tosiye mishe projection dar View gonjoondeh beshe)
@@ -1698,7 +1848,7 @@ export default function LocationPage() {
     }
   }, [map, feature]);
 
-  async function saveAddress() {
+  async function saveAddress(isOnline: boolean) {
     if (!feature) {
       return;
     }
@@ -1951,7 +2101,23 @@ export default function LocationPage() {
     //   token = localStorage.getItem("Token") || "";
     // }
     console.log('zare_nk_050110-token: ' + token);
-    var Api_CreateAddressParams = {
+    var Api_CreateAddressParams = null;
+    Api_CreateAddressParams = isOnline ? (
+      {
+        'FName': 'reza',
+        'LName': 'kavian',
+        'CodePosti': '1231231231',
+        'Pelak': addressFormInputsVal.pelak, // 1,
+        'Vahed': addressFormInputsVal.vahed, // 5,
+        'Lat': feature.get('name').Y,
+        'Lon': feature.get('name').X,
+        'Mobile': '09999999999',// mobileVal,
+        // 'Adress': /*feature.get('name').Address*/ $('#AddressMatni').val(),   
+        'Adress': addressFormInputsVal.Address, // 'dokhaniat',    // feature.get('name').Address, //feature.get('name').Address,
+        // 'TahvilGirande': TahvilGirande,
+        // 'OnvanAdress': $('#OnvanAdress').val(),
+      }
+    ) : ({
       'FName': 'reza',
       'LName': 'kavian',
       'CodePosti': '1231231231',
@@ -1961,10 +2127,24 @@ export default function LocationPage() {
       'Lon': feature.get('name').X,
       'Mobile': '09999999999',// mobileVal,
       // 'Adress': /*feature.get('name').Address*/ $('#AddressMatni').val(),   
-      'Adress': 'dokhaniat',// feature.get('name').Address, //feature.get('name').Address,
+      'Adress': 'dokhaniat',    // feature.get('name').Address, //feature.get('name').Address,
       // 'TahvilGirande': TahvilGirande,
       // 'OnvanAdress': $('#OnvanAdress').val(),
-    }
+    })
+    // var Api_CreateAddressParams = {
+    //   'FName': 'reza',
+    //   'LName': 'kavian',
+    //   'CodePosti': '1231231231',
+    //   'Pelak': addressFormInputsVal.pelak, // 1,
+    //   'Vahed': addressFormInputsVal.vahed, // 5,
+    //   'Lat': feature.get('name').Y,
+    //   'Lon': feature.get('name').X,
+    //   'Mobile': '09999999999',// mobileVal,
+    //   // 'Adress': /*feature.get('name').Address*/ $('#AddressMatni').val(),   
+    //   'Adress': addressFormInputsVal.Address, // 'dokhaniat',    // feature.get('name').Address, //feature.get('name').Address,
+    //   // 'TahvilGirande': TahvilGirande,
+    //   // 'OnvanAdress': $('#OnvanAdress').val(),
+    // }
     let ApiUrl = "https://api.tochikala.com/api/";
     // console.log('mobileVal: ' + mobileVal + '-newSmsVal: ' + newSmsVal);
     const response = await fetch(ApiUrl + "User/Api_CreateAddress", {
@@ -2134,61 +2314,61 @@ export default function LocationPage() {
   ////zare_nk_050118_commented_end
   ////zare_nk_050118_added_st
   const bigShoo = () => {
-    // console.log('zare_nk_050118_bigShoo called-01');
-    // const box = document.getElementById("box");
-    // if (box) {
-    // const scrollHeight = box.scrollHeight;
-    // setHeightBox(scrollHeight + "px");
-    setIsEpmtyHeightBox(false);
-    // }
-    // // else{
-    // //   setHeightBox('0px');
-    // //   setIsEpmtyHeightBox(true);
-    // // }
+    // setIsEpmtyHeightBox(false);  //zare_nk_050205_comemnted
+    ////zare_nk_050205_added_st
+    let token = getCookie("token");
+    console.log('zare_nk_050110-token hala is: ' + getCookie("token"));
+    if (token) {
+      setIsEpmtyHeightBox(false);
+    }
+    else {
+      saveAddress(false);  //zare_nk_050205_nokteh(age offLine ham bood taraf address ra zakhireh kon ehtemalan ba user movaghat!!)
+    }
+    ////zare_nk_050205_added_end
   }
 
-  ////zare_nk_050118_added_end
-  console.log('zare_nk_050118_LocationPage reRendered-02!!');
-  useEffect(() => {
-    console.log('zare_nk_050118_useEffect called-03-isEpmtyHeightBox: ' + isEpmtyHeightBox); //+ '-heightBox: ' + heightBox);
-    const handleClickOutside = (event: any) => {
-      const bigShooBtn: boolean = event.target.id === 'bigShooBtn';
+  ////zare_nk_050204_commented_st(componente ClickAwayListener jaigozine in handleClickOutside baraye rooydade clicke document baraye modiriate click kharej az collapse shod)
+  // useEffect(() => {
+  //   console.log('zare_nk_050118_useEffect called-03-isEpmtyHeightBox: ' + isEpmtyHeightBox); //+ '-heightBox: ' + heightBox);
+  //   const handleClickOutside = (event: any) => {
+  //     const bigShooBtn: boolean = event.target.id === 'bigShooBtn';
 
-      console.log('zare_nk_050118_04-handleClickOutside-refForBox.current: ' + refForBox.current + '-contains: ' +
-        refForBox.current?.contains(event.target) + '-isEpmtyHeightBox: ' + isEpmtyHeightBox + '-heightBox: ' +  // heightBox +
-        '-bigShooBtn: ' + bigShooBtn);
+  //     console.log('zare_nk_050118_04-handleClickOutside-refForBox.current: ' + refForBox.current + '-contains: ' +
+  //       refForBox.current?.contains(event.target) + '-isEpmtyHeightBox: ' + isEpmtyHeightBox + '-heightBox: ' +  // heightBox +
+  //       '-bigShooBtn: ' + bigShooBtn);
 
-      if (refForBox.current && !refForBox.current.contains(event.target) && !isEpmtyHeightBox
-        && !bigShooBtn   //zare_nk_050118_commented
-      ) {
-        console.log('zare_nk_050118_kharj click-05');
-        setIsEpmtyHeightBox(true);
-        // setHeightBox('0px'); //zare_nk_050203_commented
-      }
-      else {
-        console.log('zare_nk_050118_dakhel click-05');
+  //     if (refForBox.current && !refForBox.current.contains(event.target) && !isEpmtyHeightBox
+  //       && !bigShooBtn   //zare_nk_050118_commented
+  //     ) {
+  //       console.log('zare_nk_050118_kharj click-05');
+  //       setIsEpmtyHeightBox(true);  
+  //       // setHeightBox('0px'); //zare_nk_050203_commented
+  //     }
+  //     else {
+  //       console.log('zare_nk_050118_dakhel click-05');
 
-        // const box = document.getElementById("box");
-        // if (box) { 
-        // const scrollHeight = box.scrollHeight; 
-        // } 
-        var refForBoxElement = refForBox.current;
-        if (refForBoxElement) {
-          const scrollHeight = refForBoxElement.scrollHeight;
-        }
-      }
-    };
+  //       // const box = document.getElementById("box");
+  //       // if (box) { 
+  //       // const scrollHeight = box.scrollHeight; 
+  //       // } 
+  //       var refForBoxElement = refForBox.current;
+  //       if (refForBoxElement) {
+  //         const scrollHeight = refForBoxElement.scrollHeight;
+  //       }
+  //     }
+  //   };
 
-    // اضافه کردن listener به document
-    document.addEventListener('click', handleClickOutside);
+  //   // اضافه کردن listener به document
+  //   document.addEventListener('click', handleClickOutside);
 
-    // پاک کردن listener موقع unmount شدن کامپوننت
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-    // }, [isEpmtyHeightBox,heightBox]);  
-    // }, [isEpmtyHeightBox, heightBox]);  //zare_nk_050203_commented
-  }, [isEpmtyHeightBox]);   //zare_nk_050203_added
+  //   // پاک کردن listener موقع unmount شدن کامپوننت
+  //   return () => {
+  //     document.removeEventListener('click', handleClickOutside);
+  //   };
+  //   // }, [isEpmtyHeightBox,heightBox]);  
+  //   // }, [isEpmtyHeightBox, heightBox]);  //zare_nk_050203_commented
+  // }, [isEpmtyHeightBox]);   //zare_nk_050203_added
+  ////zare_nk_050204_commented_end(componente ClickAwayListener jaigozine in handleClickOutside baraye rooydade clicke document baraye modiriate click kharej az collapse shod)
 
   return (
     <>
@@ -2252,7 +2432,7 @@ export default function LocationPage() {
           </div> */}
 
         </div>
- 
+
         <div
           style={{
             // border: '2px dashed yellow',
@@ -2262,59 +2442,66 @@ export default function LocationPage() {
             display: "flex", flexFlow: "column", gap: '1.25rem',
           }}>
 
-          {isLogin ? (<>
-            <h1 style={{ fontWeight: 600, color: '#1b1c1d', margin: 0, fontSize: 'inherit', }}>موقعیت مکانی</h1>
+          {/* {isLogin ? (<> */}  {/* zare_nk_050204_commented */}
 
-            <div style={{
-              width: '100%', display: 'flex', flexFlow: "row",
-              padding: '1rem .75rem', height: '3.5rem', alignItems: 'center',
-              columnGap: '.25rem', border: '1px solid #e0e3e5', borderRadius: '.75rem',
+          {/* zare_nk_050204_nokteh(fontFamily az layoutWraper ers borde va IRANSansWeb_Medium(adad_fa) hast,fontWeight rooye in font asar dare,vali rooye bazi fontha mesle 
+          IRANSansWeb_Bold(adad_fa)) asar nadare,ehtemalan chon in font khodesh fontWeighte dakheli dareh ke dar olaviyate balatar az fontWeighte dastiye css hast ke ma midim */}
+          <h1 style={{ fontWeight: 600, color: '#1b1c1d', margin: 0, fontSize: 'inherit', }}>موقعیت مکانی</h1>
+          {/* <h1 style={{ color: '#1b1c1d', margin: 0, fontSize: 'inherit', }}
+             className={`${globalsStyles.ISW_Bold_fa}`} >موقعیت مکانی</h1>   */}
+
+          <div style={{
+            width: '100%', display: 'flex', flexFlow: "row",
+            padding: '1rem .75rem', height: '3.5rem', alignItems: 'center',
+            columnGap: '.25rem', border: '1px solid #e0e3e5', borderRadius: '.75rem',
+          }}>
+            <button style={{
+              flex: '0 0 auto', display: "flex", flexFlow: 'row', alignItems: "center",
+              padding: '.5rem 10px', color: '#1b1c1d', height: '2rem', border: 'none', backgroundColor: "inherit",
             }}>
-              <button style={{
-                flex: '0 0 auto', display: "flex", flexFlow: 'row', alignItems: "center",
-                padding: '.5rem 10px', color: '#1b1c1d', height: '2rem', border: 'none', backgroundColor: "inherit",
+              <span style={{
+                fontSize: '.875rem',
+              }}>تهران</span>
+              <img src="https://img.tochikala.com/tochikala/arrow-in-select-tag.svg" style={{ width: '12px', height: '12px', alignItems: 'center', }} alt="انتخاب شهر" />
+            </button>
+            <div style={{ flex: '1 1 auto', overflow: 'hidden', display: 'flex', flexFlow: "row", alignItems: "center", }}>
+              <span style={{
+                width: '100%', display: 'inline-block',
+                overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                fontSize: '.875rem', lineHeight: '1.25rem',
               }}>
-                <span style={{
-                  fontSize: '.875rem',
-                }}>تهران</span>
-                <img src="https://img.tochikala.com/tochikala/arrow-in-select-tag.svg" style={{ width: '12px', height: '12px', alignItems: 'center', }} alt="انتخاب شهر" />
-              </button>
-              <div style={{ flex: '1 1 auto', overflow: 'hidden', display: 'flex', flexFlow: "row", alignItems: "center", }}>
-                <span style={{
-                  width: '100%', display: 'inline-block',
-                  overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-                  fontSize: '.875rem', lineHeight: '1.25rem',
-                }}>
-                  حر، خ. امام خمینی، نرسیده به خ. کارگر جنوبی
-                </span>
-              </div>
-              <div style={{ flex: '0 0 auto', display: 'flex', flexFlow: "row", alignItems: "center", }}>
-                <img src="/images/pageLocation/shobe-search.svg" style={{ width: '24px', height: '24px', alignItems: 'center', }} alt="جستجوی شهر" />
-              </div>
+                حر، خ. امام خمینی، نرسیده به خ. کارگر جنوبی
+              </span>
             </div>
-
-            <div style={{ display: "flex", flexFlow: "row", justifyContent: "center", alignItems: "center" }}>
-              <button
-                id="bigShooBtn"
-                onClick={bigShoo}
-                style={{
-                  width: '100%', color: '#ffffff',
-                  fontSize: '.875rem', padding: '1rem .75rem', backgroundColor: '#ff5900',
-                  borderRadius: '.75rem', height: '3rem', border: 'none', marginTop: '0.78rem', marginBottom: "1.75rem",
-                }}
-              >ادامه</button>
+            <div style={{ flex: '0 0 auto', display: 'flex', flexFlow: "row", alignItems: "center", }}>
+              <img src="/images/pageLocation/shobe-search.svg" style={{ width: '24px', height: '24px', alignItems: 'center', }} alt="جستجوی شهر" />
             </div>
-          </>
-          ) : (
-            <>
-              <div>
-                <p>شما وارد نشده‌اید  -  {isLogin} </p>
-              </div>
-            </>
-          )}
-        </div>
+          </div>
 
-        {/* <div
+          <div style={{ display: "flex", flexFlow: "row", justifyContent: "center", alignItems: "center" }}>
+            <button
+              id="bigShooBtn"
+              onClick={bigShoo}
+              style={{
+                width: '100%', color: '#ffffff',
+                fontSize: '.875rem', padding: '1rem .75rem', backgroundColor: '#ff5900',
+                borderRadius: '.75rem', height: '3rem', border: 'none', marginTop: '0.78rem', marginBottom: "1.75rem",
+              }}
+            >ادامه</button>
+          </div>
+          {/* zare_nk_050204_commented_st */}
+        {/*</>        
+         ) : (
+        <>
+          <div>
+            <p>شما وارد نشده‌اید  -  {isLogin} </p>
+          </div>
+        </>
+          )} */}
+          {/* zare_nk_050204_commented_end */}
+      </div>
+
+      {/* <div
           ref={refForBox}
           id="box"
           style={{
@@ -2337,24 +2524,26 @@ export default function LocationPage() {
             transition: 'height 3s ease',
             borderRadius: '20px 20px 0px 0px',
           }}> */}
-        {/* {boxHtml} */}
+      {/* {boxHtml} */}
 
-        {/* {!isEpmtyHeightBox &&  //zare_nk_050203_commented */}
+      {/* {!isEpmtyHeightBox &&  //zare_nk_050203_commented */}
 
-        <BoxHtmlComponent
-          // heightBox={heightBox}          //zare_nk_050203_commented
-          // setHeightBox={setHeightBox}    //zare_nk_050203_commented
-          isEpmtyHeightBox={isEpmtyHeightBox}
-          setIsEpmtyHeightBox={setIsEpmtyHeightBox}
-          refForBox={refForBox}
-          saveAddress={saveAddress}
-        />
-        {/* }  //zare_nk_050203_commented */}
+      <BoxHtmlComponent
+        // heightBox={heightBox}          //zare_nk_050203_commented
+        // setHeightBox={setHeightBox}    //zare_nk_050203_commented
+        isEpmtyHeightBox={isEpmtyHeightBox}
+        setIsEpmtyHeightBox={setIsEpmtyHeightBox}
+        refForBox={refForBox}
+        saveAddress={saveAddress}
+        addressFormInputsVal={addressFormInputsVal}
+        setAddressFormInputsVal={setAddressFormInputsVal}
+      />
+      {/* }  //zare_nk_050203_commented */}
 
 
-        {/* </div> */}
+      {/* </div> */}
 
-      </main>
+    </main >
       <footer></footer>
     </>
   );

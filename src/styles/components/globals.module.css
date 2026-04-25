@@ -1,0 +1,30 @@
+/* .kolliClasic{
+   font-family: "IRANSansWeb_ms(adad_fa)", "IRANSansWeb_Medium(adad_fa)",
+    "IRANSansWeb_ms", "IRANSansWeb_Medium", "IranSans", "b nazanin", "IRNazanin"; 
+}  */
+
+.ISW_ms_fa{
+   font-family: "IRANSansWeb_ms(adad_fa)"; 
+}
+.ISW_Medium_fa{
+   font-family: "IRANSansWeb_Medium(adad_fa)"; 
+}
+.ISW_Bold_fa{
+   font-family: "IRANSansWeb_Bold(adad_fa)"; 
+}
+.ISW_ms{
+   font-family: "IRANSansWeb_ms"; 
+}
+.ISW_Medium{
+   font-family: "IRANSansWeb_Medium"; 
+}
+.ISW_Bold{
+   font-family: "IRANSansWeb_Bold"; 
+}
+
+.corTesti{
+   color: rgb(255, 0, 64);
+}
+
+
+ 

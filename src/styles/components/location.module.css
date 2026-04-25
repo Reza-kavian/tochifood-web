@@ -1,0 +1,201 @@
+ .loginForm {
+   /* position: absolute; */
+   /* border: 1px solid #a9a9a9;
+  border-radius: 20px;
+  box-shadow: #5e5e5e 0px 0px 3px 0px;
+  background-color: #f6f6f6;*/
+ }
+
+ @media screen and (min-width: 576px) {
+   .loginForm {
+     width: 100%;
+     /* width: 400px; */
+     /* height: 350px; */
+     /* min-height: min-content; */
+     /* padding: 40px 20px; */
+   }
+ }
+
+ @media screen and (max-width: 576px) {
+   .loginForm {
+     width: 100%;
+     /* height: 350px; */
+     /* min-height: min-content; */
+     /* padding: 20px 10px; */
+     /* margin-right: 5px; */
+     /* margin-left: 5px; */
+   }
+ }
+
+ .titleStyle {
+   font-family: "IRANSansWeb_Bold(adad_fa)";
+ }
+
+ .valueStyle {
+   font-family: "IRANSansWeb_Medium(adad_fa)";
+ }
+
+ .loginForm {
+   text-align: right;
+ }
+
+ .formsRow {
+   margin-bottom: 20px;
+ }
+
+ .MobileInputAndCheckBtnCont {
+   /* direction: rtl; */
+   display: flex;
+   flex-flow: row;
+   column-gap: .75rem;
+   margin-top: 2.5rem;
+   padding-bottom: 1.25rem;
+ }
+
+ .warningCont {
+   font-size: 12px;
+   color: red;
+ }
+
+ .mobileTxtBox {
+   height: 56px;
+   border-radius: .75rem;
+   border: 1px solid #e0e3e5;
+   width: 186px;
+   flex: 1 0 auto;
+   outline: none;
+   text-align: right;
+   padding: 0px 10px;
+ }
+
+ .txtBox:focus {
+   outline: none;
+   border: 1px solid red;
+   box-shadow: 0px 0px 3px 0px red;
+ }
+
+ .btn {
+   /* padding: 7px; */
+   /* border-radius: 7px; */
+   /* border: none; */
+   background-color: #ff5900;
+   color: #ffffff,
+   /* width: 100%; */
+   /* height: 50px; */
+   /* width: 56px;
+   height: 56px; */
+ }
+
+ .btn:hover {
+   background-color: #ff5900;
+   box-shadow: 0px 0px 3px 1px #4b4a4a;
+ }
+
+ /* zare_nk_050205_commented_st(chon be tag attribute disabled dadim,moroorgarha background-color va opacity darnazar migirand baraye tag ke olaviate 
+ balatari nesbat be csse ma dar file .css midahand) */
+ /* .disabledBtn { 
+   background-color: #eef0f1 !important;
+   opacity: 0.5; 
+ }  */
+ /* zare_nk_050205_commented_end(chon be tag attribute disabled dadim,moroorgarha background-color va opacity darnazar migirand baraye tag ke olaviate 
+ balatari nesbat be csse ma dar file .css midahand) */
+
+ .BackBtn {
+   padding: 10px;
+   border-radius: 7px;
+   display: flex;
+   flex-flow: row;
+   border: none;
+   /* color: #545454; */
+   background-color: inherit;
+   font-family: "IRANSansWeb_Medium(adad_fa)";
+   direction: rtl;
+ }
+
+ .BackBtn:hover {
+   background-color: #f7f7f7;
+ }
+
+ .BackImgCont {
+   display: flex;
+   flex-flow: column;
+   justify-content: center;
+   background-color: inherit;
+   margin-left: 10px;
+ }
+
+ .BackBtnTitleCont {
+   flex: 0 0 auto;
+   display: flex;
+   flex-flow: row;
+   align-items: center;
+   font-size: 14px;
+ }
+
+ .translateDiv {
+   position: absolute;
+   top: 50%;
+   transform: translate(0%, -50%);
+   /* right: 10px; */
+   right: .75rem;
+
+   background-color: white;
+   font-size: 14px;
+   color: #a5abb1;
+   /* هیچ انیمیشنی اینجا اعمال نمیشه */
+   transition: all 0.3s ease;
+   /* یک transition ساده برای نرمی در صورت نیاز */
+   pointer-events: none;
+
+   padding-left: .5rem;
+   padding-right: .5rem;
+ }
+
+ /* استایل برای فعال کردن انیمیشن */
+ .translateDiv.animateFocus {
+   animation: move-down 0.25s ease-in-out forwards;
+ }
+
+ .translateDiv.animateBlur {
+   animation: move-In 0.25s ease-in-out forwards;
+ }
+
+ @keyframes move-down {
+   from {
+     top: 50%;
+     transform: translate(0%, -50%);
+     font-size: 14px;
+     color: #a5abb1;
+   }
+
+   to {
+     top: 0px;
+     transform: translate(0%, -10px);
+     font-size: 11px;
+     color: #1b1c1d;
+   }
+ }
+
+ @keyframes move-in {
+   from {
+     top: 0px;
+     transform: translate(0%, -10px);
+     font-size: 11px;
+     color: #1b1c1d;
+   }
+
+   to {
+     top: 50%;
+     transform: translate(0%, -50%);
+     font-size: 14px;
+     color: #a5abb1;
+   }
+ }
+
+ .valid {
+   border: 1px solid #e0e3e5;  
+ }
+
+ .invalid {
+   border: 1px solid red;
+ }
