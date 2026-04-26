@@ -520,23 +520,31 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
                         >
                             مثال دکمه و Collapse با MUI
                         </Typography> */}
-        <div style={{ padding: '1rem', justifyContent: 'space-between', alignItems: 'center', flex: '0 0 auto', width: '100%', height: '3.5rem', display: 'flex', }}>
-          <span style={{ color: "#1b1c1d", fontSize: '16px', flex: '0 0 auto', }}>انتخاب آدرس</span>
-          <button
-            id="closeAddresListBtn"
-            onClick={() => {
-              // setCloseAddresList(true);
-              setIsEpmtyAdressList(true);
-            }}
-            style={{
-              width: '32px', height: '32px', border: 'none', flex: '0 0 auto', display: "flex",
-              flexFlow: "row", justifyContent: 'center', justifyItems: 'center', alignItems: 'center', borderRadius: '9999px',
+        {/* zare_nk_050206_alan */}
+        <div>
+          <div>ddd</div>
 
-            }}
-          >
-            <svg style={{ width: '1.25rem', height: '1.25rem' }} fill="#ff5900" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-6 fill-gray"><path fill-rule="evenodd" clip-rule="evenodd" d="M17.6565 7.75735L13.4138 12L17.6565 16.2426L16.2423 17.6568L11.9996 13.4142L7.75699 17.6568L6.34277 16.2426L10.5854 12L6.34277 7.75735L7.75699 6.34314L11.9996 10.5858L16.2423 6.34314L17.6565 7.75735Z" fill="inherit"></path></svg>
-          </button>
+          <div style={{ padding: '1rem', justifyContent: 'space-between', alignItems: 'center', flex: '0 0 auto', width: '100%', height: '3.5rem', display: 'flex', }}>
+            <span style={{ color: "#1b1c1d", fontSize: '16px', flex: '0 0 auto', }}>انتخاب آدرس</span>
+            <button
+              id="closeAddresListBtn"
+              onClick={() => {
+                // setCloseAddresList(true);
+                setIsEpmtyAdressList(true);
+              }}
+              style={{
+                width: '32px', height: '32px', border: 'none', flex: '0 0 auto', display: "flex",
+                flexFlow: "row", justifyContent: 'center', justifyItems: 'center', alignItems: 'center', borderRadius: '9999px',
+
+              }}
+            >
+              <svg style={{ width: '1.25rem', height: '1.25rem' }} fill="#ff5900" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-6 fill-gray"><path fill-rule="evenodd" clip-rule="evenodd" d="M17.6565 7.75735L13.4138 12L17.6565 16.2426L16.2423 17.6568L11.9996 13.4142L7.75699 17.6568L6.34277 16.2426L10.5854 12L6.34277 7.75735L7.75699 6.34314L11.9996 10.5858L16.2423 6.34314L17.6565 7.75735Z" fill="inherit"></path></svg>
+            </button>
+          </div>
+
         </div>
+
+
 
         <div //className="w-full flex-1 mt-4 px-4 pb-7"
           style={{
@@ -560,11 +568,6 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
             gap: '.5rem', justifyContent: 'flex-start', alignItems: 'center', cursor: 'pointer', height: '3.5rem', display: 'flex',
 
           }}>
-            <span style={{
-              color: "#ff5900d", flex: '0 0 auto',
-              fontSize: '.875rem',
-              lineHeight: "1.25rem",
-            }}>آدرس جدید</span>
             <button
               id="closeAddresListBtn"
               onClick={goToMap}
@@ -575,11 +578,164 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
 
               }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-5 fill-primary-600"><path d="M18 11.25H12.75V6C12.75 5.59 12.41 5.25 12 5.25C11.59 5.25 11.25 5.59 11.25 6V11.25H6C5.59 11.25 5.25 11.59 5.25 12C5.25 12.41 5.59 12.75 6 12.75H11.25V18C11.25 18.41 11.59 18.75 12 18.75C12.41 18.75 12.75 18.41 12.75 18V12.75H18C18.41 12.75 18.75 12.41 18.75 12C18.75 11.59 18.41 11.25 18 11.25Z" fill="inherit"></path></svg>            </button>
+              <svg style={{ height: ' 1.25rem', width: '1.25rem', fill: "#ff5900" }} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-5 fill-primary-600"><path d="M18 11.25H12.75V6C12.75 5.59 12.41 5.25 12 5.25C11.59 5.25 11.25 5.59 11.25 6V11.25H6C5.59 11.25 5.25 11.59 5.25 12C5.25 12.41 5.59 12.75 6 12.75H11.25V18C11.25 18.41 11.59 18.75 12 18.75C12.41 18.75 12.75 18.41 12.75 18V12.75H18C18.41 12.75 18.75 12.41 18.75 12C18.75 11.59 18.41 11.25 18 11.25Z" fill="inherit"></path></svg>
+            </button>
+            <span style={{
+              color: "#ff5900",
+              flex: '0 0 auto',
+              fontSize: '.875rem',
+              lineHeight: "1.25rem",
+            }}>آدرس جدید</span>
           </div>
 
           {/* zare_nk_050206_added_alan_st(address ha!) */}
-          <div>
+          <div style={{ display: 'flex', flexFlow: 'column', padding: '0px', margin: '0px', }}>
+
+            <div style={{
+              borderTop: '1px solid #2b364f14',
+              display: 'flex',
+              paddingBottom: '.75rem',
+              paddingTop: '.75rem',
+              gap: '.5rem',
+              justifyContent: 'space-between',
+              cursor: 'pointer',
+              height: 'min-content',
+              alignItems: 'center',
+            }}>
+
+              <button
+                id="closeAddresListBtn"
+                onClick={goToMap}
+                style={{
+                  backgroundColor: '#1b1c1d',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1) 
+                  fill: 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
+                  borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
+                  flex: '0 0 auto',
+                }}
+              >
+                <svg style={{ width: '18px', height: '18px' }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-[18px] w-[18px] fill-inherit"><g id="Location"><path id="Union" d="M11.99 2C7.34 2 3.5 5.72 3.5 10.32C3.5 12.64 4.34 14.79 5.73 16.61C7.25 18.62 9.13 20.37 11.27 21.75C11.8 22.09 12.24 22.07 12.73 21.75C14.85 20.37 16.74 18.62 18.27 16.61C19.66 14.79 20.5 12.63 20.5 10.32C20.5 5.72 16.66 2 11.99 2ZM11.99 13.33C10.45 13.33 9.19 12.12 9.19 10.58C9.19 9.04 10.45 7.78 11.99 7.78C13.53 7.78 14.8 9.05 14.8 10.58C14.8 12.11 13.53 13.33 11.99 13.33Z" fill="inherit"></path></g></svg>
+              </button>
+
+
+              <div
+                style={{
+                  paddingTop: '.5rem',
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  alignItems: 'flex-start',
+                  flexFlow: 'column',
+                  flex: '1 1 0%',
+                  height: 'min-content',
+                  marginLeft: '.5rem',
+                }}
+              >
+                <span
+                  style={{
+                    color: '#1b1c1d',
+                    fontWeight: '500',
+                    fontSize: '.875rem',
+                    lineHeight: '1.25rem',
+                  }}
+                >خونه</span>
+                <p
+                  style={{
+                    color: '#1b1c1d',  //zare_nk_050206_nokteh(age entekhab nabasheh: color:#a5abb1)   
+                    fontSize: '.75rem',
+                    lineHeight: '1rem',
+                    marginBottom: '0px',
+                  }}
+                >خ. وحدت اسلامی، نرسیده به خ. مولوی، ک. غلامرضا زندی، خ. صالح زاده</p>
+              </div>
+
+
+              <button
+                id="closeAddresListBtn"
+                onClick={goToMap}
+                style={{
+                  // backgroundColor: '#1b1c1d',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1)  
+                  backgroundColor: 'white',
+                  borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
+                  flex: '0 0 auto',
+                }}
+              >
+                <svg style={{ width: '18px', height: '18px', fill: '#a5abb1', transform: 'rotate(90deg)', }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-[18px] fill-gray-500 rotate-90"><g id="Info menu"><path id="Union" fill="inherit" fill-rule="evenodd" clip-rule="evenodd" d="M5 14C6.10457 14 7 13.1046 7 12C7 10.8954 6.10457 10 5 10C3.89543 10 3 10.8954 3 12C3 13.1046 3.89543 14 5 14ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14ZM21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12Z"></path></g></svg>
+                {/* transform: translate(0%, -50%) rotate(0deg); */}
+              </button>
+
+            </div>
+
+            <div style={{
+              borderTop: '1px solid #2b364f14',
+              display: 'flex',
+              paddingBottom: '.75rem',
+              paddingTop: '.75rem',
+              gap: '.5rem',
+              justifyContent: 'space-between',
+              cursor: 'pointer',
+              height: 'min-content',
+              alignItems: 'center',
+            }}>
+
+              <button
+                id="closeAddresListBtn"
+                onClick={goToMap}
+                style={{
+                  backgroundColor: 'eef0f1', // '#1b1c1d',  //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1)  
+                  fill: '#a5abb1', // 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
+                  borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
+                  flex: '0 0 auto',
+                }}
+              >
+                <svg style={{ width: '18px', height: '18px' }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-[18px] w-[18px] fill-inherit"><g id="Location"><path id="Union" d="M11.99 2C7.34 2 3.5 5.72 3.5 10.32C3.5 12.64 4.34 14.79 5.73 16.61C7.25 18.62 9.13 20.37 11.27 21.75C11.8 22.09 12.24 22.07 12.73 21.75C14.85 20.37 16.74 18.62 18.27 16.61C19.66 14.79 20.5 12.63 20.5 10.32C20.5 5.72 16.66 2 11.99 2ZM11.99 13.33C10.45 13.33 9.19 12.12 9.19 10.58C9.19 9.04 10.45 7.78 11.99 7.78C13.53 7.78 14.8 9.05 14.8 10.58C14.8 12.11 13.53 13.33 11.99 13.33Z" fill="inherit"></path></g></svg>
+              </button>
+
+
+              <div
+                style={{
+                  paddingTop: '.5rem',
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  alignItems: 'flex-start',
+                  flexFlow: 'column',
+                  flex: '1 1 0%',
+                  height: 'min-content',
+                  marginLeft: '.5rem',
+                }}
+              >
+                <span
+                  style={{
+                    color: '#a5abb1', // '#1b1c1d',  //zare_nk_050206_nokteh(age entekhab nabasheh: color:#a5abb1)
+                    fontWeight: '500',
+                    fontSize: '.875rem',
+                    lineHeight: '1.25rem',
+                  }}
+                >خونه</span>
+                <p
+                  style={{
+                    color: '#a5abb1', // '#1b1c1d',  //zare_nk_050206_nokteh(age entekhab nabasheh: color:#a5abb1)  
+                    fontSize: '.75rem',
+                    lineHeight: '1rem',
+                    marginBottom: '0px',
+                  }}
+                >خ. وحدت اسلامی، نرسیده به خ. مولوی، ک. غلامرضا زندی، خ. صالح زاده</p>
+              </div>
+
+
+              <button
+                id="closeAddresListBtn"
+                onClick={goToMap}
+                style={{
+                  // backgroundColor: '#1b1c1d',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1)  
+                  backgroundColor: 'white',
+                  borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
+                  flex: '0 0 auto',
+                }}
+              >
+                <svg style={{ width: '18px', height: '18px', fill: '#a5abb1', transform: 'rotate(90deg)', }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-[18px] fill-gray-500 rotate-90"><g id="Info menu"><path id="Union" fill="inherit" fill-rule="evenodd" clip-rule="evenodd" d="M5 14C6.10457 14 7 13.1046 7 12C7 10.8954 6.10457 10 5 10C3.89543 10 3 10.8954 3 12C3 13.1046 3.89543 14 5 14ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14ZM21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12Z"></path></g></svg>
+                {/* transform: translate(0%, -50%) rotate(0deg); */}
+              </button>
+
+            </div>
 
           </div>
           {/* zare_nk_050206_added_alan_end(address ha!) */}
@@ -882,7 +1038,7 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
         </form > */}
       {/* </Paper> */}
       {/* zare_nk_050204_rahe2_st(Drawer baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
-    </Drawer>
+    </Drawer >
     {/* zare_nk_050204_rahe2_end(Drawer baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
 
     {/* zare_nk_050204_rahe1_st(ClickAwayListener+Collapse baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
