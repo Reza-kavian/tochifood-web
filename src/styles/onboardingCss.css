@@ -1,4 +1,4 @@
-/* html,
+html,
 body {
     height: 100%;
 }
@@ -24,7 +24,9 @@ body {
 
 .rotating-relative {
     width: 100%;
-    height: 100%; 
+    height: 100%;
+    /* max-width: 450px; */
+    /* min-height: 100dvh; */
     position: relative;
     display: flex;
     justify-content: center;
@@ -40,7 +42,8 @@ body {
     min-height: 100dvh;
     position: absolute;
     display: flex;
-    flex-flow: column; 
+    flex-flow: column;
+    /* justify-content: center; */
     align-items: center;
     color: rgb(27, 21, 21);
     overflow: hidden;
@@ -50,16 +53,19 @@ body {
     width: 576px;
     height: 576px;
     position: absolute;  
-    animation: rotating-div-cont-spin 50s linear infinite; 
+    animation: rotating-div-cont-spin 50s linear infinite;
+    /* نام انیمیشن، مدت زمان، سرعت ثابت، تکرار بی‌نهایت */
 }
 
 .big-rotating-div-cont {
     width: 1152px;
     height: 1152px;
     position: absolute;  
-    animation: big-rotating-div-cont-spin 50s linear infinite; 
+    animation: big-rotating-div-cont-spin 50s linear infinite;
+    /* نام انیمیشن، مدت زمان، سرعت ثابت، تکرار بی‌نهایت */
 }
- 
+
+/* هر قطر */
 .rotating-div {
     width: 100%;
     display: flex;
@@ -99,7 +105,9 @@ body {
     width: 21rem;
     display: block;
     animation: big-img-in-rotating-div-spin 50s linear infinite;
-    filter: blur(4px) brightness(0.9); 
+    filter: blur(4px) brightness(0.9);
+    /* opacity: 0.7; */
+    /* zare_nk_041225_nokteh(mitoonim az tarkibe opacity va blur estefadeh konim ke man tarjih dadam faghat blur estefadeh konam) */
 }
 
 @keyframes rotating-div-cont-spin {
@@ -141,4 +149,4 @@ body {
     to {
         transform: rotate(0deg);
     }
-} */
+}

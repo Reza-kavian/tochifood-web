@@ -1,7 +1,7 @@
 ////zare_nk_050202_okk
 'use client'
 import { useRouter, redirect } from "next/navigation";
-import "@/styles/pageCss.css";
+import "@/styles/onboardingCss.css";
 import { wrap } from "module";
 
 export default function Page() {

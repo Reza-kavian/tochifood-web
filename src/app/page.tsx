@@ -101,6 +101,8 @@ function AdressListComponent({
 }: AdressListComponentType) {
   console.log('zare_nk_050126_AdressListComponent called!!-isEpmtyAdressList: ' + isEpmtyAdressList);
 
+  const router = useRouter();
+
   const [error, setError] = useState<string | null>(null);
 
   type AddressFormInputsMatnErrorType = {
@@ -421,6 +423,12 @@ function AdressListComponent({
     ////zare_nk050206__olgu_end(baraye codhaye js dastresi be tagha negah dashtam)
   });
 
+  const goToMap = () => {
+    // router.push("/folder03?tab=comments2");
+    // redirect("/login");
+    router.replace("/location");
+  };
+
   return (<>
     {/* zare_nk_050204_rahe1_st(ClickAwayListener+Collapse baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
     {/* zare_nk_050204_nokteh(ClickAwayListener componente MUI hast ke rooyadade click kharej az taghayei ke dar mohtavayash moshakhas mikonim ra modiriat mikonih, 
@@ -462,12 +470,23 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
       }}
       // hideBackdrop={true} //zare_nk_040502(albateh hideBackdrop={true} baes mishe alave bar hazfe tariye poshte drawer,ba click dar fazaye poshtesh,automat 
       // basteh nashe va niaz be modiriate dastiye document.addEventListener dar useEffect dashteh bashim)
+
       slotProps={{
         paper: {
           sx: {
-            direction:'rtl',  //zare_nk_050206_added
+            width: '450px', ////zare_nk_050206_added(chon Drawer dar DOM kharej az componente pedaresh mireh va be risheye body mire, pas 100% body ro migireh na 100% taghi
+            //// ke dar component beonvane tage pedaresh tarif kardim,pas bejaye width:100% majboorim dasti arze 450 ro behesh bedim)
+
+            ////zare_nk_050206_commented_st(baraye vasat raftane ofoghiye Drawer ke javab nadad(translate kar nakard,chon ba codehaye dakheliye Drawer MUI tadakhol dareh))
+            // left: '50%', 
+            // transform: 'translate(-50%, 0%)', 
+            ////zare_nk_050206_commented_end(baraye vasat raftane ofoghiye Drawer ke javab nadad(translate kar nakard,chon ba codehaye dakheliye Drawer MUI tadakhol dareh))
+            margin: '0 auto',  ////zare_nk_050206_added(baraye vasat raftane ofoghiye Drawer ke javab dad)
+
+            direction: 'rtl',  //zare_nk_050206_added
             borderRadius: '20px 20px 0 0',
             boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2)',
+
             backgroundColor: 'white',
           },
         },
@@ -486,7 +505,10 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
       {error && <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>{error}</p>}
       {/* <Paper> */}
       {/* <div style={{ border: '2px dashed red', backgroundColor: 'blueviolet', }}>سلام دراور</div> */}
-      <Box sx={{ border: '2px dashed red', backgroundColor: 'green', }}>
+      <Box sx={{
+
+        // border: '2px dashed red', backgroundColorr: 'green',
+      }}>
         {/* <Typography variant="h4" gutterBottom
                             // className={`${Styles.ISW_Medium_fa} ${Styles.corTesti}`}   //zare_nk_050204_nokteh(classhaye filhaye .module.css mamoolan baraye taghaye MUI olaviate paeintari 
                             // darand nesbat be designhaye dakheliye MUI(ke bazi css ha ra dakheli tanzim mikonan),va shayad kar nakonand(masalan baraye fontFamily mamoolan  kar nemikoneh
@@ -498,13 +520,78 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
                         >
                             مثال دکمه و Collapse با MUI
                         </Typography> */}
+        <div style={{ padding: '1rem', justifyContent: 'space-between', alignItems: 'center', flex: '0 0 auto', width: '100%', height: '3.5rem', display: 'flex', }}>
+          <span style={{ color: "#1b1c1d", fontSize: '16px', flex: '0 0 auto', }}>انتخاب آدرس</span>
+          <button
+            id="closeAddresListBtn"
+            onClick={() => {
+              // setCloseAddresList(true);
+              setIsEpmtyAdressList(true);
+            }}
+            style={{
+              width: '32px', height: '32px', border: 'none', flex: '0 0 auto', display: "flex",
+              flexFlow: "row", justifyContent: 'center', justifyItems: 'center', alignItems: 'center', borderRadius: '9999px',
 
-        <Typography
+            }}
+          >
+            <svg style={{ width: '1.25rem', height: '1.25rem' }} fill="#ff5900" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-6 fill-gray"><path fill-rule="evenodd" clip-rule="evenodd" d="M17.6565 7.75735L13.4138 12L17.6565 16.2426L16.2423 17.6568L11.9996 13.4142L7.75699 17.6568L6.34277 16.2426L10.5854 12L6.34277 7.75735L7.75699 6.34314L11.9996 10.5858L16.2423 6.34314L17.6565 7.75735Z" fill="inherit"></path></svg>
+          </button>
+        </div>
+
+        <div //className="w-full flex-1 mt-4 px-4 pb-7"
+          style={{
+            paddingBottom: '1.75rem', paddingLeft: '1rem', paddingRight: '1rem', flex: '1 1 0%', width: '100%', marginTop: '1rem',
+          }}>
+
+
+          <p className="ISW_ms_fa"
+            style={{
+              color: '#63676e',
+              fontSize: '.875rem',
+              lineHeight: '1.25rem',
+              marginBottom: '.5rem',
+              // fontFamily:"IRANSansWeb_ms(adad_fa)",
+              // fontFamily:"IRANSansWeb_Medium(adad_fa)",
+            }}
+          >لطفا آدرس تحویل سفارش را انتخاب کنید.</p>
+
+          <div style={{
+            // flex: '0 0 auto', width: '100%',             
+            gap: '.5rem', justifyContent: 'flex-start', alignItems: 'center', cursor: 'pointer', height: '3.5rem', display: 'flex',
+
+          }}>
+            <span style={{
+              color: "#ff5900d", flex: '0 0 auto',
+              fontSize: '.875rem',
+              lineHeight: "1.25rem",
+            }}>آدرس جدید</span>
+            <button
+              id="closeAddresListBtn"
+              onClick={goToMap}
+              style={{
+                backgroundColor: '#fff7eb',
+                width: '32px', height: '32px', border: 'none', flex: '0 0 auto', display: "flex",
+                flexFlow: "row", justifyContent: 'center', justifyItems: 'center', alignItems: 'center', borderRadius: '9999px',
+
+              }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-5 fill-primary-600"><path d="M18 11.25H12.75V6C12.75 5.59 12.41 5.25 12 5.25C11.59 5.25 11.25 5.59 11.25 6V11.25H6C5.59 11.25 5.25 11.59 5.25 12C5.25 12.41 5.59 12.75 6 12.75H11.25V18C11.25 18.41 11.59 18.75 12 18.75C12.41 18.75 12.75 18.41 12.75 18V12.75H18C18.41 12.75 18.75 12.41 18.75 12C18.75 11.59 18.41 11.25 18 11.25Z" fill="inherit"></path></svg>            </button>
+          </div>
+
+          {/* zare_nk_050206_added_alan_st(address ha!) */}
+          <div>
+
+          </div>
+          {/* zare_nk_050206_added_alan_end(address ha!) */}
+
+        </div>
+
+        {/* <Typography
           // variant="h4"
           gutterBottom
-          sx={{ border: '2px dashed black', fontFamily: '"IRANSansWeb_ms(adad_fa)", "IRANSansWeb_Medium(adad_fa)"', }}         >
+          sx={{ border: '2px dashed black', fontFamily: '"IRANSansWeb_ms(adad_fa)", "IRANSansWeb_Medium(adad_fa)"', }} >
           انتخاب آدرس
-        </Typography>
+        </Typography> */}
 
       </Box>
       {/* <Paper sx={{ border: '2px dashed red', backgroundColor: 'red', }}>سلام دراور</Paper>  */}
@@ -985,8 +1072,8 @@ export default function Page() {
     //         Api_CreateAddressParams.Mobile = resultData[0].Mobile;
     //         Api_CreateAddressParams.IdAdress = resultData[0].IdAdress;
     //         $('#addressSatrContInProfile').append('' +
-    //           //'<div class="addressSatr" id="satr-' + Api_CreateAddressParams.IdAdress +    //zare_nk_030910_commented
-    //           '<div class="addressSatr satr-' + Api_CreateAddressParams.IdAdress + '" id="satr-' + Api_CreateAddressParams.IdAdress +    //zare_nk_030910_added
+    //           //'<div className="addressSatr" id="satr-' + Api_CreateAddressParams.IdAdress +    //zare_nk_030910_commented
+    //           '<div className="addressSatr satr-' + Api_CreateAddressParams.IdAdress + '" id="satr-' + Api_CreateAddressParams.IdAdress +    //zare_nk_030910_added
     //           '" style="display:flex;flex-flow:column; border:2px solid #E7E7E7;padding:15px;margin-top:10px;border-radius:10px;" >' +
 
     //           '<div style="display:flex;flex-flow:row; padding-bottom:15px;">' +
@@ -1004,13 +1091,13 @@ export default function Page() {
     //           '<div style="flex:1 0 auto;display:flex;flex-flow:row;justify-content:end;">' +
     //           '<div style=" margin-left:10px;">' +
 
-    //           '<a class="editAddress" href="#/" onclick="addressLinkClicked(true, true, ' + Api_CreateAddressParams.IdAdress + ')" class="vorsab text-right text-decoration-none d-inline-block rounded mr-1">' +
+    //           '<a className="editAddress" href="#/" onclick="addressLinkClicked(true, true, ' + Api_CreateAddressParams.IdAdress + ')" className="vorsab text-right text-decoration-none d-inline-block rounded mr-1">' +
     //           '<img src="https://img.tochikala.com/Icon/edit-Icon.svg" style="width:20px;" alt="ویرایش آدرس" />' +
     //           '</a>' +
 
     //           '</div>' +
     //           '<div>' +
-    //           '<a class="deleteAddress" href="#/" onclick="hazfeAddress(\'satr-' + Api_CreateAddressParams.IdAdress + '\')" class="vorsab text-right text-decoration-none d-inline-block rounded mr-1">' +
+    //           '<a className="deleteAddress" href="#/" onclick="hazfeAddress(\'satr-' + Api_CreateAddressParams.IdAdress + '\')" className="vorsab text-right text-decoration-none d-inline-block rounded mr-1">' +
     //           '<img src="https://img.tochikala.com/Icon/RecycleBin.svg" style="width:20px;" alt="حذف آدرس" />' +
     //           '</a>' +
     //           '</div>' +
@@ -1062,7 +1149,7 @@ export default function Page() {
 
 
     //       //        $('#addressSatrContInProfile' ).append('' +
-    //       //            '<div class="addressSatr" id="satr-' + Api_CreateAddressParams.IdAdress +
+    //       //            '<div className="addressSatr" id="satr-' + Api_CreateAddressParams.IdAdress +
     //       //            '" style="display:flex;flex-flow:column; border:2px solid #E7E7E7;padding:15px;margin-top:10px;border-radius:10px;" >' +
 
     //       //            '<div style="display:flex;flex-flow:row; padding-bottom:15px;">' +
@@ -1080,13 +1167,13 @@ export default function Page() {
     //       //            '<div style="flex:1 0 auto;display:flex;flex-flow:row;justify-content:end;">' +
     //       //            '<div style=" margin-left:10px;">' +
 
-    //       //            '<a class="editAddress" href="#/" onclick="addressLinkClicked(true, true, ' + Api_CreateAddressParams.IdAdress + ')" class="vorsab text-right text-decoration-none d-inline-block rounded mr-1">' +
+    //       //            '<a className="editAddress" href="#/" onclick="addressLinkClicked(true, true, ' + Api_CreateAddressParams.IdAdress + ')" className="vorsab text-right text-decoration-none d-inline-block rounded mr-1">' +
     //       //            '<img src="https://img.tochikala.com/Icon/edit-Icon.svg" style="width:20px;" alt="ویرایش آدرس" />' +
     //       //            '</a>'+
 
     //       //            '</div>' +
     //       //            '<div>' +
-    //       //            '<a class="deleteAddress" href="#/" onclick="hazfeAddress(\'satr-' + Api_CreateAddressParams.IdAdress + '\')" class="vorsab text-right text-decoration-none d-inline-block rounded mr-1">' +
+    //       //            '<a className="deleteAddress" href="#/" onclick="hazfeAddress(\'satr-' + Api_CreateAddressParams.IdAdress + '\')" className="vorsab text-right text-decoration-none d-inline-block rounded mr-1">' +
     //       //            '<img src="https://img.tochikala.com/Icon/RecycleBin.svg" style="width:20px;" alt="حذف آدرس" />' +
     //       //            '</a>' +
     //       //            '</div>' +
@@ -1297,7 +1384,7 @@ export default function Page() {
     <>
       <header></header>
       <main
-        style={{ 
+        style={{
           backgroundColor: 'white',
           height: '100dvh',
           width: '100%',
@@ -1311,8 +1398,7 @@ export default function Page() {
           direction: 'rtl',
         }}>
 
-
-        <div style={{ display: 'flex', padding: '0px 10px', flex: '1 1 47%' ,direction:'rtl'}}>
+        <div style={{ display: 'flex', padding: '0px 10px', flex: '1 1 47%', direction: 'rtl' }}>
           <button
             // onClick={goToLogin}
             onClick={bigShoo}
