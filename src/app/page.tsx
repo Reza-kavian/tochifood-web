@@ -194,37 +194,19 @@ export const Adressescomponent = function Adressescomponent({
               </button>
             </div>
 
-            <ShowAddRemAddressComponent
-
-              //  isEpmtyAdressList={isEpmtyAdressList}
-              //     setIsEpmtyAdressList={setIsEpmtyAdressList}
-              //     refForBox={refForBox}
-              //     saveAddress={saveAddress}
-              //     addressFormInputsVal={addressFormInputsVal}
-              //     setAddressFormInputsVal={setAddressFormInputsVal}
-              //     responsedListFromApiSelectAddressList={responsedListFromApiSelectAddressList}
-
-              //     isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}           //zare_nk_050207_added
-              //     setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}     //zare_nk_050207_added
-              //     showAddRemAddress={showAddRemAddress}
-
-              refForShowAddRemAddressBox={refForShowAddRemAddressBox}
-              // EditAddress={goToEdditAddressMap(item.IdAdress)}
-              EditAddress={() => {
+            <ShowAddRemAddressComponent 
+              refForShowAddRemAddressBox={refForShowAddRemAddressBox} 
+              goToEdditAddressMap={() => {
                 goToEdditAddressMap(item.IdAdress)
-              }}
-
-              // RemoveAddress={RemoveAddress}
+              }} 
               RemoveAddress={() => {
                 RemoveAddress(item.IdAdress)
               }}
-
               // responsedListFromApiEditAddress={responsedListFromApiEditAddress}  //zare_nk_050207_commented(chon aslan api editeAddresss ra dar in safhe nemizanim va dar safheye editAddress mizanim)
               responsedListFromApiRemoveAddress={responsedListFromApiRemoveAddress}
               isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}
               setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}
               showAddRemAddress={showAddRemAddress}
-
             />
           </>
         )
@@ -236,18 +218,11 @@ export const Adressescomponent = function Adressescomponent({
 ////zare_nk_050206_added_end
 
 ////zare_nk_050207_added_st(for ShowAddRemAddressList)
-type ShowAddRemAddressComponentType = {
-  // isEpmtyAdressList: boolean;    //zare_nk_050207_commented
-  // setIsEpmtyAdressList: React.Dispatch<React.SetStateAction<boolean>>;    //zare_nk_050207_commented
-  refForShowAddRemAddressBox: RefObject<HTMLDivElement | null>;
-  // saveAddress: (isOnline: boolean) => void;    //zare_nk_050207_commented
-  EditAddress: (IdAdress: number) => void;
+type ShowAddRemAddressComponentType = { 
+  refForShowAddRemAddressBox: RefObject<HTMLDivElement | null>; 
+  goToEdditAddressMap: (IdAdress: number) => void;
   RemoveAddress: (IdAdress: number) => void;
 
-  // addressFormInputsVal: any;       //zare_nk_050207_commented
-  // setAddressFormInputsVal: React.Dispatch<React.SetStateAction<any>>;       //zare_nk_050207_commented
-
-  // responsedListFromApiSelectAddressList: responsedListFromApiSelectAddressListType[] | null;      //zare_nk_050207_commented
   // responsedListFromApiEditAddress: responsedListFromApiEditAddressType | null;         //zare_nk_050207_added(and zare_nk_050207_commented(chon aslan api editeAddresss ra dar in safhe nemizanim va dar safheye editAddress mizanim))           
   responsedListFromApiRemoveAddress: responsedListFromApiRemoveAddressType | null;     //zare_nk_050207_added         
 
@@ -257,25 +232,17 @@ type ShowAddRemAddressComponentType = {
 };
 
 // export function AdressListComponent({  //zare_nk_050206_commented
-export const ShowAddRemAddressComponent = function AdressListComponent({  //zare_nk_050206_added
-  // isEpmtyAdressList,    //zare_nk_050207_commented
-  // setIsEpmtyAdressList,    //zare_nk_050207_commented
-  refForShowAddRemAddressBox,
-  // saveAddress,    //zare_nk_050207_commented
-  EditAddress,
+export const ShowAddRemAddressComponent = function AdressListComponent({  //zare_nk_050206_added 
+  refForShowAddRemAddressBox, 
+  goToEdditAddressMap,
   RemoveAddress,
 
-  // addressFormInputsVal,     //zare_nk_050206_nokteh(inpute haye form inja ke nadarim,in felan olgu bemooneh
-  // setAddressFormInputsVal,   //zare_nk_050206_nokteh(inpute haye form inja ke nadarim,in felan olgu bemooneh
-
-  // responsedListFromApiSelectAddressList,     //zare_nk_050207_commented
-  // responsedListFromApiEditAddress,              //zare_nk_050207_commented(chon aslan api editeAddresss ra dar in safhe nemizanim va dar safheye editAddress mizanim)
-  responsedListFromApiRemoveAddress,            
+  // responsedListFromApiEditAddress,         //zare_nk_050207_added(and zare_nk_050207_commented(chon aslan api editeAddresss ra dar in safhe nemizanim va dar safheye editAddress mizanim))
+  responsedListFromApiRemoveAddress,           //zare_nk_050207_added      
 
   isEpmtyShowAddRemAddress,     //zare_nk_050207_added
   setIsEpmtyShowAddRemAddress,   //zare_nk_050207_added
-  showAddRemAddress,   //zare_nk_050207_added
-
+  showAddRemAddress,   //zare_nk_050207_added 
 }: ShowAddRemAddressComponentType) {
   // console.log('zare_nk_050126_AdressListComponent called!!-isEpmtyAdressList: ' + isEpmtyAdressList);
 
@@ -290,14 +257,7 @@ export const ShowAddRemAddressComponent = function AdressListComponent({  //zare
 
   // const [isDisabledsaveAddressFormInputsBtn, setIsDisabledsaveAddressFormInputsBtn] =  useState(true);  //zare_nk_050207_commented
   const [isDisabledEditAddressBtn, setIsDisabledEditAddressBtn] = useState(false);  //zare_nk_050207_added(in state contorole disabled bodan ya naboodane dokmeye eddite address ezafi va bimorede,va hamvareh ehtemalan enable bayad bashe)
-
-  // const goToMap = () => {  //zare_nk_050207_commented
-  const goToEdditAddressMap = () => {  //zare_nk_050207_added  
-    // router.push("/folder03?tab=comments2");
-    // redirect("/login");
-    router.replace("/edditAddressLocation");  //zare_nk_050207_nokteh(in safheye edditAddressLocation ezafeh beshe(dar tapsiFood esmesh safheye edit-address hast))
-  };
-
+ 
   return (<>
     <Drawer
       id="box"
@@ -391,64 +351,17 @@ export const ShowAddRemAddressComponent = function AdressListComponent({  //zare
 
         <div style={{
           paddingBottom: '1.75rem', paddingLeft: '1rem', paddingRight: '1rem', flex: '1 1 0%', width: '100%', marginTop: '1rem',
-        }}>
-          {/* zare_nk_050207_commented_st((ezafi ke az componente AdressListComponent copy shod)) */}
-          {/* <p style={{
-            color: '#63676e',
-            fontSize: '.875rem',
-            lineHeight: '1.25rem',
-            marginBottom: '.5rem', 
-          }}>
-            لطفا آدرس تحویل سفارش را انتخاب کنید.
-          </p> */}
-
-          {/* <div style={{
-            gap: '.5rem', justifyContent: 'flex-start', alignItems: 'center', cursor: 'pointer', height: '3.5rem', display: 'flex',
-          }}>
-            <button
-              id="closeAddresListBtn"
-              onClick={goToMap}
-              style={{
-                backgroundColor: '#fff7eb',
-                width: '32px', height: '32px', border: 'none', flex: '0 0 auto', display: "flex",
-                flexFlow: "row", justifyContent: 'center', justifyItems: 'center', alignItems: 'center', borderRadius: '9999px',
-
-              }}
-            >
-              <svg style={{ height: ' 1.25rem', width: '1.25rem', fill: "#ff5900" }} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-5 fill-primary-600"><path d="M18 11.25H12.75V6C12.75 5.59 12.41 5.25 12 5.25C11.59 5.25 11.25 5.59 11.25 6V11.25H6C5.59 11.25 5.25 11.59 5.25 12C5.25 12.41 5.59 12.75 6 12.75H11.25V18C11.25 18.41 11.59 18.75 12 18.75C12.41 18.75 12.75 18.41 12.75 18V12.75H18C18.41 12.75 18.75 12.41 18.75 12C18.75 11.59 18.41 11.25 18 11.25Z" fill="inherit"></path></svg>
-            </button>
-            <span style={{
-              color: "#ff5900",
-              flex: '0 0 auto',
-              fontSize: '.875rem',
-              lineHeight: "1.25rem",
-            }}>آدرس جدید</span>
-          </div> */}
-
-          {/* <Adressescomponent
-            apiSelectAddressList={apiSelectAddressList}
-            isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}
-            setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}
-            showAddRemAddress={showAddRemAddress}
-          />   */}
-
-          {/* zare_nk_050207_commented_end((ezafi ke az componente AdressListComponent copy shod)) */}
-
+        }}> 
 
           <div className="btn-cont" style={{
             display: 'flex', width: '100%', flexFlow: 'row-reverse', flexWrap: 'wrap', marginBottom: '2rem',
-            columnGap: '1rem', backgroundColor: 'inherit',
-            // //  width: 100%;
-            //     // position: absolute;
-            //     // bottom: 0px;
-            //     // display: flex;
-            //     column-gap: 1rem;
-            //     background-color: inherit; 
-
+            columnGap: '1rem', backgroundColor: 'inherit', 
           }} >
             <div style={{ display: 'flex', padding: '0px 10px', flex: '1 1 47%' }}>
               <button
-                // onClick={goToMap}
+                onClick={ ()=>{
+                  RemoveAddress
+                }}  
                 style={{
                   borderRadius: 10,
                   display: 'flex',
@@ -463,16 +376,16 @@ export const ShowAddRemAddressComponent = function AdressListComponent({  //zare
                   fontSize: '15px',
                   width: '100%',
                   height: '50px',
-                }}>
-                {/* ورود به عنوان مهمان */}
+                }}> 
                 حذف
               </button>
             </div>
             <div style={{ display: 'flex', padding: '0px 10px', flex: '1 1 47%' }}>
-              <button
-                // onClick={goToLogin}
-                onClick={goToEdditAddressMap}
-
+              <button 
+                // onClick={goToEdditAddressMap} 
+                onClick={ ()=>{
+                  goToEdditAddressMap
+                }}  
                 style={{
                   borderRadius: 10,
                   display: 'flex',
@@ -486,13 +399,11 @@ export const ShowAddRemAddressComponent = function AdressListComponent({  //zare
                   fontSize: '15px',
                   width: '100%',
                   height: '50px',
-                }}>
-                {/* ورود یا عضویت */}
+                }}> 
                 ویرایش ادرس
               </button>
             </div>
           </div>
-
 
         </div>
       </Box>
@@ -506,9 +417,7 @@ type AdressListComponentType = {
   isEpmtyAdressList: boolean;
   setIsEpmtyAdressList: React.Dispatch<React.SetStateAction<boolean>>;
   refForBox: RefObject<HTMLDivElement | null>;
-  saveAddress: (isOnline: boolean) => void;
-  addressFormInputsVal: any;   //zare_nk_050206_nokteh(inpute haye form inja ke nadarim,in felan olgu bemooneh)
-  setAddressFormInputsVal: React.Dispatch<React.SetStateAction<any>>;   //zare_nk_050206_nokteh(inpute haye form inja ke nadarim,in felan olgu bemooneh)
+   
   responsedListFromApiSelectAddressList: responsedListFromApiSelectAddressListType[] | null;
 
   isEpmtyShowAddRemAddress: boolean;    //zare_nk_050207_added
@@ -521,9 +430,7 @@ export const AdressListComponent = function AdressListComponent({  //zare_nk_050
   isEpmtyAdressList,
   setIsEpmtyAdressList,
   refForBox,
-  saveAddress,
-  addressFormInputsVal,     //zare_nk_050206_nokteh(inpute haye form inja ke nadarim,in felan olgu bemooneh
-  setAddressFormInputsVal,   //zare_nk_050206_nokteh(inpute haye form inja ke nadarim,in felan olgu bemooneh
+   
   responsedListFromApiSelectAddressList,
 
   isEpmtyShowAddRemAddress,     //zare_nk_050207_added
@@ -563,297 +470,8 @@ export const AdressListComponent = function AdressListComponent({  //zare_nk_050
     pelak: false,
     vahed: false,
     addressName: false,
-  });
-
-  type IsAddressFormInputsTextType = {
-    Address: boolean;
-    pelak: boolean;
-    vahed: boolean;
-    addressName: boolean;
-  };
-
-  // const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<boolean[]>(Array(4).fill(true));   //zare_nk_050201_added   
-  const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<IsAddressFormInputsTextType>({
-    Address: true,
-    pelak: true,
-    vahed: true,
-    addressName: true,
-  });
-
-  type RefForAddressFormInputsType = {
-    Address: HTMLTextAreaElement | null;
-    pelak: HTMLInputElement | null;
-    vahed: HTMLInputElement | null;
-    addressName: HTMLInputElement | null;
-    // onSquareClick: () => void;
-    // andis: number;
-    // refForBtn: React.RefObject<(HTMLButtonElement | null)[]>;
-    // className?: string;
-  };
-
-  // const refForAddressInput = useRef<(HTMLTextAreaElement | null)>(null); //zare_nk_050206_nokteh(chon baraye yek tage na araye lazemeh na object)
-  // const refForAddressFormInputs = useRef<(HTMLInputElement | HTMLTextAreaElement | null)[]>([]); //zare_nk_050206_nokteh(chon baraye chandin tage araye gozashtim)
-  const refForAddressFormInputs = useRef<RefForAddressFormInputsType>({  //zare_nk_050206_nokteh(chon baraye chandin tage object gozashtim)
-    Address: null,
-    pelak: null,
-    vahed: null,
-    addressName: null,
-  });
-
-  const handleAddressFormInputsFocus = (eventOrElement: ChangeEvent<HTMLInputElement> | HTMLInputElement | ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null) => {
-    var inputsName = '';
-    let input: HTMLInputElement | HTMLTextAreaElement | null = null;
-    // let vall: string = "";
-    if (eventOrElement && "target" in eventOrElement) {
-      input = eventOrElement.target;
-      // vall = input.value;
-      inputsName = input.name;
-    } else {
-      input = eventOrElement;
-      // vall = input?.value ?? "";
-      inputsName = input?.name ?? "";
-    }
-    // setIsAddressInputFocused(true);   //zare_nk_050206_nokteh(chon baraye yek tage na araye lazemeh na object)
-    setIsAddressFormInputsFocused((cur) => {  //zare_nk_050206_nokteh(chon baraye chandin tage object gozashtim)
-      return (
-        { ...cur, [inputsName]: true }
-      );
-    });
-  };
-
-  ////zare_nk_050206_nokteh001_st(yek rooydade moshtarak baraye chandin tag(voroodiye chandin tag ro migireh, khoroojiye chandin tag ro mideh))
-  const handleAddressFormInputsBlur = (eventOrElement: ChangeEvent<HTMLInputElement> | HTMLInputElement | ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null) => {
-    var inputsName = '';
-    let input: HTMLInputElement | HTMLTextAreaElement | null = null;
-    // let vall: string = "";
-    if (eventOrElement && "target" in eventOrElement) {
-      input = eventOrElement.target;
-      // vall = input.value;
-      inputsName = input.name;
-    } else {
-      input = eventOrElement;
-      // vall = input?.value ?? "";
-      inputsName = input?.name ?? "";
-    }
-    // setIsAddressInputFocused(true);
-    setIsAddressFormInputsFocused((cur) => {
-      return (
-        { ...cur, [inputsName]: false }
-      );
-    });
-  };
-  ////zare_nk_050206_nokteh001_end(yek rooydade moshtarak baraye chandin tag(voroodiye chandin tag ro migireh, khoroojiye chandin tag ro mideh))
-
-  ////zare_nk_050206_nokteh002_st(yek rooydade ekhtesasi baraye yek tag(voroodiye yek tag ro migireh, khoroojiye yek tag ro mideh))
-  ////zare_nk_050201_commented_st
-  // const handleAddressInputFocus = () => {
-  //   // setIsInputFocused(true);
-  //   setIsAddressInputFocused(true);
-  // };
-
-  // const handleAddressInputBlur = () => {
-  //   // setIsInputFocused(false);
-  //   setIsAddressInputFocused(false);
-  // };
-
-  // const handlePelakInputFocus = () => {
-  //   setIsPelakInputFocused(true);
-  // };
-
-  // const handlePelakInputBlur = () => {
-  //   setIsPelakInputFocused(false);
-  // };
-
-  // const handleVahedInputFocus = () => {
-  //   setIsVahedInputFocused(true);
-  // };
-
-  // const handleVahedInputBlur = () => {
-  //   setIsVahedInputFocused(false);
-  // };
-
-  // const handleAddressNameInputFocus = () => {
-  //   setIsAddressNameInputFocused(true);
-  // };
-
-  // const handleAddressNameInputBlur = () => {
-  //   setIsAddressNameInputFocused(false);
-  // };
-  ////zare_nk_050206_nokteh002_end(yek rooydade ekhtesasi baraye yek tag(voroodiye yek tag ro migireh, khoroojiye yek tag ro mideh))
-
-  const refForSaveAddressFormInputsBtn = useRef<HTMLButtonElement | null>(null);
-  const [isDisabledsaveAddressFormInputsBtn, setIsDisabledsaveAddressFormInputsBtn] =
-    useState(true);
-
-  ////zare_nk_050206_nokteh002(yek rooydade ekhtesasi baraye yek tag(voroodiye yek tag ro migireh, khoroojiye yek tag ro mideh))
-  // function addressMatnChanged(
-  //   eventOrElement: ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null
-  // ) { 
-  ////zare_nk_050206_nokteh002(yek rooydade moshtarak baraye chandin tag(voroodiye chandin tag ro migireh, khoroojiye chandin tag ro mideh))
-  function AddressFormInputsChanged(
-    eventOrElement: ChangeEvent<HTMLInputElement> | HTMLInputElement | ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null
-  ) {
-    var inputsName = '';
-    setError(null);
-    // let input: HTMLTextAreaElement | null = null;
-    let input: HTMLInputElement | HTMLTextAreaElement | null = null;
-    let vall: string = "";
-    if (eventOrElement && "target" in eventOrElement) {
-      input = eventOrElement.target;
-      vall = input.value;
-      inputsName = input.name;
-    } else {
-      input = eventOrElement;
-      vall = input?.value ?? "";
-      inputsName = input?.name ?? "";
-    }
-    // var pat = new RegExp("^[0]{1}[0123456789]{10}$");
-    // var isMobileNum = pat.test(vall);
-    if (!vall) {
-      // setIsAddressTextEmty(true);   //zare_nk_050206_nokteh002(yek state ekhtesasi baraye yek tag) 
-      setIsAddressFormInputsTextEmty((cur) => {    //zare_nk_050206_nokteh002(yek state moshtarak baraye chandin tag)
-        return (
-          { ...cur, [inputsName]: true }
-        );
-      });
-
-      if (input) {
-        input.classList.remove("valid");
-        input.classList.add("invalid");
-      }
-      // setAddressMatnError("ورود متن آدرس الزامی است");     //zare_nk_050206_nokteh002(yek state ekhtesasi baraye yek tag) 
-      setAddressFormInputsMatnError((cur) => {     //zare_nk_050206_nokteh002(yek state moshtarak baraye chandin tag)
-        return (
-          { ...cur, [inputsName]: 'این بخش را خالی نگذارید' }
-        );
-      });
-      ////zare_nk_050206_nokteh_st(in dastoorat dar in makan javab nemideh,baraye login chon har safhe faghat yek tage voroodi dasht javab midad)
-      // setIsDisabledsaveAddressFormInputsBtn(true);
-      // if (refForSaveAddressFormInputsBtn.current) {
-      //   refForSaveAddressFormInputsBtn.current.classList.add(Styles.disabledBtn);
-      //   refForSaveAddressFormInputsBtn.current.classList.remove(Styles.btn);
-      // }
-      ////zare_nk_050206_nokteh_end(in dastoorat dar in makan javab nemideh,baraye login chon har safhe faghat yek tage voroodi dasht javab midad)
-    }
-    // else if (!isMobileNum) {
-    //   setIsAddressTextEmty(false);
-    //   if (input) {
-    //     input.classList.remove("valid");
-    //     input.classList.add("invalid");
-    //   }
-    //   setAddressMatnError("فرمت متن آدرس وارده نادرست است");
-    // setAddressFormInputsMatnError((cur) => {
-    //   return (
-    //     { ...cur, [inputsName]: 'فرمت وارده اشتباه است' }
-    //   );
-    // });
-    ////zare_nk_050206_nokteh_st(in dastoorat dar in makan javab nemideh,baraye login chon har safhe faghat yek tage voroodi dasht javab midad)
-    //   setIsDisabledsaveAddressFormInputsBtn(true);
-    //   if (refForSaveAddressFormInputsBtn.current) {
-    //     refForSaveAddressFormInputsBtn.current.classList.add(Styles.disabledBtn);
-    //     refForSaveAddressFormInputsBtn.current.classList.remove(Styles.btn);
-    //   }
-    ////zare_nk_050206_nokteh_end(in dastoorat dar in makan javab nemideh,baraye login chon har safhe faghat yek tage voroodi dasht javab midad)
-    // } 
-    else {
-      // setIsAddressTextEmty(false);     //zare_nk_050206_nokteh002(yek state ekhtesasi baraye yek tag)  
-      setIsAddressFormInputsTextEmty((cur) => {   //zare_nk_050206_nokteh002(yek state moshtarak baraye chandin tag)
-        return (
-          { ...cur, [inputsName]: false }
-        );
-      });
-
-      if (input) {
-        input.classList.remove("invalid");
-        input.classList.add("valid");
-      }
-      // setAddressMatnError(null);
-      setAddressFormInputsMatnError((cur) => {
-        return (
-          { ...cur, [inputsName]: null }
-        );
-      });
-      ////zare_nk_050206_nokteh_st(in dastoorat dar in makan javab nemideh,baraye login chon har safhe faghat yek tage voroodi dasht javab midad)
-      // setIsDisabledsaveAddressFormInputsBtn(false);
-      // if (refForSaveAddressFormInputsBtn.current) {
-      //   refForSaveAddressFormInputsBtn.current.classList.remove(Styles.disabledBtn);
-      //   refForSaveAddressFormInputsBtn.current.classList.add(Styles.btn);
-      // }
-      ////zare_nk_050206_nokteh_end(in dastoorat dar in makan javab nemideh,baraye login chon har safhe faghat yek tage voroodi dasht javab midad)
-    }
-    if (input) {
-      // setAddressVal(input.value);
-      setAddressFormInputsVal((cur: any) => {  //zare_nk_050205_nokteh(noe any update she)
-        return (
-          { ...cur, [inputsName]: vall }
-        );
-      });
-    }
-
-    // const hasNotNullValue = Object.values(addressFormInputsMatnError).some(value => value !== null);
-    // console.log('050205-addressFormInputsMatnError: ' + JSON.stringify(addressFormInputsMatnError));
-    ////zare_nk_050206_nokteh_st(in dastoorat dar in makan entezar dashtim javab bedeh, chon chandin tage voroodi ro barresi mikoneh,vali chon addressFormInputsMatnError 
-    //// hanooz meghdar nagerefteh va dar rendere badi emel mishe,pas inja meghdare jadidi ke dadim balatar emal nashodeh,baraye dastresi be meghdare jadide state morede 
-    //// nazar az useEfffect(()=>{},[addressFormInputsMatnError]) estefadeh kardim ke dar rendere badi dastresi peyda mikoneh )
-    // if (hasNotNullValue) {
-    //   console.log('050205-hasNullValue');
-    //   setIsDisabledsaveAddressFormInputsBtn(true);
-    //   if (refForSaveAddressFormInputsBtn.current) {
-    //     refForSaveAddressFormInputsBtn.current.classList.add(Styles.disabledBtn);
-    //     refForSaveAddressFormInputsBtn.current.classList.remove(Styles.btn);
-    //   }
-    // }
-    // else {
-    //   console.log('050205-has not NullValue');
-    //   setIsDisabledsaveAddressFormInputsBtn(false);
-    //   if (refForSaveAddressFormInputsBtn.current) {
-    //     refForSaveAddressFormInputsBtn.current.classList.remove(Styles.disabledBtn);
-    //     refForSaveAddressFormInputsBtn.current.classList.add(Styles.btn);
-    //   }
-    // }
-    ////zare_nk_050206_nokteh_end(in dastoorat dar in makan entezar dashtim javab bedeh, chon chandin tage voroodi ro barresi mikoneh,vali chon addressFormInputsMatnError 
-    //// hanooz meghdar nagerefteh va dar rendere badi emel mishe,pas inja meghdare jadidi ke dadim balatar emal nashodeh,baraye dastresi be meghdare jadide state morede 
-    //// nazar az useEfffect(()=>{},[addressFormInputsMatnError]) estefadeh kardim ke dar rendere badi dastresi peyda mikoneh )
-  }
-
-  useEffect(() => {
-    const hasNotNullValue = Object.values(addressFormInputsMatnError).some(value => value !== null);
-    console.log('050205-addressFormInputsMatnError: ' + JSON.stringify(addressFormInputsMatnError));
-    ////zare_nk_050206_nokteh_st(in dastoorat dar in makan javab dad be khoobi)
-    if (hasNotNullValue) {
-      console.log('050205-hasNullValue');
-      setIsDisabledsaveAddressFormInputsBtn(true);
-      if (refForSaveAddressFormInputsBtn.current) {
-        refForSaveAddressFormInputsBtn.current.classList.add(Styles.disabledBtn);
-        refForSaveAddressFormInputsBtn.current.classList.remove(Styles.btn);
-      }
-    }
-    else {
-      console.log('050205-has not NullValue');
-      setIsDisabledsaveAddressFormInputsBtn(false);
-      if (refForSaveAddressFormInputsBtn.current) {
-        refForSaveAddressFormInputsBtn.current.classList.remove(Styles.disabledBtn);
-        refForSaveAddressFormInputsBtn.current.classList.add(Styles.btn);
-      }
-    }
-    ////zare_nk_050206_nokteh_end(in dastoorat dar in makan javab dad be khoobi)
-  }, [addressFormInputsMatnError]);
-
-  useEffect(() => {
-    ////zare_nk050206__olgu_st(baraye codhaye js dastresi be tagha negah dashtam)
-    // console.log('zare_nk_050118_AdressListComponentAdressListComponentAdressListComponentAdressListComponent');
-    // // const box = document.getElementById("box");
-    // // if (box) {
-    // //   const scrollHeight = box.scrollHeight;
-    // //   setHeightBox(scrollHeight + "px"); 
-    // // }
-    // var refForBoxElement = refForBox.current;
-    // if (refForBoxElement) {
-    //   const scrollHeight = refForBoxElement.scrollHeight;
-    //   // setHeightBox(scrollHeight + "px");  //zare_nk_050203_commented
-    // }
-    ////zare_nk050206__olgu_end(baraye codhaye js dastresi be tagha negah dashtam)
-  });
+  }); 
+ 
 
   const goToMap = () => {
     // router.push("/folder03?tab=comments2");
@@ -1009,158 +627,13 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
             }}>آدرس جدید</span>
           </div>
 
-
-
           {/* zare_nk_050206_added_addressHa_st(behtare dar componenti joda sedash bezanim ke maghadir ra ba api por koneh) */}
           <Adressescomponent
             responsedListFromApiSelectAddressList={responsedListFromApiSelectAddressList}
             isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}
             setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}
             showAddRemAddress={showAddRemAddress}
-          />
-          {/* <div style={{ display: 'flex', flexFlow: 'column', padding: '0px', margin: '0px', }}>
-
-            <div style={{
-              borderTop: '1px solid #2b364f14',
-              display: 'flex',
-              paddingBottom: '.75rem',
-              paddingTop: '.75rem',
-              gap: '.5rem',
-              justifyContent: 'space-between',
-              cursor: 'pointer',
-              height: 'min-content',
-              alignItems: 'center',
-            }}>
-
-              <button
-                id="closeAddresListBtn"
-                onClick={goToMap}
-                style={{
-                  backgroundColor: '#1b1c1d',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1) 
-                  fill: 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
-                  borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
-                  flex: '0 0 auto',
-                }}
-              >
-                <svg style={{ width: '18px', height: '18px' }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-[18px] w-[18px] fill-inherit"><g id="Location"><path id="Union" d="M11.99 2C7.34 2 3.5 5.72 3.5 10.32C3.5 12.64 4.34 14.79 5.73 16.61C7.25 18.62 9.13 20.37 11.27 21.75C11.8 22.09 12.24 22.07 12.73 21.75C14.85 20.37 16.74 18.62 18.27 16.61C19.66 14.79 20.5 12.63 20.5 10.32C20.5 5.72 16.66 2 11.99 2ZM11.99 13.33C10.45 13.33 9.19 12.12 9.19 10.58C9.19 9.04 10.45 7.78 11.99 7.78C13.53 7.78 14.8 9.05 14.8 10.58C14.8 12.11 13.53 13.33 11.99 13.33Z" fill="inherit"></path></g></svg>
-              </button>
-
-
-              <div
-                style={{
-                  paddingTop: '.5rem',
-                  display: 'flex',
-                  justifyContent: 'flex-start',
-                  alignItems: 'flex-start',
-                  flexFlow: 'column',
-                  flex: '1 1 0%',
-                  height: 'min-content',
-                  marginLeft: '.5rem',
-                }}
-              >
-                <span
-                  style={{
-                    color: '#1b1c1d',
-                    fontWeight: '500',
-                    fontSize: '.875rem',
-                    lineHeight: '1.25rem',
-                  }}
-                >خونه</span>
-                <p
-                  style={{
-                    color: '#1b1c1d',  //zare_nk_050206_nokteh(age entekhab nabasheh: color:#a5abb1)   
-                    fontSize: '.75rem',
-                    lineHeight: '1rem',
-                    marginBottom: '0px',
-                  }}
-                >خ. وحدت اسلامی، نرسیده به خ. مولوی، ک. غلامرضا زندی، خ. صالح زاده</p>
-              </div>
-
-
-              <button
-                id="closeAddresListBtn"
-                onClick={goToMap}
-                style={{
-                  // backgroundColor: '#1b1c1d',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1)  
-                  backgroundColor: 'white',
-                  borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
-                  flex: '0 0 auto',
-                }}
-              >
-                <svg style={{ width: '18px', height: '18px', fill: '#a5abb1', transform: 'rotate(90deg)', }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-[18px] fill-gray-500 rotate-90"><g id="Info menu"><path id="Union" fill="inherit" fill-rule="evenodd" clip-rule="evenodd" d="M5 14C6.10457 14 7 13.1046 7 12C7 10.8954 6.10457 10 5 10C3.89543 10 3 10.8954 3 12C3 13.1046 3.89543 14 5 14ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14ZM21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12Z"></path></g></svg>
-              </button>
-            </div>
-
-            <div style={{
-              borderTop: '1px solid #2b364f14',
-              display: 'flex',
-              paddingBottom: '.75rem',
-              paddingTop: '.75rem',
-              gap: '.5rem',
-              justifyContent: 'space-between',
-              cursor: 'pointer',
-              height: 'min-content',
-              alignItems: 'center',
-            }}>
-
-              <button
-                id="closeAddresListBtn"
-                onClick={goToMap}
-                style={{
-                  backgroundColor: 'eef0f1', // '#1b1c1d',  //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1)  
-                  fill: '#a5abb1', // 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
-                  borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
-                  flex: '0 0 auto',
-                }}
-              >
-                <svg style={{ width: '18px', height: '18px' }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-[18px] w-[18px] fill-inherit"><g id="Location"><path id="Union" d="M11.99 2C7.34 2 3.5 5.72 3.5 10.32C3.5 12.64 4.34 14.79 5.73 16.61C7.25 18.62 9.13 20.37 11.27 21.75C11.8 22.09 12.24 22.07 12.73 21.75C14.85 20.37 16.74 18.62 18.27 16.61C19.66 14.79 20.5 12.63 20.5 10.32C20.5 5.72 16.66 2 11.99 2ZM11.99 13.33C10.45 13.33 9.19 12.12 9.19 10.58C9.19 9.04 10.45 7.78 11.99 7.78C13.53 7.78 14.8 9.05 14.8 10.58C14.8 12.11 13.53 13.33 11.99 13.33Z" fill="inherit"></path></g></svg>
-              </button>
-              <div
-                style={{
-                  paddingTop: '.5rem',
-                  display: 'flex',
-                  justifyContent: 'flex-start',
-                  alignItems: 'flex-start',
-                  flexFlow: 'column',
-                  flex: '1 1 0%',
-                  height: 'min-content',
-                  marginLeft: '.5rem',
-                }}
-              >
-                <span
-                  style={{
-                    color: '#a5abb1', // '#1b1c1d',  //zare_nk_050206_nokteh(age entekhab nabasheh: color:#a5abb1)
-                    fontWeight: '500',
-                    fontSize: '.875rem',
-                    lineHeight: '1.25rem',
-                  }}
-                >خونه</span>
-                <p
-                  style={{
-                    color: '#a5abb1', // '#1b1c1d',  //zare_nk_050206_nokteh(age entekhab nabasheh: color:#a5abb1)  
-                    fontSize: '.75rem',
-                    lineHeight: '1rem',
-                    marginBottom: '0px',
-                  }}
-                >خ. وحدت اسلامی، نرسیده به خ. مولوی، ک. غلامرضا زندی، خ. صالح زاده</p>
-              </div>
-
-              <button
-                id="closeAddresListBtn"
-                onClick={goToMap}
-                style={{
-                  // backgroundColor: '#1b1c1d',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1)  
-                  backgroundColor: 'white',
-                  borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
-                  flex: '0 0 auto',
-                }}
-              >
-                <svg style={{ width: '18px', height: '18px', fill: '#a5abb1', transform: 'rotate(90deg)', }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-[18px] fill-gray-500 rotate-90"><g id="Info menu"><path id="Union" fill="inherit" fill-rule="evenodd" clip-rule="evenodd" d="M5 14C6.10457 14 7 13.1046 7 12C7 10.8954 6.10457 10 5 10C3.89543 10 3 10.8954 3 12C3 13.1046 3.89543 14 5 14ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14ZM21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12Z"></path></g></svg>              
-              </button>
-
-            </div>
-
-          </div> */}
+          /> 
           {/* zare_nk_050206_added_addressHa_end(behtare dar componenti joda sedash bezanim ke maghadir ra ba api por koneh) */}
         </div>
       </Box>
@@ -1244,25 +717,7 @@ export default function Page() {
 
   // const [apiSelectAddressList, SetApiSelectAddressList] = useState<SetApiSelectAddressListType[] | null>(null);  //zare_nk_050206_added(and zare_nk_050207_commented(baraye lafze karbordi))
   const [responsedListFromApiSelectAddressList, SetResponsedListFromApiSelectAddressList] = useState<responsedListFromApiSelectAddressListType[] | null>(null);  //zare_nk_050207_added(baraye lafze karbordi)
-
-  type AddressFormInputsType = {
-    Address: string;
-    pelak: string;
-    vahed: string;
-    addressName: string;
-    // onSquareClick: () => void;
-    // andis: number;
-    // refForBtn: React.RefObject<(HTMLButtonElement | null)[]>;
-    // className?: string;
-  };
-
-  const [addressFormInputsVal, setAddressFormInputsVal] = useState<AddressFormInputsType>({
-    Address: '',
-    pelak: '',
-    vahed: '',
-    addressName: '',
-  });
-
+ 
   const router = useRouter();
 
   const goToLogin = () => {
@@ -1276,423 +731,6 @@ export default function Page() {
     // redirect("/login");
     router.replace("/location");
   };
-
-  useEffect(() => {
-    var s = document.getElementById('tabIndexOne-in-LayoutWrapper')?.id;
-    // alert('s: ' + s);
-  })
-
-  async function saveAddress(isOnline: boolean) {
-    // if (!feature) {
-    //   return;
-    // }
-
-    // console.log('zare_nk_050110-reza02-feature.get("name").Y: ' + feature.get('name').Y + "-feature.get('name').X: " + feature.get('name').X +
-    //   '-mobileVal: ' + mobileVal + "-feature.get('name').Address: " + feature.get('name').Address);
-
-    // var errorFree = true;
-    // $('#anyInputInAdressLocationModal2 .MatnInput').each(function () {
-    //   if ($(this).attr('name') == '__RequestVerificationToken' || $(this).attr('name') == 'tahvilNistam') { return; }
-    //   if ($('#tahvilNistam').prop('checked') == false && ($(this).attr('name') == 'fName' || $(this).attr('name') == 'lName' || $(this).attr('name') == 'mobile')) {
-    //     return;
-    //   }
-    //   var valid = $(this).hasClass('valid');
-    //   var errorElement = $('.forError', $(this).parents('.contAndHoshdarCont'));
-    //   if (!valid) {
-    //     errorFree = false;
-    //     var vall = $(this).val();
-    //     if (!vall) {
-    //       $(errorElement).text('ورود این فیلد الزامی است');
-    //     }
-    //   }
-    // });
-    // if (!errorFree) {
-    //   return;
-    // }
-    // $('#sabtCoordiantInAdressLocationModal2').prop('disabled', true);  //zare_nk_041029_added 
-
-    // var localStorageParsedFortoken = JSON.parse(localStorage.getItem('token'));
-    // var FName = ''; var LName = ''; var Mobile = 0; var TahvilGirande = 0;
-    // if ($('#tahvilNistam').prop('checked') == true) {
-    //   var TahvilGirande = 1;
-    //   //FName = $('#fName').val(); LName = $('#lName').val(); Mobile = $('#mobile').val();   //zare_nk_030908_commented
-    //   FName = $('#fName').val(); LName = $('#lName').val(); Mobile = ($('#mobile').val().trim() != '' ? $('#mobile').val() : (document.edditAdderssId == '' ? 0 : parseInt($('#Mobile-' + document.edditAdderssId).text())));   //zare_nk_030908_added
-    // }
-    // //zare_nk_030908_added_st
-    // else {
-    //   Mobile = (document.edditAdderssId == '' ? 0 : parseInt($('#Mobile-' + document.edditAdderssId).text()));   //'#Mobile-' + Api_CreateAddressParams.IdAdress
-    // }
-    //zare_nk_030908_added_end
-    // var vahedVal = $('#vahed').val();
-    // vahedVal = fixNumbers(vahedVal);
-    // var Api_CreateAddressParams = {
-    //   'FName': FName,
-    //   'LName': LName,
-    //   'CodePosti': $('#CodePosti').val(),
-    //   'Pelak': parseInt($('#pelak').val()),
-    //   'Vahed': parseInt(vahedVal),
-    //   'Lat': feature.get('name').Y,
-    //   'Lon': feature.get('name').X,
-    //   'Mobile': Mobile, //age baraye baghiye gereftam
-    //   'Adress': /*feature.get('name').Address*/ $('#AddressMatni').val(),  //1808
-    //   'TahvilGirande': TahvilGirande,
-    //   'OnvanAdress': $('#OnvanAdress').val(),
-    // }
-    // if (document.edditAdderssId != '') {
-    //   Api_CreateAddressParams.IdAdress = document.edditAdderssId;
-    //   var urlForCreateOrEdit = PublicApiUrl + "User/Api_EditAddress";
-    // }
-    // else {
-    // var urlForCreateOrEdit = PublicApiUrl + "User/Api_CreateAddress";
-    // }
-
-    // $.ajax({
-    //   type: "post",
-    //   async: false,
-    //   url: urlForCreateOrEdit,
-    //   headers: {
-    //     'Authorization': 'Bearer ' + localStorageParsedFortoken,
-    //   },
-    //   data: JSON.stringify(Api_CreateAddressParams),
-    //   contentType: 'application/json',
-    //   dataType: 'json',
-    //   beforeSend: function (xhr) {
-    //     $('.holder').css('display', 'block');
-    //     $('.holder').addClass('opened');
-    //   },
-    //   error: function (e, ajaxOptions, thrownErrror) {
-    //     $('.holder').hide();
-    //     $('.holder').removeClass('opened');
-    //     checkForError401(e.status);
-    //     $('#mymodalForWarning').modal('show');
-    //     $('#mymodalForWarning .modal-body span').text('!متاسفانه ارتباط با سرور برقرار نشد');
-    //     $('#sabtCoordiantInAdressLocationModal2').prop('disabled', false);  //zare_nk_041029_added
-    //   },
-    //   success: function (dataa) {
-    //     var result = dataa;
-    //     if (result.status != 0) {
-    //       $('#mymodalForWarning').modal('show');
-    //       $('#mymodalForWarning .modal-header').addClass('btn-danger').removeClass('btn-success');
-    //       $('#mymodalForWarning .modal-body span').text(result.errors[0]);
-    //     }
-    //     else if (result.status == 0) {
-    //       if (document.edditAdderssId != '') {
-    //         var AddAddressVal = JSON.parse(localStorage.getItem('AddAddressVal'));
-    //         if (Api_CreateAddressParams.IdAdress == AddAddressVal.IdAddress) {
-    //           document.addressSatrSelect('satr-' + Api_CreateAddressParams.IdAdress, Api_CreateAddressParams.IdAdress, Api_CreateAddressParams.Adress, null, null, 1, null, event);  //idshobe==null
-    //         }
-    //       }
-    //       else {
-    //         var parsedData = JSON.parse(dataa.data);
-    //         document.addressSatrSelect('satr-' + parsedData[0].IdAdress, parsedData[0].IdAdress, parsedData[0].Adress, null, null, 1, null, event);//idshobe==null
-    //       }
-    //       //$('#AdressLocationModal2').modal('hide');  //zare_nk_030906_added
-    //       //$('#AdressLocationModal').modal('hide');  //zare_nk_030906_added
-    //       //$('#AdressModal').modal('hide');  //zare_nk_030906_added
-    //       //zare_nk_030908_added_st
-    //       if (document.edditAdderssId != '' && $('#addressSatrContInProfile').attr('id') != undefined) {  //zare_nk_030908_alan  //Adress-' + item.IdAdress   #addressSatrContInProfile
-    //         $('#addressSatrContInProfile #OnvanAdress-' + Api_CreateAddressParams.IdAdress).text(Api_CreateAddressParams.OnvanAdress);
-    //         $('#addressSatrContInProfile #Adress-' + Api_CreateAddressParams.IdAdress).text(Api_CreateAddressParams.Adress);
-    //         $('#addressSatrContInProfile #Mobile-' + Api_CreateAddressParams.IdAdress).text(Api_CreateAddressParams.Mobile);
-
-    //       }
-    //       else if ($('#addressSatrContInProfile').attr('id') != undefined) {
-    //         var resultData = JSON.parse(result.data);
-    //         Api_CreateAddressParams.Mobile = resultData[0].Mobile;
-    //         Api_CreateAddressParams.IdAdress = resultData[0].IdAdress;
-    //         $('#addressSatrContInProfile').append('' +
-    //           //'<div className="addressSatr" id="satr-' + Api_CreateAddressParams.IdAdress +    //zare_nk_030910_commented
-    //           '<div className="addressSatr satr-' + Api_CreateAddressParams.IdAdress + '" id="satr-' + Api_CreateAddressParams.IdAdress +    //zare_nk_030910_added
-    //           '" style="display:flex;flex-flow:column; border:2px solid #E7E7E7;padding:15px;margin-top:10px;border-radius:10px;" >' +
-
-    //           '<div style="display:flex;flex-flow:row; padding-bottom:15px;">' +
-    //           '<span style="margin-left:7px;">عنوان آدرس :</span>' +
-    //           '<span id="OnvanAdress-' + Api_CreateAddressParams.IdAdress + '" style="text-overflow: ellipsis;overflow: hidden;display: -webkit-box;-webkit-line-clamp: 2;line-clamp: 2;-webkit-box-orient: vertical;">' + (Api_CreateAddressParams.OnvanAdress == null ? '' : Api_CreateAddressParams.OnvanAdress) + '</span>' +
-    //           '</div>' +
-
-    //           '<div style="display:flex;flex-flow:row; padding-bottom:15px;">' +
-    //           '<span style="margin-left:7px;"><img src="https://img.tochikala.com/Icon/home/home-Icon.svg" style="width:20px;" alt="آدرس" /> </span>' +
-    //           '<span id="Adress-' + Api_CreateAddressParams.IdAdress + '" style="text-overflow: ellipsis;overflow: hidden;display: -webkit-box;-webkit-line-clamp: 2;line-clamp: 2;-webkit-box-orient: vertical;">' + Api_CreateAddressParams.Adress + '</span>' +
-    //           '</div>' +
-
-    //           '<div style="display:flex;flex-flow:row;justify-content:end;justify-items:end;margin-top: 5px;">' +
-    //           '<div style="flex: 0 0 auto;display:flex;flex-flow:row;"><span id="Mobile-' + Api_CreateAddressParams.IdAdress + '"  style="justify-self:end;">' + Api_CreateAddressParams.Mobile + '</span></div>' +
-    //           '<div style="flex:1 0 auto;display:flex;flex-flow:row;justify-content:end;">' +
-    //           '<div style=" margin-left:10px;">' +
-
-    //           '<a className="editAddress" href="#/" onclick="addressLinkClicked(true, true, ' + Api_CreateAddressParams.IdAdress + ')" className="vorsab text-right text-decoration-none d-inline-block rounded mr-1">' +
-    //           '<img src="https://img.tochikala.com/Icon/edit-Icon.svg" style="width:20px;" alt="ویرایش آدرس" />' +
-    //           '</a>' +
-
-    //           '</div>' +
-    //           '<div>' +
-    //           '<a className="deleteAddress" href="#/" onclick="hazfeAddress(\'satr-' + Api_CreateAddressParams.IdAdress + '\')" className="vorsab text-right text-decoration-none d-inline-block rounded mr-1">' +
-    //           '<img src="https://img.tochikala.com/Icon/RecycleBin.svg" style="width:20px;" alt="حذف آدرس" />' +
-    //           '</a>' +
-    //           '</div>' +
-    //           '</div>' +
-    //           '</div>' +
-
-    //           '</div>'
-    //         );
-    //       }
-
-    //       $('#AdressLocationModal2').modal('hide');  //zare_nk_030906_added
-    //       $('#AdressLocationModal').modal('hide');  //zare_nk_030906_added
-    //       $('#AdressModal').modal('hide');  //zare_nk_030906_added
-    //       //zare_nk_030908_added_st
-
-    //       //zare_nk_030908_commented_st
-    //       //if (document.IsProfilee == 0) {
-
-    //       //    //window.history.go(-1);  //zare_nk_030906_commented 
-    //       //    $('#AdressLocationModal2').modal('hide');  //zare_nk_030906_added
-    //       //    $('#AdressLocationModal').modal('hide');  //zare_nk_030906_added
-    //       //    $('#AdressModal').modal('hide');   //zare_nk_030906_added
-
-    //       //}
-    //       //else if (document.IsProfilee == 1) {
-
-    //       //    //location.href = "/Profile?IsAddressSec=true&IsOrderSec=false&IsprofilesDetSec=false";  //zare_nk_0630906_commented
-
-    //       //    $('#AdressLocationModal2').modal('hide');  //zare_nk_030906_added
-    //       //    $('#AdressLocationModal').modal('hide');  //zare_nk_030906_added
-    //       //    $('#AdressModal').modal('hide');  //zare_nk_030906_added
-
-    //       //    if (document.edditAdderssId != '' && $('#addressSatrContInProfile').attr('id')!= undefined) {  //zare_nk_030908_alan  //Adress-' + item.IdAdress   #addressSatrContInProfile
-    //       //        $('#addressSatrContInProfile #OnvanAdress-' + Api_CreateAddressParams.IdAdress).text(Api_CreateAddressParams.OnvanAdress);
-    //       //        $('#addressSatrContInProfile #Adress-' + Api_CreateAddressParams.IdAdress).text(Api_CreateAddressParams.Adress);
-
-    //       //        $('#addressSatrContInProfile #Mobile-' + Api_CreateAddressParams.IdAdress).text(Api_CreateAddressParams.Mobile);
-
-
-    //       //    }
-    //       //    else if ( $('#addressSatrContInProfile').attr('id') != undefined) {
-
-
-
-    //       //        var resultData = JSON.parse(result.data);
-    //       //        Api_CreateAddressParams.Mobile = resultData[0].Mobile;
-
-
-
-
-    //       //        $('#addressSatrContInProfile' ).append('' +
-    //       //            '<div className="addressSatr" id="satr-' + Api_CreateAddressParams.IdAdress +
-    //       //            '" style="display:flex;flex-flow:column; border:2px solid #E7E7E7;padding:15px;margin-top:10px;border-radius:10px;" >' +
-
-    //       //            '<div style="display:flex;flex-flow:row; padding-bottom:15px;">' +
-    //       //            '<span style="margin-left:7px;">عنوان آدرس :</span>' +
-    //       //            '<span id="OnvanAdress-' + Api_CreateAddressParams.IdAdress + '" style="text-overflow: ellipsis;overflow: hidden;display: -webkit-box;-webkit-line-clamp: 2;line-clamp: 2;-webkit-box-orient: vertical;">' + (Api_CreateAddressParams.OnvanAdress == null ? '' : Api_CreateAddressParams.OnvanAdress) + '</span>' +
-    //       //            '</div>' +
-
-    //       //            '<div style="display:flex;flex-flow:row; padding-bottom:15px;">' +
-    //       //            '<span style="margin-left:7px;"><img src="https://img.tochikala.com/Icon/home/home-Icon.svg" style="width:20px;" alt="آدرس" /> </span>' +
-    //       //            '<span id="Adress-' + Api_CreateAddressParams.IdAdress + '" style="text-overflow: ellipsis;overflow: hidden;display: -webkit-box;-webkit-line-clamp: 2;line-clamp: 2;-webkit-box-orient: vertical;">' + Api_CreateAddressParams.Adress + '</span>' +
-    //       //            '</div>' +
-
-    //       //            '<div style="display:flex;flex-flow:row;justify-content:end;justify-items:end;margin-top: 5px;">' +
-    //       //            '<div style="flex: 0 0 auto;display:flex;flex-flow:row;"><span style="justify-self:end;">' + Api_CreateAddressParams.Mobile  + '</span></div>' +
-    //       //            '<div style="flex:1 0 auto;display:flex;flex-flow:row;justify-content:end;">' +
-    //       //            '<div style=" margin-left:10px;">' +
-
-    //       //            '<a className="editAddress" href="#/" onclick="addressLinkClicked(true, true, ' + Api_CreateAddressParams.IdAdress + ')" className="vorsab text-right text-decoration-none d-inline-block rounded mr-1">' +
-    //       //            '<img src="https://img.tochikala.com/Icon/edit-Icon.svg" style="width:20px;" alt="ویرایش آدرس" />' +
-    //       //            '</a>'+
-
-    //       //            '</div>' +
-    //       //            '<div>' +
-    //       //            '<a className="deleteAddress" href="#/" onclick="hazfeAddress(\'satr-' + Api_CreateAddressParams.IdAdress + '\')" className="vorsab text-right text-decoration-none d-inline-block rounded mr-1">' +
-    //       //            '<img src="https://img.tochikala.com/Icon/RecycleBin.svg" style="width:20px;" alt="حذف آدرس" />' +
-    //       //            '</a>' +
-    //       //            '</div>' +
-    //       //            '</div>' +
-    //       //            '</div>' +
-
-    //       //            '</div>'
-    //       //        );
-
-    //       //    }
-    //       //}
-    //       //else {
-    //       //    console.log("document.IsProfileechiyeeeehhh????!!!!!");    
-    //       //}
-    //       //zare_nk_030908_commented_end
-
-    //       document.checkTokenAndOurStoresInScriptAbove(); //zare_nk_030911_added(for call checkTokenAndOurStoresInScriptAbove);
-    //     }
-    //     $('#sabtCoordiantInAdressLocationModal2').prop('disabled', true);  //zare_nk_041029_added
-    //     $('.holder').hide();
-    //     $('.holder').removeClass('opened');
-    //   }
-    // });
-    ////zare_nk_050110_added_st
-
-    let token = getCookie("token");
-    console.log('zare_nk_050110-token hala is: ' + getCookie("token"));
-    // if (typeof window !== "undefined") {
-    //   alert('hhhhhhhhhhhhhhh');
-    //   token = localStorage.getItem("Token") || "";
-    // }
-    console.log('zare_nk_050110-token: ' + token);
-    var Api_CreateAddressParams = null;
-    Api_CreateAddressParams = isOnline ? (
-      {
-        'FName': 'reza',
-        'LName': 'kavian',
-        'CodePosti': '1231231231',
-        'Pelak': addressFormInputsVal.pelak, // 1,
-        'Vahed': addressFormInputsVal.vahed, // 5,
-        'Lat': 36.5659904,  // feature.get('name').Y,
-        'Lon': 53.0586126,  // feature.get('name').X,
-        'Mobile': '09999999999',// mobileVal,
-        // 'Adress': /*feature.get('name').Address*/ $('#AddressMatni').val(),   
-        'Adress': addressFormInputsVal.Address, // 'dokhaniat',    // feature.get('name').Address, //feature.get('name').Address,
-        // 'TahvilGirande': TahvilGirande,
-        // 'OnvanAdress': $('#OnvanAdress').val(),
-      }
-    ) : ({
-      'FName': 'reza',
-      'LName': 'kavian',
-      'CodePosti': '1231231231',
-      'Pelak': 1,
-      'Vahed': 5,
-      'Lat': 36.5659904,  // feature.get('name').Y,
-      'Lon': 53.0586126,  // feature.get('name').X,
-      'Mobile': '09999999999',// mobileVal,
-      // 'Adress': /*feature.get('name').Address*/ $('#AddressMatni').val(),   
-      'Adress': 'dokhaniat',    // feature.get('name').Address, //feature.get('name').Address,
-      // 'TahvilGirande': TahvilGirande,
-      // 'OnvanAdress': $('#OnvanAdress').val(),
-    })
-    // var Api_CreateAddressParams = {
-    //   'FName': 'reza',
-    //   'LName': 'kavian',
-    //   'CodePosti': '1231231231',
-    //   'Pelak': addressFormInputsVal.pelak, // 1,
-    //   'Vahed': addressFormInputsVal.vahed, // 5,
-    //   'Lat': feature.get('name').Y,
-    //   'Lon': feature.get('name').X,
-    //   'Mobile': '09999999999',// mobileVal,
-    //   // 'Adress': /*feature.get('name').Address*/ $('#AddressMatni').val(),   
-    //   'Adress': addressFormInputsVal.Address, // 'dokhaniat',    // feature.get('name').Address, //feature.get('name').Address,
-    //   // 'TahvilGirande': TahvilGirande,
-    //   // 'OnvanAdress': $('#OnvanAdress').val(),
-    // }
-    let ApiUrl = "https://api.tochikala.com/api/";
-    // console.log('mobileVal: ' + mobileVal + '-newSmsVal: ' + newSmsVal);
-    const response = await fetch(ApiUrl + "User/Api_CreateAddress", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      // body: JSON.stringify({
-      //   Mobile: mobileVal, 
-      //   SmsCode: sms, 
-      //   Password: ""
-      // }),
-      body: JSON.stringify(Api_CreateAddressParams),
-    });
-    const data = await response.json();
-    ////zare_nk_050110-data: {"status":0,"message":"افزودن با موفقیت انجام شد","data":"[{\"IdAdress\":24749,\"IdUser\":10006,\"IdKeshvar\":null,\"IdShahr\":null,\"IdOstan\":null,\"Adress\":\"dokhaniat\",\"CodePosti\":\"1231231231\",\"Lon\":53.05861265277862770517,\"Lat\":36.56599047952488490409,\"Mobile\":9999999999,\"FName\":\"reza\",\"LName\":\"kavian\",\"IsDelete\":0,\"Vahed\":5,\"Pelak\":1,\"OnvanAdress\":null,\"FullCityName\":null,\"Keshvar\":null,\"Ostan\":null,\"Shahr\":null,\"Fullname\":\"reza kavian\"}]","errors":[]}
-    ////zare_nk_050110-data: {"status":-1,"message":"","data":null,"errors":["اطلاعات را کامل وارد کنید"]}
-
-    if (response.ok) {
-      console.log("zare_nk_050110-data: " + JSON.stringify(data));
-      //zare_nk_040218-data222: {"status":-8,"message":"","data":null,"errors":["52 دقیقه ی دیگر مجددا تلاش کنید"]}
-      //zare_nk_040218-data222:
-      // {"status":0,"message":"",
-      // "data":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjIwMTA5IiwiQ29kZU1vc2h0YXJpIjoiMjAxMDkiLCJNb2JpbGUiOiI5MzUxMDkxMjg3IiwiTmFtZU1vc2h0YXJpIjoiIiwibmJmIjoxNzQ2NzI1OTI4LCJleHAiOjE3NDczMzA3MjgsImlhdCI6MTc0NjcyNTkyOH0.9Jfv71v3D_s13gSyf3gXqgEfiXaV-lx93hDey4DSLM8"
-      // },"errors":[]}
-      if (data.status == 0) {
-        // let token = data.data.token;
-        //////zare_nk_040603_added_st 
-        //// // const secretKey = Buffer.from(
-        //// //   process.env.JWT_SECRET_BASE64!,
-        //// //   "base64"
-        //// // ).toString("utf-8");
-        //// // const decoded = jwt.verify(token, secretKey);
-        //// const decoded = jwt.decode(token) as JwtPayload | null;
-        //// console.log("040530-03-token: " + JSON.stringify(decoded));
-        ////zare_nk_040603_added_end        
-
-        // try {
-        ////zare_nk_041114_added_st(and commented. chon methode HttpContext.SignInAsync ra anjam mideh baraye online kardan be sabke HttpContext marboot be .net core c# 
-        // vali man ino nemikham chon hamin cookie token sakhtan baram kafiye be onvane amale online kardan va amale estelame online boodane karbar. dar zemn ma dar view haye c#
-        // ke nistim ba hamin emkanate HttpContext mesle(HttpContextAccessor.HttpContext!.User.Identity!.IsAuthenticated)baraye estelame online boodan estefadeh konim!
-        // pas az haman sakhte va vakeshiye cookie haviye token ke name token ra behesh dadam baraye moshakhas kardane online shodan va estelame online boodaanesh estefadeh mikonam
-        //va in kar ra dar methode verifyToken gonjandim)
-
-        //           let ApiUrl = "https://api.tochikala.com/api/";
-        // const responseValidationPost = await fetch(ApiUrl +"/User/ValidationPost", {
-        //             method: "POST",
-        //             headers: { "Content-Type": "application/json" },
-        //             body: JSON.stringify({ token }),
-        //           });
-        ////zare_nk_041114_added_end(and commented. chon methode HttpContext.SignInAsync rp anjam mideh baraye online kardan be sabke HttpContext marboot be .net core c# 
-        // vali man ino nemikham chon hamin cookie token sakhtan baram kafiye be onvane amale online kardan va amale estelame online boodane karbar. dar zemn ma dar view haye c#
-        // ke nistim ba hamin emkanate HttpContext mesle(HttpContextAccessor.HttpContext!.User.Identity!.IsAuthenticated)baraye estelame online boodan estefadeh konim!
-        // pas az haman sakhte va vakeshiye cookie haviye token ke name token ra behesh dadam baraye moshakhas kardane online shodan va estelame online boodaanesh estefadeh mikonam
-        //va in kar ra dar methode verifyToken gonjandim)
-
-        // const response = await fetch("/api/auth/verifyToken", {  //zare_nk_041115_nokteh(methode Api_LoginUser2 tavassote aghaye parsafar chek mishe dar morede dorostiye sms va zamane monghazi shodanesh,
-        //   //vali man mikham bedoonam tokeni ke methode Api_LoginUser2 be man mideh ba secretKey amn shodeh bashe,va projeye samte cllient hatman bayad kelide dastresi ro dashteh bashe ta kasi 
-        //   //ba sooeestefade token ro natooneh vakeshi koneh(masalan dar proje haye haker ha),pas az methode verifyToken ke ba dastoore jwt.verify az ma secretKey mikhad estefadeh kardam)
-        //   method: "POST",
-        //   headers: { "Content-Type": "application/json" },
-        //   body: JSON.stringify({ token }),
-        // });
-        // const data = await response.json();
-        // if (response.ok) {
-        //   console.log("zare_nk_040925-decodedToken: " + JSON.stringify(data.decoded));
-        //   ////zare_nk_040925-decodedToken: {"IdUser":"10006","Mobile":"9351091287","FullName":"رضا کاویان","Type":"User","nbf":1770193087,"exp":1772785087,"iat":1770193087}  //zare_nk_041115_nokteh(from api tochikala)
-        //   ////zare_nk_040925-decodedToken: {"unique_name":"20109","CodeMoshtari":"20109","Mobile":"9351091287","NameMoshtari":"","nbf":1750740741,"exp":1751345541,"iat":1750740741}  //zare_nk_041115_nokteh(from api testotmapi)
-
-        //   // const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString(); // 3 ساعت بعد //zare_nk_040219-nokteh(zamane monghazi ra khodam taein kardam)   //zare_nk_040305_updated(dasti ra az 3 be 30 tagheir dadam)
-        //   const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString();
-        //   //  const expires = data.decoded.exp;//zare_nk_040219-nokteh(zamane monghazi ra az dadeye parsafar taein kardam)
-        //   document.cookie = `token=${token}; path=/; expires=${expires}; secure; samesite=None`;
-        //   const redirect = getCookie("redirect") || "/";
-        //   document.cookie =
-        //     "redirect=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC"; // حذف کوکی
-        //   console.log('redirect iss: ' + getCookie("redirect"));
-        //   router.replace(redirect); //zare_nk_040228_commented(and zare_nk_040312 uncommented(chon safheh ro refresh nemikoneh va behtare ehtemalan))
-        //   // NextResponse.redirect(new URL("/login", request.url));//zare_nk_040228_added
-        //   // window.location.href = redirect;
-        //   // window.location.replace(redirect); //zare_nk_040312_commented(chon router.replace ya router.push safheh ro kamel refresh nemikonam behtare)
-        // } else {
-        //   document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-        //   document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-        //   setError("متاسفانه خطایی رخ داده است313:" + (data?.errorMessage ? ": " + data.errorMessage : ""));  //zare_nk_041107_added_tahlilshe(niaz bood??!!)
-        // }
-        // } catch (error) {
-        // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-        // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-        // console.error("zare_nk_040925-❌ خطااااااااااااااااااای JWT:", error);
-        // // setError("متاسفانه خطایی رخ داده است33:" + error);  //zare_nk_041107_commented
-        // ////zare_nk_041107_added_st
-        // if (error instanceof Error) {
-        //   setError("متاسفانه خطایی رخ داده است323:" + error.message);
-        // } else {
-        //   setError("متاسفانه خطایی رخ داده است343:" + String(error));
-        // }
-        // ////zare_nk_041107_added_end
-        // }
-      } else {
-        // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-        // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-        setError("متاسفانه خطایی رخ داده است34:" + data.errors);
-        console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
-      }
-    } else {
-      console.log("zare_nk_050110-!response.ok" + response.ok);
-      // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-      // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-      setError("متاسفانه خطایی رخ داده است35");
-    }
-    ////zare_nk_050110_added_end
-  }
 
   // const showDrawer = async () => {   //zare_nk_050207_commented(baraye lafze ahenatar)
   const showAddressListDrawer = async () => {     //zare_nk_050207_added(baraye lafze ahenatar)
@@ -1743,11 +781,6 @@ export default function Page() {
       // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
       setError("متاسفانه خطایی رخ داده است35");
     }
-
-
-
-
-
 
     console.log('zare_nk_050110-token hala is: ' + getCookie("token"));
     if (token) {
@@ -1810,9 +843,7 @@ export default function Page() {
           isEpmtyAdressList={isEpmtyAdressList}
           setIsEpmtyAdressList={setIsEpmtyAdressList}
           refForBox={refForBox}
-          saveAddress={saveAddress}
-          addressFormInputsVal={addressFormInputsVal}
-          setAddressFormInputsVal={setAddressFormInputsVal}
+          
           responsedListFromApiSelectAddressList={responsedListFromApiSelectAddressList}
 
           isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}           //zare_nk_050207_added

@@ -215,15 +215,19 @@ function BoxHtmlComponent({
   // const refForVahedInput = useRef<(HTMLInputElement | null)[]>([]);
   // const refForAddressNameInput = useRef<(HTMLInputElement | null)[]>([]);
   ////zare_nk_050201_commented_end
-  // const refForAddressFormInputs = useRef<(HTMLInputElement | HTMLTextAreaElement | null)[]>([]);   //zare_nk_050201_added
-  const refForAddressFormInputs = useRef<RefForAddressFormInputsType>({
+
+
+  // const refForAddressInput = useRef<(HTMLTextAreaElement | null)>(null); //zare_nk_050206_nokteh(chon baraye yek tage na araye lazemeh na object)
+  // const refForAddressFormInputs = useRef<(HTMLInputElement | HTMLTextAreaElement | null)[]>([]); //zare_nk_050206_nokteh(chon baraye chandin tage araye gozashtim)
+  const refForAddressFormInputs = useRef<RefForAddressFormInputsType>({  //zare_nk_050206_nokteh(chon baraye chandin tage object gozashtim)
     Address: null,
     pelak: null,
     vahed: null,
     addressName: null,
-  });   //zare_nk_050201_added
+  });
 
-  ////zare_nk_050201_added_st
+
+  ////zare_nk_050206_nokteh(yek rooydade moshtarak baraye chandin tag(voroodiye chandin tag ro migireh, khoroojiye chandin tag ro mideh))
   const handleAddressFormInputsFocus = (eventOrElement: ChangeEvent<HTMLInputElement> | HTMLInputElement | ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null) => {
     var inputsName = '';
     let input: HTMLInputElement | HTMLTextAreaElement | null = null;
@@ -244,6 +248,8 @@ function BoxHtmlComponent({
       );
     });
   };
+
+  ////zare_nk_050206_nokteh(yek rooydade moshtarak baraye chandin tag(voroodiye chandin tag ro migireh, khoroojiye chandin tag ro mideh))
   const handleAddressFormInputsBlur = (eventOrElement: ChangeEvent<HTMLInputElement> | HTMLInputElement | ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null) => {
     var inputsName = '';
     let input: HTMLInputElement | HTMLTextAreaElement | null = null;
@@ -267,7 +273,7 @@ function BoxHtmlComponent({
   ////zare_nk_050201_added_end
 
 
-  ////zare_nk_050201_commented_st
+  ////zare_nk_050206_nokteh002_st(yek rooydade ekhtesasi baraye yek tag(voroodiye yek tag ro migireh, khoroojiye yek tag ro mideh)) 
   // const handleAddressInputFocus = () => {
   //   // setIsInputFocused(true);
   //   setIsAddressInputFocused(true);
@@ -300,8 +306,8 @@ function BoxHtmlComponent({
 
   // const handleAddressNameInputBlur = () => {
   //   setIsAddressNameInputFocused(false);
-  // };
-  ////zare_nk_050201_commented_end
+  // }; 
+  ////zare_nk_050206_nokteh002_end(yek rooydade ekhtesasi baraye yek tag(voroodiye yek tag ro migireh, khoroojiye yek tag ro mideh))
 
 
   const refForSaveAddressFormInputsBtn = useRef<HTMLButtonElement | null>(null);
@@ -367,11 +373,11 @@ function BoxHtmlComponent({
   // }
 
 
-
+  ////zare_nk_050206_nokteh002(yek rooydade ekhtesasi baraye yek tag(voroodiye yek tag ro migireh, khoroojiye yek tag ro mideh))
   // function addressMatnChanged(
   //   eventOrElement: ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null
   // ) { 
-  console.log('050205-reRebdered Box');
+  ////zare_nk_050206_nokteh002(yek rooydade moshtarak baraye chandin tag(voroodiye chandin tag ro migireh, khoroojiye chandin tag ro mideh))
   function AddressFormInputsChanged(
     eventOrElement: ChangeEvent<HTMLInputElement> | HTMLInputElement | ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null
   ) {
@@ -495,6 +501,7 @@ function BoxHtmlComponent({
   useEffect(() => {
     const hasNotNullValue = Object.values(addressFormInputsMatnError).some(value => value !== null);
     console.log('050205-addressFormInputsMatnError: ' + JSON.stringify(addressFormInputsMatnError));
+    ////zare_nk_050206_nokteh_st(in dastoorat dar in makan javab dad be khoobi)
     if (hasNotNullValue) {
       console.log('050205-hasNullValue');
       setIsDisabledsaveAddressFormInputsBtn(true);
@@ -511,6 +518,7 @@ function BoxHtmlComponent({
         refForSaveAddressFormInputsBtn.current.classList.add(Styles.btn);
       }
     }
+    ////zare_nk_050206_nokteh_end(in dastoorat dar in makan javab dad be khoobi)
   }, [addressFormInputsMatnError]);
 
   ////zare_nk_050201_commented_st
@@ -2490,7 +2498,7 @@ export default function LocationPage() {
             >ادامه</button>
           </div>
           {/* zare_nk_050204_commented_st */}
-        {/*</>        
+          {/*</>        
          ) : (
         <>
           <div>
@@ -2499,9 +2507,9 @@ export default function LocationPage() {
         </>
           )} */}
           {/* zare_nk_050204_commented_end */}
-      </div>
+        </div>
 
-      {/* <div
+        {/* <div
           ref={refForBox}
           id="box"
           style={{
@@ -2524,26 +2532,26 @@ export default function LocationPage() {
             transition: 'height 3s ease',
             borderRadius: '20px 20px 0px 0px',
           }}> */}
-      {/* {boxHtml} */}
+        {/* {boxHtml} */}
 
-      {/* {!isEpmtyHeightBox &&  //zare_nk_050203_commented */}
+        {/* {!isEpmtyHeightBox &&  //zare_nk_050203_commented */}
 
-      <BoxHtmlComponent
-        // heightBox={heightBox}          //zare_nk_050203_commented
-        // setHeightBox={setHeightBox}    //zare_nk_050203_commented
-        isEpmtyHeightBox={isEpmtyHeightBox}
-        setIsEpmtyHeightBox={setIsEpmtyHeightBox}
-        refForBox={refForBox}
-        saveAddress={saveAddress}
-        addressFormInputsVal={addressFormInputsVal}
-        setAddressFormInputsVal={setAddressFormInputsVal}
-      />
-      {/* }  //zare_nk_050203_commented */}
+        <BoxHtmlComponent
+          // heightBox={heightBox}          //zare_nk_050203_commented
+          // setHeightBox={setHeightBox}    //zare_nk_050203_commented
+          isEpmtyHeightBox={isEpmtyHeightBox}
+          setIsEpmtyHeightBox={setIsEpmtyHeightBox}
+          refForBox={refForBox}
+          saveAddress={saveAddress}
+          addressFormInputsVal={addressFormInputsVal}
+          setAddressFormInputsVal={setAddressFormInputsVal}
+        />
+        {/* }  //zare_nk_050203_commented */}
 
 
-      {/* </div> */}
+        {/* </div> */}
 
-    </main >
+      </main >
       <footer></footer>
     </>
   );
