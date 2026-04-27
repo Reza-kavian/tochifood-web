@@ -444,35 +444,6 @@ export const AdressListComponent = function AdressListComponent({  //zare_nk_050
 
   const [error, setError] = useState<string | null>(null);
 
-  type AddressFormInputsMatnErrorType = {
-    Address: string | null;
-    pelak: string | null;
-    vahed: string | null;
-    addressName: string | null;
-  };
-
-  const [addressFormInputsMatnError, setAddressFormInputsMatnError] = useState<AddressFormInputsMatnErrorType>({
-    Address: '',
-    pelak: '',
-    vahed: '',
-    addressName: '',
-  });
-
-  type IsAddressFormInputsFocusedType = {
-    Address: boolean;
-    pelak: boolean;
-    vahed: boolean;
-    addressName: boolean;
-  };
-
-  const [isAddressFormInputsFocused, setIsAddressFormInputsFocused] = useState<IsAddressFormInputsFocusedType>({
-    Address: false,
-    pelak: false,
-    vahed: false,
-    addressName: false,
-  }); 
- 
-
   const goToMap = () => {
     // router.push("/folder03?tab=comments2");
     // redirect("/login");
