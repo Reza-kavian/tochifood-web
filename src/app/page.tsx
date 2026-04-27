@@ -105,73 +105,6 @@ export const Adressescomponent = function Adressescomponent({
 
   const [responsedListFromApiRemoveAddress, SetResponsedListFromApiRemoveAddress] = useState<responsedListFromApiRemoveAddressType | null>(null);  //zare_nk_050207_added
 
-
-  ////zare_nk_050207_added_st
-  const showAddressListDrawer = async () => {     //zare_nk_050207_added(baraye lafze ahenatar)
-
-    // setIsEpmtyAdressList(false);  //zare_nk_050205_comemnted
-    ////zare_nk_050205_added_st
-    let token = getCookie("token");
-
-    if (!token) {
-      alert('lotfan avval online shid');
-      setError("lotfan avval online shid");
-      return;
-    }
-
-    let ApiUrl = "https://api.tochikala.com/api/";
-    const response = await fetch(ApiUrl + "User/Api_SelectAddress", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify({}),
-    });
-    const data = await response.json();
-
-    if (response.ok) {
-      console.log("zare_nk_050206-data: " + JSON.stringify(data));
-      if (data.status == 0) {
-        var parsedList = JSON.parse(data.data.list);
-        console.log("zare_nk_050206-parsedList1: " + parsedList[0].Adress);
-        console.log("zare_nk_050206-parsedList2: " + parsedList[1].Adress);
-        setIsEpmtyAdressList(false);  //zare_nk_050206_added
-
-        // SetApiSelectAddressList(() => {  
-        SetResponsedListFromApiSelectAddressList(() => {
-          return parsedList
-        })
-
-      } else {
-        // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-        // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-        setError("متاسفانه خطایی رخ داده است34:" + data.errors);
-        console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
-      }
-    } else {
-      console.log("zare_nk_050110-!response.ok" + response.ok);
-      // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-      // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-      setError("متاسفانه خطایی رخ داده است35");
-    }
-
-
-
-
-
-
-    console.log('zare_nk_050110-token hala is: ' + getCookie("token"));
-    if (token) {
-      setIsEpmtyAdressList(false);
-    }
-    else {
-      alert('lotfan avval online shid');
-    }
-    ////zare_nk_050205_added_end
-  }
-  ////zare_nk_050207_added_end
-
   const goToEdditAddressMap = (IdAdress: number) => {  //zare_nk_050207_added  
     // router.push("/folder03?tab=comments2");
     // redirect("/login");
@@ -351,127 +284,12 @@ export const ShowAddRemAddressComponent = function AdressListComponent({  //zare
   // const [error, setError] = useState<string | null>(null);  //zare_nk_050207_commented
   const [errorInShowAddRemAddressComponent, setErrorInShowAddRemAddressComponent] = useState<string | null>(null);    //zare_nk_050207_added
 
-  ////zare_nk_050207_commented_st(ezafi ke az componente AdressListComponent copy shod)
-  // type AddressFormInputsMatnErrorType = {
-  //   Address: string | null;
-  //   pelak: string | null;
-  //   vahed: string | null;
-  //   addressName: string | null;
-  // };
-
-  // const [addressFormInputsMatnError, setAddressFormInputsMatnError] = useState<AddressFormInputsMatnErrorType>({
-  //   Address: '',
-  //   pelak: '',
-  //   vahed: '',
-  //   addressName: '',
-  // });
-
-  // type IsAddressFormInputsFocusedType = {
-  //   Address: boolean;
-  //   pelak: boolean;
-  //   vahed: boolean;
-  //   addressName: boolean;
-  // };
-
-  // const [isAddressFormInputsFocused, setIsAddressFormInputsFocused] = useState<IsAddressFormInputsFocusedType>({
-  //   Address: false,
-  //   pelak: false,
-  //   vahed: false,
-  //   addressName: false,
-  // });
-
-  // type IsAddressFormInputsTextType = {
-  //   Address: boolean;
-  //   pelak: boolean;
-  //   vahed: boolean;
-  //   addressName: boolean;
-  // };
-
-  // // const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<boolean[]>(Array(4).fill(true));   //zare_nk_050201_added   
-  // const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<IsAddressFormInputsTextType>({
-  //   Address: true,
-  //   pelak: true,
-  //   vahed: true,
-  //   addressName: true,
-  // });
-
-
-  // type RefForAddressFormInputsType = {
-  //   Address: HTMLTextAreaElement | null;
-  //   pelak: HTMLInputElement | null;
-  //   vahed: HTMLInputElement | null;
-  //   addressName: HTMLInputElement | null;
-  //   // onSquareClick: () => void;
-  //   // andis: number;
-  //   // refForBtn: React.RefObject<(HTMLButtonElement | null)[]>;
-  //   // className?: string;
-  // };
-
-  // // const refForAddressInput = useRef<(HTMLTextAreaElement | null)>(null); //zare_nk_050206_nokteh(chon baraye yek tage na araye lazemeh na object)
-  // // const refForAddressFormInputs = useRef<(HTMLInputElement | HTMLTextAreaElement | null)[]>([]); //zare_nk_050206_nokteh(chon baraye chandin tage araye gozashtim)
-  // const refForAddressFormInputs = useRef<RefForAddressFormInputsType>({  //zare_nk_050206_nokteh(chon baraye chandin tage object gozashtim)
-  //   Address: null,
-  //   pelak: null,
-  //   vahed: null,
-  //   addressName: null,
-  // });
-
-  // const handleAddressFormInputsFocus = (eventOrElement: ChangeEvent<HTMLInputElement> | HTMLInputElement | ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null) => {
-  //   var inputsName = '';
-  //   let input: HTMLInputElement | HTMLTextAreaElement | null = null;
-  //   // let vall: string = "";
-  //   if (eventOrElement && "target" in eventOrElement) {
-  //     input = eventOrElement.target;
-  //     // vall = input.value;
-  //     inputsName = input.name;
-  //   } else {
-  //     input = eventOrElement;
-  //     // vall = input?.value ?? "";
-  //     inputsName = input?.name ?? "";
-  //   }
-  //   // setIsAddressInputFocused(true);   //zare_nk_050206_nokteh(chon baraye yek tage na araye lazemeh na object)
-  //   setIsAddressFormInputsFocused((cur) => {  //zare_nk_050206_nokteh(chon baraye chandin tage object gozashtim)
-  //     return (
-  //       { ...cur, [inputsName]: true }
-  //     );
-  //   });
-  // };
-
-  // ////zare_nk_050206_nokteh001_st(yek rooydade moshtarak baraye chandin tag(voroodiye chandin tag ro migireh, khoroojiye chandin tag ro mideh))
-  // const handleAddressFormInputsBlur = (eventOrElement: ChangeEvent<HTMLInputElement> | HTMLInputElement | ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null) => {
-  //   var inputsName = '';
-  //   let input: HTMLInputElement | HTMLTextAreaElement | null = null;
-  //   // let vall: string = "";
-  //   if (eventOrElement && "target" in eventOrElement) {
-  //     input = eventOrElement.target;
-  //     // vall = input.value;
-  //     inputsName = input.name;
-  //   } else {
-  //     input = eventOrElement;
-  //     // vall = input?.value ?? "";
-  //     inputsName = input?.name ?? "";
-  //   }
-  //   // setIsAddressInputFocused(true);
-  //   setIsAddressFormInputsFocused((cur) => {
-  //     return (
-  //       { ...cur, [inputsName]: false }
-  //     );
-  //   });
-  // };
-  // ////zare_nk_050206_nokteh001_end(yek rooydade moshtarak baraye chandin tag(voroodiye chandin tag ro migireh, khoroojiye chandin tag ro mideh))
-
-  ////zare_nk_050207_commented_end(ezafi ke az componente AdressListComponent copy shod)
-
-
   // const refForSaveAddressFormInputsBtn = useRef<HTMLButtonElement | null>(null);  //zare_nk_050207_commented
+ 
   const refForEditAddressBtn = useRef<HTMLButtonElement | null>(null);  //zare_nk_050207_added
 
   // const [isDisabledsaveAddressFormInputsBtn, setIsDisabledsaveAddressFormInputsBtn] =  useState(true);  //zare_nk_050207_commented
   const [isDisabledEditAddressBtn, setIsDisabledEditAddressBtn] = useState(false);  //zare_nk_050207_added(in state contorole disabled bodan ya naboodane dokmeye eddite address ezafi va bimorede,va hamvareh ehtemalan enable bayad bashe)
-
-
-  ////zare_nk_050207_nokteh(kolli methode ezafi inja comment shod chon alaki az componente AdressListComponent copy shodand inja)
-
 
   // const goToMap = () => {  //zare_nk_050207_commented
   const goToEdditAddressMap = () => {  //zare_nk_050207_added  
@@ -479,8 +297,6 @@ export const ShowAddRemAddressComponent = function AdressListComponent({  //zare
     // redirect("/login");
     router.replace("/edditAddressLocation");  //zare_nk_050207_nokteh(in safheye edditAddressLocation ezafeh beshe(dar tapsiFood esmesh safheye edit-address hast))
   };
-
-
 
   return (<>
     <Drawer
