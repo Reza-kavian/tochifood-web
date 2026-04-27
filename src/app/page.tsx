@@ -83,18 +83,24 @@ function getCookie(name: any) {
 }
 
 type AdressescomponentType = {
-  apiSelectAddressList: SetApiSelectAddressListType[] | null;  //zare_nk_050206_added
+  responsedListFromApiSelectAddressList: responsedListFromApiSelectAddressListType[] | null;  //zare_nk_050206_added
+
+  isEpmtyShowAddRemAddressList: boolean;    //zare_nk_050207_added
+  setIsEpmtyShowAddRemAddressList: React.Dispatch<React.SetStateAction<boolean>>;    //zare_nk_050207_added
+  showAddRemAddress: () => void;   //zare_nk_050207_added
 };
 
 ////zare_nk_050206_added_st
 export const Adressescomponent = function Adressescomponent({
   apiSelectAddressList,
-}: AdressListComponentType) {
+
+  isEpmtyShowAddRemAddressList,     //zare_nk_050207_added
+  setIsEpmtyShowAddRemAddressList,   //zare_nk_050207_added
+  showAddRemAddress,   //zare_nk_050207_added
+}: AdressescomponentType) {
 
   return (<>
     <div style={{ display: 'flex', flexFlow: 'column', padding: '0px', margin: '0px', }}>
-
-
       {apiSelectAddressList?.map((item, index) => {
         return (
           <div style={{
@@ -142,8 +148,8 @@ export const Adressescomponent = function Adressescomponent({
                 }}
               >
                 {/* خونه */}
-                {item.OnvanAdress?item.OnvanAdress:'خونه'}
-                </span>
+                {item.OnvanAdress ? item.OnvanAdress : 'خونه'}
+              </span>
               <p
                 style={{
                   color: '#1b1c1d',  //zare_nk_050206_nokteh(age entekhab nabasheh: color:#a5abb1)   
@@ -154,12 +160,13 @@ export const Adressescomponent = function Adressescomponent({
               >
                 {/* خ. وحدت اسلامی، نرسیده به خ. مولوی، ک. غلامرضا زندی، خ. صالح زاده */}
                 {item.Adress}
-                </p>
+              </p>
             </div>
 
             <button
               id="closeAddresListBtn"
               // onClick={goToMap}
+              onClick={showAddRemAddress}
               style={{
                 // backgroundColor: '#1b1c1d',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1)  
                 backgroundColor: 'white',
@@ -169,7 +176,7 @@ export const Adressescomponent = function Adressescomponent({
             >
               <svg style={{ width: '18px', height: '18px', fill: '#a5abb1', transform: 'rotate(90deg)', }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-[18px] fill-gray-500 rotate-90"><g id="Info menu"><path id="Union" fill="inherit" fill-rule="evenodd" clip-rule="evenodd" d="M5 14C6.10457 14 7 13.1046 7 12C7 10.8954 6.10457 10 5 10C3.89543 10 3 10.8954 3 12C3 13.1046 3.89543 14 5 14ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14ZM21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12Z"></path></g></svg>
             </button>
-          </div> 
+          </div>
         )
       })}
 
@@ -315,6 +322,497 @@ export const Adressescomponent = function Adressescomponent({
 }
 ////zare_nk_050206_added_end
 
+////zare_nk_050207_added_st(for ShowAddRemAddressList)
+type ShowAddRemAddressComponentType = {
+  // isEpmtyAdressList: boolean;    //zare_nk_050207_commented
+  // setIsEpmtyAdressList: React.Dispatch<React.SetStateAction<boolean>>;    //zare_nk_050207_commented
+  refForShowAddRemAddressBox: RefObject<HTMLDivElement | null>;
+  // saveAddress: (isOnline: boolean) => void;    //zare_nk_050207_commented
+  EditAddress: (isOnline: boolean) => void;
+  RemoveAddress: (isOnline: boolean) => void;
+
+  // addressFormInputsVal: any;       //zare_nk_050207_commented
+  // setAddressFormInputsVal: React.Dispatch<React.SetStateAction<any>>;       //zare_nk_050207_commented
+
+  // responsedListFromApiSelectAddressList: responsedListFromApiSelectAddressListType[] | null;      //zare_nk_050207_commented
+  apiEditAddress:responsedListFromApiEditAddressType     | null;  //zare_nk_050206_added
+  apiRemoveAddress:responsedListFromApiRemoveAddressType  | null;  //zare_nk_050206_added
+
+  isEpmtyShowAddRemAddress: boolean;    //zare_nk_050207_added
+  setIsEpmtyShowAddRemAddress: React.Dispatch<React.SetStateAction<boolean>>;    //zare_nk_050207_added
+  showAddRemAddress: () => void;   //zare_nk_050207_added
+};
+
+// export function AdressListComponent({  //zare_nk_050206_commented
+export const ShowAddRemAddressComponent = function AdressListComponent({  //zare_nk_050206_added
+  // isEpmtyAdressList,    //zare_nk_050207_commented
+  // setIsEpmtyAdressList,    //zare_nk_050207_commented
+  refForShowAddRemAddressBox,
+  // saveAddress,    //zare_nk_050207_commented
+  EditAddress,
+  RemoveAddress,
+
+  // addressFormInputsVal,     //zare_nk_050206_nokteh(inpute haye form inja ke nadarim,in felan olgu bemooneh
+  // setAddressFormInputsVal,   //zare_nk_050206_nokteh(inpute haye form inja ke nadarim,in felan olgu bemooneh
+
+  // responsedListFromApiSelectAddressList: responsedListFromApiSelectAddressListType[] | null;      //zare_nk_050207_commented
+  apiEditAddress,
+  apiRemoveAddress,
+
+  isEpmtyShowAddRemAddress,     //zare_nk_050207_added
+  setIsEpmtyShowAddRemAddress,   //zare_nk_050207_added
+  showAddRemAddress,   //zare_nk_050207_added
+
+}: ShowAddRemAddressComponentType) {
+  // console.log('zare_nk_050126_AdressListComponent called!!-isEpmtyAdressList: ' + isEpmtyAdressList);
+
+  const router = useRouter();
+
+  // const [error, setError] = useState<string | null>(null);  //zare_nk_050207_commented
+  const [errorInShowAddRemAddressComponent, setErrorInShowAddRemAddressComponent] = useState<string | null>(null);    //zare_nk_050207_added
+
+  type AddressFormInputsMatnErrorType = {
+    Address: string | null;
+    pelak: string | null;
+    vahed: string | null;
+    addressName: string | null;
+  };
+
+  const [addressFormInputsMatnError, setAddressFormInputsMatnError] = useState<AddressFormInputsMatnErrorType>({
+    Address: '',
+    pelak: '',
+    vahed: '',
+    addressName: '',
+  });
+
+  type IsAddressFormInputsFocusedType = {
+    Address: boolean;
+    pelak: boolean;
+    vahed: boolean;
+    addressName: boolean;
+  };
+
+  const [isAddressFormInputsFocused, setIsAddressFormInputsFocused] = useState<IsAddressFormInputsFocusedType>({
+    Address: false,
+    pelak: false,
+    vahed: false,
+    addressName: false,
+  });
+
+  type IsAddressFormInputsTextType = {
+    Address: boolean;
+    pelak: boolean;
+    vahed: boolean;
+    addressName: boolean;
+  };
+
+  // const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<boolean[]>(Array(4).fill(true));   //zare_nk_050201_added   
+  const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<IsAddressFormInputsTextType>({
+    Address: true,
+    pelak: true,
+    vahed: true,
+    addressName: true,
+  });
+
+  type RefForAddressFormInputsType = {
+    Address: HTMLTextAreaElement | null;
+    pelak: HTMLInputElement | null;
+    vahed: HTMLInputElement | null;
+    addressName: HTMLInputElement | null;
+    // onSquareClick: () => void;
+    // andis: number;
+    // refForBtn: React.RefObject<(HTMLButtonElement | null)[]>;
+    // className?: string;
+  };
+
+  // const refForAddressInput = useRef<(HTMLTextAreaElement | null)>(null); //zare_nk_050206_nokteh(chon baraye yek tage na araye lazemeh na object)
+  // const refForAddressFormInputs = useRef<(HTMLInputElement | HTMLTextAreaElement | null)[]>([]); //zare_nk_050206_nokteh(chon baraye chandin tage araye gozashtim)
+  const refForAddressFormInputs = useRef<RefForAddressFormInputsType>({  //zare_nk_050206_nokteh(chon baraye chandin tage object gozashtim)
+    Address: null,
+    pelak: null,
+    vahed: null,
+    addressName: null,
+  });
+
+  const handleAddressFormInputsFocus = (eventOrElement: ChangeEvent<HTMLInputElement> | HTMLInputElement | ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null) => {
+    var inputsName = '';
+    let input: HTMLInputElement | HTMLTextAreaElement | null = null;
+    // let vall: string = "";
+    if (eventOrElement && "target" in eventOrElement) {
+      input = eventOrElement.target;
+      // vall = input.value;
+      inputsName = input.name;
+    } else {
+      input = eventOrElement;
+      // vall = input?.value ?? "";
+      inputsName = input?.name ?? "";
+    }
+    // setIsAddressInputFocused(true);   //zare_nk_050206_nokteh(chon baraye yek tage na araye lazemeh na object)
+    setIsAddressFormInputsFocused((cur) => {  //zare_nk_050206_nokteh(chon baraye chandin tage object gozashtim)
+      return (
+        { ...cur, [inputsName]: true }
+      );
+    });
+  };
+
+  ////zare_nk_050206_nokteh001_st(yek rooydade moshtarak baraye chandin tag(voroodiye chandin tag ro migireh, khoroojiye chandin tag ro mideh))
+  const handleAddressFormInputsBlur = (eventOrElement: ChangeEvent<HTMLInputElement> | HTMLInputElement | ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null) => {
+    var inputsName = '';
+    let input: HTMLInputElement | HTMLTextAreaElement | null = null;
+    // let vall: string = "";
+    if (eventOrElement && "target" in eventOrElement) {
+      input = eventOrElement.target;
+      // vall = input.value;
+      inputsName = input.name;
+    } else {
+      input = eventOrElement;
+      // vall = input?.value ?? "";
+      inputsName = input?.name ?? "";
+    }
+    // setIsAddressInputFocused(true);
+    setIsAddressFormInputsFocused((cur) => {
+      return (
+        { ...cur, [inputsName]: false }
+      );
+    });
+  };
+  ////zare_nk_050206_nokteh001_end(yek rooydade moshtarak baraye chandin tag(voroodiye chandin tag ro migireh, khoroojiye chandin tag ro mideh))
+
+  ////zare_nk_050206_nokteh002_st(yek rooydade ekhtesasi baraye yek tag(voroodiye yek tag ro migireh, khoroojiye yek tag ro mideh))
+  ////zare_nk_050201_commented_st
+  // const handleAddressInputFocus = () => {
+  //   // setIsInputFocused(true);
+  //   setIsAddressInputFocused(true);
+  // };
+
+  // const handleAddressInputBlur = () => {
+  //   // setIsInputFocused(false);
+  //   setIsAddressInputFocused(false);
+  // };
+
+  // const handlePelakInputFocus = () => {
+  //   setIsPelakInputFocused(true);
+  // };
+
+  // const handlePelakInputBlur = () => {
+  //   setIsPelakInputFocused(false);
+  // };
+
+  // const handleVahedInputFocus = () => {
+  //   setIsVahedInputFocused(true);
+  // };
+
+  // const handleVahedInputBlur = () => {
+  //   setIsVahedInputFocused(false);
+  // };
+
+  // const handleAddressNameInputFocus = () => {
+  //   setIsAddressNameInputFocused(true);
+  // };
+
+  // const handleAddressNameInputBlur = () => {
+  //   setIsAddressNameInputFocused(false);
+  // };
+  ////zare_nk_050206_nokteh002_end(yek rooydade ekhtesasi baraye yek tag(voroodiye yek tag ro migireh, khoroojiye yek tag ro mideh))
+
+  const refForSaveAddressFormInputsBtn = useRef<HTMLButtonElement | null>(null);
+  const [isDisabledsaveAddressFormInputsBtn, setIsDisabledsaveAddressFormInputsBtn] =
+    useState(true);
+
+
+  ////zare_nk_050207_nokteh(kolli methode ezafi inja comment shod chon alaki az componente AdressListComponent copy shodand inja)
+
+
+  const goToMap = () => {
+    // router.push("/folder03?tab=comments2");
+    // redirect("/login");
+    router.replace("/location");
+  };
+
+  return (<>
+    <Drawer
+      id="box"
+      // ref={refForBox}   //zare_nk_050207_commented
+      ref={refForShowAddRemAddressBox}  //zare_nk_050207_added
+
+      anchor="bottom"
+      // open={!isEpmtyAdressList}  //zare_nk_050207_commented
+      open={!isEpmtyShowAddRemAddress}  //zare_nk_050207_added
+
+      onClose={() => {
+        // setIsEpmtyAdressList(true);  //zare_nk_050207_commented
+        setIsEpmtyShowAddRemAddress(true);  //zare_nk_050207_added
+      }}
+      // hideBackdrop={true} //zare_nk_040502(albateh hideBackdrop={true} baes mishe alave bar hazfe tariye poshte drawer,ba click dar fazaye poshtesh,automat 
+      // basteh nashe va niaz be modiriate dastiye document.addEventListener dar useEffect dashteh bashim) 
+      slotProps={{
+        paper: {
+          sx: {
+            width: '450px', ////zare_nk_050206_added(chon Drawer dar DOM kharej az componente pedaresh mireh va be risheye body mire, pas 100% body ro migireh na 100% taghi
+            //// ke dar component beonvane tage pedaresh tarif kardim,pas bejaye width:100% majboorim dasti arze 450 ro behesh bedim)
+            ////zare_nk_050206_commented_st(baraye vasat raftane ofoghiye Drawer ke javab nadad(translate kar nakard,chon ba codehaye dakheliye Drawer MUI tadakhol dareh))
+            // left: '50%', 
+            // transform: 'translate(-50%, 0%)', 
+            ////zare_nk_050206_commented_end(baraye vasat raftane ofoghiye Drawer ke javab nadad(translate kar nakard,chon ba codehaye dakheliye Drawer MUI tadakhol dareh))
+            margin: '0 auto',  ////zare_nk_050206_added(baraye vasat raftane ofoghiye Drawer ke javab dad)
+            direction: 'rtl',  //zare_nk_050206_added
+            borderRadius: '20px 20px 0 0',
+            boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2)',
+            backgroundColor: 'white',
+          },
+        },
+        ////zare_nk_050204_nokteh(chon ba hideBackdrop={true} goftim range fazaya poshtesh ro nemikhaim tagheir bedim pas backdrop ro comment kardim)
+        backdrop: {
+          sx: {
+            backgroundColor: 'rgba(0,0,0,0.3)',
+          },
+        },
+      }}
+      ModalProps={{
+        keepMounted: true,
+      }}
+    >      
+      {errorInShowAddRemAddressComponent && <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>{errorInShowAddRemAddressComponent}</p>}
+     
+      <Box sx={{
+      }}>
+        <div
+          // id="addressListHeader"
+          id="addRemAddressHeader" 
+
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column',
+            flex: '0 0 auto',
+            width: '100%',
+          }}
+        >
+          <div
+            style={{
+              opacity: '1',
+              backgroundColor: '#eaeaeb',
+              borderRadius: '20px',
+              flex: '0 0 auto',
+              width: '2.5rem',
+              height: '.25rem',
+              marginTop: '.75rem',
+            }}
+          ></div>
+
+          <div style={{ padding: '1rem', justifyContent: 'space-between', alignItems: 'center', flex: '0 0 auto', width: '100%', height: '3.5rem', display: 'flex', }}>
+            <span style={{ color: "#1b1c1d", fontSize: '16px', flex: '0 0 auto', }}>انتخاب آدرس</span>
+            <button
+              id="closeAddresListBtn"
+              onClick={() => {
+                setIsEpmtyAdressList(true);
+              }}
+              style={{
+                width: '32px', height: '32px', border: 'none', flex: '0 0 auto', display: "flex", flexFlow: "row", justifyContent: 'center',
+                justifyItems: 'center', alignItems: 'center', borderRadius: '9999px',
+              }}
+            >
+              <svg style={{ width: '1.25rem', height: '1.25rem' }} fill="#ff5900" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-6 fill-gray"><path fill-rule="evenodd" clip-rule="evenodd" d="M17.6565 7.75735L13.4138 12L17.6565 16.2426L16.2423 17.6568L11.9996 13.4142L7.75699 17.6568L6.34277 16.2426L10.5854 12L6.34277 7.75735L7.75699 6.34314L11.9996 10.5858L16.2423 6.34314L17.6565 7.75735Z" fill="inherit"></path></svg>
+            </button>
+          </div>
+
+        </div>
+
+        <div style={{
+          paddingBottom: '1.75rem', paddingLeft: '1rem', paddingRight: '1rem', flex: '1 1 0%', width: '100%', marginTop: '1rem',
+        }}>
+          <p style={{
+            color: '#63676e',
+            fontSize: '.875rem',
+            lineHeight: '1.25rem',
+            marginBottom: '.5rem',
+            // fontFamily:"IRANSansWeb_ms(adad_fa)",
+            // fontFamily:"IRANSansWeb_Medium(adad_fa)",
+          }}>
+            لطفا آدرس تحویل سفارش را انتخاب کنید.
+          </p>
+
+          <div style={{
+            gap: '.5rem', justifyContent: 'flex-start', alignItems: 'center', cursor: 'pointer', height: '3.5rem', display: 'flex',
+          }}>
+            <button
+              id="closeAddresListBtn"
+              onClick={goToMap}
+              style={{
+                backgroundColor: '#fff7eb',
+                width: '32px', height: '32px', border: 'none', flex: '0 0 auto', display: "flex",
+                flexFlow: "row", justifyContent: 'center', justifyItems: 'center', alignItems: 'center', borderRadius: '9999px',
+
+              }}
+            >
+              <svg style={{ height: ' 1.25rem', width: '1.25rem', fill: "#ff5900" }} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-5 fill-primary-600"><path d="M18 11.25H12.75V6C12.75 5.59 12.41 5.25 12 5.25C11.59 5.25 11.25 5.59 11.25 6V11.25H6C5.59 11.25 5.25 11.59 5.25 12C5.25 12.41 5.59 12.75 6 12.75H11.25V18C11.25 18.41 11.59 18.75 12 18.75C12.41 18.75 12.75 18.41 12.75 18V12.75H18C18.41 12.75 18.75 12.41 18.75 12C18.75 11.59 18.41 11.25 18 11.25Z" fill="inherit"></path></svg>
+            </button>
+            <span style={{
+              color: "#ff5900",
+              flex: '0 0 auto',
+              fontSize: '.875rem',
+              lineHeight: "1.25rem",
+            }}>آدرس جدید</span>
+          </div>
+
+          {/* zare_nk_050206_added_addressHa_st(behtare dar componenti joda sedash bezanim ke maghadir ra ba api por koneh) */}
+          <Adressescomponent
+            apiSelectAddressList={apiSelectAddressList}
+            isEpmtyShowAddRemAddressList={isEpmtyShowAddRemAddressList}
+            setIsEpmtyShowAddRemAddressList={setIsEpmtyShowAddRemAddressList}
+            showAddRemAddress={showAddRemAddress}
+          />
+          {/* <div style={{ display: 'flex', flexFlow: 'column', padding: '0px', margin: '0px', }}>
+
+            <div style={{
+              borderTop: '1px solid #2b364f14',
+              display: 'flex',
+              paddingBottom: '.75rem',
+              paddingTop: '.75rem',
+              gap: '.5rem',
+              justifyContent: 'space-between',
+              cursor: 'pointer',
+              height: 'min-content',
+              alignItems: 'center',
+            }}>
+
+              <button
+                id="closeAddresListBtn"
+                onClick={goToMap}
+                style={{
+                  backgroundColor: '#1b1c1d',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1) 
+                  fill: 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
+                  borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
+                  flex: '0 0 auto',
+                }}
+              >
+                <svg style={{ width: '18px', height: '18px' }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-[18px] w-[18px] fill-inherit"><g id="Location"><path id="Union" d="M11.99 2C7.34 2 3.5 5.72 3.5 10.32C3.5 12.64 4.34 14.79 5.73 16.61C7.25 18.62 9.13 20.37 11.27 21.75C11.8 22.09 12.24 22.07 12.73 21.75C14.85 20.37 16.74 18.62 18.27 16.61C19.66 14.79 20.5 12.63 20.5 10.32C20.5 5.72 16.66 2 11.99 2ZM11.99 13.33C10.45 13.33 9.19 12.12 9.19 10.58C9.19 9.04 10.45 7.78 11.99 7.78C13.53 7.78 14.8 9.05 14.8 10.58C14.8 12.11 13.53 13.33 11.99 13.33Z" fill="inherit"></path></g></svg>
+              </button>
+
+
+              <div
+                style={{
+                  paddingTop: '.5rem',
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  alignItems: 'flex-start',
+                  flexFlow: 'column',
+                  flex: '1 1 0%',
+                  height: 'min-content',
+                  marginLeft: '.5rem',
+                }}
+              >
+                <span
+                  style={{
+                    color: '#1b1c1d',
+                    fontWeight: '500',
+                    fontSize: '.875rem',
+                    lineHeight: '1.25rem',
+                  }}
+                >خونه</span>
+                <p
+                  style={{
+                    color: '#1b1c1d',  //zare_nk_050206_nokteh(age entekhab nabasheh: color:#a5abb1)   
+                    fontSize: '.75rem',
+                    lineHeight: '1rem',
+                    marginBottom: '0px',
+                  }}
+                >خ. وحدت اسلامی، نرسیده به خ. مولوی، ک. غلامرضا زندی، خ. صالح زاده</p>
+              </div>
+
+
+              <button
+                id="closeAddresListBtn"
+                onClick={goToMap}
+                style={{
+                  // backgroundColor: '#1b1c1d',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1)  
+                  backgroundColor: 'white',
+                  borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
+                  flex: '0 0 auto',
+                }}
+              >
+                <svg style={{ width: '18px', height: '18px', fill: '#a5abb1', transform: 'rotate(90deg)', }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-[18px] fill-gray-500 rotate-90"><g id="Info menu"><path id="Union" fill="inherit" fill-rule="evenodd" clip-rule="evenodd" d="M5 14C6.10457 14 7 13.1046 7 12C7 10.8954 6.10457 10 5 10C3.89543 10 3 10.8954 3 12C3 13.1046 3.89543 14 5 14ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14ZM21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12Z"></path></g></svg>
+              </button>
+            </div>
+
+            <div style={{
+              borderTop: '1px solid #2b364f14',
+              display: 'flex',
+              paddingBottom: '.75rem',
+              paddingTop: '.75rem',
+              gap: '.5rem',
+              justifyContent: 'space-between',
+              cursor: 'pointer',
+              height: 'min-content',
+              alignItems: 'center',
+            }}>
+
+              <button
+                id="closeAddresListBtn"
+                onClick={goToMap}
+                style={{
+                  backgroundColor: 'eef0f1', // '#1b1c1d',  //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1)  
+                  fill: '#a5abb1', // 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
+                  borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
+                  flex: '0 0 auto',
+                }}
+              >
+                <svg style={{ width: '18px', height: '18px' }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-[18px] w-[18px] fill-inherit"><g id="Location"><path id="Union" d="M11.99 2C7.34 2 3.5 5.72 3.5 10.32C3.5 12.64 4.34 14.79 5.73 16.61C7.25 18.62 9.13 20.37 11.27 21.75C11.8 22.09 12.24 22.07 12.73 21.75C14.85 20.37 16.74 18.62 18.27 16.61C19.66 14.79 20.5 12.63 20.5 10.32C20.5 5.72 16.66 2 11.99 2ZM11.99 13.33C10.45 13.33 9.19 12.12 9.19 10.58C9.19 9.04 10.45 7.78 11.99 7.78C13.53 7.78 14.8 9.05 14.8 10.58C14.8 12.11 13.53 13.33 11.99 13.33Z" fill="inherit"></path></g></svg>
+              </button>
+              <div
+                style={{
+                  paddingTop: '.5rem',
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  alignItems: 'flex-start',
+                  flexFlow: 'column',
+                  flex: '1 1 0%',
+                  height: 'min-content',
+                  marginLeft: '.5rem',
+                }}
+              >
+                <span
+                  style={{
+                    color: '#a5abb1', // '#1b1c1d',  //zare_nk_050206_nokteh(age entekhab nabasheh: color:#a5abb1)
+                    fontWeight: '500',
+                    fontSize: '.875rem',
+                    lineHeight: '1.25rem',
+                  }}
+                >خونه</span>
+                <p
+                  style={{
+                    color: '#a5abb1', // '#1b1c1d',  //zare_nk_050206_nokteh(age entekhab nabasheh: color:#a5abb1)  
+                    fontSize: '.75rem',
+                    lineHeight: '1rem',
+                    marginBottom: '0px',
+                  }}
+                >خ. وحدت اسلامی، نرسیده به خ. مولوی، ک. غلامرضا زندی، خ. صالح زاده</p>
+              </div>
+
+              <button
+                id="closeAddresListBtn"
+                onClick={goToMap}
+                style={{
+                  // backgroundColor: '#1b1c1d',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1)  
+                  backgroundColor: 'white',
+                  borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
+                  flex: '0 0 auto',
+                }}
+              >
+                <svg style={{ width: '18px', height: '18px', fill: '#a5abb1', transform: 'rotate(90deg)', }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-[18px] fill-gray-500 rotate-90"><g id="Info menu"><path id="Union" fill="inherit" fill-rule="evenodd" clip-rule="evenodd" d="M5 14C6.10457 14 7 13.1046 7 12C7 10.8954 6.10457 10 5 10C3.89543 10 3 10.8954 3 12C3 13.1046 3.89543 14 5 14ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14ZM21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12Z"></path></g></svg>              
+              </button>
+
+            </div>
+
+          </div> */}
+          {/* zare_nk_050206_added_addressHa_end(behtare dar componenti joda sedash bezanim ke maghadir ra ba api por koneh) */}
+        </div>
+      </Box>
+      {/* zare_nk_050204_rahe2_st(Drawer baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
+    </Drawer >
+  </>)
+}
+////zare_nk_050207_added_end(for ShowAddRemAddressList)
 
 type AdressListComponentType = {
   isEpmtyAdressList: boolean;
@@ -323,8 +821,11 @@ type AdressListComponentType = {
   saveAddress: (isOnline: boolean) => void;
   addressFormInputsVal: any;   //zare_nk_050206_nokteh(inpute haye form inja ke nadarim,in felan olgu bemooneh)
   setAddressFormInputsVal: React.Dispatch<React.SetStateAction<any>>;   //zare_nk_050206_nokteh(inpute haye form inja ke nadarim,in felan olgu bemooneh)
+  apiSelectAddressList: responsedListFromApiSelectAddressListType[] | null;  //zare_nk_050206_added
 
-  apiSelectAddressList: SetApiSelectAddressListType[] | null;  //zare_nk_050206_added
+  isEpmtyShowAddRemAddressList: boolean;    //zare_nk_050207_added
+  setIsEpmtyShowAddRemAddressList: React.Dispatch<React.SetStateAction<boolean>>;    //zare_nk_050207_added
+  showAddRemAddress: () => void;   //zare_nk_050207_added
 };
 
 // export function AdressListComponent({  //zare_nk_050206_commented
@@ -336,6 +837,11 @@ export const AdressListComponent = function AdressListComponent({  //zare_nk_050
   addressFormInputsVal,     //zare_nk_050206_nokteh(inpute haye form inja ke nadarim,in felan olgu bemooneh
   setAddressFormInputsVal,   //zare_nk_050206_nokteh(inpute haye form inja ke nadarim,in felan olgu bemooneh
   apiSelectAddressList,
+
+  isEpmtyShowAddRemAddressList,     //zare_nk_050207_added
+  setIsEpmtyShowAddRemAddressList,   //zare_nk_050207_added
+  showAddRemAddress,   //zare_nk_050207_added
+
 }: AdressListComponentType) {
   console.log('zare_nk_050126_AdressListComponent called!!-isEpmtyAdressList: ' + isEpmtyAdressList);
 
@@ -819,6 +1325,9 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
           {/* zare_nk_050206_added_addressHa_st(behtare dar componenti joda sedash bezanim ke maghadir ra ba api por koneh) */}
           <Adressescomponent
             apiSelectAddressList={apiSelectAddressList}
+            isEpmtyShowAddRemAddressList={isEpmtyShowAddRemAddressList}
+            setIsEpmtyShowAddRemAddressList={setIsEpmtyShowAddRemAddressList}
+            showAddRemAddress={showAddRemAddress}
           />
           {/* <div style={{ display: 'flex', flexFlow: 'column', padding: '0px', margin: '0px', }}>
 
@@ -978,7 +1487,8 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
 }
 
 ////zare_nk_050206_added_st 
-type SetApiSelectAddressListType = {
+// type SetApiSelectAddressListType = {  //zare_nk_050207_commented(baraye lafze karbordi)
+type responsedListFromApiSelectAddressListType = {      //zare_nk_050207_added(baraye lafze karbordi)
   IdAdress: number;
   IdUser: number;
   Adress: string;
@@ -994,10 +1504,46 @@ type SetApiSelectAddressListType = {
   [key: string]: any;
 };
 ////zare_nk_050206_added_end
+ 
+////zare_nk_050207_added_st
+type responsedListFromApiEditAddressType = {      
+  IdAdress: number;
+  IdUser: number;
+  Adress: string;
+  CodePosti: string;
+  Lon: number;
+  Lat: number;
+  Mobile: number;
+  FName: string;
+  LName: string;
+  OnvanAdress: string;
+  Fullname: string;
+
+  [key: string]: any;
+};
+
+type responsedListFromApiRemoveAddressType = {      
+  IdAdress: number;
+  IdUser: number;
+  Adress: string;
+  CodePosti: string;
+  Lon: number;
+  Lat: number;
+  Mobile: number;
+  FName: string;
+  LName: string;
+  OnvanAdress: string;
+  Fullname: string;
+
+  [key: string]: any;
+};
+////zare_nk_050207_added_end
 
 export default function Page() {
   const [error, setError] = useState<string | null>(null);
   const [isEpmtyAdressList, setIsEpmtyAdressList] = useState(true);
+  const [isEpmtyShowAddRemAddressList, setIsEpmtyShowAddRemAddressList] = useState(true);   //zare_nk_050207_added
+
   // const [heightBox, setHeightBox] = useState<string>('0px');   //zare_nk_050203_commented
   const refForBox = useRef<HTMLDivElement | null>(null);
   const [boxHtml, setBoxHtml] = useState<any>(null);
@@ -1007,7 +1553,8 @@ export default function Page() {
   const { isLogin } = useAuthentication(); //zare_nk_050111_added
   console.log('zare_nk_050111-isLogin from context:', isLogin);
 
-  const [apiSelectAddressList, SetApiSelectAddressList] = useState<SetApiSelectAddressListType[] | null>(null);  //zare_nk_050206_added
+  // const [apiSelectAddressList, SetApiSelectAddressList] = useState<SetApiSelectAddressListType[] | null>(null);  //zare_nk_050206_added(and zare_nk_050207_commented(baraye lafze karbordi))
+  const [responsedListFromApiSelectAddressList, SetResponsedListFromApiSelectAddressList] = useState<responsedListFromApiSelectAddressListType[] | null>(null);  //zare_nk_050207_added(baraye lafze karbordi)
 
   type AddressFormInputsType = {
     Address: string;
@@ -1487,8 +2034,9 @@ export default function Page() {
         console.log("zare_nk_050206-parsedList1: " + parsedList[0].Adress);
         console.log("zare_nk_050206-parsedList2: " + parsedList[1].Adress);
         setIsEpmtyAdressList(false);  //zare_nk_050206_added
-        ////zare_nk_050206_alan
-        SetApiSelectAddressList(() => {
+         
+        // SetApiSelectAddressList(() => {  
+        SetResponsedListFromApiSelectAddressList(() => {  
           return parsedList
         })
 
@@ -1519,6 +2067,13 @@ export default function Page() {
     }
     ////zare_nk_050205_added_end
   }
+
+
+  ////zare_nk_050207_added_st
+  const showAddRemAddress = async () => {
+    setIsEpmtyShowAddRemAddressList(false);
+  }
+  ////zare_nk_050207_added_end
 
   return (
     <>
@@ -1568,8 +2123,11 @@ export default function Page() {
           saveAddress={saveAddress}
           addressFormInputsVal={addressFormInputsVal}
           setAddressFormInputsVal={setAddressFormInputsVal}
+          responsedListFromApiSelectAddressList={responsedListFromApiSelectAddressList}
 
-          apiSelectAddressList={apiSelectAddressList}
+          isEpmtyShowAddRemAddressList={isEpmtyShowAddRemAddressList}           //zare_nk_050207_added
+          setIsEpmtyShowAddRemAddressList={setIsEpmtyShowAddRemAddressList}     //zare_nk_050207_added
+          showAddRemAddress={showAddRemAddress}
         />
 
       </main>
