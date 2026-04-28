@@ -1,4 +1,4 @@
-////zare_nk_050202_okk
+////zare_nk_050208_okk
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -6,8 +6,8 @@ import Styles from "@/styles/components/login.module.css";
 import { RefObject } from "react";
 import { ReactNode } from "react";
 import { ChangeEvent } from "react";
-import jwt from "jsonwebtoken"; //zare_nk_040603_added
-import { JwtPayload } from "jsonwebtoken";  //zare_nk_040603_added
+import jwt from "jsonwebtoken"; 
+import { JwtPayload } from "jsonwebtoken";  
 import { factchecktools } from "googleapis/build/src/apis/factchecktools";
 
 function getCookie(name: any) {
@@ -71,11 +71,10 @@ function FirstPageComponent({
     setIsInputFocused(false);
   };
 
-
   useEffect(() => {
     if (backBtnCliked == true) {
       if (refForMobileInput.current[0]) {
-        mobileChanged(refForMobileInput.current[0]); //zare_nk_040527_nokteh(shabihsaziye rooydade onChange textboxe mobile ke metode mobileChanged seda zadeh mishod)
+        mobileChanged(refForMobileInput.current[0]); //zare_nk_040527_nokteh(shabihsaziye rooydade onChange textboxe mobile ke methode mobileChanged seda zadeh mishod)
       }
     }
   }, [backBtnCliked]);
@@ -175,7 +174,6 @@ type SecondPageProps = {
   setIsDisabledResendCode: React.Dispatch<React.SetStateAction<boolean>>; //zare_nk_040527_nokteh(setState meghdardehiye state isDisabledResendCode)
   isDisabledRemovTimerBtn: boolean; //zare_nk_040527_nokteh(state shamele meghdare booliane attribute disabled dokmeye risete timer )
   setIsDisabledRemovTimerBtn: React.Dispatch<React.SetStateAction<boolean>>; //zare_nk_040527_nokteh(setState meghdardehiye state isDisabledRemovTimerBtn)
-
   newSmsVal: string,  //zare_nk_050103_added
   setNewSmsVal: React.Dispatch<React.SetStateAction<string>>;  //zare_nk_050103_added
   newSmsTxtChanged: (textVaredeh: string, index: number) => void;  //zare_nk_050103_added
@@ -305,7 +303,9 @@ function SecondPageComponent({
     };
   }, [timer, removTimer]);
 
-  useEffect(() => {
+  useEffect(() => {    //zare_nk_050208_nokteh(dar in useEffect migim age mobileCheckBtn true bood smsTxtChanged ra ba evente sooriye fakeEvent seda bezan(in kar ra 
+  //// baraye modiriate khata vaghti karbar az safhe do back zad va mojadad dokmeye checMobb ra zad va sms hast hanooz dar text boxesh vali age khataei dar formatesh 
+  //// bood state modiraiate an khata age meghdaresh hazf shod dobare meghdar begireh) )
     if (mobileCheckBtn == true) {
       const input = refForSmsInput.current[0];
       if (input) {
@@ -396,30 +396,10 @@ function SecondPageComponent({
           </div>
         )}
 
-        {/* <div className={Styles.formsRow}>
-          <button
-            ref={refForCheckSmsBtn}
-            className={Styles.disabledBtn}
-            onClick={checkSmsForLogin}
-            disabled={isDisabledCheckSmsBtn}
-          >
-            ورود
-          </button>
-        </div> */}
-
         <div style={{
           display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
           paddingBottom: '1.25rem', paddingLeft: '1.25rem', paddingRight: '1.25rem', marginTop: '1.75rem',
-        }}>
-          {/* <button
-            id="ResendCode"
-            ref={refForResendCode}
-            className={Styles.btn}
-            onClick={ResendCodefunc}
-            disabled={isDisabledResendCode}
-          >
-            درخواست دوباره
-          </button> */}
+        }}>          
           {!isDisabledResendCode ?
             (<button
               id="ResendCode"
@@ -492,7 +472,6 @@ function SecondPageComponent({
           </button> */}
 
         </div>
-
 
       </div>
     </>

@@ -84,7 +84,6 @@ function getCookie(name: any) {
 
 type AdressescomponentType = {
   responsedListFromApiSelectAddressList: responsedListFromApiSelectAddressListType[] | null;  //zare_nk_050206_added
-
   isEpmtyShowAddRemAddress: boolean;    //zare_nk_050207_added
   setIsEpmtyShowAddRemAddress: React.Dispatch<React.SetStateAction<boolean>>;    //zare_nk_050207_added
   showAddRemAddress: () => void;   //zare_nk_050207_added
@@ -96,7 +95,6 @@ export const Adressescomponent = function Adressescomponent({
   isEpmtyShowAddRemAddress,     //zare_nk_050207_added
   setIsEpmtyShowAddRemAddress,   //zare_nk_050207_added
   showAddRemAddress,   //zare_nk_050207_added
-  
 }: AdressescomponentType) {
 
   const router = useRouter();
@@ -133,7 +131,7 @@ export const Adressescomponent = function Adressescomponent({
               alignItems: 'center',
             }}>
               <button
-                id="closeAddresListBtn"
+                id="locationBtnInEveryAddressRow"   //zare_nk_050208_nokteh(in dokmeh engar karbordi nadare va faghat ye design hast!badan shayad tabdilesh konam be ye tage div)
                 style={{
                   backgroundColor: '#1b1c1d',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1) 
                   fill: 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
@@ -181,7 +179,7 @@ export const Adressescomponent = function Adressescomponent({
               </div>
 
               <button
-                id="closeAddresListBtn"
+                id="showAddRemAddressBtn"
                 // onClick={goToMap}
                 onClick={showAddRemAddress}
                 style={{
@@ -212,7 +210,6 @@ export const Adressescomponent = function Adressescomponent({
           </>
         )
       })}
-
     </div>
   </>);
 }

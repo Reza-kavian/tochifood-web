@@ -1,4 +1,4 @@
-////zare_nk_050202_okk
+////zare_nk_050208_okk
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -304,11 +304,11 @@ function BoxHtmlComponent({
     //     input.classList.add("invalid");
     //   }
     //   setAddressMatnError("فرمت متن آدرس وارده نادرست است");
-    // setAddressFormInputsMatnError((cur) => {
-    //   return (
-    //     { ...cur, [inputsName]: 'فرمت وارده اشتباه است' }
-    //   );
-    // });
+    //   setAddressFormInputsMatnError((cur) => {
+    //     return (
+    //       { ...cur, [inputsName]: 'فرمت وارده اشتباه است' }
+    //     );
+    //   });
     //   setIsDisabledsaveAddressFormInputsBtn(true);
     //   if (refForSaveAddressFormInputsBtn.current) {
     //     refForSaveAddressFormInputsBtn.current.classList.add(Styles.disabledBtn);

@@ -12,6 +12,8 @@ let cachedBootstrap: typeof import("bootstrap") | null = null; //zare_nk_040417_
 // import { json } from "stream/consumers";  ////zare_nk_040417_commented(estefadeh ham nashod)
 import "@/styles/shoppingbasketCss.css";
 
+import '@zxing/browser'; // Import CSS if needed  //zare_nk_050208_added
+
 import { RefObject } from "react";
 import { MouseEvent } from "react";
 
@@ -447,12 +449,12 @@ function MiddleCountTedadSefr({  //zare_nk_041127_added
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                     // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
+                    // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
                     // barmigardoone va ...(Number(bishAzMaxTedadYaMojoodi) === 1 ham ya true ya false barmigardoone,va darkol ba and(&&) natijeye kolli ya true 
                     // midshe ya false,pas opacity meghdare nemigireh va faghat meghdari boolean barmigardooneh!!  )
 
                     // opacity: Number(bishAzMaxTedadYaMojoodi) === 1 ? 0.3 : 1, //zare_nk_050124_nokteh(rahe1-in dastoor dorosteh va javab mideh)
-                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 }:{opacity: 1}), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
+                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 } : { opacity: 1 }), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
                     ////zare_nk_050124_nokteh(rahe1 age gharare hamin opacity faghat meghdar begire khanatare,vali age bakhaim chandin khasiat ra meghdar bedim rahe2
                     // tosiyeh mishe (masalan ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3,color:'silver' }:{opacity: 1,color:'red'}),))
                   }}
@@ -617,12 +619,12 @@ function MiddleCountTedadSefr({  //zare_nk_041127_added
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                     // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
+                    // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
                     // barmigardoone va ...(Number(bishAzMaxTedadYaMojoodi) === 1 ham ya true ya false barmigardoone,va darkol ba and(&&) natijeye kolli ya true 
                     // midshe ya false,pas opacity meghdare nemigireh va faghat meghdari boolean barmigardooneh!!  )
 
                     // opacity: Number(bishAzMaxTedadYaMojoodi) === 1 ? 0.3 : 1, //zare_nk_050124_nokteh(rahe1-in dastoor dorosteh va javab mideh)
-                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 }:{opacity: 1}), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
+                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 } : { opacity: 1 }), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
                     ////zare_nk_050124_nokteh(rahe1 age gharare hamin opacity faghat meghdar begire khanatare,vali age bakhaim chandin khasiat ra meghdar bedim rahe2
                     // tosiyeh mishe (masalan ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3,color:'silver' }:{opacity: 1,color:'red'}),))
                   }}
@@ -1113,16 +1115,49 @@ export default function ShallowRoutingExample() {
     setIsOpenedProdDetModal(true);
     setAddOrRemChanged(null);
   }
-  async function ShowCamera() {
-    // تنظیم ZXing برای پشتیبانی از QR کد و بارکدهای 1D
+
+
+  // async function ShowCamera() {  //zare_nk_050208_commented
+  async function ShowCamera(isClient: boolean) {  //zare_nk_050208_added
+    if (!isClient) return;  //zare_nk_050208_added
+    console.log('zare_nk_050208-ShowCamera called!!001');
+    ////zare_nk_050208_commented_st
+    // // تنظیم ZXing برای پشتیبانی از QR کد و بارکدهای 1D
+    // const { BrowserMultiFormatReader } = await import("@zxing/browser");
+    // const codeReader = new BrowserMultiFormatReader();
+    ////zare_nk_050208_commented_end
+
+    ////zare_nk_050208_added_st
+    // ایمپورت درست از دو پکیج متفاوت
     const { BrowserMultiFormatReader } = await import("@zxing/browser");
-    const codeReader = new BrowserMultiFormatReader();
+    const { DecodeHintType, BarcodeFormat } = await import("@zxing/library");
+
+    // تعریف فرمت‌هایی که می‌خوای پشتیبانی بشن
+    const formats = [
+      BarcodeFormat.EAN_13,
+      BarcodeFormat.EAN_8,
+      BarcodeFormat.CODE_128,
+      BarcodeFormat.QR_CODE,
+    ];
+
+    // ایجاد map مربوط به تنظیمات (hints)
+    const hints = new Map();
+    // hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);  //zare_nk_050208_nokteh(ba mahdood kardane tedad anvae barcode sorate scan bala miri(pishfarz hameye barcodeha ro barrasi mikoneh))
+    // hints.set(DecodeHintType.TRY_HARDER, true);   //zare_nk_050208_nokteh(ba tanzim TRY_HARDER deghate scan bala mire vali kami kond mikoneh sorat ro(pishfarz TRY_HARDER false hast))
+
+    // ساخت Reader با تنظیمات بالا
+    const codeReader = new BrowserMultiFormatReader(hints);
+    ////zare_nk_050208_added_end
+
     codeReader
       .decodeFromVideoDevice(
         undefined,
         "videoForzxing",
         async (result, err, control) => {
+          console.log('zare_nk_050208-ShowCamera called!!-002');
+          console.log('Decode attempt - result:', result, 'error:', err);
           if (result) {
+            console.log('zare_nk_050208-ShowCamera called!!-003');
             const text = result.getText();
             // متوقف کردن اسکن پس از شناسایی
             control.stop();
@@ -1133,6 +1168,7 @@ export default function ShallowRoutingExample() {
             modal.hide();
             openprodDetModal(/* 6262831000503 */ text);
           } else {
+            console.log('zare_nk_050208-ShowCamera called!!-004');
             const { NotFoundException } = await import("@zxing/library");
             if (err && !(err instanceof NotFoundException)) {
               console.log("zare_nk_040321-in zxing-err: " + err);
@@ -1141,7 +1177,7 @@ export default function ShallowRoutingExample() {
         }
       )
       .catch((err) => {
-        console.log("zare_nk_040321-in zxing-err in catch: " + err);
+        console.log('zare_nk_050208-in catch-error: ' + err);
       });
   }
 
@@ -1376,13 +1412,16 @@ export default function ShallowRoutingExample() {
   }, [isOpenedProdDetModal]);
 
   useEffect(() => {
+    const isClient = typeof window !== 'undefined';  //zare_nk_050208_added
     const seePricesModal = document.getElementById("seePricesModal");
     const handlerForSeePricesModal = () => {
       const input = document.getElementById("manualInputBarcode");
       if (input instanceof HTMLInputElement) {
         input.value = "";
       }
-      ShowCamera();
+
+      // ShowCamera();  //zare_nk_050208_commented 
+      ShowCamera(isClient);  //zare_nk_050208_added
     };
 
     const hiddenHandlerForSeePricesModal = () => {
@@ -1405,12 +1444,26 @@ export default function ShallowRoutingExample() {
       }
     }
     tempFuncForAsyncGetBootstrap();
+
+    ////zare_nk_050208_added_st
+    // Cleanup function to stop the video stream when the component unmounts
+    return () => {
+      if (isClient) {
+        // You might need to access codeReader here if it's made accessible
+        // For example, by returning it from ShowCamera or storing it in a ref
+        // codeReader.reset(); // If a reset method exists and is appropriate
+        console.log("Scanner component unmounted, cleaning up.");
+      }
+    };
+    ////zare_nk_050208_added_end
+
   }, [isOpenedSeePricesModal]);
 
   ////zare_nk_041119_added_st_testi
   useEffect(() => {
     // console.log('0-041119-sabadRows: ' + JSON.stringify(sabadRows));  //zare_nk_041120_commented
   }, [sabadRows]);
+
   useEffect(() => {
     console.log('0-041119-ForCartContInProdDetVal: ' + JSON.stringify(ForCartContInProdDetVal));
   }, [ForCartContInProdDetVal]);
@@ -1420,7 +1473,7 @@ export default function ShallowRoutingExample() {
   async function getSabadItems(IdSabadKharidTitr: number, token: string) {
     ////zare_nk_041129_added_st
     if (IdSabadKharidTitr == -22) {
-      alert('bisatrrre!!!');
+      // alert('bisatrrre!!!');
       setBisatr(true);
       return;
     }
@@ -1525,8 +1578,8 @@ export default function ShallowRoutingExample() {
     }
   }
 
-  useEffect(() => { 
-    if (isOpenedProdDetModal == true) { 
+  useEffect(() => {
+    if (isOpenedProdDetModal == true) {
       return;
     }
     async function tempFuncForAsync() {
@@ -1559,7 +1612,7 @@ export default function ShallowRoutingExample() {
           }),
         });
         const data = await response.json();
-        if (response.ok) { 
+        if (response.ok) {
           var majmooeKharidMasraf = 0;
           var soodAzKharid = 0;
           var Kerayeh = 0;
@@ -1583,7 +1636,7 @@ export default function ShallowRoutingExample() {
             }
           } else if (data.status == 0) {
             if (result.length == 0) {
-              alert('result.length ===== 0: ' + result.length)
+              // alert('result.length ===== 0: ' + result.length);
               ///zare_nk_041129_added_st
               setSabadTitr(null);
               IdSabadKharidTitr = 0;
