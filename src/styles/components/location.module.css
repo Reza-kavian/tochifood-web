@@ -1,30 +1,8 @@
+ /* zare_nk_050208_okk */
+
  .loginForm {
-   /* position: absolute; */
-   /* border: 1px solid #a9a9a9;
-  border-radius: 20px;
-  box-shadow: #5e5e5e 0px 0px 3px 0px;
-  background-color: #f6f6f6;*/
- }
-
- @media screen and (min-width: 576px) {
-   .loginForm {
-     width: 100%;
-     /* width: 400px; */
-     /* height: 350px; */
-     /* min-height: min-content; */
-     /* padding: 40px 20px; */
-   }
- }
-
- @media screen and (max-width: 576px) {
-   .loginForm {
-     width: 100%;
-     /* height: 350px; */
-     /* min-height: min-content; */
-     /* padding: 20px 10px; */
-     /* margin-right: 5px; */
-     /* margin-left: 5px; */
-   }
+   text-align: right;
+   width: 100%;
  }
 
  .titleStyle {
@@ -35,21 +13,8 @@
    font-family: "IRANSansWeb_Medium(adad_fa)";
  }
 
- .loginForm {
-   text-align: right;
- }
-
  .formsRow {
    margin-bottom: 20px;
- }
-
- .MobileInputAndCheckBtnCont {
-   /* direction: rtl; */
-   display: flex;
-   flex-flow: row;
-   column-gap: .75rem;
-   margin-top: 2.5rem;
-   padding-bottom: 1.25rem;
  }
 
  .warningCont {
@@ -57,33 +22,9 @@
    color: red;
  }
 
- .mobileTxtBox {
-   height: 56px;
-   border-radius: .75rem;
-   border: 1px solid #e0e3e5;
-   width: 186px;
-   flex: 1 0 auto;
-   outline: none;
-   text-align: right;
-   padding: 0px 10px;
- }
-
- .txtBox:focus {
-   outline: none;
-   border: 1px solid red;
-   box-shadow: 0px 0px 3px 0px red;
- }
-
- .btn {
-   /* padding: 7px; */
-   /* border-radius: 7px; */
-   /* border: none; */
+ .btn { 
    background-color: #ff5900;
-   color: #ffffff,
-   /* width: 100%; */
-   /* height: 50px; */
-   /* width: 56px;
-   height: 56px; */
+   color: #ffffff,     
  }
 
  .btn:hover {
@@ -99,38 +40,6 @@
  }  */
  /* zare_nk_050205_commented_end(chon be tag attribute disabled dadim,moroorgarha background-color va opacity darnazar migirand baraye tag ke olaviate 
  balatari nesbat be csse ma dar file .css midahand) */
-
- .BackBtn {
-   padding: 10px;
-   border-radius: 7px;
-   display: flex;
-   flex-flow: row;
-   border: none;
-   /* color: #545454; */
-   background-color: inherit;
-   font-family: "IRANSansWeb_Medium(adad_fa)";
-   direction: rtl;
- }
-
- .BackBtn:hover {
-   background-color: #f7f7f7;
- }
-
- .BackImgCont {
-   display: flex;
-   flex-flow: column;
-   justify-content: center;
-   background-color: inherit;
-   margin-left: 10px;
- }
-
- .BackBtnTitleCont {
-   flex: 0 0 auto;
-   display: flex;
-   flex-flow: row;
-   align-items: center;
-   font-size: 14px;
- }
 
  .translateDiv {
    position: absolute;
@@ -193,7 +102,7 @@
  }
 
  .valid {
-   border: 1px solid #e0e3e5;  
+   border: 1px solid #e0e3e5;
  }
 
  .invalid {

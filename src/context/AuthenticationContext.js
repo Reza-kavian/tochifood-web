@@ -1,5 +1,5 @@
-// context/AuthenticationContext.js   //zare_nk_050129_okk
-'use client'; // اگر از App Router استفاده می‌کنید، این خط ضروری است
+// context/AuthenticationContext.js   //zare_nk_050208_okk
+'use client';  
 
 import { createContext, useState, useContext } from 'react';
 
@@ -26,9 +26,9 @@ export function AuthenticationProvider({ children }) {
     let isLog = token != null ? true : false
     const [isLogin, setIsLogin] = useState(isLog);
 
-    //const [userData, setUserData] = useState({ name: 'Ali', role: 'Admin' }); 
-    //   const login = (user) => setUserData(user);
-    //   const logout = () => setUserData(null);
+    // const [userData, setUserData] = useState({ name: 'Ali', role: 'Admin' }); 
+    // const login = (user) => setUserData(user);
+    // const logout = () => setUserData(null);
 
     return (
         // <AuthenticationContext.Provider value={{ userData, login, logout }}>
