@@ -120,7 +120,8 @@ export const Adressescomponent = function Adressescomponent({
       {responsedListFromApiSelectAddressList?.map((item, index) => {
         return (
           <>
-            <div style={{
+            <div 
+             style={{
               borderTop: '1px solid #2b364f14',
               display: 'flex',
               paddingBottom: '.75rem',
@@ -680,7 +681,7 @@ export default function Page() {
   // const [heightBox, setHeightBox] = useState<string>('0px');   //zare_nk_050203_commented
   const refForBox = useRef<HTMLDivElement | null>(null);
   const [boxHtml, setBoxHtml] = useState<any>(null);
-  ////zare_nk_050117_added_end
+  ////zare_nk_050117_add   ed_end
 
   // const { userData, login, logout } = useAuthentication(); //zare_nk_050111_added
   const { isLogin } = useAuthentication(); //zare_nk_050111_added
