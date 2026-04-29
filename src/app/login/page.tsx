@@ -1066,7 +1066,7 @@ export default function Toolbar() {
           justifyContent: 'center',
           alignItems: 'center',
           flex: '1 0 auto',
-          border: '2px dashed red',
+          // border: '2px dashed red',
         }}>
         <div
           style={{
@@ -1163,7 +1163,7 @@ export default function Toolbar() {
             // padding: '1rem',
             position: 'relative',
             justifyContent: 'flex-end',
-            border: '2px dashed green',
+            // border: '2px dashed green',
           }}
         >
           {/* zare_nk_050102_commented_st(move to FirstPageComponent component) */}
