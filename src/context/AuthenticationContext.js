@@ -1,9 +1,14 @@
 // context/AuthenticationContext.js   //zare_nk_050208_okk
-'use client';  
+'use client';
 
 import { createContext, useState, useContext } from 'react';
 
 function getCookie(name) {
+    ////zare_nk_050209_added_st
+    if (typeof document === 'undefined') {
+        return null; // برای جلوگیری از خطای عدم وجود document
+    }
+    ////zare_nk_050209_added_end
     const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
     const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
     if (parts.length === 2) {

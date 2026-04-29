@@ -72,6 +72,11 @@ import { Console } from "console";
 import { useAuthentication } from '../context/AuthenticationContext';  //zare_nk_050111_added
 
 function getCookie(name: any) {
+  ////zare_nk_050209_added_st
+  if (typeof document === 'undefined') {
+    return null; // برای جلوگیری از خطای عدم وجود document
+  }
+  ////zare_nk_050209_added_end
   const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
   const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
   if (parts.length === 2) {
@@ -91,40 +96,12 @@ type AdressescomponentType = {
   showAddRemAddress: () => void;   //zare_nk_050207_added
 };
 
-type SquareProps = {
-  value: string | null;
-  onSquareClick: () => void;
-  andis: number;
-  // refForBtn: React.RefObject<(HTMLButtonElement | null)[]>;
-  // className?: string;
-};
-
-function Square({ value, onSquareClick, andis }: SquareProps) {
-  console.log('zare_nk_050209-02-Square called!!-value: ' + value + '-andis: ' + andis + '-onSquareClick: ' + onSquareClick);
-  return (
-    <div className={Styles.tripleInRow}>
-      <button
-        id={andis.toString()}
-        // onClick={onSquareClick}  //rahe 1(okk)
-        onClick={() => {   //rahe 2(okk)
-          console.log('ya ali-value: ' + andis);
-          onSquareClick()
-        }}
-        style={{ padding: "0px" }}
-      >
-        {value}___ {andis}
-      </button>
-    </div>
-  );
-}
-
-
 ////zare_nk_050206_added_st
 export const Adressescomponent = function Adressescomponent({
   responsedListFromApiSelectAddressList,
-  isEpmtyShowAddRemAddress,     //zare_nk_050207_added
-  setIsEpmtyShowAddRemAddress,   //zare_nk_050207_added
-  showAddRemAddress,   //zare_nk_050207_added
+  isEpmtyShowAddRemAddress,
+  setIsEpmtyShowAddRemAddress,
+  showAddRemAddress,
 }: AdressescomponentType) {
 
   const router = useRouter();
@@ -263,7 +240,7 @@ export const Adressescomponent = function Adressescomponent({
               </button>
             </div>
 
-            <ShowAddRemAddressComponent 
+            <ShowAddRemAddressComponent
               key={index}
               refForShowAddRemAddressBox={refForShowAddRemAddressBox}
               goToEdditAddressMap={() => {
@@ -283,16 +260,6 @@ export const Adressescomponent = function Adressescomponent({
               showAddRemAddress={showAddRemAddress}
             />
 
-            <Square
-              key={index}
-              // className={Styles.tripleInRow}
-              value={item.Fullname}
-              onSquareClick={() => {
-                console.log('zare_nk_050209-sq01-index: ' + index + '-item.IdAdress: ' + item.IdAdress + '-item.Fullname: ' + item.Fullname);  //item.IdAdress dar zamane click dar dom berooz va okk
-              }}
-              andis={item.IdAdress}
-            />
-
           </>
         )
       })}
@@ -302,7 +269,7 @@ export const Adressescomponent = function Adressescomponent({
 ////zare_nk_050206_added_end
 
 ////zare_nk_050207_added_st(for ShowAddRemAddressList)
-type ShowAddRemAddressComponentType = { 
+type ShowAddRemAddressComponentType = {
   refForShowAddRemAddressBox: RefObject<HTMLDivElement | null>;
 
   // goToEdditAddressMap: (IdAdress: number) => void;  //zare_nk_050209_commented
@@ -331,7 +298,7 @@ export const ShowAddRemAddressComponent = function AdressListComponent({  //zare
   isEpmtyShowAddRemAddress,     //zare_nk_050207_added
   setIsEpmtyShowAddRemAddress,   //zare_nk_050207_added
   showAddRemAddress,   //zare_nk_050207_added 
-}: ShowAddRemAddressComponentType) { 
+}: ShowAddRemAddressComponentType) {
 
   //zare_nk_050208_AdressListComponent called!!-RemoveAddress: ()=>{
   //     alert('1');
@@ -352,7 +319,7 @@ export const ShowAddRemAddressComponent = function AdressListComponent({  //zare
 
   return (<>
     <button
-      onClick={(e) => { 
+      onClick={(e) => {
         RemoveAddress(e);
       }}
 
@@ -372,7 +339,7 @@ export const ShowAddRemAddressComponent = function AdressListComponent({  //zare
       }}>
       حذف تستی
     </button>
-    <Drawer 
+    <Drawer
       id="box"
       // ref={refForBox}   //zare_nk_050207_commented
       ref={refForShowAddRemAddressBox}  //zare_nk_050207_added
@@ -470,24 +437,10 @@ export const ShowAddRemAddressComponent = function AdressListComponent({  //zare
             <div style={{ display: 'flex', padding: '0px 10px', flex: '1 1 47%' }}>
               <button
 
-                ////zare_nk_050209_commented_st_movaghat
-                // onClick={() => {
-                //   alert('2');
-                //   RemoveAddress
-                // }}
-                ////zare_nk_050209_commented_end_movaghat
-                ////zare_nk_050209_added_st_movaghat
-                onClick={(e) => { 
-                  RemoveAddress(e);  //zare_nk_050209_tahlilshe
+                onClick={(e) => {
+                  RemoveAddress(e);
                 }}
                 // onClick={RemoveAddress}
-
-                //  // onClick={onSquareClick}  //rahe 1(okk)
-                //         onClick={() => {   //rahe 2(okk)
-                //           alert('ya ali');
-                //           onSquareClick()
-                //         }}
-                ////zare_nk_050209_added_end_movaghat
 
                 style={{
                   borderRadius: 10,
@@ -504,7 +457,7 @@ export const ShowAddRemAddressComponent = function AdressListComponent({  //zare
                   width: '100%',
                   height: '50px',
                 }}>
-              33  حذف
+                33  حذف
               </button>
             </div>
             <div style={{ display: 'flex', padding: '0px 10px', flex: '1 1 47%' }}>
@@ -820,18 +773,6 @@ export default function Page() {
   const [responsedListFromApiSelectAddressList, SetResponsedListFromApiSelectAddressList] = useState<responsedListFromApiSelectAddressListType[] | null>(null);  //zare_nk_050207_added(baraye lafze karbordi)
 
   const router = useRouter();
-
-  const goToLogin = () => {
-    // router.push("/folder03?tab=comments2");
-    // redirect("/login");
-    router.replace("/login");
-  };
-
-  const goToMap = () => {
-    // router.push("/folder03?tab=comments2");
-    // redirect("/login");
-    router.replace("/location");
-  };
 
   // const showDrawer = async () => {   //zare_nk_050207_commented(baraye lafze ashenatar)
   const showAddressListDrawer = async () => {     //zare_nk_050207_added(baraye lafze ashenatar)
