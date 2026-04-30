@@ -74,18 +74,23 @@ import { useAuthentication } from '../context/AuthenticationContext';  //zare_nk
 function getCookie(name: any) {
   ////zare_nk_050209_added_st
   if (typeof document === 'undefined') {
+    console.log("document === 'undefined'");
     return null; // برای جلوگیری از خطای عدم وجود document
   }
+  console.log("document !== 'undefined'");
   ////zare_nk_050209_added_end
   const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
+  console.log("value is: " + value);
   const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
   if (parts.length === 2) {
+    console.log("dohe-parts.length: " + parts.length);
     const raw = parts.pop();
     if (!raw) throw new Error("No parts found");
     const value = raw.split(";").shift();
     if (!value) throw new Error("Invalid cookie format");
     return decodeURIComponent(value);
   }
+  console.log("do nist-parts.length: " + parts.length);
   return null; //اگر کوکی پیدا نشد
 }
 
@@ -120,7 +125,7 @@ const Adressescomponent = function Adressescomponent({    //zare_nk_050209_added
   const goToEdditAddressMap = (IdAdress: number) => {  //zare_nk_050207_added  
     // router.push("/folder03?tab=comments2");
     // redirect("/login");
-    alert('IdAdress:::: ' + IdAdress);
+    // alert('IdAdress:::: ' + IdAdress);
     router.replace("/edditAddressLocation");  //zare_nk_050207_nokteh(in safheye edditAddressLocation ezafeh beshe(dar tapsiFood esmesh safheye edit-address hast))
   };
 
@@ -128,7 +133,7 @@ const Adressescomponent = function Adressescomponent({    //zare_nk_050209_added
     ////zare_nk_api deleteAddres seda zadeh va ehtemalan setIsEpmtyAdressList(true) mizanim ta dobareh liste Addressha refresh shan
 
     const token = getCookie("token");
-    console.log('zare_nk_050110-token hala is: ' + getCookie("token"));
+    console.log('zare_nk_050110-RemoveAddress-token hala is: ' + getCookie("token"));
 
 
     let ApiUrl = "https://api.tochikala.com/api/";
@@ -165,13 +170,45 @@ const Adressescomponent = function Adressescomponent({    //zare_nk_050209_added
 
   };
 
+  ////zare_nk_050210_added_st
+  const chosenAddress = async (chosenAddressItem: responsedListFromApiSelectAddressListType) => {
+    console.log('chosenAddressItem.IdAdress: ' + chosenAddressItem.IdAdress); 
+    // document.cookie = `chosenAddress=${JSON.stringify(chosenAddressItem)}; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;  //zare_nk_050210_nokteh(expires=Thu, 01 Jan 1970 00:00:00 UTC baese monghazi shodane cookie dar hamin khatte tarif mishe! pas 
+    // majboorim ye tarikhe dastiy behesh badim,age mikhaim abadi basshe ye cookiye dastiye toolani behesh midim ke shabiye abadiye(age expires ra dasti nadim 
+    // behesh pishfarz SessionCookie darnazar gerefteh mishe(yani moroorgar ro bebandim cookie hazf mishe) ) )
+    // const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString();
+    const expires = new Date();
+    expires.setFullYear(expires.getFullYear() + 5);
+    const expiresString = expires.toUTCString();
+    // document.cookie = `chosenAddress=${JSON.stringify(chosenAddressItem)}; path=/; expires=${expiresString};secure; samesite=None`;
+    ////zare_nk_050210_nokteh(mamoolan JSON.stringify kefayat mikoneh, vali age matne cookie shamele characterhaye ; va ... bashe shayad barnameh eshtebahan anra 
+    //// beonvane jodakonandeh dar reshteye document.cookie darnazar begire va kharabkari koneh, pas encodeURIComponent tosiye mishavad)
+    document.cookie = `chosenAddress=${encodeURIComponent(
+      JSON.stringify(chosenAddressItem)
+    )}; path=/; expires=${expiresString};secure; samesite=None`;
+
+    const chosenAddress = getCookie("chosenAddress");
+    console.log('chosenAddress is: ' + chosenAddress);   
+    setIsEpmtyAdressList(null);   //zare_nk_050210_added
+  }
+  ////zare_nk_050210_added_end
+
   return (<>
-    <div style={{ display: 'flex', flexFlow: 'column', padding: '0px', margin: '0px', }}>
+    <div style={{ display: 'flex', flexFlow: 'column', padding: '0px', margin: '0px', border: '1px dashed red' }}>
       {responsedListFromApiSelectAddressList?.map((item, index) => {
         // alert('0-item.IdAdress: '+JSON.stringify(item));
         return (
           <>
             <div
+              ////zare_nk_050210_added_st
+              onClick={() => {
+                // alert('01-item.IdAdress: ' + JSON.stringify(item));
+                //// showAddRemAddress();  //zare_nk_050209_commented
+                // setIsEpmtyShowAddRemAddress(false);  //zare_nk_050209_added 
+                setRowItem(item);  //zare_nk_050209_added 
+                chosenAddress(item);    //zare_nk_050210_added
+              }}
+              ////zare_nk_050210_added_end
               style={{
                 borderTop: '1px solid #2b364f14',
                 display: 'flex',
@@ -234,7 +271,7 @@ const Adressescomponent = function Adressescomponent({    //zare_nk_050209_added
               <button
                 id="showAddRemAddressBtn"
                 onClick={() => {
-                  alert('01-item.IdAdress: ' + JSON.stringify(item));
+                  // alert('01-item.IdAdress: ' + JSON.stringify(item));
                   // showAddRemAddress();  //zare_nk_050209_commented
                   setIsEpmtyShowAddRemAddress(false);  //zare_nk_050209_added 
                   setRowItem(item);  //zare_nk_050209_added 
@@ -334,7 +371,7 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({     //z
 
 }: ShowAddRemAddressComponentType) {
 
-  alert('showAddRemAddress: ' + showAddRemAddress);
+  // alert('showAddRemAddress: ' + showAddRemAddress);
 
   const router = useRouter();
 
@@ -496,7 +533,7 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({     //z
                 //   goToEdditAddressMap
                 // }}
                 onClick={(e) => {
-                  alert('2');
+                  // alert('2');
                   goToEdditAddressMap(e);
                 }}
                 style={{
@@ -818,11 +855,11 @@ export default function Page() {
     let token = getCookie("token");
 
     if (!token) {
-      alert('lotfan avval online shid');
+      // alert('lotfan avval online shid');
       setError("lotfan avval online shid");
       return;
     }
-
+    console.log('tokentokentoken: ' + token);
     let ApiUrl = "https://api.tochikala.com/api/";
     const response = await fetch(ApiUrl + "User/Api_SelectAddress", {
       method: "POST",
@@ -867,16 +904,15 @@ export default function Page() {
       setIsEpmtyAdressList('notNull');   //zare_nk_040209_added
     }
     else {
-      alert('lotfan avval online shid');
+      // alert('lotfan avval online shid');
     }
     ////zare_nk_050205_added_end
   }
 
-  ////zare_nk_050207_added_st
+
   const showAddRemAddress = async () => {
     setIsEpmtyShowAddRemAddress(false);
   }
-  ////zare_nk_050207_added_end
 
   return (
     <>
@@ -926,8 +962,8 @@ export default function Page() {
 
           responsedListFromApiSelectAddressList={responsedListFromApiSelectAddressList}
 
-          isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}           //zare_nk_050207_added
-          setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}     //zare_nk_050207_added
+          isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}           
+          setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}      
           showAddRemAddress={showAddRemAddress}
           showAddressListDrawer={showAddressListDrawer}
         />
