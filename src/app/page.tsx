@@ -94,14 +94,18 @@ type AdressescomponentType = {
   isEpmtyShowAddRemAddress: boolean;    //zare_nk_050207_added
   setIsEpmtyShowAddRemAddress: React.Dispatch<React.SetStateAction<boolean>>;    //zare_nk_050207_added
   showAddRemAddress: () => void;   //zare_nk_050207_added
+  setIsEpmtyAdressList: React.Dispatch<React.SetStateAction<string | null>>;  //zare_nk_050209_added
+  showAddressListDrawer: () => void;    //zare_nk_050209_added
 };
 
-////zare_nk_050206_added_st
-export const Adressescomponent = function Adressescomponent({
+// export const Adressescomponent = function Adressescomponent({    //zare_nk_050209_commented
+const Adressescomponent = function Adressescomponent({    //zare_nk_050209_added
   responsedListFromApiSelectAddressList,
   isEpmtyShowAddRemAddress,
   setIsEpmtyShowAddRemAddress,
   showAddRemAddress,
+  setIsEpmtyAdressList,  //zare_nk_050209_added
+  showAddressListDrawer,  //zare_nk_050209_added
 }: AdressescomponentType) {
 
   const router = useRouter();
@@ -109,6 +113,9 @@ export const Adressescomponent = function Adressescomponent({
   const refForShowAddRemAddressBox = useRef<HTMLDivElement | null>(null);  //zare_nk_050207_added
 
   const [responsedListFromApiRemoveAddress, SetResponsedListFromApiRemoveAddress] = useState<responsedListFromApiRemoveAddressType | null>(null);  //zare_nk_050207_added
+
+  const [rowItem, setRowItem] = useState<responsedListFromApiRemoveAddressType | null>(null);  //zare_nk_050209_added
+
 
   const goToEdditAddressMap = (IdAdress: number) => {  //zare_nk_050207_added  
     // router.push("/folder03?tab=comments2");
@@ -140,6 +147,8 @@ export const Adressescomponent = function Adressescomponent({
       console.log("zare_nk_050208-Api_DeleteAddress-data: " + JSON.stringify(data));
       if (data.status == 0) {
         console.log("zare_nk_050208-Api_DeleteAddress-data.status is 0");
+        setIsEpmtyAdressList('notNull2');  //zare_nk_050209_added
+        showAddressListDrawer();  //zare_nk_050209_added
       } else {
         // // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
         // // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
@@ -224,10 +233,11 @@ export const Adressescomponent = function Adressescomponent({
 
               <button
                 id="showAddRemAddressBtn"
-                // onClick={showAddRemAddress}
                 onClick={() => {
                   alert('01-item.IdAdress: ' + JSON.stringify(item));
-                  showAddRemAddress();
+                  // showAddRemAddress();  //zare_nk_050209_commented
+                  setIsEpmtyShowAddRemAddress(false);  //zare_nk_050209_added 
+                  setRowItem(item);  //zare_nk_050209_added 
                 }}
                 style={{
                   // backgroundColor: '#1b1c1d',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1)  
@@ -240,7 +250,7 @@ export const Adressescomponent = function Adressescomponent({
               </button>
             </div>
 
-            <ShowAddRemAddressComponent
+            {/* <ShowAddRemAddressComponent
               key={index}
               refForShowAddRemAddressBox={refForShowAddRemAddressBox}
               goToEdditAddressMap={() => {
@@ -258,11 +268,32 @@ export const Adressescomponent = function Adressescomponent({
               isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}
               setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}
               showAddRemAddress={showAddRemAddress}
-            />
+            /> */}
 
           </>
         )
       })}
+      {rowItem &&
+        <ShowAddRemAddressComponent
+          key={rowItem.IdAdress}
+          refForShowAddRemAddressBox={refForShowAddRemAddressBox}
+          goToEdditAddressMap={() => {
+            console.log('zare_nk_050209-sh01-edit-rowItem.IdAdress: ' + rowItem.IdAdress + '-rowItem.Fullname: ' + rowItem.Fullname);
+            goToEdditAddressMap(rowItem.IdAdress);
+          }}
+          RemoveAddress={() => {
+            console.log('zare_nk_050209-sh01-rem-item.IdAdress: ' + rowItem.IdAdress + '-rowItem.Fullname: ' + rowItem.Fullname);   //item.IdAdress dar zamane click dar dom naberooz va notokk
+            RemoveAddress(rowItem.IdAdress);
+          }}
+
+          // responsedListFromApiEditAddress={responsedListFromApiEditAddress}  //zare_nk_050207_commented(chon aslan api editeAddresss ra dar in safhe nemizanim va dar safheye editAddress mizanim)
+          responsedListFromApiRemoveAddress={responsedListFromApiRemoveAddress}
+          isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}
+          setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}
+          showAddRemAddress={showAddRemAddress}
+          setRowItem={setRowItem}
+        />
+      }
     </div>
   </>);
 }
@@ -284,10 +315,11 @@ type ShowAddRemAddressComponentType = {
   isEpmtyShowAddRemAddress: boolean;    //zare_nk_050207_added
   setIsEpmtyShowAddRemAddress: React.Dispatch<React.SetStateAction<boolean>>;    //zare_nk_050207_added
   showAddRemAddress: () => void;   //zare_nk_050207_added
+  setRowItem: React.Dispatch<React.SetStateAction<responsedListFromApiSelectAddressListType | null>>;    //zare_nk_050209_added
 };
 
-// export function AdressListComponent({  //zare_nk_050206_commented
-export const ShowAddRemAddressComponent = function AdressListComponent({  //zare_nk_050206_added  
+// export const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({    //zare_nk_050209_commented
+const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({     //zare_nk_050209_added
   refForShowAddRemAddressBox,
   goToEdditAddressMap,
   RemoveAddress,
@@ -298,12 +330,11 @@ export const ShowAddRemAddressComponent = function AdressListComponent({  //zare
   isEpmtyShowAddRemAddress,     //zare_nk_050207_added
   setIsEpmtyShowAddRemAddress,   //zare_nk_050207_added
   showAddRemAddress,   //zare_nk_050207_added 
+  setRowItem,    //zare_nk_050209_added
+
 }: ShowAddRemAddressComponentType) {
 
-  //zare_nk_050208_AdressListComponent called!!-RemoveAddress: ()=>{
-  //     alert('1');
-  //     RemoveAddress(item.IdAdress);
-  // }
+  alert('showAddRemAddress: ' + showAddRemAddress);
 
   const router = useRouter();
 
@@ -345,12 +376,10 @@ export const ShowAddRemAddressComponent = function AdressListComponent({  //zare
       ref={refForShowAddRemAddressBox}  //zare_nk_050207_added
 
       anchor="bottom"
-      // open={!isEpmtyAdressList}  //zare_nk_050207_commented
-      open={!isEpmtyShowAddRemAddress}  //zare_nk_050207_added 
+      open={!isEpmtyShowAddRemAddress}
 
       onClose={() => {
-        // setIsEpmtyAdressList(true);  //zare_nk_050207_commented
-        setIsEpmtyShowAddRemAddress(true);  //zare_nk_050207_added
+        setIsEpmtyShowAddRemAddress(true);
       }}
       // hideBackdrop={true} //zare_nk_040502(albateh hideBackdrop={true} baes mishe alave bar hazfe tariye poshte drawer,ba click dar fazaye poshtesh,automat 
       // basteh nashe va niaz be modiriate dastiye document.addEventListener dar useEffect dashteh bashim) 
@@ -414,6 +443,7 @@ export const ShowAddRemAddressComponent = function AdressListComponent({  //zare
               id="closeAddRemAddressBtn"
               onClick={() => {
                 setIsEpmtyShowAddRemAddress(true);
+                setRowItem(null);    //zare_nk_050209_added 
               }}
               style={{
                 width: '32px', height: '32px', border: 'none', flex: '0 0 auto', display: "flex", flexFlow: "row", justifyContent: 'center',
@@ -436,12 +466,11 @@ export const ShowAddRemAddressComponent = function AdressListComponent({  //zare
           }} >
             <div style={{ display: 'flex', padding: '0px 10px', flex: '1 1 47%' }}>
               <button
-
                 onClick={(e) => {
                   RemoveAddress(e);
+                  setIsEpmtyShowAddRemAddress(true); //zare_nk_050209_added
                 }}
-                // onClick={RemoveAddress}
-
+                // onClick={RemoveAddress} 
                 style={{
                   borderRadius: 10,
                   display: 'flex',
@@ -498,8 +527,10 @@ export const ShowAddRemAddressComponent = function AdressListComponent({  //zare
 ////zare_nk_050207_added_end(for ShowAddRemAddressList)
 
 type AdressListComponentType = {
-  isEpmtyAdressList: boolean;
-  setIsEpmtyAdressList: React.Dispatch<React.SetStateAction<boolean>>;
+  // isEpmtyAdressList: boolean;    //zare_nk_050209_commented
+  isEpmtyAdressList: string | null;    //zare_nk_050209_added
+  // setIsEpmtyAdressList: React.Dispatch<React.SetStateAction<boolean>>;     //zare_nk_050209_commented
+  setIsEpmtyAdressList: React.Dispatch<React.SetStateAction<string | null>>;   //zare_nk_050209_added
   refForBox: RefObject<HTMLDivElement | null>;
 
   responsedListFromApiSelectAddressList: responsedListFromApiSelectAddressListType[] | null;
@@ -507,10 +538,11 @@ type AdressListComponentType = {
   isEpmtyShowAddRemAddress: boolean;    //zare_nk_050207_added
   setIsEpmtyShowAddRemAddress: React.Dispatch<React.SetStateAction<boolean>>;    //zare_nk_050207_added
   showAddRemAddress: () => void;   //zare_nk_050207_added
+  showAddressListDrawer: () => void;   //zare_nk_050209_added
 };
 
-// export function AdressListComponent({  //zare_nk_050206_commented
-export const AdressListComponent = function AdressListComponent({  //zare_nk_050206_added
+// export const AdressListComponent = function AdressListComponent({      //zare_nk_050209_commented
+const AdressListComponent = function AdressListComponent({      //zare_nk_050209_added
   isEpmtyAdressList,
   setIsEpmtyAdressList,
   refForBox,
@@ -520,6 +552,7 @@ export const AdressListComponent = function AdressListComponent({  //zare_nk_050
   isEpmtyShowAddRemAddress,     //zare_nk_050207_added
   setIsEpmtyShowAddRemAddress,   //zare_nk_050207_added
   showAddRemAddress,   //zare_nk_050207_added
+  showAddressListDrawer,   //zare_nk_050209_added
 }: AdressListComponentType) {
   console.log('zare_nk_050126_AdressListComponent called!!-isEpmtyAdressList: ' + isEpmtyAdressList);
 
@@ -567,10 +600,12 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
       id="box"
       ref={refForBox}
       anchor="bottom"
-      open={!isEpmtyAdressList}
+      // open={!isEpmtyAdressList}
+      open={isEpmtyAdressList != null}
       onClose={() => {
         console.log('zare_nk_050204-Drawer closed!');
-        setIsEpmtyAdressList(true)
+        // setIsEpmtyAdressList(true);   //zare_nk_050209_commented
+        setIsEpmtyAdressList(null)   //zare_nk_050209_added
       }}
       // hideBackdrop={true} //zare_nk_040502(albateh hideBackdrop={true} baes mishe alave bar hazfe tariye poshte drawer,ba click dar fazaye poshtesh,automat 
       // basteh nashe va niaz be modiriate dastiye document.addEventListener dar useEffect dashteh bashim) 
@@ -632,7 +667,8 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
             <button
               id="closeAddresListBtn"  //zare_nk_050207_okk
               onClick={() => {
-                setIsEpmtyAdressList(true);  //zare_nk_050207_okk
+                // setIsEpmtyAdressList(true);  //zare_nk_050209_commented
+                setIsEpmtyAdressList(null);  //zare_nk_050209_added
               }}
               style={{
                 width: '32px', height: '32px', border: 'none', flex: '0 0 auto', display: "flex", flexFlow: "row", justifyContent: 'center',
@@ -687,6 +723,8 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
             isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}
             setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}
             showAddRemAddress={showAddRemAddress}
+            setIsEpmtyAdressList={setIsEpmtyAdressList}
+            showAddressListDrawer={showAddressListDrawer}
           />
           {/* zare_nk_050206_added_addressHa_end(behtare dar componenti joda sedash bezanim ke maghadir ra ba api por koneh) */}
         </div>
@@ -757,8 +795,9 @@ type responsedListFromApiRemoveAddressType = {
 
 export default function Page() {
   const [error, setError] = useState<string | null>(null);
-  const [isEpmtyAdressList, setIsEpmtyAdressList] = useState(true);
-  const [isEpmtyShowAddRemAddress, setIsEpmtyShowAddRemAddress] = useState(true);   //zare_nk_050207_added
+  // const [isEpmtyAdressList, setIsEpmtyAdressList] = useState(true);            //zare_nk_050209_commented
+  const [isEpmtyAdressList, setIsEpmtyAdressList] = useState<string | null>(null);  //zare_nk_050209_added
+  const [isEpmtyShowAddRemAddress, setIsEpmtyShowAddRemAddress] = useState(true);
 
   // const [heightBox, setHeightBox] = useState<string>('0px');   //zare_nk_050203_commented
   const refForBox = useRef<HTMLDivElement | null>(null);
@@ -767,17 +806,14 @@ export default function Page() {
 
   // const { userData, login, logout } = useAuthentication(); //zare_nk_050111_added
   const { isLogin } = useAuthentication(); //zare_nk_050111_added
-  console.log('zare_nk_050111-isLogin from context:', isLogin);
+  console.log('zare_nk_050111-Page rendered!!');
 
   // const [apiSelectAddressList, SetApiSelectAddressList] = useState<SetApiSelectAddressListType[] | null>(null);  //zare_nk_050206_added(and zare_nk_050207_commented(baraye lafze karbordi))
   const [responsedListFromApiSelectAddressList, SetResponsedListFromApiSelectAddressList] = useState<responsedListFromApiSelectAddressListType[] | null>(null);  //zare_nk_050207_added(baraye lafze karbordi)
 
   const router = useRouter();
 
-  // const showDrawer = async () => {   //zare_nk_050207_commented(baraye lafze ashenatar)
-  const showAddressListDrawer = async () => {     //zare_nk_050207_added(baraye lafze ashenatar)
-
-    // setIsEpmtyAdressList(false);  //zare_nk_050205_comemnted
+  const showAddressListDrawer = async () => {
     ////zare_nk_050205_added_st
     let token = getCookie("token");
 
@@ -804,7 +840,8 @@ export default function Page() {
         var parsedList = JSON.parse(data.data.list);
         console.log("zare_nk_050206-parsedList1: " + parsedList[0].Adress);
         console.log("zare_nk_050206-parsedList2: " + parsedList[1].Adress);
-        setIsEpmtyAdressList(false);  //zare_nk_050206_added
+        // setIsEpmtyAdressList(false);  //zare_nk_050209_commented
+        setIsEpmtyAdressList('notNull');  //zare_nk_050209_added
 
         // SetApiSelectAddressList(() => {  
         SetResponsedListFromApiSelectAddressList(() => {
@@ -826,7 +863,8 @@ export default function Page() {
 
     console.log('zare_nk_050110-token hala is: ' + getCookie("token"));
     if (token) {
-      setIsEpmtyAdressList(false);
+      // setIsEpmtyAdressList(false);   //zare_nk_040209_commented
+      setIsEpmtyAdressList('notNull');   //zare_nk_040209_added
     }
     else {
       alert('lotfan avval online shid');
@@ -891,6 +929,7 @@ export default function Page() {
           isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}           //zare_nk_050207_added
           setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}     //zare_nk_050207_added
           showAddRemAddress={showAddRemAddress}
+          showAddressListDrawer={showAddressListDrawer}
         />
 
       </main>

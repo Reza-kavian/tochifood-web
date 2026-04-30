@@ -13,7 +13,7 @@ import { useAuthentication } from '../context/AuthenticationContext'; //zare_nk_
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 ////zare_nk_050202_added_end(for use MUI)
- 
+
 import Styles from "@/styles/components/globals.module.css"; //zare_nk_050204_added 
 
 interface RootLayoutProps {
@@ -25,13 +25,16 @@ interface RootLayoutProps {
 const theme = createTheme({
   palette: {
     mode: 'light', ////zare_nk_050203_nokteh(shabihe bg-dark bootstrap)
-    primaryDasti: {   //zare_nk_050203_nokteh(range dastiye khodam ke dar palette tarif kardam,baname delkhah(age name tarifshodeye MUI yani primary bedam jaigizine primarye MUI mishe))     
+    // primaryDasti: {   //zare_nk_050203_nokteh(range dastiye khodam ke dar palette tarif kardam,baname delkhah(age name tarifshodeye MUI yani primary bedam jaigizine primarye MUI mishe))     
+    primary: {   //zare_nk_050203_nokteh(range dastiye khodam ke dar palette tarif kardam,baname delkhah(age name tarifshodeye MUI yani primary bedam jaigizine primarye MUI mishe))     
+
       light: '#9ea6ad',  //zare_nk_050203_nokteh(light ro nemishnaseh!)
       main: '#724a0e62', //zare_nk_050203_nokteh(lafze primary ra dar propertiye tagha bedam faghat main ro mishnaseh(name dotSubi ham ghabool nemikoneh(masalan primaryDasti.main ya primaryDasti.dark ro ghabool nemikoneh!))) 
       dark: '#c01515',    //zare_nk_050203_nokteh(dark ro nemishnaseh!) 
       contrastText: '#ffffff',     //zare_nk_050203_nokteh(contrastText ro nemishnaseh!) 
     },
-    secondaryDasti: {
+    // secondaryDasti: {
+    secondary: {
       main: '#7a037a', // رنگ ثانویه بنفش MUI
     },
     ////zare_nk_050203_commented_st(text ro nemikhooneh va zirmajmooash ham emal nemishe pas commentesh kardam)
@@ -63,12 +66,12 @@ export default function LayoutWrapper({ children }: RootLayoutProps) {
     <ThemeProvider theme={theme} >
       <CssBaseline />
       {/* zare_nk_050202_added_end(for use MUI) */}
-      <body         
-        className={`${Styles.ISW_Medium_fa}`} 
+      <body
+        className={`${Styles.ISW_Medium_fa}`}
         style={{
           // color: "#3f3f3f",
           // fontFamily: 'IRANSansWeb_Medium(adad_fa)', 
-        }}> 
+        }}>
         {/* zare_nk_041225_commented_st(tebghe revale tapsifood header ra baraye aksare safahat motefavet ast,pas dar safahat mizaraim) */}
         {/* {!isLoginPageOrPage && (
         <div className="layoutHeader sticky-top">
@@ -92,7 +95,7 @@ export default function LayoutWrapper({ children }: RootLayoutProps) {
       )} */}
         {/* zare_nk_041225_commented_end(tebghe revale tapsifood header ra baraye aksare safahat motefavet ast,pas dar safahat mizaraim) */}
         <main className="main-in-LayoutWrapper">
-          <section className="section-in-LayoutWrapper"> 
+          <section className="section-in-LayoutWrapper">
             {/* {isLogin ? (
             <div>
               <p>شما وارد شده‌اید  -  {isLogin} </p>
@@ -104,7 +107,7 @@ export default function LayoutWrapper({ children }: RootLayoutProps) {
           )} */}
 
 
-           {/* {isLogin ? (<>
+            {/* {isLogin ? (<>
               {children}
             </>
             ) : (

@@ -79,7 +79,8 @@ export default function Page() {
 
             <div>
               <p>
-                <span>سفارش آنلاین قهوه ...</span>
+                <span>...</span>
+                <span style={{marginLeft:'5px'}}>سفارش آنلاین قهوه</span>
               </p>
             </div>
           </div>
