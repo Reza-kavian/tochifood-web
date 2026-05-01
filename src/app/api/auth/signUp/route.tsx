@@ -1,4 +1,4 @@
-////zare_nk_050124_okk
+////zare_nk_050210_okk
 import { NextRequest , NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { getConnection, sql } from "../../../../../lib/db";
@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
       { status: 405 }
     );
     response.cookies.delete("token");
-    response.cookies.delete("google_Invalid_credentials"); //zare_nk_031226_added
+    response.cookies.delete("google_Invalid_credentials");  
     return response;
   }
   try {

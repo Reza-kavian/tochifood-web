@@ -1,4 +1,4 @@
- ////zare_nk_050124_okk
+////zare_nk_050210_okk
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef, useMemo } from "react";
@@ -307,7 +307,7 @@ export function MiddleCountTedadSefr({
             alignContent: "center",
             border: "1px solid red",
             overflow: "hidden",
-            width: 'auto',  //zare_nk_041127_added
+            width: 'auto',
           }}
           dir="ltr"
         >
@@ -439,7 +439,7 @@ export function MiddleCountTedadSefr({
                     // midshe ya false,pas opacity meghdare nemigireh va faghat meghdari boolean barmigardooneh!!  )
 
                     // opacity: Number(bishAzMaxTedadYaMojoodi) === 1 ? 0.3 : 1, //zare_nk_050124_nokteh(rahe1-in dastoor dorosteh va javab mideh)
-                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 }:{opacity: 1}), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
+                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 } : { opacity: 1 }), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
                     ////zare_nk_050124_nokteh(rahe1 age gharare hamin opacity faghat meghdar begire khanatare,vali age bakhaim chandin khasiat ra meghdar bedim rahe2
                     // tosiyeh mishe (masalan ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3,color:'silver' }:{opacity: 1,color:'red'}),))
                   }}
@@ -605,12 +605,12 @@ export function MiddleCountTedadSefr({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                     // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
+                    // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
                     // barmigardoone va ...(Number(bishAzMaxTedadYaMojoodi) === 1 ham ya true ya false barmigardoone,va darkol ba and(&&) natijeye kolli ya true 
                     // midshe ya false,pas opacity meghdare nemigireh va faghat meghdari boolean barmigardooneh!!  )
 
                     // opacity: Number(bishAzMaxTedadYaMojoodi) === 1 ? 0.3 : 1, //zare_nk_050124_nokteh(rahe1-in dastoor dorosteh va javab mideh)
-                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 }:{opacity: 1}), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
+                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 } : { opacity: 1 }), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
                     ////zare_nk_050124_nokteh(rahe1 age gharare hamin opacity faghat meghdar begire khanatare,vali age bakhaim chandin khasiat ra meghdar bedim rahe2
                     // tosiyeh mishe (masalan ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3,color:'silver' }:{opacity: 1,color:'red'}),))
                   }}
@@ -671,6 +671,7 @@ type ForCartContInProdDetValType = {
   idTag: string;
 };
 
+////zare_nk_050210_nokteh_st(sabad kharid nadarim dar in safheh va faghat baraye olgue hast in)
 // type SabadRowType = {
 //   tedadInSabadOrDet: number;
 //   ZaribForoosh: number;
@@ -697,6 +698,7 @@ type ForCartContInProdDetValType = {
 //   MablaghNahaee: number;
 //   [key: string]: any;
 // };
+////zare_nk_050210_nokteh_end(sabad kharid nadarim dar in safheh va faghat baraye olgue hast in)
 
 type SabadSatrProps = {
   SabadRow: ForCartContInProdDetValType
@@ -737,7 +739,6 @@ export function SabadSatrComponent({
         tedadInSabadOrDetToNumber === ZaribForooshToNumber ? 1 :
           0;
   // }, [SabadRow]);  
-
 
   return (
     <button
@@ -1081,6 +1082,7 @@ export default function ShallowRoutingExample() {
 
   const [isOpenedProdDetModal, setIsOpenedProdDetModal] = useState(false);
   const [isOpenedSeePricesModal, setIsOpenedSeePricesModal] = useState(false);
+
   async function openprodDetModal(barcodeKala: string) {
     console.log('ShallowRoutingExample called-openprodDetModal called!!');
     await ShowDetails(barcodeKala);

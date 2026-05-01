@@ -1,4 +1,4 @@
-////zare_nk_050129_okk
+////zare_nk_050210_okk
 "use client"; 
 import { useEffect, useState, useRef, useCallback ,memo} from "react";
 import Styles from "@/styles/components/dooz.module.css";
@@ -121,6 +121,7 @@ function Board({
         setTimer(-1);
         return;
       }
+
       ////  //zare_nk_040120_added_st(baraye disable kardane dokmeha baraye entezar)(and commented)
       //   [...Array(9)].map((_, index) => {
       //     refForBtn.current[index]?.removeAttribute("disabled");
@@ -235,7 +236,7 @@ function Board({
     //zare_nk_040225_commented_st(rahe1-vali dalili be comment nist,chon dakhaele yek setState digeh nabood ke chon boolean barmigardoone amal nakoneh va majboor shim az rahe2 estefadeh konim)
     setXIsNextState((cur) => {
       localStorage.setItem("xIsNextState", JSON.stringify(!cur));
-      squares[squares.length - 1] = !cur ? "X" : "O"; ////zare_nk_050130_nokteh(engar ezafiye va bimoredeh!-hatman tahlilshe)
+      // squares[squares.length - 1] = !cur ? "X" : "O"; ////zare_nk_050130_nokteh(engar ezafiye va bimoredeh!-hatman tahlilshe)
       return !cur;
     });
     //zare_nk_040225_commented_end(rahe1-vali dalili be comment nist,chon dakhaele yek setState digeh nabood ke chon boolean barmigardoone amal nakoneh va majboor shim az rahe2 estefadeh konim)
@@ -263,10 +264,11 @@ function Board({
           Styles.lineWined
         );
         BtnsColor[index] = Styles.mohreh;
-      }
+      } 
       // refForBtn.current[index].disabled="disabled";  //zare_nk_040120(baraye disable kardane dokmeha baraye entezar)  
     });
     localStorage.setItem("BtnsColor", JSON.stringify(BtnsColor));
+    
     setLastMove(true);
     localStorage.setItem("lastMove", JSON.stringify(true));
     onPlay(nextSquares);
@@ -293,6 +295,7 @@ function Board({
         //khaneye avvale winner nobat ra taein mikone(X ya Y)
         return;
       }
+       
       if (
         typeof winner[index] === "number" && // تضمین عدد بودن    
         winner[index] != lastButton &&

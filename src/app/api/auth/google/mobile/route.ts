@@ -1,4 +1,4 @@
-// src/app/api/auth/google/mobile/route.ts  //zare_nk_050124_okk
+// src/app/api/auth/google/mobile/route.ts  //zare_nk_050210_okk
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {

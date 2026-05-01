@@ -194,7 +194,7 @@ const Adressescomponent = function Adressescomponent({    //zare_nk_050209_added
   ////zare_nk_050210_added_end
 
   return (<>
-    <div style={{ display: 'flex', flexFlow: 'column', padding: '0px', margin: '0px', border: '1px dashed red' }}>
+    <div style={{ display: 'flex', flexFlow: 'column', padding: '0px', margin: '0px', }}>
       {responsedListFromApiSelectAddressList?.map((item, index) => {
         // alert('0-item.IdAdress: '+JSON.stringify(item));
         return (

@@ -125,15 +125,10 @@ export async function middleware(request: NextRequest) {
       );
       ////zare_nk_040403_added_st
       const validPayload = await verifyToken(token);
-      ////zare_nk_040403_alan
+      
       console.log(
         "zare_nk_050205-04-validPayload is: " + JSON.stringify(validPayload)
       );
-
-      ////zare_nk_050111_added_movaghat_st
-      // const response22 = NextResponse.next();
-      // return response22;
-      ////zare_nk_050111_added_movaghat_end
 
       if (!validPayload) {
         var ishomePage: boolean = request.nextUrl.pathname == "/" ? true : false;  //zare_nk_050205_added

@@ -1,3 +1,4 @@
+////zare_nk_050210_okk
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef, useMemo } from "react";
@@ -7,9 +8,11 @@ import { useState, useEffect, useRef, useMemo } from "react";
 // import * as bootstrap from "bootstrap";  //zare_nk_040417_commented
 let cachedBootstrap: typeof import("bootstrap") | null = null; //zare_nk_040417_added
 // import Modal from "bootstrap/js/dist/modal";   //age faghat in ra begzaram va kolle bootstarp ra import nakonam kami be sabok boodane barname komak mishe,vali dar terminal errore <<document is not defined>> mideh ke badan tahlilesh mikonam
-// import { BrowserMultiFormatReader } from "@zxing/browser";   //zare_nk_040417_commented
-// import { NotFoundException } from "@zxing/library";    //zare_nk_040417_commented
+import { BrowserMultiFormatReader } from "@zxing/browser";  //zare_nk_050211_nokteh(az dele code avordimesh inja impor kardim)
+import { NotFoundException } from "@zxing/library";   //zare_nk_050211_nokteh(az dele code avordimesh inja impor kardim)
 // import { json } from "stream/consumers";  ////zare_nk_040417_commented(estefadeh ham nashod)
+
+
 import "@/styles/shoppingbasketCss.css";
 
 import '@zxing/browser'; // Import CSS if needed  //zare_nk_050208_added
@@ -25,7 +28,7 @@ async function getBootstrap() {
 }
 
 type MiddleCountTedadSefrType = {
-  // SabadRow: SabadRowType | ForCartContInProdDetValType;  //zare_nk_041120_commented
+  // SabadRow: SabadRowType | ForCartContInProdDetValType;  //zare_nk_041120_nokteh(in khat commenteh, faghat jahate olgue hazf nakardam)
   ////zare_nk_041120_added_st
   refForfather: RefObject<string | null>;
   fromShowDetails: boolean;
@@ -1109,6 +1112,10 @@ export default function ShallowRoutingExample() {
 
   const [isOpenedProdDetModal, setIsOpenedProdDetModal] = useState(false);
   const [isOpenedSeePricesModal, setIsOpenedSeePricesModal] = useState(false);
+
+  const refForCodeReader = useRef<BrowserMultiFormatReader | null>(null); //zare_nk_050211_added
+
+
   async function openprodDetModal(barcodeKala: string) {
     console.log('ShallowRoutingExample called-openprodDetModal called!!');
     await ShowDetails(barcodeKala);
@@ -1116,20 +1123,17 @@ export default function ShallowRoutingExample() {
     setAddOrRemChanged(null);
   }
 
-
   // async function ShowCamera() {  //zare_nk_050208_commented
   async function ShowCamera(isClient: boolean) {  //zare_nk_050208_added
-    if (!isClient) return;  //zare_nk_050208_added
+    if (!isClient) return;  ////zare_nk_050208_nokteh(albateh midoonim bekhatere neveshtane "use client" ebtedaye file ma dar safheye samte client(yani moroorgare 
+    // karbar)hastim, va in shart niazi nist, baraye talangor neveshtam(talangore inke codehaye @zxing/browser makhsoose samte client hast va samte serverSide benvisim error mideh))
     console.log('zare_nk_050208-ShowCamera called!!001');
-    ////zare_nk_050208_commented_st
+
     // // تنظیم ZXing برای پشتیبانی از QR کد و بارکدهای 1D
-    // const { BrowserMultiFormatReader } = await import("@zxing/browser");
-    // const codeReader = new BrowserMultiFormatReader();
-    ////zare_nk_050208_commented_end
+    // const { BrowserMultiFormatReader } = await import("@zxing/browser");  //zare_nk_050211_commented(bordimesh dar ebtedaye file import kardim(mesle importe baghiyeye packageha))
+    // const codeReader = new BrowserMultiFormatReader();  ////zare_nk_050208_commented 
 
     ////zare_nk_050208_added_st
-    // ایمپورت درست از دو پکیج متفاوت
-    const { BrowserMultiFormatReader } = await import("@zxing/browser");
     const { DecodeHintType, BarcodeFormat } = await import("@zxing/library");
 
     // تعریف فرمت‌هایی که می‌خوای پشتیبانی بشن
@@ -1148,6 +1152,8 @@ export default function ShallowRoutingExample() {
     // ساخت Reader با تنظیمات بالا
     const codeReader = new BrowserMultiFormatReader(hints);
     ////zare_nk_050208_added_end
+
+    refForCodeReader.current = codeReader; //zare_nk_050211_added
 
     codeReader
       .decodeFromVideoDevice(
@@ -1169,7 +1175,7 @@ export default function ShallowRoutingExample() {
             openprodDetModal(/* 6262831000503 */ text);
           } else {
             console.log('zare_nk_050208-ShowCamera called!!-004');
-            const { NotFoundException } = await import("@zxing/library");
+            // const { NotFoundException } = await import("@zxing/library");  //zare_nk_050211_commented(bordimesh dar ebtedaye file import kardim(mesle importe baghiyeye packageha))
             if (err && !(err instanceof NotFoundException)) {
               console.log("zare_nk_040321-in zxing-err: " + err);
             }
@@ -1412,7 +1418,9 @@ export default function ShallowRoutingExample() {
   }, [isOpenedProdDetModal]);
 
   useEffect(() => {
-    const isClient = typeof window !== 'undefined';  //zare_nk_050208_added
+    const isClient = typeof window !== 'undefined';  //zare_nk_050208_nokteh(isClient age true beshe mifahmimi ke far mohite client(yani moroorgare karbarim) hastim na dar mohite 
+    // codehaye server(in  baraye ine ke bazi az codeha ke samte server vojood nadaran samte server nanevism eshtebahi ke error begirim!(albate make dar in file az "use client" 
+    // dar ebtedaye file estefadeh kardim va midoonim ke samte clientim va sharte typeof window !== 'undefined' hamvareh true hast vali jahate olgue gozashtam bemooneh)))
     const seePricesModal = document.getElementById("seePricesModal");
     const handlerForSeePricesModal = () => {
       const input = document.getElementById("manualInputBarcode");
@@ -1448,12 +1456,27 @@ export default function ShallowRoutingExample() {
     ////zare_nk_050208_added_st
     // Cleanup function to stop the video stream when the component unmounts
     return () => {
-      if (isClient) {
-        // You might need to access codeReader here if it's made accessible
-        // For example, by returning it from ShowCamera or storing it in a ref
-        // codeReader.reset(); // If a reset method exists and is appropriate
+      if (isClient && refForCodeReader.current) {
+        console.log('پاکسازی منابع اسکنر...');
+        // refForCodeReader.current.reset(); // فراخوانی reset روی نمونه واقعی
+        refForCodeReader.current = null; // پاک کردن ref 
         console.log("Scanner component unmounted, cleaning up.");
       }
+
+
+      ////zare_nk_050211_added_st
+      if (seePricesModal) {
+        seePricesModal.removeEventListener(
+          "shown.bs.modal",
+          handlerForSeePricesModal
+        );
+        seePricesModal.removeEventListener(
+          "hidden.bs.modal",
+          hiddenHandlerForSeePricesModal
+        );
+      }
+      ////zare_nk_050211_added_end
+
     };
     ////zare_nk_050208_added_end
 
@@ -1989,7 +2012,7 @@ export default function ShallowRoutingExample() {
       }
     }
   }
-  // event
+
   async function remveFromCartInIndex(
     addRemParam: addRemParamType,
   ) {
