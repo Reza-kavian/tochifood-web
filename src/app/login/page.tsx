@@ -1,4 +1,4 @@
-////zare_nk_050208_okk
+////zare_nk_050212_okk
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -6,8 +6,8 @@ import Styles from "@/styles/components/login.module.css";
 import { RefObject } from "react";
 import { ReactNode } from "react";
 import { ChangeEvent } from "react";
-import jwt from "jsonwebtoken"; 
-import { JwtPayload } from "jsonwebtoken";  
+import jwt from "jsonwebtoken";
+import { JwtPayload } from "jsonwebtoken";
 import { factchecktools } from "googleapis/build/src/apis/factchecktools";
 
 function getCookie(name: any) {
@@ -74,7 +74,7 @@ function FirstPageComponent({
   useEffect(() => {
     if (backBtnCliked == true) {
       if (refForMobileInput.current[0]) {
-        mobileChanged(refForMobileInput.current[0]); //zare_nk_040527_nokteh(shabihsaziye rooydade onChange textboxe mobile ke methode mobileChanged seda zadeh mishod)
+        mobileChanged(refForMobileInput.current[0]); //zare_nk_040527_nokteh(shabihsaziye rooydade onChange textboxe mobile ke methode mobileChanged seda zadeh mishod, in ra be niate berooz shodane mobileError seda mizanim)
       }
     }
   }, [backBtnCliked]);
@@ -257,6 +257,27 @@ function SecondPageComponent({
         sToString = sToString.length === 1 ? "0" + sToString : sToString;
         try {
           if (refForTimer.current) {
+            // refForTimer.current.innerHTML =
+            //   hToString != "00"
+            //     ? '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
+            //     hToString +
+            //     "</span>" +
+            //     '<span style="color:red;padding:0px 5px;display:flex;justify-content:center;align-items:center;">:</span>' +
+            //     '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
+            //     mToString +
+            //     "</span>" +
+            //     '<span style="color:red;padding:0px 5px;display:flex;justify-content:center;align-items:center;">:</span>' +
+            //     '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
+            //     sToString +
+            //     "</span>"
+            //     : '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
+            //     mToString +
+            //     "</span>" +
+            //     '<span style="color:red;padding:0px 5px;display:flex;justify-content:center;align-items:center;">:</span>' +
+            //     '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
+            //     sToString +
+            //     "</span>";
+
             refForTimer.current.innerHTML =
               hToString != "00"
                 ? '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
@@ -270,13 +291,25 @@ function SecondPageComponent({
                 '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
                 sToString +
                 "</span>"
-                : '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
+                :
+                '<span style="color:#b7bdc2;padding:0px 5px;display:flex;justify-content:center;align-items:center;font-size: .875rem;">تا درخواست دوباره</span>' +
+                // '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
+                // mToString +
+                // "</span>" +
+                // '<span style="color:red;padding:0px 5px;display:flex;justify-content:center;align-items:center;">:</span>' +
+                // '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
+                // sToString +
+                // "</span>";
+                '<span style="border-radius:5px;widthh:30px;heightt:30px;background-colorr:red;color:#b7bdc2;display:flex;justify-content:center;align-items:center;font-size: .875rem;">' +
                 mToString +
                 "</span>" +
-                '<span style="color:red;padding:0px 5px;display:flex;justify-content:center;align-items:center;">:</span>' +
-                '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
+                '<span style="color:#b7bdc2;padding:0px 3px;display:flex;justify-content:center;align-items:center;font-size: .875rem;">:</span>' +
+                '<span style="border-radius:5px;widthh:30px;heightt:30px;background-colorr:red;color:#b7bdc2;display:flex;justify-content:center;align-items:center;font-size: .875rem;">' +
                 sToString +
                 "</span>";
+
+            refForTimer.current.style.cursor = 'not-allowed';  
+
           }
         } catch (error) {
           if (error instanceof Error) {
@@ -303,9 +336,9 @@ function SecondPageComponent({
     };
   }, [timer, removTimer]);
 
-  useEffect(() => {    //zare_nk_050208_nokteh(dar in useEffect migim age mobileCheckBtn true bood smsTxtChanged ra ba evente sooriye fakeEvent seda bezan(in kar ra 
-  //// baraye modiriate khata vaghti karbar az safhe do back zad va mojadad dokmeye checMobb ra zad va sms hast hanooz dar text boxesh vali age khataei dar formatesh 
-  //// bood state modiraiate an khata age meghdaresh hazf shod dobare meghdar begireh) )
+  useEffect(() => {    ////zare_nk_050208_nokteh(dar in useEffect migim age mobileCheckBtn true bood smsTxtChanged ra ba evente sooriye fakeEvent seda bezan(in kar ra 
+    //// baraye modiriate khata vaghti karbar az safhe do back zad va mojadad dokmeye checMobb ra zad va sms hast hanooz dar text boxesh vali age khataei dar formatesh 
+    //// bood state modiraiate an khata age meghdaresh hazf shod dobare meghdar begireh) )
     if (mobileCheckBtn == true) {
       const input = refForSmsInput.current[0];
       if (input) {
@@ -399,7 +432,7 @@ function SecondPageComponent({
         <div style={{
           display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
           paddingBottom: '1.25rem', paddingLeft: '1.25rem', paddingRight: '1.25rem', marginTop: '1.75rem',
-        }}>          
+        }}>
           {!isDisabledResendCode ?
             (<button
               id="ResendCode"
@@ -950,13 +983,16 @@ export default function Toolbar() {
     //   input = refForSmsInput.current[0];
     //   vall = input?.value;
     // }
-    ////zare_nk_050103_added_st
+
     let vall: string = textVaredeh;
     let tempnewSmsVal = newSmsVal;
-    tempnewSmsVal += vall;
+    ////zare_nk_050211_nokteh_st(rahe smschandtaei01, commnet shod chon faghat be tartib ezafe mikone, age inpute vasatiha ro tagheir bedim charachtere varedeh eshtebahi dar entehaye resheteheye newSmsVal darj mishe)
+    // tempnewSmsVal += vall;   
     // setNewSmsVal(tempnewSmsVal);
+    ////zare_nk_050211_nokteh_end(rahe smschandtaei01, commnet shod chon faghat be tartib ezafe mikone, age inpute vasatiha ro tagheir bedim charachtere varedeh eshtebahi dar entehaye resheteheye newSmsVal darj mishe)
     console.log('rahe ghabli-tempnewSmsVal: ' + tempnewSmsVal);
 
+    ////zare_nk_050211_nokteh_st(rahe smschandtaei02, rahe doroste-halle taghse smschandtaei01)
     tempnewSmsVal = '';
     SmsInputRefs.current.map((inputItem, index) => {
       let inputItemVal = SmsInputRefs.current[index].value;
@@ -967,8 +1003,7 @@ export default function Toolbar() {
         setNewSmsVal(tempnewSmsVal);
       }
     });
-
-    ////zare_nk_050103_added_end
+    ////zare_nk_050211_nokteh_end(rahe smschandtaei02, rahe doroste-halle taghse smschandtaei01) 
 
     if (!tempnewSmsVal) {
       // setFocusItem(0);  //zare_nk_050105_aaded(shayad niazi behesh nabashe!)
@@ -995,7 +1030,6 @@ export default function Toolbar() {
         SmsInputRefs.current[index + 1]?.focus();
       }
       else {
-        // alert('ddd');
         checkSmsForLogin(tempnewSmsVal);
       }
     }

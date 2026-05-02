@@ -1,3 +1,4 @@
+////zare_nk_050211_okk
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
@@ -119,7 +120,8 @@ const Adressescomponent = function Adressescomponent({    //zare_nk_050209_added
 
   const [responsedListFromApiRemoveAddress, SetResponsedListFromApiRemoveAddress] = useState<responsedListFromApiRemoveAddressType | null>(null);  //zare_nk_050207_added
 
-  const [rowItem, setRowItem] = useState<responsedListFromApiRemoveAddressType | null>(null);  //zare_nk_050209_added
+  // const [rowItem, setRowItem] = useState<responsedListFromApiRemoveAddressType | null>(null);  //zare_nk_050209_added(zare_nk_050211_comemnted)
+  const [rowItem, setRowItem] = useState<responsedListFromApiSelectAddressListType | null>(null);  //zare_nk_050211_added
 
 
   const goToEdditAddressMap = (IdAdress: number) => {  //zare_nk_050207_added  
@@ -386,7 +388,7 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({     //z
   const [isDisabledEditAddressBtn, setIsDisabledEditAddressBtn] = useState(false);  //zare_nk_050207_added(in state contorole disabled bodan ya naboodane dokmeye eddite address ezafi va bimorede,va hamvareh ehtemalan enable bayad bashe)
 
   return (<>
-    <button
+    {/* <button
       onClick={(e) => {
         RemoveAddress(e);
       }}
@@ -406,7 +408,7 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({     //z
         height: '50px',
       }}>
       حذف تستی
-    </button>
+    </button> */}
     <Drawer
       id="box"
       // ref={refForBox}   //zare_nk_050207_commented

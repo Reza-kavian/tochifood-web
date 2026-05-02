@@ -1,4 +1,4 @@
-// app/page.tsx
+// app/page.tsx  ////zare_nk_050211_okk
 'use client'; // برای استفاده از state و event handlers لازم است
 
 import React, { useState } from 'react';

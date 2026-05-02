@@ -1,4 +1,4 @@
-////zare_nk_050208_okk
+////zare_nk_050211_okk
 'use client'
 import { useRouter, redirect } from "next/navigation";
 import "@/styles/onboardingCss.css";
@@ -134,5 +134,4 @@ export default function Page() {
       {/* </div> */}
     </>
   );
-
 }
