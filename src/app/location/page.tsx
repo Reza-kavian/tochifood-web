@@ -1,4 +1,4 @@
-////zare_nk_050211_okk
+////zare_nk_050212_okk
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -12,9 +12,7 @@ import { JwtPayload } from "jsonwebtoken";
 import { factchecktools } from "googleapis/build/src/apis/factchecktools";
 
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog)
-
-////zare_nk_050109_added_st
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog(shabihe modal bootstrap))
 
 // import 'ol/ol.css';   //zare_nk_041025_commented(for used neshan)
 import "@neshan-maps-platform/ol/ol.css"
@@ -207,7 +205,7 @@ function BoxHtmlComponent({
     });
   };
 
-  ////zare_nk_050206_nokteh002_st(yek rooydade ekhtesasi baraye yek tag(voroodiye yek tag ro migireh, khoroojiye yek tag ro mideh)) 
+  ////zare_nk_050206_nokteh001_st(yek rooydade ekhtesasi baraye yek tag(voroodiye yek tag ro migireh, khoroojiye yek tag ro mideh)) 
   // const handleAddressInputFocus = () => {
   //   // setIsInputFocused(true);
   //   setIsAddressInputFocused(true);
@@ -241,7 +239,7 @@ function BoxHtmlComponent({
   // const handleAddressNameInputBlur = () => {
   //   setIsAddressNameInputFocused(false);
   // }; 
-  ////zare_nk_050206_nokteh002_end(yek rooydade ekhtesasi baraye yek tag(voroodiye yek tag ro migireh, khoroojiye yek tag ro mideh))
+  ////zare_nk_050206_nokteh001_end(yek rooydade ekhtesasi baraye yek tag(voroodiye yek tag ro migireh, khoroojiye yek tag ro mideh))
 
   const refForSaveAddressFormInputsBtn = useRef<HTMLButtonElement | null>(null);
   const [isDisabledsaveAddressFormInputsBtn, setIsDisabledsaveAddressFormInputsBtn] = useState(true);

@@ -1,4 +1,4 @@
-////zare_nk_050211_okk
+////zare_nk_050212_okk
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
@@ -15,8 +15,6 @@ import { MouseEvent } from "react";
 
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog)
-
-////zare_nk_050109_added_st
 
 // import 'ol/ol.css';   //zare_nk_041025_commented(for used neshan)
 import "@neshan-maps-platform/ol/ol.css"
@@ -123,7 +121,6 @@ const Adressescomponent = function Adressescomponent({    //zare_nk_050209_added
   // const [rowItem, setRowItem] = useState<responsedListFromApiRemoveAddressType | null>(null);  //zare_nk_050209_added(zare_nk_050211_comemnted)
   const [rowItem, setRowItem] = useState<responsedListFromApiSelectAddressListType | null>(null);  //zare_nk_050211_added
 
-
   const goToEdditAddressMap = (IdAdress: number) => {  //zare_nk_050207_added  
     // router.push("/folder03?tab=comments2");
     // redirect("/login");
@@ -132,11 +129,8 @@ const Adressescomponent = function Adressescomponent({    //zare_nk_050209_added
   };
 
   const RemoveAddress = async (IdAdress: number) => {
-    ////zare_nk_api deleteAddres seda zadeh va ehtemalan setIsEpmtyAdressList(true) mizanim ta dobareh liste Addressha refresh shan
-
     const token = getCookie("token");
     console.log('zare_nk_050110-RemoveAddress-token hala is: ' + getCookie("token"));
-
 
     let ApiUrl = "https://api.tochikala.com/api/";
     const response = await fetch(ApiUrl + "User/Api_DeleteAddress", {
@@ -169,12 +163,11 @@ const Adressescomponent = function Adressescomponent({    //zare_nk_050209_added
       // // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
       // setError("متاسفانه خطایی رخ داده است35");
     }
-
   };
 
   ////zare_nk_050210_added_st
   const chosenAddress = async (chosenAddressItem: responsedListFromApiSelectAddressListType) => {
-    console.log('chosenAddressItem.IdAdress: ' + chosenAddressItem.IdAdress); 
+    console.log('chosenAddressItem.IdAdress: ' + chosenAddressItem.IdAdress);
     // document.cookie = `chosenAddress=${JSON.stringify(chosenAddressItem)}; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;  //zare_nk_050210_nokteh(expires=Thu, 01 Jan 1970 00:00:00 UTC baese monghazi shodane cookie dar hamin khatte tarif mishe! pas 
     // majboorim ye tarikhe dastiy behesh badim,age mikhaim abadi basshe ye cookiye dastiye toolani behesh midim ke shabiye abadiye(age expires ra dasti nadim 
     // behesh pishfarz SessionCookie darnazar gerefteh mishe(yani moroorgar ro bebandim cookie hazf mishe) ) )
@@ -190,7 +183,7 @@ const Adressescomponent = function Adressescomponent({    //zare_nk_050209_added
     )}; path=/; expires=${expiresString};secure; samesite=None`;
 
     const chosenAddress = getCookie("chosenAddress");
-    console.log('chosenAddress is: ' + chosenAddress);   
+    console.log('chosenAddress is: ' + chosenAddress);
     setIsEpmtyAdressList(null);   //zare_nk_050210_added
   }
   ////zare_nk_050210_added_end
@@ -388,27 +381,6 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({     //z
   const [isDisabledEditAddressBtn, setIsDisabledEditAddressBtn] = useState(false);  //zare_nk_050207_added(in state contorole disabled bodan ya naboodane dokmeye eddite address ezafi va bimorede,va hamvareh ehtemalan enable bayad bashe)
 
   return (<>
-    {/* <button
-      onClick={(e) => {
-        RemoveAddress(e);
-      }}
-
-      style={{
-        borderRadius: 10,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row',
-        padding: 7,
-        backgroundColor: '#f3f2f2',
-        color: '#242424',
-        border: 'none',
-        fontSize: '15px',
-        width: '100%',
-        height: '50px',
-      }}>
-      حذف تستی
-    </button> */}
     <Drawer
       id="box"
       // ref={refForBox}   //zare_nk_050207_commented
@@ -525,7 +497,7 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({     //z
                   width: '100%',
                   height: '50px',
                 }}>
-                33  حذف
+                حذف
               </button>
             </div>
             <div style={{ display: 'flex', padding: '0px 10px', flex: '1 1 47%' }}>
@@ -964,8 +936,8 @@ export default function Page() {
 
           responsedListFromApiSelectAddressList={responsedListFromApiSelectAddressList}
 
-          isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}           
-          setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}      
+          isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}
+          setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}
           showAddRemAddress={showAddRemAddress}
           showAddressListDrawer={showAddressListDrawer}
         />
