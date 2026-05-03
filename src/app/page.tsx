@@ -125,7 +125,8 @@ const Adressescomponent = function Adressescomponent({    //zare_nk_050209_added
     // router.push("/folder03?tab=comments2");
     // redirect("/login");
     // alert('IdAdress:::: ' + IdAdress);
-    router.replace("/edditAddressLocation");  //zare_nk_050207_nokteh(in safheye edditAddressLocation ezafeh beshe(dar tapsiFood esmesh safheye edit-address hast))
+    // router.replace("/edditAddressLocation");  //zare_nk_050207_nokteh(in safheye edditAddressLocation ezafeh beshe(dar tapsiFood esmesh safheye edit-address hast))
+    router.push("/editaddress?IdAdress=" + IdAdress);   //zare_nk_050213_added 
   };
 
   const RemoveAddress = async (IdAdress: number) => {
