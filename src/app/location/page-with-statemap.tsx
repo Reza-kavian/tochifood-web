@@ -781,17 +781,12 @@ export default function LocationPage() {
 
   var featureToPaskari; var addressMatni = '';
 
-  // const [map, setMap] = useState<Map | null>(null);  //zare_nk_050213_commented
-  const refForMap = useRef<Map | null>(null);     //zare_nk_050213_added
+  //  var map = null;
+  const [map, setMap] = useState<Map | null>(null);
 
+  const [styles1, setStyles1] = useState<Style | null>(null);
 
-  // const [styles1, setStyles1] = useState<Style | null>(null);  //zare_nk_050213_commented
-  const refForStyle = useRef<Style | null>(null);  //zare_nk_050213_added
-
-  // const [vSource1, setVSource1] = useState<VectorSource | null>(null);  //zare_nk_050213_commented
-  const refForVectorSource = useRef<VectorSource | null>(null);  //zare_nk_050213_added
-
-
+  const [vSource1, setVSource1] = useState<VectorSource | null>(null);
   //  const [vSource1, setVSource1] = useState<VectorSource<Feature<Point>> | null>(null); 
   //// zare_nk_050208_nokteh(dar asl bayad noe jenerice VectorSource(yani Feature<Point>) ro 
   //// begim,vali chon dar tarife in class tavassote barnamenevisane openlayer behesh voroodiye pishfarze Geometry dadand man nadam error nemideh)
@@ -799,9 +794,7 @@ export default function LocationPage() {
   //// const [vLayer1, setVLayer1] = useState<VectorLayer | null>(null);  //zare_nk_050109_commented(VectorLayer yek classe generic hast)
   ////zare_nk_050126_nokteh_st(VectorLayer yek classe generic hast,va baraye clashaye generic bayad noe manbae(yani source) dakhelash moshakhas shavad,ma ham
   //  ba dastoore VectorLayer<VectorSource> noe soursesh ra VectorSource lahaz kardim(age noe source genericha ro nagim az nazare typeScript khata hast))
-  // const [vLayer1, setVLayer1] = useState<VectorLayer<VectorSource> | null>(null);  //zare_nk_050213_commented
-  const refForVectorLayer = useRef<VectorLayer<VectorSource> | null>(null);  //zare_nk_050213_added
-
+  const [vLayer1, setVLayer1] = useState<VectorLayer<VectorSource> | null>(null);
   ////zare_nk_050126_nokteh_end(VectorLayer yek classe generic hast,va baraye clashaye generic bayad noe manbae(yani source) dakhelash moshakhas shavad,ma ham
   //  ba dastoore VectorLayer<VectorSource> noe soursesh ra VectorSource lahaz kardim(age noe source genericha ro nagim az nazare typeScript khata hast))
 
@@ -814,354 +807,80 @@ export default function LocationPage() {
   //  const [vLayer1, setVLayer1] = useState<VectorLayer<VectorSource<Geometry>> | null>(null)
   //)
 
-  // const [feature, setFeature] = useState<Feature | null>(null);  //zare_nk_050213_commented
-  const refForFeature = useRef<Feature | null>(null);  //zare_nk_050213_added
+  // var feature: (Feature | null) = null;  //zare_nk_050109_commented
+  const [feature, setFeature] = useState<Feature | null>(null);  //zare_nk_050109_added
 
   useEffect(() => {
     console.log('rezam-first useEffect');
 
-    ////zare_nk_050213_commented_st
-    // const newMap = new Map({
-    //   mapType: 'neshan',
-    //   target: 'id123',
-    //   //key: 'web.6646ef4caa574f5484cf4a140d1b1fa7',  //zare_nk_041030_nokteh(keye shakhsiye man baname mapForWeb)
-    //   key: 'web.ed314c3159af4e7ab4caf19447b6cf36',   //zare_nk_041030_nokteh(keye sazmaniye tochikala ba name mainTochi)
-    //   poi: true,
-    //   traffic: true,
-    //   //interactions: defaults({
-    //   //    dragPan: true,
-    //   //    mouseWheelZoom: true,
-    //   //}),
-    //   view: new View({
-    //     //center:/*ol.proj.fromLonLat(*/[firstCoordinates.X, firstCoordinates.Y]/*)*/   //ol.proj.fromLonLat([51.389, 35.6892]), 
-    //     center: fromLonLat([52.4152, 39.6872]),    //ol.proj.fromLonLat([51.389, 35.6892]), 
-    //     // center:   [52.4152, 39.6872] ,    /
-    //     zoom: 18,  //zare_nk_040912_added
-    //     projection: "EPSG:3857",
-    //   })
-    // });
+    const newMap = new Map({
+      mapType: 'neshan',
+      target: 'id123',
+      //key: 'web.6646ef4caa574f5484cf4a140d1b1fa7',  //zare_nk_041030_nokteh(keye shakhsiye man baname mapForWeb)
+      key: 'web.ed314c3159af4e7ab4caf19447b6cf36',   //zare_nk_041030_nokteh(keye sazmaniye tochikala ba name mainTochi)
+      poi: true,
+      traffic: true,
+      //interactions: defaults({
+      //    dragPan: true,
+      //    mouseWheelZoom: true,
+      //}),
+      view: new View({
+        //center:/*ol.proj.fromLonLat(*/[firstCoordinates.X, firstCoordinates.Y]/*)*/   //ol.proj.fromLonLat([51.389, 35.6892]), 
+        center: fromLonLat([52.4152, 39.6872]),    //ol.proj.fromLonLat([51.389, 35.6892]), 
+        // center:   [52.4152, 39.6872] ,    /
+        zoom: 18,  //zare_nk_040912_added
+        projection: "EPSG:3857",
+      })
+    })
+    ////zare_nk_050110_nokteh(nemidoonam chera vaghti kolle new Map ra dakhele setMap mirizim do naghshe dar tage #id123 lahaz mishe!
+    // albateh midoonim ke react dastoorate dakhele useEffect(...,[]) ra baraye testgiri dobar ejra mikone ba vojoode yek bar seda zadeh shodane useEffecti ke [] dare.
+    //pas do bar setMap ejra mishe ke do naghshe ro khahim dash dar ja naghshei(#id123) vali vaghti new Map ra dar moteghayere const mirizim react midoone ke const ra
+    // nabayad bad az khatte tarif mojadad meghdar bedeh,pas setMap ba inke dobare sedaa zadeh mishe dastoore returne toosh amal nemikone,chon meghdare moteghayere 
+    // const newMap tagheiri nakarde va moshkele do naghshe dar ja naghshei hal mishe ba tarife moteghayere const )
+    setMap(() => {
+      console.log('rezam-setMap');
+      return (newMap);
+    });
 
-    // setMap(() => {
-    //   console.log('rezam-setMap');
-    //   return (newMap);
-    // });
-    ////zare_nk_050213_commented_end 
-    ////zare_nk_050213_added_st 
-
-    if (!refForMap.current) {
-      const newMap = new Map({
-        mapType: 'neshan',
-        target: 'id123',
-        //key: 'web.6646ef4caa574f5484cf4a140d1b1fa7',  //zare_nk_041030_nokteh(keye shakhsiye man baname mapForWeb)
-        key: 'web.ed314c3159af4e7ab4caf19447b6cf36',   //zare_nk_041030_nokteh(keye sazmaniye tochikala ba name mainTochi)
-        poi: true,
-        traffic: true,
-        //interactions: defaults({
-        //    dragPan: true,
-        //    mouseWheelZoom: true,
-        //}),
-        view: new View({
-          //center:/*ol.proj.fromLonLat(*/[firstCoordinates.X, firstCoordinates.Y]/*)*/   //ol.proj.fromLonLat([51.389, 35.6892]), 
-          center: fromLonLat([52.4152, 39.6872]),    //ol.proj.fromLonLat([51.389, 35.6892]), 
-          // center:   [52.4152, 39.6872] ,    /
-          zoom: 18,  //zare_nk_040912_added
-          projection: "EPSG:3857",
-        })
-      });
-      console.log("useeeeeeeeeeeeeeeeeeeeeeeeeeeeee !refForMap.current  in if");
-      refForMap.current = newMap;
-    }
-    else {
-      console.log("useeeeeeeeeeeeeeeeeeeeeeeeeeeeee refForMap.current  in else");
-    }
-
-    ////zare_nk_050213_added_end 
-
-    ////zare_nk_050213_commented_st 
-    // const newStyle = new Style({
-    //   fill: new Fill({
-    //     color: '#581e88'
-    //   }),
-    //   stroke: new Stroke({
-    //     color: '#581e88',
-    //     width: 2
-    //   }),
-    //   image:
-    //     new Icon({
-    //       anchorXUnits: 'fraction',
-    //       anchorYUnits: 'pixels',
-    //       src: "https://img.tochikala.com/Icon/location-icon.png",
-    //     }),
-    // });
-
-    // setStyles1(() => {
-    //   console.log('rezam-setStyles1');
-    //   return (newStyle);
-    // });
-    ////zare_nk_050213_commented_end 
-    ////zare_nk_050213_added_st
-    if (!refForStyle.current) {
-      const newStyle = new Style({
-        fill: new Fill({
-          color: '#581e88'
+    const newStyle = new Style({
+      fill: new Fill({
+        color: '#581e88'
+      }),
+      stroke: new Stroke({
+        color: '#581e88',
+        width: 2
+      }),
+      image:
+        new Icon({
+          anchorXUnits: 'fraction',
+          anchorYUnits: 'pixels',
+          src: "https://img.tochikala.com/Icon/location-icon.png",
         }),
-        stroke: new Stroke({
-          color: '#581e88',
-          width: 2
-        }),
-        image:
-          new Icon({
-            anchorXUnits: 'fraction',
-            anchorYUnits: 'pixels',
-            src: "https://img.tochikala.com/Icon/location-icon.png",
-          }),
-      });
-      refForStyle.current = newStyle;
-    }
-    else {
-      console.log("useeeeeeeeeeeeeeeeeeeeeeeeeeeeee refForStyle.current  in else");
-    }
-    ////zare_nk_050213_added_end
+    });
 
-    ////zare_nk_050213_commented_st
-    //  const newVectorSource = new VectorSource({
-    //       // projection: 'EPSG:4326', //zare_nk_050109_nokteh(tosiye mishe projection dar View gonjoondeh beshe,baraye hamin comment shod az inja)
-    //     });
-    //     setVSource1(() => {
-    //       console.log('rezam-setVSource1');
-    //       return (newVectorSource);
-    //     });
-    ////zare_nk_050213_commented_end
-    ////zare_nk_050213_added_st
-    if (!refForVectorSource.current) {
-      const newVectorSource = new VectorSource({
-        // projection: 'EPSG:4326', //zare_nk_050109_nokteh(tosiye mishe projection dar View gonjoondeh beshe,baraye hamin comment shod az inja)
-      });
-      refForVectorSource.current = newVectorSource;
-    }
-    else {
-      console.log("useeeeeeeeeeeeeeeeeeeeeeeeeeeeee refForVectorSource.current  in else");
-    }
-    ////zare_nk_050213_added_end
+    setStyles1(() => {
+      console.log('rezam-setStyles1');
+      return (newStyle);
+    });
 
-    ////zare_nk_050213_commented_st
-    // //  if (vSource1 && styles1 != null) {
-    //       // console.log('useeeeeeeeeeeeeeeeeeeeeeeeeeeeee vSource1  in if');
-    //       setVLayer1(() => {
-    //         return (
-    //           new VectorLayer<VectorSource>({
-    //             source: vSource1, // حالا vSource1 قطعاً VectorSource<Geometry> است
-    //             style: styles1,
-    //             updateWhileAnimating: true,
-    //             updateWhileInteracting: true,
-    //           }));
-    //       });
-    //     }
-    //   //  else {
-    //   //     console.log('useeeeeeeeeeeeeeeeeeeeeeeeeeeeee vSource1 noot in if');
-    //   //   }
-    ////zare_nk_050213_commented_end
-    ////zare_nk_050213_added_st
-    // if (vSource1 && styles1 != null) {
-    // console.log('useeeeeeeeeeeeeeeeeeeeeeeeeeeeee vSource1  in if');
+    const newVectorSource = new VectorSource({
+      // projection: 'EPSG:4326', //zare_nk_050109_nokteh(tosiye mishe projection dar View gonjoondeh beshe,baraye hamin comment shod az inja)
+    });
+    setVSource1(() => {
+      console.log('rezam-setVSource1');
+      return (newVectorSource);
+    });
+    ////zare_nk_050109_commented_st(bordim be useEffecte [vSource1],ta motmaein beshim vSource1 meghdaresh kamel shodeh)
     // setVLayer1(() => {
     //   return (
-    //     new VectorLayer<VectorSource>({
-    //       source: vSource1, // حالا vSource1 قطعاً VectorSource<Geometry> است
-    //       style: styles1,
-    //       updateWhileAnimating: true,
-    //       updateWhileInteracting: true,
+    //     new VectorLayer<VectorSource<Geometry>>({ 
+    //      source: vSource1,
+    //      style: styles1,
+    //      updateWhileAnimating: true,
+    //      updateWhileInteracting: true,
     //     }));
-    // });
-    if (!refForVectorLayer.current) {
-      refForVectorLayer.current = new VectorLayer<VectorSource>({
-        source: refForVectorSource.current,
-        style: refForStyle.current,
-        updateWhileAnimating: true,
-        updateWhileInteracting: true,
-      });
-
-      ////zare_nk_050213_added_st(movaghat ta motmaen shim)
-      if ((refForMap.current.getView().getZoom() ?? 0) < 18) {
-        console.log('less than 18');
-      }
-      else {
-        console.log('bigger than 18');
-      }
-      showPosition([53.0585, 36.5659]);
-      ////zare_nk_050213_added_end(movaghat ta motmaen shim) 
-
-      ////zare_nk_050213_added_st(movaghat ta motmaen shim)
-      console.log("002");
-      featureToPaskari = refForFeature.current;
-      if (refForFeature.current) {
-        refForVectorSource.current?.removeFeature(refForFeature.current);
-      }
-
-      refForVectorSource.current?.clear();
-      refForVectorSource.current?.getFeatures().map(item => {
-        refForVectorSource.current?.removeFeature(item);
-      });
-      if (refForFeature.current) {
-        refForVectorSource.current?.addFeature(refForFeature.current);
-      }
-      featuresArr.push(refForFeature.current);
-      console.log("longitude: " + longitude.current + '-latitude: ' + latitude.current);
-      LocationArr = [];
-      LocationArr.push({
-        'loc': {
-          'X': longitude.current,
-          'Y': latitude.current
-        }
-      });
-      continuation();
-
-      refForMap.current?.on('moveend', function (event) {
-        ////zare_nk_040912_added_st
-        if ((refForMap.current?.getView().getZoom() ?? 0) < 18) {
-          // alert('less than 18');
-        }
-        else {
-          // alert('bigger than 18');
-        }
-        ////zare_nk_040912_added_end 
-
-        let centerCoords3857 = refForMap.current?.getView().getCenter();
-        console.log("moveend-feature.get('name').X: " + refForFeature.current);
-        if (centerCoords3857) {
-          console.log("moveend-feature.get('name').X: " + refForFeature.current?.get('name').X);
-          // feature?.getGeometry()?.setCoordinates(centerCoords3857);
-          refForFeature.current?.setGeometry(new Point(centerCoords3857));
-          let coordinate = transform(centerCoords3857, 'EPSG:3857', 'EPSG:4326');
-          let lat = coordinate[1]// ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[1]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-          let lng = coordinate[0]// ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[0];  // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-          if (refForFeature.current) {
-            refForFeature.current.get('name').X = lng; refForFeature.current.get('name').Y = lat;
-          }
-        }
-      });
-
-      refForMap.current.on('pointerdrag', function () {
-        defZoom = refForMap.current?.getView().getZoom();
-
-        ////zare_nk_040911_added_st
-        let centerCoords3857 = refForMap.current?.getView().getCenter();
-        if (centerCoords3857) {
-          console.log("pointermove-feature.get('name').X: " + refForFeature.current?.get('name').X + '-feature.getGeometry().getCoordinates()[0]: ' + refForFeature.current?.getGeometry() ? [0] : 777
-            + "-pointermove-feature.get('name').Y: " + refForFeature.current?.get('name').Y + '-feature.getGeometry().getCoordinates()[1]: ' + refForFeature.current?.getGeometry() ? [1] : 888); //feature.getGeometry().getCoordinates()[1]);
-          // feature.getGeometry().setCoordinates(centerCoords3857);
-          refForFeature.current?.setGeometry(new Point(centerCoords3857));
-          let coordinate = transform(centerCoords3857, 'EPSG:3857', 'EPSG:4326');
-          ////zare_nk_040911_added_end 
-          //let coordinate = feature.getGeometry().getCoordinates();  //zare_nk_040911_commented  
-          let lat = coordinate[1]//ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[1]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-          let lng = coordinate[0]//ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[0]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-
-          if (refForFeature.current) {
-            refForFeature.current.get('name').X = lng; refForFeature.current.get('name').Y = lat;
-          }
-        }
-      });
-      ////zare_nk_050213_added_end(movaghat ta motmaen shim)
-    }
-    else {
-      console.log("useeeeeeeeeeeeeeeeeeeeeeeeeeeeee refForVectorLayer.current  in else");
-    }
-    //}
-    //  else {
-    //     console.log('useeeeeeeeeeeeeeeeeeeeeeeeeeeeee vSource1 noot in if');
-    //   }
-    ////zare_nk_050213_added_end
-
-
-    ////zare_nk_050213_added_st
-    if (refForMap.current && refForVectorLayer.current) {
-      ////zare_nk_050213_commented_st(movaghat ta motmaen shim)
-      // if ((refForMap.current.getView().getZoom() ?? 0) < 18) {
-      //   console.log('less than 18');
-      // }
-      // else {
-      //   console.log('bigger than 18');
-      // }
-      // showPosition([53.0585, 36.5659]);
-      ////zare_nk_050213_commented_end(movaghat ta motmaen shim)
-    }
-
-
-    if (refForMap.current && refForFeature.current) {
-      ////zare_nk_050213_commented_st(movaghat ta motmaen shim)
-      // console.log("002");
-      // featureToPaskari = refForFeature.current;
-      // refForVectorSource.current?.removeFeature(refForFeature.current);
-      // refForVectorSource.current?.clear();
-      // refForVectorSource.current?.getFeatures().map(item => {
-      //   refForVectorSource.current?.removeFeature(item);
-      // });
-      // refForVectorSource.current?.addFeature(refForFeature.current);
-      // featuresArr.push(refForFeature.current);
-      // console.log("longitude: " + longitude.current + '-latitude: ' + latitude.current);
-      // LocationArr = [];
-      // LocationArr.push({
-      //   'loc': {
-      //     'X': longitude.current,
-      //     'Y': latitude.current
-      //   }
-      // });
-      // continuation();
-
-      // refForMap.current?.on('moveend', function (event) {
-      //   ////zare_nk_040912_added_st
-      //   if ((refForMap.current?.getView().getZoom() ?? 0) < 18) {
-      //     // alert('less than 18');
-      //   }
-      //   else {
-      //     // alert('bigger than 18');
-      //   }
-      //   ////zare_nk_040912_added_end 
-
-      //   let centerCoords3857 = refForMap.current?.getView().getCenter();
-      //   console.log("moveend-feature.get('name').X: " + refForFeature.current);
-      //   if (centerCoords3857) {
-      //     console.log("moveend-feature.get('name').X: " + refForFeature.current?.get('name').X);
-      //     // feature?.getGeometry()?.setCoordinates(centerCoords3857);
-      //     refForFeature.current?.setGeometry(new Point(centerCoords3857));
-      //     let coordinate = transform(centerCoords3857, 'EPSG:3857', 'EPSG:4326');
-      //     let lat = coordinate[1]// ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[1]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-      //     let lng = coordinate[0]// ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[0];  // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-      //     if (refForFeature.current) {
-      //       refForFeature.current.get('name').X = lng; refForFeature.current.get('name').Y = lat;
-      //     }
-      //   }
-      // });
-
-      // refForMap.current.on('pointerdrag', function () {
-      //   defZoom = refForMap.current?.getView().getZoom();
-
-      //   ////zare_nk_040911_added_st
-      //   let centerCoords3857 = refForMap.current?.getView().getCenter();
-      //   if (centerCoords3857) {
-      //     console.log("pointermove-feature.get('name').X: " + refForFeature.current?.get('name').X + '-feature.getGeometry().getCoordinates()[0]: ' + refForFeature.current?.getGeometry() ? [0] : 777
-      //       + "-pointermove-feature.get('name').Y: " + refForFeature.current?.get('name').Y + '-feature.getGeometry().getCoordinates()[1]: ' + refForFeature.current?.getGeometry() ? [1] : 888); //feature.getGeometry().getCoordinates()[1]);
-      //     // feature.getGeometry().setCoordinates(centerCoords3857);
-      //     refForFeature.current?.setGeometry(new Point(centerCoords3857));
-      //     let coordinate = transform(centerCoords3857, 'EPSG:3857', 'EPSG:4326');
-      //     ////zare_nk_040911_added_end 
-      //     //let coordinate = feature.getGeometry().getCoordinates();  //zare_nk_040911_commented  
-      //     let lat = coordinate[1]//ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[1]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-      //     let lng = coordinate[0]//ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[0]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-
-      //     if (refForFeature.current) {
-      //       refForFeature.current.get('name').X = lng; refForFeature.current.get('name').Y = lat;
-      //     }
-      //   }
-      // });
-      ////zare_nk_050213_commented_end(movaghat ta motmaen shim)
-    }
-    else {
-      console.log("003");
-    }
-    ////zare_nk_050213_added_end
-
+    // }); 
+    ////zare_nk_050109_commented_end(bordim be useEffecte [vSource1],ta motmaein beshim vSource1 meghdaresh kamel shodeh)
   }, []);
 
   var LocationArr: any = []; var featuresArr: any = [];
@@ -1180,26 +899,25 @@ export default function LocationPage() {
   let longitude = useRef<number | null | undefined>(null);
   let latitude = useRef<number | null | undefined>(null);
 
-  ////zare_nk_050213_commented_st
-  // useEffect(() => {
-  //   console.log('useeeeeeeeeeeeeeeeeeeeeeeeeeeeee vSource1 called!!!!');
-  //   if (vSource1 && styles1 != null) {
-  //     console.log('useeeeeeeeeeeeeeeeeeeeeeeeeeeeee vSource1  in if');
-  //     setVLayer1(() => {
-  //       return (
-  //         new VectorLayer<VectorSource>({
-  //           source: vSource1, // حالا vSource1 قطعاً VectorSource<Geometry> است
-  //           style: styles1,
-  //           updateWhileAnimating: true,
-  //           updateWhileInteracting: true,
-  //         }));
-  //     });
-  //   }
-  //   else {
-  //     console.log('useeeeeeeeeeeeeeeeeeeeeeeeeeeeee vSource1 noot in if');
-  //   }
-  // }, [vSource1]);
-  ////zare_nk_050213_commented_end
+  useEffect(() => {
+    console.log('useeeeeeeeeeeeeeeeeeeeeeeeeeeeee vSource1 called!!!!');
+    if (vSource1 && styles1 != null) {
+      console.log('useeeeeeeeeeeeeeeeeeeeeeeeeeeeee vSource1  in if');
+      setVLayer1(() => {
+        return (
+          new VectorLayer<VectorSource>({
+            source: vSource1, // حالا vSource1 قطعاً VectorSource<Geometry> است
+            style: styles1,
+            updateWhileAnimating: true,
+            updateWhileInteracting: true,
+          }));
+      });
+    }
+    else {
+      console.log('useeeeeeeeeeeeeeeeeeeeeeeeeeeeee vSource1 noot in if');
+    }
+  }, [vSource1]);
+  // }, []);
 
   async function showPosition(position: PositionType) {    //zare_nk_050208_nokteh(tabee showPosition barasase parametre voroodish(position refhaye longitude va 
     // latitude ro meghdar mideh va state feature ra ham ba hamin position meghdar mideh) )
@@ -1223,6 +941,9 @@ export default function LocationPage() {
       }
     }
 
+    // if (longitude.current == null || latitude.current == null) {
+    //   longitude.current = 53.0585; latitude.current = 36.5659;
+    // }
     console.log(`1234-finalyt Longitude=${longitude.current}, Latitude=${latitude.current}`);
     if (longitude.current === null || longitude.current === undefined) {
       longitude.current = 53.0585;
@@ -1231,39 +952,21 @@ export default function LocationPage() {
       latitude.current = 53.0585;
     }
 
-    ////zare_nk_050213_commented_st
-    // setFeature(() => {
-    //   return (
-    //     new Feature({
-    //       // geometry: new /*ol.geom.*/Point(/*ol.proj.fromLonLat(*/[/*longitude.current, latitude.current*/ 52.4152, 39.6872]/*)*/),
-    //       // geometry: new /*ol.geom.*/Point(fromLonLat([longitude.current,  latitude.current])),
-    //       // geometry: new /*ol.geom.*/Point(fromLonLat([longitude.current ? longitude.current : 53.0585, latitude.current ? latitude.current : 36.5659 /*52.4152, 39.6872*/])),
-    //       name: {
-    //         "Address": addressMatni,
-    //         "X": longitude.current,
-    //         "Y": latitude.current,
-    //       },
-    //       population: 4000,
-    //       rainfall: 500,
-    //     }));
-    // });
-    ////zare_nk_050213_commented_end
-    ////zare_nk_050213_added_st
-    refForFeature.current = new Feature({
-      // geometry: new /*ol.geom.*/Point(/*ol.proj.fromLonLat(*/[/*longitude.current, latitude.current*/ 52.4152, 39.6872]/*)*/),
-      // geometry: new /*ol.geom.*/Point(fromLonLat([longitude.current,  latitude.current])),
-      // geometry: new /*ol.geom.*/Point(fromLonLat([longitude.current ? longitude.current : 53.0585, latitude.current ? latitude.current : 36.5659 /*52.4152, 39.6872*/])),
-      name: {
-        "Address": addressMatni,
-        "X": longitude.current,
-        "Y": latitude.current,
-      },
-      population: 4000,
-      rainfall: 500,
+    setFeature(() => {
+      return (
+        new Feature({
+          // geometry: new /*ol.geom.*/Point(/*ol.proj.fromLonLat(*/[/*longitude.current, latitude.current*/ 52.4152, 39.6872]/*)*/),
+          // geometry: new /*ol.geom.*/Point(fromLonLat([longitude.current,  latitude.current])),
+          // geometry: new /*ol.geom.*/Point(fromLonLat([longitude.current ? longitude.current : 53.0585, latitude.current ? latitude.current : 36.5659 /*52.4152, 39.6872*/])),
+          name: {
+            "Address": addressMatni,
+            "X": longitude.current,
+            "Y": latitude.current,
+          },
+          population: 4000,
+          rainfall: 500,
+        }));
     });
-    ////zare_nk_050213_added_end
-
-
 
     // featureToPaskari = feature;
     // vSource1?.removeFeature(feature);
@@ -1285,129 +988,125 @@ export default function LocationPage() {
 
   function continuation() {   //zare_nk_050208_nokteh(tabee continuation center va zoome map ro moshakhas mikoneh, hamchenin vectorLayere map ro ham inja midim behesh)
     var firstCoordinates = LocationArr[0].loc;
-    // map?.getView().setCenter(fromLonLat([firstCoordinates.X, firstCoordinates.Y]));      //zare_nk_050213_commented 
-    refForMap.current?.getView().setCenter(fromLonLat([firstCoordinates.X, firstCoordinates.Y]));      //zare_nk_050213_added
+    map?.getView().setCenter(fromLonLat([firstCoordinates.X, firstCoordinates.Y]));
+    map?.getView().setZoom(18);
+    // map?.addLayer(vLayer1 );  
 
-    // map?.getView().setZoom(18);     //zare_nk_050213_commented 
-    refForMap.current?.getView().setZoom(18);     //zare_nk_050213_added
-
-    // if (vLayer1) {       //zare_nk_050213_commented 
-    if (refForVectorLayer.current) {     //zare_nk_050213_added  
+    if (vLayer1) { // این چک می‌کنه که vLayer1 null یا undefined نباشه
+      // alert('continuation-vLayer1');
       console.log("vLayer1 is not null,firstCoordinates.X: " + firstCoordinates.X + '-firstCoordinates.Y: ' + firstCoordinates.Y);
-      // if (map) {      //zare_nk_050213_commented 
-      if (refForMap.current) {      //zare_nk_050213_added 
+      if (map) {
         console.log('mapmapmapmapmapmapmap');
       }
       else {
         console.log('nooooo mmapmapmapmapmapmapmap');
       }
-      // map?.addLayer(vLayer1);     //zare_nk_050213_commented
-      refForMap.current?.addLayer(refForVectorLayer.current);     //zare_nk_050213_added
+      map?.addLayer(vLayer1);
     } else {
+      // alert('continuation-!vLayer1');
       console.log("vLayer1 is null, cannot add layer to map.");
+      // می‌تونید اینجا یه لایه پیش‌فرض بسازید یا کاری انجام بدید
     }
-    //map?.updateSize();    //zare_nk_050213_commented
-    refForMap.current?.updateSize();     //zare_nk_050213_added
+    map?.updateSize();
   }
 
-  ////zare_nk_050213_commented_st
-  // useEffect(() => {   //zare_nk_050208_nokteh(dar useEffecte [map, vLayer1] motmaen mishim map va vLayer1 meghdar daran,age daran showPosition ro ba positioni ke inja 
-  //   //// behesh midim seda mizanim ta state feature ra meghdardehi koneh)
-  //   if (map && vLayer1) {
-  //     if ((map.getView().getZoom() ?? 0) < 18) {
-  //       console.log('less than 18');
-  //     }
-  //     else {
-  //       console.log('bigger than 18');
-  //     }
+  useEffect(() => {   //zare_nk_050208_nokteh(dar useEffecte [map, vLayer1] motmaen mishim map va vLayer1 meghdar daran,age daran showPosition ro ba positioni ke inja 
+    //// behesh midim seda mizanim ta state feature ra meghdardehi koneh)
+    if (map && vLayer1) {
+      //  if (map.getView().getZoom() < 18) {
+      if ((map.getView().getZoom() ?? 0) < 18) {
+        console.log('less than 18');
+      }
+      else {
+        console.log('bigger than 18');
+      }
 
-  //     showPosition([53.0585, 36.5659]);
-  //   }
-  // }, [map, vLayer1]);
-  ////zare_nk_050213_commented_end
+      // //  var LocationArr = []; var featuresArr = [];
+      // // document.edditAdderssId = '';  //zare_nk_050108_tahlilshe(ehtemalan bimorede!!)
+      // // var longitude = null; var latitude = null;
 
+      showPosition([53.0585, 36.5659]);
+    }
+  }, [map, vLayer1]);
 
-  ////zare_nk_050213_commented_st
-  // useEffect(() => {   //zare_nk_050208_nokteh(useEffecte [map, feature] check mikoneh age map va vSource1 va feature meghdar daran,feature ra be vSource1 midim, 
-  //   // hamchenin modiriat mikonim dar rooydade moveend va pointerdrag feature meghdare jadid begire )
-  //   console.log("001");
-  //   if (map && feature) {
-  //     console.log("002");
-  //     featureToPaskari = feature;
-  //     vSource1?.removeFeature(feature);
-  //     vSource1?.clear();
-  //     vSource1?.getFeatures().map(item => {
-  //       vSource1.removeFeature(item);
-  //     });
-  //     vSource1?.addFeature(feature);
-  //     featuresArr.push(feature);
-  //     console.log("longitude: " + longitude.current + '-latitude: ' + latitude.current);
-  //     LocationArr = [];
-  //     LocationArr.push({
-  //       'loc': {
-  //         'X': longitude.current,
-  //         'Y': latitude.current
-  //       }
-  //     });
-  //     continuation();
+  useEffect(() => {   //zare_nk_050208_nokteh(useEffecte [map, feature] check mikoneh age map va vSource1 va feature meghdar daran,feature ra be vSource1 midim, 
+  // hamchenin modiriat mikonim dar rooydade moveend va pointerdrag feature meghdare jadid begire )
+    console.log("001");
+    if (map && feature) {
+      console.log("002");
+      featureToPaskari = feature;
+      vSource1?.removeFeature(feature);
+      vSource1?.clear();
+      vSource1?.getFeatures().map(item => {
+        vSource1.removeFeature(item);
+      });
+      vSource1?.addFeature(feature);
+      featuresArr.push(feature);
+      console.log("longitude: " + longitude.current + '-latitude: ' + latitude.current);
+      LocationArr = [];
+      LocationArr.push({
+        'loc': {
+          'X': longitude.current,
+          'Y': latitude.current
+        }
+      });
+      continuation();
 
-  //     map?.on('moveend', function (event) {
-  //       ////zare_nk_040912_added_st
-  //       if ((map.getView().getZoom() ?? 0) < 18) {
-  //         // alert('less than 18');
-  //       }
-  //       else {
-  //         // alert('bigger than 18');
-  //       }
-  //       ////zare_nk_040912_added_end 
+      map?.on('moveend', function (event) {
+        ////zare_nk_040912_added_st
+        if ((map.getView().getZoom() ?? 0) < 18) {
+          // alert('less than 18');
+        }
+        else {
+          // alert('bigger than 18');
+        }
+        ////zare_nk_040912_added_end 
 
-  //       let centerCoords3857 = map.getView().getCenter();
-  //       console.log("moveend-feature.get('name').X: " + feature);
-  //       if (centerCoords3857) {
-  //         console.log("moveend-feature.get('name').X: " + feature.get('name').X);
-  //         // feature?.getGeometry()?.setCoordinates(centerCoords3857);
-  //         feature.setGeometry(new Point(centerCoords3857));
-  //         let coordinate = transform(centerCoords3857, 'EPSG:3857', 'EPSG:4326');
-  //         let lat = coordinate[1]// ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[1]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-  //         let lng = coordinate[0]// ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[0];  // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-  //         feature.get('name').X = lng; feature.get('name').Y = lat;
-  //       }
-  //     });
+        let centerCoords3857 = map.getView().getCenter();
+        console.log("moveend-feature.get('name').X: " + feature);
+        if (centerCoords3857) {
+          console.log("moveend-feature.get('name').X: " + feature.get('name').X);
+          // feature?.getGeometry()?.setCoordinates(centerCoords3857);
+          feature.setGeometry(new Point(centerCoords3857));
+          let coordinate = transform(centerCoords3857, 'EPSG:3857', 'EPSG:4326');
+          let lat = coordinate[1]// ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[1]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
+          let lng = coordinate[0]// ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[0];  // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
+          feature.get('name').X = lng; feature.get('name').Y = lat;
+        }
+      });
 
-  //     map.on('pointerdrag', function () {
-  //       defZoom = map.getView().getZoom();
+      map.on('pointerdrag', function () {
+        defZoom = map.getView().getZoom();
 
-  //       ////zare_nk_040911_added_st
-  //       let centerCoords3857 = map.getView().getCenter();
-  //       if (centerCoords3857) {
-  //         console.log("pointermove-feature.get('name').X: " + feature.get('name').X + '-feature.getGeometry().getCoordinates()[0]: ' + feature.getGeometry() ? [0] : 777
-  //           + "-pointermove-feature.get('name').Y: " + feature.get('name').Y + '-feature.getGeometry().getCoordinates()[1]: ' + feature.getGeometry() ? [1] : 888); //feature.getGeometry().getCoordinates()[1]);
-  //         // feature.getGeometry().setCoordinates(centerCoords3857);
-  //         feature.setGeometry(new Point(centerCoords3857));
-  //         let coordinate = transform(centerCoords3857, 'EPSG:3857', 'EPSG:4326');
-  //         ////zare_nk_040911_added_end 
-  //         //let coordinate = feature.getGeometry().getCoordinates();  //zare_nk_040911_commented  
-  //         let lat = coordinate[1]//ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[1]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-  //         let lng = coordinate[0]//ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[0]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-  //         feature.get('name').X = lng; feature.get('name').Y = lat;
-  //       }
-  //     });
+        ////zare_nk_040911_added_st
+        let centerCoords3857 = map.getView().getCenter();
+        if (centerCoords3857) {
+          console.log("pointermove-feature.get('name').X: " + feature.get('name').X + '-feature.getGeometry().getCoordinates()[0]: ' + feature.getGeometry() ? [0] : 777
+            + "-pointermove-feature.get('name').Y: " + feature.get('name').Y + '-feature.getGeometry().getCoordinates()[1]: ' + feature.getGeometry() ? [1] : 888); //feature.getGeometry().getCoordinates()[1]);
+          // feature.getGeometry().setCoordinates(centerCoords3857);
+          feature.setGeometry(new Point(centerCoords3857));
+          let coordinate = transform(centerCoords3857, 'EPSG:3857', 'EPSG:4326');
+          ////zare_nk_040911_added_end 
+          //let coordinate = feature.getGeometry().getCoordinates();  //zare_nk_040911_commented  
+          let lat = coordinate[1]//ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[1]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
+          let lng = coordinate[0]//ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[0]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
+          feature.get('name').X = lng; feature.get('name').Y = lat;
+        }
+      });
 
-  //   }
-  //   else {
-  //     console.log("003");
-  //   }
-  // }, [map, feature]);
-  ////zare_nk_050213_commented_end
+    }
+    else {
+      console.log("003");
+    }
+  }, [map, feature]);
 
   async function saveAddress(isOnline: boolean) {
-    // if (!feature) {   //zare_nk_050213_commented
-    if (!refForFeature.current) {  //zare_nk_050213_added
+    if (!feature) {
       return;
     }
 
-    console.log('zare_nk_050110-reza02-feature.get("name").Y: ' + refForFeature.current.get('name').Y + "-feature.get('name').X: " + refForFeature.current.get('name').X +
-      '-mobileVal: ' + mobileVal + "-feature.get('name').Address: " + refForFeature.current.get('name').Address);
+    console.log('zare_nk_050110-reza02-feature.get("name").Y: ' + feature.get('name').Y + "-feature.get('name').X: " + feature.get('name').X +
+      '-mobileVal: ' + mobileVal + "-feature.get('name').Address: " + feature.get('name').Address);
 
     let token = getCookie("token");
     console.log('zare_nk_050110-token hala is: ' + getCookie("token"));
@@ -1425,8 +1124,8 @@ export default function LocationPage() {
         'CodePosti': '1231231231',
         'Pelak': addressFormInputsVal.pelak, // 1,
         'Vahed': addressFormInputsVal.vahed, // 5,
-        'Lat': refForFeature.current.get('name').Y,
-        'Lon': refForFeature.current.get('name').X,
+        'Lat': feature.get('name').Y,
+        'Lon': feature.get('name').X,
         'Mobile': '09999999999',// mobileVal,
         // 'Adress': /*feature.get('name').Address*/ $('#AddressMatni').val(),   
         'Adress': addressFormInputsVal.Address, // 'dokhaniat',    // feature.get('name').Address, //feature.get('name').Address,
@@ -1439,15 +1138,15 @@ export default function LocationPage() {
       'CodePosti': '1231231231',
       'Pelak': 1,
       'Vahed': 5,
-      'Lat': refForFeature.current.get('name').Y,
-      'Lon': refForFeature.current.get('name').X,
+      'Lat': feature.get('name').Y,
+      'Lon': feature.get('name').X,
       'Mobile': '09999999999',// mobileVal,
       // 'Adress': /*feature.get('name').Address*/ $('#AddressMatni').val(),   
       'Adress': 'dokhaniat',    // feature.get('name').Address, //feature.get('name').Address,
       // 'TahvilGirande': TahvilGirande,
       // 'OnvanAdress': $('#OnvanAdress').val(),
     })
-
+   
     let ApiUrl = "https://api.tochikala.com/api/";
     const response = await fetch(ApiUrl + "User/Api_CreateAddress", {
       method: "POST",
@@ -1474,7 +1173,7 @@ export default function LocationPage() {
       // "data":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjIwMTA5IiwiQ29kZU1vc2h0YXJpIjoiMjAxMDkiLCJNb2JpbGUiOiI5MzUxMDkxMjg3IiwiTmFtZU1vc2h0YXJpIjoiIiwibmJmIjoxNzQ2NzI1OTI4LCJleHAiOjE3NDczMzA3MjgsImlhdCI6MTc0NjcyNTkyOH0.9Jfv71v3D_s13gSyf3gXqgEfiXaV-lx93hDey4DSLM8"
       // },"errors":[]}
       if (data.status == 0) {
-
+       
       } else {
         // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
         // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
@@ -1636,7 +1335,7 @@ export default function LocationPage() {
               }}
             >ادامه</button>
           </div>
-
+         
         </div>
 
         <BoxHtmlComponent
