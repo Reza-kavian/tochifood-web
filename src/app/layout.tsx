@@ -6,6 +6,13 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";   //zare_nk_040416_added(inja avordam ke dar safahat seda nazanam)
 
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination'; 
+// اگر از افکت‌های خاصی مثل Fade یا Cube استفاده می‌کنی، استایل مربوط به اون رو هم اینجا ایمپورت کن
+// مثال: import 'swiper/css/effect-fade';
+
+
 import "@/styles/globals.css";
 
 import LayoutWrapper from "@/components/LayoutWrapper";

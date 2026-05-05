@@ -86,10 +86,11 @@
    height: 56px;
  }
 
- .btn:hover {
+ /* zare_nk_050215_commented(bedoone rooydade hover ghashangtare) */
+ /* .btn:hover {
    background-color: #ff5900;
    box-shadow: 0px 0px 3px 1px #4b4a4a;
- }
+ } */
 
  .disabledBtn {
    /* padding: 7px; */

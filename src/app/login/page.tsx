@@ -32,6 +32,7 @@ type FirstPageProps = {
   mobileError: string | null; //zare_nk_040527_nokteh(state shamele errore marboot be format va mohtavaye mobile varedeh)
   refForMobileInput: RefObject<(HTMLInputElement | null)[]>; //zare_nk_040527_nokteh(useRefe textboxe mobile )
   refForMobileCheckBtn: RefObject<HTMLButtonElement | null>; //zare_nk_040527_nokteh(useRefe dokmeye mobileCheckBtn )
+  refForIconInMobileCheckBtn: RefObject<HTMLImageElement | null>;   //zare_nk_050215_added(useRefe icone dakhele dokmeye mobileCheckBtn)
   isDisabledMobileCheckBtn: boolean; //zare_nk_040527_nokteh(state shamele meghdare booliane attribute disabled dokmeye mobileCheckBtn )
   setIsDisabledMobileCheckBtn: React.Dispatch<React.SetStateAction<boolean>>; //zare_nk_040527_nokteh(setState meghdardehiye booleane attribute disabled dokmeye mobileCheckBtn )
   backBtnCliked: boolean; //zare_nk_040527_nokteh(state shamele meghdare booliane clicke dokmeye backToFirsPage)
@@ -50,6 +51,7 @@ function FirstPageComponent({
   mobileError,
   refForMobileInput,
   refForMobileCheckBtn,
+  refForIconInMobileCheckBtn,    //zare_nk_050215_added
   isDisabledMobileCheckBtn,
   setIsDisabledMobileCheckBtn,
   backBtnCliked,
@@ -103,9 +105,14 @@ function FirstPageComponent({
               onClick={mobileButtonClick}
               disabled={isDisabledMobileCheckBtn}
             >
-              <img
-                style={{ transform: 'rotate(180deg)' }}
-                src="/images/login/checkMobile.svg"
+              {/* #878b92 */}
+              <img 
+                ref={refForIconInMobileCheckBtn}            //zare_nk_050215_added
+                // className={`${Styles.IconIndisabledBtn}`}   //zare_nk_050215_added(and commented(chon style fill baraye tage img ke sourcesh 
+                //// svg hast amal nemikoneh va barnameh entezar dare ke dar code haye khode svg css fill ro lahaz konim ke amal koneh ))
+                // style={{ transform: 'rotate(180deg)' }}  //zare_nk_050215_commented(bordamesh be code svg)
+                // src="/images/login/checkMobile.svg"  
+                src="/images/login/IconIndisabledBtn.svg"  //zare_nk_050215_added
                 alt="ذخیره موبایل"
               />
             </button>
@@ -308,7 +315,7 @@ function SecondPageComponent({
                 sToString +
                 "</span>";
 
-            refForTimer.current.style.cursor = 'not-allowed';  
+            refForTimer.current.style.cursor = 'not-allowed';
 
           }
         } catch (error) {
@@ -523,6 +530,8 @@ export default function Toolbar() {
   const refForMobileInput = useRef<(HTMLInputElement | null)[]>([]);
   const refForSmsInput = useRef<(HTMLInputElement | null)[]>([null]);
   const refForMobileCheckBtn = useRef<HTMLButtonElement | null>(null);
+  const refForIconInMobileCheckBtn = useRef<HTMLImageElement | null>(null);  //zare_nk_050215_added
+
   const refForCheckSmsBtn = useRef<HTMLButtonElement | null>(null);
   const [isDisabledMobileCheckBtn, setIsDisabledMobileCheckBtn] =
     useState(true);
@@ -890,6 +899,12 @@ export default function Toolbar() {
         refForMobileCheckBtn.current.classList.add(Styles.disabledBtn);
         refForMobileCheckBtn.current.classList.remove(Styles.btn);
       }
+      ////zare_nk_050215_added_st
+      if (refForIconInMobileCheckBtn.current) { 
+        refForIconInMobileCheckBtn.current.src = "/images/login/IconIndisabledBtn.svg";
+      }
+      ////zare_nk_050215_added_end
+
     } else if (!isMobileNum) {
       setIsMobileTextEmty(false);
       if (input) {
@@ -906,6 +921,11 @@ export default function Toolbar() {
         refForMobileCheckBtn.current.classList.add(Styles.disabledBtn);
         refForMobileCheckBtn.current.classList.remove(Styles.btn);
       }
+       ////zare_nk_050215_added_st
+      if (refForIconInMobileCheckBtn.current) { 
+        refForIconInMobileCheckBtn.current.src = "/images/login/IconIndisabledBtn.svg";
+      }
+      ////zare_nk_050215_added_end
     } else {
       setIsMobileTextEmty(false);
       if (input) {
@@ -923,6 +943,11 @@ export default function Toolbar() {
         refForMobileCheckBtn.current.classList.remove(Styles.disabledBtn);
         refForMobileCheckBtn.current.classList.add(Styles.btn);
       }
+       ////zare_nk_050215_added_st
+      if (refForIconInMobileCheckBtn.current) {  
+        refForIconInMobileCheckBtn.current.src = "/images/login/IconInBtn.svg";
+      }
+      ////zare_nk_050215_added_end
     }
     if (input) {
       setMobileVal(input.value);
@@ -1221,6 +1246,7 @@ export default function Toolbar() {
               mobileError={mobileError}
               refForMobileInput={refForMobileInput}
               refForMobileCheckBtn={refForMobileCheckBtn}
+              refForIconInMobileCheckBtn={refForIconInMobileCheckBtn}  // zare_nk_050515_added  
               isDisabledMobileCheckBtn={isDisabledMobileCheckBtn}
               setIsDisabledMobileCheckBtn={setIsDisabledMobileCheckBtn}
               backBtnCliked={backBtnCliked}
