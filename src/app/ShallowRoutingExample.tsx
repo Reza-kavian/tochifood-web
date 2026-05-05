@@ -1,4 +1,4 @@
-"use client";  //zare_nk_041220_okk
+"use client";  //zare_nk_050214_okk
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 
@@ -696,6 +696,7 @@ export default function ShallowRoutingExample() {
   const refForfather = useRef<string | null>(null);
 
   var modal: bootstrap.Modal;
+
   async function openprodDetModal(barcodeKala: string) {
     const bootstrap = await getBootstrap();
     modal = new bootstrap.Modal(document.getElementById("prodDetModal"));
