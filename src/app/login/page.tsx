@@ -1,4 +1,4 @@
-////zare_nk_050212_okk
+////zare_nk_050222_okk
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -76,7 +76,8 @@ function FirstPageComponent({
   useEffect(() => {
     if (backBtnCliked == true) {
       if (refForMobileInput.current[0]) {
-        mobileChanged(refForMobileInput.current[0]); //zare_nk_040527_nokteh(shabihsaziye rooydade onChange textboxe mobile ke methode mobileChanged seda zadeh mishod, in ra be niate berooz shodane mobileError seda mizanim)
+        mobileChanged(refForMobileInput.current[0]); //zare_nk_040527_nokteh(shabihsaziye rooydade onChange textboxe mobile ke methode mobileChanged seda zadeh mishod, in ra
+        ////  be niate berooz shodane mobileError seda mizanim)
       }
     }
   }, [backBtnCliked]);
@@ -106,7 +107,7 @@ function FirstPageComponent({
               disabled={isDisabledMobileCheckBtn}
             >
               {/* #878b92 */}
-              <img 
+              <img
                 ref={refForIconInMobileCheckBtn}            //zare_nk_050215_added
                 // className={`${Styles.IconIndisabledBtn}`}   //zare_nk_050215_added(and commented(chon style fill baraye tage img ke sourcesh 
                 //// svg hast amal nemikoneh va barnameh entezar dare ke dar code haye khode svg css fill ro lahaz konim ke amal koneh ))
@@ -398,18 +399,13 @@ function SecondPageComponent({
                       tempArrayForSmsVal[index] = e.target.value;  //zare_nk_050128_added
                       console.log('arrayForSmsVal is: ' + JSON.stringify(arrayForSmsVal));
                       setArrayForSmsVal(tempArrayForSmsVal);
-                      //                       setArrayForSmsVal((cur)=>{
-                      // [...cur,]
-                      //                       })
-
                       newSmsTxtChanged(e.target.value, index);
                     }}
                     onKeyDown={(e) => {
-                      // alert('onKeyDown');
                       smsInputKeyDown(e, index);
                     }}
-
                     // onKeyDown={smsTxtKeyDown}
+
                     ref={(e) => {
                       // refForSmsInput.current[0] = e;
                       SmsInputRefs.current[index] = e;
@@ -900,7 +896,7 @@ export default function Toolbar() {
         refForMobileCheckBtn.current.classList.remove(Styles.btn);
       }
       ////zare_nk_050215_added_st
-      if (refForIconInMobileCheckBtn.current) { 
+      if (refForIconInMobileCheckBtn.current) {
         refForIconInMobileCheckBtn.current.src = "/images/login/IconIndisabledBtn.svg";
       }
       ////zare_nk_050215_added_end
@@ -921,8 +917,8 @@ export default function Toolbar() {
         refForMobileCheckBtn.current.classList.add(Styles.disabledBtn);
         refForMobileCheckBtn.current.classList.remove(Styles.btn);
       }
-       ////zare_nk_050215_added_st
-      if (refForIconInMobileCheckBtn.current) { 
+      ////zare_nk_050215_added_st
+      if (refForIconInMobileCheckBtn.current) {
         refForIconInMobileCheckBtn.current.src = "/images/login/IconIndisabledBtn.svg";
       }
       ////zare_nk_050215_added_end
@@ -943,8 +939,8 @@ export default function Toolbar() {
         refForMobileCheckBtn.current.classList.remove(Styles.disabledBtn);
         refForMobileCheckBtn.current.classList.add(Styles.btn);
       }
-       ////zare_nk_050215_added_st
-      if (refForIconInMobileCheckBtn.current) {  
+      ////zare_nk_050215_added_st
+      if (refForIconInMobileCheckBtn.current) {
         refForIconInMobileCheckBtn.current.src = "/images/login/IconInBtn.svg";
       }
       ////zare_nk_050215_added_end

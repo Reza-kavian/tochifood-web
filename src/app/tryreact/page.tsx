@@ -1,4 +1,4 @@
-////zare_nk_050210_okk
+////zare_nk_050222_okk
 "use client"; 
 import { useEffect, useState, useRef, useCallback ,memo} from "react";
 import Styles from "@/styles/components/dooz.module.css";
@@ -36,7 +36,7 @@ type BtnColor = string | null;   //zare_nk_041015_nokteh(BtnColor range dokmeh r
 type BoardProps = {
   squares: Squares; //zare_nk_040528_nokteh(arayeye 9 khanehiye haviye vaziate feliye chineshe dooz(ba clicke dokmehaye dooz ya ba clicke dokmehaye archiv in vaziat avaz misheh))
   onPlay: (nextSquares: Squares) => void; //az methode handlePlaye componente Game meghdar migire,handlePlaye dar renderhaye Game zamani ke masalan dokmehaye dooz
-  // ya dokmehaye arshiv click beshan va vazite jadide chineshe dooz shekl begire amal mikoneh)   //zare_nk_050122_nokteh(rahnamaei gofteham ghablan archive ham handlePlaye seda mizaneh,alan cheshmbaste migam na,cheshm baz va tahlilshe!)
+  //// ya dokmehaye arshiv click beshan va vazite jadide chineshe dooz shekl begire amal mikoneh)   //zare_nk_050122_nokteh(rahnamaei gofteham ghablan archive ham handlePlaye seda mizaneh,alan cheshmbaste migam na,cheshm baz va tahlilshe!)
   refForBtn: React.RefObject<(HTMLButtonElement | null)[]>;  //zare_nk_040528_nokteh(useRefe dokmehaye dooz ke harkodam tage button hastand)
   timer: number; //zare_nk_040525_nokteh(state shamele meghdare timer)
   setTimer: React.Dispatch<React.SetStateAction<number>>;  //zare_nk_040525_nokteh(setState meghdardehiye state timer)
@@ -84,7 +84,7 @@ function Board({
   var refForTimer = useRef(null);  //zare_nk_040528_nokteh(useRefe tage namayeshe timer hast)
   var refForTimerCont = useRef(null);  //zare_nk_040528_nokteh(useRefe tage pedare tage namayeshe timer hast)
   const refForWinnerOrNobat = useRef<HTMLDivElement | null>(null);   //zare_nk_040528_nokteh(useRefe tage namayeshe lafze nobat ya barandeh)
-  const xIsNextRef = useRef(xIsNextState);   //zare_nk_040528_nokteh(useRefe haviye meghdare feliye xIsNextState,xIsNextState ra dar useRef 
+  const xIsNextRef = useRef(xIsNextState);   //zare_nk_040528_nokteh(useRefe haviye meghdare feliye xIsNextState, xIsNextState ra dar useRef 
   // rikhtim ke dar renderhaye component meghdarash hefz shavad)
 
   useEffect(() => {  //zare_nk_040528_nokteh(range dokmehaye dooz ra inja taein mikonim)
@@ -243,7 +243,7 @@ function Board({
     // //zare_nk_040225_added_st(rahe2-rahe1 chon biniaz az ref hast az nazare chatGpt behtare)
     // setXIsNextState(!xIsNextRef.current); //ok
     // localStorage.setItem("xIsNextState", JSON.stringify(!xIsNextRef.current)); //ok
-    // squares[squares.length - 1] = !xIsNextRef.current ? "X" : "O; //ok
+    //// squares[squares.length - 1] = !xIsNextRef.current ? "X" : "O; ////zare_nk_050130_nokteh(engar ezafiye va bimoredeh!-hatman tahlilshe)
     // //zare_nk_040225_added_end(rahe2-rahe1 chon biniaz az ref hast az nazare chatGpt behtare)
     setTimer(5000);
     localStorage.setItem("timer", JSON.stringify(5000));

@@ -1,4 +1,4 @@
- ////zare_nk_050210_okk
+ ////zare_nk_050222_okk
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
@@ -35,7 +35,8 @@ function getCookie(name: any) {
 export default function ShallowRoutingExample() {
   const router = useRouter();
 
-  type ForoshStateType = {
+  // type ForoshStateType = {   //zare_nk_050222_commented(baraye lafze khanatar)
+   type sumValsForForooshSatrType = {   //zare_nk_050222_added(baraye lafze khanatar)
     ShomarehFaktorForoosh: number;
     IdFaktorForoosh: number;
     TarikhSefaresh: string;
@@ -47,7 +48,7 @@ export default function ShallowRoutingExample() {
   };
 
   const [ForooshSatrHideForooshTitr, setForooshSatrHideForooshTitr] =
-    useState<ForoshStateType | null>(null);
+    useState<sumValsForForooshSatrType | null>(null);
   const [bisatr, setBisatr] = useState(true);
   const [bisatrDarSatr, setBisatrDarSatr] = useState(true);
 

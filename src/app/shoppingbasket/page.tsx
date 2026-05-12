@@ -1,4 +1,4 @@
-////zare_nk_050210_okk
+////zare_nk_050222_okk
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef, useMemo } from "react";
@@ -1115,7 +1115,6 @@ export default function ShallowRoutingExample() {
 
   const refForCodeReader = useRef<BrowserMultiFormatReader | null>(null); //zare_nk_050211_added
 
-
   async function openprodDetModal(barcodeKala: string) {
     console.log('ShallowRoutingExample called-openprodDetModal called!!');
     await ShowDetails(barcodeKala);
@@ -1126,7 +1125,7 @@ export default function ShallowRoutingExample() {
   // async function ShowCamera() {  //zare_nk_050208_commented
   async function ShowCamera(isClient: boolean) {  //zare_nk_050208_added
     if (!isClient) return;  ////zare_nk_050208_nokteh(albateh midoonim bekhatere neveshtane "use client" ebtedaye file ma dar safheye samte client(yani moroorgare 
-    // karbar)hastim, va in shart niazi nist, baraye talangor neveshtam(talangore inke codehaye @zxing/browser makhsoose samte client hast va samte serverSide benvisim error mideh))
+    // karbar) hastim, va in shart niazi nist, baraye talangor neveshtam(talangore inke codehaye @zxing/browser makhsoose samte client hast va samte serverSide benvisim error mideh))
     console.log('zare_nk_050208-ShowCamera called!!001');
 
     // // تنظیم ZXing برای پشتیبانی از QR کد و بارکدهای 1D
@@ -1458,11 +1457,11 @@ export default function ShallowRoutingExample() {
     return () => {
       if (isClient && refForCodeReader.current) {
         console.log('پاکسازی منابع اسکنر...');
-        // refForCodeReader.current.reset(); // فراخوانی reset روی نمونه واقعی
+        // refForCodeReader.current.reset(); //zare_nk_050220_nokteh(code versione ghadimiye zxing hast va dar versione feli kar nemikoneh(dar versione feli
+        ////  hamoon control.stop(); ke dakhele codeReader.decodeFromVideoDevice(...) hast kar mikoneh))
         refForCodeReader.current = null; // پاک کردن ref 
         console.log("Scanner component unmounted, cleaning up.");
       }
-
 
       ////zare_nk_050211_added_st
       if (seePricesModal) {
@@ -1780,7 +1779,6 @@ export default function ShallowRoutingExample() {
         var parsedList = JSON.parse(result.data.list);
         console.log('041120-result in Api_SelectKalaShobeh: ' + JSON.stringify(parsedList));
         if (parsedList.length == 0) {
-          // alert('nist');
           const productNotExist = document.getElementById("productNotExist");
           if (productNotExist) {
             productNotExist.style.display = "flex";

@@ -1,4 +1,4 @@
-////zare_nk_050212_okk
+////zare_nk_050222_okk
 'use client'
 import { useRouter, redirect } from "next/navigation";
 import "@/styles/onboardingCss.css";
@@ -91,7 +91,7 @@ export default function Page() {
       <div className="btn-cont">
         <div style={{ display: 'flex', padding: '0px 10px', flex: '1 1 47%' }}>
           <button
-            // onClick={goToMap}    //zare_nk_050215_commented_movaghat(baraye synce hadafmand)
+            onClick={goToMap}    //zare_nk_050215_commented_movaghat(baraye synce hadafmand)
             style={{
               display: 'flex',
               flexDirection: 'row',

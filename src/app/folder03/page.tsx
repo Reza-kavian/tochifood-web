@@ -1,3 +1,4 @@
+ ////zare_nk_041221_okk
 'use client';
 
 import { useEffect, useState, useRef, useCallback, memo } from "react";  //zare_nk_050216_added
@@ -30,7 +31,6 @@ export default function HeroSlider() {
     swiperInstance.navigation.init();
   }, []);
 
-
   return (
     <div className="slider-container">
       {/* age lafze swiper-button-next ro be classe dokmeh bedim az nazare designi barname dokmeh ro mibare tooye makane navigationiye swiper, yani dar raste
@@ -44,12 +44,12 @@ export default function HeroSlider() {
         برو قبلی
       </button>
 
-      {/* zare_nk_050216_nokteh(age tage .swiper-pagination ra dasti ijad nakonim,barnameh khodesh automat ijadesh mikoneh(be sharti ke navigation={true} ro gheid konim, 
-fargheshoon dar ine ke vaaghti barname besaze dakhele swiper misaze va position:absolute;bottom:0; mide behesh ke paeine swiper michasbeh, vali ma inja biroone swiper
+      {/* zare_nk_050216_nokteh(age tage .swiper-pagination ra dasti ijad nakonim, barnameh khodesh automat ijadesh mikoneh(be sharti ke navigation={true} ro gheid konim, 
+fargheshoon dar ine ke vaghti barname besaze dakhele swiper misaze va position:absolute;bottom:0; mide behesh ke paeine swiper michasbeh, vali ma inja biroone swiper
  sakhtim, pas barnameh mibine in tag vojood dare nemisazeh va faghat position:absolute;bottom:0; mideh, ke tag dar paeine .slider-container mireh,na paeine swiper, chon 
  pedaresh .slider-container hast va absolute ham nesbat be pedar position migire,dar vaghe aslan dar nevashtane ma tage swiperi vojood nadare ke dive swiper-pagination 
  ro bekhaim toosh benevisim, <Swiper .. /> ke paein neveshtim ham Component hast na tag, va in component tooye khodeshe div.swiper ro automat misazeh )) */}
-      {/* zare_nk_050216_nokteh(mitavan name delkhahe digari gheir az swiper-pagination ham bedim,vali dige barnameh css ha ro behesh nemideh(manzoor 
+      {/* zare_nk_050216_nokteh(mitavan name delkhahe digari gheir az swiper-pagination ham bedim, vali dige barnameh css ha ro behesh nemideh(manzoor 
  position:absolute;bottom:0; hast ke dar file haye css marboot be swiper code .swiper-pagination{position:absolute;bottom:0; va css haye dige } vojood dareh )) */}
       <div className="swiper-pagination"></div>
 
@@ -59,12 +59,13 @@ fargheshoon dar ine ke vaaghti barname besaze dakhele swiper misaze va position:
         spaceBetween={10}    //zare_nk_050216_nokteh(faseleye beine slideha dar har ghabele namayesh(be px hast))
         slidesPerView={2}   //zare_nk_050216_nokteh(tedad slideha dar har ghabele moshahedeh)
         ////zare_nk_050215_nokteh_st(dokmeye raftan be badi va ghabli ro modiriat mikoneh, age nazarim pishfarz false hast, mishe ham boolean dad, va ham meghdare objecti dad 
-        //// ke dokmehaye ghablo bad , ... ra sefareshi konim)
-        // navigation={false}  
+        //// ke dokmehaye ghablo bad , ... ra sefareshi konim(midoonim useRef age masalan string ya namber ,... bashe tagheiresh bedim dar hamin render tagheiresh ghabale 
+        // moshahedeh hast, vali manzoore ma useRefi hast ke be taghaye jsx nesbat midim ke ta dar dom naran useRef be tage jsx nemichasbe ))
+        // navigation={true}  
         navigation={{
           // nextEl: '.swiper-button-next2',  //zare_nk_050216_nokteh(dorost kar mikoneh)
           nextEl: null, //refForwiperButtonNext.current,  //zare_nk_050216_nokteh(nextEl=refForwiperButtonNext.current kar nemikone)(refForwiperButtonNext.current dar in lahzeh null
-          //// hast(yani meghdare avvaliyeye refForwiperButtonNext) chon useref ha mount shodane html(yani zamani ke tagha der DOM raftan meghdar migiran, va midoonim enteda rendere 
+          //// hast(yani meghdare avvaliyeye refForwiperButtonNext) chon useref ha mount shodane html(yani zamani ke tagha dar DOM raftan meghdar migiran, va midoonim enteda rendere 
           //// component soorat migere sepas ke jsx haye return shodehye component dar DOM beravand estelahan migim mount soorat gereteh, ke useRef ha dar hamin lahze meghdari ke dar
           //// jsx midim ro migiran )           
 
@@ -75,7 +76,8 @@ fargheshoon dar ine ke vaaghti barname besaze dakhele swiper misaze va position:
           //// jsx midim ro migiran )           
         }}
         ////zare_nk_050215_nokteh_end(dokmeye raftan be badi va ghabli ro modiriat mikoneh, age nazarim pishfarz false hast, mishe ham boolean dad, va ham meghdare objecti dad 
-        //// ke dokmehaye ghablo bad , ... ra sefareshi konim)
+        //// ke dokmehaye ghablo bad , ... ra sefareshi konim(midoonim useRef age masalan string ya namber ,... bashe tagheiresh bedim dar hamin render tagheiresh ghabale 
+        // moshahedeh hast, vali manzoore ma useRefi hast ke be taghaye jsx nesbat midim ke ta dar dom naran useRef be tage jsx nemichasbe ))
 
         ////zare_nk_050216_nokteh_st(dokmehaye raftan be safhe ke momoolan dar vasat va paeine swiper namayash dadeh mishan, age nazarim pishfarz false hast, mishe ham boolean 
         //// dad, va ham meghdare objecti dad ke dokmehaye adshodeh ra sefareshi konim)

@@ -1,4 +1,4 @@
-////zare_nk_050212_okk
+////zare_nk_050221_okk
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -233,11 +233,11 @@ function BoxHtmlComponent({
     if (eventOrElement && "target" in eventOrElement) {
       input = eventOrElement.target;
       vall = input.value;
-      inputsName = input.name;  //zare_nk_050201_added
+      inputsName = input.name;   
     } else {
       input = eventOrElement;
       vall = input?.value ?? "";
-      inputsName = input?.name ?? "";  //zare_nk_050201_added
+      inputsName = input?.name ?? "";   
     }
     // var pat = new RegExp("^[0]{1}[0123456789]{10}$");
     // var isMobileNum = pat.test(vall);
@@ -304,7 +304,7 @@ function BoxHtmlComponent({
     }
   }
 
-  useEffect(() => {   //u001
+  useEffect(() => {  
     const hasNotNullValue = Object.values(addressFormInputsMatnError).some(value => value !== null);
     console.log('050205-addressFormInputsMatnError: ' + JSON.stringify(addressFormInputsMatnError));
     ////zare_nk_050206_nokteh_st(in dastoorat dar in makan javab dad be khoobi)
@@ -380,8 +380,7 @@ function BoxHtmlComponent({
             position: 'relative',
             marginBottom: '3.25rem',
           }}>
-            <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.Address || !isAddressFormInputsTextEmty.Address ? Styles.animateFocus : Styles.animateBlur}`}
-            >
+            <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.Address || !isAddressFormInputsTextEmty.Address ? Styles.animateFocus : Styles.animateBlur}`}>
               <span style={{ width: '100%' }}>جزئیات آدرس</span>
             </div>
 
@@ -497,8 +496,7 @@ function BoxHtmlComponent({
               position: 'relative',
               flex: '1 1 47%'
             }}>
-              <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.vahed || !isAddressFormInputsTextEmty.vahed ? Styles.animateFocus : Styles.animateBlur}`}
-              >
+              <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.vahed || !isAddressFormInputsTextEmty.vahed ? Styles.animateFocus : Styles.animateBlur}`}>
                 <span style={{ width: '100%' }}>واحد</span>
               </div>
 
@@ -545,8 +543,7 @@ function BoxHtmlComponent({
             position: 'relative',
             marginBottom: '1.25rem',
           }}>
-            <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.addressName || !isAddressFormInputsTextEmty.addressName ? Styles.animateFocus : Styles.animateBlur}`}
-            >
+            <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.addressName || !isAddressFormInputsTextEmty.addressName ? Styles.animateFocus : Styles.animateBlur}`}>
               <span style={{ width: '100%' }}>اسم آدرس (اختیاری)</span>
             </div>
             <input
@@ -598,11 +595,9 @@ function BoxHtmlComponent({
               ref={refForSaveAddressFormInputsBtn}
               id="saveAddressFormInputsBtn"
               onClick={() => {
-                // saveAddress(true);   //zare_nk_050213_commented
-
                 const IdAdressForEddit: number | null = getIdAdressFromSearchParams();
-                alert(IdAdressForEddit);
-                saveAddress(IdAdressForEddit);   //zare_nk_050213_added
+                console.log(IdAdressForEddit);
+                saveAddress(IdAdressForEddit);  
               }}
               style={{
                 width: '100%', color: '#ffffff',
@@ -619,23 +614,18 @@ function BoxHtmlComponent({
   </>)
 }
 
-// export default function LocationPage() {    //zare_nk_050213_commented
-export default function EditPage() {           //zare_nk_050213_added
-  // ////zare_nk_050213_added_st
+export default function EditPage() { 
   const router = useRouter();
 
   var searchParams = useSearchParams();
 
   const getIdAdressFromSearchParams = () => {
     console.log('getIdAdressFromSearchParams called!!');
-
     const IdAdress = searchParams.get('IdAdress');
     console.log('zare_050213_IdAdress: ' + IdAdress);
     let numberedIdAdress = IdAdress ? Number(IdAdress) : null;
     return numberedIdAdress;
   };
-  // ////zare_nk_050213_added_end
-
 
   const [mobileVal, setMobileVal] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -643,7 +633,7 @@ export default function EditPage() {           //zare_nk_050213_added
   const [isEpmtyHeightBox, setIsEpmtyHeightBox] = useState(true);
   const refForBox = useRef<HTMLDivElement | null>(null);
 
-  const { isLogin } = useAuthentication();
+  const { isLogin } = useAuthentication();  
   console.log('zare_nk_050111-isLogin from context:', isLogin);
 
   type AddressFormInputsType = {
@@ -681,7 +671,8 @@ export default function EditPage() {           //zare_nk_050213_added
       setError("addresse peida nashod!");
       return;
     }
-    let token = getCookie("token");
+    let token = getCookie("token");  //zare_nk_thlilshe(age manteghiye conste isLogin ke az useAuthentication meghdar gereft jaigozine getCookie beshe, methode
+    //// getCookie ham comment she(chon niazi nadarim sedah bezanim va be AuthenticationContext.js montaghel shod va in ja ham ba useAuthentication vakeshish kardim))
     if (!token) {
       setError("lotfan avval online shid");
       return;
@@ -855,8 +846,8 @@ export default function EditPage() {           //zare_nk_050213_added
             // feature?.getGeometry()?.setCoordinates(centerCoords3857);
             refForFeature.current?.setGeometry(new Point(centerCoords3857));
             let coordinate = transform(centerCoords3857, 'EPSG:3857', 'EPSG:4326');
-            let lat = coordinate[1]// ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[1]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-            let lng = coordinate[0]// ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[0];  // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
+            let lat = coordinate[1]   // ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[1];  
+            let lng = coordinate[0]   // ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[0];  
             if (refForFeature.current) {
               refForFeature.current.get('name').X = lng; refForFeature.current.get('name').Y = lat;
             }
@@ -874,8 +865,8 @@ export default function EditPage() {           //zare_nk_050213_added
             refForFeature.current?.setGeometry(new Point(centerCoords3857));
             let coordinate = transform(centerCoords3857, 'EPSG:3857', 'EPSG:4326');
 
-            let lat = coordinate[1]//ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[1]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-            let lng = coordinate[0]//ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[0]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
+            let lat = coordinate[1]//ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[1];
+            let lng = coordinate[0]//ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[0]; 
 
             if (refForFeature.current) {
               refForFeature.current.get('name').X = lng; refForFeature.current.get('name').Y = lat;
@@ -906,7 +897,7 @@ export default function EditPage() {           //zare_nk_050213_added
   let longitude = useRef<number | null | undefined>(null);
   let latitude = useRef<number | null | undefined>(null);
 
-  async function showPosition(position: PositionType) {    //zare_nk_050208_nokteh(tabee showPosition barasase parametre voroodish(position refhaye longitude va 
+  async function showPosition(position: PositionType) {    //zare_nk_050208_nokteh(tabee showPosition barasase parametre voroodish(position) refhaye longitude va 
     // latitude ro meghdar mideh va state feature ra ham ba hamin position meghdar mideh) )
     if (Array.isArray(position)) {
       // اگر آرایه بود، مستقیماً از عناصرش استفاده کن
@@ -996,7 +987,7 @@ export default function EditPage() {           //zare_nk_050213_added
       'Vahed': addressFormInputsVal.vahed, // 5,
       'Lat': refForFeature.current.get('name').Y,
       'Lon': refForFeature.current.get('name').X,
-      'Mobile': '09999999999',// mobileVal,
+      'Mobile': '09999999999', // mobileVal,
       // 'Adress': /*feature.get('name').Address*/ $('#AddressMatni').val(),   
       'Adress': addressFormInputsVal.Address, // 'dokhaniat',    // feature.get('name').Address, //feature.get('name').Address,
       // 'TahvilGirande': TahvilGirande,

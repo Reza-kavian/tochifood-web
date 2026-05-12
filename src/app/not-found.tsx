@@ -1,12 +1,12 @@
-// src/app/not-found.tsx  //zare_nk_041220_okk
+// src/app/not-found.tsx  //zare_nk_050222_okk
 "use client";
 import { useEffect } from "react";
 import Link from "next/link";
 
 export default function NotFound() {
   useEffect(() => {
-//    const mymodalForWarning = new bootstrap.Modal(document.getElementById("mymodalForWarning"))
-  },[]);
+    //    const mymodalForWarning = new bootstrap.Modal(document.getElementById("mymodalForWarning"))
+  }, []);
 
   return (
     <div style={{ padding: "3rem", textAlign: "center" }}>

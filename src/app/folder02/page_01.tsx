@@ -1,4 +1,4 @@
-// app/page.tsx  ////zare_nk_050211_okk
+// app/page.tsx  ////zare_nk_050221_okk
 'use client'; // برای استفاده از state و event handlers لازم است
 
 import React, { useState } from 'react';
@@ -27,7 +27,7 @@ export default function HomePage() {
                     p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', border: '2px dashed green',
                     // fontFamily: '"IRANSansWeb_ms(adad_fa)", "IRANSansWeb_Medium(adad_fa)", "IRANSansWeb_ms", "IRANSansWeb_Medium", "IranSans", "b nazanin", "IRNazanin"',
                 }}
-            style={{fontFamily: '"IRANSansWeb_ms(adad_fa)", "IRANSansWeb_Medium(adad_fa)"  '}}  
+                style={{ fontFamily: '"IRANSansWeb_ms(adad_fa)", "IRANSansWeb_Medium(adad_fa)"  ' }}
             >
                 <Typography variant="h4" gutterBottom
                     // className={`${Styles.ISW_Medium_fa} ${Styles.corTesti}`}   //zare_nk_050204_nokteh(classhaye filhaye .module.css mamoolan baraye taghaye MUI olaviate paeintari 
@@ -89,13 +89,13 @@ export default function HomePage() {
                 }}>
                     <DialogTitle>عنوان مودال شما</DialogTitle> {/* zare_nk_050204_nokteh(mesle modalHedeare bootstrap) */}
                     <DialogContent> {/* zare_nk_050204_nokteh(mesle modalContent bootstrap) */}
-                        <DialogContentText> {/* zare_nk_050204_nokteh(mesle modalBodye bootstrap(bakhshe motavaye gheire dokmehi va gheire rooydadi)) */}
+                        <DialogContentText> {/* zare_nk_050204_nokteh(mesle modalBodye bootstrap(bakhshe mohtavaye gheire dokmehi va gheire rooydadi)) */}
                             اینجا متن توضیحات مودال قرار می‌گیرد که در بوت‌استرپ در بخش modal-body بود.
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions> {/* zare_nk_050204_nokteh(mesle modalBodye bootstrap(bakhshe motavaye dokmehi va rooydadi)) */}
-                        {/* zare_nk_050204_nokteh(dokmehaye tooye Dialog ro mishe mesle bootstrapModal ke tooye modal-bodu mizasht,inja masalan tooyeDialogContent  va hamsayaye 
-                    DialogContentText bezarim,vali az nazare manteghe MUI dakhele DialogActions khanatar hast,darzem MUI emkanate zaheri va karbordiye khoobi ham barash lahaz mikoneh) */}
+                        {/* zare_nk_050204_nokteh(dokmehaye tooye Dialog ro mishe mesle bootstrapModal ke tooye modal-body mizasht,inja masalan tooyeDialogContent  va hamsayaye 
+                    DialogContentText bezarim,vali az nazare manteghe MUI dakhele DialogActions khanatar hast,darzemn MUI emkanate zaheri va karbordiye khoobi ham barash lahaz mikoneh) */}
                         <Button onClick={() => {
                             console.log('Dialog onClose event2!');
                             setOpen(false);

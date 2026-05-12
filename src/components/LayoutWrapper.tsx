@@ -1,4 +1,4 @@
-////zare_nk_041219_okk
+////zare_nk_050222_okk
 "use client";
 
 import React, { useState, useRef, useEffect } from 'react';
@@ -25,9 +25,8 @@ interface RootLayoutProps {
 const theme = createTheme({
   palette: {
     mode: 'light', ////zare_nk_050203_nokteh(shabihe bg-dark bootstrap)
-    // primaryDasti: {   //zare_nk_050203_nokteh(range dastiye khodam ke dar palette tarif kardam,baname delkhah(age name tarifshodeye MUI yani primary bedam jaigizine primarye MUI mishe))     
-    primary: {   //zare_nk_050203_nokteh(range dastiye khodam ke dar palette tarif kardam,baname delkhah(age name tarifshodeye MUI yani primary bedam jaigizine primarye MUI mishe))     
-
+    // primaryDasti: {   //zare_nk_050203_nokteh(range dastiye khodam ke dar palette tarif kardam, ba name delkhah(age name tarifshodeye MUI yani primary bedam jaigizine primarye MUI mishe))     
+    primary: {   //zare_nk_050203_nokteh(range dastiye khodam ke dar palette tarif kardam, ba name delkhah(age name tarifshodeye MUI yani primary bedam jaigizine primarye MUI mishe))     
       light: '#9ea6ad',  //zare_nk_050203_nokteh(light ro nemishnaseh!)
       main: '#724a0e62', //zare_nk_050203_nokteh(lafze primary ra dar propertiye tagha bedam faghat main ro mishnaseh(name dotSubi ham ghabool nemikoneh(masalan primaryDasti.main ya primaryDasti.dark ro ghabool nemikoneh!))) 
       dark: '#c01515',    //zare_nk_050203_nokteh(dark ro nemishnaseh!) 
@@ -45,8 +44,8 @@ const theme = createTheme({
     // },
     ////zare_nk_050203_commented_end(text ro nemikhooneh va zirmajmooash ham emal nemishe pas commentesh kardam)
   },
-  // شما می‌توانید تنظیمات بیشتری برای تم اینجا اضافه کنید
-  // typography, spacing, components, etc.
+  //// شما می‌توانید تنظیمات بیشتری برای تم اینجا اضافه کنید
+  //// typography, spacing, components, etc.
 });
 ////zare_nk_050202_added_end(for use MUI)
 

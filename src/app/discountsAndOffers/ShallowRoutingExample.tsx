@@ -1,4 +1,4 @@
-////zare_nk_050214_okk
+////zare_nk_050220_okk
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef, useMemo } from "react";
@@ -11,8 +11,7 @@ let cachedBootstrap: typeof import("bootstrap") | null = null; //zare_nk_040417_
 // import { BrowserMultiFormatReader } from "@zxing/browser";   //zare_nk_040417_commented
 // import { NotFoundException } from "@zxing/library";    //zare_nk_040417_commented
 // import { json } from "stream/consumers";  ////zare_nk_040417_commented(estefadeh ham nashod)
-// import "@/styles/shoppingbasketCss.css";  //zare_nk_041121_commented(for shopToDiscount)
-import "@/styles/DiscountsAndOffersCss.css";  //zare_nk_041121_added(for shopToDiscount)
+import "@/styles/DiscountsAndOffersCss.css"; 
 
 import { RefObject } from "react";
 import { MouseEvent } from "react";

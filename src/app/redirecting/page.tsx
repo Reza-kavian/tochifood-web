@@ -1,4 +1,4 @@
-////zare_nk_041220_okk
+////zare_nk_041222_okk
 "use client";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -32,7 +32,7 @@ export default function RedirectingPage() {
     // //zare_nk_031221_commented_end(chon  tasmime nahaei estefadeh az cookie shod)
  
     //zare_nk_031221_added_st
-    const redirect = getCookie('redirect') || "/"; 
+    const redirect = getCookie('redirect') || "/";   //zare_nk_050222_nokteh(ba getCookie('redirect')? getCookie('redirect'): "/"; moghayeseh she)
     document.cookie = "redirect=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC"; // حذف کوکی
     router.replace(redirect); // هدایت به مسیر ذخیره‌شده
     //zare_nk_031221_added_end

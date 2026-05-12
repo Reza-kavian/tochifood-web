@@ -1,4 +1,4 @@
-////zare_nk_041219_okk
+////zare_nk_050222_okk
 // import { strict } from "assert";
 // import { ReactNode } from "react";
 import { headers } from "next/headers";
@@ -16,7 +16,7 @@ import 'swiper/css/pagination';
 import "@/styles/globals.css";
 
 import LayoutWrapper from "@/components/LayoutWrapper";
-//zare_nk_041011_nokteh(layout.tsx serverComponent hast va dar an nemitavani mostaghiman az hoock haye client estefadeh koni yani  
+//zare_nk_041011_nokteh(layout.tsx serverComponent hast va dar aan nemitavani mostaghiman az hoock haye client estefadeh koni yani  
 // neveshtane "use client" dar an manteghi nist pas az componente komaki(LayoutWrapper) ke "use client" dashteh bashe baraye estefadeh kardim
 
 import { AuthenticationProvider } from '../context/AuthenticationContext'; //zare_nk_050111_added

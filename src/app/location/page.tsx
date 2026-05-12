@@ -1,4 +1,4 @@
-////zare_nk_050212_okk
+////zare_nk_050221_okk
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -260,23 +260,21 @@ function BoxHtmlComponent({
     if (eventOrElement && "target" in eventOrElement) {
       input = eventOrElement.target;
       vall = input.value;
-      inputsName = input.name;  //zare_nk_050201_added
+      inputsName = input.name;
     } else {
       input = eventOrElement;
       vall = input?.value ?? "";
-      inputsName = input?.name ?? "";  //zare_nk_050201_added
+      inputsName = input?.name ?? "";
     }
     // var pat = new RegExp("^[0]{1}[0123456789]{10}$");
     // var isMobileNum = pat.test(vall);
     if (!vall) {
-      // setIsAddressTextEmty(true);   ////zare_nk_050201_commented
-      ////zare_nk_050201_added_st
+      // setIsAddressTextEmty(true);   
       setIsAddressFormInputsTextEmty((cur) => {
         return (
           { ...cur, [inputsName]: true }
         );
       });
-      ////zare_nk_050201_added_end
 
       if (input) {
         input.classList.remove("valid");
@@ -347,8 +345,8 @@ function BoxHtmlComponent({
       });
     }
 
-    ////zare_nk_050208_nokteh_st(bekhatere inke addressFormInputsMatnError dar in rendere jari meghdar dadim,vali midoonim bayad reRender beshe component va dar rendere badim 
-    // meghdari ke alan dadin ro bepazire,pas dastoorate in nokteh ra be useEffecte rendere badi bordim)
+    ////zare_nk_050208_nokteh_st(bekhatere inke addressFormInputsMatnError dar in rendere jari meghdar dadim, vali midoonim bayad reRender beshe component va dar rendere badi
+    //// meghdari ke alan dadin ro bepazire, pas dastoorate in nokteh ra be useEffecte rendere badi bordim)
     // const hasNotNullValue = Object.values(addressFormInputsMatnError).some(value => value !== null);
     // if (hasNotNullValue) {
     //   console.log('050205-hasNullValue');
@@ -499,8 +497,7 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
             marginBottom: '3.25rem',
           }}>
             {/* <div className={`${Styles.translateDiv} ${isInputFocused || !isMobileTextEmty ? Styles.animateFocus : Styles.animateBlur}`} */}
-            <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.Address || !isAddressFormInputsTextEmty.Address ? Styles.animateFocus : Styles.animateBlur}`}
-            >
+            <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.Address || !isAddressFormInputsTextEmty.Address ? Styles.animateFocus : Styles.animateBlur}`} >
               <span style={{ width: '100%' }}>جزئیات آدرس</span>
             </div>
 
@@ -735,7 +732,7 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
                 saveAddress(true);
               }}
               style={{
-                 width: '100%', color: '#ffffff',
+                width: '100%', color: '#ffffff',
                 fontSize: '.875rem',
                 padding: '0.75rem 1rem',
                 borderRadius: '.75rem', height: '3rem', border: 'none',
@@ -804,7 +801,7 @@ export default function LocationPage() {
   const refForVectorLayer = useRef<VectorLayer<VectorSource> | null>(null);  //zare_nk_050213_added
 
   ////zare_nk_050126_nokteh_end(VectorLayer yek classe generic hast,va baraye clashaye generic bayad noe manbae(yani source) dakhelash moshakhas shavad,ma ham
-  //  ba dastoore VectorLayer<VectorSource> noe soursesh ra VectorSource lahaz kardim(age noe source genericha ro nagim az nazare typeScript khata hast))
+  ////  ba dastoore VectorLayer<VectorSource> noe soursesh ra VectorSource lahaz kardim(age noe source genericha ro nagim az nazare typeScript khata hast))
 
   ////zare_nk_050126_nokteh_st(albate VectorSource ham generice va bayad noe sourcesh ro moshakhas konim,vali chon dar tarife in class tavassote barnamenevisane 
   // openlayer behesh voroodiye pishfarze Geometry dadand man nadam error nemideh,tarife classe VectorSource taghriban intotiye:
@@ -963,17 +960,6 @@ export default function LocationPage() {
     //   //   }
     ////zare_nk_050213_commented_end
     ////zare_nk_050213_added_st
-    // if (vSource1 && styles1 != null) {
-    // console.log('useeeeeeeeeeeeeeeeeeeeeeeeeeeeee vSource1  in if');
-    // setVLayer1(() => {
-    //   return (
-    //     new VectorLayer<VectorSource>({
-    //       source: vSource1, // حالا vSource1 قطعاً VectorSource<Geometry> است
-    //       style: styles1,
-    //       updateWhileAnimating: true,
-    //       updateWhileInteracting: true,
-    //     }));
-    // });
     if (!refForVectorLayer.current) {
       refForVectorLayer.current = new VectorLayer<VectorSource>({
         source: refForVectorSource.current,
@@ -982,7 +968,6 @@ export default function LocationPage() {
         updateWhileInteracting: true,
       });
 
-      ////zare_nk_050213_added_st(movaghat ta motmaen shim)
       if ((refForMap.current.getView().getZoom() ?? 0) < 18) {
         console.log('less than 18');
       }
@@ -990,9 +975,7 @@ export default function LocationPage() {
         console.log('bigger than 18');
       }
       showPosition([53.0585, 36.5659]);
-      ////zare_nk_050213_added_end(movaghat ta motmaen shim) 
-
-      ////zare_nk_050213_added_st(movaghat ta motmaen shim)
+      
       console.log("002");
       featureToPaskari = refForFeature.current;
       if (refForFeature.current) {
@@ -1017,15 +1000,13 @@ export default function LocationPage() {
       });
       continuation();
 
-      refForMap.current?.on('moveend', function (event) {
-        ////zare_nk_040912_added_st
+      refForMap.current?.on('moveend', function (event) { 
         if ((refForMap.current?.getView().getZoom() ?? 0) < 18) {
           // alert('less than 18');
         }
         else {
           // alert('bigger than 18');
-        }
-        ////zare_nk_040912_added_end 
+        } 
 
         let centerCoords3857 = refForMap.current?.getView().getCenter();
         console.log("moveend-feature.get('name').X: " + refForFeature.current);
@@ -1044,8 +1025,7 @@ export default function LocationPage() {
 
       refForMap.current.on('pointerdrag', function () {
         defZoom = refForMap.current?.getView().getZoom();
-
-        ////zare_nk_040911_added_st
+ 
         let centerCoords3857 = refForMap.current?.getView().getCenter();
         if (centerCoords3857) {
           console.log("pointermove-feature.get('name').X: " + refForFeature.current?.get('name').X + '-feature.getGeometry().getCoordinates()[0]: ' + refForFeature.current?.getGeometry() ? [0] : 777
@@ -1053,17 +1033,15 @@ export default function LocationPage() {
           // feature.getGeometry().setCoordinates(centerCoords3857);
           refForFeature.current?.setGeometry(new Point(centerCoords3857));
           let coordinate = transform(centerCoords3857, 'EPSG:3857', 'EPSG:4326');
-          ////zare_nk_040911_added_end 
           //let coordinate = feature.getGeometry().getCoordinates();  //zare_nk_040911_commented  
-          let lat = coordinate[1]//ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[1]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-          let lng = coordinate[0]//ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[0]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
+          let lat = coordinate[1]//ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[1]; 
+          let lng = coordinate[0]//ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[0];
 
           if (refForFeature.current) {
             refForFeature.current.get('name').X = lng; refForFeature.current.get('name').Y = lat;
           }
         }
-      });
-      ////zare_nk_050213_added_end(movaghat ta motmaen shim)
+      }); 
     }
     else {
       console.log("useeeeeeeeeeeeeeeeeeeeeeeeeeeeee refForVectorLayer.current  in else");
@@ -1073,9 +1051,7 @@ export default function LocationPage() {
     //     console.log('useeeeeeeeeeeeeeeeeeeeeeeeeeeeee vSource1 noot in if');
     //   }
     ////zare_nk_050213_added_end
-
-
-    ////zare_nk_050213_added_st
+ 
     if (refForMap.current && refForVectorLayer.current) {
       ////zare_nk_050213_commented_st(movaghat ta motmaen shim)
       // if ((refForMap.current.getView().getZoom() ?? 0) < 18) {
@@ -1087,7 +1063,6 @@ export default function LocationPage() {
       // showPosition([53.0585, 36.5659]);
       ////zare_nk_050213_commented_end(movaghat ta motmaen shim)
     }
-
 
     if (refForMap.current && refForFeature.current) {
       ////zare_nk_050213_commented_st(movaghat ta motmaen shim)
@@ -1161,8 +1136,6 @@ export default function LocationPage() {
     else {
       console.log("003");
     }
-    ////zare_nk_050213_added_end
-
   }, []);
 
   var LocationArr: any = []; var featuresArr: any = [];
@@ -1263,8 +1236,6 @@ export default function LocationPage() {
       rainfall: 500,
     });
     ////zare_nk_050213_added_end
-
-
 
     // featureToPaskari = feature;
     // vSource1?.removeFeature(feature);
