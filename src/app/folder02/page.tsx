@@ -1,4 +1,4 @@
-////zare_nk_041221_okk
+////zare_nk_041223_okk
 "use client";
 import { useRouter, useParams, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";

@@ -1,4 +1,4 @@
-////zare_nk_050222_okk
+////zare_nk_050223_okk
 // import { strict } from "assert";
 // import { ReactNode } from "react";
 import { headers } from "next/headers";
@@ -11,7 +11,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination'; 
 // اگر از افکت‌های خاصی مثل Fade یا Cube استفاده می‌کنی، استایل مربوط به اون رو هم اینجا ایمپورت کن
 // مثال: import 'swiper/css/effect-fade';
-
 
 import "@/styles/globals.css";
 

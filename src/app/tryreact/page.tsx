@@ -1,4 +1,4 @@
-////zare_nk_050222_okk
+////zare_nk_050223_okk
 "use client"; 
 import { useEffect, useState, useRef, useCallback ,memo} from "react";
 import Styles from "@/styles/components/dooz.module.css";

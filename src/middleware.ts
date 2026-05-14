@@ -1,4 +1,4 @@
-////zare_nk_041218_okk
+////zare_nk_041223_okk
 import { NextResponse, NextRequest } from "next/server";
 // import jwt from "jsonwebtoken";  //chon middleware.ts dar Edge Runtime ejra mishavad, az majoole crypto poshtibani nemikoneh 
 // va az jsonwebtoken nemishe dar middleware.ts estefadeh kard, pas api zadim be verifytoken va dar anja az jsonwebtoken estefade kardim 
@@ -137,7 +137,6 @@ export async function middleware(request: NextRequest) {
         const response = ishomePage ? NextResponse.redirect(new URL("/onboarding", request.url)) :
           NextResponse.redirect(new URL("/login", request.url));  //zare_nk_050205_added
 
-
         const isValidRedirectPath = !publicPaths.some((path) =>
           request.nextUrl.pathname.startsWith(path)
         );
@@ -270,7 +269,6 @@ export async function middleware(request: NextRequest) {
       const response = ishomePage ? NextResponse.redirect(new URL("/onboarding", request.url)) :
         NextResponse.redirect(new URL("/login", request.url));    //zare_nk_050205_added
 
-
       response.cookies.set("redirect", request.nextUrl.pathname, {
         path: "/",
         httpOnly: false,
@@ -295,7 +293,6 @@ export async function middleware(request: NextRequest) {
     // const response = NextResponse.redirect(new URL("/login", request.url));  //zare_nk_050205_commented
     const response = ishomePage ? NextResponse.redirect(new URL("/onboarding", request.url)) :
       NextResponse.redirect(new URL("/login", request.url));    //zare_nk_050205_added
-
 
     response.cookies.set("redirect", request.nextUrl.pathname, {
       path: "/",

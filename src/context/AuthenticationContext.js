@@ -1,4 +1,4 @@
-// context/AuthenticationContext.js   //zare_nk_050222_okk
+// context/AuthenticationContext.js   //zare_nk_050223_okk
 'use client';
 
 import { createContext, useState, useContext } from 'react';
@@ -26,7 +26,6 @@ const AuthenticationContext = createContext();
 
 // 2. Provider کامپوننت را بسازید
 export function AuthenticationProvider({ children }) {
-
     let token = getCookie("token");
     let isLog = token != null ? true : false
     const [isLogin, setIsLogin] = useState(isLog);

@@ -1,4 +1,4 @@
-////zare_nk_050212_okk
+////zare_nk_050223_okk
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -1030,7 +1030,7 @@ export default function LocationPage() {
   }, [map, vLayer1]);
 
   useEffect(() => {   //zare_nk_050208_nokteh(useEffecte [map, feature] check mikoneh age map va vSource1 va feature meghdar daran,feature ra be vSource1 midim, 
-  // hamchenin modiriat mikonim dar rooydade moveend va pointerdrag feature meghdare jadid begire )
+    // hamchenin modiriat mikonim dar rooydade moveend va pointerdrag feature meghdare jadid begire )
     console.log("001");
     if (map && feature) {
       console.log("002");
@@ -1146,7 +1146,7 @@ export default function LocationPage() {
       // 'TahvilGirande': TahvilGirande,
       // 'OnvanAdress': $('#OnvanAdress').val(),
     })
-   
+
     let ApiUrl = "https://api.tochikala.com/api/";
     const response = await fetch(ApiUrl + "User/Api_CreateAddress", {
       method: "POST",
@@ -1173,7 +1173,7 @@ export default function LocationPage() {
       // "data":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjIwMTA5IiwiQ29kZU1vc2h0YXJpIjoiMjAxMDkiLCJNb2JpbGUiOiI5MzUxMDkxMjg3IiwiTmFtZU1vc2h0YXJpIjoiIiwibmJmIjoxNzQ2NzI1OTI4LCJleHAiOjE3NDczMzA3MjgsImlhdCI6MTc0NjcyNTkyOH0.9Jfv71v3D_s13gSyf3gXqgEfiXaV-lx93hDey4DSLM8"
       // },"errors":[]}
       if (data.status == 0) {
-       
+
       } else {
         // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
         // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
@@ -1335,7 +1335,7 @@ export default function LocationPage() {
               }}
             >ادامه</button>
           </div>
-         
+
         </div>
 
         <BoxHtmlComponent

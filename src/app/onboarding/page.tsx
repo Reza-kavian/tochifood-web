@@ -1,4 +1,4 @@
-////zare_nk_050222_okk
+////zare_nk_050223_okk
 'use client'
 import { useRouter, redirect } from "next/navigation";
 import "@/styles/onboardingCss.css";

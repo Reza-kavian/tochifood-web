@@ -1,4 +1,4 @@
-////zare_nk_050222_okk
+////zare_nk_050223_okk
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -699,12 +699,11 @@ export default function Toolbar() {
         // // const decoded = jwt.verify(token, secretKey);
         // const decoded = jwt.decode(token) as JwtPayload | null;
         // console.log("040530-03-token: " + JSON.stringify(decoded));
-        ////zare_nk_040603_added_end        
-
+        ////zare_nk_040603_added_end    
         try {
           ////zare_nk_041114_added_st(and commented. chon methode HttpContext.SignInAsync rp anjam mideh baraye online kardan be sabke HttpContext marboot be .net core c# 
           // vali man ino nemikham chon hamin cookie token sakhtan baram kafiye be onvane amale online kardan va amale estelame online boodane karbar. dar zemn ma dar view haye c#
-          // ke nistim ba hamin emkanate HttpContext mesle(HttpContextAccessor.HttpContext!.User.Identity!.IsAuthenticated)baraye estelame online boodan estefadeh konim!
+          // ke nistim ba hamin emkanate HttpContext mesle(HttpContextAccessor.HttpContext!.User.Identity!.IsAuthenticated) baraye estelame online boodan estefadeh konim!
           // pas az haman sakhte va vakeshiye cookie haviye token ke name token ra behesh dadam baraye moshakhas kardane online shodan va estelame online boodaanesh estefadeh mikonam
           //va in kar ra dar methode verifyToken gonjandim)
 
