@@ -1,4 +1,4 @@
- ////zare_nk_041223_okk
+////zare_nk_041225_okk
 'use client';
 
 import { useEffect, useState, useRef, useCallback, memo } from "react";  //zare_nk_050216_added
@@ -58,6 +58,7 @@ fargheshoon dar ine ke vaghti barname besaze dakhele swiper misaze va position:a
         modules={[Navigation, Pagination]}
         spaceBetween={10}    //zare_nk_050216_nokteh(faseleye beine slideha dar har ghabele namayesh(be px hast))
         slidesPerView={2}   //zare_nk_050216_nokteh(tedad slideha dar har ghabele moshahedeh)
+        //  centeredSlides={true}  //zare_nk_050226_added(baraye vasat gharar gereftane slide ha dar swiper)
         ////zare_nk_050215_nokteh_st(dokmeye raftan be badi va ghabli ro modiriat mikoneh, age nazarim pishfarz false hast, mishe ham boolean dad, va ham meghdare objecti dad 
         //// ke dokmehaye ghablo bad , ... ra sefareshi konim(midoonim useRef age masalan string ya namber ,... bashe tagheiresh bedim dar hamin render tagheiresh ghabale 
         // moshahedeh hast, vali manzoore ma useRefi hast ke be taghaye jsx nesbat midim ke ta dar dom naran useRef be tage jsx nemichasbe ))
@@ -81,7 +82,8 @@ fargheshoon dar ine ke vaghti barname besaze dakhele swiper misaze va position:a
 
         ////zare_nk_050216_nokteh_st(dokmehaye raftan be safhe ke momoolan dar vasat va paeine swiper namayash dadeh mishan, age nazarim pishfarz false hast, mishe ham boolean 
         //// dad, va ham meghdare objecti dad ke dokmehaye adshodeh ra sefareshi konim)
-        // pagination={true} 
+        // pagination={true}  ////zare_nk_050226_nokteh(pagination={true} ra gozashtam faghat nameyesh mideh safheye feli ra ba toopor va tookhali kardane bullet ha, vali inke click
+        ////  konim rooshoon amal konan bayad clickable: true, benevisim(chon pishfarz false hast va faghat ba angosht ya mouseclick chaporast mikeshim slide ha ra(na click rooye bullet ha)))
         pagination={{
           clickable: true,
           el: '.swiper-pagination',

@@ -1,4 +1,4 @@
-////zare_nk_050223_okk
+////zare_nk_050225_okk
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -1086,8 +1086,6 @@ export default function EditPage() {
             paddingTop: '1rem', paddingLeft: '1rem', paddingRight: '1rem',
             display: "flex", flexFlow: "column", gap: '1.25rem',
           }}>
-
-
           {/* zare_nk_050204_nokteh(fontFamily az layoutWraper ers borde va IRANSansWeb_Medium(adad_fa) hast,fontWeight rooye in font asar dare,vali rooye bazi fontha mesle 
           IRANSansWeb_Bold(adad_fa)) asar nadare,ehtemalan chon in font khodesh fontWeighte dakheli dareh ke dar olaviyate balatar az fontWeighte dastiye css hast ke ma midim */}
           <h1 style={{ fontWeight: 600, color: '#1b1c1d', margin: 0, fontSize: 'inherit', }}>ویرایش آدرس</h1>
@@ -1114,7 +1112,6 @@ export default function EditPage() {
               }}
             >تایید</button>
           </div>
-
         </div>
 
         <BoxHtmlComponent
@@ -1126,7 +1123,6 @@ export default function EditPage() {
           setAddressFormInputsVal={setAddressFormInputsVal}
           getIdAdressFromSearchParams={getIdAdressFromSearchParams}  //zare_nk_050213_added
         />
-
       </main >
       <footer></footer>
     </>
