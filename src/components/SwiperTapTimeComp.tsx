@@ -458,20 +458,24 @@ export default function SwiperTapTimeComp() {
                                     //  height: '80px',
                                     // height: '89px',
                                     // width: 'auto',
-                                    width: '230px',
+                                    // width: '230px',
+                                    width: '145px',
                                 }}>
 
 
 
                                 <div className="contInSlide" style={{
                                     display: 'flex', alignItems: 'center', justifyContent: 'center', //// width: '100%', height: '100%',
-                                    backgroundColor: 'inherit', borderRadius: '.75rem', border: '1px solid #f6f6f7',
+                                    backgroundColor: 'white', borderRadius: '.5rem',
+                                    // border: '1px solid #f6f6f7',
                                 }}>
                                     <Link href="https://tapsi.food/business-lines?businessTypeId=6" style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
                                         <div style={{
                                             display: 'flex', flexFlow: 'column', position: 'relative', width: '100%', height: '100%',
                                             justifyContent: 'center', alignItems: 'center',
+
                                             // rowGap: '0.25rem',   ////zare_nk_050304_commented(rowGap nazasht tapsifood)
+                                            padding:'.25rem 0px',   ////zare_nk_050307_added
                                         }}>
                                             <div style={{
                                                 position: 'absolute', top: '.5rem', right: '-5px',
@@ -576,13 +580,13 @@ export default function SwiperTapTimeComp() {
 
                                             <img
                                                 style={{
-                                                    width: '100%',
-                                                    // marginTop: '5px', marginBottom: '0px',
-                                                    ////zare_nk_050314_added_st
+                                                    width: '137px',  //'100%',
+                                                    // marginTop: '5px', marginBottom: '0px', 
                                                     height: '105px', objectFit: 'cover',
-                                                    borderTopLeftRadius: '.5rem',
-                                                    borderTopRightRadius: '.5rem',
-                                                    ////zare_nk_050314_added_end 
+                                                    borderTopLeftRadius: '.375rem',
+                                                    borderTopRightRadius: '.375rem', 
+
+
                                                 }}
                                                 // src={`/images/SwiperGrouplevel1/${item.AxG1}.png`} />  ////zare_nk_050229_nokteh(age az database bekhooneh bade emale database food tavassote parsa)
                                                 // src={`/images/SwiperGrouplevel1/${index}.png`} />
@@ -601,7 +605,7 @@ export default function SwiperTapTimeComp() {
                                                     display: 'flex', flexFlow: 'row', width: '100%',
                                                 }}>
                                                     <div style={{
-                                                        display: 'flex', flexFlow: 'row', width: '100%', padding: '0px .75rem', justifyContent: 'space-between',
+                                                        display: 'flex', flexFlow: 'row', width: '100%', padding: '0px .5rem', justifyContent: 'space-between',
                                                         marginTop: '8px',
                                                     }}>
 
@@ -663,7 +667,7 @@ export default function SwiperTapTimeComp() {
                                                     display: 'flex', flexFlow: 'row', width: '100%', marginBottom: '2px',
                                                 }}>
                                                     <div style={{
-                                                        display: 'flex', flexFlow: 'row', width: '100%', padding: '0px .75rem', justifyContent: 'space-between',
+                                                        display: 'flex', flexFlow: 'row', width: '100%', padding: '0px .5rem', justifyContent: 'space-between',
                                                         // marginTop: '8px',
                                                     }}>
 
