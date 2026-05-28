@@ -182,8 +182,8 @@ export default function SwiperTapBestsComp() {
                     }}
                 >
                     {responsedListFromApiSelectGoroohJson?.map((item, index) => {
-                        console.log('0-item.IdAdress: ' + JSON.stringify(item));
-                        console.log('0-item.IdAdress: ' + JSON.stringify(item));
+                        console.log('00-item.IdAdress: ' + JSON.stringify(item));
+                        console.log('00-item.IdAdress: ' + JSON.stringify(item));
                         return (
                             <SwiperSlide
                                 key={index}

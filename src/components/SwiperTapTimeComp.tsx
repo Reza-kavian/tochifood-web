@@ -48,10 +48,14 @@ function getCookie(name: any) {
 }
 
 export default function SwiperTapTimeComp() {
+
     ////zare_nk_050305_added_st
+    const intervalRef = useRef<null | ReturnType<typeof setInterval>>(null);
+    //// React.RefObject<NodeJS.Timeout | null>;
     const [hToString, setHToString] = useState<string | null>(null);
     const [mToString, setMToString] = useState<string | null>(null);
     const [sToString, setSToString] = useState<string | null>(null);
+    const refForTimer = useRef<HTMLDivElement | null>(null);
     ////zare_nk_050305_added_end
 
     const [errorInSwiperTapTime, setErrorInSwiperTapTime] = useState<string | null>(null);
@@ -59,21 +63,21 @@ export default function SwiperTapTimeComp() {
     const router = useRouter();
 
     type responsedListFromApiSelectShobehJashnvarehType = {
-        IdG1: number;
-        NameG1: string;
-        AxG1: string;
-        Tozihat: string;
-        // MetaDesc: string;  //؟؟
-        // tbl_Gorooh2
-        // .
-        // .
-        // .
+        // IdG1: number;
+        // NameG1: string;
+        // AxG1: string;
+        // Tozihat: string;
+
         [key: string]: any;
     };
 
     const [responsedListFromApiSelectShobehJashnvareh, SetResponsedListFromApiSelectShobehJashnvareh] = useState<responsedListFromApiSelectShobehJashnvarehType[] | null>(null);
-const [timer, setTimer] = useState(0);
+    const [timer, setTimer] = useState(0);  ////zare_nk_050307_added
+
+    // alert('SwiperTapTimeComp rerendered-timer: ' + timer);
+
     const getSwiperTapTime = async () => {
+        // alert('getSwiperTapTime');
         let token = getCookie("token");
         if (!token) {
             setErrorInSwiperTapTime("lotfan avval online shid");
@@ -95,7 +99,7 @@ const [timer, setTimer] = useState(0);
         const data = await response.json();
 
         if (response.ok) {
-            console.log("zare_nk_050228-data: " + JSON.stringify(data));
+            console.log("zare_nk_050307-data: " + JSON.stringify(data));
             if (data.status == 0) {
                 if (data.data.list == undefined) {
                     return;
@@ -108,13 +112,15 @@ const [timer, setTimer] = useState(0);
                 // var Gorooh = parsedList.Gorooh;
 
                 SetResponsedListFromApiSelectShobehJashnvareh(() => {
-                    return parsedTimer
+                    return parsedList
                 });
 
-                setTimer(() => {
-                    return timer
-                });
-
+                setTimer(timer);  ////zare_nk_050307_added
+                // ////zare_nk_050307_added_st
+                // setTimer(() => {
+                //     return timer
+                // });
+                // ////zare_nk_050307_added_end
 
             } else {
                 setErrorInSwiperTapTime("متاسفانه خطایی رخ داده است34:" + data.errors);
@@ -126,9 +132,103 @@ const [timer, setTimer] = useState(0);
         }
     }
 
-    // useEffect(() => {         
-    getSwiperTapTime();
-    // }, []);
+    useEffect(() => {
+        getSwiperTapTime();
+    }, []);
+
+    ////zare_nk_050307_added_st
+    useEffect(() => {
+        // alert('0');
+        if (responsedListFromApiSelectShobehJashnvareh == null) {
+            // alert('1');
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+            }
+            return;
+        }
+        // alert('2');
+        ////zare_nk_050307_added_st
+        intervalRef.current = setInterval(function () {
+            ////zare_nk_050307_commented_st
+            // if (calculateWinner(squares)) {
+            //     setTimerDisplay("none");
+            //     if (intervalRef.current !== null) {
+            //         clearInterval(intervalRef.current);
+            //     }
+            //     setTimer(-1);
+            //     return;
+            // }
+            ////zare_nk_050307_commented_end
+
+            setTimer((curTimer) => {
+                // alert('kkkk' + timer+'-curTimer: '+curTimer);
+                if (curTimer < 0) {
+                    if (intervalRef.current !== null) {
+                        clearInterval(intervalRef.current);
+                    }
+
+                    ////zare_nk_050307_commented_st
+                    // setXIsNextState(!xIsNextRef.current);
+                    // squares[squares.length - 1] = !xIsNextRef.current ? "X" : "O";  
+                    // localStorage.setItem(   
+                    //     "xIsNextState",
+                    //     JSON.stringify(!xIsNextRef.current)
+                    // );
+                    ////zare_nk_050307_commented_end
+
+                    // localStorage.setItem("timer", JSON.stringify(5000));  ////zare_nk_050307_commented 
+
+                    // return 5000;  ////zare_nk_050307_commented
+                    return 0;  ////zare_nk_050307_added
+                }
+                // let h = Math.floor(timer / (1000 * 60 * 60));    ////zare_nk_050307_commented
+                let h = Math.floor(curTimer / (1000 * 60 * 60)); ////zare_nk_050307_added
+                let hToString = h.toString();
+                hToString = hToString.length === 1 ? "0" + hToString : hToString;
+                ////zare_nk_050307_nokteh(hatman tahlilshe chera timer ri inja moghdare avvaliye faghat mideh, vali curTimer ro berooz mideh!!)
+                // let m = Math.floor((timer - h * 60 * 60 * 1000) / (60 * 1000));   ////zare_nk_050307_commented 
+                let m = Math.floor((curTimer - h * 60 * 60 * 1000) / (60 * 1000));   ////zare_nk_050307_added
+                let mToString = m.toString();
+                mToString = mToString.length === 1 ? "0" + mToString : mToString;
+                // let s = Math.floor((timer - h * 60 * 60 * 1000 - m * 60 * 1000) / 1000);  ////zare_nk_050307_commented
+                let s = Math.floor((curTimer - h * 60 * 60 * 1000 - m * 60 * 1000) / 1000);
+                let sToString = s.toString();
+                sToString = sToString.length === 1 ? "0" + sToString : sToString;
+
+                try {
+                    if (hToString != "00") {
+                        setHToString(hToString);
+                        setMToString(mToString);
+                        setSToString(sToString);
+                    } else {
+                        setMToString(mToString);
+                        setSToString(sToString);
+                    }
+
+                } catch (error) {
+                    if (error instanceof Error) {
+                        console.log("zare_nk_040123-0004-Error:" + error.message);
+                    } else {
+                        console.log("zare_nk_040123-0004-Error: Unknown error");
+                    }
+                    if (intervalRef.current !== null) {
+                        clearInterval(intervalRef.current);
+                    }
+                }
+                // localStorage.setItem("timer", JSON.stringify(curTimer - 1000));
+                // alert('timertimertimer:  ' + timer);
+                return curTimer - 1000;
+            });
+        }, 1000);
+
+        return () => {
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+            }
+        };
+        ////zare_nk_050307_added_end
+    }, [responsedListFromApiSelectShobehJashnvareh]);
+    ////zare_nk_050307_added_end
 
     return (
         <>
@@ -201,7 +301,7 @@ const [timer, setTimer] = useState(0);
                         <div
                             ref={refForTimer}
                             id="timermoveOpportunity"
-                            style={{ display: "flex", flexFlow: "row", color: "red", cursor: 'not-allowed', }}
+                            style={{ display: "flex", flexFlow: "row-reverse", color: "red", cursor: 'not-allowed', }}
                         >
                             {hToString != null && (
                                 <>
@@ -348,9 +448,8 @@ const [timer, setTimer] = useState(0);
                         overflow: 'visible', ////zare_nk_050226_nokteh(baraye inke darsade takhfifha ke biroon mizanan dideh beshan)
                     }}
                 >
-                    {responsedListFromApiSelectGoroohJson?.map((item, index) => {
-                        console.log('0-item.IdAdress: ' + JSON.stringify(item));
-                        console.log('0-item.IdAdress: ' + JSON.stringify(item));
+                    {responsedListFromApiSelectShobehJashnvareh?.map((item, index) => {
+                        console.log('050307-item: ' + JSON.stringify(item));
                         return (
                             <SwiperSlide
                                 key={index}
@@ -361,6 +460,9 @@ const [timer, setTimer] = useState(0);
                                     // width: 'auto',
                                     width: '230px',
                                 }}>
+
+
+
                                 <div className="contInSlide" style={{
                                     display: 'flex', alignItems: 'center', justifyContent: 'center', //// width: '100%', height: '100%',
                                     backgroundColor: 'inherit', borderRadius: '.75rem', border: '1px solid #f6f6f7',
@@ -484,6 +586,7 @@ const [timer, setTimer] = useState(0);
                                                 }}
                                                 // src={`/images/SwiperGrouplevel1/${item.AxG1}.png`} />  ////zare_nk_050229_nokteh(age az database bekhooneh bade emale database food tavassote parsa)
                                                 // src={`/images/SwiperGrouplevel1/${index}.png`} />
+                                                // https://img.tochikala.com/Product/' + item.IdKala
                                                 src={`/images/movaghat/SwiperTapTime/${index}.jpg`} />
 
 
@@ -523,7 +626,7 @@ const [timer, setTimer] = useState(0);
 
                                                             textAlign: 'center',
                                                         }}>
-                                                            {item.NameG1}
+                                                            {item.NameKala}
                                                         </div>
 
                                                         <div style={{
@@ -617,10 +720,30 @@ const [timer, setTimer] = useState(0);
                                         </div>
                                     </Link>
                                 </div>
+
+
+
                             </SwiperSlide>
                         )
                     })}
                 </Swiper>
+
+
+
+
+                {/* zare_nk_050307_added_st */}
+                <div style={{
+                    width: '100%', height: '1rem', boxShadow: 'rgba(0, 0, 0, 0.1) 0px 6px 8px 0px', marginTop: '0.5rem',
+                    backgroundColor: '#fcfcfc', borderTopLeftRadius: '.75rem', borderTopRightRadius: '.75rem',
+                }}>
+                </div>
+                {/* zare_nk_050307_added_end */}
+
+
+
+
+
+
             </div>
 
             {/* </div> */}

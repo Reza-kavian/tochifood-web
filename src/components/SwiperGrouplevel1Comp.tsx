@@ -133,8 +133,8 @@ export default function SwiperGrouplevel1Comp() {
                 }}
             >
                 {responsedListFromApiSelectGoroohJson?.map((item, index) => {
-                    console.log('0-item.IdAdress: ' + JSON.stringify(item));
-                    console.log('0-item.IdAdress: ' + JSON.stringify(item));
+                    console.log('000-item.IdAdress: ' + JSON.stringify(item));
+                    console.log('000-item.IdAdress: ' + JSON.stringify(item));
                     return (
                         <SwiperSlide
                             key={index}
