@@ -1,4 +1,4 @@
-////zare_nk_050223_okk
+////zare_nk_050303_okk
 "use client"; 
 import { useEffect, useState, useRef, useCallback ,memo} from "react";
 import Styles from "@/styles/components/dooz.module.css";
@@ -12,7 +12,7 @@ type SquareProps = {
 };
 
 function Square({ value, onSquareClick, andis, refForBtn }: SquareProps) {
-  return (  //zare_nk_050122_nokteh(tahlilshe ke be key niaz dare ya na!!)
+  return (  ////zare_nk_050122_nokteh(tahlilshe ke be key niaz dare ya na!!)
     <div className={Styles.tripleInRow}>
       <button
         ref={(e) => {
@@ -29,13 +29,13 @@ function Square({ value, onSquareClick, andis, refForBtn }: SquareProps) {
   );
 }
 
-type SquareValue = "X" | "O" | null;   //zare_nk_041015_nokteh(SquareValue yek type ast ke ya X ya O ya null hast)
-type Squares = SquareValue[];   //zare_nk_041015_nokteh(Squares yek type ast ke arayeh ei az noe SquareValue hast,yani maghadiresh faghat X ya O ya null hast) 
-type BtnColor = string | null;   //zare_nk_041015_nokteh(BtnColor range dokmeh ra moshakhas mikoneh ke noe reshtei ast)
+type SquareValue = "X" | "O" | null;   ////zare_nk_041015_nokteh(SquareValue yek type ast ke ya X ya O ya null hast)
+type Squares = SquareValue[];   ////zare_nk_041015_nokteh(Squares yek type ast ke arayeh ei az noe SquareValue hast,yani maghadiresh faghat X ya O ya null hast) 
+type BtnColor = string | null;   ////zare_nk_041015_nokteh(BtnColor range dokmeh ra moshakhas mikoneh ke noe reshtei ast)
 
 type BoardProps = {
   squares: Squares; //zare_nk_040528_nokteh(arayeye 9 khanehiye haviye vaziate feliye chineshe dooz(ba clicke dokmehaye dooz ya ba clicke dokmehaye archiv in vaziat avaz misheh))
-  onPlay: (nextSquares: Squares) => void; //az methode handlePlaye componente Game meghdar migire,handlePlaye dar renderhaye Game zamani ke masalan dokmehaye dooz
+  onPlay: (nextSquares: Squares) => void; ////az methode handlePlaye componente Game meghdar migire, handlePlaye dar renderhaye Game zamani ke masalan dokmehaye dooz
   //// ya dokmehaye arshiv click beshan va vazite jadide chineshe dooz shekl begire amal mikoneh)   //zare_nk_050122_nokteh(rahnamaei gofteham ghablan archive ham handlePlaye seda mizaneh,alan cheshmbaste migam na,cheshm baz va tahlilshe!)
   refForBtn: React.RefObject<(HTMLButtonElement | null)[]>;  //zare_nk_040528_nokteh(useRefe dokmehaye dooz ke harkodam tage button hastand)
   timer: number; //zare_nk_040525_nokteh(state shamele meghdare timer)
@@ -76,18 +76,18 @@ function Board({
   setSToString,
 }: BoardProps) {
   console.log('zare_nk_050126-Board called!!-squares: ' + squares);
-  const [lastButton, setLastButton] = useState<number | null>(  //zare_nk_040528_nokteh(state ke andise dokmeh ra dar arayeye Squares midahad,va dar har handleClick ke haman rooydade clicke dokmehaye dooz ast meghdar migireh)
+  const [lastButton, setLastButton] = useState<number | null>(  ////zare_nk_040528_nokteh(state ke andise dokmeh ra dar arayeye Squares midahad,va dar har handleClick ke haman rooydade clicke dokmehaye dooz ast meghdar migireh)
     localStorage.getItem("lastButton") != null
       ? JSON.parse(localStorage.getItem("lastButton")!)
       : null
   );
-  var refForTimer = useRef(null);  //zare_nk_040528_nokteh(useRefe tage namayeshe timer hast)
-  var refForTimerCont = useRef(null);  //zare_nk_040528_nokteh(useRefe tage pedare tage namayeshe timer hast)
-  const refForWinnerOrNobat = useRef<HTMLDivElement | null>(null);   //zare_nk_040528_nokteh(useRefe tage namayeshe lafze nobat ya barandeh)
-  const xIsNextRef = useRef(xIsNextState);   //zare_nk_040528_nokteh(useRefe haviye meghdare feliye xIsNextState, xIsNextState ra dar useRef 
-  // rikhtim ke dar renderhaye component meghdarash hefz shavad)
+  var refForTimer = useRef(null);  ////zare_nk_040528_nokteh(useRefe tage namayeshe timer hast)
+  var refForTimerCont = useRef(null);  ////zare_nk_040528_nokteh(useRefe tage pedare tage namayeshe timer hast)
+  const refForWinnerOrNobat = useRef<HTMLDivElement | null>(null);   ////zare_nk_040528_nokteh(useRefe tage namayeshe lafze nobat ya barandeh)
+  const xIsNextRef = useRef(xIsNextState);   ////zare_nk_040528_nokteh(useRefe haviye meghdare feliye xIsNextState, xIsNextState ra dar useRef 
+  //// rikhtim ke dar renderhaye component meghdarash hefz shavad)
 
-  useEffect(() => {  //zare_nk_040528_nokteh(range dokmehaye dooz ra inja taein mikonim)
+  useEffect(() => {  ////zare_nk_040528_nokteh(range dokmehaye dooz ra inja taein mikonim)
     if (localStorage.getItem("BtnsColor")) {
       console.log(
         "zare_nk_040225-Board called!!-localStorage.BtnsColor: " +
@@ -100,9 +100,9 @@ function Board({
       } else {
         jsonedBtnsColor = null; // یا مقدار پیش‌فرض دیگه
       }
-      if (jsonedBtnsColor) {  //zare_nk_041015_nokteh(jsonedBtnsColor arrayeei az ranghaye dokmeh ha hast)
+      if (jsonedBtnsColor) {  ////zare_nk_041015_nokteh(jsonedBtnsColor arrayeei az ranghaye dokmeh ha hast)
         jsonedBtnsColor.map((item_: string, index: number) => {
-          if (refForBtn.current[index]) {    //zare_nk_041015_nokteh(age dokmeye khaneye index vojood dasht dakhele if rangesh ro taein mikonim
+          if (refForBtn.current[index]) {    ////zare_nk_041015_nokteh(age dokmeye khaneye index vojood dasht dakhele if rangesh ro taein mikonim
             refForBtn.current[index].classList.add(jsonedBtnsColor[index]);
           }
         });
@@ -135,9 +135,9 @@ function Board({
           }
           setXIsNextState(!xIsNextRef.current);
           // setXIsNextState(!xIsNextState);   
-          // setXIsNextState((cur) =>{return !cur} );  //not ok //zare_nk_040528_nokteh(nadorost hast,ehtemalan chon yek setState booleani dakhele setState dige mokhtal mishe)
-          squares[squares.length - 1] = !xIsNextRef.current ? "X" : "O";  //zare_nk_041016_nokteh(tavize nobat bekhatere etmame mohlate zamani)
-          localStorage.setItem(   //zare_nk_041016_nokteh(tavize nobat bekhatere etmame mohlate zamani)
+          // setXIsNextState((cur) =>{return !cur} );  ////not ok //zare_nk_040528_nokteh(nadorost hast,ehtemalan chon yek setState booleani dakhele setState dige mokhtal mishe)
+          squares[squares.length - 1] = !xIsNextRef.current ? "X" : "O";  ////zare_nk_041016_nokteh(tavize nobat bekhatere etmame mohlate zamani)
+          localStorage.setItem(   ////zare_nk_041016_nokteh(tavize nobat bekhatere etmame mohlate zamani)
             "xIsNextState",
             JSON.stringify(!xIsNextRef.current)
           );
@@ -213,7 +213,8 @@ function Board({
 
     return () => {
       if (intervalRef.current) {
-        clearInterval(intervalRef.current); //in dastoor bayad bashe ta az anbashte shodane intervale yad shodeh dar hafezehye system(anbashtegi) hengame unmount shodane component(yani dastoorate router ra bezanim va be componenthaye dige berim) jologiri beshe
+        clearInterval(intervalRef.current);  ////in dastoor bayad bashe ta az anbashte shodane intervale yad shodeh dar hafezehye system(anbashtegi) hengame unmount 
+        //// shodane component(yani dastoorate router ra bezanim va be componenthaye dige berim) jologiri beshe
       }
     };
   }, [timer, xIsNextState]);
@@ -233,18 +234,18 @@ function Board({
     } else {
       nextSquares[i] = "O";  //zare_nk_041016_nokteh(az null be O)
     }
-    //zare_nk_040225_commented_st(rahe1-vali dalili be comment nist,chon dakhaele yek setState digeh nabood ke chon boolean barmigardoone amal nakoneh va majboor shim az rahe2 estefadeh konim)
+    //zare_nk_040225_nokteh_st(rahe1-vali dalili be comment nist, chon dakhaele yek setState digeh nabood ke chon boolean barmigardoone amal nakoneh va majboor shim az rahe2 estefadeh konim)
     setXIsNextState((cur) => {
       localStorage.setItem("xIsNextState", JSON.stringify(!cur));
       // squares[squares.length - 1] = !cur ? "X" : "O"; ////zare_nk_050130_nokteh(engar ezafiye va bimoredeh!-hatman tahlilshe)
       return !cur;
-    });
-    //zare_nk_040225_commented_end(rahe1-vali dalili be comment nist,chon dakhaele yek setState digeh nabood ke chon boolean barmigardoone amal nakoneh va majboor shim az rahe2 estefadeh konim)
-    // //zare_nk_040225_added_st(rahe2-rahe1 chon biniaz az ref hast az nazare chatGpt behtare)
+    }); 
+    ////zare_nk_040225_nokteh_end(rahe1-vali dalili be comment nist, chon dakhaele yek setState digeh nabood ke chon boolean barmigardoone amal nakoneh va majboor shim az rahe2 estefadeh konim)
+    ////zare_nk_040225_nokteh_st(rahe2-rahe1 chon biniaz az ref hast az nazare chatGpt behtare)
     // setXIsNextState(!xIsNextRef.current); //ok
     // localStorage.setItem("xIsNextState", JSON.stringify(!xIsNextRef.current)); //ok
     //// squares[squares.length - 1] = !xIsNextRef.current ? "X" : "O; ////zare_nk_050130_nokteh(engar ezafiye va bimoredeh!-hatman tahlilshe)
-    // //zare_nk_040225_added_end(rahe2-rahe1 chon biniaz az ref hast az nazare chatGpt behtare)
+    ////zare_nk_040225_nokteh_end(rahe2-rahe1 chon biniaz az ref hast az nazare chatGpt behtare)
     setTimer(5000);
     localStorage.setItem("timer", JSON.stringify(5000));
     [...Array(9)].map((_, index) => {
@@ -265,7 +266,7 @@ function Board({
         );
         BtnsColor[index] = Styles.mohreh;
       } 
-      // refForBtn.current[index].disabled="disabled";  //zare_nk_040120(baraye disable kardane dokmeha baraye entezar)  
+      // refForBtn.current[index].disabled="disabled";  ////zare_nk_040120(baraye disable kardane dokmeha baraye entezar)  
     });
     localStorage.setItem("BtnsColor", JSON.stringify(BtnsColor));
     
@@ -424,6 +425,7 @@ function Board({
                 {mToString}
               </span>
             )}
+            
             {sToString && (
               <>
                 <span
@@ -517,8 +519,8 @@ function Board({
 
 export default function Game() {
   console.log("zare_nk_050126-Game called!!");
-  const refForBtn = useRef<(HTMLButtonElement | null)[]>(Array(9).fill(null)); //zare_nk_041015_nokteh(refForBtn yek useref ast ke arayeei az dokmehaye dooz ast)
-  const BtnsColor: (string | null)[] = [...Array(9)].map(() => null);  //zare_nk_040528_nokteh(arayehei 9 khanehi ke moadele range har dokmeye dooz ast)
+  const refForBtn = useRef<(HTMLButtonElement | null)[]>(Array(9).fill(null));   ////zare_nk_041015_nokteh(refForBtn yek useref ast ke arayeei az dokmehaye dooz ast)
+  const BtnsColor: (string | null)[] = [...Array(9)].map(() => null);   ////zare_nk_040528_nokteh(arayehei 9 khanehi ke moadele range har dokmeye dooz ast)
   const storedHistory = localStorage.getItem("history");
   const [history, setHistory] = useState(
     storedHistory !== null ? JSON.parse(storedHistory) : [Array(10).fill(null)]
@@ -532,7 +534,7 @@ export default function Game() {
     history
   );
   const storedCurrentMove = localStorage.getItem("currentMove");
-  const [currentMove, setCurrentMove] = useState(  //zare_nk_040528_nokteh(shamele andise akhare arayeye history ast ke be vaziate feliye chineshe mohrehaye dooz eshare mikoneh)
+  const [currentMove, setCurrentMove] = useState(  ////zare_nk_040528_nokteh(shamele andise akhare arayeye history ast ke be vaziate feliye chineshe mohrehaye dooz eshare mikoneh)
     storedCurrentMove !== null ? JSON.parse(storedCurrentMove) : 0
   );
   const currentSquares = history[currentMove];
@@ -546,8 +548,8 @@ export default function Game() {
   );
   const storedLastMove = localStorage.getItem("lastMove");
 
-  const [lastMove, setLastMove] = useState(  //zare_nk_040525_nokteh(state ke mige dokmehaye dooz click shodeh ya dokmehaye archiv)
-    // (baraye dokmeh boodan ya h6 boodane akharin dikmeye arshiv karbord dareh)
+  const [lastMove, setLastMove] = useState(  ////zare_nk_040525_nokteh(state ke mige dokmehaye dooz click shodeh ya dokmehaye archiv)
+    //// (baraye dokmeh boodan ya h6 boodane akharin dikmeye arshiv karbord dareh)
     storedLastMove !== null ? JSON.parse(storedLastMove) : false
   );
 
@@ -607,8 +609,8 @@ export default function Game() {
     }
   }
 
-  // const moves = history.map((squares: string, move: number) => {  //zare_nk_041124_commented
-  const moves = history.map((squares: Squares, move: number) => {  //zare_nk_041124_addeed
+  // const moves = history.map((squares: string, move: number) => {  ////zare_nk_041124_commented
+  const moves = history.map((squares: Squares, move: number) => {  ////zare_nk_041124_addeed
     //item_: string, index: number
     let mokhtasatInDescription = " ترتیب مهره های آرشیو : ";
     let SquareInHistory = history[move];

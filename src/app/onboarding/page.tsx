@@ -1,7 +1,8 @@
-////zare_nk_050223_okk
+////zare_nk_050303_okk
 'use client'
 import { useRouter, redirect } from "next/navigation";
 import "@/styles/onboardingCss.css";
+import Styles from "@/styles/components/globals.module.css";   ////zare_nk_050303_added
 import { wrap } from "module";
 
 export default function Page() {
@@ -80,7 +81,7 @@ export default function Page() {
             <div>
               <p>
                 <span>...</span>
-                <span style={{marginLeft:'5px'}}>سفارش آنلاین قهوه</span>
+                <span style={{ marginLeft: '5px' }}>سفارش آنلاین قهوه</span>
               </p>
             </div>
           </div>
@@ -91,6 +92,10 @@ export default function Page() {
       <div className="btn-cont">
         <div style={{ display: 'flex', padding: '0px 10px', flex: '1 1 47%' }}>
           <button
+            className={`${Styles.ISW_Medium_fa}`}   /////zare_nk_050303_nokteh(in class ra az jadde resheye in dokmeh(yani body) shoroo kardam ta pedaresh (yani dive pedar), vali 
+            //// hich kodoom natoonestan rooye font-familye dokmeh tasir bezaran va majboor shodam in class ro mostaghim be khode button bedam(albatteh ba 
+            // gozashtane code: .ISW_Medium_fa button{font-family: inherit; } dar file globals.module.css raftare chomooshaneye buttonha dar bazi moroorgarha ra biasar kardim 
+            // va gotim ke az pedaranet font-family ro be ers bebar ))
             onClick={goToMap}    //zare_nk_050215_commented_movaghat(baraye synce hadafmand)
             style={{
               display: 'flex',
@@ -111,6 +116,10 @@ export default function Page() {
         </div>
         <div style={{ display: 'flex', padding: '0px 10px', flex: '1 1 47%' }}>
           <button
+            className={`${Styles.ISW_Medium_fa}`}   ////zare_nk_050303_nokteh(in class ra az jadde resheye in dokmeh(yani body) shoroo kardam ta pedaresh (yani dive pedar), vali 
+            //// hich kodoom natoonestan rooye font-familye dokmeh tasir bezaran va majboor shodam in class ro mostaghim be khode button bedam(albatteh ba 
+            // gozashtane code: .ISW_Medium_fa button{font-family: inherit; } dar file globals.module.css raftare chomooshaneye buttonha dar bazi moroorgarha ra biasar kardim 
+            // va gotim ke az pedaranet font-family ro be ers bebar ))
             onClick={goToLogin}
             style={{
               display: 'flex',

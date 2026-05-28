@@ -1,4 +1,4 @@
-////zare_nk_041225_okk
+////zare_nk_041227_okk
 'use client';
 
 import { useEffect, useState, useRef, useCallback, memo } from "react";  //zare_nk_050216_added

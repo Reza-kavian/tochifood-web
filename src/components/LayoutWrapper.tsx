@@ -1,4 +1,4 @@
-////zare_nk_050222_okk
+////zare_nk_050303_okk
 "use client";
 
 import React, { useState, useRef, useEffect } from 'react';
@@ -6,7 +6,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { usePathname } from "next/navigation";
 import LogoutButton from "@/components/LogoutButton";
 
-import { useAuthentication } from '../context/AuthenticationContext'; //zare_nk_050111_added
+import { useAuthentication } from '../context/AuthenticationContext';  ////zare_nk_050111_added
 
 ////zare_nk_050202_added_st(for use MUI)
 // MUI imports
@@ -14,19 +14,19 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 ////zare_nk_050202_added_end(for use MUI)
 
-import Styles from "@/styles/components/globals.module.css"; //zare_nk_050204_added 
+import Styles from "@/styles/components/globals.module.css";  ////zare_nk_050204_added 
 
 interface RootLayoutProps {
   children: React.ReactNode;
 }
 
 ////zare_nk_050202_added_st(for use MUI)
-// // Define your MUI theme
+//// Define your MUI theme
 const theme = createTheme({
   palette: {
     mode: 'light', ////zare_nk_050203_nokteh(shabihe bg-dark bootstrap)
     // primaryDasti: {   //zare_nk_050203_nokteh(range dastiye khodam ke dar palette tarif kardam, ba name delkhah(age name tarifshodeye MUI yani primary bedam jaigizine primarye MUI mishe))     
-    primary: {   //zare_nk_050203_nokteh(range dastiye khodam ke dar palette tarif kardam, ba name delkhah(age name tarifshodeye MUI yani primary bedam jaigizine primarye MUI mishe))     
+    primary: {   ////zare_nk_050203_nokteh(range dastiye khodam ke dar palette tarif kardam, ba name delkhah(age name tarifshodeye MUI yani primary bedam jaigozine primarye MUI mishe))     
       light: '#9ea6ad',  //zare_nk_050203_nokteh(light ro nemishnaseh!)
       main: '#724a0e62', //zare_nk_050203_nokteh(lafze primary ra dar propertiye tagha bedam faghat main ro mishnaseh(name dotSubi ham ghabool nemikoneh(masalan primaryDasti.main ya primaryDasti.dark ro ghabool nemikoneh!))) 
       dark: '#c01515',    //zare_nk_050203_nokteh(dark ro nemishnaseh!) 
@@ -71,7 +71,7 @@ export default function LayoutWrapper({ children }: RootLayoutProps) {
           // color: "#3f3f3f",
           // fontFamily: 'IRANSansWeb_Medium(adad_fa)', 
         }}>
-        {/* zare_nk_041225_commented_st(tebghe revale tapsifood header ra baraye aksare safahat motefavet ast,pas dar safahat mizaraim) */}
+        {/* zare_nk_041225_commented_st(tebghe revale tapsifood header ra baraye aksare safahat motefavet ast, pas dar safahat mizaraim) */}
         {/* {!isLoginPageOrPage && (
         <div className="layoutHeader sticky-top">
           <a
@@ -121,142 +121,8 @@ export default function LayoutWrapper({ children }: RootLayoutProps) {
             </div>
 
           </section>
-        </main>
-
-        <div
-          className="modal px-0"
-          id="mymodalForWarning"
-          style={{ overflow: "hidden" }}
-        >
-          <div
-            className="modal-dialog"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              height: "100%",
-            }}
-          >
-            <div
-              className="modal-content"
-              style={{
-                borderRadius: "10px",
-                width: "900px",
-                flex: "0 0 900px",
-                maxWidth: "100%",
-                display: "flex",
-                flexFlow: "column",
-                height: "fit-content",
-                maxHeight: "98vh",
-                backgroundColor: "#fcfcfc !important",
-              }}
-            >
-              <div
-                className="modal-header"
-                style={{ border: "none", padding: "6px 16px 5px 16px" }}
-              >
-                <div
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    flexFlow: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <div
-                    className="spanCont titleStyle"
-                    style={{
-                      fontFamily: "IRANSansWeb_Medium(adad_fa)",
-                      fontSize: "18px",
-                      color: "red",
-                    }}
-                  >
-                    <span>خطا</span>
-                  </div>
-                  <div className="h4Cont"></div>
-                  <div
-                    className="buttonCont buttonHover"
-                    style={{
-                      display: "flex",
-                      flexFlow: "row",
-                      alignContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <span
-                      style={{
-                        cursor: "pointer",
-                        padding: "4px",
-                        borderRadius: "8px",
-                        border: "1px solid #A5A5A5",
-                        width: "24px",
-                        height: "24px",
-                        display: "flex",
-                        flexFlow: "row",
-                        justifyContent: "center",
-                        alignContent: "center",
-                      }}
-                      data-bs-dismiss="modal"
-                    >
-                      <img src="https://img.tochikala.com/tochikala/close-modal.svg" />
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="modal-body text-center thinScroll"
-                style={{
-                  flex: "1 1 auto",
-                  display: "flex",
-                  flexFlow: "column",
-                  paddingTop: "0px",
-                }}
-              >
-                <div
-                  className="inModalBody"
-                  style={{
-                    display: "flex",
-                    flexFlow: "column",
-                    height: "100%",
-                  }}
-                >
-                  <div
-                    className="scrollContInModal"
-                    id="seePricesCont"
-                    style={{
-                      flex: "1 1 auto",
-                      display: "flex",
-                      flexFlow: "column",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <div
-                      className="contAndHoshdarCont"
-                      style={{
-                        flex: "1 1 auto",
-                        display: "flex",
-                        flexFlow: "column",
-                      }}
-                    >
-                      <div style={{ margin: "10px 0px" }}>
-                        <span
-                          className="errorInMymodalForWarning valueStyle"
-                          style={{
-                            width: "100%",
-                            display: "flex",
-                            flexFlow: "row",
-                            fontSize: "16px",
-                            // color: "red",
-                            justifyContent: "center",
-                          }}
-                        ></span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        </main> 
+         
       </body >
       {/* zare_nk_050202_added_st(for use MUI) */}
     </ThemeProvider >

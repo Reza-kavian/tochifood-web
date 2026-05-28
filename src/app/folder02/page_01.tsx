@@ -1,4 +1,4 @@
-// app/page.tsx  ////zare_nk_050223_okk
+// app/page.tsx  ////zare_nk_050227_okk
 'use client'; // برای استفاده از state و event handlers لازم است
 
 import React, { useState } from 'react';
@@ -30,13 +30,12 @@ export default function HomePage() {
                 style={{ fontFamily: '"IRANSansWeb_ms(adad_fa)", "IRANSansWeb_Medium(adad_fa)"  ' }}
             >
                 <Typography variant="h4" gutterBottom
-                    // className={`${Styles.ISW_Medium_fa} ${Styles.corTesti}`}   //zare_nk_050204_nokteh(classhaye filhaye .module.css mamoolan baraye taghaye MUI olaviate paeintari 
-                    // darand nesbat be designhaye dakheliye MUI(ke bazi css ha ra dakheli tanzim mikonan),va shayad kar nakonand(masalan baraye fontFamily mamoolan  kar nemikoneh
-                    // vali baraye color test kardam kar kard),baraye hamin fonte IRANSansWeb_Medium(adad_fa) ra mostaghiman dar sx ya style neveshtim(dar zemn dar sx ya style
-                    // pedareshoon ham benevisim bazam ehtemal dare kar nakonam,va behtare mostaghim dar dar sx ya style khodeshoon benevisim ) )
+                    // className={`${Styles.ISW_Medium_fa} ${Styles.corTesti}`}   ////zare_nk_050204_nokteh(classhaye filhaye .module.css mamoolan baraye taghaye MUI olaviate paeintari 
+                    // darand nesbat be designhaye dakheliye MUI(ke bazi css ha ra dakheli tanzim mikonan), va shayad kar nakonand(masalan baraye fontFamily mamoolan  kar nemikoneh
+                    // vali baraye color test kardam kar kard), baraye hamin fonte IRANSansWeb_Medium(adad_fa) ra mostaghiman dar sx ya style neveshtim(dar zemn dar sx ya style
+                    // pedareshoon ham benevisim bazam ehtemal dare kar nakonam, va behtare mostaghim dar dar sx ya style khodeshoon benevisim ) )
                     sx={{ border: '2px dashed black', fontFamily: '"IRANSansWeb_ms(adad_fa)", "IRANSansWeb_Medium(adad_fa)"', }}
                 // style={{fontFamily: '"IRANSansWeb_ms(adad_fa)", "IRANSansWeb_Medium(adad_fa)"  '}} 
-
                 >
                     مثال دکمه و Collapse با MUI
                 </Typography>
@@ -44,10 +43,10 @@ export default function HomePage() {
                 <p>سلاممی آگاهانه</p>
 
                 <Button
-                    variant="contained"  //zare_nk_050202_nokteh(moadele background-color va box-shadow va hover baraye designe zaheri)
-                    color="primary"    //zare_nk_050202_nokteh(moadele btn-primary dar bootstrap)
+                    variant="contained"  ////zare_nk_050202_nokteh(moadele background-color va box-shadow va hover baraye designe zaheri)
+                    color="primary"    ////zare_nk_050202_nokteh(moadele btn-primary dar bootstrap)
                     onClick={handleToggle}
-                    sx={{ mb: 2, fontFamily: '"IRANSansWeb_ms(adad_fa)"' }} //zare_nk_050202_nokteh( margin-bottom)
+                    sx={{ mb: 2, fontFamily: '"IRANSansWeb_ms(adad_fa)"' }}   ////zare_nk_050202_nokteh(margin-bottom)
                 >
                     {open ? 'بستن محتوا' : 'باز کردن محتوا'}
                 </Button>

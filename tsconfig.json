@@ -1,4 +1,4 @@
-////zare_nk_050129_okk
+////zare_nk_050303_okk
 ////zare_nk_050128(file tsconfig.json haviye tanzimate makhsoose typeScript hast)
 {
   "compilerOptions": {
@@ -23,7 +23,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"] 
+      "@/*": ["./src/*"]   ////zare_nk_050302_nokteh(risheye addressdehi ba slash(/) ra dar nazar migirim(dar inja masire ./src/* ra dadim))
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts","src/types"],

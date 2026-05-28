@@ -1,4 +1,4 @@
-////zare_nk_050223_okk
+////zare_nk_050229_okk
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef, useMemo } from "react";
@@ -1203,8 +1203,8 @@ export default function ShallowRoutingExample() {
     }
 
     let ApiUrl = "https://api.tochikala.com/api/";
-    var urlApi_SelectShobehJashnvareh = ApiUrl + "User/Api_SelectKalaShobeh";
-    const response = await fetch(urlApi_SelectShobehJashnvareh, {
+    var urlApi_SelectKalaShobeh = ApiUrl + "User/Api_SelectKalaShobeh";
+    const response = await fetch(urlApi_SelectKalaShobeh, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1660,7 +1660,8 @@ export default function ShallowRoutingExample() {
             if (result.length == 0) {
               // alert('result.length ===== 0: ' + result.length);
               ///zare_nk_041129_added_st
-              setSabadTitr(null);
+              setSabadTitr(null);  ////zare_nk_050229_added_st(albate felan niazam nemisheh, chon dar hamyare foroosh faghat yek forooshgah va sabadTitr darnazar darim 
+              //// felan va mostaghim barmameh satrhaye hamin titr ro mikhaim baz koneh(va niaz nabashe karbar dasti rooye titr bezaneh satrhash baz she))
               IdSabadKharidTitr = 0;
               majmooeKharidMasraf = 0;
               soodAzKharid = 0;
@@ -1727,9 +1728,9 @@ export default function ShallowRoutingExample() {
     }
 
     let ApiUrl = "https://api.tochikala.com/api/";
-    var urlApi_SelectShobehJashnvareh = ApiUrl + "User/Api_SelectKalaShobeh";
+    var urlApi_SelectKalaShobeh = ApiUrl + "User/Api_SelectKalaShobeh";
 
-    const response = await fetch(urlApi_SelectShobehJashnvareh, {
+    const response = await fetch(urlApi_SelectKalaShobeh, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

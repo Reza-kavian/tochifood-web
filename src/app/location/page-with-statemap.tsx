@@ -1,4 +1,4 @@
-////zare_nk_050223_okk
+////zare_nk_050231_okk
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -130,15 +130,15 @@ function BoxHtmlComponent({
     addressName: false,
   });
 
-  type IsAddressFormInputsTextType = {
+  type IsAddressFormInputsTextEmtyType = {
     Address: boolean;
     pelak: boolean;
     vahed: boolean;
     addressName: boolean;
   };
 
-  // const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<boolean[]>(Array(4).fill(true));   //zare_nk_050208_nokteh(state arayeei)   
-  const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<IsAddressFormInputsTextType>({   //zare_nk_050208_nokteh(state objecti)
+  // const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<boolean[]>(Array(4).fill(true));   ////zare_nk_050208_nokteh(state arayeei)   
+  const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<IsAddressFormInputsTextEmtyType>({   ////zare_nk_050208_nokteh(state objecti)
     Address: true,
     pelak: true,
     vahed: true,
@@ -152,9 +152,9 @@ function BoxHtmlComponent({
     addressName: HTMLInputElement | null;
   };
 
-  // const refForAddressInput = useRef<(HTMLTextAreaElement | null)>(null); //zare_nk_050206_nokteh(chon baraye yek tage na araye lazemeh na object)
-  // const refForAddressFormInputs = useRef<(HTMLInputElement | HTMLTextAreaElement | null)[]>([]); //zare_nk_050206_nokteh(chon baraye chandin tage araye gozashtim)
-  const refForAddressFormInputs = useRef<RefForAddressFormInputsType>({  //zare_nk_050206_nokteh(chon baraye chandin tage object gozashtim)
+  // const refForAddressInput = useRef<(HTMLTextAreaElement | null)>(null);  ////zare_nk_050206_nokteh(chon baraye yek tage na araye lazemeh na object)
+  // const refForAddressFormInputs = useRef<(HTMLInputElement | HTMLTextAreaElement | null)[]>([]);  ////zare_nk_050206_nokteh(chon baraye chandin tage araye gozashtim)
+  const refForAddressFormInputs = useRef<RefForAddressFormInputsType>({  ////zare_nk_050206_nokteh(chon baraye chandin tage object gozashtim)
     Address: null,
     pelak: null,
     vahed: null,
@@ -175,7 +175,7 @@ function BoxHtmlComponent({
       // vall = input?.value ?? "";
       inputsName = input?.name ?? "";
     }
-    // setIsAddressInputFocused(true);
+    //// setIsAddressInputFocused(true);
     setIsAddressFormInputsFocused((cur) => {
       return (
         { ...cur, [inputsName]: true }
@@ -432,10 +432,10 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
           borderRadius: '20px 20px 0px 0px',
           boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.2)',
         }}
-        in={!isEpmtyHeightBox} //zare_nk_050202_nokteh(moadele show() va hide() dar bootstrap) 
+        in={!isEpmtyHeightBox} ////zare_nk_050202_nokteh(moadele show() va hide() dar bootstrap) 
         timeout="auto"
-        unmountOnExit  //zare_nk_050202_nokteh(age in attribute ra benevisim age in={false} beshe az dom hazf mishe,age in attribute ra nanevisim 
-      // age in={false} beshe az dom hazf nemishe va dar inspect vojood dareh va faghat hidden mishe)
+        unmountOnExit  ////zare_nk_050202_nokteh(age in attribute ra benevisim age in={false} beshe az dom hazf mishe,age in attribute ra nanevisim 
+      //// age in={false} beshe az dom hazf nemishe va dar inspect vojood dareh va faghat hidden mishe)
       >
         {/* zare_nk_050204_rahe1_end(ClickAwayListener+Collapse baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
         {/* zare_nk_050204_rahe2_st(Drawer baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
@@ -448,8 +448,8 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
           console.log('zare_nk_050204-Drawer closed!');
           setIsEpmtyHeightBox(true)
         }}
-        hideBackdrop={true} //zare_nk_040502(albateh hideBackdrop={true} baes mishe alave bar hazfe tariye poshte drawer,ba click dar fazaye poshtesh,automat 
-        // basteh nashe va niaz be modiriate dastiye document.addEventListener dar useEffect dashteh bashim)
+        hideBackdrop={true}  ////zare_nk_040502(albateh hideBackdrop={true} baes mishe alave bar hazfe tariye poshte drawer,ba click dar fazaye poshtesh,automat 
+        //// basteh nashe va niaz be modiriate dastiye document.addEventListener dar useEffect dashteh bashim)
         slotProps={{
           paper: {
             sx: {

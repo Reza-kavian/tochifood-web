@@ -1,3 +1,4 @@
+/* zare_nk_050229_okk */
 /* .kolliClasic{
    font-family: "IRANSansWeb_ms(adad_fa)", "IRANSansWeb_Medium(adad_fa)",
     "IRANSansWeb_ms", "IRANSansWeb_Medium", "IranSans", "b nazanin", "IRNazanin"; 
@@ -21,6 +22,15 @@
 .ISW_Bold{
    font-family: "IRANSansWeb_Bold"; 
 }
+
+/* zare_nk_050303_added_st(chon buttonha chamoosh hastand va dar bazi moroorgarha raftare pishfarze dakhely baraye font-family darand ke baes mishe 
+az pedaran be ers nabaran, ma inja migim bayad be ers bebari) */
+.ISW_Medium_fa button, 
+.ISW_Medium button { 
+  font-family: inherit;  
+}
+/* zare_nk_050303_added_end(chon buttonha chamoosh hastand va dar bazi moroorgarha raftare pishfarze dakhely baraye font-family darand ke baes mishe 
+az pedaran be ers nabaran, ma inja migim bayad be ers bebari) */
 
 .corTesti{
    color: rgb(255, 0, 64);

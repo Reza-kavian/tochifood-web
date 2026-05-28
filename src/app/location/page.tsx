@@ -1,4 +1,4 @@
-////zare_nk_050225_okk
+////zare_nk_050303_okk
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -12,7 +12,7 @@ import { JwtPayload } from "jsonwebtoken";
 import { factchecktools } from "googleapis/build/src/apis/factchecktools";
 
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog(shabihe modal bootstrap))
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';  ////zare_nk_050204_added(for use Dialog(shabihe modal bootstrap))
 
 // import 'ol/ol.css';   //zare_nk_041025_commented(for used neshan)
 import "@neshan-maps-platform/ol/ol.css"
@@ -1175,8 +1175,8 @@ export default function LocationPage() {
   // }, [vSource1]);
   ////zare_nk_050213_commented_end
 
-  async function showPosition(position: PositionType) {    //zare_nk_050208_nokteh(tabee showPosition barasase parametre voroodish(position refhaye longitude va 
-    // latitude ro meghdar mideh va state feature ra ham ba hamin position meghdar mideh) )
+  async function showPosition(position: PositionType) {    ////zare_nk_050208_nokteh(tabee showPosition barasase parametre voroodish(position refhaye longitude va 
+    //// latitude ro meghdar mideh va state feature ra ham ba hamin position meghdar mideh) )
     if (Array.isArray(position)) {
       // اگر آرایه بود، مستقیماً از عناصرش استفاده کن
       let coord = position;
@@ -1255,7 +1255,7 @@ export default function LocationPage() {
     // continuation();
   }
 
-  function continuation() {   //zare_nk_050208_nokteh(tabee continuation center va zoome map ro moshakhas mikoneh, hamchenin vectorLayere map ro ham inja midim behesh)
+  function continuation() {   ////zare_nk_050208_nokteh(tabee continuation center va zoome map ro moshakhas mikoneh, hamchenin vectorLayere map ro ham inja midim behesh)
     var firstCoordinates = LocationArr[0].loc;
     // map?.getView().setCenter(fromLonLat([firstCoordinates.X, firstCoordinates.Y]));      //zare_nk_050213_commented 
     refForMap.current?.getView().setCenter(fromLonLat([firstCoordinates.X, firstCoordinates.Y]));      //zare_nk_050213_added
@@ -1448,15 +1448,11 @@ export default function LocationPage() {
       if (data.status == 0) {
 
       } else {
-        // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-        // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
         setError("متاسفانه خطایی رخ داده است34:" + data.errors);
         console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
       }
     } else {
       console.log("zare_nk_050110-!response.ok" + response.ok);
-      // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-      // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
       setError("متاسفانه خطایی رخ داده است35");
     }
   }
@@ -1470,7 +1466,7 @@ export default function LocationPage() {
       setIsEpmtyHeightBox(false);
     }
     else {
-      saveAddress(false);  //zare_nk_050205_nokteh(age offLine ham bood taraf address ra zakhireh kon ehtemalan ba user movaghat!!)
+      saveAddress(false);  ////zare_nk_050205_nokteh(age offLine ham bood taraf address ra zakhireh kon ehtemalan ba user movaghat!!)
     }
     ////zare_nk_050205_added_end
   }

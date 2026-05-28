@@ -1,4 +1,4 @@
-////zare_nk_050225_okk
+////zare_nk_050303_okk
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -159,8 +159,8 @@ function FirstPageComponent({
 }
 
 type SecondPageProps = {
-  smsVal: string; //zare_nk_040525_nokteh(shamele meghdare sms varedehye karbar)
-  smsTxtChanged: (e: ChangeEvent<HTMLInputElement>) => void; //zare_nk_040525_nokteh(rooydade onChange textboxe smsValTxt)
+  smsVal: string;  ////zare_nk_040525_nokteh(shamele meghdare sms varedehye karbar)
+  smsTxtChanged: (e: ChangeEvent<HTMLInputElement>) => void;  ////zare_nk_040525_nokteh(rooydade onChange textboxe smsValTxt)
   // smsTxtKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void; //zare_nk_040525_nokteh(rooydade onKeyDown textboxe smsValTxt)
   backBtnClick: () => void; //zare_nk_040525_nokteh(rooydade clicke dokmeye backToFirsPage)
   checkSmsForLogin: (sms: string) => void; //zare_nk_040525_nokteh(rooydade clicke dokmeye vorood)
@@ -182,11 +182,11 @@ type SecondPageProps = {
   setIsDisabledResendCode: React.Dispatch<React.SetStateAction<boolean>>; //zare_nk_040527_nokteh(setState meghdardehiye state isDisabledResendCode)
   isDisabledRemovTimerBtn: boolean; //zare_nk_040527_nokteh(state shamele meghdare booliane attribute disabled dokmeye risete timer )
   setIsDisabledRemovTimerBtn: React.Dispatch<React.SetStateAction<boolean>>; //zare_nk_040527_nokteh(setState meghdardehiye state isDisabledRemovTimerBtn)
-  newSmsVal: string,  //zare_nk_050103_added
-  setNewSmsVal: React.Dispatch<React.SetStateAction<string>>;  //zare_nk_050103_added
-  newSmsTxtChanged: (textVaredeh: string, index: number) => void;  //zare_nk_050103_added
-  smsInputKeyDown: (e: React.KeyboardEvent<HTMLInputElement>, index: number) => void;  //zare_nk_050105_added
-  SmsInputRefs: RefObject<(HTMLInputElement | null)[]>;  //zare_nk_050105_added
+  newSmsVal: string,   ////zare_nk_050103_added
+  setNewSmsVal: React.Dispatch<React.SetStateAction<string>>;  ////zare_nk_050103_added
+  newSmsTxtChanged: (textVaredeh: string, index: number) => void;  ////zare_nk_050103_added
+  smsInputKeyDown: (e: React.KeyboardEvent<HTMLInputElement>, index: number) => void;  ////zare_nk_050105_added
+  SmsInputRefs: RefObject<(HTMLInputElement | null)[]>;  ////zare_nk_050105_added
 };
 
 function SecondPageComponent({
@@ -423,7 +423,6 @@ function SecondPageComponent({
               )
             })
           }
-
         </div>
 
         {smsError && (

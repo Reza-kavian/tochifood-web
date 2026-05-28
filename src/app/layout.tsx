@@ -1,10 +1,10 @@
-////zare_nk_050225_okk
+////zare_nk_050303_okk
 // import { strict } from "assert";
 // import { ReactNode } from "react";
 import { headers } from "next/headers";
-import "@fortawesome/fontawesome-free/css/all.min.css";
+// import "@fortawesome/fontawesome-free/css/all.min.css";  ////zare_nk_050303_commented(ghadimiye demodeh shod)
 
-import "bootstrap/dist/css/bootstrap.min.css";   //zare_nk_040416_added(inja avordam ke dar safahat seda nazanam)
+// import "bootstrap/dist/css/bootstrap.min.css";   ////zare_nk_050303_commented(ghadimiye demodeh shod)
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -15,8 +15,8 @@ import 'swiper/css/pagination';
 import "@/styles/globals.css";
 
 import LayoutWrapper from "@/components/LayoutWrapper";
-//zare_nk_041011_nokteh(layout.tsx serverComponent hast va dar aan nemitavani mostaghiman az hoock haye client estefadeh koni yani  
-// neveshtane "use client" dar an manteghi nist pas az componente komaki(LayoutWrapper) ke "use client" dashteh bashe baraye estefadeh kardim
+////zare_nk_041011_nokteh(layout.tsx serverComponent hast va dar aan nemitavani mostaghiman az hoock haye client estefadeh koni yani  
+//// neveshtane "use client" dar an manteghi nist pas az componente komaki(LayoutWrapper) ke "use client" dashteh bashe baraye estefadeh kardim
 
 import { AuthenticationProvider } from '../context/AuthenticationContext'; //zare_nk_050111_added
 

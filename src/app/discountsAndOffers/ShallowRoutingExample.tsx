@@ -1107,8 +1107,8 @@ export default function ShallowRoutingExample() {
     }
 
     let ApiUrl = "https://api.tochikala.com/api/";
-    var urlApi_SelectShobehJashnvareh = ApiUrl + "User/Api_SelectKalaShobeh";
-    const response = await fetch(urlApi_SelectShobehJashnvareh, {
+    var urlApi_SelectKalaShobeh = ApiUrl + "User/Api_SelectKalaShobeh";
+    const response = await fetch(urlApi_SelectKalaShobeh, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

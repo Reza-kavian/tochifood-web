@@ -108,19 +108,19 @@
 
 body {  
   /* zare_nk_050204_comment(baraye bazi propertyha mesle font-family barname pishfarzhaye designi baraye body lahaz mikoneh ke ehtemalan olaviate balatari ham daran
-   nesbat be code css dastiye ma baraye body,pas behtare be khode tagha mostaghim font-family bedim,ke man az class dadan be tag dar globals.module.css estefade kardam)  */
+   nesbat be code css dastiye ma baraye body, pas behtare be khode tagha mostaghim font-family bedim, ke man az class dadan be tag dar globals.module.css estefade kardam)  */
   /* font-family: "IRANSansWeb_ms(adad_fa)", "IRANSansWeb_Medium(adad_fa)",
     "IRANSansWeb_ms", "IRANSansWeb_Medium", "IranSans", "b nazanin", "IRNazanin"; */
   background-color: #f6f6f6 !important;
 } 
 
-.vorsab:hover,
+/* .vorsab:hover,
 .vorsab:link,
 .vorsab:visited,
 .vorsab:active {
   color: #322e2e;
   text-decoration: none;
-}
+} */
 
 
 @media screen and (min-width: 576px) {
@@ -138,7 +138,6 @@ body {
 @media screen and (min-width: 1400px) {
  
 }
-
 
 /* zare_nk_041225_added_st */ 
 
@@ -160,12 +159,9 @@ body {
     position: relative;
     /* border: 2px dashed rgb(255, 0, 170); */
 }
-
 /* zare_nk_041225_added_end */
 
-
 /* zare_nk_050131_added_st */ 
-
 html {
   overflow-y: auto;
   scrollbar-width: thin;

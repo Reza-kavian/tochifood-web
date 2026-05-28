@@ -1,4 +1,4 @@
-////zare_nk_041223_okk
+////zare_nk_050303_okk
 import { NextResponse, NextRequest } from "next/server";
 // import jwt from "jsonwebtoken";  //chon middleware.ts dar Edge Runtime ejra mishavad, az majoole crypto poshtibani nemikoneh 
 // va az jsonwebtoken nemishe dar middleware.ts estefadeh kard, pas api zadim be verifytoken va dar anja az jsonwebtoken estefade kardim 
@@ -38,7 +38,7 @@ async function verifyToken(token: string) {
     const secretKey = Buffer.from(
       process.env.JWT_SECRET_BASE64!,
       "base64"
-    ).toString("utf-8"); //zare_nk_040219_added(baraye adame moshkel dar verify kardane secretKey vaghti az lafze $ estefadeh shod dar mohtavaye secretKey)
+    ).toString("utf-8");  ////zare_nk_040219_added(baraye adame moshkel dar verify kardane secretKey vaghti az lafze $ estefadeh shod dar mohtavaye secretKey)
 
     console.log(
       "zare_nk_050205-03-POST called!!-decoded secretKey: " + secretKey
@@ -90,8 +90,8 @@ export async function middleware(request: NextRequest) {
     ////zare_nk_040520_rahe1_end(pichidehtare va faghat baraye masirhaye pichide tosiye mishe)
     ////zare_nk_040520_rahe2_st(sadehtare va baraye masirhaye sade mesle projeye man tosiye mishe)
     return (
-      request.nextUrl.pathname === path || //yani daghighan khode /tryreact
-      request.nextUrl.pathname.startsWith(path + "/") //yani zir majmooe haye /tryreact, masalan /tryreact/...
+      request.nextUrl.pathname === path ||  ////yani daghighan khode /tryreact
+      request.nextUrl.pathname.startsWith(path + "/") ////yani zir majmooe haye /tryreact, masalan /tryreact/...
     );
   });
   ////zare_nk_040520_rahe2_end(sadehtare va baraye masirhaye sade mesle projeye man tosiye mishe)
@@ -140,8 +140,8 @@ export async function middleware(request: NextRequest) {
         const isValidRedirectPath = !publicPaths.some((path) =>
           request.nextUrl.pathname.startsWith(path)
         );
-        // if (isValidRedirectPath) {  //zare_nk_050205_commented
-        if (isValidRedirectPath || ishomePage) {  //zare_nk_050205_added
+        // if (isValidRedirectPath) {  ////zare_nk_050205_commented
+        if (isValidRedirectPath || ishomePage) {  ////zare_nk_050205_added
           response.cookies.set("redirect", request.nextUrl.pathname, {
             path: "/",
             httpOnly: false,

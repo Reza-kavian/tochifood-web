@@ -1,3 +1,4 @@
+////zare_nk_050303_okk
 import type { NextConfig } from "next";  
 
 const nextConfig03: NextConfig = { 

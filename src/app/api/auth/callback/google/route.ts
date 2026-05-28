@@ -1,7 +1,7 @@
-//src\app\api\auth\callback\google  //zare_nk_050225_okk
-import { NextRequest, NextResponse } from "next/server";  //zare_nk_041013_nokteh(cookies marboot be NextResponse(mesle res.cookies.set("token", "123");) ham khandani va ham neveshtani hastan )
+//src\app\api\auth\callback\google  //zare_nk_050229_okk
+import { NextRequest, NextResponse } from "next/server";  ////zare_nk_041013_nokteh(cookies marboot be NextResponse(mesle res.cookies.set("token", "123");) ham khandani va ham neveshtani hastan )
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { cookies } from "next/headers";  //zare_nk_041013_nokteh(cookies import shodeh az next/headers faghat khandani hast, va marboot be cooki haei ke az samte karbar ba request mian)
+import { cookies } from "next/headers";  ////zare_nk_041013_nokteh(cookies import shodeh az next/headers faghat khandani hast, va marboot be cooki haei ke az samte karbar ba request mian)
 
 function decodeState(stateStr: string) {
   return JSON.parse(
@@ -26,12 +26,28 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const code = searchParams.get("code");
     const error = searchParams.get("error");
-    const returnedParamState = searchParams.get("state");  //zare_nk_041106_nokteh(dar masire src\app\api\auth\google dar be khasiate state dar
+    const returnedParamState = searchParams.get("state");  ////zare_nk_041106_nokteh(dar masire src\app\api\auth\google dar be khasiate state dar
     // oauth2Client.generateAuthUrl ezafeh kardim ke google hefzesh kard va dar calback bargardoond)
     ////zare_nk_041013_nokteh_end(Params haye tooye url)
     ////zare_nk_041013_nokteh_st(cooki haye zakhireh shodeh)
+    ////zare_nk_050229_nokteh_st(rahe 1-karbord baraye dastyabi be cookiye ersal shodeh az moroorgar be inja(next/headers midoonim ke faghat cookie haro mikhooneh va nemitooneh set koneh ta dar inja virayeshesh konim))
     const cookieStore = await cookies();
     const cookieStateStr = cookieStore.get("oauth_state")?.value;
+    ////zare_nk_050229_nokteh_end(rahe 1-karbord baraye dastyabi be cookiye ersal shodeh az moroorgar be inja(next/headers midoonim ke faghat cookie haro mikhooneh va nemitooneh set koneh ta dar inja virayeshesh konim))
+
+    ////zare_nk_050229_nokteh_st(rahe 2-karbord baraye dastyabi be cookiye ersal shodeh az moroorgar be inja(manzoor haman (req: NextRequest) hast
+    ////  ke dar parametre voroodiye componente inja darim(ba NextRequest set ham mitavan kard cookiye daryaft shodeh ra, vali baraye estefadeh dar haminja(yani nemishe samte moroorgar ferestadesh))))
+    // const cookieStore = req.headers.get('oauth_state');
+    ////zare_nk_050229_nokteh_end(rahe 2-karbord baraye dastyabi be cookiye ersal shodeh az moroorgar be inja(manzoor haman (req: NextRequest) hast
+    ////  ke dar parametre voroodiye componente inja darim(ba NextRequest set ham mitavan kard cookiye daryaft shodeh ra, vali baraye estefadeh dar haminja(yani nemishe samte moroorgar ferestadesh))))
+
+    ////zare_nk_050229_nokteh_st(rahe 2-karbord baraye dastyabi be cooki haei ke dar haminja(yani samte server ijad kardim) va inja vakeshi kerdim va 
+    //// mishe roosh set ham anjam dad(vali cookie haye ersal shodeh az moroorgar ro nemitooneh bekhooneh(chon NextResponse makhsoose pasokh be darkhasthaye client hast va ersal be karbar, na daryaft az karbar(jahate daryaft az client az NextRequest va next/headers estefadeh mikonim) )))
+    // const res = NextResponse.next();
+    // const cookieStore2 = res.cookies.get('oauth_state')?.value;
+    ////zare_nk_050229_nokteh_end(rahe 2-karbord baraye dastyabi be cooki haei ke dar haminja(yani samte server ijad kardim) va inja vakeshi kerdim va 
+    //// mishe roosh set ham anjam dad(vali cookie haye ersal shodeh az moroorgar ro nemitooneh bekhooneh(chon NextResponse makhsoose pasokh be darkhasthaye client hast va ersal be karbar, na daryaft az karbar(jahate daryaft az client az NextRequest va next/headers estefadeh mikonim) )))
+
     ////zare_nk_041013_nokteh_end(cooki haye zakhireh shodeh)
     if (!cookieStateStr || !returnedParamState) {
       ////zare_nk_041105_added_st
@@ -44,7 +60,7 @@ export async function GET(req: NextRequest) {
       if (source === "mobile") {
         const url = new URL("https://testotm.sarinmehr.com/redirect-mobile");
         url.searchParams.set("error", error ?? "google_login_failed");
-        url.searchParams.set("verified", "1"); 
+        url.searchParams.set("verified", "1");
         const res = NextResponseRedirect(url.toString());
         res.cookies.delete("token");
         res.cookies.set("google_Invalid_credentials", "yes", {
@@ -53,7 +69,7 @@ export async function GET(req: NextRequest) {
         return res;
       }
       ////zare_nk_041105_added_end
- 
+
       const res = NextResponseRedirect("/login");
       res.cookies.delete("token");
       res.cookies.set("google_Invalid_credentials", "yes", {
@@ -61,7 +77,7 @@ export async function GET(req: NextRequest) {
       });
       return res;
     }
- 
+
     if (returnedParamState !== cookieStateStr) {
       cookieStore.delete("oauth_state");
       ////zare_nk_041105_added_st
@@ -72,7 +88,7 @@ export async function GET(req: NextRequest) {
       if (source === "mobile") {
         const url = new URL("https://testotm.sarinmehr.com/redirect-mobile");
         url.searchParams.set("error", error ?? "google_login_failed");
-        url.searchParams.set("verified", "1"); 
+        url.searchParams.set("verified", "1");
         const res = NextResponseRedirect(url.toString());
         res.cookies.delete("token");
         res.cookies.set("google_Invalid_credentials", "yes", {
@@ -98,7 +114,7 @@ export async function GET(req: NextRequest) {
       if (source === "mobile") {
         const url = new URL("https://testotm.sarinmehr.com/redirect-mobile");
         url.searchParams.set("error", error ?? "google_login_failed");
-        url.searchParams.set("verified", "1"); 
+        url.searchParams.set("verified", "1");
         const res = NextResponseRedirect(url.toString());
         res.cookies.delete("token");
         res.cookies.set("google_Invalid_credentials", "yes", {
@@ -128,7 +144,7 @@ export async function GET(req: NextRequest) {
 
     const tokenData = await tokenRes.json();
 
-    if (!tokenData.id_token) { 
+    if (!tokenData.id_token) {
       if (source === "mobile") {
         const url = new URL("https://testotm.sarinmehr.com/redirect-mobile");
         url.searchParams.set("error", error ?? "google_login_failed");
@@ -139,7 +155,7 @@ export async function GET(req: NextRequest) {
           httpOnly: false,
         });
         return res;
-      } 
+      }
       const res = NextResponseRedirect("/login");
       res.cookies.delete("token");
       res.cookies.set("google_Invalid_credentials", "yes", {
@@ -166,16 +182,16 @@ export async function GET(req: NextRequest) {
     );
 
     /* ---------------- Redirect ---------------- */
-    let redirectPath = '';  
+    let redirectPath = '';
     if (source === "mobile") {
       const url = new URL("https://testotm.sarinmehr.com/redirect-mobile");
       url.searchParams.set("token", token);
-      url.searchParams.set("verified", "1"); 
-      redirectPath = url.toString()  
+      url.searchParams.set("verified", "1");
+      redirectPath = url.toString()
     }
     else {
-      redirectPath = "/redirecting";   
-    } 
+      redirectPath = "/redirecting";
+    }
     const res = NextResponseRedirect(redirectPath);
     // تنظیم کوکی برای کاربر
     res.cookies.set("token", token, {
@@ -187,10 +203,10 @@ export async function GET(req: NextRequest) {
       secure: true, //(secure: true bashe cookie faghat be darkhasthaye https ersal mishe,age secure:false bashe cookie be darkhasthaye http ham ersal mishe )
       //zare_nk_040208_nokteh(vaghti az sameSite: 'none' estefadeh mikonim htman bayad secure: true bashe vagarnah shayad moroorgarha cookie ro napaziran va cookie kar nakoneh)
     });
-    res.cookies.delete("google_Invalid_credentials");  
+    res.cookies.delete("google_Invalid_credentials");
     return res;
   } catch (error) {
     console.error("040930-a-04-Callback error:", error);
-    return NextResponseRedirect("/login"); 
+    return NextResponseRedirect("/login");
   }
 }

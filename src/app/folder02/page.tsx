@@ -1,4 +1,4 @@
-////zare_nk_041223_okk
+////zare_nk_041227_okk
 "use client";
 import { useRouter, useParams, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
@@ -66,13 +66,13 @@ export default function ProductPage() {
               idUSerRefTag.innerText = "ffffffferer----" + (data?.errorMessage ?? response.statusText);  //zare_nk_041219_nokteh(midanim age data?.errorMessage darim yani response.ok 
               // hast va be error haye dastimoon tooye verifyToken residim ke name dastiye errorMessage residim. age data?.errorMessage nadarim yani tebghe and(&&), response.ok nist chon age bashe bayad decode nadashteh bashim ke tebghe response dastiye ma 
               // ijad kardimesh ba statuse 200 ke maro ba response.ok mibare!(pas yani response.ok==false hast age data?.errorMessage nadarim ))
-              //zare_nk_040224-nokteh(age az useState estefadeh mikardim reactpasandtar bood)
+              //zare_nk_040224-nokteh(age az useState estefadeh mikardim reactpasandtar bood) 
               //zare_nk_041112-nokteh(age ba eshtebah vared kardane voroodihaye fetch va ya name eshtebahe fetch va ... !response.ok beshe, data.errorMessage
-              // vojood nadare chon barnameh aslan be api narafteh ke dar codehaye dastiye api bekhaim errorMessage ra ijad konim,pas az alamate ?? estefadeh kardim
+              // vojood nadare chon barnameh aslan be api narafteh ke dar codehaye dastiye api bekhaim errorMessage ra ijad konim, pas az alamate ?? estefadeh kardim
               // ke age errorMessage vojood nadasht pas matni ra benevisim
             }
           }
-        } catch (error) { //mamoolan mavarede ghtiye shabakeh va net va adame dastrasi be api be catch miad(vali mavarede eshtebah vared kardane name api va paramethaye naghes dadan be api va ... barnameh dar try 
+        } catch (error) { ////mamoolan mavarede ghtiye shabakeh va net va adame dastrasi be api be catch miad(vali mavarede eshtebah vared kardane name api va paramethaye naghes dadan be api va ... barnameh dar try 
           // mimooneh va automat statuse 4xx ya 5xx tolid mikoneh)
           console.error("❌ خطااااااااااااااااااای JWT:", error);
           if (error instanceof Error) {

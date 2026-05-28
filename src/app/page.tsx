@@ -1,4 +1,4 @@
-////zare_nk_050225_okk
+////zare_nk_050303_okk
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
@@ -76,6 +76,18 @@ import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
 ////zare_nk_050226_added_end
 
+import SwiperGrouplevel1Comp from '../components/SwiperGrouplevel1Comp';
+
+import SwiperTapBestsComp from '../components/SwiperTapBestsComp';  //zare_nk_050305_added
+
+import SwiperTopBanerComp from '../components/SwiperTopBanerComp';
+
+import SwiperthinkBanerComp from '../components/SwiperthinkBanerComp';
+
+import SwiperTapTimeComp from '../components/SwiperTapTimeComp';
+
+import SwiperSecondBanerComp from '../components/SwiperSecondBanerComp';  //zare_nk_050305_added
+
 function getCookie(name: any) {
   ////zare_nk_050209_added_st
   if (typeof document === 'undefined') {
@@ -108,8 +120,8 @@ type AdressescomponentType = {
   showAddressListDrawer: () => void;
 };
 
-// export const Adressescomponent = function Adressescomponent({    //zare_nk_050209_commented
-const Adressescomponent = function Adressescomponent({    //zare_nk_050209_added
+// export const Adressescomponent = function Adressescomponent({    ////zare_nk_050209_commented
+const Adressescomponent = function Adressescomponent({    ////zare_nk_050209_added
   responsedListFromApiSelectAddressList,
   isEpmtyShowAddRemAddress,
   setIsEpmtyShowAddRemAddress,
@@ -156,16 +168,11 @@ const Adressescomponent = function Adressescomponent({    //zare_nk_050209_added
         setIsEpmtyAdressList('notNull2');
         showAddressListDrawer();
       } else {
-        // // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-        // // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
         // setError("متاسفانه خطایی رخ داده است34:" + data.errors);
         console.log("zare_nk_050208-Api_DeleteAddress-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
       }
-
     } else {
       console.log("zare_nk_050208-Api_DeleteAddress-!response.ok" + response.ok);
-      // // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-      // // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
       // setError("متاسفانه خطایی رخ داده است35");
     }
   };
@@ -174,8 +181,8 @@ const Adressescomponent = function Adressescomponent({    //zare_nk_050209_added
     console.log('chosenAddressItem.IdAdress: ' + chosenAddressItem.IdAdress);
     // document.cookie = `chosenAddress=${JSON.stringify(chosenAddressItem)}; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;  ////zare_nk_050210_nokteh(expires=Thu, 01 Jan 1970 00:00:00 UTC baese monghazi shodane cookie dar hamin khatte tarif mishe! pas 
     //// majboorim ye tarikhe dastiy behesh badim,age mikhaim abadi basshe ye cookiye dastiye toolani behesh midim ke shabiye abadiye(age expires ra dasti nadim 
-    // behesh pishfarz SessionCookie darnazar gerefteh mishe(yani moroorgar ro bebandim cookie hazf mishe) ) )
-    // const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString();
+    //// behesh pishfarz SessionCookie darnazar gerefteh mishe(yani moroorgar ro bebandim cookie hazf mishe) ) )
+    //// const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString();
     const expires = new Date();
     expires.setFullYear(expires.getFullYear() + 5);
     const expiresString = expires.toUTCString();
@@ -194,7 +201,6 @@ const Adressescomponent = function Adressescomponent({    //zare_nk_050209_added
   return (<>
     <div style={{ display: 'flex', flexFlow: 'column', padding: '0px', margin: '0px', }}>
       {responsedListFromApiSelectAddressList?.map((item, index) => {
-        // alert('0-item.IdAdress: '+JSON.stringify(item));
         return (
           <>
             <div
@@ -377,8 +383,8 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({     //z
       onClose={() => {
         setIsEpmtyShowAddRemAddress(true);
       }}
-      // hideBackdrop={true} //zare_nk_040502(albateh hideBackdrop={true} baes mishe alave bar hazfe tariye poshte drawer,ba click dar fazaye poshtesh,automat 
-      // basteh nashe va niaz be modiriate dastiye document.addEventListener dar useEffect dashteh bashim) 
+      // hideBackdrop={true} ////zare_nk_040502(albateh hideBackdrop={true} baes mishe alave bar hazfe tariye poshte drawer,ba click dar fazaye poshtesh,automat 
+      //// basteh nashe va niaz be modiriate dastiye document.addEventListener dar useEffect dashteh bashim) 
       slotProps={{
         paper: {
           sx: {
@@ -387,7 +393,7 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({     //z
             ////zare_nk_050206_commented_st(baraye vasat raftane ofoghiye Drawer ke javab nadad(translate kar nakard,chon ba codehaye dakheliye Drawer MUI tadakhol dareh))
             // left: '50%', 
             // transform: 'translate(-50%, 0%)', 
-            ////zare_nk_050206_commented_end(baraye vasat raftane ofoghiye Drawer ke javab nadad(translate kar nakard,chon ba codehaye dakheliye Drawer MUI tadakhol dareh))
+            ////zare_nk_050206_commented_end(baraye vasat raftane ofoghiye Drawer ke javab nadad(translate kar nakard, chon ba codehaye dakheliye Drawer MUI tadakhol dareh))
             margin: '0 auto',  ////zare_nk_050206_added(baraye vasat raftane ofoghiye Drawer ke javab dad)
             direction: 'rtl',  //zare_nk_050206_added
             borderRadius: '20px 20px 0 0',
@@ -593,7 +599,7 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
         console.log('zare_nk_050204-Drawer closed!');
         setIsEpmtyAdressList(null)
       }}
-      // hideBackdrop={true} //zare_nk_040502(albateh hideBackdrop={true} baes mishe alave bar hazfe tariye poshte drawer,ba click dar fazaye poshtesh,automat 
+      // hideBackdrop={true} //zare_nk_040502(albateh hideBackdrop={true} baes mishe alave bar hazfe tariye poshte drawer, ba click dar fazaye poshtesh,automat 
       // basteh nashe va niaz be modiriate dastiye document.addEventListener dar useEffect dashteh bashim) 
       slotProps={{
         paper: {
@@ -791,11 +797,10 @@ export default function Page() {
   const showAddressListDrawer = async () => {
     let token = getCookie("token");
     if (!token) {
-      // alert('lotfan avval online shid');
       setError("lotfan avval online shid");
       return;
     }
-    console.log('tokentokentoken: ' + token);
+
     let ApiUrl = "https://api.tochikala.com/api/";
     const response = await fetch(ApiUrl + "User/Api_SelectAddress", {
       method: "POST",
@@ -820,16 +825,12 @@ export default function Page() {
         });
 
       } else {
-        // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-        // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
         setError("متاسفانه خطایی رخ داده است34:" + data.errors);
         console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
         ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
       }
     } else {
       console.log("zare_nk_050110-!response.ok" + response.ok);
-      // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-      // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
       setError("متاسفانه خطایی رخ داده است35");
       ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
     }
@@ -876,7 +877,80 @@ export default function Page() {
 
   return (
     <>
-      <header></header>
+      <SwiperthinkBanerComp />
+
+      <header style={{
+        position: 'sticky',
+        top: '0px',
+        boxShadow: '0px 3px 2px -1px #d7d6d6',
+        display: 'flex',
+        flexFlow: 'row-reverse',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '5px',
+        zIndex: 899,
+        backgroundColor: 'white',
+      }}>
+        <button
+          id="showAddressListDrawerBtn"
+          onClick={showAddressListDrawer}   //zare_nk_050215_commented_movaghat(baraye synce hadafmand)
+          style={{
+            borderRadius: 10,
+            display: 'flex',
+            flexDirection: 'column',
+            backgroundColor: 'inherit',
+            border: 'none',
+            fontSize: '.875rem',
+          }}>
+
+          <span
+            style={{
+              fontSize: '.875rem',
+              lineHeight: '1.25rem',
+              color: '#878b92',
+              textAlign: "right",
+            }}
+          >ارسال به</span>
+          <div style={{
+            display: 'flex',
+            flexFlow: 'row',
+            direction: 'rtl',
+            color: '#313335',
+            minWidth: '124px',
+            maxWidth: '256px',
+            gap: '.5rem',
+          }}>
+            <span style={{ textAlign: "right", }}>خونه</span>
+
+            <span style={{ textAlign: "right", }}>ساری-دخانیات-کوچه عبدی</span>
+
+            <img
+              src="/images/header/getAddresses.svg"
+              alt=" ادرس ها"
+            />
+            {/* <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="inherit" class="size-6 shrink-0 fill-gray-950 rotate-90"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.55017 15.5355L12.085 12.0007L8.55017 8.46445L9.96438 7.05023L14.9141 12L9.96438 16.9497L8.55017 15.5355Z" fill="inherit"></path></svg> */}
+          </div>
+
+        </button>
+
+        <button
+          id="goShoppingBacketBtn"
+          onClick={showAddressListDrawer}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            backgroundColor: 'inherit',
+            border: 'none',
+            fontSize: '.875rem',
+            height: '50px',
+          }}>
+          <img
+            src="/images/header/shoppingBacket.svg"
+            alt="سبد خرید"
+          />
+        </button>
+      </header >
+
       <main
         style={{
           backgroundColor: 'white',
@@ -885,35 +959,13 @@ export default function Page() {
           display: "flex",
           flexDirection: 'column',
           overflow: 'hidden',
-          justifyContent: 'center',
+          // justifyContent: 'center',  ////zare_nk_050229_nokteh(be lahaze amoodi vasat chin mikoneh mohtavaye safheh ro ke ma inro nemikhaim)
           alignItems: 'center',
           flex: '1 0 auto',
           // border: '3px solid orange',
           direction: 'rtl',
+          // paddingTop: '10px',   
         }}>
-
-        {/* <div style={{ display: 'flex', padding: '0px 10px', flex: '1 1 47%', direction: 'rtl', }}>
-          <button
-            id="showAddressListDrawerBtn"
-            onClick={showAddressListDrawer}   //zare_nk_050215_commented_movaghat(baraye synce hadafmand)
-            style={{
-              borderRadius: 10,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexDirection: 'row',
-              marginTop: 15,
-              padding: 7,
-              backgroundColor: '#ff5900',
-              color: 'white',
-              border: 'none',
-              fontSize: '15px',
-              width: '100%',
-              height: '50px',
-            }}>
-            My Addresses
-          </button>
-        </div> */}
 
         <AdressListComponent
           isEpmtyAdressList={isEpmtyAdressList}
@@ -926,7 +978,6 @@ export default function Page() {
           showAddressListDrawer={showAddressListDrawer}
         />
 
-        {/* zare_nk_050226_added_st */}
         {/* zare_nk_050226_npkteh_st(dokmehaye navigation va pagination dasti(jahate olgu gozashtim)) */}
         {/* <button className='swiper-button-next2' ref={refForwiperButtonNext}>
           برو بعدی
@@ -938,906 +989,25 @@ export default function Page() {
         {/* <div className="swiper-pagination"></div>   */}
         {/* zare_nk_050226_npkteh_end(dokmehaye navigation va pagination dasti(jahate olgu gozashtim)) */}
 
-        <Swiper
-          ref={swiperRef} // اتصال ریفرنس به Swiper
-          modules={[Navigation, Pagination]}
-          spaceBetween={10}    //zare_nk_050216_nokteh(faseleye beine slideha dar har ghabele namayesh(be px hast))
-          slidesPerView={1.09}   //zare_nk_050216_nokteh(tedad slideha dar har ghabele moshahedeh)
-          centeredSlides={true}  //zare_nk_050226_added(baraye vasat gharar gereftane slide ha dar swiper)
-          ////zare_nk_050215_nokteh_st(dokmeye raftan be badi va ghabli ro modiriat mikoneh, age nazarim pishfarz false hast, mishe ham boolean dad, va ham meghdare objecti dad 
-          //// ke dokmehaye ghablo bad , ... ra sefareshi konim(midoonim useRef age masalan string ya namber ,... bashe tagheiresh bedim dar hamin render tagheiresh ghabale 
-          // moshahedeh hast, vali manzoore ma useRefi hast ke be taghaye jsx nesbat midim ke ta dar dom naran useRef be tage jsx nemichasbe ))
-          navigation={false}
-          // navigation={{
-          //   nextEl: '.swiper-button-next2',  //zare_nk_050216_nokteh(dorost kar mikoneh)
-          //   // nextEl: null, //refForwiperButtonNext.current,  
+        <div style={{ marginBottom: '.75rem' }}></div>
 
-          //   prevEl: '.swiper-button-prev',  //zare_nk_050216_nokteh(dorost kar mikoneh)
-          //   // prevEl: null, //refForwiperButtonPrev.current,   
-          // }}
-          ////zare_nk_050215_nokteh_end(dokmeye raftan be badi va ghabli ro modiriat mikoneh, age nazarim pishfarz false hast, mishe ham boolean dad, va ham meghdare objecti dad 
-          //// ke dokmehaye ghablo bad , ... ra sefareshi konim(midoonim useRef age masalan string ya namber ,... bashe tagheiresh bedim dar hamin render tagheiresh ghabale 
-          // moshahedeh hast, vali manzoore ma useRefi hast ke be taghaye jsx nesbat midim ke ta dar dom naran useRef be tage jsx nemichasbe ))
+        <SwiperTopBanerComp />
 
-          ////zare_nk_050216_nokteh_st(dokmehaye raftan be safhe ke momoolan dar vasat va paeine swiper namayash dadeh mishan, age nazarim pishfarz false hast, mishe ham boolean 
-          //// dad, va ham meghdare objecti dad ke dokmehaye adshodeh ra sefareshi konim)
-          // pagination={true}  ////zare_nk_050226_nokteh(pagination={true} ra gozashtam faghat nameyesh mideh safheye feli ra ba toopor va tookhali kardane bullet ha, vali inke click
-          ////  konim rooshoon amal konan bayad clickable: true, benevisim(chon pishfarz false hast va faghat ba angosht ya mouseclick chaporast mikeshim slide ha ra(na click rooye bullet ha)))
-          // pagination={{
-          //   clickable: true,
-          //   // el: '.swiper-pagination',
-          //   type: 'bullets',
-          // }}
-          ////zare_nk_050216_nokteh_end(dokmehaye raftan be safhe ke momoolan dar vasat va paeine swiper namayash dadeh mishan, age nazarim pishfarz false hast, mishe ham boolean 
-          //// dad, va ham meghdare objecti dad ke dokmehaye yadshodeh ra sefareshi konim)
+        {/* <br /> */}
+        <div style={{ marginBottom: '1.3rem' }}></div>
 
-          // autoplay={{ delay: 5000, disableOnInteraction: false }} //zare_nk_050226_nokteh(age mikhaim barnameh automat slide ha ro varagh bezaneh)
-          className="SwiperTopBaner"
-          style={{ width: '100%', margin: '0px 19px' }}
-        >
-          {/* اسلاید اول */}
-          <SwiperSlide>
-            <div className="contInSlide" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Link href="https://tapsi.food/vendor-list?vendorListId=banner-1624" >
-                <img
-                  style={{
-                    // width:'412px',
-                    width: '100%',
-                    borderRadius: '0.5rem',
-                  }}
-                  src="./images/top-baner/top-baner-slide01.png" />
-              </Link>
-              {/* <a href="/folder03" style={{}}>
-                <h2>اسلاید اول</h2>
-              </a> */}
-            </div>
-          </SwiperSlide>
+        <SwiperGrouplevel1Comp />
 
-          {/* اسلاید دوم */}
-          <SwiperSlide>
-            <div className="contInSlide" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Link href="https://tapsi.food/business-lines?businessTypeId=6" >
-                <img
-                  style={{
-                    // width:'412px',
-                    width: '100%',
-                    borderRadius: '0.5rem',
-                  }}
-                  src="./images/top-baner/top-baner-slide02.png" />
-              </Link>
-            </div>
-          </SwiperSlide>
+        <SwiperTapBestsComp />
 
-          {/* اسلاید سوم */}
-          <SwiperSlide>
-            <div className="contInSlide" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Link href="https://tapsi.food/vendor-list?vendorListId=banner-1653" >
-                <img
-                  style={{
-                    // width:'412px',
-                    width: '100%',
-                    borderRadius: '0.5rem',
-                  }}
-                  src="./images/top-baner/top-baner-slide03.png" />
-              </Link>
-            </div>
-          </SwiperSlide>
+        <div style={{ marginBottom: '1.5rem' }}></div>
 
-          {/* اسلاید چهارم */}
-          <SwiperSlide>
-            <div className="contInSlide" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Link href="https://tapsi.food/business-lines?businessTypeId=5" >
-                <img
-                  style={{
-                    // width:'412px',
-                    width: '100%',
-                    borderRadius: '0.5rem',
-                  }}
-                  src="./images/top-baner/top-baner-slide04.png" />
-              </Link>
-            </div>
-          </SwiperSlide>
-        </Swiper>
-        {/* zare_nk_0580226_added_end */}
+        <SwiperSecondBanerComp />
 
-        <br />
-        {/* <svg xmlns="http://www.w3.org/2000/svg" width="48" height="28" viewBox="0 0 48 28" fill="none">
-                      <path d="M44.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.30698 22 1.00094 22H41.5732C42.1255 22 42.5732 22.4477 42.5732 23V26.619C42.5732 27.0866 43.158 27.2983 43.4574 26.9391L47.1097 22.5563C47.4092 22.1968 47.5732 21.7438 47.5732 21.2759V3.41421C47.5732 2.50871 47.2135 1.64029 46.5732 1C45.933 0.359711 45.0645 0 44.159 0Z" fill="url(#paint0_linear_19043_112501)" />
-                      <defs>
-                        <linearGradient id="paint0_linear_19043_112501" x1="3.57324" y1="11" x2="47.5732" y2="11" gradientUnits="userSpaceOnUse">
-                          <stop stop-color="#1747A1" />
-                          <stop offset="1" stop-color="#2269EE" />
-                        </linearGradient>
-                      </defs>
-                    </svg> */}
-        {/* zare_nk_050226_added_st */}
-        <Swiper
-          modules={[Navigation, Pagination]}
-          spaceBetween={10}
-          slidesPerView="auto"  ////zare_nk_050226_nokteh(meghdaresh ro auto dadim ta bar asase arze SwiperSlide ha tedadesh automat tavasoote 
-          //// barnameh moshakhas she(pishfarz slidesPerView={1} hast))
-          // centeredSlides={true}
-          navigation={false}
+        <div style={{ marginBottom: '1.5rem' }}></div>
 
-          className="SwiperGrouplevel1"
-          style={{
-            width: '100%', margin: '0px 19px', height: '86px',
-            overflow: 'visible', ////zare_nk_050226_nokteh(baraye inke darsade takhfifha ke biroon mizanan dideh beshan)
-          }}
-        >
-          {/* اسلاید اول */}
-          <SwiperSlide style={{ width: '72px', height: '80px' }}>
-            <div className="contInSlide" style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%',
-              backgroundColor: '#f5f6f7', borderRadius: '.75rem',
-            }}>
-              <Link href="https://tapsi.food/business-lines?businessTypeId=6" style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
-                <div style={{
-                  display: 'flex', flexFlow: 'column', position: 'relative', width: '100%', height: '100%',
-                  justifyContent: 'center', alignItems: 'center', rowGap: '.25rem',
-                }}>
-                  <div style={{
-                    position: 'absolute', top: '-5px', right: '-5px',
-                    width: '44px', height: '28px',
-                    //  border: '1px dashed blue',
-                  }}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg" width="44" height="28" viewBox="0 0 44 28" fill="none">
-                      <path d="M40.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.306976 22 1.00094 22H37.5732C38.1255 22 38.5732 22.4477 38.5732 23V26.619C38.5732 27.0866 39.158 27.2983 39.4574 26.9391L43.1097 22.5563C43.4092 22.1968 43.5732 21.7438 43.5732 21.2759V3.41421C43.5732 2.50871 43.2135 1.64029 42.5732 1C41.933 0.359711 41.0645 0 40.159 0Z" fill="url(#paint0_linear_19043_112508)" />
-                      <defs>
-                        <linearGradient id="paint0_linear_19043_112508" x1="-8.42676" y1="11" x2="43.5732" y2="11" gradientUnits="userSpaceOnUse">
-                          <stop stop-color="#CC4800" />
-                          <stop offset="1" stop-color="#FF5A00" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
+        <SwiperTapTimeComp />
 
-                    <span style={{
-                      position: 'absolute',
-                      top: '-5px',
-                      width: '44px', height: '33px',
-                      // border: '1px dashed red',
-                      fontSize: '.625rem',
-                      color: '#ffffff',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>تخفیف</span>
-                  </div>
-
-                  {/* <div style={{ display: 'flex', flexFlow: 'column', margin: '0.5rem', border: '1px solid black', width: '100%', height: '100%', }}> */}
-                  <img
-                    style={{
-                      // width:'412px',
-                      width: '48px',
-                      borderRadius: '0.5rem',
-                      // position: 'absolute',
-                      // bottom: '0px',
-                      // border: '1px solid yellow',
-                    }}
-                    src="./images/SwiperGrouplevel1/Restaurant.png" />
-                  <span style={{
-                    // border: '1px solid green',
-                    fontSize: '.75rem',
-                    lineHeight: '1rem',
-                    color: '#1b1c1d',
-                  }}>
-                    رستوران
-                  </span>
-                  {/* </div> */}
-                </div>
-              </Link>
-            </div>
-          </SwiperSlide>
-          {/* اسلاید دوم */}
-          <SwiperSlide style={{ width: '72px', height: '80px' }}>
-            <div className="contInSlide" style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%',
-              backgroundColor: '#f5f6f7', borderRadius: '.75rem',
-            }}>
-              <Link href="https://tapsi.food/business-lines?businessTypeId=6" style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
-                <div style={{
-                  display: 'flex', flexFlow: 'column', position: 'relative', width: '100%', height: '100%',
-                  justifyContent: 'center', alignItems: 'center', rowGap: '.25rem',
-                }}>
-                  <div style={{
-                    position: 'absolute', top: '-5px', right: '-5px',
-                    width: '44px', height: '28px',
-                    //  border: '1px dashed blue',
-                    display: 'none',
-                  }}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg" width="44" height="28" viewBox="0 0 44 28" fill="none">
-                      <path d="M40.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.306976 22 1.00094 22H37.5732C38.1255 22 38.5732 22.4477 38.5732 23V26.619C38.5732 27.0866 39.158 27.2983 39.4574 26.9391L43.1097 22.5563C43.4092 22.1968 43.5732 21.7438 43.5732 21.2759V3.41421C43.5732 2.50871 43.2135 1.64029 42.5732 1C41.933 0.359711 41.0645 0 40.159 0Z" fill="url(#paint0_linear_19043_112508)" />
-                      <defs>
-                        <linearGradient id="paint0_linear_19043_112508" x1="-8.42676" y1="11" x2="43.5732" y2="11" gradientUnits="userSpaceOnUse">
-                          <stop stop-color="#CC4800" />
-                          <stop offset="1" stop-color="#FF5A00" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-
-                    <span style={{
-                      position: 'absolute',
-                      top: '-5px',
-                      width: '44px', height: '33px',
-                      // border: '1px dashed red',
-                      fontSize: '.625rem',
-                      color: '#ffffff',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>تخفیف</span>
-                  </div>
-
-                  {/* <div style={{ display: 'flex', flexFlow: 'column', margin: '0.5rem', border: '1px solid black', width: '100%', height: '100%', }}> */}
-                  <img
-                    style={{
-                      // width:'412px',
-                      width: '48px',
-                      borderRadius: '0.5rem',
-                      // position: 'absolute',
-                      // bottom: '0px',
-                      // border: '1px solid yellow',
-                    }}
-                    src="./images/SwiperGrouplevel1/CoffeeShop.png" />
-                  <span style={{
-                    // border: '1px solid green',
-                    fontSize: '.75rem',
-                    lineHeight: '1rem',
-                    color: '#1b1c1d',
-                  }}>
-                    کافه
-                  </span>
-                  {/* </div> */}
-                </div>
-              </Link>
-            </div>
-          </SwiperSlide>
-
-          {/* اسلاید سوم */}
-          <SwiperSlide style={{ width: '72px', height: '80px' }}>
-            <div className="contInSlide" style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%',
-              backgroundColor: '#f5f6f7', borderRadius: '.75rem',
-            }}>
-              <Link href="https://tapsi.food/business-lines?businessTypeId=6" style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
-                <div style={{
-                  display: 'flex', flexFlow: 'column', position: 'relative', width: '100%', height: '100%',
-                  justifyContent: 'center', alignItems: 'center', rowGap: '.25rem',
-                }}>
-                  <div style={{
-                    position: 'absolute', top: '-5px', right: '-5px',
-                    width: '44px', height: '28px',
-                    //  border: '1px dashed blue',
-                    display: 'none',
-                  }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="28" viewBox="0 0 48 28" fill="none">
-                      <path d="M44.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.30698 22 1.00094 22H41.5732C42.1255 22 42.5732 22.4477 42.5732 23V26.619C42.5732 27.0866 43.158 27.2983 43.4574 26.9391L47.1097 22.5563C47.4092 22.1968 47.5732 21.7438 47.5732 21.2759V3.41421C47.5732 2.50871 47.2135 1.64029 46.5732 1C45.933 0.359711 45.0645 0 44.159 0Z" fill="url(#paint0_linear_19043_112501)" />
-                      <defs>
-                        <linearGradient id="paint0_linear_19043_112501" x1="3.57324" y1="11" x2="47.5732" y2="11" gradientUnits="userSpaceOnUse">
-                          <stop stop-color="#1747A1" />
-                          <stop offset="1" stop-color="#2269EE" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-
-                    <span style={{
-                      position: 'absolute',
-                      top: '-5px',
-                      width: '44px', height: '33px',
-                      // border: '1px dashed red',
-                      fontSize: '.625rem',
-                      color: '#ffffff',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>قسطی!</span>
-                  </div>
-
-                  {/* <div style={{ display: 'flex', flexFlow: 'column', margin: '0.5rem', border: '1px solid black', width: '100%', height: '100%', }}> */}
-                  <img
-                    style={{
-                      // width:'412px',
-                      width: '48px',
-                      borderRadius: '0.5rem',
-                      // position: 'absolute',
-                      // bottom: '0px',
-                      // border: '1px solid yellow',
-                    }}
-                    src="./images/SwiperGrouplevel1/Bakery.png" />
-                  <span style={{
-                    // border: '1px solid green',
-                    fontSize: '.75rem',
-                    lineHeight: '1rem',
-                    color: '#1b1c1d',
-                  }}>
-                    نانوایی
-                  </span>
-                  {/* </div> */}
-                </div>
-              </Link>
-            </div>
-          </SwiperSlide>
-
-          {/* اسلاید چهارم */}
-          <SwiperSlide style={{ width: '72px', height: '80px' }}>
-            <div className="contInSlide" style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%',
-              backgroundColor: '#f5f6f7', borderRadius: '.75rem',
-            }}>
-              <Link href="https://tapsi.food/business-lines?businessTypeId=6" style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
-                <div style={{
-                  display: 'flex', flexFlow: 'column', position: 'relative', width: '100%', height: '100%',
-                  justifyContent: 'center', alignItems: 'center', rowGap: '.25rem',
-                }}>
-                  <div style={{
-                    position: 'absolute', top: '-5px', right: '-5px',
-                    width: '44px', height: '28px',
-                    //  border: '1px dashed blue', 
-                  }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="28" viewBox="0 0 48 28" fill="none">
-                      <path d="M44.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.30698 22 1.00094 22H41.5732C42.1255 22 42.5732 22.4477 42.5732 23V26.619C42.5732 27.0866 43.158 27.2983 43.4574 26.9391L47.1097 22.5563C47.4092 22.1968 47.5732 21.7438 47.5732 21.2759V3.41421C47.5732 2.50871 47.2135 1.64029 46.5732 1C45.933 0.359711 45.0645 0 44.159 0Z" fill="url(#paint0_linear_19043_112501)" />
-                      <defs>
-                        <linearGradient id="paint0_linear_19043_112501" x1="3.57324" y1="11" x2="47.5732" y2="11" gradientUnits="userSpaceOnUse">
-                          <stop stop-color="#1747A1" />
-                          <stop offset="1" stop-color="#2269EE" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-
-                    <span style={{
-                      position: 'absolute',
-                      top: '-5px',
-                      width: '44px', height: '33px',
-                      // border: '1px dashed red',
-                      fontSize: '.625rem',
-                      color: '#ffffff',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>قسطی!</span>
-                  </div>
-
-                  {/* <div style={{ display: 'flex', flexFlow: 'column', margin: '0.5rem', border: '1px solid black', width: '100%', height: '100%', }}> */}
-                  <img
-                    style={{
-                      // width:'412px',
-                      width: '48px',
-                      borderRadius: '0.5rem',
-                      // position: 'absolute',
-                      // bottom: '0px',
-                      // border: '1px solid yellow',
-                    }}
-                    src="./images/SwiperGrouplevel1/Protein.png" />
-                  <span style={{
-                    // border: '1px solid green',
-                    fontSize: '.75rem',
-                    lineHeight: '1rem',
-                    color: '#1b1c1d',
-                  }}>
-                    پروتئین
-                  </span>
-                  {/* </div> */}
-                </div>
-              </Link>
-            </div>
-          </SwiperSlide>
-
-          {/* اسلاید پنجم */}
-          <SwiperSlide style={{ width: '72px', height: '80px' }}>
-            <div className="contInSlide" style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%',
-              backgroundColor: '#f5f6f7', borderRadius: '.75rem',
-            }}>
-              <Link href="https://tapsi.food/business-lines?businessTypeId=6" style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
-                <div style={{
-                  display: 'flex', flexFlow: 'column', position: 'relative', width: '100%', height: '100%',
-                  justifyContent: 'center', alignItems: 'center', rowGap: '.25rem',
-                }}>
-                  <div style={{
-                    position: 'absolute', top: '-5px', right: '-5px',
-                    width: '44px', height: '28px',
-                    //  border: '1px dashed blue',
-                  }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="28" viewBox="0 0 48 28" fill="none">
-                      <path d="M44.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.30698 22 1.00094 22H41.5732C42.1255 22 42.5732 22.4477 42.5732 23V26.619C42.5732 27.0866 43.158 27.2983 43.4574 26.9391L47.1097 22.5563C47.4092 22.1968 47.5732 21.7438 47.5732 21.2759V3.41421C47.5732 2.50871 47.2135 1.64029 46.5732 1C45.933 0.359711 45.0645 0 44.159 0Z" fill="url(#paint0_linear_19043_112501)" />
-                      <defs>
-                        <linearGradient id="paint0_linear_19043_112501" x1="3.57324" y1="11" x2="47.5732" y2="11" gradientUnits="userSpaceOnUse">
-                          <stop stop-color="#1747A1" />
-                          <stop offset="1" stop-color="#2269EE" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-
-                    <span style={{
-                      position: 'absolute',
-                      top: '-5px',
-                      width: '44px', height: '33px',
-                      // border: '1px dashed red',
-                      fontSize: '.625rem',
-                      color: '#ffffff',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>قسطی!</span>
-                  </div>
-
-                  {/* <div style={{ display: 'flex', flexFlow: 'column', margin: '0.5rem', border: '1px solid black', width: '100%', height: '100%', }}> */}
-                  <img
-                    style={{
-                      // width:'412px',
-                      width: '48px',
-                      borderRadius: '0.5rem',
-                      // position: 'absolute',
-                      // bottom: '0px',
-                      // border: '1px solid yellow',
-                    }}
-                    src="./images/SwiperGrouplevel1/Fruit.png" />
-                  <span style={{
-                    // border: '1px solid green',
-                    fontSize: '.75rem',
-                    lineHeight: '1rem',
-                    color: '#1b1c1d',
-                  }}>
-                    میوه
-                  </span>
-                  {/* </div> */}
-                </div>
-              </Link>
-            </div>
-          </SwiperSlide>
-
-          {/* اسلاید ششم */}
-          <SwiperSlide style={{ width: '72px', height: '80px' }}>
-            <div className="contInSlide" style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%',
-              backgroundColor: '#f5f6f7', borderRadius: '.75rem',
-            }}>
-              <Link href="https://tapsi.food/business-lines?businessTypeId=6" style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
-                <div style={{
-                  display: 'flex', flexFlow: 'column', position: 'relative', width: '100%', height: '100%',
-                  justifyContent: 'center', alignItems: 'center', rowGap: '.25rem',
-                }}>
-                  <div style={{
-                    position: 'absolute', top: '-5px', right: '-5px',
-                    width: '44px', height: '28px',
-                    //  border: '1px dashed blue',
-                  }}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg" width="44" height="28" viewBox="0 0 44 28" fill="none">
-                      <path d="M40.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.306976 22 1.00094 22H37.5732C38.1255 22 38.5732 22.4477 38.5732 23V26.619C38.5732 27.0866 39.158 27.2983 39.4574 26.9391L43.1097 22.5563C43.4092 22.1968 43.5732 21.7438 43.5732 21.2759V3.41421C43.5732 2.50871 43.2135 1.64029 42.5732 1C41.933 0.359711 41.0645 0 40.159 0Z" fill="url(#paint0_linear_19043_112508)" />
-                      <defs>
-                        <linearGradient id="paint0_linear_19043_112508" x1="-8.42676" y1="11" x2="43.5732" y2="11" gradientUnits="userSpaceOnUse">
-                          <stop stop-color="#CC4800" />
-                          <stop offset="1" stop-color="#FF5A00" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <span style={{
-                      position: 'absolute',
-                      top: '-5px',
-                      width: '44px', height: '33px',
-                      // border: '1px dashed red',
-                      fontSize: '.625rem',
-                      color: '#ffffff',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>تخفیف</span>
-                  </div>
-
-                  {/* <div style={{ display: 'flex', flexFlow: 'column', margin: '0.5rem', border: '1px solid black', width: '100%', height: '100%', }}> */}
-                  <img
-                    style={{
-                      // width:'412px',
-                      width: '48px',
-                      borderRadius: '0.5rem',
-                      // position: 'absolute',
-                      // bottom: '0px',
-                      // border: '1px solid yellow',
-                    }}
-                    src="./images/SwiperGrouplevel1/Grocery.png" />
-                  <span style={{
-                    // border: '1px solid green',
-                    fontSize: '.75rem',
-                    lineHeight: '1rem',
-                    color: '#1b1c1d',
-                  }}>
-                    مایحتاج روزانه
-                  </span>
-                  {/* </div> */}
-                </div>
-              </Link>
-            </div>
-          </SwiperSlide>
-
-          {/* اسلاید هفتم */}
-          <SwiperSlide style={{ width: '72px', height: '80px' }}>
-            <div className="contInSlide" style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%',
-              backgroundColor: '#f5f6f7', borderRadius: '.75rem',
-            }}>
-              <Link href="https://tapsi.food/business-lines?businessTypeId=6" style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
-                <div style={{
-                  display: 'flex', flexFlow: 'column', position: 'relative', width: '100%', height: '100%',
-                  justifyContent: 'center', alignItems: 'center', rowGap: '.25rem',
-                }}>
-                  <div style={{
-                    position: 'absolute', top: '-5px', right: '-5px',
-                    width: '44px', height: '28px',
-                    //  border: '1px dashed blue',
-                  }}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg" width="44" height="28" viewBox="0 0 44 28" fill="none">
-                      <path d="M40.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.306976 22 1.00094 22H37.5732C38.1255 22 38.5732 22.4477 38.5732 23V26.619C38.5732 27.0866 39.158 27.2983 39.4574 26.9391L43.1097 22.5563C43.4092 22.1968 43.5732 21.7438 43.5732 21.2759V3.41421C43.5732 2.50871 43.2135 1.64029 42.5732 1C41.933 0.359711 41.0645 0 40.159 0Z" fill="url(#paint0_linear_19043_112508)" />
-                      <defs>
-                        <linearGradient id="paint0_linear_19043_112508" x1="-8.42676" y1="11" x2="43.5732" y2="11" gradientUnits="userSpaceOnUse">
-                          <stop stop-color="#CC4800" />
-                          <stop offset="1" stop-color="#FF5A00" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <span style={{
-                      position: 'absolute',
-                      top: '-5px',
-                      width: '44px', height: '33px',
-                      // border: '1px dashed red',
-                      fontSize: '.625rem',
-                      color: '#ffffff',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>تخفیف</span>
-                  </div>
-
-                  {/* <div style={{ display: 'flex', flexFlow: 'column', margin: '0.5rem', border: '1px solid black', width: '100%', height: '100%', }}> */}
-                  <img
-                    style={{
-                      // width:'412px',
-                      width: '48px',
-                      borderRadius: '0.5rem',
-                      // position: 'absolute',
-                      // bottom: '0px',
-                      // border: '1px solid yellow',
-                    }}
-                    src="./images/SwiperGrouplevel1/Confectionery.png" />
-                  <span style={{
-                    // border: '1px solid green',
-                    fontSize: '.75rem',
-                    lineHeight: '1rem',
-                    color: '#1b1c1d',
-                  }}>
-                    شیرینی
-                  </span>
-                  {/* </div> */}
-                </div>
-              </Link>
-            </div>
-          </SwiperSlide>
-
-          {/* اسلاید هشتم */}
-          <SwiperSlide style={{ width: '72px', height: '80px' }}>
-            <div className="contInSlide" style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%',
-              backgroundColor: '#f5f6f7', borderRadius: '.75rem',
-            }}>
-              <Link href="https://tapsi.food/business-lines?businessTypeId=6" style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
-                <div style={{
-                  display: 'flex', flexFlow: 'column', position: 'relative', width: '100%', height: '100%',
-                  justifyContent: 'center', alignItems: 'center', rowGap: '.25rem',
-                }}>
-                  <div style={{
-                    position: 'absolute', top: '-5px', right: '-5px',
-                    width: '44px', height: '28px',
-                    //  border: '1px dashed blue',
-                  }}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg" width="44" height="28" viewBox="0 0 44 28" fill="none">
-                      <path d="M40.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.306976 22 1.00094 22H37.5732C38.1255 22 38.5732 22.4477 38.5732 23V26.619C38.5732 27.0866 39.158 27.2983 39.4574 26.9391L43.1097 22.5563C43.4092 22.1968 43.5732 21.7438 43.5732 21.2759V3.41421C43.5732 2.50871 43.2135 1.64029 42.5732 1C41.933 0.359711 41.0645 0 40.159 0Z" fill="url(#paint0_linear_19043_112508)" />
-                      <defs>
-                        <linearGradient id="paint0_linear_19043_112508" x1="-8.42676" y1="11" x2="43.5732" y2="11" gradientUnits="userSpaceOnUse">
-                          <stop stop-color="#CC4800" />
-                          <stop offset="1" stop-color="#FF5A00" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <span style={{
-                      position: 'absolute',
-                      top: '-5px',
-                      width: '44px', height: '33px',
-                      // border: '1px dashed red',
-                      fontSize: '.625rem',
-                      color: '#ffffff',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>تخفیف</span>
-                  </div>
-
-                  {/* <div style={{ display: 'flex', flexFlow: 'column', margin: '0.5rem', border: '1px solid black', width: '100%', height: '100%', }}> */}
-                  <img
-                    style={{
-                      // width:'412px',
-                      width: '48px',
-                      borderRadius: '0.5rem',
-                      // position: 'absolute',
-                      // bottom: '0px',
-                      // border: '1px solid yellow',
-                    }}
-                    src="./images/SwiperGrouplevel1/Nuts.png" />
-                  <span style={{
-                    // border: '1px solid green',
-                    fontSize: '.75rem',
-                    lineHeight: '1rem',
-                    color: '#1b1c1d',
-                  }}>
-                    آجیل
-                  </span>
-                  {/* </div> */}
-                </div>
-              </Link>
-            </div>
-          </SwiperSlide>
-
-          {/* اسلاید نهم */}
-          <SwiperSlide style={{ width: '72px', height: '80px' }}>
-            <div className="contInSlide" style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%',
-              backgroundColor: '#f5f6f7', borderRadius: '.75rem',
-            }}>
-              <Link href="https://tapsi.food/business-lines?businessTypeId=6" style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
-                <div style={{
-                  display: 'flex', flexFlow: 'column', position: 'relative', width: '100%', height: '100%',
-                  justifyContent: 'center', alignItems: 'center', rowGap: '.25rem',
-                }}>
-                  <div style={{
-                    position: 'absolute', top: '-5px', right: '-5px',
-                    width: '44px', height: '28px',
-                    //  border: '1px dashed blue',
-                  }}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg" width="44" height="28" viewBox="0 0 44 28" fill="none">
-                      <path d="M40.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.306976 22 1.00094 22H37.5732C38.1255 22 38.5732 22.4477 38.5732 23V26.619C38.5732 27.0866 39.158 27.2983 39.4574 26.9391L43.1097 22.5563C43.4092 22.1968 43.5732 21.7438 43.5732 21.2759V3.41421C43.5732 2.50871 43.2135 1.64029 42.5732 1C41.933 0.359711 41.0645 0 40.159 0Z" fill="url(#paint0_linear_19043_112508)" />
-                      <defs>
-                        <linearGradient id="paint0_linear_19043_112508" x1="-8.42676" y1="11" x2="43.5732" y2="11" gradientUnits="userSpaceOnUse">
-                          <stop stop-color="#CC4800" />
-                          <stop offset="1" stop-color="#FF5A00" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <span style={{
-                      position: 'absolute',
-                      top: '-5px',
-                      width: '44px', height: '33px',
-                      // border: '1px dashed red',
-                      fontSize: '.625rem',
-                      color: '#ffffff',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>تخفیف</span>
-                  </div>
-
-                  {/* <div style={{ display: 'flex', flexFlow: 'column', margin: '0.5rem', border: '1px solid black', width: '100%', height: '100%', }}> */}
-                  <img
-                    style={{
-                      // width:'412px',
-                      width: '48px',
-                      borderRadius: '0.5rem',
-                      // position: 'absolute',
-                      // bottom: '0px',
-                      // border: '1px solid yellow',
-                    }}
-                    src="./images/SwiperGrouplevel1/Juice.png" />
-                  <span style={{
-                    // border: '1px solid green',
-                    fontSize: '.75rem',
-                    lineHeight: '1rem',
-                    color: '#1b1c1d',
-                  }}>
-                    آبمیوه و بستنی
-                  </span>
-                  {/* </div> */}
-                </div>
-              </Link>
-            </div>
-          </SwiperSlide>
-
-          {/* اسلاید دهم */}
-          <SwiperSlide style={{ width: '72px', height: '80px' }}>
-            <div className="contInSlide" style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%',
-              backgroundColor: '#f5f6f7', borderRadius: '.75rem',
-            }}>
-              <Link href="https://tapsi.food/business-lines?businessTypeId=6" style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
-                <div style={{
-                  display: 'flex', flexFlow: 'column', position: 'relative', width: '100%', height: '100%',
-                  justifyContent: 'center', alignItems: 'center', rowGap: '.25rem',
-                }}>
-                  <div style={{
-                    position: 'absolute', top: '-5px', right: '-5px',
-                    width: '44px', height: '28px',
-                    //  border: '1px dashed blue',
-                  }}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg" width="44" height="28" viewBox="0 0 44 28" fill="none">
-                      <path d="M40.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.306976 22 1.00094 22H37.5732C38.1255 22 38.5732 22.4477 38.5732 23V26.619C38.5732 27.0866 39.158 27.2983 39.4574 26.9391L43.1097 22.5563C43.4092 22.1968 43.5732 21.7438 43.5732 21.2759V3.41421C43.5732 2.50871 43.2135 1.64029 42.5732 1C41.933 0.359711 41.0645 0 40.159 0Z" fill="url(#paint0_linear_19043_112508)" />
-                      <defs>
-                        <linearGradient id="paint0_linear_19043_112508" x1="-8.42676" y1="11" x2="43.5732" y2="11" gradientUnits="userSpaceOnUse">
-                          <stop stop-color="#CC4800" />
-                          <stop offset="1" stop-color="#FF5A00" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <span style={{
-                      position: 'absolute',
-                      top: '-5px',
-                      width: '44px', height: '33px',
-                      // border: '1px dashed red',
-                      fontSize: '.625rem',
-                      color: '#ffffff',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>تخفیف</span>
-                  </div>
-
-                  {/* <div style={{ display: 'flex', flexFlow: 'column', margin: '0.5rem', border: '1px solid black', width: '100%', height: '100%', }}> */}
-                  <img
-                    style={{
-                      // width:'412px',
-                      width: '48px',
-                      borderRadius: '0.5rem',
-                      // position: 'absolute',
-                      // bottom: '0px',
-                      // border: '1px solid yellow',
-                    }}
-                    src="./images/SwiperGrouplevel1/Petshop.png" />
-                  <span style={{
-                    // border: '1px solid green',
-                    fontSize: '.75rem',
-                    lineHeight: '1rem',
-                    color: '#1b1c1d',
-                  }}>
-                    پت شاپ
-                  </span>
-                  {/* </div> */}
-                </div>
-              </Link>
-            </div>
-          </SwiperSlide>
-
-          {/* اسلاید یازدهم */}
-          <SwiperSlide style={{ width: '72px', height: '80px' }}>
-            <div className="contInSlide" style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%',
-              backgroundColor: '#f5f6f7', borderRadius: '.75rem',
-            }}>
-              <Link href="https://tapsi.food/business-lines?businessTypeId=6" style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
-                <div style={{
-                  display: 'flex', flexFlow: 'column', position: 'relative', width: '100%', height: '100%',
-                  justifyContent: 'center', alignItems: 'center', rowGap: '.25rem',
-                }}>
-                  <div style={{
-                    position: 'absolute', top: '-5px', right: '-5px',
-                    width: '44px', height: '28px',
-                    //  border: '1px dashed blue',
-                  }}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg" width="44" height="28" viewBox="0 0 44 28" fill="none">
-                      <path d="M40.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.306976 22 1.00094 22H37.5732C38.1255 22 38.5732 22.4477 38.5732 23V26.619C38.5732 27.0866 39.158 27.2983 39.4574 26.9391L43.1097 22.5563C43.4092 22.1968 43.5732 21.7438 43.5732 21.2759V3.41421C43.5732 2.50871 43.2135 1.64029 42.5732 1C41.933 0.359711 41.0645 0 40.159 0Z" fill="url(#paint0_linear_19043_112508)" />
-                      <defs>
-                        <linearGradient id="paint0_linear_19043_112508" x1="-8.42676" y1="11" x2="43.5732" y2="11" gradientUnits="userSpaceOnUse">
-                          <stop stop-color="#CC4800" />
-                          <stop offset="1" stop-color="#FF5A00" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <span style={{
-                      position: 'absolute',
-                      top: '-5px',
-                      width: '44px', height: '33px',
-                      // border: '1px dashed red',
-                      fontSize: '.625rem',
-                      color: '#ffffff',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>تخفیف</span>
-                  </div>
-
-                  {/* <div style={{ display: 'flex', flexFlow: 'column', margin: '0.5rem', border: '1px solid black', width: '100%', height: '100%', }}> */}
-                  <img
-                    style={{
-                      // width:'412px',
-                      width: '48px',
-                      borderRadius: '0.5rem',
-                      // position: 'absolute',
-                      // bottom: '0px',
-                      // border: '1px solid yellow',
-                    }}
-                    src="./images/SwiperGrouplevel1/Coffee_&_Chocolate.png" />
-                  <span style={{
-                    // border: '1px solid green',
-                    fontSize: '.75rem',
-                    lineHeight: '1rem',
-                    color: '#1b1c1d',
-                  }}>
-                    شکلات و قهوه
-                  </span>
-                  {/* </div> */}
-                </div>
-              </Link>
-            </div>
-          </SwiperSlide>
-
-          {/* اسلاید دوازدهم */}
-          <SwiperSlide style={{ width: '72px', height: '80px' }}>
-            <div className="contInSlide" style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%',
-              backgroundColor: '#f5f6f7', borderRadius: '.75rem',
-            }}>
-              <Link href="https://tapsi.food/business-lines?businessTypeId=6" style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
-                <div style={{
-                  display: 'flex', flexFlow: 'column', position: 'relative', width: '100%', height: '100%',
-                  justifyContent: 'center', alignItems: 'center', rowGap: '.25rem',
-                }}>
-                  <div style={{
-                    position: 'absolute', top: '-5px', right: '-5px',
-                    width: '44px', height: '28px',
-                    //  border: '1px dashed blue',
-                  }}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg" width="44" height="28" viewBox="0 0 44 28" fill="none">
-                      <path d="M40.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.306976 22 1.00094 22H37.5732C38.1255 22 38.5732 22.4477 38.5732 23V26.619C38.5732 27.0866 39.158 27.2983 39.4574 26.9391L43.1097 22.5563C43.4092 22.1968 43.5732 21.7438 43.5732 21.2759V3.41421C43.5732 2.50871 43.2135 1.64029 42.5732 1C41.933 0.359711 41.0645 0 40.159 0Z" fill="url(#paint0_linear_19043_112508)" />
-                      <defs>
-                        <linearGradient id="paint0_linear_19043_112508" x1="-8.42676" y1="11" x2="43.5732" y2="11" gradientUnits="userSpaceOnUse">
-                          <stop stop-color="#CC4800" />
-                          <stop offset="1" stop-color="#FF5A00" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <span style={{
-                      position: 'absolute',
-                      top: '-5px',
-                      width: '44px', height: '33px',
-                      // border: '1px dashed red',
-                      fontSize: '.625rem',
-                      color: '#ffffff',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>تخفیف</span>
-                  </div>
-
-                  {/* <div style={{ display: 'flex', flexFlow: 'column', margin: '0.5rem', border: '1px solid black', width: '100%', height: '100%', }}> */}
-                  <img
-                    style={{
-                      // width:'412px',
-                      width: '48px',
-                      borderRadius: '0.5rem',
-                      // position: 'absolute',
-                      // bottom: '0px',
-                      // border: '1px solid yellow',
-                    }}
-                    src="./images/SwiperGrouplevel1/Organic.png" />
-                  <span style={{
-                    // border: '1px solid green',
-                    fontSize: '.75rem',
-                    lineHeight: '1rem',
-                    color: '#1b1c1d',
-                  }}>
-                    ارگانیک
-                  </span>
-                  {/* </div> */}
-                </div>
-              </Link>
-            </div>
-          </SwiperSlide>
-
-        </Swiper>
-        {/* zare_nk_050226_added_end */}
 
       </main>
       <footer></footer>

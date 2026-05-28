@@ -1,4 +1,4 @@
-////src\app\api\auth\login  //zare_nk_050225_okk
+////src\app\api\auth\login  //zare_nk_050229_okk
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -73,8 +73,8 @@ export async function POST(request: NextRequest) {
       //  sameSite: 'strict',
       sameSite: "none",
       secure: true, //(secure: true bashe cookie faghat be darkhasthaye https ersal mishe,age secure:false bashe cookie be darkhasthaye http ham ersal mishe )
-      //zare_nk_040208_nokteh(vaghti az sameSite: 'none' estefadeh mikonim hatman bayad secure: true bashe vagarnah shayad moroorgarha cookie ro napaziran va cookie kar nakoneh)
-      //zare_nk_040216_nokteh2(age maxAge ra nadim va browser ra bebandim engar age cookieye token tamoom mishe va token ra hazf mikone,age mojadad moroorgar ra baz konim varede site shim token vojood nadare)
+      ////zare_nk_040208_nokteh(vaghti az sameSite: 'none' estefadeh mikonim hatman bayad secure: true bashe vagarnah shayad moroorgarha cookie ro napaziran va cookie kar nakoneh)
+      ////zare_nk_040216_nokteh2(age maxAge ra nadim va browser ra bebandim engar age cookieye token tamoom mishe va token ra hazf mikone,age mojadad moroorgar ra baz konim varede site shim token vojood nadare)
     });
     response.cookies.delete("google_Invalid_credentials");
     return response; //zare_nk_040312_commented_movaghat

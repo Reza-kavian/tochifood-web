@@ -1,4 +1,4 @@
-////zare_nk_050225_okk
+////zare_nk_050303_okk
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -145,7 +145,7 @@ function BoxHtmlComponent({
     addressName: false,
   });
 
-  type IsAddressFormInputsTextType = {
+  type IsAddressFormInputsTextEmtyType = {
     Address: boolean;
     pelak: boolean;
     vahed: boolean;
@@ -153,7 +153,7 @@ function BoxHtmlComponent({
   };
 
   // const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<boolean[]>(Array(4).fill(true));   //zare_nk_050208_nokteh(state arayeei)   
-  const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<IsAddressFormInputsTextType>({   //zare_nk_050208_nokteh(state objecti)
+  const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<IsAddressFormInputsTextEmtyType>({   //zare_nk_050208_nokteh(state objecti)
     Address: true,
     pelak: true,
     vahed: true,
@@ -233,11 +233,11 @@ function BoxHtmlComponent({
     if (eventOrElement && "target" in eventOrElement) {
       input = eventOrElement.target;
       vall = input.value;
-      inputsName = input.name;   
+      inputsName = input.name;
     } else {
       input = eventOrElement;
       vall = input?.value ?? "";
-      inputsName = input?.name ?? "";   
+      inputsName = input?.name ?? "";
     }
     // var pat = new RegExp("^[0]{1}[0123456789]{10}$");
     // var isMobileNum = pat.test(vall);
@@ -304,7 +304,7 @@ function BoxHtmlComponent({
     }
   }
 
-  useEffect(() => {  
+  useEffect(() => {
     const hasNotNullValue = Object.values(addressFormInputsMatnError).some(value => value !== null);
     console.log('050205-addressFormInputsMatnError: ' + JSON.stringify(addressFormInputsMatnError));
     ////zare_nk_050206_nokteh_st(in dastoorat dar in makan javab dad be khoobi)
@@ -331,8 +331,8 @@ function BoxHtmlComponent({
     <ClickAwayListener
       onClickAway={(event) => {
         const target = event.target as HTMLElement;
-        const isToggleButton = target.id === 'bigShooBtn';  //zare_nk_050208_nokteh(tage bigShooBtn alan dar dakhele Collapse hast na dar kharejesh,va in check 
-        // kardane isToggleButton inja bimorede va niazi nist,age ye roozi absolutesh konim be kharej az Collapse ya fixed konim be kharaej az Collapse in shart karbordiye)
+        const isToggleButton = target.id === 'bigShooBtn';  ////zare_nk_050208_nokteh(tage bigShooBtn alan dar dakhele Collapse hast na dar kharejesh,va in check 
+        //// kardane isToggleButton inja bimorede va niazi nist,age ye roozi absolutesh konim be kharej az Collapse ya fixed konim be kharaej az Collapse in shart karbordiye)
         if (!isEpmtyHeightBox && !isToggleButton) {
           setIsEpmtyHeightBox(true); // ببند
         }
@@ -348,10 +348,10 @@ function BoxHtmlComponent({
           borderRadius: '20px 20px 0px 0px',
           boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.2)',
         }}
-        in={!isEpmtyHeightBox} //zare_nk_050202_nokteh(moadele show() va hide() dar bootstrap) 
+        in={!isEpmtyHeightBox}  ////zare_nk_050202_nokteh(moadele show() va hide() dar bootstrap) 
         timeout="auto"
-        unmountOnExit  //zare_nk_050202_nokteh(age in attribute ra benevisim age in={false} beshe az dom hazf mishe,age in attribute ra nanevisim 
-      // age in={false} beshe az dom hazf nemishe va dar inspect vojood dareh va faghat hidden mishe)
+        unmountOnExit  ////zare_nk_050202_nokteh(age in attribute ra benevisim age in={false} beshe az dom hazf mishe,age in attribute ra nanevisim 
+      //// age in={false} beshe az dom hazf nemishe va dar inspect vojood dareh va faghat hidden mishe)
       >
         {error && <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>{error}</p>}
         <form
@@ -597,7 +597,7 @@ function BoxHtmlComponent({
               onClick={() => {
                 const IdAdressForEddit: number | null = getIdAdressFromSearchParams();
                 console.log(IdAdressForEddit);
-                saveAddress(IdAdressForEddit);  
+                saveAddress(IdAdressForEddit);
               }}
               style={{
                 width: '100%', color: '#ffffff',
@@ -614,7 +614,7 @@ function BoxHtmlComponent({
   </>)
 }
 
-export default function EditPage() { 
+export default function EditPage() {
   const router = useRouter();
 
   var searchParams = useSearchParams();
@@ -633,7 +633,7 @@ export default function EditPage() {
   const [isEpmtyHeightBox, setIsEpmtyHeightBox] = useState(true);
   const refForBox = useRef<HTMLDivElement | null>(null);
 
-  const { isLogin } = useAuthentication();  
+  const { isLogin } = useAuthentication();
   console.log('zare_nk_050111-isLogin from context:', isLogin);
 
   type AddressFormInputsType = {
@@ -829,6 +829,7 @@ export default function EditPage() {
             'Y': latitude.current
           }
         });
+
         continuation();
 
         refForMap.current?.on('moveend', function (event) {
@@ -897,8 +898,8 @@ export default function EditPage() {
   let longitude = useRef<number | null | undefined>(null);
   let latitude = useRef<number | null | undefined>(null);
 
-  async function showPosition(position: PositionType) {    //zare_nk_050208_nokteh(tabee showPosition barasase parametre voroodish(position) refhaye longitude va 
-    // latitude ro meghdar mideh va state feature ra ham ba hamin position meghdar mideh) )
+  async function showPosition(position: PositionType) {    ////zare_nk_050208_nokteh(tabee showPosition barasase parametre voroodish(position) refhaye longitude va 
+    //// latitude ro meghdar mideh va state feature ra ham ba hamin position meghdar mideh) )
     if (Array.isArray(position)) {
       // اگر آرایه بود، مستقیماً از عناصرش استفاده کن
       let coord = position;
@@ -941,7 +942,7 @@ export default function EditPage() {
     });
   }
 
-  function continuation() {   //zare_nk_050208_nokteh(tabee continuation center va zoome map ro moshakhas mikoneh, hamchenin vectorLayere map ro ham inja midim behesh)
+  function continuation() {   ////zare_nk_050208_nokteh(tabee continuation center va zoome map ro moshakhas mikoneh, hamchenin vectorLayere map ro ham inja midim behesh)
     var firstCoordinates = LocationArr[0].loc;
     refForMap.current?.getView().setCenter(fromLonLat([firstCoordinates.X, firstCoordinates.Y]));
     refForMap.current?.getView().setZoom(18);
@@ -1017,15 +1018,11 @@ export default function EditPage() {
       if (data.status == 0) {
         router.push("/");
       } else {
-        // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-        // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
         setError("متاسفانه خطایی رخ داده است34:" + data.errors);
         console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
       }
     } else {
       console.log("zare_nk_050110-!response.ok" + response.ok);
-      // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-      // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
       setError("متاسفانه خطایی رخ داده است35");
     }
   }
@@ -1038,7 +1035,7 @@ export default function EditPage() {
     }
     ////zare_nk_050213_commented_st
     // else {
-    //   saveAddress(false);  //zare_nk_050205_nokteh(age offLine ham bood taraf address ra zakhireh kon ehtemalan ba user movaghat!!)
+    //   saveAddress(false);  ////zare_nk_050205_nokteh(age offLine ham bood taraf address ra zakhireh kon ehtemalan ba user movaghat!!)
     // }
     ////zare_nk_050213_commented_st 
   }
