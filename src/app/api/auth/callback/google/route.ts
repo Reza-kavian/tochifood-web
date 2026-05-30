@@ -1,4 +1,4 @@
-//src\app\api\auth\callback\google  //zare_nk_050229_okk
+//src\app\api\auth\callback\google  ////zare_nk_050309_okk
 import { NextRequest, NextResponse } from "next/server";  ////zare_nk_041013_nokteh(cookies marboot be NextResponse(mesle res.cookies.set("token", "123");) ham khandani va ham neveshtani hastan )
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { cookies } from "next/headers";  ////zare_nk_041013_nokteh(cookies import shodeh az next/headers faghat khandani hast, va marboot be cooki haei ke az samte karbar ba request mian)
@@ -27,7 +27,7 @@ export async function GET(req: NextRequest) {
     const code = searchParams.get("code");
     const error = searchParams.get("error");
     const returnedParamState = searchParams.get("state");  ////zare_nk_041106_nokteh(dar masire src\app\api\auth\google dar be khasiate state dar
-    // oauth2Client.generateAuthUrl ezafeh kardim ke google hefzesh kard va dar calback bargardoond)
+    //// oauth2Client.generateAuthUrl ezafeh kardim ke google hefzesh kard va dar calback bargardoond)
     ////zare_nk_041013_nokteh_end(Params haye tooye url)
     ////zare_nk_041013_nokteh_st(cooki haye zakhireh shodeh)
     ////zare_nk_050229_nokteh_st(rahe 1-karbord baraye dastyabi be cookiye ersal shodeh az moroorgar be inja(next/headers midoonim ke faghat cookie haro mikhooneh va nemitooneh set koneh ta dar inja virayeshesh konim))
@@ -42,11 +42,13 @@ export async function GET(req: NextRequest) {
     ////  ke dar parametre voroodiye componente inja darim(ba NextRequest set ham mitavan kard cookiye daryaft shodeh ra, vali baraye estefadeh dar haminja(yani nemishe samte moroorgar ferestadesh))))
 
     ////zare_nk_050229_nokteh_st(rahe 2-karbord baraye dastyabi be cooki haei ke dar haminja(yani samte server ijad kardim) va inja vakeshi kerdim va 
-    //// mishe roosh set ham anjam dad(vali cookie haye ersal shodeh az moroorgar ro nemitooneh bekhooneh(chon NextResponse makhsoose pasokh be darkhasthaye client hast va ersal be karbar, na daryaft az karbar(jahate daryaft az client az NextRequest va next/headers estefadeh mikonim) )))
+    //// mishe roosh set ham anjam dad(vali cookie haye ersal shodeh az moroorgar ro nemitooneh bekhooneh(chon NextResponse makhsoose pasokh be darkhasthaye client hast va ersal be karbar, na 
+    //// daryaft az karbar(jahate daryaft az client az NextRequest va next/headers estefadeh mikonim) )))
     // const res = NextResponse.next();
     // const cookieStore2 = res.cookies.get('oauth_state')?.value;
     ////zare_nk_050229_nokteh_end(rahe 2-karbord baraye dastyabi be cooki haei ke dar haminja(yani samte server ijad kardim) va inja vakeshi kerdim va 
-    //// mishe roosh set ham anjam dad(vali cookie haye ersal shodeh az moroorgar ro nemitooneh bekhooneh(chon NextResponse makhsoose pasokh be darkhasthaye client hast va ersal be karbar, na daryaft az karbar(jahate daryaft az client az NextRequest va next/headers estefadeh mikonim) )))
+    //// mishe roosh set ham anjam dad(vali cookie haye ersal shodeh az moroorgar ro nemitooneh bekhooneh(chon NextResponse makhsoose pasokh be darkhasthaye client hast va ersal be karbar, na
+    //// daryaft az karbar(jahate daryaft az client az NextRequest va next/headers estefadeh mikonim) )))
 
     ////zare_nk_041013_nokteh_end(cooki haye zakhireh shodeh)
     if (!cookieStateStr || !returnedParamState) {
@@ -177,7 +179,7 @@ export async function GET(req: NextRequest) {
         user_name: null,
         name: decoded?.name ?? null,
       },
-      secretKey,
+      secretKey,  ////zare_nk_050309_nokteh(inke khodam secretKey besazam ra tahlil konam ke digeh az parsafar nagiram be dalayele aminiati)
       { expiresIn: "3h" }
     );
 

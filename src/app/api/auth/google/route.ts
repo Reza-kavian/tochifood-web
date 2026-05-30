@@ -1,7 +1,7 @@
-// src\app\api\auth\google  //zare_nk_050227  _okk
+// src\app\api\auth\google  ////zare_nk_050309_okk
 import { NextResponse } from "next/server";
 import { google } from "googleapis";
-import { cookies } from "next/headers"; 
+import { cookies } from "next/headers";
 
 const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_ID,
@@ -10,12 +10,12 @@ const oauth2Client = new google.auth.OAuth2(
 );
 
 export async function GET(req: Request) {
-////zare_nk_041112_nokteh_st
-// req chon az Request import shod faghede req.cookies va req.nextUrl hast chon inha dar req: NextRequest hastand, darvaghe NextRequest az 
-// Request ersbari mikoneh va hameye methodhash ro dare mesle req.url va req.method va req.headers vali emkanate bishtari behesh ezafeh shodeh
-// mesle req.cookies va req.nextUrl ke dar Request nist(Request male JavaScript hast va marboot be datahaye API fetch hast vali NextRequest az 
-// next/server import mishe ke emkanate mokhtasse nextJs hast va emkanate ezafi dareh)
-////zare_nk_041112_nokteh_end
+  ////zare_nk_041112_nokteh_st
+  // req chon az Request import shod faghede req.cookies va req.nextUrl hast chon inha dar req: NextRequest hastand, darvaghe NextRequest az 
+  // Request ersbari mikoneh va hameye methodhash ro dare mesle req.url va req.method va req.headers vali emkanate bishtari behesh ezafeh shodeh
+  // mesle req.cookies va req.nextUrl ke dar Request nist(Request male JavaScript hast va marboot be datahaye API fetch hast vali NextRequest az 
+  // next/server import mishe ke emkanate mokhtasse nextJs hast va emkanate ezafi dareh)
+  ////zare_nk_041112_nokteh_end
 
   // ✅ خواندن کوکی‌ها (تشخیص موبایل یا وب)
   const cookieStore = await cookies();

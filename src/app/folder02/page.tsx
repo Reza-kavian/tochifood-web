@@ -1,4 +1,4 @@
-////zare_nk_041227_okk
+////zare_nk_050309_okk
 "use client";
 import { useRouter, useParams, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
@@ -28,7 +28,7 @@ export default function ProductPage() {
             body: JSON.stringify({ a: 1 }),  //zare_nk_041219_added_movaghat
           });
 
-          // const data = await response.json();  //zare_nk_041112_commented
+          // const data = await response.json();  ////zare_nk_041112_commented
           ////zare_nk_041112_added_st
           let data: any = null;
 
@@ -41,9 +41,9 @@ export default function ProductPage() {
           }
           ////zare_nk_041112_added_end
 
-          const decoded = data?.decoded;//zare_nk_041113_added
+          const decoded = data?.decoded;  ////zare_nk_041113_added
           if (response.ok && decoded) {  //zare_nk_041113_added
-            // if (response.ok) {  //zare_nk_041113_commented
+            // if (response.ok) {  ////zare_nk_041113_commented
             ////zare_nk_041115_commented_st
             // var idUser = data.decoded.IdUser;
             // var email = data.decoded.email;
@@ -63,17 +63,17 @@ export default function ProductPage() {
           } else {
             const idUSerRefTag = idUSerRef.current;
             if (idUSerRefTag instanceof HTMLElement) {
-              idUSerRefTag.innerText = "ffffffferer----" + (data?.errorMessage ?? response.statusText);  //zare_nk_041219_nokteh(midanim age data?.errorMessage darim yani response.ok 
-              // hast va be error haye dastimoon tooye verifyToken residim ke name dastiye errorMessage residim. age data?.errorMessage nadarim yani tebghe and(&&), response.ok nist chon age bashe bayad decode nadashteh bashim ke tebghe response dastiye ma 
-              // ijad kardimesh ba statuse 200 ke maro ba response.ok mibare!(pas yani response.ok==false hast age data?.errorMessage nadarim ))
-              //zare_nk_040224-nokteh(age az useState estefadeh mikardim reactpasandtar bood) 
-              //zare_nk_041112-nokteh(age ba eshtebah vared kardane voroodihaye fetch va ya name eshtebahe fetch va ... !response.ok beshe, data.errorMessage
-              // vojood nadare chon barnameh aslan be api narafteh ke dar codehaye dastiye api bekhaim errorMessage ra ijad konim, pas az alamate ?? estefadeh kardim
-              // ke age errorMessage vojood nadasht pas matni ra benevisim
+              idUSerRefTag.innerText = "ffffffferer----" + (data?.errorMessage ?? response.statusText);  ////zare_nk_041219_nokteh(midanim age data?.errorMessage darim yani response.ok 
+              //// hast va be error haye dastimoon tooye verifyToken residim ke name dastiye errorMessage residim. age data?.errorMessage nadarim yani tebghe and(&&), response.ok nist chon age bashe bayad decode nadashteh bashim ke tebghe response dastiye ma 
+              //// ijad kardimesh ba statuse 200 ke maro ba response.ok mibare!(pas yani response.ok==false hast age data?.errorMessage nadarim ))
+              ////zare_nk_040224-nokteh(age az useState estefadeh mikardim reactpasandtar bood) 
+              ////zare_nk_041112-nokteh(age ba eshtebah vared kardane voroodihaye fetch va ya name eshtebahe fetch va ... !response.ok beshe, data.errorMessage
+              //// vojood nadare chon barnameh aslan be api narafteh ke dar codehaye dastiye api bekhaim errorMessage ra ijad konim, pas az alamate ?? estefadeh kardim
+              //// ke age errorMessage vojood nadasht pas matni ra benevisim
             }
           }
         } catch (error) { ////mamoolan mavarede ghtiye shabakeh va net va adame dastrasi be api be catch miad(vali mavarede eshtebah vared kardane name api va paramethaye naghes dadan be api va ... barnameh dar try 
-          // mimooneh va automat statuse 4xx ya 5xx tolid mikoneh)
+          //// mimooneh va automat statuse 4xx ya 5xx tolid mikoneh)
           console.error("❌ خطااااااااااااااااااای JWT:", error);
           if (error instanceof Error) {
             idUSerRef.current!.innerText = error.message;

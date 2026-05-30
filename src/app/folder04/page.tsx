@@ -5,8 +5,8 @@ import React, { useState, useRef, useEffect, MutableRefObject } from 'react';
 
 function OtpInputForm() {
   const [otp, setOtp] = useState(['', '', '', '']);
-  // This useRef will hold an array of HTMLInputElement or null.
-  // We initialize it as an empty array.
+  //// This useRef will hold an array of HTMLInputElement or null.
+  //// We initialize it as an empty array.
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   // Use useEffect to focus the first input after the component mounts

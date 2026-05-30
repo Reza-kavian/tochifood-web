@@ -628,7 +628,7 @@ export default function SwiperTapTimeComp() {
                                                             maxHeight: '1.25rem',  // maxHeight: '2.5rem', // اجبار به بیشتر نشدن
                                                             boxSizing: 'border-box', // برای اینکه بُردر (border) به ارتفاع اضافه نشود
 
-                                                            textAlign: 'center',
+                                                            textAlign: 'right',
                                                         }}>
                                                             {item.NameKala}
                                                         </div>

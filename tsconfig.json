@@ -2,7 +2,7 @@
 ////zare_nk_050128(file tsconfig.json haviye tanzimate makhsoose typeScript hast)
 {
   "compilerOptions": {
-    "typeRoots": ["./types", "./node_modules/@types"],
+    "typeRoots": ["./types", "./node_modules/@types"],  ////zare_nk_050309_nokteh(typeRoots dar projehhaye next khoobeh, vali  dar projehhaye react native tosiyeh nemisheh)
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
