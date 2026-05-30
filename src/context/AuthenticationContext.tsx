@@ -1,9 +1,9 @@
-//// context/AuthenticationContext.js   ////zare_nk_050303_okk
+//// context/AuthenticationContext.js   ////zare_nk_050309_okk
 'use client';
 
 import { createContext, useState, useContext } from 'react';
 
-function getCookie(name) {
+function getCookie(name:string) {
     ////zare_nk_050209_added_st
     if (typeof document === 'undefined') {
         return null; // برای جلوگیری از خطای عدم وجود document
@@ -22,10 +22,16 @@ function getCookie(name) {
 }
 
 // 1. Context را ایجاد کنید
-const AuthenticationContext = createContext();
+// const AuthenticationContext = createContext();  ////zare_nk_050309_nokteh(ghablan formate AuthenticationContext.js bood ke tipescript nadashtim ke error bedeh, vali vaghti 
+//// be AuthenticationContext.tsx tabdil kardim, tipeScript error dad ke hatman bayad noe object ra moshakhas konim ke kardim)
+const AuthenticationContext = createContext({
+    isLogin : false,
+});
 
 // 2. Provider کامپوننت را بسازید
-export function AuthenticationProvider({ children }) {
+// export function AuthenticationProvider({ children }) {  ////zare_nk_050309_nokteh(ghablan formate AuthenticationContext.js bood ke tipescript nadashtim ke error bedeh, vali vaghti 
+////be AuthenticationContext.tsx tabdil kardim, tipeScript error dad ke hatman bayad noe object ra moshakhas konim ke kardim)
+export function AuthenticationProvider({children}:{children:React.ReactNode}){
     let token = getCookie("token");
     let isLog = token != null ? true : false
     const [isLogin, setIsLogin] = useState(isLog);
