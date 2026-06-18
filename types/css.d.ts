@@ -1,2 +1,2 @@
-////zare_nk_050309_okk
+////zare_nk_050325_okk
 declare module "*.css";

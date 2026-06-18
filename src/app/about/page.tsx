@@ -1,4 +1,4 @@
-////zare_nk_050309_okk
+////zare_nk_050325_okk
 //src\app\about\page.tsx
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -7,7 +7,7 @@ import Image002 from "../../../public/images/002.jpg";  //zare_nk_041105_nokteh(
 // az tage img mostaghiman estefadeh kard va baraye atribute src ham az / be onvane poosheye public estefadeh mikonim,masalan <img src="/Images/..." /> yani masire /public/Images/...)
 import { metadata as layoutMetadata} from "../layout"; //zare_nk_040131_nokteh(mitavan metadata ra az layout import nakard,inja import kardam ta roosh dastkari konam)
 // metadata.title = metadata.title + '-abouuttiimm';  //zare_nk_040416_nokteh(in khat az nazare manteghi khatarnake ke metadataye import shodeh ro dastkari konim va momkene dar builde proujeh error bedeh)
-export const metadata = { //zare_nk_041013_nokteh(be khatere in dastkari majboor shodim metadata ra az layout import konim vagarnah barnameh automat in const ba lafze metadata(faghat metadata) ra dar tage html title gharar midad)
+export const metadata = {  ////zare_nk_041013_nokteh(be khatere in dastkari majboor shodim metadata ra az layout import konim vagarnah barnameh automat in const ba lafze metadata(faghat metadata) ra dar tage html title gharar midad)
     title: `${layoutMetadata.title} - About03`, 
 };
 

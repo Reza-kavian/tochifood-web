@@ -1,4 +1,4 @@
-//src\app\api\auth\callback\google  ////zare_nk_050309_okk
+//src\app\api\auth\callback\google  ////zare_nk_050325_okk
 import { NextRequest, NextResponse } from "next/server";  ////zare_nk_041013_nokteh(cookies marboot be NextResponse(mesle res.cookies.set("token", "123");) ham khandani va ham neveshtani hastan )
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { cookies } from "next/headers";  ////zare_nk_041013_nokteh(cookies import shodeh az next/headers faghat khandani hast, va marboot be cooki haei ke az samte karbar ba request mian)
@@ -36,10 +36,10 @@ export async function GET(req: NextRequest) {
     ////zare_nk_050229_nokteh_end(rahe 1-karbord baraye dastyabi be cookiye ersal shodeh az moroorgar be inja(next/headers midoonim ke faghat cookie haro mikhooneh va nemitooneh set koneh ta dar inja virayeshesh konim))
 
     ////zare_nk_050229_nokteh_st(rahe 2-karbord baraye dastyabi be cookiye ersal shodeh az moroorgar be inja(manzoor haman (req: NextRequest) hast
-    ////  ke dar parametre voroodiye componente inja darim(ba NextRequest set ham mitavan kard cookiye daryaft shodeh ra, vali baraye estefadeh dar haminja(yani nemishe samte moroorgar ferestadesh))))
+    //// ke dar parametre voroodiye componente inja darim(ba NextRequest set ham mitavan kard cookiye daryaft shodeh ra, vali baraye estefadeh dar haminja(yani nemishe samte moroorgar ferestadesh))))
     // const cookieStore = req.headers.get('oauth_state');
     ////zare_nk_050229_nokteh_end(rahe 2-karbord baraye dastyabi be cookiye ersal shodeh az moroorgar be inja(manzoor haman (req: NextRequest) hast
-    ////  ke dar parametre voroodiye componente inja darim(ba NextRequest set ham mitavan kard cookiye daryaft shodeh ra, vali baraye estefadeh dar haminja(yani nemishe samte moroorgar ferestadesh))))
+    //// ke dar parametre voroodiye componente inja darim(ba NextRequest set ham mitavan kard cookiye daryaft shodeh ra, vali baraye estefadeh dar haminja(yani nemishe samte moroorgar ferestadesh))))
 
     ////zare_nk_050229_nokteh_st(rahe 2-karbord baraye dastyabi be cooki haei ke dar haminja(yani samte server ijad kardim) va inja vakeshi kerdim va 
     //// mishe roosh set ham anjam dad(vali cookie haye ersal shodeh az moroorgar ro nemitooneh bekhooneh(chon NextResponse makhsoose pasokh be darkhasthaye client hast va ersal be karbar, na 

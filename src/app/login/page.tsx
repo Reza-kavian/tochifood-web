@@ -95,7 +95,7 @@ function FirstPageComponent({
         >
           <div className={`${Styles.formsRow}`}>
             <p className={`${Styles.titleStyle}`} style={{ fontSize: '16px', color: '#1b1c1d', marginBottom: '0px', }}>ثبت&zwnj;نام یا ورود</p>
-            <p className={`${Styles.valueStyle}`} style={{ fontSize: '14px', color: '#878b92', marginBottom: '0px', paddingTop: '.25rem' }}>برای آمدن به تپسی&zwnj;فود، شماره موبایلت را وارد کن</p>
+            <p className={`${Styles.valueStyle}`} style={{ fontSize: '14px', color: '#878b92', marginBottom: '0px', paddingTop: '.25rem' }}>برای آمدن به توچی&zwnj;فود، شماره موبایلت را وارد کن</p>
           </div>
 
           <div className={`${Styles.MobileInputAndCheckBtnCont}`} >
@@ -151,7 +151,7 @@ function FirstPageComponent({
             </div>
           )}
           {/* zare_nk_040224_added_end(rahe1-ba useState-ke reactpasandtare) */}
-          <p style={{ color: '#878b92', fontSize: '.75rem', lineHeight: '1rem', }}>با ثبت&zwnj;نام در تپسی&zwnj;فود، <a style={{ fontWeight: 500, color: '#ff5900', textDecoration: 'none', }} href="/terms-and-conditions">شرایط و قوانین</a> را قبول می&zwnj;کنم</p>
+          <p style={{ color: '#878b92', fontSize: '.75rem', lineHeight: '1rem', }}>با ثبت&zwnj;نام در توچی&zwnj;فود، <a style={{ fontWeight: 500, color: '#ff5900', textDecoration: 'none', }} href="/terms-and-conditions">شرایط و قوانین</a> را قبول می&zwnj;کنم</p>
         </form>
       </div>
     </>

@@ -1,4 +1,4 @@
-////zare_nk_050229_okk
+////zare_nk_050325_okk
 //src\app\api\auth\verifyToken\  
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";

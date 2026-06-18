@@ -129,7 +129,8 @@ export default function SwiperGrouplevel1Comp() {
                     //  margin: '0px 19px',
                     //  height: '86px',
                     // height: '95px',
-                    overflow: 'visible', ////zare_nk_050226_nokteh(baraye inke darsade takhfifha ke biroon mizanan dideh beshan)
+                    // overflow: 'visible', ////zare_nk_050226_nokteh(baraye inke darsade takhfifha ke biroon mizanan dideh beshan)   ////zare_nk_050317_commented(baraye swiper overflow: 'visible' 
+                    //// manteghi nist, chon arze colle slideha ro migire, na arze masalan 100% pedaresh ro)
                 }}
             >
                 {responsedListFromApiSelectGoroohJson?.map((item, index) => {

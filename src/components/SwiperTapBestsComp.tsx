@@ -178,7 +178,8 @@ export default function SwiperTapBestsComp() {
                         //  margin: '0px 19px',
                         //  height: '86px',
                         // height: '95px',
-                        overflow: 'visible', ////zare_nk_050226_nokteh(baraye inke darsade takhfifha ke biroon mizanan dideh beshan)
+                                            // overflow: 'visible', ////zare_nk_050226_nokteh(baraye inke darsade takhfifha ke biroon mizanan dideh beshan)   ////zare_nk_050317_commented(baraye swiper overflow: 'visible' 
+                    //// manteghi nist, chon arze colle slideha ro migire, na arze masalan 100% pedaresh ro)ب
                     }}
                 >
                     {responsedListFromApiSelectGoroohJson?.map((item, index) => {
@@ -341,7 +342,7 @@ export default function SwiperTapBestsComp() {
 
                                                             // این بخش برای سه‌نقطه و محدودیت ۲ خط
                                                             display: '-webkit-box',
-                                                            WebkitLineClamp: 2,
+                                                            WebkitLineClamp: 1,
                                                             WebkitBoxOrient: 'vertical',
                                                             overflow: 'hidden',
 

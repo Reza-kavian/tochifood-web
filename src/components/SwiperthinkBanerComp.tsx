@@ -1,17 +1,12 @@
 ////zare_nk_050303_okk
 'use client'
 
-import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
+import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
 import { useRouter, useSearchParams, redirect } from "next/navigation";
 import Styles from "@/styles/components/location.module.css";
 import globalsStyles from "@/styles/components/globals.module.css";
-import { RefObject } from "react";
-import { ReactNode } from "react";
-import { ChangeEvent } from "react";
 import jwt from "jsonwebtoken";
 import { JwtPayload } from "jsonwebtoken";
-
-import { MouseEvent } from "react";
 
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog)
@@ -27,27 +22,28 @@ import Link from "next/link";
 function getCookie(name: any) {
     ////zare_nk_050209_added_st
     if (typeof document === 'undefined') {
-        console.log("document === 'undefined'");
+        // console.log("document === 'undefined'");
         return null; // برای جلوگیری از خطای عدم وجود document
     }
-    console.log("document !== 'undefined'");
+    // console.log("document !== 'undefined'");
     ////zare_nk_050209_added_end
     const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
-    console.log("value is: " + value);
+    // console.log("value is: " + value);
     const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
     if (parts.length === 2) {
-        console.log("dohe-parts.length: " + parts.length);
+        // console.log("dohe-parts.length: " + parts.length);
         const raw = parts.pop();
         if (!raw) throw new Error("No parts found");
         const value = raw.split(";").shift();
         if (!value) throw new Error("Invalid cookie format");
         return decodeURIComponent(value);
     }
-    console.log("do nist-parts.length: " + parts.length);
+    // console.log("do nist-parts.length: " + parts.length);
     return null; //اگر کوکی پیدا نشد
 }
-
-export default function SwiperThinkBanerComp() {
+// export default function SwiperThinkBanerComp() {  ////zare_nk_050329_commented(baraye esswtefadeh az memo)
+const SwiperThinkBanerComp = () => { ////zare_nk_050329_added(baraye esswtefadeh az memo)
+    console.log('050329-SwiperThinkBanerComp called!!');
     const [errorInSwiperThinkBaner, setErrorInSwiperThinkBaner] = useState<string | null>(null);
 
     const router = useRouter();
@@ -80,7 +76,7 @@ export default function SwiperThinkBanerComp() {
             setErrorInSwiperThinkBaner("lotfan avval online shid");
             return;
         }
-        console.log('tokentokentoken: ' + token);
+        // console.log('tokentokentoken: ' + token);
         let ApiUrl = "https://api.tochikala.com/api/";
         const response = await fetch(ApiUrl + "User/Api_SelectBaner", {
             method: "POST",
@@ -96,7 +92,7 @@ export default function SwiperThinkBanerComp() {
         const data = await response.json();
 
         if (response.ok) {
-            console.log("zare_nk_050228-data: " + JSON.stringify(data));
+            // console.log("zare_nk_050228-data: " + JSON.stringify(data));
             if (data.status == 0) {
                 if (data.data.list == undefined) {
                     return;
@@ -109,20 +105,20 @@ export default function SwiperThinkBanerComp() {
                 });
             } else {
                 setErrorInSwiperThinkBaner("متاسفانه خطایی رخ داده است34:" + data.errors);
-                console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
+                // console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
             }
         } else {
-            console.log("zare_nk_050110-!response.ok" + response.ok);
+            // console.log("zare_nk_050110-!response.ok" + response.ok);
             setErrorInSwiperThinkBaner("متاسفانه خطایی رخ داده است35");
         }
     }
 
-    // useEffect(() => {  
-    getSwiperThinkBaner();
-    // }, []);
+    useEffect(() => {
+        getSwiperThinkBaner();
+    }, []);
 
     return (
-        <>
+        <>  
             <Swiper
                 modules={[Navigation, Pagination]}
                 spaceBetween={10}
@@ -138,10 +134,11 @@ export default function SwiperThinkBanerComp() {
                         <Link href="https://tapsi.food/vendor-list?vendorListId=banner-1624" >
                             <img
                                 style={{
-                                    width: '100%',display:'block', ////zare_nk_050303_nokteh(age display:'block' nadam tage pedare img ertefaei hodoode 10px bishtar az img migireh!)
+                                    width: '100%', display: 'block', ////zare_nk_050303_nokteh(age display:'block' nadam tage pedare img ertefaei hodoode 10px bishtar az img migireh!)
                                 }}
-                                src={`/images/top-baner/ThinkBanerFromBasalam.gif`} />
+                                src={`/images/baners/top-baner/ThinkBanerFromBasalam.gif`} />
                         </Link>
+
                     </div>
                 </SwiperSlide>
                 {/* {responsedListFromApiSelectBaner?.map((item, index) => {
@@ -168,3 +165,5 @@ export default function SwiperThinkBanerComp() {
         </>
     );
 }
+
+export default memo(SwiperThinkBanerComp);  

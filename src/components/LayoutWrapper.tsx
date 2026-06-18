@@ -50,7 +50,7 @@ const theme = createTheme({
 ////zare_nk_050202_added_end(for use MUI)
 
 export default function LayoutWrapper({ children }: RootLayoutProps) {
-
+console.log('050329-LayoutWrapper rendered!!');
   const refForBox = useRef<HTMLDivElement | null>(null);
 
   const pathname = usePathname();

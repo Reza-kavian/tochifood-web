@@ -32,6 +32,7 @@ const AuthenticationContext = createContext({
 // export function AuthenticationProvider({ children }) {  ////zare_nk_050309_nokteh(ghablan formate AuthenticationContext.js bood ke tipescript nadashtim ke error bedeh, vali vaghti 
 ////be AuthenticationContext.tsx tabdil kardim, tipeScript error dad ke hatman bayad noe object ra moshakhas konim ke kardim)
 export function AuthenticationProvider({children}:{children:React.ReactNode}){
+    console.log('050329-AuthenticationProvider rendered!!');
     let token = getCookie("token");
     let isLog = token != null ? true : false
     const [isLogin, setIsLogin] = useState(isLog);

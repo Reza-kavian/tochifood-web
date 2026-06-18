@@ -1,4 +1,4 @@
-/* zare_nk_050303_okk */
+/* zare_nk_050325_okk */
 
 html,
 body {
@@ -56,9 +56,15 @@ body {
 }
 
 .cont-in-icon-and-description {
-    display: 'flex';
-    flex-direction: 'column';
-    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+
+    /* margin-top: 70px; */
+    position: absolute;
+    top:50%;
+    transform: translate(0%, -50%);
+    align-items:center;
+    width:200px;
 }
 
 .rotating-div-cont {

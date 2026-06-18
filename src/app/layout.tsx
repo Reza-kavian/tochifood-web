@@ -29,6 +29,7 @@ export const metadata = {
 
 // export default function Layout({children}:{children:React.ReactNode}){
 export default async function Layout({ children }: RootLayoutProps) {
+  console.log('050329-Layout rendered!!');
   // console.log("oo-Layout called[]!!");  //zare_nk_040416_commented(chon dar har safhe seda zadeh mishe typescript hoshdar mide dare ziad seda zadeh mishe va baese sholooghiye log mishe!!)
   const headersList = await headers();
   const pathname = headersList.get("x-pathname") || "";

@@ -754,6 +754,7 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
 }
 
 export default function LocationPage() {
+  const router = useRouter();
   const [mobileVal, setMobileVal] = useState("");
   const [error, setError] = useState<string | null>(null);
 
@@ -975,7 +976,7 @@ export default function LocationPage() {
         console.log('bigger than 18');
       }
       showPosition([53.0585, 36.5659]);
-      
+
       console.log("002");
       featureToPaskari = refForFeature.current;
       if (refForFeature.current) {
@@ -1000,13 +1001,13 @@ export default function LocationPage() {
       });
       continuation();
 
-      refForMap.current?.on('moveend', function (event) { 
+      refForMap.current?.on('moveend', function (event) {
         if ((refForMap.current?.getView().getZoom() ?? 0) < 18) {
           // alert('less than 18');
         }
         else {
           // alert('bigger than 18');
-        } 
+        }
 
         let centerCoords3857 = refForMap.current?.getView().getCenter();
         console.log("moveend-feature.get('name').X: " + refForFeature.current);
@@ -1025,7 +1026,7 @@ export default function LocationPage() {
 
       refForMap.current.on('pointerdrag', function () {
         defZoom = refForMap.current?.getView().getZoom();
- 
+
         let centerCoords3857 = refForMap.current?.getView().getCenter();
         if (centerCoords3857) {
           console.log("pointermove-feature.get('name').X: " + refForFeature.current?.get('name').X + '-feature.getGeometry().getCoordinates()[0]: ' + refForFeature.current?.getGeometry() ? [0] : 777
@@ -1041,7 +1042,7 @@ export default function LocationPage() {
             refForFeature.current.get('name').X = lng; refForFeature.current.get('name').Y = lat;
           }
         }
-      }); 
+      });
     }
     else {
       console.log("useeeeeeeeeeeeeeeeeeeeeeeeeeeeee refForVectorLayer.current  in else");
@@ -1051,7 +1052,7 @@ export default function LocationPage() {
     //     console.log('useeeeeeeeeeeeeeeeeeeeeeeeeeeeee vSource1 noot in if');
     //   }
     ////zare_nk_050213_added_end
- 
+
     if (refForMap.current && refForVectorLayer.current) {
       ////zare_nk_050213_commented_st(movaghat ta motmaen shim)
       // if ((refForMap.current.getView().getZoom() ?? 0) < 18) {
@@ -1446,7 +1447,7 @@ export default function LocationPage() {
       // "data":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjIwMTA5IiwiQ29kZU1vc2h0YXJpIjoiMjAxMDkiLCJNb2JpbGUiOiI5MzUxMDkxMjg3IiwiTmFtZU1vc2h0YXJpIjoiIiwibmJmIjoxNzQ2NzI1OTI4LCJleHAiOjE3NDczMzA3MjgsImlhdCI6MTc0NjcyNTkyOH0.9Jfv71v3D_s13gSyf3gXqgEfiXaV-lx93hDey4DSLM8"
       // },"errors":[]}
       if (data.status == 0) {
-
+        router.push("/");   ////zare_nk_050319_added
       } else {
         setError("متاسفانه خطایی رخ داده است34:" + data.errors);
         console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);

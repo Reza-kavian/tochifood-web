@@ -445,7 +445,8 @@ export default function SwiperTapTimeComp() {
                         //  margin: '0px 19px',
                         //  height: '86px',
                         // height: '95px',
-                        overflow: 'visible', ////zare_nk_050226_nokteh(baraye inke darsade takhfifha ke biroon mizanan dideh beshan)
+                        // overflow: 'visible', ////zare_nk_050226_nokteh(baraye inke darsade takhfifha ke biroon mizanan dideh beshan)   ////zare_nk_050317_commented(baraye swiper overflow: 'visible' 
+                        //// manteghi nist, chon arze colle slideha ro migire, na arze masalan 100% pedaresh ro)
                     }}
                 >
                     {responsedListFromApiSelectShobehJashnvareh?.map((item, index) => {
@@ -475,7 +476,7 @@ export default function SwiperTapTimeComp() {
                                             justifyContent: 'center', alignItems: 'center',
 
                                             // rowGap: '0.25rem',   ////zare_nk_050304_commented(rowGap nazasht tapsifood)
-                                            padding:'.25rem 0px',   ////zare_nk_050307_added
+                                            padding: '.25rem 0px',   ////zare_nk_050307_added
                                         }}>
                                             <div style={{
                                                 position: 'absolute', top: '.5rem', right: '-5px',
@@ -584,7 +585,7 @@ export default function SwiperTapTimeComp() {
                                                     // marginTop: '5px', marginBottom: '0px', 
                                                     height: '105px', objectFit: 'cover',
                                                     borderTopLeftRadius: '.375rem',
-                                                    borderTopRightRadius: '.375rem', 
+                                                    borderTopRightRadius: '.375rem',
 
 
                                                 }}
@@ -615,7 +616,7 @@ export default function SwiperTapTimeComp() {
 
                                                             // این بخش برای سه‌نقطه و محدودیت ۲ خط
                                                             display: '-webkit-box',
-                                                            WebkitLineClamp: 2,
+                                                            WebkitLineClamp: 1,
                                                             WebkitBoxOrient: 'vertical',
                                                             overflow: 'hidden',
 
