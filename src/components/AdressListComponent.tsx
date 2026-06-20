@@ -1,3 +1,4 @@
+////zare_nk_050329_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor,RefObject ,ReactNode,ChangeEvent,MouseEvent,memo} from "react";
@@ -7,6 +8,7 @@ import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Draw
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog)
 
 import Adressescomponent from '../components/Adressescomponent';  //zare_nk_050328_added
+
 
 type responsedListFromApiSelectAddressListType = {
   IdAdress: number;
@@ -33,8 +35,9 @@ type AdressListComponentType = {
   responsedListFromApiSelectAddressList: responsedListFromApiSelectAddressListType[] | null;
   isEpmtyShowAddRemAddress: boolean;    //zare_nk_050207_added
   setIsEpmtyShowAddRemAddress: React.Dispatch<React.SetStateAction<boolean>>;    //zare_nk_050207_added
-  showAddRemAddress: () => void;   //zare_nk_050207_added
+  // showAddRemAddress: () => void;   //zare_nk_050329_commented
   showAddressListDrawer: () => void;   //zare_nk_050209_added
+  // setCurrentAddress: React.Dispatch<React.SetStateAction<responsedListFromApiSelectAddressListType | null>>;  ////zare_nk_050329_commented(currentAddress az useState tabdil shod be createContext)
 };
 
 // export const AdressListComponent = function AdressListComponent({      //zare_nk_050209_commented
@@ -45,10 +48,12 @@ const AdressListComponent = function AdressListComponent({      //zare_nk_050209
   responsedListFromApiSelectAddressList,
   isEpmtyShowAddRemAddress,
   setIsEpmtyShowAddRemAddress,
-  showAddRemAddress,
+  // showAddRemAddress,   //zare_nk_050329_commented
   showAddressListDrawer,
+  // setCurrentAddress,  ////zare_nk_050329_commented(currentAddress az useState tabdil shod be createContext)
 }: AdressListComponentType) {
   // console.log('zare_nk_050126_AdressListComponent called!!-isEpmtyAdressList: ' + isEpmtyAdressList);
+  console.log('050329-AdressListComponent rendered!!');   ////zare_nk_050329_added
 
   const router = useRouter();
 
@@ -213,9 +218,10 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
             responsedListFromApiSelectAddressList={responsedListFromApiSelectAddressList}
             isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}
             setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}
-            showAddRemAddress={showAddRemAddress}
+            // showAddRemAddress={showAddRemAddress}  ////zare_nk_050329_commented
             setIsEpmtyAdressList={setIsEpmtyAdressList}
             showAddressListDrawer={showAddressListDrawer}
+            // setCurrentAddress={setCurrentAddress}  ////zare_nk_050329_commented(currentAddress az useState tabdil shod be createContext)
           />
           {/* zare_nk_050206_added_addressHa_end(behtare dar componenti joda sedash bezanim ke maghadir ra ba api por koneh) */}
         </div>

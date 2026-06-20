@@ -1,17 +1,13 @@
 ////zare_nk_050303_okk
 'use client'
 
-import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
+import { useState, useEffect, useRef, useCallback, JSXElementConstructor ,memo,RefObject,ReactNode,ChangeEvent,MouseEvent} from "react";
 import { useRouter, useSearchParams, redirect } from "next/navigation";
 import Styles from "@/styles/components/location.module.css";
 import globalsStyles from "@/styles/components/globals.module.css";
-import { RefObject } from "react";
-import { ReactNode } from "react";
-import { ChangeEvent } from "react";
-import jwt from "jsonwebtoken";
-import { JwtPayload } from "jsonwebtoken";
 
-import { MouseEvent } from "react";
+import jwt from "jsonwebtoken";
+import { JwtPayload } from "jsonwebtoken"; 
 
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog)
@@ -47,7 +43,9 @@ function getCookie(name: any) {
     return null; //اگر کوکی پیدا نشد
 }
 
-export default function SwiperTapBestsComp() {
+// export default function SwiperTapBestsComp() {
+const SwiperTapBestsComp = () => {
+    console.log('050329-SwiperTapBestsComp rendered!!');   ////zare_nk_050329_added
     const [errorInSwiperTapBests, setErrorInSwiperTapBests] = useState<string | null>(null);
 
     const router = useRouter();
@@ -91,14 +89,11 @@ export default function SwiperTapBestsComp() {
                 if (data.data.list == undefined) {
                     return;
                 }
-
                 var parsedList = JSON.parse(data.data.list);
                 var Gorooh = parsedList.Gorooh;
-
                 SetResponsedListFromApiSelectGoroohJson(() => {
                     return Gorooh
                 });
-
             } else {
                 setErrorInSwiperTapBests("متاسفانه خطایی رخ داده است34:" + data.errors);
                 console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
@@ -109,9 +104,9 @@ export default function SwiperTapBestsComp() {
         }
     }
 
-    // useEffect(() => {         
-    getSwiperTapBests();
-    // }, []);
+    useEffect(() => {
+        getSwiperTapBests();
+    }, []);
 
     return (
         <>
@@ -178,8 +173,8 @@ export default function SwiperTapBestsComp() {
                         //  margin: '0px 19px',
                         //  height: '86px',
                         // height: '95px',
-                                            // overflow: 'visible', ////zare_nk_050226_nokteh(baraye inke darsade takhfifha ke biroon mizanan dideh beshan)   ////zare_nk_050317_commented(baraye swiper overflow: 'visible' 
-                    //// manteghi nist, chon arze colle slideha ro migire, na arze masalan 100% pedaresh ro)ب
+                        // overflow: 'visible', ////zare_nk_050226_nokteh(baraye inke darsade takhfifha ke biroon mizanan dideh beshan)   ////zare_nk_050317_commented(baraye swiper overflow: 'visible' 
+                        //// manteghi nist, chon arze colle slideha ro migire, na arze masalan 100% pedaresh ro)ب
                     }}
                 >
                     {responsedListFromApiSelectGoroohJson?.map((item, index) => {
@@ -197,7 +192,7 @@ export default function SwiperTapBestsComp() {
                                 }}>
                                 <div className="contInSlide" style={{
                                     display: 'flex', alignItems: 'center', justifyContent: 'center', //// width: '100%', height: '100%',
-                                    backgroundColor: 'inherit', borderRadius: '.75rem', border:'1px solid #f6f6f7' ,
+                                    backgroundColor: 'inherit', borderRadius: '.75rem', border: '1px solid #f6f6f7',
                                 }}>
                                     <Link href="https://tapsi.food/business-lines?businessTypeId=6" style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
                                         <div style={{
@@ -264,7 +259,7 @@ export default function SwiperTapBestsComp() {
                                                 {/* zare_nk_050228_nokteh_st(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
                                                 {
                                                     (index == 2 || index == 3 || index == 6) ?
-                                                        <svg style={{transform: 'scaleX(-1)',}} xmlns="http://www.w3.org/2000/svg" width="48" height="28" viewBox="0 0 48 28" fill="none">
+                                                        <svg style={{ transform: 'scaleX(-1)', }} xmlns="http://www.w3.org/2000/svg" width="48" height="28" viewBox="0 0 48 28" fill="none">
                                                             <path d="M44.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.30698 22 1.00094 22H41.5732C42.1255 22 42.5732 22.4477 42.5732 23V26.619C42.5732 27.0866 43.158 27.2983 43.4574 26.9391L47.1097 22.5563C47.4092 22.1968 47.5732 21.7438 47.5732 21.2759V3.41421C47.5732 2.50871 47.2135 1.64029 46.5732 1C45.933 0.359711 45.0645 0 44.159 0Z" fill="url(#paint0_linear_19043_112501)" />
                                                             <defs>
                                                                 <linearGradient id="paint0_linear_19043_112501" x1="3.57324" y1="11" x2="47.5732" y2="11" gradientUnits="userSpaceOnUse">
@@ -274,7 +269,7 @@ export default function SwiperTapBestsComp() {
                                                             </defs>
                                                         </svg>
                                                         :
-                                                        <svg style={{transform:'scaleX(-1)',}} xmlns="http://www.w3.org/2000/svg" width="44" height="28" viewBox="0 0 44 28" fill="none">
+                                                        <svg style={{ transform: 'scaleX(-1)', }} xmlns="http://www.w3.org/2000/svg" width="44" height="28" viewBox="0 0 44 28" fill="none">
                                                             <path d="M40.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.306976 22 1.00094 22H37.5732C38.1255 22 38.5732 22.4477 38.5732 23V26.619C38.5732 27.0866 39.158 27.2983 39.4574 26.9391L43.1097 22.5563C43.4092 22.1968 43.5732 21.7438 43.5732 21.2759V3.41421C43.5732 2.50871 43.2135 1.64029 42.5732 1C41.933 0.359711 41.0645 0 40.159 0Z" fill="url(#paint0_linear_19043_112508)" />
                                                             <defs>
                                                                 <linearGradient id="paint0_linear_19043_112508" x1="-8.42676" y1="11" x2="43.5732" y2="11" gradientUnits="userSpaceOnUse">
@@ -391,7 +386,7 @@ export default function SwiperTapBestsComp() {
 
                                                 {/* zare_nk_050305_added_st */}
                                                 <div style={{
-                                                    display: 'flex', flexFlow: 'row', width: '100%', marginBottom:'2px',
+                                                    display: 'flex', flexFlow: 'row', width: '100%', marginBottom: '2px',
                                                 }}>
                                                     <div style={{
                                                         display: 'flex', flexFlow: 'row', width: '100%', padding: '0px .75rem', justifyContent: 'space-between',
@@ -462,3 +457,5 @@ export default function SwiperTapBestsComp() {
         </>
     );
 }
+
+export default memo(SwiperTapBestsComp); 

@@ -114,7 +114,7 @@ const SwiperThinkBanerComp = () => { ////zare_nk_050329_added(baraye esswtefadeh
     }
 
     useEffect(() => {
-        getSwiperThinkBaner();
+        // getSwiperThinkBaner();
     }, []);
 
     return (

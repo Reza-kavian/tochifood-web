@@ -24,7 +24,7 @@ function getCookie(name:string) {
 // 1. Context را ایجاد کنید
 // const AuthenticationContext = createContext();  ////zare_nk_050309_nokteh(ghablan formate AuthenticationContext.js bood ke tipescript nadashtim ke error bedeh, vali vaghti 
 //// be AuthenticationContext.tsx tabdil kardim, tipeScript error dad ke hatman bayad noe object ra moshakhas konim ke kardim)
-const AuthenticationContext = createContext({
+const AuthenticationContext = createContext<{isLogin:boolean}>({  ////zare_nk_050329_updated(ezafeh kardane typeScriptiye <{isLogin:boolean}>)
     isLogin : false,
 });
 

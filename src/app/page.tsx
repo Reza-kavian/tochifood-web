@@ -1,18 +1,19 @@
+////zare_nk_050329_okk(0)
 'use client'
 
-import { useState, useEffect, useRef, useCallback, JSXElementConstructor,RefObject ,ReactNode,ChangeEvent,MouseEvent} from "react";
+import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext } from "react";
 import { useRouter, useSearchParams, redirect } from "next/navigation";
 import Styles from "@/styles/components/location.module.css";
 import globalsStyles from "@/styles/components/globals.module.css";
 import jwt from "jsonwebtoken";
-import { JwtPayload } from "jsonwebtoken"; 
+import { JwtPayload } from "jsonwebtoken";
 
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';  
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
 
 // import "@neshan-maps-platform/ol/ol.css"   ////zare_nk_050328_commented(in safhe be naghshe niazi nist ke)
 
-import { useAuthentication } from '../context/AuthenticationContext';  
+import { useAuthentication } from '../context/AuthenticationContext';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -20,7 +21,7 @@ import Link from "next/link";
 
 import SwiperGrouplevel1Comp from '../components/SwiperGrouplevel1Comp';
 
-import SwiperTapBestsComp from '../components/SwiperTapBestsComp';  //zare_nk_050305_added
+import SwiperTapBestsComp from '../components/SwiperTapBestsComp';  ////zare_nk_050305_added
 
 import SwiperTopBanerComp from '../components/SwiperTopBanerComp';
 
@@ -30,8 +31,10 @@ import SwiperTapTimeComp from '../components/SwiperTapTimeComp';
 
 import SwiperSecondBanerComp from '../components/SwiperSecondBanerComp';  //zare_nk_050305_added
 
-import AdressListComponent from '../components/AdressListComponent';  //zare_nk_050328_added
-// import Adressescomponent from '../components/Adressescomponent';  //zare_nk_050328_added
+import AdressListComponent from '../components/AdressListComponent';  //zare_nk_050328_added 
+
+import { currentAddressContext } from '../context/currentAddressContext';  //zare_nk_050329_added 
+import { json } from "node:stream/consumers";
 
 // import TestComponent from '../components/TestComponent';  ////zare_nk_050327_added_movaghat(componente testi tamrini hast)
 
@@ -698,7 +701,8 @@ type responsedListFromApiSelectAddressListType = {
 // };
 ////zare_nk_050328_commented_end
 
-export default function Page() {
+export default function Home() {
+  console.log('050329-Home rendered!!');   ////zare_nk_050329_added
   const [error, setError] = useState<string | null>(null);
   const [isEpmtyAdressList, setIsEpmtyAdressList] = useState<string | null>(null);
   const [isEpmtyShowAddRemAddress, setIsEpmtyShowAddRemAddress] = useState(true);
@@ -707,103 +711,115 @@ export default function Page() {
 
   // const { userData, login, logout } = useAuthentication(); //zare_nk_050111_added
   const { isLogin } = useAuthentication(); //zare_nk_050111_added //zare_nk_050221_tahlilshe(ke chera estefadeh nashod)
-  console.log('050329-Page rendered!!');   ////zare_nk_050327_tahlilshe
 
   const [responsedListFromApiSelectAddressList, SetResponsedListFromApiSelectAddressList] = useState<responsedListFromApiSelectAddressListType[] | null>(null);
 
-  const [currentAddress, setCurrentAddress] = useState<any>(null);   ////zare_nk_050317_added
+  let currentAddressUseContext = useContext(currentAddressContext);   ////zare_nk_050329_added  
+
+  // const chosenAddress = getCookie("chosenAddress"); 
+  // var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
+  // const [mycurrentAddressState, setMycurrentAddressState] = useState<responsedListFromApiSelectAddressListType | null>(parsedChosenAddress);    
+  const [mycurrentAddressState, setMycurrentAddressState] = useState<responsedListFromApiSelectAddressListType | null>(null);
+
+  // const [currentAddress, setCurrentAddress] = useState<responsedListFromApiSelectAddressListType | null>(null);    ////zare_nk_050329_commented(currentAddress az useState 
+  //// tabdil shod be createContext(ta beshe az jadde bozorgvar be nave pas dadeh beshe bedoone vasetehha!!))
+
+  useEffect(() => {
+    const chosenAddress = getCookie("chosenAddress");
+    var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
+
+    setMycurrentAddressState(parsedChosenAddress);
+  }, []);
 
   const router = useRouter();
 
-  const showAddressListDrawer = async () => {
-    let token = getCookie("token");
-    if (!token) {
-      setError("lotfan avval online shid");
-      return;
-    }
+  const showAddressListDrawer = useCallback(
+    async () => {
+      let token = getCookie("token");
+      if (!token) {
+        setError("lotfan avval online shid");
+        return;
+      }
 
-    let ApiUrl = "https://api.tochikala.com/api/";
-    const response = await fetch(ApiUrl + "User/Api_SelectAddress", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify({}),
-    });
-    const data = await response.json();
+      let ApiUrl = "https://api.tochikala.com/api/";
+      const response = await fetch(ApiUrl + "User/Api_SelectAddress", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify({}),
+      });
+      const data = await response.json();
 
-    if (response.ok) {
-      // console.log("zare_nk_050206-data: " + JSON.stringify(data));
-      if (data.status == 0) {
-        var parsedList = JSON.parse(data.data.list);
-        // console.log("zare_nk_050206-parsedList1: " + parsedList[0].Adress);
-        // console.log("zare_nk_050206-parsedList2: " + parsedList[1].Adress);
-        setIsEpmtyAdressList('notNull');
+      if (response.ok) {
+        // console.log("zare_nk_050206-data: " + JSON.stringify(data));
+        if (data.status == 0) {
+          var parsedList = JSON.parse(data.data.list);
+          // console.log("zare_nk_050206-parsedList1: " + parsedList[0].Adress);
+          // console.log("zare_nk_050206-parsedList2: " + parsedList[1].Adress);
+          setIsEpmtyAdressList('notNull');
 
-        SetResponsedListFromApiSelectAddressList(() => {
-          return parsedList
-        });
+          SetResponsedListFromApiSelectAddressList(() => {
+            return parsedList
+          });
 
+        } else {
+          setError("متاسفانه خطایی رخ داده است34:" + data.errors);
+          // console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
+          ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
+        }
       } else {
-        setError("متاسفانه خطایی رخ داده است34:" + data.errors);
-        // console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
+        // console.log("zare_nk_050110-!response.ok" + response.ok);
+        setError("متاسفانه خطایی رخ داده است35");
         ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
       }
-    } else {
-      // console.log("zare_nk_050110-!response.ok" + response.ok);
-      setError("متاسفانه خطایی رخ داده است35");
-      ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
+
+      // console.log('zare_nk_050110-token hala is: ' + getCookie("token"));
+      if (token) {
+        setIsEpmtyAdressList('notNull');   //zare_nk_050221_nokteh(age online bashe va address nadashteh bashe ke manteghi nist setIsEpmtyAdressList('notNull') beshe!!)
+      }
+      else {
+        // alert('lotfan avval online shid');
+        ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
+      }
     }
+    , [isEpmtyAdressList, responsedListFromApiSelectAddressList])
 
-    // console.log('zare_nk_050110-token hala is: ' + getCookie("token"));
-    if (token) {
-      setIsEpmtyAdressList('notNull');   //zare_nk_050221_nokteh(age online bashe va address nadashteh bashe ke manteghi nist setIsEpmtyAdressList('notNull') beshe!!)
-    }
-    else {
-      // alert('lotfan avval online shid');
-      ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
-    }
-  }
+  ////zare_nk_050226_nokteh_st(baraye dokmehaye navigation va pagination dasti(ke estefadeh nakardim))
+  // const refForwiperButtonNext = useRef<HTMLButtonElement | null>(null);
+  // const refForwiperButtonPrev = useRef<HTMLButtonElement | null>(null);
+  // const swiperRef = useRef(null);
 
-  ////zare_nk_050226_added_st
-  const refForwiperButtonNext = useRef<HTMLButtonElement | null>(null);
-  const refForwiperButtonPrev = useRef<HTMLButtonElement | null>(null);
-  const swiperRef = useRef(null);
+  // useEffect(() => {
+  //   // اگر ریفرنس‌ها هنوز پر نشده باشند، کاری نکن
+  //   if (!refForwiperButtonNext.current || !refForwiperButtonPrev.current) return;
 
-  useEffect(() => {
-    ////zare_nk_050317_added_st
-    const chosenAddress = getCookie("chosenAddress");
-    // alert('chosenAddress is: ' + chosenAddress);
-    var parsedChosenAddress = chosenAddress ? JSON.parse(chosenAddress) : null;
-    // alert('chosenAddress IdAdress is: ' + parsedChosenAddress.IdAdress);
-    setCurrentAddress(parsedChosenAddress);    ////zare_nk_050327_commented_movaghat(baraye teste reRenderhaye componentha movaghat comment shod)
-    ////zare_nk_050317_added_end
+  //   // اگر swiperRef هنوز ساخته نشده، صبر کن (چون Swiper کمی دیرتر رندر میشه)
+  //   if (!swiperRef.current) return;
 
-    // اگر ریفرنس‌ها هنوز پر نشده باشند، کاری نکن
-    if (!refForwiperButtonNext.current || !refForwiperButtonPrev.current) return;
+  //   // ۴. اینجا به Swiper می‌گوییم دکمه‌هایش کدام هستند
+  //   // ماژول Navigation را از داخل instance Swiper پیدا می‌کنیم
+  //   const swiperInstance = swiperRef.current.swiper;
 
-    // اگر swiperRef هنوز ساخته نشده، صبر کن (چون Swiper کمی دیرتر رندر میشه)
-    if (!swiperRef.current) return;
+  //   // تنظیم دکمه‌ها
+  //   swiperInstance.params.navigation.nextEl = refForwiperButtonNext.current;
+  //   swiperInstance.params.navigation.prevEl = refForwiperButtonPrev.current;
 
-    // ۴. اینجا به Swiper می‌گوییم دکمه‌هایش کدام هستند
-    // ماژول Navigation را از داخل instance Swiper پیدا می‌کنیم
-    const swiperInstance = swiperRef.current.swiper;
+  //   // فعال‌سازی مجدد دکمه‌ها
+  //   swiperInstance.navigation.update();
+  //   swiperInstance.navigation.init();
+  // }, []);
+  ////zare_nk_050226_nokteh_end(baraye dokmehaye navigation va pagination dasti(ke estefadeh nakardim))
 
-    // تنظیم دکمه‌ها
-    swiperInstance.params.navigation.nextEl = refForwiperButtonNext.current;
-    swiperInstance.params.navigation.prevEl = refForwiperButtonPrev.current;
-
-    // فعال‌سازی مجدد دکمه‌ها
-    swiperInstance.navigation.update();
-    swiperInstance.navigation.init();
-  }, [isEpmtyAdressList]);
   ////IsEpmtyAdressList
   ////zare_nk_050226_added_end
 
-  const showAddRemAddress = async () => {
-    setIsEpmtyShowAddRemAddress(false);
-  }
+  // const showAddRemAddress = useCallback(
+  //   async () => {
+  //     setIsEpmtyShowAddRemAddress(false);
+  //   }
+  //   , [isEpmtyShowAddRemAddress]);
 
   ////zare_nk_050327_added_movaghat_st(pakkardani va tamrini)
   // const [testState, SetTestState] = useState<number>(1);
@@ -832,13 +848,13 @@ export default function Page() {
   //     });
   //   } , [testState]);
   ////zare_nk_050327_added_movaghat_end(pakkardani va tamrini)
- 
-  return (
-    <>
-      {/*<button onClick={() => { func33() }}>for func3</button> 
-       <TestComponent testState={testState} SetTestState={useCalback1} /> */}       
 
-      <SwiperThinkBanerComp  />      
+  return (
+    <currentAddressContext.Provider value={{ mycurrentAddress: mycurrentAddressState, setMycurrentAddress: setMycurrentAddressState }}>
+      {/*<button onClick={() => { func33() }}>for func3</button> 
+       <TestComponent testState={testState} SetTestState={useCalback1} /> */}
+
+      <SwiperThinkBanerComp />
 
       <header style={{
         position: 'sticky',
@@ -855,10 +871,11 @@ export default function Page() {
 
         <button
           id="showAddressListDrawerBtn"
-          onClick={showAddressListDrawer}   //zare_nk_050215_commented_movaghat(baraye synce hadafmand)
+          onClick={showAddressListDrawer}   //zare_nk_050329_commented_nokteh(ba setState hayash baese reRendere Home mishe(bayad az reRendere farzandane birabte home jologiri beshe)) 
           style={{
             borderRadius: 10,
             display: 'flex',
+            visibility: (mycurrentAddressState?.Adress ? 'visible' : 'hidden'),  ////zare_nk_050329_added
             flexDirection: 'column',
             backgroundColor: 'inherit',
             border: 'none',
@@ -885,13 +902,10 @@ export default function Page() {
           }}>
             {/* zare_nk_050317_alan */}
             <span style={{ textAlign: "right", }}>
-              {/* خونه */}
-              {currentAddress?.OnvanAdress ? currentAddress.OnvanAdress : 'خونه'}
+              {/* zare_nk_050329_nokteh(currentAddress az useState tabdil shod be useContext) */}
+              {/* {currentAddress?.OnvanAdress ? currentAddress.OnvanAdress : 'خونه'} */}
+              {mycurrentAddressState?.Adress ? mycurrentAddressState.OnvanAdress : ''}
             </span>
-
-            {/* <span style={{ textAlign: "right", }}> 
-              {currentAddress?.Adress ? currentAddress.Adress : 'آدرسسس'}
-            </span> */}
 
             <div style={{
               fontSize: '0.875rem',
@@ -914,7 +928,8 @@ export default function Page() {
 
               textAlign: 'right',
             }}>
-              {currentAddress?.Adress ? currentAddress.Adress : 'آدرسسس'}
+              {/* {currentAddress?.Adress ? currentAddress.Adress : 'آدرسسس'} */}
+              {mycurrentAddressState?.Adress ? mycurrentAddressState.Adress : ''}
             </div>
 
             <img
@@ -928,7 +943,8 @@ export default function Page() {
 
         <button
           id="goShoppingBacketBtn"
-          onClick={showAddressListDrawer}
+          // onClick={showAddressListDrawer}
+          onClick={() => { setError('goooo!!') }}
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -960,17 +976,19 @@ export default function Page() {
           direction: 'rtl',
           // paddingTop: '10px',   
         }}>
-
-         <AdressListComponent
-          isEpmtyAdressList={isEpmtyAdressList}
-          setIsEpmtyAdressList={setIsEpmtyAdressList}
-          refForBox={refForBox}
-          responsedListFromApiSelectAddressList={responsedListFromApiSelectAddressList}
-          isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}
-          setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}
-          showAddRemAddress={showAddRemAddress}
-          showAddressListDrawer={showAddressListDrawer}
-        />  
+        {isEpmtyAdressList &&  ////zare_nk_050329_updated(sharte isEpmtyAdressList emal shod ke isEpmtyAdressList==false bood component ra aslan seda nazanim)
+          <AdressListComponent
+            isEpmtyAdressList={isEpmtyAdressList}
+            setIsEpmtyAdressList={setIsEpmtyAdressList}
+            refForBox={refForBox}
+            responsedListFromApiSelectAddressList={responsedListFromApiSelectAddressList}
+            isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}
+            setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}
+            // showAddRemAddress={showAddRemAddress}     //zare_nk_050329_commented
+            showAddressListDrawer={showAddressListDrawer}
+          // setCurrentAddress={setCurrentAddress}  ////zare_nk_050329_commented(currentAddress az seState tabdil shod be useContext)
+          />
+        }
 
         {/* zare_nk_050226_nokteh_st(dokmehaye navigation va pagination dasti(jahate olgu gozashtim)) */}
         {/* <button className='swiper-button-next2' ref={refForwiperButtonNext}>
@@ -985,13 +1003,13 @@ export default function Page() {
 
         <div style={{ marginBottom: '.75rem' }}></div>
 
-        {/* <SwiperTopBanerComp /> */}
+        <SwiperTopBanerComp />
 
         <div style={{ marginBottom: '1.3rem' }}></div>
 
-        {/* <SwiperGrouplevel1Comp /> */}
+        <SwiperGrouplevel1Comp />
 
-        {/* <SwiperTapBestsComp /> */}
+        <SwiperTapBestsComp />
 
         <div style={{ marginBottom: '1.5rem' }}></div>
 
@@ -1005,6 +1023,6 @@ export default function Page() {
 
       <div className="tabIndexOne-in-LayoutWrapper" tabIndex={1}>
       </div>
-    </>
+    </currentAddressContext.Provider>
   );
 }

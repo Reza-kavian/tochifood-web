@@ -50,7 +50,7 @@ const theme = createTheme({
 ////zare_nk_050202_added_end(for use MUI)
 
 export default function LayoutWrapper({ children }: RootLayoutProps) {
-console.log('050329-LayoutWrapper rendered!!');
+  console.log('050329-LayoutWrapper rendered!!');
   const refForBox = useRef<HTMLDivElement | null>(null);
 
   const pathname = usePathname();
@@ -121,8 +121,8 @@ console.log('050329-LayoutWrapper rendered!!');
             </div>
 
           </section>
-        </main> 
-         
+        </main>
+
       </body >
       {/* zare_nk_050202_added_st(for use MUI) */}
     </ThemeProvider >

@@ -1,22 +1,17 @@
 ////zare_nk_050303_okk
 'use client'
 
-import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
+import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
 import { useRouter, useSearchParams, redirect } from "next/navigation";
 import Styles from "@/styles/components/location.module.css";
 import globalsStyles from "@/styles/components/globals.module.css";
-import { RefObject } from "react";
-import { ReactNode } from "react";
-import { ChangeEvent } from "react";
 import jwt from "jsonwebtoken";
 import { JwtPayload } from "jsonwebtoken";
 
-import { MouseEvent } from "react";
-
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog)
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
 
-import { useAuthentication } from '../context/AuthenticationContext';  //zare_nk_050111_added
+import { useAuthentication } from '../context/AuthenticationContext';
 
 ////zare_nk_050226_added_st
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -47,7 +42,9 @@ function getCookie(name: any) {
     return null; //اگر کوکی پیدا نشد
 }
 
-export default function SwiperTopBanerComp() {
+// export default function SwiperTopBanerComp() {
+const SwiperTopBanerComp = () => {
+    console.log('050329-SwiperTopBanerComp rendered!!');   ////zare_nk_050329_added
     const [errorInSwiperTopBaner, setErrorInSwiperTopBaner] = useState<string | null>(null);
 
     const router = useRouter();
@@ -98,13 +95,10 @@ export default function SwiperTopBanerComp() {
                 if (data.data.list == undefined) {
                     return;
                 }
-
                 var parsedList = JSON.parse(data.data.list);
-
                 SetResponsedListFromApiSelectBaner(() => {
                     return parsedList
                 });
-
             } else {
                 setErrorInSwiperTopBaner("متاسفانه خطایی رخ داده است34:" + data.errors);
                 console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
@@ -116,9 +110,9 @@ export default function SwiperTopBanerComp() {
         }
     }
 
-    // useEffect(() => {  
-    getSwiperTopBaner();
-    // }, []);
+    useEffect(() => {
+        getSwiperTopBaner();
+    }, []);
 
     return (
         <>
@@ -191,3 +185,5 @@ export default function SwiperTopBanerComp() {
         </>
     );
 }
+
+export default memo(SwiperTopBanerComp); 
