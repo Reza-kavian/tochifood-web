@@ -1,17 +1,13 @@
 ////zare_nk_050303_okk
 'use client'
 
-import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
+import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
 import { useRouter, useSearchParams, redirect } from "next/navigation";
 import Styles from "@/styles/components/location.module.css";
 import globalsStyles from "@/styles/components/globals.module.css";
-import { RefObject } from "react";
-import { ReactNode } from "react";
-import { ChangeEvent } from "react";
+
 import jwt from "jsonwebtoken";
 import { JwtPayload } from "jsonwebtoken";
-
-import { MouseEvent } from "react";
 
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog)
@@ -47,8 +43,9 @@ function getCookie(name: any) {
     return null; //اگر کوکی پیدا نشد
 }
 
-export default function SwiperTapTimeComp() {
-
+// export default function SwiperTapTimeComp() {
+const SwiperTapTimeComp = () => {
+    console.log('050329-SwiperTapTimeComp rendered!!');   ////zare_nk_050329_added
     ////zare_nk_050305_added_st
     const intervalRef = useRef<null | ReturnType<typeof setInterval>>(null);
     //// React.RefObject<NodeJS.Timeout | null>;
@@ -136,7 +133,7 @@ export default function SwiperTapTimeComp() {
         getSwiperTapTime();
     }, []);
 
-    ////zare_nk_050307_added_st
+    //zare_nk_050307_added_st
     useEffect(() => {
         // alert('0');
         if (responsedListFromApiSelectShobehJashnvareh == null) {
@@ -228,7 +225,7 @@ export default function SwiperTapTimeComp() {
         };
         ////zare_nk_050307_added_end
     }, [responsedListFromApiSelectShobehJashnvareh]);
-    ////zare_nk_050307_added_end
+    //zare_nk_050307_added_end
 
     return (
         <>
@@ -756,3 +753,5 @@ export default function SwiperTapTimeComp() {
         </>
     );
 }
+
+export default memo(SwiperTapTimeComp); 

@@ -1013,11 +1013,11 @@ export default function Home() {
 
         <div style={{ marginBottom: '1.5rem' }}></div>
 
-        {/* <SwiperSecondBanerComp /> */}
+        <SwiperSecondBanerComp />
 
         <div style={{ marginBottom: '1.5rem' }}></div>
 
-        {/* <SwiperTapTimeComp /> */}
+        <SwiperTapTimeComp />
       </main>
       <footer></footer>
 

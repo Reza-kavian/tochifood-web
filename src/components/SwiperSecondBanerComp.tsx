@@ -1,17 +1,13 @@
 ////zare_nk_050303_okk
 'use client'
 
-import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
+import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
 import { useRouter, useSearchParams, redirect } from "next/navigation";
 import Styles from "@/styles/components/location.module.css";
 import globalsStyles from "@/styles/components/globals.module.css";
-import { RefObject } from "react";
-import { ReactNode } from "react";
-import { ChangeEvent } from "react";
+
 import jwt from "jsonwebtoken";
 import { JwtPayload } from "jsonwebtoken";
-
-import { MouseEvent } from "react";
 
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog)
@@ -47,7 +43,9 @@ function getCookie(name: any) {
     return null; //اگر کوکی پیدا نشد
 }
 
-export default function SwiperSecondBanerComp() {
+// export default function SwiperSecondBanerComp() {
+const SwiperSecondBanerComp = () => {
+    console.log('050329-SwiperSecondBanerComp rendered!!');   ////zare_nk_050329_added
     const [errorInSwiperSecondBaner, setErrorInSwiperSecondBaner] = useState<string | null>(null);
 
     const router = useRouter();
@@ -116,16 +114,16 @@ export default function SwiperSecondBanerComp() {
         }
     }
 
-    // useEffect(() => {  
-    getSwiperSecondBaner();
-    // }, []);
+    useEffect(() => {
+        getSwiperSecondBaner();
+    }, []);
 
     return (
         <>
             {/* zare_nk_050317_nokteh_st(age div pedare Swiper ra bardarim vaghti Swiper dar Dom gharar migire ertefaesh kam mishe!!(ehtemalan bekhatere ertefa dadan be body dar layout hast ke bayad tahlilshe hatman)) */}
             <div style={{
                 display: 'flex', flexFlow: 'column', width: '100%',
-            }} >  
+            }} >
                 <Swiper
                     modules={[Navigation, Pagination]}
                     spaceBetween={10}    ////zare_nk_050216_nokteh(faseleye beine slideha dar har ghabele namayesh(be px hast))
@@ -193,3 +191,5 @@ export default function SwiperSecondBanerComp() {
         </>
     );
 }
+
+export default memo(SwiperSecondBanerComp); 
