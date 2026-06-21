@@ -17,6 +17,7 @@ import { useAuthentication } from '../context/AuthenticationContext';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
+import { none } from "@neshan-maps-platform/ol/centerconstraint";
 ////zare_nk_050226_added_end
 
 function getCookie(name: any) {
@@ -114,6 +115,20 @@ const SwiperTopBanerComp = () => {
         getSwiperTopBaner();
     }, []);
 
+
+    const goToVendor = (IdBaner: number) => {
+        alert('IdBaner: ' + IdBaner);
+        // router.push("/folder03?tab=comments2");
+        // redirect("/login");
+        // router.replace("/location");
+        // router.push("/vendorlist/");
+        router.push(`/vendorlist?IdBaner=${IdBaner}`);
+        ////zare_nk_050331_nokteh(age az setState estefadeh konim va dar jsx begim {state && <Vendorlist IdBaner={...}  /> barname Vendorlist ra beonvane yek
+        ////  component dar nazar migereh, na yek safhe!! dar url moroorgar ham tagheire sddress nadarim, dokmeye backe moroorgar ham barash lahaz nemishe!(pas 
+        //// farghe component hayei ke dar jsx seda mizanim ba poshehaye masire /src/app/foldername ra deghat konim ke poosheye foldername name safhe ast dar 
+        //// moroorgar ke haviye file page.tsx mibashad) } )
+    };
+
     return (
         <>
             {/* zare_nk_050317_nokteh_st(age div pedare Swiper ra bardarim vaghti Swiper dar Dom gharar migire ertefaesh kam mishe!!(ehtemalan bekhatere ertefa dadan be body dar layout hast ke bayad tahlilshe hatman)) */}
@@ -166,7 +181,8 @@ const SwiperTopBanerComp = () => {
                             return (
                                 <SwiperSlide key={index}>
                                     <div className="contInSlide" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        <Link href="https://tapsi.food/vendor-list?vendorListId=banner-1624" >
+                                        {/* <Link href="https://tapsi.food/vendor-list?vendorListId=banner-1624" > */}
+                                        {/* <Link href="/vendorlist?vendorListId=banner-1624" >
                                             <img
                                                 style={{
                                                     width: '100%',
@@ -174,7 +190,24 @@ const SwiperTopBanerComp = () => {
                                                 }}
                                                 // src="./images/top-baner/top-baner-slide01.png" />
                                                 src={`https://img.tochikala.com/Baners/${item.AxBaner}`} />
-                                        </Link>
+                                        </Link> */}
+                                        <button onClick={() => {
+                                            goToVendor(item.IdBaner);
+                                        }}
+                                            style={{
+                                                border: 'none',
+                                                backgroundColor: 'inherit',
+                                                padding: '0px',
+                                            }}
+                                        >
+                                            <img
+                                                style={{
+                                                    width: '100%',
+                                                    borderRadius: '0.5rem',
+                                                }}
+                                                // src="./images/top-baner/top-baner-slide01.png" />
+                                                src={`https://img.tochikala.com/Baners/${item.AxBaner}`} />
+                                        </button>
                                     </div>
                                 </SwiperSlide>
                             )

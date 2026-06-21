@@ -12,7 +12,11 @@ export default function NotFound() {
     <div style={{ padding: "3rem", textAlign: "center" }}>
       <h1 style={{ fontSize: "3rem", color: "crimson" }}>صفحه پیدا نشد 😢</h1>
       <p>به نظر می‌رسه صفحه‌ای که دنبالش هستی وجود نداره.</p>
-      <Link href="/" style={{ color: "blue", textDecoration: "underline" }}>
+      <Link href="/" style={{ 
+        color: "blue", 
+        // textDecoration: "underline",
+        textDecoration: "none",
+         }}>
         برگشت به صفحه اصلی
       </Link>
     </div>
