@@ -1,12 +1,9 @@
 ////zare_nk_050303_okk
 "use client";
-import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
+import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Styles from "@/styles/components/location.module.css";
 import globalsStyles from "@/styles/components/globals.module.css";
-import { RefObject } from "react";
-import { ReactNode } from "react";
-import { ChangeEvent } from "react";
 import jwt from "jsonwebtoken";
 import { JwtPayload } from "jsonwebtoken";
 import { factchecktools } from "googleapis/build/src/apis/factchecktools";
@@ -412,10 +409,14 @@ function BoxHtmlComponent({
 va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast) */}
     <ClickAwayListener
       onClickAway={(event) => {
+        console.log('dgdgdg');
         const target = event.target as HTMLElement;
-        const isToggleButton = target.id === 'bigShooBtn';  //zare_nk_050208_nokteh(tage bigShooBtn alan dar dakhele Collapse hast na dar kharejesh,va in check 
-        // kardane isToggleButton inja bimorede va niazi nist,age ye roozi absolutesh konim be kharej az Collapse ya fixed konim be kharaej az Collapse in shart karbordiye)
-        if (!isEpmtyHeightBox && !isToggleButton) {
+        // const isToggleButton = target.id === 'bigShooBtn';   ////zare_nk_050401_commented(chon age tage bigShooBtn dakhelesh tage digehi mesle span ya img dashteh bashe va karbar 
+        ////rooye oona click koneh barnameh target ro onna midoone na bigShooBtn, chareye kar estefadeh az !!target.closest('#bigShooBtn') hast) 
+        const isToggleButton = !!target.closest('#bigShooBtn');   ////zare_nk_050401_added(amalgare !! meghdar ra be boolean tabdil mikoneh(null => false va HTMLElement=> true))
+
+        if (!isEpmtyHeightBox && !isToggleButton) { ////zare_nk_050208_nokteh(tage bigShooBtn alan dar dakhele Collapse hast na dar kharejesh,va in check 
+          // // kardane isToggleButton inja bimorede va niazi nist,age ye roozi absolutesh konim be kharej az Collapse ya fixed konim be kharaej az Collapse in shart karbordiye)
           setIsEpmtyHeightBox(true); // ببند
         }
       }}
@@ -1537,7 +1538,6 @@ export default function LocationPage() {
             width: '100%',
             position: 'relative',
           }}>
-
           <div id="id123"
             style={{
               width: '100%',

@@ -1,7 +1,7 @@
 ////zare_nk_050329_okk(1)
 'use client'
 
-import { useState, useEffect, useRef, useCallback, JSXElementConstructor,RefObject ,ReactNode,ChangeEvent,MouseEvent,memo} from "react";
+import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, memo } from "react";
 import { useRouter, useSearchParams, redirect } from "next/navigation";
 
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
@@ -131,6 +131,8 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
       }}
       ModalProps={{
         keepMounted: true,
+        disableScrollLock: true,  ////zare_nk_050402_nokteh(agge disableScrollLock: true nadim baes mishe hengame baz shodane Drawer barname automat be 
+        ////tage <body> style css rooberoo ro bede: padding-right: 10px; overflow: hidden;(pishfarza disableScrollLock: false hast va style yad shode ro migire ke nemikhaim begireh!!  ))
       }}
     >
       {/* zare_nk_050204_rahe2_end(Drawer baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she(taghriban hamkhanevadeye modal hast)) */}
@@ -221,7 +223,7 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
             // showAddRemAddress={showAddRemAddress}  ////zare_nk_050329_commented
             setIsEpmtyAdressList={setIsEpmtyAdressList}
             showAddressListDrawer={showAddressListDrawer}
-            // setCurrentAddress={setCurrentAddress}  ////zare_nk_050329_commented(currentAddress az useState tabdil shod be createContext)
+          // setCurrentAddress={setCurrentAddress}  ////zare_nk_050329_commented(currentAddress az useState tabdil shod be createContext)
           />
           {/* zare_nk_050206_added_addressHa_end(behtare dar componenti joda sedash bezanim ke maghadir ra ba api por koneh) */}
         </div>

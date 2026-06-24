@@ -129,8 +129,7 @@ body {
   /* zarezank_041122_nokteh(backgroud tochi) */
   /* background-color: #fcfcfc !important;  */
   /* zarezank_041122_nokteh(backgroud okala) */
-  background-color: #f6f6f6 !important;
-
+  background-color: #f6f6f6 !important; 
 }
 
 .loginOutBtn {
@@ -396,9 +395,7 @@ button {
     justify-content: space-between;
   }
 
-  #body {
-    padding-bottom: 0px;
-  }
+ 
 
   #navarbala {
     justify-content: center;
@@ -460,11 +457,7 @@ button {
 
   #collapsibleNavbar2 {
     font-size: 120%;
-  }
-
-  #body {
-    padding-bottom: 60px;
-  }
+  } 
 
   #DownloadGuide {
     font-size: 12px;

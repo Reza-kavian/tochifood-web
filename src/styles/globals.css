@@ -106,13 +106,13 @@
     url("../../public/fonts/webfont(farsi_adad_hast)/eot/IRANSansWeb(FaNum).eot") format("embedded-opentype");
 }
 
-body {  
+body {
   /* zare_nk_050204_comment(baraye bazi propertyha mesle font-family barname pishfarzhaye designi baraye body lahaz mikoneh ke ehtemalan olaviate balatari ham daran
    nesbat be code css dastiye ma baraye body, pas behtare be khode tagha mostaghim font-family bedim, ke man az class dadan be tag dar globals.module.css estefade kardam)  */
   /* font-family: "IRANSansWeb_ms(adad_fa)", "IRANSansWeb_Medium(adad_fa)",
     "IRANSansWeb_ms", "IRANSansWeb_Medium", "IranSans", "b nazanin", "IRNazanin"; */
   background-color: #f6f6f6 !important;
-} 
+}
 
 /* .vorsab:hover,
 .vorsab:link,
@@ -123,45 +123,44 @@ body {
 } */
 
 
-@media screen and (min-width: 576px) {
- 
-}
-@media screen and (min-width: 768px) {
- 
-}
-@media screen and (min-width: 992px) {
- 
-}
-@media screen and (min-width: 1200px) {
- 
-}
-@media screen and (min-width: 1400px) {
- 
-}
+@media screen and (min-width: 576px) {}
 
-/* zare_nk_041225_added_st */ 
+@media screen and (min-width: 768px) {}
+
+@media screen and (min-width: 992px) {}
+
+@media screen and (min-width: 1200px) {}
+
+@media screen and (min-width: 1400px) {}
+
+/* zare_nk_041225_added_st */
 
 /* .page-cont { */
-.main-in-LayoutWrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: #f1f1f2;
+.main-in-LayoutWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #f1f1f2;
 }
 
 /* .main { */
-.section-in-LayoutWrapper{
-    width: 100%;
-    max-width: 450px;
-    min-height: 100dvh;
-    position: relative;
-    /* border: 2px dashed rgb(255, 0, 170); */
+.section-in-LayoutWrapper {
+  width: 100%;
+  max-width: 450px;
+  min-height: 100dvh;
+  position: relative;
+  /* zare_nk_050331_added_st */
+  display: flex;
+  flex-flow: row;
+  /* zare_nk_050331_added_end */
+  /* border: 2px dashed rgb(255, 0, 170); */
 }
+
 /* zare_nk_041225_added_end */
 
-/* zare_nk_050131_added_st */ 
+/* zare_nk_050131_added_st */
 html {
   overflow-y: auto;
   scrollbar-width: thin;
@@ -207,4 +206,5 @@ html::-webkit-scrollbar-thumb:hover,
   background: #555555;
   box-shadow: 0px 0px 3px 1px #555555 inset;
 }
-/* zare_nk_050131_added_end */ 
+
+/* zare_nk_050131_added_end */
