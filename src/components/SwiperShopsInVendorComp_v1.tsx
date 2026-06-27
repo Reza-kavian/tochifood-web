@@ -84,7 +84,7 @@ const SwiperShopsInVendorComp = () => {
         const data = await response.json();
 
         if (response.ok) {
-             console.log("zare_nk_050404-Api_SelectGoroohJson data1: " + JSON.stringify(data));
+            console.log("zare_nk_050228-data: " + JSON.stringify(data));
             if (data.status == 0) {
                 if (data.data.list == undefined) {
                     return;
@@ -108,8 +108,7 @@ const SwiperShopsInVendorComp = () => {
         getSwiperTapBests();  ////zare_nk_050403_commented_movaghat
     }, []);
 
-    return (
-        <>
+    return ( 
             <div style={{
                 display: 'flex', flexFlow: 'column', width: '100%', overflow: 'hidden',
             }}>
@@ -153,7 +152,7 @@ const SwiperShopsInVendorComp = () => {
                                     backgroundColor: 'inherit', borderRadius: '.75rem', border: '1px solid #f6f6f7',
                                 }}>
                                     <Link 
-                                     href={`/vendor/${item.IdG1}`}
+                                     href={`/vendor/vendor-${item.IdG1}`}
                                     // href="https://tapsi.food/business-lines?businessTypeId=6" 
                                     style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
                                         <div style={{
@@ -405,8 +404,7 @@ const SwiperShopsInVendorComp = () => {
                         )
                     })}
                 </Swiper>
-            </div>
-        </>
+            </div> 
     );
 }
 
