@@ -115,9 +115,8 @@ const SwiperTopBanerComp = () => {
         getSwiperTopBaner();
     }, []);
 
-
     const goToVendor = (IdBaner: number) => {
-        alert('IdBaner: ' + IdBaner);
+        // alert('IdBaner: ' + IdBaner);
         // router.push("/folder03?tab=comments2");
         // redirect("/login");
         // router.replace("/location");

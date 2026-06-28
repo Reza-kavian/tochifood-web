@@ -41,7 +41,6 @@ function getCookie(name: any) {
     return null; //اگر کوکی پیدا نشد
 }
 
-
 const SwiperInVendorHeaderComp = ({
     // openCollapseForSorting,
     // openCollapseForRaveshErsal
@@ -50,10 +49,11 @@ const SwiperInVendorHeaderComp = ({
 }: {
     // openCollapseForSorting: () => void;
     // openCollapseForRaveshErsal: () => void;
-    scrollToSection: (id:string) => void;
-    activeTab: string|null;
+    scrollToSection: (id: string) => void;
+    activeTab: string | null;
+
 }) => {
-// const SwiperInVendorHeaderComp = () => {
+    // const SwiperInVendorHeaderComp = () => {
 
     console.log('050329-SwiperInVendorHeaderComp rendered!!');   ////zare_nk_050329_added
     const [errorInSwiperTapBests, setErrorInSwiperTapBests] = useState<string | null>(null);
@@ -120,10 +120,9 @@ const SwiperInVendorHeaderComp = ({
 
     return (
         <>
-            {/* <div style={{
+            <div style={{
                 display: 'flex', flexFlow: 'column', width: '100%',
-
-            }} > 
+            }} >
                 <Swiper
                     modules={[Navigation, Pagination]}
                     spaceBetween={12}  ////zare_nk_050305_nokteh(moadele 0.75rem(chon spaceBetween adad 0.75rem))  
@@ -143,8 +142,9 @@ const SwiperInVendorHeaderComp = ({
                     }}
                 >
                     {responsedListFromApiSelectGoroohJson?.map((item, index) => {
-                        console.log('00-item.IdAdress: ' + JSON.stringify(item));
-                        console.log('00-item.IdAdress: ' + JSON.stringify(item));
+
+                        if (item.IdG1 != 1 && item.IdG1 != 7 && item.IdG1 != 8 && item.IdG1 != 17 && item.IdG1 != null) { return; }
+                        console.log('050405-item.IdG1.toString() is22: ' + item.IdG1.toString());
                         return (
                             <SwiperSlide
                                 key={index}
@@ -157,34 +157,41 @@ const SwiperInVendorHeaderComp = ({
                                 }}>
                                 <div className="contInSlide" style={{
                                     display: 'flex', alignItems: 'center', justifyContent: 'center', //// width: '100%', height: '100%',
-                                    backgroundColor: 'inherit', borderRadius: '.75rem', border: '1px solid #f6f6f7',
+                                    // backgroundColor: 'inherit',  
+                                     borderRadius: '.75rem', border: '1px solid #f6f6f7',
                                 }}>
-                                    <button style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        // width: '100%', 
-                                        // height: '100%',
-                                        textDecoration: 'none',
-                                        // backgroundColor: '#f1f2f3',
-                                        backgroundColor: 'white',
-                                        // border: 'none',
-                                        border: '1px solid #cdd2d5',
-                                        fontSize: '.875rem',
-                                        borderRadius: '9999px',
-                                        cursor: 'pointer',
-                                        // width: '2rem',
-                                        // height: '2rem',
-                                        padding: '8px 10px',
-                                    }}>
+                                    <button
+                                        // onClick={() => { scrollToSection('111') }}  ////zare_nk_050405_added
+                                        onClick={() => { scrollToSection(item.IdG1.toString()) }}  ////zare_nk_050405_added
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            // width: '100%', 
+                                            // height: '100%',
+                                            textDecoration: 'none',
+                                            // backgroundColor: 'white',
+                                            // border: 'none',
+                                            border: '1px solid #cdd2d5',
+                                            fontSize: '.875rem',
+                                            borderRadius: '9999px',
+                                            cursor: 'pointer',
+                                            // width: '2rem',
+                                            // height: '2rem',
+                                            padding: '8px 10px',
+
+                                            backgroundColor: (activeTab == item.IdG1.toString() ? 'black' : 'white'), ////zare_nk_050405_added
+                                        }}>
                                         <div style={{
                                             display: 'flex', flexFlow: 'row-reverse', position: 'relative', width: '100%', height: '100%',
                                             justifyContent: 'center', alignItems: 'center', gap: '0.5rem',
                                             // rowGap: '0.25rem',   ////zare_nk_050304_commented(rowGap nazasht tapsifood)
                                         }}>
                                             <div style={{
-                                                display: 'flex', flexFlow: 'row', justifyContent: 'center', alignItems: 'center',
-                                            }}>                                                
+                                                // display: 'flex',   ////zare_nk_050407_commented
+                                                display: 'none',   ////zare_nk_050407_added
+                                                flexFlow: 'row', justifyContent: 'center', alignItems: 'center',
+                                            }}>
                                                 <svg style={{ width: '1rem', height: '1rem', }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-4"><g id="Swap"><path id="Union" fillRule="evenodd" clipRule="evenodd" d="M7.42002 3.28999C7.43002 3.29999 7.44002 3.29999 7.44002 3.29999L11.52 7.39999C11.81 7.68999 11.81 8.16999 11.52 8.45999C11.37 8.60999 11.18 8.67999 10.99 8.67999C10.8 8.67999 10.61 8.60999 10.46 8.45999L7.66002 5.64999V17.45C7.66002 17.86 7.32002 18.2 6.91002 18.2C6.50002 18.2 6.16002 17.86 6.16002 17.45V5.64999L3.36002 8.45999C3.07002 8.74999 2.59002 8.74999 2.30002 8.45999C2.01002 8.16999 2.01002 7.68999 2.30002 7.39999L6.38002 3.29999C6.39002 3.28999 6.40002 3.28999 6.40002 3.28999C6.53002 3.15999 6.71002 3.07999 6.91002 3.07999C7.11002 3.07999 7.29002 3.15999 7.42002 3.28999ZM20.3899 15.54C20.68 15.25 21.16 15.25 21.45 15.54C21.74 15.83 21.74 16.31 21.45 16.6L17.37 20.7C17.3176 20.7524 17.2652 20.7819 17.2062 20.8151C17.1976 20.82 17.1888 20.8249 17.18 20.83C17.1721 20.8339 17.1657 20.8394 17.1597 20.8446C17.1505 20.8527 17.1421 20.86 17.13 20.86C17.04 20.9 16.94 20.92 16.84 20.92C16.74 20.92 16.64 20.9 16.55 20.86C16.54 20.86 16.5325 20.8525 16.525 20.845C16.5175 20.8375 16.51 20.83 16.5 20.83C16.43 20.79 16.36 20.75 16.31 20.7L12.23 16.6C11.94 16.31 11.94 15.83 12.23 15.54C12.52 15.25 13 15.25 13.29 15.54L16.09 18.35V6.54999C16.09 6.13999 16.43 5.79999 16.84 5.79999C17.25 5.79999 17.59 6.13999 17.59 6.54999V18.35L20.3899 15.54Z" fill="#63676e"></path></g></svg>
                                             </div>
 
@@ -193,8 +200,8 @@ const SwiperInVendorHeaderComp = ({
                                             }}>
                                                 <div style={{
                                                     fontSize: '0.875rem',
-                                                    // color: '#1b1c1d',    ////zare_nk_050331_commented
-                                                    color: '#000',     ////zare_nk_050331_added
+                                                    // color: '#63676e',     ////zare_nk_050407_alan
+                                                    color: (activeTab == item.IdG1.toString() ? 'white' : '#63676e'),
 
                                                     // این بخش برای سه‌نقطه و محدودیت ۲ خط
                                                     display: '-webkit-box',
@@ -219,15 +226,17 @@ const SwiperInVendorHeaderComp = ({
 
                                         </div>
                                     </button>
+
                                 </div>
                             </SwiperSlide>
                         )
                     })}
                 </Swiper>
-            </div> */}
+            </div>
 
-            <div style={{
-                display: 'flex', flexFlow: 'column', width: '100%', 
+
+            {/* <div style={{
+                display: 'flex', flexFlow: 'column', width: '100%',
             }} >
                 <Swiper
                     modules={[Navigation, Pagination]}
@@ -282,7 +291,7 @@ const SwiperInVendorHeaderComp = ({
                                     // height: '2rem',
                                     padding: '8px 10px',
 
-                                     backgroundColor: (activeTab == '111' ? '#f1f2f3' : 'white')
+                                    backgroundColor: (activeTab == '111' ? '#f1f2f3' : 'white')
                                 }}>
                                 <div style={{
                                     display: 'flex', flexFlow: 'row', position: 'relative', width: '100%', height: '100%',
@@ -362,19 +371,13 @@ const SwiperInVendorHeaderComp = ({
                                     // width: '2rem',
                                     // height: '2rem',
                                     padding: '8px 10px',
-                                      backgroundColor: (activeTab == '222' ? '#f1f2f3' : 'white')
+                                    backgroundColor: (activeTab == '222' ? '#f1f2f3' : 'white')
                                 }}>
                                 <div style={{
                                     display: 'flex', flexFlow: 'row-reverse', position: 'relative', width: '100%', height: '100%',
                                     justifyContent: 'center', alignItems: 'center', gap: '0.5rem',
                                     // rowGap: '0.25rem',   ////zare_nk_050304_commented(rowGap nazasht tapsifood)
                                 }}>
-                                    {/* <div style={{
-                                                display: 'flex', flexFlow: 'row', justifyContent: 'center', alignItems: 'center',
-                                            }}>                                                
-                                                <svg style={{ width: '1rem', height: '1rem', }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-4"><g id="Swap"><path id="Union" fillRule="evenodd" clipRule="evenodd" d="M7.42002 3.28999C7.43002 3.29999 7.44002 3.29999 7.44002 3.29999L11.52 7.39999C11.81 7.68999 11.81 8.16999 11.52 8.45999C11.37 8.60999 11.18 8.67999 10.99 8.67999C10.8 8.67999 10.61 8.60999 10.46 8.45999L7.66002 5.64999V17.45C7.66002 17.86 7.32002 18.2 6.91002 18.2C6.50002 18.2 6.16002 17.86 6.16002 17.45V5.64999L3.36002 8.45999C3.07002 8.74999 2.59002 8.74999 2.30002 8.45999C2.01002 8.16999 2.01002 7.68999 2.30002 7.39999L6.38002 3.29999C6.39002 3.28999 6.40002 3.28999 6.40002 3.28999C6.53002 3.15999 6.71002 3.07999 6.91002 3.07999C7.11002 3.07999 7.29002 3.15999 7.42002 3.28999ZM20.3899 15.54C20.68 15.25 21.16 15.25 21.45 15.54C21.74 15.83 21.74 16.31 21.45 16.6L17.37 20.7C17.3176 20.7524 17.2652 20.7819 17.2062 20.8151C17.1976 20.82 17.1888 20.8249 17.18 20.83C17.1721 20.8339 17.1657 20.8394 17.1597 20.8446C17.1505 20.8527 17.1421 20.86 17.13 20.86C17.04 20.9 16.94 20.92 16.84 20.92C16.74 20.92 16.64 20.9 16.55 20.86C16.54 20.86 16.5325 20.8525 16.525 20.845C16.5175 20.8375 16.51 20.83 16.5 20.83C16.43 20.79 16.36 20.75 16.31 20.7L12.23 16.6C11.94 16.31 11.94 15.83 12.23 15.54C12.52 15.25 13 15.25 13.29 15.54L16.09 18.35V6.54999C16.09 6.13999 16.43 5.79999 16.84 5.79999C17.25 5.79999 17.59 6.13999 17.59 6.54999V18.35L20.3899 15.54Z" fill="#63676e"></path></g></svg>
-                                            </div> */}
-
                                     <div style={{
                                         display: 'flex', flexFlow: 'row', justifyContent: 'center', alignItems: 'center',
                                     }}>
@@ -439,19 +442,13 @@ const SwiperInVendorHeaderComp = ({
                                     // width: '2rem',
                                     // height: '2rem',
                                     padding: '8px 10px',
-                                      backgroundColor: (activeTab == '333' ? '#f1f2f3' : 'white')
+                                    backgroundColor: (activeTab == '333' ? '#f1f2f3' : 'white')
                                 }}>
                                 <div style={{
                                     display: 'flex', flexFlow: 'row-reverse', position: 'relative', width: '100%', height: '100%',
                                     justifyContent: 'center', alignItems: 'center', gap: '0.5rem',
                                     // rowGap: '0.25rem',   ////zare_nk_050304_commented(rowGap nazasht tapsifood)
                                 }}>
-                                    {/* <div style={{
-                                                display: 'flex', flexFlow: 'row', justifyContent: 'center', alignItems: 'center',
-                                            }}>                                                
-                                                <svg style={{ width: '1rem', height: '1rem', }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-4"><g id="Swap"><path id="Union" fillRule="evenodd" clipRule="evenodd" d="M7.42002 3.28999C7.43002 3.29999 7.44002 3.29999 7.44002 3.29999L11.52 7.39999C11.81 7.68999 11.81 8.16999 11.52 8.45999C11.37 8.60999 11.18 8.67999 10.99 8.67999C10.8 8.67999 10.61 8.60999 10.46 8.45999L7.66002 5.64999V17.45C7.66002 17.86 7.32002 18.2 6.91002 18.2C6.50002 18.2 6.16002 17.86 6.16002 17.45V5.64999L3.36002 8.45999C3.07002 8.74999 2.59002 8.74999 2.30002 8.45999C2.01002 8.16999 2.01002 7.68999 2.30002 7.39999L6.38002 3.29999C6.39002 3.28999 6.40002 3.28999 6.40002 3.28999C6.53002 3.15999 6.71002 3.07999 6.91002 3.07999C7.11002 3.07999 7.29002 3.15999 7.42002 3.28999ZM20.3899 15.54C20.68 15.25 21.16 15.25 21.45 15.54C21.74 15.83 21.74 16.31 21.45 16.6L17.37 20.7C17.3176 20.7524 17.2652 20.7819 17.2062 20.8151C17.1976 20.82 17.1888 20.8249 17.18 20.83C17.1721 20.8339 17.1657 20.8394 17.1597 20.8446C17.1505 20.8527 17.1421 20.86 17.13 20.86C17.04 20.9 16.94 20.92 16.84 20.92C16.74 20.92 16.64 20.9 16.55 20.86C16.54 20.86 16.5325 20.8525 16.525 20.845C16.5175 20.8375 16.51 20.83 16.5 20.83C16.43 20.79 16.36 20.75 16.31 20.7L12.23 16.6C11.94 16.31 11.94 15.83 12.23 15.54C12.52 15.25 13 15.25 13.29 15.54L16.09 18.35V6.54999C16.09 6.13999 16.43 5.79999 16.84 5.79999C17.25 5.79999 17.59 6.13999 17.59 6.54999V18.35L20.3899 15.54Z" fill="#63676e"></path></g></svg>
-                                            </div> */}
-
                                     <div style={{
                                         display: 'flex', flexFlow: 'row', justifyContent: 'center', alignItems: 'center',
                                     }}>
@@ -517,19 +514,13 @@ const SwiperInVendorHeaderComp = ({
                                     // width: '2rem',
                                     // height: '2rem',
                                     padding: '8px 10px',
-                                      backgroundColor: (activeTab == '444' ? '#f1f2f3' : 'white')
+                                    backgroundColor: (activeTab == '444' ? '#f1f2f3' : 'white')
                                 }}>
                                 <div style={{
                                     display: 'flex', flexFlow: 'row-reverse', position: 'relative', width: '100%', height: '100%',
                                     justifyContent: 'center', alignItems: 'center', gap: '0.5rem',
                                     // rowGap: '0.25rem',   ////zare_nk_050304_commented(rowGap nazasht tapsifood)
                                 }}>
-                                    {/* <div style={{
-                                                display: 'flex', flexFlow: 'row', justifyContent: 'center', alignItems: 'center',
-                                            }}>                                                
-                                                <svg style={{ width: '1rem', height: '1rem', }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-4"><g id="Swap"><path id="Union" fillRule="evenodd" clipRule="evenodd" d="M7.42002 3.28999C7.43002 3.29999 7.44002 3.29999 7.44002 3.29999L11.52 7.39999C11.81 7.68999 11.81 8.16999 11.52 8.45999C11.37 8.60999 11.18 8.67999 10.99 8.67999C10.8 8.67999 10.61 8.60999 10.46 8.45999L7.66002 5.64999V17.45C7.66002 17.86 7.32002 18.2 6.91002 18.2C6.50002 18.2 6.16002 17.86 6.16002 17.45V5.64999L3.36002 8.45999C3.07002 8.74999 2.59002 8.74999 2.30002 8.45999C2.01002 8.16999 2.01002 7.68999 2.30002 7.39999L6.38002 3.29999C6.39002 3.28999 6.40002 3.28999 6.40002 3.28999C6.53002 3.15999 6.71002 3.07999 6.91002 3.07999C7.11002 3.07999 7.29002 3.15999 7.42002 3.28999ZM20.3899 15.54C20.68 15.25 21.16 15.25 21.45 15.54C21.74 15.83 21.74 16.31 21.45 16.6L17.37 20.7C17.3176 20.7524 17.2652 20.7819 17.2062 20.8151C17.1976 20.82 17.1888 20.8249 17.18 20.83C17.1721 20.8339 17.1657 20.8394 17.1597 20.8446C17.1505 20.8527 17.1421 20.86 17.13 20.86C17.04 20.9 16.94 20.92 16.84 20.92C16.74 20.92 16.64 20.9 16.55 20.86C16.54 20.86 16.5325 20.8525 16.525 20.845C16.5175 20.8375 16.51 20.83 16.5 20.83C16.43 20.79 16.36 20.75 16.31 20.7L12.23 16.6C11.94 16.31 11.94 15.83 12.23 15.54C12.52 15.25 13 15.25 13.29 15.54L16.09 18.35V6.54999C16.09 6.13999 16.43 5.79999 16.84 5.79999C17.25 5.79999 17.59 6.13999 17.59 6.54999V18.35L20.3899 15.54Z" fill="#63676e"></path></g></svg>
-                                            </div> */}
-
                                     <div style={{
                                         display: 'flex', flexFlow: 'row', justifyContent: 'center', alignItems: 'center',
                                     }}>
@@ -565,7 +556,7 @@ const SwiperInVendorHeaderComp = ({
                     </SwiperSlide>
 
                 </Swiper>
-            </div>
+            </div> */}
         </>
     );
 }

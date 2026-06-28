@@ -58,6 +58,7 @@ function getCookie(name: any) {
 }
 
 export default function VendorList() {
+    const router = useRouter();
     console.log('050329-VendorList rendered!!');   ////zare_nk_050329_added
     const [isEpmtyCollapseForSorting, setIsEpmtyCollapseForSorting] = useState(true);  //zare_nk_050401_added 
     const [isEpmtyCollapseForRaveshErsal, setIsEpmtyCollapseForRaveshErsal] = useState(true);  //zare_nk_050401_added 
@@ -167,8 +168,8 @@ export default function VendorList() {
                     }}>
 
                     <button
-                        id="goBackBtn"  ////zare_nk_050401_commented
-                        // onClick={showAddressListDrawer}  ////zare_nk_050401_commented 
+                        id="goBackBtn"
+                        onClick={() => { router.back() }}
 
                         style={{
                             display: 'flex',

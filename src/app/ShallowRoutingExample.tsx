@@ -1427,7 +1427,7 @@ export default function ShallowRoutingExample() {
         }
       }
     } catch (error) {
-      alert('catch: ' + error + 'modal: ' + modal)
+      // alert('catch: ' + error + 'modal: ' + modal);
       const bootstrap = await getBootstrap();
       modal?.hide();
       const mymodalForWarning = new bootstrap.Modal(
@@ -1444,7 +1444,7 @@ export default function ShallowRoutingExample() {
             span.innerText = "❌ اتصال اینترنت برقرار نیست یا سرور در دسترس نمی‌باشد";
           }
         } else {
-          alert('2')
+          // alert('2');
           span.innerText = String(error);
         }
       }

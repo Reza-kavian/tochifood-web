@@ -14,6 +14,9 @@ import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Draw
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog)
 
 import SwiperInVendorScrollTabComp from '../../../components/SwiperInVendorScrollTabComp';
+import GetScrollsSecInVendor from '../../../components/GetScrollsSecInVendor';
+import SwiperBordBordInVendorComp from '../../../components/SwiperBordBordInVendorComp';
+
 
 // import { useAuthentication } from '../context/AuthenticationContext';  
 
@@ -135,19 +138,21 @@ export default function VendorPage() {
 
     const [activeTab, setActiveTab] = useState<string | null>(null);
 
-    const scrollToSection = (id: string) => {
-        console.log('050405-scrollToSection called!!-id: ' + id);
-        console.log('050405-scrollToSection called!!-sectionRefs.current[id] : ' + sectionRefs.current[id]);
-        const section = sectionRefs.current[id];
-        if (!section) return;
+    const scrollToSection = useCallback(
+        (id: string) => {
+            console.log('050405-scrollToSection called!!-id: ' + id);
+            console.log('050405-scrollToSection called!!-sectionRefs.current[id] : ' + sectionRefs.current[id]);
+            const section = sectionRefs.current[id];
+            if (!section) return;
 
-        section.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-        });
-    };
+            section.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        }
+        , [activeTab]);
 
-       useEffect(() => {
+    useEffect(() => {
         const HEADER_HEIGHT = 40;
         const handleScroll = () => {
             let currentSection = "";
@@ -218,9 +223,8 @@ export default function VendorPage() {
                     }}>
 
                     <button
-                        id="goBackBtn"  ////zare_nk_050401_commented
-                        // onClick={showAddressListDrawer}  ////zare_nk_050401_commented 
-
+                        id="goBackBtn"
+                        onClick={() => router.back()}
                         style={{
                             display: 'flex',
                             justifyContent: 'center',
@@ -305,18 +309,11 @@ export default function VendorPage() {
                     // justifyContent: 'center',  ////zare_nk_050229_nokteh(be lahaze amoodi vasat chin mikoneh mohtavaye safheh ro ke ma inro nemikhaim)
                     alignItems: 'center',
                     flex: '1 0 auto',
-                    border: '3px dashed orange',
+                    // border: '3px dashed orange',
                     direction: 'rtl',
                     position: 'absolute',  ////zare_nk_050404_added   
                     top: '0px ',  ////zare_nk_050404_added      
                 }}>
-
-
-                {/* {responsedListFromApiSelectKalaShobeh?.map((item, index) => {
-return(<>
-
-</>)
- })} */}
                 <div style={{
                     width: '100%',
                     display: 'flex',
@@ -554,6 +551,7 @@ return(<>
 
                 <div style={{
                     paddingTop: '.5rem', marginTop: '.5rem', backgroundColor: '#fff7ec', display: 'flex', flexFlow: 'column', width: '100%', height: 'min-content',
+                    paddingBottom: '10px',
                 }}>
                     <div style={{
                         padding: '.125rem 1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%',
@@ -563,7 +561,10 @@ return(<>
                             alignItems: 'center',
                             gap: '.5rem',
                         }}>
-                            <h2 style={{ fontSize: '.875rem', lineHeight: '1.25rem', margin: 0, }}></h2>
+                            <img src='/images/movaghat/vendorPage/bord-bord-icon.svg'
+                                style={{ width: '20px', height: '20px' }} />
+
+                            <h2 style={{ fontSize: '.875rem', lineHeight: '1.25rem', margin: 0, }}>فرصت برد برد</h2>
                         </div>
 
                         <div style={{
@@ -580,9 +581,19 @@ return(<>
                                 style={{ width: '24px', height: '24px' }} />
                         </div>
                     </div>
+                    <SwiperBordBordInVendorComp
+                    // // openCollapseForSorting={openCollapseForSorting}
+                    // // openCollapseForRaveshErsal={openCollapseForRaveshErsal}
+                    // scrollToSection={scrollToSection}
+                    // activeTab={activeTab}
+                    />
+                </div>
 
-
-                    {/* zare_nk_050405_added_alan_st */}
+                {/* zare_nk_050405_added_alan_st */}
+                <div style={{
+                    display: 'flex',
+                    flexFlow: 'column', width: '100%', height: 'min-content', paddingTop: '.5rem', marginTop: '.5rem', //backgroundColor: '#fff7ec',
+                }}>
                     <div
                         style={{
                             display: 'flex',
@@ -591,12 +602,16 @@ return(<>
                             alignItems: 'center',
                             paddingRight: '0.375rem',
                             paddingLeft: '0.375rem',
-                            border: '1px dashed black',
+                            // border: '1px dashed black',
                             width: '100%',
                             cursor: 'grab',
 
                             position: 'sticky',
                             top: '0px',
+                            backgroundColor: 'white',
+
+                            height: '60px',   ////zare_nk_050407_added
+                            zIndex: 2,
                         }}>
                         <SwiperInVendorScrollTabComp
                             // openCollapseForSorting={openCollapseForSorting}
@@ -610,10 +625,14 @@ return(<>
                         width: '100%',
                         display: "flex",
                         flexDirection: 'column',
-                        border: '1px dashed blue',
-                        marginTop: '100px',
+                        // border: '1px dashed blue',
+                        // marginTop: '100px',
                     }}>
-                        <div
+                        <GetScrollsSecInVendor
+                            sectionRefs={sectionRefs}
+                        />
+
+                        {/* <div
                             id="111"
                             style={{
                                 width: '100%',
@@ -623,8 +642,7 @@ return(<>
                                 height: '300px',
                                 marginTop: '200px',
                                 scrollMarginTop: "40px",
-                            }}
-                            // ref={(el) => sectionRefs.current["111"] = el}
+                            }} 
                             ref={(el) => {
                                 sectionRefs.current["111"] = el;
                             }}
@@ -641,8 +659,7 @@ return(<>
                                 border: '1px dashed black',
                                 height: '300px',
                                 scrollMarginTop: "40px",
-                            }}
-                            // ref={(el) => sectionRefs.current["222"] = el}
+                            }} 
                             ref={(el) => {
                                 sectionRefs.current["222"] = el;
                             }}
@@ -659,8 +676,7 @@ return(<>
                                 border: '1px dashed black',
                                 height: '300px',
                                 scrollMarginTop: "40px",
-                            }}
-                            // ref={(el) => sectionRefs.current["pizza"] = el}
+                            }} 
                             ref={(el) => {
                                 sectionRefs.current["333"] = el;
                             }}
@@ -677,23 +693,17 @@ return(<>
                                 border: '1px dashed black',
                                 height: '300px',
                                 scrollMarginTop: "40px",
-                            }}
-                            // ref={(el) => sectionRefs.current["burger"] = el}
+                            }} 
                             ref={(el) => {
                                 sectionRefs.current["444"] = el;
                             }}
                         >
                             <h2>4444</h2>
-                        </div>
+                        </div> */}
+
                     </div>
-                    {/* zare_nk_050405_added_alan_end */}
-
                 </div>
-
-
-
-
-
+                {/* zare_nk_050405_added_alan_end */}
 
             </main>
 
