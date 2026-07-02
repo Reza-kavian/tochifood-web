@@ -1,4 +1,4 @@
-////zare_nk_050329_okk(0)
+////zare_nk_050411_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext } from "react";
@@ -38,6 +38,8 @@ import { json } from "node:stream/consumers";
 import { relative } from "node:path";
 
 // import TestComponent from '../components/TestComponent';  ////zare_nk_050327_added_movaghat(componente testi tamrini hast)
+
+import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
 
 function getCookie(name: any) {
   ////zare_nk_050209_added_st
@@ -118,8 +120,9 @@ export default function Home() {
         return;
       }
 
-      let ApiUrl = "https://api.tochikala.com/api/";
-      const response = await fetch(ApiUrl + "User/Api_SelectAddress", {
+      // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
+      let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
+      const response = await fetch(ApiUrl + "Api_SelectAddress", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -235,7 +238,7 @@ export default function Home() {
         width: '100%',
         // height: '100%',  ////height :100% dorost nist, chon shayad dar layout alaveh ba children satrhaye dife ham dashe bashim(mesle footer va header va...)
         display: "flex",
-        flexDirection: 'column', 
+        flexDirection: 'column',
         // border: '3px solid orange',
       }}>
         <SwiperThinkBanerComp />
@@ -283,7 +286,6 @@ export default function Home() {
               maxWidth: '256px',
               gap: '.5rem',
             }}>
-              {/* zare_nk_050317_alan */}
               <span style={{ textAlign: "right", }}>
                 {/* zare_nk_050329_nokteh(currentAddress az useState tabdil shod be useContext) */}
                 {/* {currentAddress?.OnvanAdress ? currentAddress.OnvanAdress : 'خونه'} */}
@@ -393,7 +395,6 @@ export default function Home() {
             {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="inherit" className="size-3.5 shrink-0 fill-gray-500 text-gray"><path d="M22.07 21.47L18.93 18.34C20.52 16.61 21.5 14.3 21.5 11.77C21.5 6.40003 17.13 2.03003 11.76 2.03003C6.39003 2.03003 2.03003 6.40003 2.03003 11.77C2.03003 17.14 6.40003 21.51 11.77 21.51C14.07 21.51 16.18 20.71 17.84 19.37L21.01 22.53C21.16 22.68 21.35 22.75 21.54 22.75C21.73 22.75 21.92 22.68 22.07 22.53C22.36 22.24 22.36 21.76 22.07 21.47ZM3.53003 11.77C3.53003 7.22003 7.22003 3.53003 11.77 3.53003C16.32 3.53003 20.01 7.23003 20.01 11.77C20.01 16.31 16.31 20.01 11.77 20.01C7.23003 20.01 3.53003 16.31 3.53003 11.77Z" fill="inherit"></path></svg> */}
             <svg style={{ width: '.875rem', height: '.875rem' }} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#a5abb1" className="size-3.5 shrink-0 fill-gray-500 text-gray"><path d="M22.07 21.47L18.93 18.34C20.52 16.61 21.5 14.3 21.5 11.77C21.5 6.40003 17.13 2.03003 11.76 2.03003C6.39003 2.03003 2.03003 6.40003 2.03003 11.77C2.03003 17.14 6.40003 21.51 11.77 21.51C14.07 21.51 16.18 20.71 17.84 19.37L21.01 22.53C21.16 22.68 21.35 22.75 21.54 22.75C21.73 22.75 21.92 22.68 22.07 22.53C22.36 22.24 22.36 21.76 22.07 21.47ZM3.53003 11.77C3.53003 7.22003 7.22003 3.53003 11.77 3.53003C16.32 3.53003 20.01 7.23003 20.01 11.77C20.01 16.31 16.31 20.01 11.77 20.01C7.23003 20.01 3.53003 16.31 3.53003 11.77Z" fill="inherit"></path></svg>
 
-
             <p style={{ color: '#878b92', fontSize: '.75rem', lineHeight: '1rem', flex: '1 1 0%', }} className="flex-1 text-xs text-gray">جستجوی نام فروشگاه یا محصول...</p>
           </a>
 
@@ -447,8 +448,6 @@ export default function Home() {
                 src={`/images/baners/single-punched-banner/single-punched-banner-01.png`} />
             </div>
           </div>
-
-
         </main>
         <footer></footer>
 

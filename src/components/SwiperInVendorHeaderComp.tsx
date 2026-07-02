@@ -1,4 +1,4 @@
-////zare_nk_050303_okk
+////zare_nk_050411_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -19,6 +19,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
 ////zare_nk_050226_added_end
+
+import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
 
 function getCookie(name: any) {
     ////zare_nk_050209_added_st
@@ -61,11 +63,7 @@ const SwiperInVendorHeaderComp = ({
         NameG1: string;
         AxG1: string;
         Tozihat: string;
-        // MetaDesc: string;  //؟؟
-        // tbl_Gorooh2
-        // .
-        // .
-        // .
+      
         [key: string]: any;
     };
 
@@ -78,7 +76,9 @@ const SwiperInVendorHeaderComp = ({
             return;
         }
         console.log('tokentokentoken: ' + token);
-        let ApiUrl = "https://api.tochikala.com/api/";
+
+        // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
         const response = await fetch(ApiUrl + "User/Api_SelectGoroohJson", {
             method: "POST",
             headers: {
@@ -313,10 +313,9 @@ const SwiperInVendorHeaderComp = ({
 
                                             textAlign: 'center',
                                         }}>
-                                            مرتب&zwnj;سازی                                       
+                                            مرتب&zwnj;سازی
                                         </div>
                                     </div>
-
                                 </div>
                             </button>
                         </div>

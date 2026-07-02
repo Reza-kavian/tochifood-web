@@ -1,4 +1,4 @@
-////zare_nk_050303_okk
+////zare_nk_050411_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -18,6 +18,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
 ////zare_nk_050226_added_end
+
+import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
 
 function getCookie(name: any) {
     ////zare_nk_050209_added_st
@@ -41,8 +43,8 @@ function getCookie(name: any) {
     // console.log("do nist-parts.length: " + parts.length);
     return null; //اگر کوکی پیدا نشد
 }
-// export default function SwiperThinkBanerComp() {  ////zare_nk_050329_commented(baraye esswtefadeh az memo)
-const SwiperThinkBanerComp = () => { ////zare_nk_050329_added(baraye esswtefadeh az memo)
+
+const SwiperThinkBanerComp = () => { 
     console.log('050329-SwiperThinkBanerComp called!!');
     const [errorInSwiperThinkBaner, setErrorInSwiperThinkBaner] = useState<string | null>(null);
 
@@ -61,9 +63,6 @@ const SwiperThinkBanerComp = () => { ////zare_nk_050329_added(baraye esswtefadeh
         Type: string;
         IdShopCategory: number;
 
-        // Width 
-        // Height
-
         [key: string]: any;  ////zare_nk_050228_nokteh(noe Width va Height ra nemidoonestam comment kardam va automat daar [key: string]: any; gonjoondeh mishan)
     };
 
@@ -77,8 +76,10 @@ const SwiperThinkBanerComp = () => { ////zare_nk_050329_added(baraye esswtefadeh
             return;
         }
         // console.log('tokentokentoken: ' + token);
-        let ApiUrl = "https://api.tochikala.com/api/";
-        const response = await fetch(ApiUrl + "User/Api_SelectBaner", {
+
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
+        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
+        const response = await fetch(ApiUrl + "Api_SelectBaner", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -118,7 +119,7 @@ const SwiperThinkBanerComp = () => { ////zare_nk_050329_added(baraye esswtefadeh
     }, []);
 
     return (
-        <>  
+        <>
             <Swiper
                 modules={[Navigation, Pagination]}
                 spaceBetween={10}

@@ -1,4 +1,4 @@
-////zare_nk_050303_okk
+////zare_nk_050411_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -19,6 +19,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
 ////zare_nk_050226_added_end
+
+import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
 
 function getCookie(name: any) {
     ////zare_nk_050209_added_st
@@ -43,7 +45,6 @@ function getCookie(name: any) {
     return null; //اگر کوکی پیدا نشد
 }
 
-// export default function SwiperTapTimeComp() {
 const SwiperTapTimeComp = () => {
     console.log('050329-SwiperTapTimeComp rendered!!');   ////zare_nk_050329_added
     ////zare_nk_050305_added_st
@@ -60,11 +61,6 @@ const SwiperTapTimeComp = () => {
     const router = useRouter();
 
     type responsedListFromApiSelectShobehJashnvarehType = {
-        // IdG1: number;
-        // NameG1: string;
-        // AxG1: string;
-        // Tozihat: string;
-
         [key: string]: any;
     };
 
@@ -82,8 +78,9 @@ const SwiperTapTimeComp = () => {
             return;
         }
         console.log("050331-getSwiperTapTime calles!!-token: " + token);
-        let ApiUrl = "https://api.tochikala.com/api/";
-        const response = await fetch(ApiUrl + "User/Api_SelectShobehJashnvareh", {
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
+        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
+        const response = await fetch(ApiUrl + "Api_SelectShobehJashnvareh", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -109,19 +106,12 @@ const SwiperTapTimeComp = () => {
 
                 var parsedTimer = JSON.parse(data.data.timer);
                 let timer = parsedTimer[0].Timer;
-                // var Gorooh = parsedList.Gorooh;
 
                 SetResponsedListFromApiSelectShobehJashnvareh(() => {
                     return parsedList
                 });
 
-                setTimer(timer);  ////zare_nk_050307_added
-                // ////zare_nk_050307_added_st
-                // setTimer(() => {
-                //     return timer
-                // });
-                // ////zare_nk_050307_added_end
-
+                setTimer(timer);
             } else {
                 setErrorInSwiperTapTime("متاسفانه خطایی رخ داده است34:" + data.errors);
                 console.log("050331-getSwiperTapTime calles!!-data.status != 0: " + data.status + '-data.errors: ' + data.errors);
@@ -453,8 +443,6 @@ const SwiperTapTimeComp = () => {
                                     width: '145px',
                                 }}>
 
-
-
                                 <div className="contInSlide" style={{
                                     display: 'flex', alignItems: 'center', justifyContent: 'center', //// width: '100%', height: '100%',
                                     backgroundColor: 'white', borderRadius: '.5rem',
@@ -591,7 +579,6 @@ const SwiperTapTimeComp = () => {
                                                 gap: '.25rem',
                                                 width: '100%',
                                             }}>
-
                                                 <div style={{
                                                     display: 'flex', flexFlow: 'row', width: '100%',
                                                 }}>
@@ -832,7 +819,6 @@ const SwiperTapTimeComp = () => {
                                                     </div>
                                                 </div>
 
-
                                                 {/* zare_nk_050305_added_st */}
                                                 <div style={{
                                                     display: 'flex', flexFlow: 'row', width: '100%', marginBottom: '2px',
@@ -841,7 +827,6 @@ const SwiperTapTimeComp = () => {
                                                         display: 'flex', flexFlow: 'row', width: '100%', padding: '0px .5rem', justifyContent: 'space-between',
                                                         // marginTop: '8px',
                                                     }}>
-
                                                         <div style={{
                                                             display: 'flex', flexFlow: 'row', gap: '2px', alignItems: 'center',
                                                         }}>
@@ -902,24 +887,14 @@ const SwiperTapTimeComp = () => {
                                                         }}>
                                                             تا 50 دقیقه
                                                         </span> */}
-
                                                     </div>
 
                                                 </div>
                                                 {/* zare_nk_050305_added_end */}
-
-
-
-
                                             </div>
-
-
                                         </div>
                                     </Link>
                                 </div>
-
-
-
                             </SwiperSlide>
                         )
                     })}

@@ -1,4 +1,4 @@
- ////zare_nk_050325_okk
+////zare_nk_050411_okk(1)
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
@@ -14,6 +14,8 @@ import "@/styles/ordersHistoryCss.css";
 
 import { RefObject } from "react";
 import { MouseEvent } from "react";
+
+import { NextJsApiUrl } from "../../constants/Urls";  ////zare_nk_050407_added
 
 async function getBootstrap() {
   if (!cachedBootstrap) {
@@ -35,8 +37,7 @@ function getCookie(name: any) {
 export default function ShallowRoutingExample() {
   const router = useRouter();
 
-  // type ForoshStateType = {   //zare_nk_050222_commented(baraye lafze khanatar)
-   type sumValsForForooshSatrType = {   //zare_nk_050222_added(baraye lafze khanatar)
+  type sumValsForForooshSatrType = { 
     ShomarehFaktorForoosh: number;
     IdFaktorForoosh: number;
     TarikhSefaresh: string;
@@ -133,7 +134,8 @@ export default function ShallowRoutingExample() {
       // const token = getCookie("token");  //zare_nk_041130_commented(ezafi hast va token balatar tarif shod)
       // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
       // var urlSelectFaktorForooshSatr = ApiUrl + "Api_SelectFaktorForooshSatr";
-      let ApiUrl = "https://api.tochikala.com/api/";
+      // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+      let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
       var urlSelectFaktorForooshSatr = ApiUrl + "User/Api_SelectForooshSatr";
       const response = await fetch(urlSelectFaktorForooshSatr, {
         method: "POST",
@@ -224,7 +226,8 @@ export default function ShallowRoutingExample() {
         // const token = getCookie("token"); //zare_nk_041130_commented(chon ezafiye va balatar tarif shode)
         // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
         // var urlSelectFaktorForooshTitr = ApiUrl + "Api_SelectFaktorForooshTitr";
-        let ApiUrl = "https://api.tochikala.com/api/";
+        // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
         var urlSelectFaktorForooshTitr = ApiUrl + "User/Api_SelectForooshTitr";
         const response = await fetch(urlSelectFaktorForooshTitr, {
           method: "POST",

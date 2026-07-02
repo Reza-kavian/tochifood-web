@@ -1,4 +1,4 @@
-////zare_nk_050303_okk
+////zare_nk_050411_okk(1)
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -56,7 +56,7 @@ export default function LogoutButton() {
   }
 
   ////zare_nk_041013_nokteh_st(pishnahade chatgpt, chon dastoore 134 kar nemikoneh age cookie: httpOnly,secure,sameSite bashe, agaram httpOnly:false bashe ke amniate cookie paein miad samte client behesh dastresi dashteh bashim)
-  //   // /api/auth/logout/route.ts
+  //// /api/auth/logout/route.ts
   // import { NextResponse } from "next/server";
 
   // export async function POST() {

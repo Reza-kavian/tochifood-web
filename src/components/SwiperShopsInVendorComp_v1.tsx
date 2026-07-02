@@ -1,4 +1,4 @@
-////zare_nk_050303_okk
+////zare_nk_05041_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -19,6 +19,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
 ////zare_nk_050226_added_end
+
+import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
 
 function getCookie(name: any) {
     ////zare_nk_050209_added_st
@@ -55,11 +57,7 @@ const SwiperShopsInVendorComp = () => {
         NameG1: string;
         AxG1: string;
         Tozihat: string;
-        // MetaDesc: string;  //؟؟
-        // tbl_Gorooh2
-        // .
-        // .
-        // .
+     
         [key: string]: any;
     };
 
@@ -72,8 +70,9 @@ const SwiperShopsInVendorComp = () => {
             return;
         }
         console.log('tokentokentoken: ' + token);
-        let ApiUrl = "https://api.tochikala.com/api/";
-        const response = await fetch(ApiUrl + "User/Api_SelectGoroohJson", {
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
+        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
+        const response = await fetch(ApiUrl + "Api_SelectGoroohJson", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -108,303 +107,298 @@ const SwiperShopsInVendorComp = () => {
         getSwiperTapBests();  ////zare_nk_050403_commented_movaghat
     }, []);
 
-    return ( 
-            <div style={{
-                display: 'flex', flexFlow: 'column', width: '100%', overflow: 'hidden',
-            }}>
-                <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={24}  ////zare_nk_050305_nokteh(moadele 1.5rem(chon spaceBetween adad 1.5rem))  
-                    slidesPerView="auto"  ////zare_nk_050226_nokteh(meghdaresh ro auto dadim ta bar asase arze SwiperSlide ha tedadesh automat tavasoote 
-                    //// barnameh moshakhas she(pishfarz slidesPerView={1} hast))
-                    // centeredSlides={true}
-                    navigation={false}
+    return (
+        <div style={{
+            display: 'flex', flexFlow: 'column', width: '100%', overflow: 'hidden',
+        }}>
+            <Swiper
+                modules={[Navigation, Pagination]}
+                spaceBetween={24}  ////zare_nk_050305_nokteh(moadele 1.5rem(chon spaceBetween adad 1.5rem))  
+                slidesPerView="auto"  ////zare_nk_050226_nokteh(meghdaresh ro auto dadim ta bar asase arze SwiperSlide ha tedadesh automat tavasoote 
+                //// barnameh moshakhas she(pishfarz slidesPerView={1} hast))
+                // centeredSlides={true}
+                navigation={false}
 
-                    className="SwiperTapBests"
-                    style={{
-                        // width: '100%',
-                        //  margin: '0px 19px',
-                        //  height: '86px',
-                        // height: '95px',
-                        width: '426px',
-                        overflow: 'visible', ////zare_nk_050226_nokteh(baraye inke darsade takhfifha ke biroon mizanan dideh beshan)   ////zare_nk_050317_commented(baraye swiper overflow: 'visible' 
-                        //// manteghi nist, chon arze colle slideha ro migire, na arze masalan 100% pedaresh ro)ب
-                    }}
-                >
-                    {responsedListFromApiSelectGoroohJson?.map((item, index) => {
-                        console.log('050404-item.IdG1: ' + item.IdG1); 
-                        ////zare_nk_050331_added_st(soori helghehaye badi ra biasar kardam-chon tapsifood faghat yek tasvir dashe va man baraye inke badan betoonam manovr bedam az swipere ye slidi estefadeh kardam)
-                        // if (index >= 1) return null;
-                        ////zare_nk_050331_added_end(soori helghehaye badi ra biasar kardam-chon tapsifood faghat yek tasvir dashe va man baraye inke badan betoonam manovr bedam az swipere ye slidi estefadeh kardam)
-                        return (
-                            <SwiperSlide
-                                key={index}
-                                style={{
-                                    //  width: '72px',
-                                    //  height: '80px',
-                                    // height: '89px',
-                                    // width: 'auto',
-                                    // width: '230px',
-                                    width: '100%',
-                                }}>
-                                <div className="contInSlide" style={{
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center', //// width: '100%', height: '100%',
-                                    backgroundColor: 'inherit', borderRadius: '.75rem', border: '1px solid #f6f6f7',
-                                }}>
-                                    <Link 
-                                     href={`/vendor/vendor-${item.IdG1}`}
+                className="SwiperTapBests"
+                style={{
+                    // width: '100%',
+                    //  margin: '0px 19px',
+                    //  height: '86px',
+                    // height: '95px',
+                    width: '426px',
+                    overflow: 'visible', ////zare_nk_050226_nokteh(baraye inke darsade takhfifha ke biroon mizanan dideh beshan)   ////zare_nk_050317_commented(baraye swiper overflow: 'visible' 
+                    //// manteghi nist, chon arze colle slideha ro migire, na arze masalan 100% pedaresh ro)ب
+                }}
+            >
+                {responsedListFromApiSelectGoroohJson?.map((item, index) => {
+                    console.log('050404-item.IdG1: ' + item.IdG1);
+                    ////zare_nk_050331_added_st(soori helghehaye badi ra biasar kardam-chon tapsifood faghat yek tasvir dashe va man baraye inke badan betoonam manovr bedam az swipere ye slidi estefadeh kardam)
+                    // if (index >= 1) return null;
+                    ////zare_nk_050331_added_end(soori helghehaye badi ra biasar kardam-chon tapsifood faghat yek tasvir dashe va man baraye inke badan betoonam manovr bedam az swipere ye slidi estefadeh kardam)
+                    return (
+                        <SwiperSlide
+                            key={index}
+                            style={{
+                                //  width: '72px',
+                                //  height: '80px',
+                                // height: '89px',
+                                // width: 'auto',
+                                // width: '230px',
+                                width: '100%',
+                            }}>
+                            <div className="contInSlide" style={{
+                                display: 'flex', alignItems: 'center', justifyContent: 'center', //// width: '100%', height: '100%',
+                                backgroundColor: 'inherit', borderRadius: '.75rem', border: '1px solid #f6f6f7',
+                            }}>
+                                <Link
+                                    href={`/vendor/vendor-${item.IdG1}`}
                                     // href="https://tapsi.food/business-lines?businessTypeId=6" 
                                     style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
+                                    <div style={{
+                                        display: 'flex', flexFlow: 'column', position: 'relative', width: '100%', height: '100%',
+                                        justifyContent: 'center', alignItems: 'center',
+                                    }}>
                                         <div style={{
-                                            display: 'flex', flexFlow: 'column', position: 'relative', width: '100%', height: '100%',
-                                            justifyContent: 'center', alignItems: 'center',
+                                            width: '100%',
+                                            display: 'flex',
+                                            position: 'relative',
                                         }}>
                                             <div style={{
-                                                width: '100%',
-                                                display: 'flex',
-                                                position: 'relative',
+                                                position: 'absolute', bottom: '-6px', right: '.75rem',
+                                                width: '42px', height: '42px',
                                             }}>
-                                                <div style={{
-                                                    position: 'absolute', bottom: '-6px', right: '.75rem',
-                                                    width: '42px', height: '42px',
-                                                }}>
-                                                    <img
-                                                        style={{
-                                                            width: '100%', height: '100%',
-                                                            objectFit: 'cover',
-                                                            borderRadius: '.5rem',
-                                                            border: '1px solid #efefef',
-                                                        }}
-                                                        src={`/images/movaghat/vendorPage/restaurant-tag.jpg`} />
-                                                </div>
-
                                                 <img
                                                     style={{
-                                                        width: '100%',
-                                                        // marginTop: '5px', marginBottom: '0px',
-                                                        ////zare_nk_050314_added_st
-                                                        height: '105px', objectFit: 'cover',
-                                                        borderTopLeftRadius: '.5rem',
-                                                        borderTopRightRadius: '.5rem',
-                                                        ////zare_nk_050314_added_end 
+                                                        width: '100%', height: '100%',
+                                                        objectFit: 'cover',
+                                                        borderRadius: '.5rem',
+                                                        border: '1px solid #efefef',
                                                     }}
-                                                    // src={`/images/SwiperGrouplevel1/${item.AxG1}.png`} />  ////zare_nk_050229_nokteh(age az database bekhooneh bade emale database food tavassote parsa)
-                                                    // src={`/images/SwiperGrouplevel1/${index}.png`} />
-                                                    src={`/images/movaghat/vendorPage/${index}.jpg`} /> 
+                                                    src={`/images/movaghat/vendorPage/restaurant-tag.jpg`} />
+                                            </div>
 
-                                                {/* zare_nk_050228_nokteh_st(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
-                                                {
-                                                    (index == 0 || index == 3 || index == 6) ?
+                                            <img
+                                                style={{
+                                                    width: '100%',
+                                                    // marginTop: '5px', marginBottom: '0px',
+                                                    ////zare_nk_050314_added_st
+                                                    height: '105px', objectFit: 'cover',
+                                                    borderTopLeftRadius: '.5rem',
+                                                    borderTopRightRadius: '.5rem',
+                                                    ////zare_nk_050314_added_end 
+                                                }}
+                                                // src={`/images/SwiperGrouplevel1/${item.AxG1}.png`} />  ////zare_nk_050229_nokteh(age az database bekhooneh bade emale database food tavassote parsa)
+                                                // src={`/images/SwiperGrouplevel1/${index}.png`} />
+                                                src={`/images/movaghat/vendorPage/${index}.jpg`} />
 
-                                                        // <img
-                                                        //     style={{
-                                                        //         width: '100%',
-                                                        //         // height: '105px', objectFit: 'cover',
-                                                        //         position: 'absolute',
-                                                        //         top: '-5px',
-                                                        //     }}
-                                                        //     // src={`/images/SwiperGrouplevel1/${item.AxG1}.png`} />  ////zare_nk_050229_nokteh(age az database bekhooneh bade emale database food tavassote parsa)
-                                                        //     // src={`/images/SwiperGrouplevel1/${index}.png`} />
-                                                        //     src={`/images/Icon/Ghesti_Tile.svg`} />
-                                                        <div className="flex items-center rounded-sm px-2 pt-[2px] text-white rounded-br-none absolute right-[-8px] top-2 z-10 h-[30px]"
+                                            {/* zare_nk_050228_nokteh_st(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
+                                            {
+                                                (index == 0 || index == 3 || index == 6) ?
+
+                                                    // <img
+                                                    //     style={{
+                                                    //         width: '100%',
+                                                    //         // height: '105px', objectFit: 'cover',
+                                                    //         position: 'absolute',
+                                                    //         top: '-5px',
+                                                    //     }}
+                                                    //     // src={`/images/SwiperGrouplevel1/${item.AxG1}.png`} />  ////zare_nk_050229_nokteh(age az database bekhooneh bade emale database food tavassote parsa)
+                                                    //     // src={`/images/SwiperGrouplevel1/${index}.png`} />
+                                                    //     src={`/images/Icon/Ghesti_Tile.svg`} />
+                                                    <div className="flex items-center rounded-sm px-2 pt-[2px] text-white rounded-br-none absolute right-[-8px] top-2 z-10 h-[30px]"
+                                                        style={{
+                                                            backgroundColor: 'rgb(31, 117, 242)',
+                                                            display: 'flex', alignItems: 'center', borderRadius: '.25rem', paddingLeft: '.5rem', paddingRight: '.5rem', paddingTop: '2px',
+                                                            color: 'white',  ////zare_nk_050401_nokteh(tapsifood css digeei baraye sefid kardane matn gozasht)
+                                                            borderBottomRightRadius: 0, position: 'absolute', right: '-8px', top: '.5rem', zIndex: 10, height: '30px',
+                                                        }}>
+                                                        <span className="text-xs font-bold"
+                                                            style={{ fontSize: '.75rem', lineHeight: '1rem', fontWeight: 700, }}
+                                                        >خرید قسطی!</span>
+                                                        <span className="absolute bottom-[-8px] inline-block size-0 border-l-0 border-solid border-b-transparent right-0 border-b-0 border-r-[8px] border-t-[8px] border-x-transparent"
                                                             style={{
-                                                                backgroundColor: 'rgb(31, 117, 242)',
-                                                                display: 'flex', alignItems: 'center', borderRadius: '.25rem', paddingLeft: '.5rem', paddingRight: '.5rem', paddingTop: '2px',
-                                                                color: 'white',  ////zare_nk_050401_nokteh(tapsifood css digeei baraye sefid kardane matn gozasht)
-                                                                borderBottomRightRadius: 0, position: 'absolute', right: '-8px', top: '.5rem', zIndex: 10, height: '30px',
+                                                                position: 'absolute',
+
+                                                                height: 0, width: 0,
+
+                                                                borderTopWidth: '8px',
+                                                                borderRightWidth: '8px',
+                                                                borderBottomWidth: 0,
+                                                                borderLeftWidth: 0,
+
+                                                                bottom: '-8px', right: 0,
+
+                                                                display: 'inline-block',
+
+                                                                borderStyle: 'solid',
+
+                                                                borderTopColor: 'rgb(19, 60, 135)',
+                                                                borderRightColor: 'transparent',
+                                                                borderBottomColor: 'transparent',
+                                                                borderLeftColor: 'transparent',
                                                             }}>
-                                                            <span className="text-xs font-bold"
-                                                                style={{ fontSize: '.75rem', lineHeight: '1rem', fontWeight: 700, }}
-                                                            >خرید قسطی!</span>
-                                                            <span className="absolute bottom-[-8px] inline-block size-0 border-l-0 border-solid border-b-transparent right-0 border-b-0 border-r-[8px] border-t-[8px] border-x-transparent"
-                                                                style={{
-                                                                    position: 'absolute',
-
-                                                                    height: 0, width: 0,
-
-                                                                    borderTopWidth: '8px',
-                                                                    borderRightWidth: '8px',
-                                                                    borderBottomWidth: 0,
-                                                                    borderLeftWidth: 0, 
-
-                                                                    bottom: '-8px', right: 0,
-
-                                                                    display: 'inline-block',
-
-                                                                    borderStyle: 'solid',
-
-                                                                    borderTopColor: 'rgb(19, 60, 135)',
-                                                                    borderRightColor: 'transparent',
-                                                                    borderBottomColor: 'transparent',
-                                                                    borderLeftColor: 'transparent',
-                                                                }}>
-                                                            </span>
-                                                        </div>
-                                                        :
-
-                                                          <div className="flex items-center rounded-sm px-2 pt-[2px] text-white rounded-br-none absolute right-[-8px] top-2 z-10 h-[30px]"
+                                                        </span>
+                                                    </div>
+                                                    :
+                                                    <div className="flex items-center rounded-sm px-2 pt-[2px] text-white rounded-br-none absolute right-[-8px] top-2 z-10 h-[30px]"
+                                                        style={{
+                                                            backgroundColor: '#ff5a00',
+                                                            display: 'flex', alignItems: 'center', borderRadius: '.25rem', paddingLeft: '.5rem', paddingRight: '.5rem', paddingTop: '2px',
+                                                            color: 'white',  ////zare_nk_050401_nokteh(tapsifood css digeei baraye sefid kardane matn gozasht)
+                                                            borderBottomLeftRadius: 0, position: 'absolute', left: '-8px', top: '.5rem', zIndex: 10, height: '30px',
+                                                        }}>
+                                                        <span className="text-xs font-bold"
+                                                            style={{ fontSize: '.75rem', lineHeight: '1rem', fontWeight: 700, }}
+                                                        >تا 50%</span>
+                                                        <span className="absolute bottom-[-8px] inline-block size-0 border-l-0 border-solid border-b-transparent right-0 border-b-0 border-r-[8px] border-t-[8px] border-x-transparent"
                                                             style={{
-                                                                backgroundColor: '#ff5a00',
-                                                                display: 'flex', alignItems: 'center', borderRadius: '.25rem', paddingLeft: '.5rem', paddingRight: '.5rem', paddingTop: '2px',
-                                                                color: 'white',  ////zare_nk_050401_nokteh(tapsifood css digeei baraye sefid kardane matn gozasht)
-                                                                borderBottomLeftRadius: 0, position: 'absolute', left: '-8px', top: '.5rem', zIndex: 10, height: '30px',
+                                                                position: 'absolute',
+
+                                                                height: 0, width: 0,
+
+                                                                borderTopWidth: '8px',
+                                                                borderRightWidth: 0,
+                                                                borderBottomWidth: 0,
+                                                                borderLeftWidth: '8px',
+
+                                                                bottom: '-8px', left: 0,
+
+                                                                display: 'inline-block',
+
+                                                                borderStyle: 'solid',
+
+                                                                borderTopColor: '#b23f00',
+                                                                borderRightColor: 'transparent',
+                                                                borderBottomColor: 'transparent',
+                                                                borderLeftColor: 'transparent',
                                                             }}>
-                                                            <span className="text-xs font-bold"
-                                                                style={{ fontSize: '.75rem', lineHeight: '1rem', fontWeight: 700, }}
-                                                            >تا 50%</span>
-                                                            <span className="absolute bottom-[-8px] inline-block size-0 border-l-0 border-solid border-b-transparent right-0 border-b-0 border-r-[8px] border-t-[8px] border-x-transparent"
-                                                                style={{
-                                                                    position: 'absolute',
+                                                        </span>
+                                                    </div>
+                                            }
+                                            {/* zare_nk_050228_nokteh_end(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
 
-                                                                    height: 0, width: 0,
+                                        </div>
 
-                                                                    borderTopWidth: '8px',
-                                                                    borderRightWidth: 0,
-                                                                    borderBottomWidth: 0,
-                                                                    borderLeftWidth: '8px', 
+                                        <div style={{
+                                            display: 'flex', flexFlow: 'column',
+                                            paddingTop: '2px',
+                                            gap: '.25rem',
+                                            width: '100%',
+                                        }}>
+                                            <div style={{
+                                                display: 'flex', flexFlow: 'row', width: '100%',
+                                            }}>
+                                                <div style={{
+                                                    display: 'flex', flexFlow: 'row', width: '100%', padding: '0px .75rem', justifyContent: 'space-between',
+                                                    marginTop: '8px',
+                                                }}>
+                                                    <div style={{
+                                                        fontSize: '0.875rem',
+                                                        color: '#1b1c1d',
 
-                                                                    bottom: '-8px', left: 0,
+                                                        // این بخش برای سه‌نقطه و محدودیت ۲ خط
+                                                        display: '-webkit-box',
+                                                        WebkitLineClamp: 1,
+                                                        WebkitBoxOrient: 'vertical',
+                                                        overflow: 'hidden',
 
-                                                                    display: 'inline-block',
+                                                        // این بخش برای تثبیت ارتفاع روی ۴۰ پیکسل 
+                                                        lineHeight: '1.25rem',
+                                                        // height: '2.5rem',
+                                                        height: '1.25rem',
 
-                                                                    borderStyle: 'solid',
+                                                        minHeight: '1.25rem',  // minHeight: '2.5rem', // اجبار به کمتر نشدن
+                                                        maxHeight: '1.25rem',  // maxHeight: '2.5rem', // اجبار به بیشتر نشدن
+                                                        boxSizing: 'border-box', // برای اینکه بُردر (border) به ارتفاع اضافه نشود
 
-                                                                    borderTopColor: '#b23f00',
-                                                                    borderRightColor: 'transparent',
-                                                                    borderBottomColor: 'transparent',
-                                                                    borderLeftColor: 'transparent',
-                                                                }}>
-                                                            </span>
-                                                        </div>
-                                                }
-                                                {/* zare_nk_050228_nokteh_end(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
+                                                        textAlign: 'center',
+                                                    }}>
+                                                        {item.NameG1}
+                                                    </div>
 
+                                                    <div style={{
+                                                        display: 'flex', flexFlow: 'row', gap: '2px', alignItems: 'center',
+                                                        // visibility: 'hidden',  ////zare_nk_050331_commented(badan az db mikhoone ke emtiazi baraye namayesh dareh ya na(be jaye visibility ham display ra none ya flex mikonim va visibility comment mishe))
+                                                    }}>
+                                                        <span style={{
+                                                            color: '#a4aab0',
+                                                            //    fontWeight: 600,
+                                                            fontSize: '10px',
+                                                        }}
+                                                        >(362)</span>
+                                                        <p style={{
+                                                            color: '#1b1c1d',
+                                                            //    fontWeight: 600,
+                                                            fontSize: '.75rem',
+                                                            margin: '0px',
+
+                                                        }}>4.2</p>
+                                                        <img
+                                                            src="/images/movaghat/SwiperTapBests/star/star.svg"
+                                                            alt="علاقه مندی"
+                                                            style={{ width: '.75rem', height: '.75rem', }}
+                                                        />
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div style={{
-                                                display: 'flex', flexFlow: 'column',
-                                                paddingTop: '2px',
-                                                gap: '.25rem',
-                                                width: '100%',
+                                                display: 'flex', flexFlow: 'row', width: '100%', marginBottom: '2px',
                                             }}>
                                                 <div style={{
-                                                    display: 'flex', flexFlow: 'row', width: '100%',
+                                                    display: 'flex', flexFlow: 'row', width: '100%', padding: '0px .75rem', justifyContent: 'space-between',
+                                                    // marginTop: '8px',
                                                 }}>
+
                                                     <div style={{
-                                                        display: 'flex', flexFlow: 'row', width: '100%', padding: '0px .75rem', justifyContent: 'space-between',
-                                                        marginTop: '8px',
+                                                        display: 'flex', flexFlow: 'row', gap: '2px', alignItems: 'center',
                                                     }}>
+                                                        <span
+                                                            style={{
+                                                                color: '#878b92',
+                                                                fontSize: '.75rem',
+                                                            }}
+                                                        >
+                                                            پیک تپسی&zwnj;فود:
+                                                        </span>
                                                         <div style={{
-                                                            fontSize: '0.875rem',
-                                                            color: '#1b1c1d',
-
-                                                            // این بخش برای سه‌نقطه و محدودیت ۲ خط
-                                                            display: '-webkit-box',
-                                                            WebkitLineClamp: 1,
-                                                            WebkitBoxOrient: 'vertical',
-                                                            overflow: 'hidden',
-
-                                                            // این بخش برای تثبیت ارتفاع روی ۴۰ پیکسل 
-                                                            lineHeight: '1.25rem',
-                                                            // height: '2.5rem',
-                                                            height: '1.25rem',
-
-                                                            minHeight: '1.25rem',  // minHeight: '2.5rem', // اجبار به کمتر نشدن
-                                                            maxHeight: '1.25rem',  // maxHeight: '2.5rem', // اجبار به بیشتر نشدن
-                                                            boxSizing: 'border-box', // برای اینکه بُردر (border) به ارتفاع اضافه نشود
-
-                                                            textAlign: 'center',
-                                                        }}>
-                                                            {item.NameG1}
-                                                        </div>
-
-                                                        <div style={{
-                                                            display: 'flex', flexFlow: 'row', gap: '2px', alignItems: 'center',
-                                                            // visibility: 'hidden',  ////zare_nk_050331_commented(badan az db mikhoone ke emtiazi baraye namayesh dareh ya na(be jaye visibility ham display ra none ya flex mikonim va visibility comment mishe))
+                                                            display: 'flex', flexFlow: 'row', alignItems: "center", gap: '.25rem',
                                                         }}>
                                                             <span style={{
-                                                                color: '#a4aab0',
-                                                                //    fontWeight: 600,
-                                                                fontSize: '10px',
-                                                            }}
-                                                            >(362)</span>
-                                                            <p style={{
-                                                                color: '#1b1c1d',
-                                                                //    fontWeight: 600,
+                                                                color: '#878b92',
                                                                 fontSize: '.75rem',
                                                                 margin: '0px',
-
-                                                            }}>4.2</p>
-                                                            <img
-                                                                src="/images/movaghat/SwiperTapBests/star/star.svg"
-                                                                alt="علاقه مندی"
-                                                                style={{ width: '.75rem', height: '.75rem', }}
-                                                            />
+                                                                textDecoration: 'line-through',
+                                                            }}>58000</span>
+                                                            <span style={{
+                                                                color: '#059666',
+                                                                //    fontWeight: 500,
+                                                                fontSize: '.875rem',
+                                                                lineHeight: '1.25rem',
+                                                            }}>رایگان</span>
                                                         </div>
-                                                    </div>
-                                                </div>
 
-                                                {/* zare_nk_050305_added_st */}
-                                                <div style={{
-                                                    display: 'flex', flexFlow: 'row', width: '100%', marginBottom: '2px',
-                                                }}>
-                                                    <div style={{
-                                                        display: 'flex', flexFlow: 'row', width: '100%', padding: '0px .75rem', justifyContent: 'space-between',
-                                                        // marginTop: '8px',
+                                                    </div>
+
+                                                    <span style={{
+                                                        color: '#878b92',
+                                                        fontSize: '.75rem',
+                                                        lineHeight: '18px',
                                                     }}>
-
-                                                        <div style={{
-                                                            display: 'flex', flexFlow: 'row', gap: '2px', alignItems: 'center',
-                                                        }}>
-                                                            <span
-                                                                style={{
-                                                                    color: '#878b92',
-                                                                    fontSize: '.75rem',
-                                                                }}
-                                                            >
-                                                                پیک تپسی&zwnj;فود:
-                                                            </span>
-                                                            <div style={{
-                                                                display: 'flex', flexFlow: 'row', alignItems: "center", gap: '.25rem',
-                                                            }}>
-                                                                <span style={{
-                                                                    color: '#878b92',
-                                                                    fontSize: '.75rem',
-                                                                    margin: '0px',
-                                                                    textDecoration: 'line-through',
-                                                                }}>58000</span>
-                                                                <span style={{
-                                                                    color: '#059666',
-                                                                    //    fontWeight: 500,
-                                                                    fontSize: '.875rem',
-                                                                    lineHeight: '1.25rem',
-                                                                }}>رایگان</span>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <span style={{
-                                                            color: '#878b92',
-                                                            fontSize: '.75rem',
-                                                            lineHeight: '18px',
-                                                        }}>
-                                                            تا 50 دقیقه
-                                                        </span>
-
-                                                    </div>
-
+                                                        تا 50 دقیقه
+                                                    </span>
                                                 </div>
-                                                {/* zare_nk_050305_added_end */}
-
                                             </div>
+
                                         </div>
-                                    </Link>
-                                </div>
-                            </SwiperSlide>
-                        )
-                    })}
-                </Swiper>
-            </div> 
+                                    </div>
+                                </Link>
+                            </div>
+                        </SwiperSlide>
+                    )
+                })}
+            </Swiper>
+        </div>
     );
 }
 

@@ -1,4 +1,4 @@
-////zare_nk_050303_okk
+////zare_nk_050411_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -19,6 +19,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
 ////zare_nk_050226_added_end
+
+import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
 
 function getCookie(name: any) {
     ////zare_nk_050209_added_st
@@ -43,7 +45,6 @@ function getCookie(name: any) {
     return null; //اگر کوکی پیدا نشد
 }
 
-// export default function SwiperShopsInVendorComp() {
 const SwiperShopsInVendorComp = () => {
     console.log('050329-SwiperShopsInVendorComp rendered!!');   ////zare_nk_050329_added
     const [errorInSwiperTapBests, setErrorInSwiperTapBests] = useState<string | null>(null);
@@ -72,8 +73,9 @@ const SwiperShopsInVendorComp = () => {
             return;
         }
         console.log('tokentokentoken: ' + token);
-        let ApiUrl = "https://api.tochikala.com/api/";
-        const response = await fetch(ApiUrl + "User/Api_SelectGoroohJson", {
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
+        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
+        const response = await fetch(ApiUrl + "Api_SelectGoroohJson", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -84,7 +86,7 @@ const SwiperShopsInVendorComp = () => {
         const data = await response.json();
 
         if (response.ok) {
-             console.log("zare_nk_050404-Api_SelectGoroohJson data1: " + JSON.stringify(data));
+            console.log("zare_nk_050404-Api_SelectGoroohJson data1: " + JSON.stringify(data));
             if (data.status == 0) {
                 if (data.data.list == undefined) {
                     return;
@@ -133,7 +135,7 @@ const SwiperShopsInVendorComp = () => {
                     }}
                 >
                     {responsedListFromApiSelectGoroohJson?.map((item, index) => {
-                        console.log('050404-item.IdG1: ' + item.IdG1); 
+                        console.log('050404-item.IdG1: ' + item.IdG1);
                         ////zare_nk_050331_added_st(soori helghehaye badi ra biasar kardam-chon tapsifood faghat yek tasvir dashe va man baraye inke badan betoonam manovr bedam az swipere ye slidi estefadeh kardam)
                         // if (index >= 1) return null;
                         ////zare_nk_050331_added_end(soori helghehaye badi ra biasar kardam-chon tapsifood faghat yek tasvir dashe va man baraye inke badan betoonam manovr bedam az swipere ye slidi estefadeh kardam)
@@ -152,10 +154,10 @@ const SwiperShopsInVendorComp = () => {
                                     display: 'flex', alignItems: 'center', justifyContent: 'center', //// width: '100%', height: '100%',
                                     backgroundColor: 'inherit', borderRadius: '.75rem', border: '1px solid #f6f6f7',
                                 }}>
-                                    <Link 
-                                     href={`/vendor/${item.IdG1}`}
-                                    // href="https://tapsi.food/business-lines?businessTypeId=6" 
-                                    style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
+                                    <Link
+                                        href={`/vendor/${item.IdG1}`}
+                                        // href="https://tapsi.food/business-lines?businessTypeId=6" 
+                                        style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
                                         <div style={{
                                             display: 'flex', flexFlow: 'column', position: 'relative', width: '100%', height: '100%',
                                             justifyContent: 'center', alignItems: 'center',
@@ -191,7 +193,7 @@ const SwiperShopsInVendorComp = () => {
                                                     }}
                                                     // src={`/images/SwiperGrouplevel1/${item.AxG1}.png`} />  ////zare_nk_050229_nokteh(age az database bekhooneh bade emale database food tavassote parsa)
                                                     // src={`/images/SwiperGrouplevel1/${index}.png`} />
-                                                    src={`/images/movaghat/vendorPage/${index}.jpg`} /> 
+                                                    src={`/images/movaghat/vendorPage/${index}.jpg`} />
 
                                                 {/* zare_nk_050228_nokteh_st(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
                                                 {
@@ -226,7 +228,7 @@ const SwiperShopsInVendorComp = () => {
                                                                     borderTopWidth: '8px',
                                                                     borderRightWidth: '8px',
                                                                     borderBottomWidth: 0,
-                                                                    borderLeftWidth: 0, 
+                                                                    borderLeftWidth: 0,
 
                                                                     bottom: '-8px', right: 0,
 
@@ -242,8 +244,7 @@ const SwiperShopsInVendorComp = () => {
                                                             </span>
                                                         </div>
                                                         :
-
-                                                          <div className="flex items-center rounded-sm px-2 pt-[2px] text-white rounded-br-none absolute right-[-8px] top-2 z-10 h-[30px]"
+                                                        <div className="flex items-center rounded-sm px-2 pt-[2px] text-white rounded-br-none absolute right-[-8px] top-2 z-10 h-[30px]"
                                                             style={{
                                                                 backgroundColor: '#ff5a00',
                                                                 display: 'flex', alignItems: 'center', borderRadius: '.25rem', paddingLeft: '.5rem', paddingRight: '.5rem', paddingTop: '2px',
@@ -262,7 +263,7 @@ const SwiperShopsInVendorComp = () => {
                                                                     borderTopWidth: '8px',
                                                                     borderRightWidth: 0,
                                                                     borderBottomWidth: 0,
-                                                                    borderLeftWidth: '8px', 
+                                                                    borderLeftWidth: '8px',
 
                                                                     bottom: '-8px', left: 0,
 
@@ -279,7 +280,6 @@ const SwiperShopsInVendorComp = () => {
                                                         </div>
                                                 }
                                                 {/* zare_nk_050228_nokteh_end(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
-
                                             </div>
 
                                             <div style={{
@@ -345,7 +345,6 @@ const SwiperShopsInVendorComp = () => {
                                                     </div>
                                                 </div>
 
-                                                {/* zare_nk_050305_added_st */}
                                                 <div style={{
                                                     display: 'flex', flexFlow: 'row', width: '100%', marginBottom: '2px',
                                                 }}>
@@ -353,7 +352,6 @@ const SwiperShopsInVendorComp = () => {
                                                         display: 'flex', flexFlow: 'row', width: '100%', padding: '0px .75rem', justifyContent: 'space-between',
                                                         // marginTop: '8px',
                                                     }}>
-
                                                         <div style={{
                                                             display: 'flex', flexFlow: 'row', gap: '2px', alignItems: 'center',
                                                         }}>
@@ -395,7 +393,6 @@ const SwiperShopsInVendorComp = () => {
                                                     </div>
 
                                                 </div>
-                                                {/* zare_nk_050305_added_end */}
 
                                             </div>
                                         </div>

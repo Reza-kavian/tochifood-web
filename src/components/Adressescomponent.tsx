@@ -1,4 +1,4 @@
-////zare_nk_050329_okk(2)
+////zare_nk_050411_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, memo, useContext, } from "react";
@@ -7,6 +7,8 @@ import { useRouter, useSearchParams, redirect } from "next/navigation";
 import ShowAddRemAddressComponent from '../components/ShowAddRemAddressComponent';  //zare_nk_050328_added
 
 import { currentAddressContext } from '../context/currentAddressContext';  //zare_nk_050329_added 
+
+import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
 
 function getCookie(name: any) {
   ////zare_nk_050209_added_st
@@ -73,14 +75,12 @@ type AdressescomponentType = {
   // setCurrentAddress: React.Dispatch<React.SetStateAction<responsedListFromApiSelectAddressListType | null>>; ////zare_nk_050329_commented(currentAddress az useState tabdil shod be createContext)
 };
 
-// export const Adressescomponent = function Adressescomponent({    ////zare_nk_050209_commented
-const Adressescomponent = function Adressescomponent({    ////zare_nk_050209_added
+const Adressescomponent = function Adressescomponent({   
   responsedListFromApiSelectAddressList,
   isEpmtyShowAddRemAddress,
-  setIsEpmtyShowAddRemAddress,
-  // showAddRemAddress,  ////zare_nk_050329_commented
+  setIsEpmtyShowAddRemAddress, 
   setIsEpmtyAdressList,
-  showAddressListDrawer,  ////zare_nk_050329_nokteh(tahlil baraye useCalback)
+  showAddressListDrawer,  
   // setCurrentAddress, ////zare_nk_050329_commented(currentAddress az useState tabdil shod be createContext)
 }: AdressescomponentType) {
   console.log('050329-Adressescomponent rendered!!');   ////zare_nk_050329_added
@@ -107,8 +107,9 @@ const Adressescomponent = function Adressescomponent({    ////zare_nk_050209_add
       const token = getCookie("token");
       // console.log('zare_nk_050110-RemoveAddress-token hala is: ' + getCookie("token"));
 
-      let ApiUrl = "https://api.tochikala.com/api/";
-      const response = await fetch(ApiUrl + "User/Api_DeleteAddress", {
+      // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
+      let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
+      const response = await fetch(ApiUrl + "Api_DeleteAddress", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -131,7 +132,6 @@ const Adressescomponent = function Adressescomponent({    ////zare_nk_050209_add
           if (parsedChosenAddress?.IdAdress == IdAdress) {
             chosenAddress(responsedListFromApiSelectAddressList ? responsedListFromApiSelectAddressList[0] : null)    ////zare_nk_050329_added
           }
-
         } else {
           // setError("متاسفانه خطایی رخ داده است34:" + data.errors);
           // console.log("zare_nk_050208-Api_DeleteAddress-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
@@ -206,24 +206,24 @@ const Adressescomponent = function Adressescomponent({    ////zare_nk_050209_add
               height: 'min-content',
               alignItems: 'center',
             }}>
-            <div 
-             onClick={() => {
-              setRowItem(item);
-              chosenAddress(item);
-            }}
-            style={{
-              // borderTop: '1px solid #2b364f14',
-              display: 'flex',
-              flex: '1 1 0%',
-              // paddingBottom: '.75rem',
-              // paddingTop: '.75rem',
-              gap: '.5rem',
-              justifyContent: 'space-between',
-              cursor: 'pointer',
-              height: 'min-content',
-              alignItems: 'center',
-              // border:'2px dashed red'
-            }}>
+            <div
+              onClick={() => {
+                setRowItem(item);
+                chosenAddress(item);
+              }}
+              style={{
+                // borderTop: '1px solid #2b364f14',
+                display: 'flex',
+                flex: '1 1 0%',
+                // paddingBottom: '.75rem',
+                // paddingTop: '.75rem',
+                gap: '.5rem',
+                justifyContent: 'space-between',
+                cursor: 'pointer',
+                height: 'min-content',
+                alignItems: 'center',
+                // border:'2px dashed red'
+              }}>
               <button
                 id="locationBtnInEveryAddressRow"   //zare_nk_050208_nokteh(in dokmeh engar karbordi nadare va faghat ye design hast! badan shayad tabdilesh konam be ye tage div)
                 style={{
@@ -271,8 +271,6 @@ const Adressescomponent = function Adressescomponent({    ////zare_nk_050209_add
                   {item.Adress}
                 </p>
               </div>
-
-
             </div>
 
             <button
@@ -287,9 +285,8 @@ const Adressescomponent = function Adressescomponent({    ////zare_nk_050209_add
                 // backgroundColor: 'white',
                 borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
                 flex: '0 0 auto',
-                cursor: 'pointer', 
-              }}
-            >
+                cursor: 'pointer',
+              }}>
               <svg style={{ width: '18px', height: '18px', fill: '#a5abb1', transform: 'rotate(90deg)', }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-[18px] fill-gray-500 rotate-90"><g id="Info menu"><path id="Union" fill="inherit" fillRule="evenodd" clipRule="evenodd" d="M5 14C6.10457 14 7 13.1046 7 12C7 10.8954 6.10457 10 5 10C3.89543 10 3 10.8954 3 12C3 13.1046 3.89543 14 5 14ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14ZM21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12Z"></path></g></svg>
             </button>
           </div>
@@ -307,7 +304,6 @@ const Adressescomponent = function Adressescomponent({    ////zare_nk_050209_add
             // console.log('zare_nk_050209-sh01-rem-item.IdAdress: ' + rowItem.IdAdress + '-rowItem.Fullname: ' + rowItem.Fullname);   //item.IdAdress dar zamane click dar dom naberooz va notokk
             RemoveAddress(rowItem.IdAdress);
           }}
-
           // responsedListFromApiEditAddress={responsedListFromApiEditAddress}  //zare_nk_050207_commented(chon aslan api editeAddresss ra dar in safhe nemizanim va dar safheye editAddress mizanim)
           responsedListFromApiRemoveAddress={responsedListFromApiRemoveAddress}
           isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}

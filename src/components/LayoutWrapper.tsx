@@ -1,4 +1,4 @@
-////zare_nk_050303_okk
+////zare_nk_050411_okk(1)
 "use client";
 
 import React, { useState, useRef, useEffect } from 'react';
@@ -114,15 +114,12 @@ export default function LayoutWrapper({ children }: RootLayoutProps) {
                 <p>شما وارد نشده‌اید  -  {isLogin} </p>
               </div>
             )} */}
-
             {children}
             {/* zare_nk_041225_added_st(baraye collapse paeine safhe(ehtemalan tapsifood dar layout gozashteh!shayad khodam tooye safheh bebaram!)) */}
             <div className="tabIndexOne-in-LayoutWrapper" tabIndex={1}>
             </div>
-
           </section>
         </main>
-
       </body >
       {/* zare_nk_050202_added_st(for use MUI) */}
     </ThemeProvider >

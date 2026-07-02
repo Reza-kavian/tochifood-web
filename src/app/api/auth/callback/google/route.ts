@@ -1,4 +1,4 @@
-//src\app\api\auth\callback\google  ////zare_nk_050325_okk
+//src\app\api\auth\callback\google  ////zare_nk_050411_okk(1)
 import { NextRequest, NextResponse } from "next/server";  ////zare_nk_041013_nokteh(cookies marboot be NextResponse(mesle res.cookies.set("token", "123");) ham khandani va ham neveshtani hastan )
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { cookies } from "next/headers";  ////zare_nk_041013_nokteh(cookies import shodeh az next/headers faghat khandani hast, va marboot be cooki haei ke az samte karbar ba request mian)

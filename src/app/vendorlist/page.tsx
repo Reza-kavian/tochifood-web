@@ -1,4 +1,4 @@
-////zare_nk_050331_okk
+////zare_nk_050411_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext } from "react";
@@ -7,29 +7,10 @@ import { useRouter, useSearchParams, redirect } from "next/navigation";
 import jwt from "jsonwebtoken";
 import { JwtPayload } from "jsonwebtoken";
 
-import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
-
 import { useAuthentication } from '../../context/AuthenticationContext';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
-import Link from "next/link";
-
-import SwiperGrouplevel1Comp from '../../components/SwiperGrouplevel1Comp';
-import SwiperTapBestsComp from '../../components/SwiperTapBestsComp';
 import SwiperShopsInVendorComp from '../../components/SwiperShopsInVendorComp';
 import SwiperInVendorHeaderComp from '../../components/SwiperInVendorHeaderComp';
-
-import SwiperTopBanerComp from '../../components/SwiperTopBanerComp';
-
-import SwiperThinkBanerComp from '../../components/SwiperthinkBanerComp';
-
-import SwiperTapTimeComp from '../../components/SwiperTapTimeComp';
-
-import SwiperSecondBanerComp from '../../components/SwiperSecondBanerComp';  //zare_nk_050305_added
-
-import AdressListComponent from '../../components/AdressListComponent';  //zare_nk_050328_added 
 
 import CollapseAndClickAwayForSortingComp from '../../components/CollapseAndClickAwayForSortingComp';  //zare_nk_050401_added 
 import CollapseAndClickAwayForRaveshErsalComp from '../../components/CollapseAndClickAwayForRaveshErsalComp';  //zare_nk_050401_added 
@@ -59,34 +40,20 @@ function getCookie(name: any) {
 
 export default function VendorList() {
     const router = useRouter();
-    console.log('050329-VendorList rendered!!');   ////zare_nk_050329_added
-    const [isEpmtyCollapseForSorting, setIsEpmtyCollapseForSorting] = useState(true);  //zare_nk_050401_added 
-    const [isEpmtyCollapseForRaveshErsal, setIsEpmtyCollapseForRaveshErsal] = useState(true);  //zare_nk_050401_added 
+    console.log('050329-VendorList rendered!!');   
+    const [isEpmtyCollapseForSorting, setIsEpmtyCollapseForSorting] = useState(true);   
+    const [isEpmtyCollapseForRaveshErsal, setIsEpmtyCollapseForRaveshErsal] = useState(true);  
 
     ////zare_nk_050403_added_movaghat_st(olgoohaye tamrini va pakkardani)
-    const [testState, SetTestState] = useState<number>(1);
-    //   const [testState2, SetTestState2] = useState<number>(1);
+    // const [testState, SetTestState] = useState<number>(1);
+    // //   const [testState2, SetTestState2] = useState<number>(1);
 
-    useEffect(() => {
-        SetTestState(2);
-        //// useCalback1;
-    }, []);
+    // useEffect(() => {
+    //     SetTestState(2);
+    //     //// useCalback1;
+    // }, []);
     ////zare_nk_050403_added_movaghat_end(olgoohaye tamrini va pakkardani)
-
-    type AddressFormInputsType = {
-        Address: string;
-        pelak: string;
-        vahed: string;
-        addressName: string;
-    };
-
-    const [addressFormInputsVal, setAddressFormInputsVal] = useState<AddressFormInputsType>({//zare_nk_050401_added 
-        Address: '',
-        pelak: '',
-        vahed: '',
-        addressName: '',
-    });
-
+  
     // async function saveAddress(isOnline: boolean) {  ////zare_nk_050403_nokteh(rahe1- mamoolan age tabe ra kharej az component tarif mikonim az in sabke tarife tabe estefadeh mishe(dar sorat va karaei har do ravesh taghriban yeki hastan))
     const saveAddress = useCallback(
         async (isOnline: boolean) => {  ////zare_nk_050403_nokteh(rahe2- mamoolan age tabe ra dakhele   component tarif mikonim az in sabke tarife tabe estefadeh mishe(dar sorat va karaei har do ravesh taghriban yeki hastan))
@@ -301,24 +268,22 @@ export default function VendorList() {
                 <SwiperShopsInVendorComp />
 
                 <div style={{ marginBottom: '1.5rem' }}></div>
-
-                {/* zare_nk_050403_commented_movaghat */}
+                
                 <CollapseAndClickAwayForSortingComp
                     isEpmtyCollapseForSorting={isEpmtyCollapseForSorting}
                     setIsEpmtyCollapseForSorting={setIsEpmtyCollapseForSorting}
                     saveAddress={saveAddress}
-                    addressFormInputsVal={addressFormInputsVal}
-                    setAddressFormInputsVal={setAddressFormInputsVal}
+                    // addressFormInputsVal={addressFormInputsVal}
+                    // setAddressFormInputsVal={setAddressFormInputsVal}
                 />
 
                 <CollapseAndClickAwayForRaveshErsalComp
                     isEpmtyCollapseForRaveshErsal={isEpmtyCollapseForRaveshErsal}
                     setIsEpmtyCollapseForRaveshErsal={setIsEpmtyCollapseForRaveshErsal}
                     saveAddress={saveAddress}
-                    addressFormInputsVal={addressFormInputsVal}
-                    setAddressFormInputsVal={setAddressFormInputsVal}
+                    // addressFormInputsVal={addressFormInputsVal}
+                    // setAddressFormInputsVal={setAddressFormInputsVal}
                 />
-
             </main>
 
             <footer></footer>

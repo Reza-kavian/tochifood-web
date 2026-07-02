@@ -1,4 +1,4 @@
-////zare_nk_050303_okk
+////zare_nk_050411_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -11,7 +11,8 @@ import { JwtPayload } from "jsonwebtoken";
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
 
-import { useAuthentication } from '../context/AuthenticationContext';
+import { useAuthentication } from '../context/AuthenticationContext';  ////zare_nk_050408_nokteh(monasebe ine ke age ghablan login shod dar codeHa login boodan ra barrasi
+//// va useContext ra seda zadeh va setIsLogin(true) behesh bedim, ya tooye tebeye AuthenticationContext login boodan ra barrasi va setIsLogin ra anjam bedeh va ma faghat isLogin ra dashteh bashim )
 
 ////zare_nk_050226_added_st
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -19,6 +20,8 @@ import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
 import { none } from "@neshan-maps-platform/ol/centerconstraint";
 ////zare_nk_050226_added_end
+
+import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
 
 function getCookie(name: any) {
     ////zare_nk_050209_added_st
@@ -43,7 +46,6 @@ function getCookie(name: any) {
     return null; //اگر کوکی پیدا نشد
 }
 
-// export default function SwiperTopBanerComp() {
 const SwiperTopBanerComp = () => {
     console.log('050329-SwiperTopBanerComp rendered!!');   ////zare_nk_050329_added
     const [errorInSwiperTopBaner, setErrorInSwiperTopBaner] = useState<string | null>(null);
@@ -62,9 +64,6 @@ const SwiperTopBanerComp = () => {
         Type: string;
         IdShopCategory: number;
 
-        // Width 
-        // Height
-
         [key: string]: any;  ////zare_nk_050228_nokteh(noe Width va Height ra nemidoonestam comment kardam va automat daar [key: string]: any; gonjoondeh mishan)
     };
 
@@ -77,8 +76,10 @@ const SwiperTopBanerComp = () => {
             return;
         }
         console.log('tokentokentoken: ' + token);
-        let ApiUrl = "https://api.tochikala.com/api/";
-        const response = await fetch(ApiUrl + "User/Api_SelectBaner", {
+
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
+        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
+        const response = await fetch(ApiUrl + "Api_SelectBaner", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -123,7 +124,7 @@ const SwiperTopBanerComp = () => {
         // router.push("/vendorlist/");
         router.push(`/vendorlist?IdBaner=${IdBaner}`);
         ////zare_nk_050331_nokteh(age az setState estefadeh konim va dar jsx begim {state && <Vendorlist IdBaner={...}  /> barname Vendorlist ra beonvane yek
-        ////  component dar nazar migereh, na yek safhe!! dar url moroorgar ham tagheire sddress nadarim, dokmeye backe moroorgar ham barash lahaz nemishe!(pas 
+        ////  component dar nazar migereh, na yek safhe!! dar url moroorgar ham tagheire address nadarim, dokmeye backe moroorgar ham barash lahaz nemishe!(pas 
         //// farghe component hayei ke dar jsx seda mizanim ba poshehaye masire /src/app/foldername ra deghat konim ke poosheye foldername name safhe ast dar 
         //// moroorgar ke haviye file page.tsx mibashad) } )
     };
@@ -180,8 +181,9 @@ const SwiperTopBanerComp = () => {
                             return (
                                 <SwiperSlide key={index}>
                                     <div className="contInSlide" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        {/* <Link href="https://tapsi.food/vendor-list?vendorListId=banner-1624" > */}
-                                        {/* <Link href="/vendorlist?vendorListId=banner-1624" >
+                                        {/* <Link href={`https://tapsi.food/vendor-list?vendorListId=${item.IdBaner}`} > */}
+                                        {/* zare_nk_050408_nokteh_st(rahe1) */}
+                                        {/* <Link href={`/vendorlist?IdBaner=${item.IdBaner}`} >
                                             <img
                                                 style={{
                                                     width: '100%',
@@ -190,6 +192,8 @@ const SwiperTopBanerComp = () => {
                                                 // src="./images/top-baner/top-baner-slide01.png" />
                                                 src={`https://img.tochikala.com/Baners/${item.AxBaner}`} />
                                         </Link> */}
+                                        {/* zare_nk_050408_nokteh_end(rahe1) */}
+                                        {/* zare_nk_050408_nokteh_st(rahe2) */}
                                         <button onClick={() => {
                                             goToVendor(item.IdBaner);
                                         }}
@@ -207,6 +211,7 @@ const SwiperTopBanerComp = () => {
                                                 // src="./images/top-baner/top-baner-slide01.png" />
                                                 src={`https://img.tochikala.com/Baners/${item.AxBaner}`} />
                                         </button>
+                                        {/* zare_nk_050408_nokteh_end(rahe2) */}
                                     </div>
                                 </SwiperSlide>
                             )

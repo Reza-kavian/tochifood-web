@@ -1,4 +1,4 @@
-////zare_nk_050303_okk
+////zare_nk_050411_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -18,6 +18,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
 import { red } from "@mui/material/colors";
+
+import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
+
 
 function getCookie(name: any) {
     ////zare_nk_050209_added_st
@@ -134,8 +137,10 @@ const GetScrollsSecInVendor = ({
             return;
         }
         console.log('tokentokentoken: ' + token);
-        let ApiUrl = "https://api.tochikala.com/api/";
-        // const response = await fetch(ApiUrl + "User/Api_SelectGoroohJson", {
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
+        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
+
+        // const response = await fetch(ApiUrl + "Api_SelectGoroohJson", {
         //     method: "POST",
         //     headers: {
         //         "Content-Type": "application/json",
@@ -143,7 +148,7 @@ const GetScrollsSecInVendor = ({
         //     },
         //     body: JSON.stringify({}),
         // }); 
-        const response = await fetch(ApiUrl + "User/Api_SelectKalaShobeh", {
+        const response = await fetch(ApiUrl + "Api_SelectKalaShobeh", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -328,7 +333,7 @@ const GetScrollsSecInVendor = ({
             </div> */}
 
             {grouped &&
-                Object.entries(grouped).map(([idG1, items]) => {
+                Object.entries(grouped).map(([idG1, items]) => {   ////zare_nk_050408_nokteh(chon methode map makhsoose arraye hast az Object.entries estefade kardim baraye tabdile object be arraye)
                     return (
                         <div key={idG1} id={idG1}
                             style={{
@@ -339,13 +344,11 @@ const GetScrollsSecInVendor = ({
                                 sectionRefs.current[idG1.toString()] = el;
                             }}
                         >
-
-
                             <div style={{
                                 width: '100%',
                                 height: '82px',
                                 paddingBottom: '1rem',
-                                paddingTop: '1rem',
+                                // paddingTop: '1rem',
                                 paddingLeft: '1rem',
                                 paddingRight: '1rem',
                                 display: 'flex',
@@ -375,14 +378,11 @@ const GetScrollsSecInVendor = ({
                                 //     sectionRefs.current[item.IdKala.toString()] = el;
                                 // }}
                                 >
-
                                     <div style={{
                                         paddingLeft: '1rem',
                                         paddingRight: '1rem',
                                         gap: '.75rem', justifyContent: 'flex-start',
                                         width: '100%', height: '100px', display: 'flex',
-
-
                                     }}>
                                         <div style={{ borderRadius: '.5rem', flexShrink: 0, width: '100px', height: '100%', position: 'relative', }}>
                                             <img
@@ -447,15 +447,8 @@ const GetScrollsSecInVendor = ({
                                                         alt="علاقه مندی"
                                                         style={{ width: '12px', height: '12px', }}
                                                     />
-
                                                 </div>
                                             </div>
-
-                                            {/* <p style={{
-                                                    color: #a5abb1;
-font-size: .75rem;
-    line-height: 1rem;
-                                            }}></p> */}
 
                                             <div style={{
                                                 fontSize: '.75rem',
@@ -480,11 +473,7 @@ font-size: .75rem;
                                             }}>
                                                 خمیر پیتزا آمریکایی، کالباس خشک، هات داگ، قارچ، پنیر پیتزا، فلفل دلمه ای، گوجه
                                             </div>
-
-
-
                                         </div>
-
                                     </div>
 
                                     <div
@@ -500,12 +489,8 @@ font-size: .75rem;
                                             justifyContent: 'space-between',
                                             alignItems: 'center',
                                             marginTop: '1rem',
+                                        }}>
 
-                                        }}
-                                    // ref={el => {
-                                    //     sectionRefs.current[item.IdKala.toString()] = el;
-                                    // }}
-                                    >
                                         <div style={{
                                             display: "flex",
                                             gap: '.75rem', alignItems: 'center', flex: '1 1 0%', width: '100%',
@@ -515,7 +500,6 @@ font-size: .75rem;
                                         <div style={{
                                             justifyContent: 'flex-end', width: '100%', display: "flex", marginTop: '.5rem',
                                         }}>
-
                                             <div style={{ display: "flex", flexFlow: 'row', alignItems: 'center', }}>
                                                 <span style={{
                                                     // fontSize: '1rem',
@@ -525,7 +509,7 @@ font-size: .75rem;
                                                     {item.FeeMasraf.toLocaleString()}
                                                 </span>
 
-                                                <span style={{ fontSize: '.625rem', color: '#6d6d6d', }}>
+                                                <span style={{ fontSize: '.625rem', color: '#6d6d6d', marginRight: '3px', }}>
                                                     تومان
                                                 </span>
                                                 {/* ya ali */}
@@ -537,11 +521,8 @@ font-size: .75rem;
                                         display: "flex", borderBottom: '1px solid #e6e9ea', margin: '1rem 0.75rem',
                                     }}>
                                     </div>
-
-
                                 </div>
                             ))}
-
                         </div>
                     )
                 })

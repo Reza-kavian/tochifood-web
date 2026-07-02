@@ -1,13 +1,13 @@
-////zare_nk_050303_okk
+////zare_nk_050411_okk(1)
 'use client'
 
-import { useState, useEffect, useRef, useCallback, JSXElementConstructor ,memo,RefObject,ReactNode,ChangeEvent,MouseEvent} from "react";
+import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
 import { useRouter, useSearchParams, redirect } from "next/navigation";
 import Styles from "@/styles/components/location.module.css";
 import globalsStyles from "@/styles/components/globals.module.css";
 
 import jwt from "jsonwebtoken";
-import { JwtPayload } from "jsonwebtoken"; 
+import { JwtPayload } from "jsonwebtoken";
 
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog)
@@ -19,6 +19,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
 ////zare_nk_050226_added_end
+
+import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
 
 function getCookie(name: any) {
     ////zare_nk_050209_added_st
@@ -43,7 +45,6 @@ function getCookie(name: any) {
     return null; //اگر کوکی پیدا نشد
 }
 
-// export default function SwiperTapBestsComp() {
 const SwiperTapBestsComp = () => {
     console.log('050329-SwiperTapBestsComp rendered!!');   ////zare_nk_050329_added
     const [errorInSwiperTapBests, setErrorInSwiperTapBests] = useState<string | null>(null);
@@ -55,11 +56,7 @@ const SwiperTapBestsComp = () => {
         NameG1: string;
         AxG1: string;
         Tozihat: string;
-        // MetaDesc: string;  //؟؟
-        // tbl_Gorooh2
-        // .
-        // .
-        // .
+
         [key: string]: any;
     };
 
@@ -72,8 +69,9 @@ const SwiperTapBestsComp = () => {
             return;
         }
         console.log('tokentokentoken: ' + token);
-        let ApiUrl = "https://api.tochikala.com/api/";
-        const response = await fetch(ApiUrl + "User/Api_SelectGoroohJson", {
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
+        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
+        const response = await fetch(ApiUrl + "Api_SelectGoroohJson", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -119,7 +117,7 @@ const SwiperTapBestsComp = () => {
             <div style={{
                 display: 'flex', flexFlow: 'column', gap: '.5rem', width: '100%',
 
-            }} >
+            }}>
                 <div
                     style={{
                         display: 'flex', flexFlow: "row", justifyContent: "space-between",
@@ -131,7 +129,6 @@ const SwiperTapBestsComp = () => {
                     <h2 style={{ color: '#313335', lineHeight: '1.75rem', fontSize: '1.125rem', fontWeight: '500', margin: '0px', }}>
                         بهترین&zwnj;های تپسی&zwnj;فود
                     </h2>
-
 
                     <button
                         id="goShoppingBacketBtn"
@@ -154,9 +151,6 @@ const SwiperTapBestsComp = () => {
                             style={{ width: '1.25rem', height: '1.25rem', }}
                         />
                     </button>
-
-
-
                 </div>
 
                 <Swiper
@@ -204,7 +198,6 @@ const SwiperTapBestsComp = () => {
                                                 position: 'absolute', top: '.5rem', right: '-5px',
                                                 width: '44px', height: '28px',
                                             }}>
-
                                                 {/* zare_nk_050228_nokteh_st(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
                                                 {
                                                     (index == 2 || index == 3 || index == 6) ?
@@ -250,12 +243,10 @@ const SwiperTapBestsComp = () => {
                                                 </span>
                                             </div>
 
-                                            {/* zare_nk_050305_added_st */}
                                             <div style={{
                                                 position: 'absolute', top: '.5rem', left: '-5px',
                                                 width: '44px', height: '28px',
                                             }}>
-
                                                 {/* zare_nk_050228_nokteh_st(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
                                                 {
                                                     (index == 2 || index == 3 || index == 6) ?
@@ -299,7 +290,6 @@ const SwiperTapBestsComp = () => {
                                                     {/* zare_nk_050228_nokteh_end(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
                                                 </span>
                                             </div>
-                                            {/* zare_nk_050305_added_enf */}
 
                                             <img
                                                 style={{
@@ -315,14 +305,12 @@ const SwiperTapBestsComp = () => {
                                                 // src={`/images/SwiperGrouplevel1/${index}.png`} />
                                                 src={`/images/movaghat/SwiperTapBests/${index}.jpg`} />
 
-
                                             <div style={{
                                                 display: 'flex', flexFlow: 'column',
                                                 paddingTop: '2px',
                                                 gap: '.25rem',
                                                 width: '100%',
                                             }}>
-
                                                 <div style={{
                                                     display: 'flex', flexFlow: 'row', width: '100%',
                                                 }}>
@@ -330,7 +318,6 @@ const SwiperTapBestsComp = () => {
                                                         display: 'flex', flexFlow: 'row', width: '100%', padding: '0px .75rem', justifyContent: 'space-between',
                                                         marginTop: '8px',
                                                     }}>
-
                                                         <div style={{
                                                             fontSize: '0.875rem',
                                                             color: '#1b1c1d',
@@ -358,14 +345,11 @@ const SwiperTapBestsComp = () => {
                                                         <div style={{
                                                             display: 'flex', flexFlow: 'row', gap: '2px', alignItems: 'center',
                                                         }}>
-                                                            <span
-
-                                                                style={{
-                                                                    color: '#a4aab0',
-                                                                    //    fontWeight: 600,
-                                                                    fontSize: '10px',
-
-                                                                }}
+                                                            <span style={{
+                                                                color: '#a4aab0',
+                                                                //    fontWeight: 600,
+                                                                fontSize: '10px',
+                                                            }}
                                                             >(362)</span>
                                                             <p style={{
                                                                 color: '#1b1c1d',
@@ -383,8 +367,6 @@ const SwiperTapBestsComp = () => {
                                                     </div>
                                                 </div>
 
-
-                                                {/* zare_nk_050305_added_st */}
                                                 <div style={{
                                                     display: 'flex', flexFlow: 'row', width: '100%', marginBottom: '2px',
                                                 }}>
@@ -392,7 +374,6 @@ const SwiperTapBestsComp = () => {
                                                         display: 'flex', flexFlow: 'row', width: '100%', padding: '0px .75rem', justifyContent: 'space-between',
                                                         // marginTop: '8px',
                                                     }}>
-
                                                         <div style={{
                                                             display: 'flex', flexFlow: 'row', gap: '2px', alignItems: 'center',
                                                         }}>
@@ -431,18 +412,10 @@ const SwiperTapBestsComp = () => {
                                                         }}>
                                                             تا 50 دقیقه
                                                         </span>
-
                                                     </div>
 
                                                 </div>
-                                                {/* zare_nk_050305_added_end */}
-
-
-
-
                                             </div>
-
-
                                         </div>
                                     </Link>
                                 </div>

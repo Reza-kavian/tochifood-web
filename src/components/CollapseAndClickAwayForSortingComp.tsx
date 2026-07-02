@@ -1,3 +1,4 @@
+////zare_nk_050411_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext, memo } from "react";
@@ -21,51 +22,44 @@ type CollapseAndClickAwayForSortingCompType = {
     isEpmtyCollapseForSorting: boolean;
     setIsEpmtyCollapseForSorting: React.Dispatch<React.SetStateAction<boolean>>;
     saveAddress: (isOnline: boolean) => void;
-    addressFormInputsVal: any;   //zare_nk_050205_added(noe any update she)
-    setAddressFormInputsVal: React.Dispatch<React.SetStateAction<any>>;   //zare_nk_050205_added(noe any update she) 
+    // addressFormInputsVal: any;   //zare_nk_050205_added(noe any update she)
+    // setAddressFormInputsVal: React.Dispatch<React.SetStateAction<any>>;   //zare_nk_050205_added(noe any update she) 
 };
 
-// function CollapseAndClickAwayForSortingComp({
-//   isEpmtyCollapseForSorting,
-//   setIsEpmtyCollapseForSorting, 
-//   saveAddress,
-//   addressFormInputsVal,
-//   setAddressFormInputsVal
-// }: CollapseAndClickAwayForSortingCompType) {
-const CollapseAndClickAwayForSortingComp = ({ 
+const CollapseAndClickAwayForSortingComp = ({
     isEpmtyCollapseForSorting,
     setIsEpmtyCollapseForSorting,
     saveAddress,
-    addressFormInputsVal,
-    setAddressFormInputsVal,
+    // addressFormInputsVal,
+    // setAddressFormInputsVal,
 }: CollapseAndClickAwayForSortingCompType) => {
     console.log('050329-CollapseAndClickAwayForSortingComp rendered!!');   ////zare_nk_050329_added
     console.log('050401-CollapseAndClickAwayForSortingComp called!!-isEpmtyCollapseForSorting: ' + isEpmtyCollapseForSorting);
 
     const [error, setError] = useState<string | null>(null);
 
-    type AddressFormInputsMatnErrorType = {
-        Address: string | null;
-        pelak: string | null;
-        vahed: string | null;
-        addressName: string | null;
-    };
-
-    const [addressFormInputsMatnError, setAddressFormInputsMatnError] = useState<AddressFormInputsMatnErrorType>({
-        Address: '',
-        pelak: '',
-        vahed: '',
-        addressName: '',
-    });
-
-    type IsAddressFormInputsFocusedType = {
-        Address: boolean;
-        pelak: boolean;
-        vahed: boolean;
-        addressName: boolean;
-    };
-
     ////zare_nk_050402_commented_st
+    // type AddressFormInputsMatnErrorType = {
+    //     Address: string | null;
+    //     pelak: string | null;
+    //     vahed: string | null;
+    //     addressName: string | null;
+    // };
+
+    // const [addressFormInputsMatnError, setAddressFormInputsMatnError] = useState<AddressFormInputsMatnErrorType>({
+    //     Address: '',
+    //     pelak: '',
+    //     vahed: '',
+    //     addressName: '',
+    // });
+
+    // type IsAddressFormInputsFocusedType = {
+    //     Address: boolean;
+    //     pelak: boolean;
+    //     vahed: boolean;
+    //     addressName: boolean;
+    // }; 
+
     // const [isAddressFormInputsFocused, setIsAddressFormInputsFocused] = useState<IsAddressFormInputsFocusedType>({
     //     Address: false,
     //     pelak: false,
@@ -73,42 +67,41 @@ const CollapseAndClickAwayForSortingComp = ({
     //     addressName: false,
     // });
     ////zare_nk_050402_commented_end
-    ////zare_nk_050402_added_st
-    const [whichRadioFocused, setWhichRadioFocused] = useState<number | null>(null);
-    ////zare_nk_050402_added_end
 
-    type IsAddressFormInputsTextType = {
-        Address: boolean;
-        pelak: boolean;
-        vahed: boolean;
-        addressName: boolean;
-    };
+    ////zare_nk_050408_commented_st
+    //  type IsAddressFormInputsTextType = {
+    //         Address: boolean;
+    //         pelak: boolean;
+    //         vahed: boolean;
+    //         addressName: boolean;
+    //     };
+    // // const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<boolean[]>(Array(4).fill(true));   //zare_nk_050208_nokteh(state arayeei)   
+    // const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<IsAddressFormInputsTextType>({   //zare_nk_050208_nokteh(state objecti)
+    //     Address: true,
+    //     pelak: true,
+    //     vahed: true,
+    //     addressName: true,
+    // });
 
-    // const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<boolean[]>(Array(4).fill(true));   //zare_nk_050208_nokteh(state arayeei)   
-    const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<IsAddressFormInputsTextType>({   //zare_nk_050208_nokteh(state objecti)
-        Address: true,
-        pelak: true,
-        vahed: true,
-        addressName: true,
-    });
+    // type RefForAddressFormInputsType = {
+    //     Address: HTMLTextAreaElement | null;
+    //     pelak: HTMLInputElement | null;
+    //     vahed: HTMLInputElement | null;
+    //     addressName: HTMLInputElement | null;
+    // };
 
-    type RefForAddressFormInputsType = {
-        Address: HTMLTextAreaElement | null;
-        pelak: HTMLInputElement | null;
-        vahed: HTMLInputElement | null;
-        addressName: HTMLInputElement | null;
-    };
-
-    // const refForAddressInput = useRef<(HTMLTextAreaElement | null)>(null); //zare_nk_050206_nokteh(chon baraye yek tage na araye lazemeh na object)
-    // const refForAddressFormInputs = useRef<(HTMLInputElement | HTMLTextAreaElement | null)[]>([]); //zare_nk_050206_nokteh(chon baraye chandin tage araye gozashtim)
-    const refForAddressFormInputs = useRef<RefForAddressFormInputsType>({  //zare_nk_050206_nokteh(chon baraye chandin tage object gozashtim)
-        Address: null,
-        pelak: null,
-        vahed: null,
-        addressName: null,
-    });
-
+    // // const refForAddressInput = useRef<(HTMLTextAreaElement | null)>(null); //zare_nk_050206_nokteh(chon baraye yek tage na araye lazemeh na object)
+    // // const refForAddressFormInputs = useRef<(HTMLInputElement | HTMLTextAreaElement | null)[]>([]); //zare_nk_050206_nokteh(chon baraye chandin tage araye gozashtim)
+    // const refForAddressFormInputs = useRef<RefForAddressFormInputsType>({  //zare_nk_050206_nokteh(chon baraye chandin tage object gozashtim)
+    //     Address: null,
+    //     pelak: null,
+    //     vahed: null,
+    //     addressName: null,
+    // });
+    ////zare_nk_050408_commented_end
     ////zare_nk_050402_commented_st
+    // const refForSaveAddressFormInputsBtn = useRef<HTMLButtonElement | null>(null);
+    // const [isDisabledsaveAddressFormInputsBtn, setIsDisabledsaveAddressFormInputsBtn] = useState(true);
     // const handleAddressFormInputsFocus = (eventOrElement: ChangeEvent<HTMLInputElement> | HTMLInputElement | ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null) => {
     //     var inputsName = '';
     //     let input: HTMLInputElement | HTMLTextAreaElement | null = null;
@@ -188,155 +181,32 @@ const CollapseAndClickAwayForSortingComp = ({
     // }; 
     ////zare_nk_050206_nokteh001_end(yek rooydade ekhtesasi baraye yek tag(voroodiye yek tag ro migireh, khoroojiye yek tag ro mideh))
 
-    const refForSaveAddressFormInputsBtn = useRef<HTMLButtonElement | null>(null);
-    const [isDisabledsaveAddressFormInputsBtn, setIsDisabledsaveAddressFormInputsBtn] = useState(true);
 
-    ////zare_nk_050206_nokteh002(yek rooydade ekhtesasi baraye yek tag(voroodiye yek tag ro migireh, khoroojiye yek tag ro mideh))
-    // function addressMatnChanged(
-    //   eventOrElement: ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null
-    // ) { 
-    ////zare_nk_050206_nokteh002(yek rooydade moshtarak baraye chandin tag(voroodiye chandin tag ro migireh, khoroojiye chandin tag ro mideh))
-    function AddressFormInputsChanged(
-        eventOrElement: ChangeEvent<HTMLInputElement> | HTMLInputElement | ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null
-    ) {
-        var inputsName = '';
-        setError(null);
-        // let input: HTMLTextAreaElement | null = null;
-        let input: HTMLInputElement | HTMLTextAreaElement | null = null;
-        let vall: string = "";
-        if (eventOrElement && "target" in eventOrElement) {
-            input = eventOrElement.target;
-            vall = input.value;
-            inputsName = input.name;
-        } else {
-            input = eventOrElement;
-            vall = input?.value ?? "";
-            inputsName = input?.name ?? "";
-        }
-        // var pat = new RegExp("^[0]{1}[0123456789]{10}$");
-        // var isMobileNum = pat.test(vall);
-        if (!vall) {
-            // setIsAddressTextEmty(true);   
-            setIsAddressFormInputsTextEmty((cur) => {
-                return (
-                    { ...cur, [inputsName]: true }
-                );
-            });
 
-            if (input) {
-                input.classList.remove("valid");
-                input.classList.add("invalid");
-            }
-            // setAddressMatnError("ورود متن آدرس الزامی است");
-            setAddressFormInputsMatnError((cur) => {
-                return (
-                    { ...cur, [inputsName]: 'این بخش را خالی نگذارید' }
-                );
-            });
-
-            // setIsDisabledsaveAddressFormInputsBtn(true);
-            // if (refForSaveAddressFormInputsBtn.current) {
-            //   refForSaveAddressFormInputsBtn.current.classList.add(Styles.disabledBtn);
-            //   refForSaveAddressFormInputsBtn.current.classList.remove(Styles.btn);
-            // }
-        }
-        // else if (!isMobileNum) {
-        //   setIsAddressTextEmty(false);
-        //   if (input) {
-        //     input.classList.remove("valid");
-        //     input.classList.add("invalid");
-        //   }
-        //   setAddressMatnError("فرمت متن آدرس وارده نادرست است");
-        //   setAddressFormInputsMatnError((cur) => {
-        //     return (
-        //       { ...cur, [inputsName]: 'فرمت وارده اشتباه است' }
-        //     );
-        //   });
-        //   setIsDisabledsaveAddressFormInputsBtn(true);
-        //   if (refForSaveAddressFormInputsBtn.current) {
-        //     refForSaveAddressFormInputsBtn.current.classList.add(Styles.disabledBtn);
-        //     refForSaveAddressFormInputsBtn.current.classList.remove(Styles.btn);
-        //   }
-        // } 
-        else {
-            // setIsAddressTextEmty(false);  //zare_nk_050201_commented
-            ////zare_nk_050201_added_st
-            setIsAddressFormInputsTextEmty((cur) => {
-                return (
-                    { ...cur, [inputsName]: false }
-                );
-            });
-            ////zare_nk_050201_added_end
-            if (input) {
-                input.classList.remove("invalid");
-                input.classList.add("valid");
-            }
-            // setAddressMatnError(null);
-            setAddressFormInputsMatnError((cur) => {
-                return (
-                    { ...cur, [inputsName]: null }
-                );
-            });
-            // setIsDisabledsaveAddressFormInputsBtn(false);
-            // if (refForSaveAddressFormInputsBtn.current) {
-            //   refForSaveAddressFormInputsBtn.current.classList.remove(Styles.disabledBtn);
-            //   refForSaveAddressFormInputsBtn.current.classList.add(Styles.btn);
-            // }
-        }
-        if (input) {
-            // setAddressVal(input.value);
-            setAddressFormInputsVal((cur: any) => {  //zare_nk_050205_nokteh(noe any update she)
-                return (
-                    { ...cur, [inputsName]: vall }
-                );
-            });
-        }
-
-        ////zare_nk_050208_nokteh_st(bekhatere inke addressFormInputsMatnError dar in rendere jari meghdar dadim, vali midoonim bayad reRender beshe component va dar rendere badi
-        //// meghdari ke alan dadin ro bepazire, pas dastoorate in nokteh ra be useEffecte rendere badi bordim)
-        // const hasNotNullValue = Object.values(addressFormInputsMatnError).some(value => value !== null);
-        // if (hasNotNullValue) {
-        //   console.log('050205-hasNullValue');
-        //   setIsDisabledsaveAddressFormInputsBtn(true);
-        //   if (refForSaveAddressFormInputsBtn.current) {
-        //     refForSaveAddressFormInputsBtn.current.classList.add(Styles.disabledBtn);
-        //     refForSaveAddressFormInputsBtn.current.classList.remove(Styles.btn);
-        //   }
-        // }
-        // else {
-        //   console.log('050205-has not NullValue');
-        //   setIsDisabledsaveAddressFormInputsBtn(false);
-        //   if (refForSaveAddressFormInputsBtn.current) {
-        //     refForSaveAddressFormInputsBtn.current.classList.remove(Styles.disabledBtn);
-        //     refForSaveAddressFormInputsBtn.current.classList.add(Styles.btn);
-        //   }
-        // }
-        ////zare_nk_050208_nokteh_end(bekhatere inke addressFormInputsMatnError dar in rendere jari meghdar dadim,vali midoonim bayad reRender beshe component va dar rendere badim 
-        // meghdari ke alan dadin ro bepazire,pas dastoorate in nokteh ra be useEffecte rendere badi bordim(yani useEffecte u001))
-    }
-
-    useEffect(() => {   //u001
-        const hasNotNullValue = Object.values(addressFormInputsMatnError).some(value => value !== null);
-        console.log('050205-addressFormInputsMatnError: ' + JSON.stringify(addressFormInputsMatnError));
-        ////zare_nk_050206_nokteh_st(in dastoorat dar in makan javab dad be khoobi)
-        if (hasNotNullValue) {
-            console.log('050205-hasNullValue');
-            setIsDisabledsaveAddressFormInputsBtn(true);
-            if (refForSaveAddressFormInputsBtn.current) {
-                refForSaveAddressFormInputsBtn.current.classList.add(Styles.disabledBtn);
-                refForSaveAddressFormInputsBtn.current.classList.remove(Styles.btn);
-            }
-        }
-        else {
-            console.log('050205-has not NullValue');
-            setIsDisabledsaveAddressFormInputsBtn(false);
-            if (refForSaveAddressFormInputsBtn.current) {
-                refForSaveAddressFormInputsBtn.current.classList.remove(Styles.disabledBtn);
-                refForSaveAddressFormInputsBtn.current.classList.add(Styles.btn);
-            }
-        }
-        ////zare_nk_050206_nokteh_end(in dastoorat dar in makan javab dad be khoobi)
-    }, [addressFormInputsMatnError]);
+    ////zare_nk_050408_commented_st
+    // useEffect(() => {   //u001
+    //     const hasNotNullValue = Object.values(addressFormInputsMatnError).some(value => value !== null);
+    //     console.log('050205-addressFormInputsMatnError: ' + JSON.stringify(addressFormInputsMatnError));
+    //     ////zare_nk_050206_nokteh_st(in dastoorat dar in makan javab dad be khoobi)
+    //     if (hasNotNullValue) {
+    //         console.log('050205-hasNullValue');
+    //         setIsDisabledsaveAddressFormInputsBtn(true);
+    //         if (refForSaveAddressFormInputsBtn.current) {
+    //             refForSaveAddressFormInputsBtn.current.classList.add(Styles.disabledBtn);
+    //             refForSaveAddressFormInputsBtn.current.classList.remove(Styles.btn);
+    //         }
+    //     }
+    //     else {
+    //         console.log('050205-has not NullValue');
+    //         setIsDisabledsaveAddressFormInputsBtn(false);
+    //         if (refForSaveAddressFormInputsBtn.current) {
+    //             refForSaveAddressFormInputsBtn.current.classList.remove(Styles.disabledBtn);
+    //             refForSaveAddressFormInputsBtn.current.classList.add(Styles.btn);
+    //         }
+    //     }
+    //     ////zare_nk_050206_nokteh_end(in dastoorat dar in makan javab dad be khoobi)
+    // }, [addressFormInputsMatnError]);
+    ////zare_nk_050408_commented_end
 
     const [radionClicked, setRadionClicked] = useState<number>(1);
 
@@ -458,18 +328,18 @@ const CollapseAndClickAwayForSortingComp = ({
                     }}>مرتب&zwnj;سازی براساس</p>
                 </div>
 
-                <div 
-                 onClick={() => { radionClickedFunc(1) }}
-                style={{
-                    display: "flex",
-                    flexFlow: 'row',
-                    width: '100%',
-                    paddingBottom: '.375rem',
-                    paddingTop: '.375rem',
-                    columnGap: '.5rem',
-                    alignItems: 'center',
-                    cursor: 'pointer',
-                }}>
+                <div
+                    onClick={() => { radionClickedFunc(1) }}
+                    style={{
+                        display: "flex",
+                        flexFlow: 'row',
+                        width: '100%',
+                        paddingBottom: '.375rem',
+                        paddingTop: '.375rem',
+                        columnGap: '.5rem',
+                        alignItems: 'center',
+                        cursor: 'pointer',
+                    }}>
                     <button type="button"
                         // onClick={() => { radionClickedFunc(1) }}
                         role="radio"
@@ -478,7 +348,7 @@ const CollapseAndClickAwayForSortingComp = ({
                         value="distance"
                         className="peer aspect-square rounded-full border border-solid border-gray text-foreground ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 disabled:cursor-not-allowed disabled:!border-gray-200 disabled:text-gray-200 size-5"
                         id="distance" tabIndex={0} data-radix-collection-item=""
-                        style={{ borderRadius: '9999px', border: '1px solid #878b92', height: '1.25rem', width: '1.25rem', padding: '0px', backgroundColor: 'transparent',  }}>
+                        style={{ borderRadius: '9999px', border: '1px solid #878b92', height: '1.25rem', width: '1.25rem', padding: '0px', backgroundColor: 'transparent', }}>
                         {radionClicked == 1 &&
                             <span id="spanInDistance" data-state="checked" className="flex size-full items-center justify-center"
                                 style={{
@@ -496,17 +366,17 @@ const CollapseAndClickAwayForSortingComp = ({
                 </div>
 
                 <div
-                 onClick={() => { radionClickedFunc(2) }}
-                style={{
-                    display: "flex",
-                    flexFlow: 'row',
-                    width: '100%',
-                    paddingBottom: '.375rem',
-                    paddingTop: '.375rem',
-                    columnGap: '.5rem',
-                    alignItems: 'center',
-                    cursor: 'pointer',
-                }}>
+                    onClick={() => { radionClickedFunc(2) }}
+                    style={{
+                        display: "flex",
+                        flexFlow: 'row',
+                        width: '100%',
+                        paddingBottom: '.375rem',
+                        paddingTop: '.375rem',
+                        columnGap: '.5rem',
+                        alignItems: 'center',
+                        cursor: 'pointer',
+                    }}>
                     <button type="button"
                         // onClick={() => { radionClickedFunc(2) }}
                         role="radio"
@@ -515,7 +385,7 @@ const CollapseAndClickAwayForSortingComp = ({
                         value="rate"
                         className="peer aspect-square rounded-full border border-solid border-gray text-foreground ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 disabled:cursor-not-allowed disabled:!border-gray-200 disabled:text-gray-200 size-5"
                         id="rate" tabIndex={0} data-radix-collection-item=""
-                        style={{ borderRadius: '9999px', border: '1px solid #878b92', height: '1.25rem', width: '1.25rem', padding: '0px', backgroundColor: 'transparent',  }}>
+                        style={{ borderRadius: '9999px', border: '1px solid #878b92', height: '1.25rem', width: '1.25rem', padding: '0px', backgroundColor: 'transparent', }}>
                         {radionClicked == 2 &&
                             <span id="spanInDistance" data-state="checked" className="flex size-full items-center justify-center"
                                 style={{
@@ -532,18 +402,18 @@ const CollapseAndClickAwayForSortingComp = ({
                     </div>
                 </div>
 
-                <div 
-                onClick={() => { radionClickedFunc(3) }}
-                style={{
-                    display: "flex",
-                    flexFlow: 'row',
-                    width: '100%',
-                    paddingBottom: '.375rem',
-                    paddingTop: '.375rem',
-                    columnGap: '.5rem',
-                    alignItems: 'center',
-                     cursor: 'pointer',
-                }}>
+                <div
+                    onClick={() => { radionClickedFunc(3) }}
+                    style={{
+                        display: "flex",
+                        flexFlow: 'row',
+                        width: '100%',
+                        paddingBottom: '.375rem',
+                        paddingTop: '.375rem',
+                        columnGap: '.5rem',
+                        alignItems: 'center',
+                        cursor: 'pointer',
+                    }}>
                     <button type="button"
                         // onClick={() => { radionClickedFunc(3) }}
                         role="radio"

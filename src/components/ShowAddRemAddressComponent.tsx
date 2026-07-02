@@ -1,7 +1,7 @@
-////zare_nk_050329_okk(3)
+////zare_nk_050411_okk(1)
 'use client'
 
-import { useState, useEffect, useRef, useCallback, JSXElementConstructor,RefObject ,ReactNode,ChangeEvent,MouseEvent,memo} from "react";
+import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, memo } from "react";
 import { useRouter, useSearchParams, redirect } from "next/navigation";
 
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
@@ -46,11 +46,11 @@ type ShowAddRemAddressComponentType = {
   // goToEdditAddressMap: (IdAdress: number) => void;  //zare_nk_050209_commented
   goToEdditAddressMap: (e?: MouseEvent<HTMLButtonElement>) => void;  //zare_nk_050209_added
 
-  // RemoveAddress: (IdAdress: number) => void;  //zare_nk_050209_commented(ok fo btn)
-  RemoveAddress: (e?: MouseEvent<HTMLButtonElement>) => void;  //zare_nk_050209_added(ok fo btn)
+  // RemoveAddress: (IdAdress: number) => void;  //zare_nk_050209_commented
+  RemoveAddress: (e?: MouseEvent<HTMLButtonElement>) => void;  //zare_nk_050209_added
 
-  // responsedListFromApiEditAddress: responsedListFromApiEditAddressType | null;         //zare_nk_050207_added(and zare_nk_050207_commented(chon aslan api editeAddresss ra dar in safhe nemizanim va dar safheye editAddress mizanim))           
-  responsedListFromApiRemoveAddress: responsedListFromApiRemoveAddressType | null;     //zare_nk_050207_added         
+  // responsedListFromApiEditAddress: responsedListFromApiEditAddressType | null;      ////zare_nk_050207_added(and zare_nk_050207_commented(chon aslan api editeAddresss ra dar in safhe nemizanim va dar safheye editAddress mizanim))           
+  responsedListFromApiRemoveAddress: responsedListFromApiRemoveAddressType | null;     ////zare_nk_050207_added         
 
   isEpmtyShowAddRemAddress: boolean;
   setIsEpmtyShowAddRemAddress: React.Dispatch<React.SetStateAction<boolean>>;
@@ -58,7 +58,7 @@ type ShowAddRemAddressComponentType = {
   setRowItem: React.Dispatch<React.SetStateAction<responsedListFromApiSelectAddressListType | null>>;
 };
 
-const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({  
+const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({
   refForShowAddRemAddressBox,
   goToEdditAddressMap,
   RemoveAddress,
@@ -70,7 +70,6 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({
   setIsEpmtyShowAddRemAddress,
   // showAddRemAddress,    //zare_nk_050329_commented
   setRowItem,
-
 }: ShowAddRemAddressComponentType) {
   console.log('050329-ShowAddRemAddressComponent rendered!!');   ////zare_nk_050329_added
   const router = useRouter();
@@ -226,6 +225,6 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({
       {/* zare_nk_050204_rahe2_st(Drawer baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
     </Drawer >
   </>)
-} 
+}
 
 export default memo(ShowAddRemAddressComponent); 

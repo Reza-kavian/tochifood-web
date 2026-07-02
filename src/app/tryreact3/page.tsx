@@ -1,4 +1,4 @@
-////zare_nk_050303_okk
+////zare_nk_050411_okk(1)
 "use client";
 import { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
@@ -24,7 +24,7 @@ export default function Timer() {
 }
 
 //dar code bala chon useEffect faghat yek bar ejra mishe dar render haye badi setInterval jadidi sakhte nemishe ke chandin setInterval hamzaman
-// ejra beshan va ba ham tadakhol dashte bashan,vali bazam dastoore clearinterVall dar entehaye useEffect niaze,chon age component unmount beshe
+// ejra beshan va ba ham tadakhol dashte bashan, vali bazam dastoore clearinterVall dar entehaye useEffect niaze, chon age component unmount beshe
 // yani masalan ba dastoorate router berim be ye componente dige va sepes mojadad mount beshe yani biaym be component timer reset khahad shod
 // va intervale ghabli be khatere raftan az component hazf shode alan vali manzoor az hazf ine ke az barnameye nextjs hazf shode vali dar
 // hafezeye system hast va tavassote cpu dare pardazeh mishe(intervale yad shode dar barnameye nextjs hazf shode va bikhasiate vali alaki cpu ra eshghal kardeh)

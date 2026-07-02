@@ -1,4 +1,4 @@
-////zare_nk_050303_okk
+////zare_nk_050411_okk(1)
 "use client";
 import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 
@@ -10,7 +10,6 @@ export default function () {
   if (process.env.NODE_ENV === "production") {
     notFound(); //نمایش صفحه 404
     // یا redirect("/") // به صفحه اصلی بفرست
-    return null;
   }
 
   const [count, setCount] = useState(0);

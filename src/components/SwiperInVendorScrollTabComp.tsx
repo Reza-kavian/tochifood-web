@@ -1,4 +1,4 @@
-////zare_nk_050303_okk
+////zare_nk_050411_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -17,6 +17,8 @@ import { useAuthentication } from '../context/AuthenticationContext';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
+
+import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
 
 function getCookie(name: any) {
     ////zare_nk_050209_added_st
@@ -51,7 +53,6 @@ const SwiperInVendorHeaderComp = ({
     // openCollapseForRaveshErsal: () => void;
     scrollToSection: (id: string) => void;
     activeTab: string | null;
-
 }) => {
     // const SwiperInVendorHeaderComp = () => {
 
@@ -82,8 +83,10 @@ const SwiperInVendorHeaderComp = ({
             return;
         }
         console.log('tokentokentoken: ' + token);
-        let ApiUrl = "https://api.tochikala.com/api/";
-        const response = await fetch(ApiUrl + "User/Api_SelectGoroohJson", {
+
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
+        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
+        const response = await fetch(ApiUrl + "Api_SelectGoroohJson", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -158,7 +161,7 @@ const SwiperInVendorHeaderComp = ({
                                 <div className="contInSlide" style={{
                                     display: 'flex', alignItems: 'center', justifyContent: 'center', //// width: '100%', height: '100%',
                                     // backgroundColor: 'inherit',  
-                                     borderRadius: '.75rem', border: '1px solid #f6f6f7',
+                                    borderRadius: '.75rem', border: '1px solid #f6f6f7',
                                 }}>
                                     <button
                                         // onClick={() => { scrollToSection('111') }}  ////zare_nk_050405_added
@@ -223,10 +226,8 @@ const SwiperInVendorHeaderComp = ({
                                                     {item.NameG1}
                                                 </div>
                                             </div>
-
                                         </div>
                                     </button>
-
                                 </div>
                             </SwiperSlide>
                         )

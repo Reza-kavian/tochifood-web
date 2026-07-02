@@ -10,6 +10,8 @@ import jwt from "jsonwebtoken";
 import { JwtPayload } from "jsonwebtoken";
 import { factchecktools } from "googleapis/build/src/apis/factchecktools";
 
+import { NextJsApiUrl } from "../../constants/Urls";  ////zare_nk_050407_added
+
 function getCookie(name: any) {
   const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
   const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
@@ -584,7 +586,9 @@ export default function Toolbar() {
     }
 
     try {
-      var ApiUrl = "https://api.tochikala.com/api/";
+      // var ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+      var ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
+
       const response = await fetch(ApiUrl + "User/Api_LoginUser1", {
         method: "POST",
         headers: {
@@ -664,7 +668,10 @@ export default function Toolbar() {
       return;
     }
     // const token = getCookie("token");  //zare_nk_041125_commented(chon token null hast ke be login oomadim digeh!!) 
-    let ApiUrl = "https://api.tochikala.com/api/";
+
+    // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+    let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
+
     console.log('mobileVal: ' + mobileVal + '-newSmsVal: ' + newSmsVal);
     const response = await fetch(ApiUrl + "User/Api_LoginUser2", {
       method: "POST",
@@ -800,7 +807,8 @@ export default function Toolbar() {
       token = localStorage.getItem("Token") || "";
     }
     try {
-      var ApiUrl = "https://api.tochikala.com/api/";
+      // var ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+      var ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
       const response = await fetch(ApiUrl + "User/Api_LoginUser1", {
         method: "POST",
         headers: {

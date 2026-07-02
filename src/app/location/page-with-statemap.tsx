@@ -68,6 +68,8 @@ import { Console } from "console";
 
 import { useAuthentication } from '../../context/AuthenticationContext';  //zare_nk_050111_added
 
+import { NextJsApiUrl } from "../../constants/Urls";  ////zare_nk_050407_added
+
 function getCookie(name: any) {
   const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
   const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
@@ -1147,7 +1149,8 @@ export default function LocationPage() {
       // 'OnvanAdress': $('#OnvanAdress').val(),
     })
 
-    let ApiUrl = "https://api.tochikala.com/api/";
+    // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+    let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
     const response = await fetch(ApiUrl + "User/Api_CreateAddress", {
       method: "POST",
       headers: {

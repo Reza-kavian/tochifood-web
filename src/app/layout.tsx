@@ -1,10 +1,7 @@
-////zare_nk_050303_okk
+////zare_nk_050411_okk(1)
 // import { strict } from "assert";
 // import { ReactNode } from "react";
 import { headers } from "next/headers";
-// import "@fortawesome/fontawesome-free/css/all.min.css";  ////zare_nk_050303_commented(ghadimiye demodeh shod)
-
-// import "bootstrap/dist/css/bootstrap.min.css";   ////zare_nk_050303_commented(ghadimiye demodeh shod)
 
 import 'swiper/css';
 import 'swiper/css/navigation';

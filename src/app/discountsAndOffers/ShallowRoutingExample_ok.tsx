@@ -16,6 +16,8 @@ import "@/styles/DiscountsAndOffersCss.css";  //zare_nk_041121_added(for shopToD
 import { RefObject } from "react";
 import { MouseEvent } from "react";
 
+import { NextJsApiUrl } from "../../constants/Urls";  ////zare_nk_050407_added
+
 async function getBootstrap() {
   if (!cachedBootstrap) {
     cachedBootstrap = await import("bootstrap");
@@ -1849,7 +1851,8 @@ export default function ShallowRoutingExample() {
           IsFavorite: -1,
           IdVitrin: -1,
         };
-        let ApiUrl = "https://api.tochikala.com/api/";
+        // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
         // var urlSelectSabadTitr = ApiUrl + "User/Api_SelectSabadKharidTitr";  //zare_nk_041121_commented(for shopToDiscount)
         var urlSelectKalaShobeh = ApiUrl + "User/Api_SelectKalaShobeh";  //zare_nk_041121_added(for shopToDiscount)
 

@@ -1,4 +1,4 @@
-////zare_nk_050303_okk
+////zare_nk_050411_okk(1)
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -64,6 +64,8 @@ import { Console } from "console";
 // import Layer from '@neshan-maps-platform/ol/layer/Layer.js'; 
 
 import { useAuthentication } from '../../context/AuthenticationContext';  //zare_nk_050111_added
+
+import { NextJsApiUrl } from "../../constants/Urls";  ////zare_nk_050407_added
 
 function getCookie(name: any) {
   const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
@@ -1422,7 +1424,9 @@ export default function LocationPage() {
       // 'OnvanAdress': $('#OnvanAdress').val(),
     })
 
-    let ApiUrl = "https://api.tochikala.com/api/";
+
+    // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+    let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
     const response = await fetch(ApiUrl + "User/Api_CreateAddress", {
       method: "POST",
       headers: {

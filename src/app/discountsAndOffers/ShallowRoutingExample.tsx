@@ -1,4 +1,4 @@
-////zare_nk_050325_okk
+////zare_nk_050411_okk(1)
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef, useMemo } from "react";
@@ -11,10 +11,12 @@ let cachedBootstrap: typeof import("bootstrap") | null = null; //zare_nk_040417_
 // import { BrowserMultiFormatReader } from "@zxing/browser";   //zare_nk_040417_commented
 // import { NotFoundException } from "@zxing/library";    //zare_nk_040417_commented
 // import { json } from "stream/consumers";  ////zare_nk_040417_commented(estefadeh ham nashod)
-import "@/styles/DiscountsAndOffersCss.css"; 
+import "@/styles/DiscountsAndOffersCss.css";
 
 import { RefObject } from "react";
 import { MouseEvent } from "react";
+
+import { NextJsApiUrl } from "../../constants/Urls";  ////zare_nk_050407_added
 
 async function getBootstrap() {
   if (!cachedBootstrap) {
@@ -1106,7 +1108,8 @@ export default function ShallowRoutingExample() {
       return;  //zare_nk_041130_added
     }
 
-    let ApiUrl = "https://api.tochikala.com/api/";
+    // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+    let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
     var urlApi_SelectKalaShobeh = ApiUrl + "User/Api_SelectKalaShobeh";
     const response = await fetch(urlApi_SelectKalaShobeh, {
       method: "POST",
@@ -1361,7 +1364,8 @@ export default function ShallowRoutingExample() {
           IsFavorite: -1,
           IdVitrin: -1,
         };
-        let ApiUrl = "https://api.tochikala.com/api/";
+        // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
         var urlSelectKalaShobeh = ApiUrl + "User/Api_SelectKalaShobeh";
         const response = await fetch(urlSelectKalaShobeh, {   //zare_nk_041121_added(for shopToDiscount)
           method: "POST",
@@ -1515,7 +1519,8 @@ export default function ShallowRoutingExample() {
       const token = getCookie("token");
       console.log('041120-addToCartInIndex-tedad: ' + addRemParam.tedadInSabadOrDet + '-zarib: ' + addRemParam.ZaribForoosh + '-TedadOut: ' + TedadOut);
 
-      let ApiUrl = "https://api.tochikala.com/api/";
+      // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+      let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
       var urlInsertToSabad = ApiUrl + "User/Api_AddRemoveSabadKharidSatr";
       const response = await fetch(urlInsertToSabad, {
         method: "POST",
@@ -1653,7 +1658,8 @@ export default function ShallowRoutingExample() {
       TedadOuttoAjax = -(addRemParam.ZaribForoosh);
       const token = getCookie("token");
 
-      let ApiUrl = "https://api.tochikala.com/api/";
+      // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+      let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
       var urlInsertToSabad = ApiUrl + "User/Api_AddRemoveSabadKharidSatr";
       const response = await fetch(urlInsertToSabad, {
         method: "POST",
@@ -2594,7 +2600,7 @@ export default function ShallowRoutingExample() {
       }}
     >
       {!bisatr && (
-        <> 
+        <>
           {sabadRows?.map((item, index) => {
             return (
               <SabadSatrComponent
@@ -2605,7 +2611,7 @@ export default function ShallowRoutingExample() {
                 openprodDetModal={openprodDetModal}
               />
             );
-          })} 
+          })}
 
           {sabadRows?.slice(0, 5).map((item) => (
             <div

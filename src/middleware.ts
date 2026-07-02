@@ -1,9 +1,10 @@
-////zare_nk_050303_okk
+////zare_nk_050411_okk(1)
 import { NextResponse, NextRequest } from "next/server";
 // import jwt from "jsonwebtoken";  //chon middleware.ts dar Edge Runtime ejra mishavad, az majoole crypto poshtibani nemikoneh 
 // va az jsonwebtoken nemishe dar middleware.ts estefadeh kard, pas api zadim be verifytoken va dar anja az jsonwebtoken estefade kardim 
 // va natijeh ra be middleware.ts pasokh dadim.(albateh be api verifyToken ham nazadim va az jwtVerify estefadeh kardim ke moadele jwt hast)
 import { jwtVerify } from "jose"; ////zare_nk_040403_added
+
 const publicPaths = [
   "/about",
   "/folder02",
@@ -98,7 +99,8 @@ export async function middleware(request: NextRequest) {
   ////zare_nk_040520_added_end
 
   // if (isPublic || request.nextUrl.pathname == "/") {  //zare_nk_050205_commented
-  if (isPublic) {  //zare_nk_050205_added
+  if (isPublic) {
+    ////zare_nk_050205_added
     const response = NextResponse.next();
     const fullUrl = request.nextUrl.href;
     const pathname = request.nextUrl.pathname;
@@ -125,7 +127,7 @@ export async function middleware(request: NextRequest) {
       );
       ////zare_nk_040403_added_st
       const validPayload = await verifyToken(token);
-      
+
       console.log(
         "zare_nk_050205-04-validPayload is: " + JSON.stringify(validPayload)
       );
@@ -153,7 +155,6 @@ export async function middleware(request: NextRequest) {
           "zare_nk_050205-response.Cookies(not ok) in middleware:",
           response.cookies.get("token")?.value
         );
-
         //zare_nk_040228_added_st
         const fullUrl = request.nextUrl.href;
         const pathname = request.nextUrl.pathname;

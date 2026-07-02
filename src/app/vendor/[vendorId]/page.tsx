@@ -1,30 +1,20 @@
-// ////zare_nk_050303_okk
+// ////zare_nk_050411_okk(1)
 'use client'
 import { useParams } from 'next/navigation';
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
 import { useRouter, useSearchParams, redirect } from "next/navigation";
-import Styles from "@/styles/components/location.module.css";
+
 import globalsStyles from "@/styles/components/globals.module.css";
 
 import jwt from "jsonwebtoken";
 import { JwtPayload } from "jsonwebtoken";
 
-import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog)
-
 import SwiperInVendorScrollTabComp from '../../../components/SwiperInVendorScrollTabComp';
 import GetScrollsSecInVendor from '../../../components/GetScrollsSecInVendor';
 import SwiperBordBordInVendorComp from '../../../components/SwiperBordBordInVendorComp';
 
-
-// import { useAuthentication } from '../context/AuthenticationContext';  
-
-////zare_nk_050226_added_st
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
-import Link from "next/link";
-////zare_nk_050226_added_end
+import { NextJsApiUrl } from "../../../constants/Urls";  ////zare_nk_050407_added
 
 function getCookie(name: any) {
     ////zare_nk_050209_added_st
@@ -93,8 +83,10 @@ export default function VendorPage() {
             return;
         }
         console.log('tokentokentoken: ' + token);
-        let ApiUrl = "https://api.tochikala.com/api/";
-        const response = await fetch(ApiUrl + "User/Api_SelectKalaShobeh", {
+
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
+        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
+        const response = await fetch(ApiUrl + "Api_SelectKalaShobeh", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -131,7 +123,6 @@ export default function VendorPage() {
         getVendorPage();  ////zare_nk_050403_commented_movaghat
     }, []);
     // ////zare_nk_050404_added_end 
-
 
     ////zare_nk_050405_added_st
     const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
@@ -221,7 +212,6 @@ export default function VendorPage() {
                         width: '100%',
                         height: '3.5rem',
                     }}>
-
                     <button
                         id="goBackBtn"
                         onClick={() => router.back()}
@@ -356,7 +346,6 @@ export default function VendorPage() {
                             }}
                             src={`/images/movaghat/vendorPage/tupchi-tag.jpg`} />
                     </div>
-
                 </div>
 
                 <div style={{
@@ -371,7 +360,6 @@ export default function VendorPage() {
                     borderTopLeftRadius: '.75rem',
                     borderTopRightRadius: '.75rem',
                     gap: '.5rem',
-
                 }}>
                     <div style={{
                         display: 'flex', flexFlow: 'row', justifyContent: 'start', alignItems: 'center',
@@ -544,8 +532,6 @@ export default function VendorPage() {
                                 }}>تومان</span>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
 
@@ -589,7 +575,6 @@ export default function VendorPage() {
                     />
                 </div>
 
-                {/* zare_nk_050405_added_alan_st */}
                 <div style={{
                     display: 'flex',
                     flexFlow: 'column', width: '100%', height: 'min-content', paddingTop: '.5rem', marginTop: '.5rem', //backgroundColor: '#fff7ec',
@@ -703,7 +688,6 @@ export default function VendorPage() {
 
                     </div>
                 </div>
-                {/* zare_nk_050405_added_alan_end */}
 
             </main>
 
