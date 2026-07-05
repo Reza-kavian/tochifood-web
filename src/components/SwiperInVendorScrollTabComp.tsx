@@ -47,12 +47,14 @@ const SwiperInVendorHeaderComp = ({
     // openCollapseForSorting,
     // openCollapseForRaveshErsal
     scrollToSection,
-    activeTab
+    activeTab,
+    IdShobe,
 }: {
     // openCollapseForSorting: () => void;
     // openCollapseForRaveshErsal: () => void;
     scrollToSection: (id: string) => void;
     activeTab: string | null;
+    IdShobe: number | undefined;
 }) => {
     // const SwiperInVendorHeaderComp = () => {
 
@@ -92,7 +94,10 @@ const SwiperInVendorHeaderComp = ({
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + token,
             },
-            body: JSON.stringify({}),
+            // body: JSON.stringify({}),   ////zare_nk_050414_commented(dar api tochikala parametre voroodi nadarim, man IdShobe dadam ehtemalan dar tochiFood mikhaim
+            body: JSON.stringify({   ////zare_nk_050414_added(dar api tochikala parametre voroodi nadarim, man IdShobe dadam ehtemalan dar tochiFood mikhaim
+                "IdShobe":IdShobe,
+            }),
         });
         const data = await response.json();
 
@@ -125,7 +130,7 @@ const SwiperInVendorHeaderComp = ({
         <>
             <div style={{
                 display: 'flex', flexFlow: 'column', width: '100%',
-            }} >
+            }}>
                 <Swiper
                     modules={[Navigation, Pagination]}
                     spaceBetween={12}  ////zare_nk_050305_nokteh(moadele 0.75rem(chon spaceBetween adad 0.75rem))  
@@ -234,7 +239,6 @@ const SwiperInVendorHeaderComp = ({
                     })}
                 </Swiper>
             </div>
-
 
             {/* <div style={{
                 display: 'flex', flexFlow: 'column', width: '100%',

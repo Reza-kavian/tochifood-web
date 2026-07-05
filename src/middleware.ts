@@ -1,4 +1,4 @@
-////zare_nk_050411_okk(1)
+////zare_nk_050413_okk(1) ////zare_nk_050413(az jose baraye samte karbar estefadeh konam(masalan dar login) age javab mideh(ke api be verifytoken nazanam))
 import { NextResponse, NextRequest } from "next/server";
 // import jwt from "jsonwebtoken";  //chon middleware.ts dar Edge Runtime ejra mishavad, az majoole crypto poshtibani nemikoneh 
 // va az jsonwebtoken nemishe dar middleware.ts estefadeh kard, pas api zadim be verifytoken va dar anja az jsonwebtoken estefade kardim 
@@ -52,7 +52,7 @@ async function verifyToken(token: string) {
     // "NameMoshtari":"","nbf":1750759349,"exp":1751364149,"iat":1750759349}
     return payload;
   } catch (error) {
-    return null;
+    return null;  ////zare_nk)050413_nokteh(catche marboot be verifytoken ro inja begonjoonam)
   }
 }
 

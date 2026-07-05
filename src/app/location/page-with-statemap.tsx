@@ -1149,9 +1149,9 @@ export default function LocationPage() {
       // 'OnvanAdress': $('#OnvanAdress').val(),
     })
 
-    // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+    // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
     let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-    const response = await fetch(ApiUrl + "User/Api_CreateAddress", {
+    const response = await fetch(ApiUrl + "Api_CreateAddress", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

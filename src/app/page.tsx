@@ -1,4 +1,4 @@
-////zare_nk_050411_okk(1)
+////zare_nk_050413_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext } from "react";
@@ -111,6 +111,13 @@ export default function Home() {
   }, []);
 
   const router = useRouter();
+
+  const goTosShoppingbasket = () => {
+    // router.push("/folder03?tab=comments2");
+    // redirect("/login");
+    //router.replace("/location");
+    router.push("/shoppingbasket");
+  };
 
   const showAddressListDrawer = useCallback(
     async () => {
@@ -327,8 +334,8 @@ export default function Home() {
 
           <button
             id="goShoppingBacketBtn"
-            // onClick={showAddressListDrawer}
-            onClick={() => { setError('goooo!!') }}
+            // onClick={showAddressListDrawer}  
+            onClick={() => { goTosShoppingbasket(); }}
             style={{
               display: 'flex',
               alignItems: 'center',

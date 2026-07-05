@@ -1,4 +1,4 @@
-////zare_nk_050411_okk(1)
+////zare_nk_050413_okk(1)
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
@@ -134,9 +134,9 @@ export default function ShallowRoutingExample() {
       // const token = getCookie("token");  //zare_nk_041130_commented(ezafi hast va token balatar tarif shod)
       // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
       // var urlSelectFaktorForooshSatr = ApiUrl + "Api_SelectFaktorForooshSatr";
-      // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+      // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
       let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-      var urlSelectFaktorForooshSatr = ApiUrl + "User/Api_SelectForooshSatr";
+      var urlSelectFaktorForooshSatr = ApiUrl + "Api_SelectForooshSatr";
       const response = await fetch(urlSelectFaktorForooshSatr, {
         method: "POST",
         headers: {
@@ -226,9 +226,9 @@ export default function ShallowRoutingExample() {
         // const token = getCookie("token"); //zare_nk_041130_commented(chon ezafiye va balatar tarif shode)
         // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
         // var urlSelectFaktorForooshTitr = ApiUrl + "Api_SelectFaktorForooshTitr";
-        // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
         let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-        var urlSelectFaktorForooshTitr = ApiUrl + "User/Api_SelectForooshTitr";
+        var urlSelectFaktorForooshTitr = ApiUrl + "Api_SelectForooshTitr";
         const response = await fetch(urlSelectFaktorForooshTitr, {
           method: "POST",
           headers: {

@@ -1,4 +1,4 @@
-// ////zare_nk_050411_okk(1)
+// ////zare_nk_050413_okk(1)
 'use client'
 import { useParams } from 'next/navigation';
 
@@ -52,7 +52,7 @@ function getCookie(name: any) {
 export default function VendorPage() {
     const { vendorId } = useParams();
     ////zare_nk_050405_nokteh_end(rahe2- baraye serverComponent)
-    console.log('050329-VendorPage rendered!!');   ////zare_nk_050329_added
+    console.log('050329-VendorPage rendered!!-vendorId: '+vendorId);   ////zare_nk_050329_added
     // ////zare_nk_050404_added_st
 
     const [errorInVendorPage, setErrorInVendorPage] = useState<string | null>(null);
@@ -76,13 +76,24 @@ export default function VendorPage() {
 
     // console.log('050404-responsedListFromApiSelectKalaShobeh: ' + responsedListFromApiSelectKalaShobeh?[0].IdKala);   ////zare_nk_050329_added
 
+    type responsedListFromApiSelectShobehAtrafUserType = {
+        IdShobe: number;
+        NameSobe: string;
+        KafKharid: number;
+        Fasele: number;
+        ZarfiatErsal: number;
+        Keraye: number;
+        NazdikTarinZamanErsal: string;
+    };
+    const [currentShobeState, setCurrentShobeState] = useState<responsedListFromApiSelectShobehAtrafUserType | null>(null);
+
     const getVendorPage = async () => {
         let token = await getCookie("token");
         if (!token) {
             setErrorInVendorPage("lotfan avval online shid");
             return;
         }
-        console.log('tokentokentoken: ' + token);
+        // console.log('tokentokentoken: ' + token);
 
         // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
         let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
@@ -93,12 +104,14 @@ export default function VendorPage() {
                 Authorization: "Bearer " + token,
             },
             body: JSON.stringify({
-                // IdG1: vendorId,
-                "IdShobeh": 6,
+                // "IdShobeh": 6,
+                IdShobeh: vendorId,
+                // page: 1,
+                // take: 3,
             }),
         });
         const data = await response.json();
-
+        console.log('datadatadata: ' + JSON.stringify(data));
         if (response.ok) {
             if (data.status == 0) {
                 if (data.data.list == undefined) {
@@ -120,6 +133,13 @@ export default function VendorPage() {
     }
 
     useEffect(() => {
+        const tempAsync = async () => {
+            const currentShobe = await getCookie("currentShobe");
+            var parsedurrentShobe: responsedListFromApiSelectShobehAtrafUserType | null = currentShobe ? JSON.parse(currentShobe) : null;
+            setCurrentShobeState(parsedurrentShobe);
+        }
+        tempAsync();
+
         getVendorPage();  ////zare_nk_050403_commented_movaghat
     }, []);
     // ////zare_nk_050404_added_end 
@@ -311,40 +331,26 @@ export default function VendorPage() {
                     // border: '2px solid red',
                     position: 'relative',
                 }}>
-                    {
-                        responsedListFromApiSelectKalaShobeh ? (
-                            <img
-                                style={{
-                                    width: '100%',
-                                    height: '230px',
-                                    objectFit: 'cover',
-                                }}
-                                // src={`https://img.tochikala.com/Product/${responsedListFromApiSelectKalaShobeh[0].IdKala}.webp`} />
-                                src={`/images/movaghat/vendorPage/1.jpg`} />
-                        ) : (
-                            // <img
-                            //     style={{
-                            //         width: '100%',
-                            //         height: '230px',
-                            //         objectFit: 'cover', 
-                            //     }}
-                            //     src={`https://img.tochikala.com/Logo/tochi.png`} />
-                            ''
-                        )
-                    }
-
+                    {responsedListFromApiSelectKalaShobeh && (
+                        <img
+                            style={{
+                                width: '100%',
+                                height: '230px',
+                                objectFit: 'cover',
+                            }}
+                            // src={`https://img.tochikala.com/Product/${responsedListFromApiSelectKalaShobeh[0].IdKala}.webp`} />
+                            src={`/images/movaghat/vendorPage/1.jpg`} />
+                    )}
                     <div style={{
                         position: 'absolute', bottom: '-15px', right: '.8rem',
                         width: '4rem', height: '4rem',
                     }}>
-                        <img
-                            style={{
-                                width: '100%', height: '100%',
-                                objectFit: 'cover',
-                                borderRadius: '.5rem',
-                                // border: '1px solid #efefef',
-                            }}
-                            src={`/images/movaghat/vendorPage/tupchi-tag.jpg`} />
+                        <img style={{
+                            width: '100%', height: '100%',
+                            objectFit: 'cover',
+                            borderRadius: '.5rem',
+                            // border: '1px solid #efefef',
+                        }} src={`/images/movaghat/vendorPage/tupchi-tag.jpg`} />
                     </div>
                 </div>
 
@@ -369,7 +375,12 @@ export default function VendorPage() {
                         <h2 style={{
                             fontSize: '1.25rem', fontFamily: "'IRANSansWeb_Bold(adad_fa)'",
                             margin: '0rem',
-                        }}>فست&zwnj;فود توپچی</h2>
+                        }}>
+                            {/* فست&zwnj;فود توپچی */}
+                            {responsedListFromApiSelectKalaShobeh &&
+                                responsedListFromApiSelectKalaShobeh[0].NameSobe
+                            }
+                        </h2>
                     </div>
 
                     <div style={{
@@ -440,7 +451,7 @@ export default function VendorPage() {
                             <span style={{
                                 color: '#313335', fontSize: '.75rem',
                                 lineHeight: '1rem',
-                            }}>پیک تپسی فود</span>
+                            }}>پیک توچی فود</span>
                             <div style={{
                                 fontSize: '.875rem',
                                 lineHeight: '1.25rem',
@@ -449,15 +460,24 @@ export default function VendorPage() {
                                 alignItems: 'center',
                                 gap: '.25rem',
                             }}>
-                                <span style={{
-                                    color: '#000000', fontSize: '.875rem',
-                                    lineHeight: '1.25rem',
-                                }}>32.800</span>
+                                {currentShobeState?.Keraye != 0 ?
+                                    <>
+                                        <span style={{
+                                            color: '#000000', fontSize: '.875rem',
+                                            lineHeight: '1.25rem',
+                                        }}>32.800</span>
 
-                                <span style={{
-                                    color: '#63676e', fontSize: '.875rem',
-                                    lineHeight: '1.25rem',
-                                }}>تومان</span>
+                                        <span style={{
+                                            color: '#63676e', fontSize: '.875rem',
+                                            lineHeight: '1.25rem',
+                                        }}>تومان</span>
+                                    </> : <>
+                                        <span style={{
+                                            color: '#63676e', fontSize: '.875rem',
+                                            lineHeight: '1.25rem',
+                                        }}>رایگان</span>
+                                    </>
+                                }
                             </div>
                         </div>
 
@@ -483,7 +503,17 @@ export default function VendorPage() {
                                 alignItems: 'center',
                                 gap: '.25rem',
                             }}>
-                                <span style={{
+                                {currentShobeState?.NazdikTarinZamanErsal &&
+                                    <>
+                                        <span style={{
+                                            color: '#63676e', fontSize: '.875rem',
+                                            lineHeight: '1.25rem',
+                                        }}>
+                                            {currentShobeState.NazdikTarinZamanErsal}
+                                        </span>
+                                    </>
+                                }
+                                {/* <span style={{
                                     color: '#313335', fontSize: '.875rem',
                                     lineHeight: '1.25rem',
                                 }}>تا</span>
@@ -496,7 +526,7 @@ export default function VendorPage() {
                                 <span style={{
                                     color: '#313335', fontSize: '.875rem',
                                     lineHeight: '1.25rem',
-                                }}>دقیقه</span>
+                                }}>دقیقه</span> */}
                             </div>
                         </div>
 
@@ -521,7 +551,22 @@ export default function VendorPage() {
                                 alignItems: 'center',
                                 gap: '.25rem',
                             }}>
-                                <span style={{
+                                {currentShobeState?.KafKharid &&
+                                    <>
+                                        <span style={{
+                                            color: '#000000', fontSize: '.875rem',
+                                            lineHeight: '1.25rem',
+                                        }}>
+                                            {currentShobeState.KafKharid}
+                                        </span>
+
+                                        <span style={{
+                                            color: '#63676e', fontSize: '.875rem',
+                                            lineHeight: '1.25rem',
+                                        }}>تومان</span>
+                                    </>
+                                }
+                                {/* <span style={{
                                     color: '#000000', fontSize: '.875rem',
                                     lineHeight: '1.25rem',
                                 }}>300000</span>
@@ -529,7 +574,7 @@ export default function VendorPage() {
                                 <span style={{
                                     color: '#63676e', fontSize: '.875rem',
                                     lineHeight: '1.25rem',
-                                }}>تومان</span>
+                                }}>تومان</span> */}
                             </div>
                         </div>
                     </div>
@@ -603,6 +648,7 @@ export default function VendorPage() {
                             // openCollapseForRaveshErsal={openCollapseForRaveshErsal}
                             scrollToSection={scrollToSection}
                             activeTab={activeTab}
+                            IdShobe={currentShobeState?.IdShobe}
                         />
                     </div>
 

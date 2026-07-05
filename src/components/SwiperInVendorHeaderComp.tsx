@@ -1,4 +1,4 @@
-////zare_nk_050411_okk(1)
+////zare_nk_050413_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -45,7 +45,6 @@ function getCookie(name: any) {
     return null; //اگر کوکی پیدا نشد
 }
 
-// export default function SwiperInVendorHeaderComp() {
 const SwiperInVendorHeaderComp = ({
     openCollapseForSorting,
     openCollapseForRaveshErsal
@@ -79,7 +78,7 @@ const SwiperInVendorHeaderComp = ({
 
         // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
         let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-        const response = await fetch(ApiUrl + "User/Api_SelectGoroohJson", {
+        const response = await fetch(ApiUrl + "Api_SelectGoroohJson", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -1644,10 +1644,10 @@ export default function LocationPage() {
       // 'TahvilGirande': TahvilGirande,
       // 'OnvanAdress': $('#OnvanAdress').val(),
     }
-    // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+    // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
     let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
     // console.log('mobileVal: ' + mobileVal + '-newSmsVal: ' + newSmsVal);
-    const response = await fetch(ApiUrl + "User/Api_CreateAddress", {
+    const response = await fetch(ApiUrl + "Api_CreateAddress", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1690,8 +1690,8 @@ export default function LocationPage() {
         // pas az haman sakhte va vakeshiye cookie haviye token ke name token ra behesh dadam baraye moshakhas kardane online shodan va estelame online boodaanesh estefadeh mikonam
         //va in kar ra dar methode verifyToken gonjandim)
 
-        //           let ApiUrl = "https://api.tochikala.com/api/";
-        // const responseValidationPost = await fetch(ApiUrl +"/User/ValidationPost", {
+        //           let ApiUrl = "https://api.tochikala.com/api/User/";
+        // const responseValidationPost = await fetch(ApiUrl +"ValidationPost", {
         //             method: "POST",
         //             headers: { "Content-Type": "application/json" },
         //             body: JSON.stringify({ token }),

@@ -1,4 +1,4 @@
-////zare_nk_050303_okk
+////zare_nk_050413_okk(1)
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -576,7 +576,7 @@ export default function Toolbar() {
           errorFree = false;
           const vall = element?.value;
           if (!vall) {
-            setMobileError("ورود شماره تماس الزامی است"); //zare_nk_040224_added(rahe3-ba useState-reactpasandtarine)
+            setMobileError("ورود شماره تماس الزامی است");   ////zare_nk_040224_added(rahe3-ba useState-reactpasandtarine)
           }
         }
       });
@@ -586,10 +586,10 @@ export default function Toolbar() {
     }
 
     try {
-      // var ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+      // var ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
       var ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
 
-      const response = await fetch(ApiUrl + "User/Api_LoginUser1", {
+      const response = await fetch(ApiUrl + "Api_LoginUser1", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -669,11 +669,11 @@ export default function Toolbar() {
     }
     // const token = getCookie("token");  //zare_nk_041125_commented(chon token null hast ke be login oomadim digeh!!) 
 
-    // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+    // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
     let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
 
     console.log('mobileVal: ' + mobileVal + '-newSmsVal: ' + newSmsVal);
-    const response = await fetch(ApiUrl + "User/Api_LoginUser2", {
+    const response = await fetch(ApiUrl + "Api_LoginUser2", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -713,8 +713,8 @@ export default function Toolbar() {
           // pas az haman sakhte va vakeshiye cookie haviye token ke name token ra behesh dadam baraye moshakhas kardane online shodan va estelame online boodaanesh estefadeh mikonam
           //va in kar ra dar methode verifyToken gonjandim)
 
-          //           let ApiUrl = "https://api.tochikala.com/api/";
-          // const responseValidationPost = await fetch(ApiUrl +"/User/ValidationPost", {
+          //           let ApiUrl = "https://api.tochikala.com/api/User/";
+          // const responseValidationPost = await fetch(ApiUrl +"ValidationPost", {
           //             method: "POST",
           //             headers: { "Content-Type": "application/json" },
           //             body: JSON.stringify({ token }),
@@ -807,9 +807,9 @@ export default function Toolbar() {
       token = localStorage.getItem("Token") || "";
     }
     try {
-      // var ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+      // var ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
       var ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-      const response = await fetch(ApiUrl + "User/Api_LoginUser1", {
+      const response = await fetch(ApiUrl + "Api_LoginUser1", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

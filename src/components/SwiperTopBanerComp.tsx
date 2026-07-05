@@ -1,4 +1,4 @@
-////zare_nk_050411_okk(1)
+////zare_nk_050413_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -116,7 +116,7 @@ const SwiperTopBanerComp = () => {
         getSwiperTopBaner();
     }, []);
 
-    const goToVendor = (IdBaner: number) => {
+    const goToVendorList = (IdBaner: number) => {
         // alert('IdBaner: ' + IdBaner);
         // router.push("/folder03?tab=comments2");
         // redirect("/login");
@@ -195,7 +195,7 @@ const SwiperTopBanerComp = () => {
                                         {/* zare_nk_050408_nokteh_end(rahe1) */}
                                         {/* zare_nk_050408_nokteh_st(rahe2) */}
                                         <button onClick={() => {
-                                            goToVendor(item.IdBaner);
+                                            goToVendorList(item.IdBaner);
                                         }}
                                             style={{
                                                 border: 'none',

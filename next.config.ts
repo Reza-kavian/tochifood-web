@@ -1,7 +1,7 @@
-////zare_nk_050411_okk(1)
-import type { NextConfig } from "next";  
+////zare_nk_050413_okk(1)
+import type { NextConfig } from "next";
 
-const nextConfig03: NextConfig = { 
+const nextConfig03: NextConfig = {
   async redirects() {
     return [
       {
@@ -13,7 +13,7 @@ const nextConfig03: NextConfig = {
   },
 
   images: {
-    domains: ['www.w3schools.com','www.tutorialspoint.com','www.netafraz.com'],  
+    domains: ['www.w3schools.com', 'www.tutorialspoint.com', 'www.netafraz.com'],
   },
 };
 

@@ -1,4 +1,4 @@
-////zare_nk_050411_okk(1)
+////zare_nk_050413_okk(1)
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -1425,9 +1425,9 @@ export default function LocationPage() {
     })
 
 
-    // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
+    // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
     let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-    const response = await fetch(ApiUrl + "User/Api_CreateAddress", {
+    const response = await fetch(ApiUrl + "Api_CreateAddress", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

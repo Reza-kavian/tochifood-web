@@ -1,4 +1,4 @@
-////zare_nk_050411_okk(1)
+////zare_nk_050413_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext } from "react";
@@ -40,9 +40,9 @@ function getCookie(name: any) {
 
 export default function VendorList() {
     const router = useRouter();
-    console.log('050329-VendorList rendered!!');   
-    const [isEpmtyCollapseForSorting, setIsEpmtyCollapseForSorting] = useState(true);   
-    const [isEpmtyCollapseForRaveshErsal, setIsEpmtyCollapseForRaveshErsal] = useState(true);  
+    console.log('050329-VendorList rendered!!');
+    const [isEpmtyCollapseForSorting, setIsEpmtyCollapseForSorting] = useState(true);
+    const [isEpmtyCollapseForRaveshErsal, setIsEpmtyCollapseForRaveshErsal] = useState(true);
 
     ////zare_nk_050403_added_movaghat_st(olgoohaye tamrini va pakkardani)
     // const [testState, SetTestState] = useState<number>(1);
@@ -53,7 +53,7 @@ export default function VendorList() {
     //     //// useCalback1;
     // }, []);
     ////zare_nk_050403_added_movaghat_end(olgoohaye tamrini va pakkardani)
-  
+
     // async function saveAddress(isOnline: boolean) {  ////zare_nk_050403_nokteh(rahe1- mamoolan age tabe ra kharej az component tarif mikonim az in sabke tarife tabe estefadeh mishe(dar sorat va karaei har do ravesh taghriban yeki hastan))
     const saveAddress = useCallback(
         async (isOnline: boolean) => {  ////zare_nk_050403_nokteh(rahe2- mamoolan age tabe ra dakhele   component tarif mikonim az in sabke tarife tabe estefadeh mishe(dar sorat va karaei har do ravesh taghriban yeki hastan))
@@ -121,23 +121,18 @@ export default function VendorList() {
                 backgroundColor: 'white',
                 // border: '1px dashed red',
             }}>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexFlow: 'row-reverse',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        paddingRight: '1rem',
-                        paddingLeft: '1rem',
-                        // border: '1px dashed blue',
-                        width: '100%',
-                        height: '3.5rem',
-                    }}>
-
-                    <button
-                        id="goBackBtn"
-                        onClick={() => { router.back() }}
-
+                <div style={{
+                    display: 'flex',
+                    flexFlow: 'row-reverse',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    paddingRight: '1rem',
+                    paddingLeft: '1rem',
+                    // border: '1px dashed blue',
+                    width: '100%',
+                    height: '3.5rem',
+                }}>
+                    <button id="goBackBtn" onClick={() => { router.back() }}
                         style={{
                             display: 'flex',
                             justifyContent: 'center',
@@ -152,8 +147,7 @@ export default function VendorList() {
                             borderRadius: '9999px',
                             cursor: 'pointer',
                         }}>
-                        <img
-                            src="/images/Icon/back-icon.svg"
+                        <img src="/images/Icon/back-icon.svg"
                             alt="بازگشت"
                             style={{ width: '1.5rem', height: '1.5rem', }}
                         />
@@ -169,8 +163,7 @@ export default function VendorList() {
                         فروشگاه‌های اطراف
                     </div>
 
-                    <button
-                        id="goShoppingBacketBtn"
+                    <button id="goShoppingBacketBtn"
                         // onClick={showAddressListDrawer}
                         //   onClick={() => { setError('goooo!!') }}
                         style={{
@@ -186,10 +179,7 @@ export default function VendorList() {
                             borderRadius: '9999px',
                             cursor: 'pointer',
                         }}>
-                        <img
-                            src="/images/header/shoppingBacket.svg"
-                            alt="سبد خرید"
-                        />
+                        <img src="/images/header/shoppingBacket.svg" alt="سبد خرید" />
                     </button>
                 </div>
 
@@ -268,21 +258,21 @@ export default function VendorList() {
                 <SwiperShopsInVendorComp />
 
                 <div style={{ marginBottom: '1.5rem' }}></div>
-                
+
                 <CollapseAndClickAwayForSortingComp
                     isEpmtyCollapseForSorting={isEpmtyCollapseForSorting}
                     setIsEpmtyCollapseForSorting={setIsEpmtyCollapseForSorting}
                     saveAddress={saveAddress}
-                    // addressFormInputsVal={addressFormInputsVal}
-                    // setAddressFormInputsVal={setAddressFormInputsVal}
+                // addressFormInputsVal={addressFormInputsVal}
+                // setAddressFormInputsVal={setAddressFormInputsVal}
                 />
 
                 <CollapseAndClickAwayForRaveshErsalComp
                     isEpmtyCollapseForRaveshErsal={isEpmtyCollapseForRaveshErsal}
                     setIsEpmtyCollapseForRaveshErsal={setIsEpmtyCollapseForRaveshErsal}
                     saveAddress={saveAddress}
-                    // addressFormInputsVal={addressFormInputsVal}
-                    // setAddressFormInputsVal={setAddressFormInputsVal}
+                // addressFormInputsVal={addressFormInputsVal}
+                // setAddressFormInputsVal={setAddressFormInputsVal}
                 />
             </main>
 

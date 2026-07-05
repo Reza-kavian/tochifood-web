@@ -1,4 +1,4 @@
-////zare_nk_050411_okk(1)
+////zare_nk_050413_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -20,7 +20,6 @@ import Link from "next/link";
 import { red } from "@mui/material/colors";
 
 import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
-
 
 function getCookie(name: any) {
     ////zare_nk_050209_added_st

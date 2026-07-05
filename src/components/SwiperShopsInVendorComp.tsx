@@ -1,4 +1,4 @@
-////zare_nk_050411_okk(1)
+////zare_nk_050413_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -47,41 +47,57 @@ function getCookie(name: any) {
 
 const SwiperShopsInVendorComp = () => {
     console.log('050329-SwiperShopsInVendorComp rendered!!');   ////zare_nk_050329_added
-    const [errorInSwiperTapBests, setErrorInSwiperTapBests] = useState<string | null>(null);
+    const [errorInSwiperShopsInVendorComp, setErrorInSwiperShopsInVendorComp] = useState<string | null>(null);
 
     const router = useRouter();
 
-    type responsedListFromApiSelectGoroohJsonType = {
-        IdG1: number;
-        NameG1: string;
-        AxG1: string;
-        Tozihat: string;
-        // MetaDesc: string;  //؟؟
-        // tbl_Gorooh2
-        // .
-        // .
-        // .
-        [key: string]: any;
+    // type responsedListFromApiSelectGoroohJsonType = {
+    //     IdG1: number;
+    //     NameG1: string;
+    //     AxG1: string;
+    //     Tozihat: string;
+    //     // MetaDesc: string;  //؟؟
+    //     // tbl_Gorooh2
+    //     // .
+    //     // .
+    //     // .
+    //     [key: string]: any;
+    // };
+    type responsedListFromApiSelectShobehAtrafUserType = {
+        IdShobe: number;
+        NameSobe: string;
+        KafKharid: number;
+        Fasele: number;
+        ZarfiatErsal: number;
+        Keraye: number;
+        NazdikTarinZamanErsal: string;
     };
 
-    const [responsedListFromApiSelectGoroohJson, SetResponsedListFromApiSelectGoroohJson] = useState<responsedListFromApiSelectGoroohJsonType[] | null>(null);
+    // const [responsedListFromApiSelectGoroohJson, SetResponsedListFromApiSelectGoroohJson] = useState<responsedListFromApiSelectGoroohJsonType[] | null>(null);
+    const [responsedListFromApiSelectShobehAtrafUser, SetResponsedListFromApiSelectShobehAtrafUser] = useState<responsedListFromApiSelectShobehAtrafUserType[] | null>(null);
 
-    const getSwiperTapBests = async () => {
+    const [currentShobeState, setCurrentShobeState] = useState<responsedListFromApiSelectShobehAtrafUserType | null>(null);
+
+    const getSwiperShopsInVendorComp = async () => {
         let token = await getCookie("token");
         if (!token) {
-            setErrorInSwiperTapBests("lotfan avval online shid");
+            setErrorInSwiperShopsInVendorComp("lotfan avval online shid");
             return;
         }
         console.log('tokentokentoken: ' + token);
         // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
         let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-        const response = await fetch(ApiUrl + "Api_SelectGoroohJson", {
+        // const response = await fetch(ApiUrl + "Api_SelectGoroohJson", {
+        const response = await fetch(ApiUrl + "Api_SelectShobehAtrafUser", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + token,
             },
-            body: JSON.stringify({}),
+            // body: JSON.stringify({}),
+            body: JSON.stringify({
+                "Id": 1,
+            }),
         });
         const data = await response.json();
 
@@ -91,24 +107,55 @@ const SwiperShopsInVendorComp = () => {
                 if (data.data.list == undefined) {
                     return;
                 }
+                // var parsedList = JSON.parse(data.data.list);
+                // var Gorooh = parsedList.Gorooh;
+                // SetResponsedListFromApiSelectGoroohJson(() => {
+                //     return Gorooh
+                // });
                 var parsedList = JSON.parse(data.data.list);
-                var Gorooh = parsedList.Gorooh;
-                SetResponsedListFromApiSelectGoroohJson(() => {
-                    return Gorooh
+                SetResponsedListFromApiSelectShobehAtrafUser(() => {
+                    return parsedList
                 });
             } else {
-                setErrorInSwiperTapBests("متاسفانه خطایی رخ داده است34:" + data.errors);
+                setErrorInSwiperShopsInVendorComp("متاسفانه خطایی رخ داده است34:" + data.errors);
                 console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
             }
         } else {
             console.log("zare_nk_050110-!response.ok" + response.ok);
-            setErrorInSwiperTapBests("متاسفانه خطایی رخ داده است35");
+            setErrorInSwiperShopsInVendorComp("متاسفانه خطایی رخ داده است35");
         }
     }
 
     useEffect(() => {
-        getSwiperTapBests();  ////zare_nk_050403_commented_movaghat
+        getSwiperShopsInVendorComp();  ////zare_nk_050403_commented_movaghat
     }, []);
+
+    const goToVendor = async (Shobe: responsedListFromApiSelectShobehAtrafUserType | null) => {
+        // alert('IdShobe: ' + IdShobe);
+        // router.push("/folder03?tab=comments2");
+        // redirect("/login");
+        // router.replace("/location");
+        // router.push("/vendorlist/");
+        //`/vendor/${item.IdShobe}`
+        router.push(`/vendor/${Shobe?.IdShobe}`);
+
+
+        const expires = new Date();
+        expires.setFullYear(expires.getFullYear() + 5);
+        const expiresString = expires.toUTCString();
+        document.cookie = Shobe ? (
+            `currentShobe=${encodeURIComponent(
+                JSON.stringify(Shobe)
+            )}; path=/; expires=${expiresString};secure; samesite=None`
+        ) :
+            (
+                `currentShobe=; path=/; expires=${expiresString};secure; samesite=None`
+            )
+
+        const currentShobe = await getCookie("currentShobe");
+        var parsedurrentShobe: responsedListFromApiSelectShobehAtrafUserType | null = currentShobe ? JSON.parse(currentShobe) : null;
+        // setCurrentShobeState(parsedurrentShobe);   ////zare_nk_050414_commented(be useState felan niazi nadaram) 
+    };
 
     return (
         <>
@@ -134,8 +181,9 @@ const SwiperShopsInVendorComp = () => {
                         //// manteghi nist, chon arze colle slideha ro migire, na arze masalan 100% pedaresh ro)ب
                     }}
                 >
-                    {responsedListFromApiSelectGoroohJson?.map((item, index) => {
-                        console.log('050404-item.IdG1: ' + item.IdG1);
+                    {/* {responsedListFromApiSelectGoroohJson?.map((item, index) => { */}
+                    {responsedListFromApiSelectShobehAtrafUser?.map((item, index) => {
+                        console.log('050404-item.IdShobe: ' + item.IdShobe);
                         ////zare_nk_050331_added_st(soori helghehaye badi ra biasar kardam-chon tapsifood faghat yek tasvir dashe va man baraye inke badan betoonam manovr bedam az swipere ye slidi estefadeh kardam)
                         // if (index >= 1) return null;
                         ////zare_nk_050331_added_end(soori helghehaye badi ra biasar kardam-chon tapsifood faghat yek tasvir dashe va man baraye inke badan betoonam manovr bedam az swipere ye slidi estefadeh kardam)
@@ -154,10 +202,15 @@ const SwiperShopsInVendorComp = () => {
                                     display: 'flex', alignItems: 'center', justifyContent: 'center', //// width: '100%', height: '100%',
                                     backgroundColor: 'inherit', borderRadius: '.75rem', border: '1px solid #f6f6f7',
                                 }}>
-                                    <Link
-                                        href={`/vendor/${item.IdG1}`}
-                                        // href="https://tapsi.food/business-lines?businessTypeId=6" 
-                                        style={{ width: '100%', height: '100%', textDecoration: 'none', }}>
+                                    {/* <Link href={`/vendorlist?IdBaner=${item.IdBaner}`} >	
+	
+	 <button onClick={() => { goToVendor(item.IdBaner); }} */}
+                                    {/* <Link href={`/vendor/${item.IdShobe}`} */}
+                                    <button onClick={() => { goToVendor(item); }}
+                                        style={{
+                                            width: '100%', height: '100%', //textDecoration: 'none',
+                                            border: 'none', backgroundColor: 'inherit', padding: '0px',
+                                        }}>
                                         <div style={{
                                             display: 'flex', flexFlow: 'column', position: 'relative', width: '100%', height: '100%',
                                             justifyContent: 'center', alignItems: 'center',
@@ -316,7 +369,7 @@ const SwiperShopsInVendorComp = () => {
 
                                                             textAlign: 'center',
                                                         }}>
-                                                            {item.NameG1}
+                                                            {item.NameSobe}
                                                         </div>
 
                                                         <div style={{
@@ -366,20 +419,30 @@ const SwiperShopsInVendorComp = () => {
                                                             <div style={{
                                                                 display: 'flex', flexFlow: 'row', alignItems: "center", gap: '.25rem',
                                                             }}>
-                                                                <span style={{
-                                                                    color: '#878b92',
-                                                                    fontSize: '.75rem',
-                                                                    margin: '0px',
-                                                                    textDecoration: 'line-through',
-                                                                }}>58000</span>
-                                                                <span style={{
-                                                                    color: '#059666',
-                                                                    //    fontWeight: 500,
-                                                                    fontSize: '.875rem',
-                                                                    lineHeight: '1.25rem',
-                                                                }}>رایگان</span>
+                                                                {item.Keraye != 0 ?
+                                                                    <>
+                                                                        <span style={{
+                                                                            color: '#878b92',
+                                                                            fontSize: '.75rem',
+                                                                            margin: '0px',
+                                                                            textDecoration: 'line-through',
+                                                                        }}>58000</span>
+                                                                        <span style={{
+                                                                            color: '#059666',
+                                                                            //    fontWeight: 500,
+                                                                            fontSize: '.875rem',
+                                                                            lineHeight: '1.25rem',
+                                                                        }}>رایگان</span>
+                                                                    </> :
+                                                                    <>
+                                                                        <span style={{
+                                                                            color: '#878b92',
+                                                                            fontSize: '.75rem',
+                                                                            margin: '0px',
+                                                                        }}>58000</span>
+                                                                    </>
+                                                                }
                                                             </div>
-
                                                         </div>
 
                                                         <span style={{
@@ -387,16 +450,15 @@ const SwiperShopsInVendorComp = () => {
                                                             fontSize: '.75rem',
                                                             lineHeight: '18px',
                                                         }}>
-                                                            تا 50 دقیقه
+                                                            {/* تا 50 دقیقه */}
+                                                            {item.NazdikTarinZamanErsal}
                                                         </span>
 
                                                     </div>
-
                                                 </div>
-
                                             </div>
                                         </div>
-                                    </Link>
+                                    </button>
                                 </div>
                             </SwiperSlide>
                         )
