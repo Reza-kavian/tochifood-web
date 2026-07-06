@@ -40,7 +40,7 @@ function getCookie(name: any) {
 
 export default function VendorList() {
     const router = useRouter();
-    console.log('050329-VendorList rendered!!');
+    console.log('050414-VendorList rendered!!');
     const [isEpmtyCollapseForSorting, setIsEpmtyCollapseForSorting] = useState(true);
     const [isEpmtyCollapseForRaveshErsal, setIsEpmtyCollapseForRaveshErsal] = useState(true);
 
