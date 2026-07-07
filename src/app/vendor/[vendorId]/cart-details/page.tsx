@@ -16,6 +16,8 @@ import SwiperBordBordInVendorComp from '../../../../components/SwiperBordBordInV
 
 import { NextJsApiUrl } from "../../../../constants/Urls";  ////zare_nk_050407_added
 
+import Link from "next/link";
+
 function getCookie(name: any) {
     ////zare_nk_050209_added_st
     if (typeof document === 'undefined') {
@@ -38,6 +40,807 @@ function getCookie(name: any) {
     console.log("do nist-parts.length: " + parts.length);
     return null; //اگر کوکی پیدا نشد
 }
+
+////zare_nk_050416_added_st(for add ren buttons)
+type MiddleCountTedadSefrType = {
+  // SabadRow: SabadRowType | ForCartContInProdDetValType;  //zare_nk_041120_nokteh(in khat commenteh, faghat jahate olgue hazf nakardam)
+  ////zare_nk_041120_added_st
+  refForfather: RefObject<string | null>;
+  fromShowDetails: boolean;
+  IdKala: number;
+  idTag: string;
+  tedadInSabadOrDet: number;
+  ////zare_nk_041120_added_end
+  handlerForAddClick: (e?: MouseEvent<HTMLAnchorElement>) => void;
+  handlerForRemClick: (e?: MouseEvent<HTMLAnchorElement>) => void;
+  ForCartContentsDesignType: number;
+  bishAzMaxTedadYaMojoodi: number | null;
+};
+
+function MiddleCountTedadSefr({  //zare_nk_041127_added
+  // SabadRow,  //zare_nk_041120_commented
+  ////zare_nk_041120_added_st
+  refForfather,
+  fromShowDetails,
+  IdKala,
+  idTag,
+  tedadInSabadOrDet,
+  ////zare_nk_041120_added_end
+  handlerForAddClick,
+  handlerForRemClick,
+  ForCartContentsDesignType,
+  bishAzMaxTedadYaMojoodi,
+  ///////////////////////////////////zare_nk_041120_added_end
+}: MiddleCountTedadSefrType) {
+  console.log('ShallowRoutingExample called-MiddleCountTedadSefr-ForCartContentsDesignType: ' + ForCartContentsDesignType);
+  useEffect(() => {
+    ////zare_nk_041120_commented_st
+    // console.log('2-041119-SabadRow: ' + JSON.stringify(SabadRow));
+    // console.log('2-041119-ForCartContentsDesignType: ' + ForCartContentsDesignType);
+    // console.log('2-041119-bishAzMaxTedadYaMojoodi: ' + bishAzMaxTedadYaMojoodi);
+    ////zare_nk_041120_commented_end
+  });
+
+  useEffect(() => {
+    // if ("refForfather" in SabadRow) {
+    //   SabadRow.refForfather.current = SabadRow.fromShowDetails
+    //     ? "#DetailsInfoCont"
+    //     : "#sabadItemsContInSafhe";
+    // }
+    console.log('refForfather.current iss: ' + refForfather.current);
+    ////zare_nk_041127_commented_st
+    // refForfather.current = fromShowDetails
+    //   ? "#DetailsInfoCont"
+    //   : "#sabadItemsContInSafhe"; 
+
+    //if (ForCartContentsDesignType == 0) {
+    // if (IdKala) {
+    //   const ForCartWidth = document.querySelector(
+    //     refForfather.current +
+    //     " #ForCart-" +
+    //     IdKala +
+    //     " .input-group"
+    //   );
+    //   if (ForCartWidth instanceof HTMLElement) {
+    //      ForCartWidth.style.width = "35px";
+    //   }
+    // }
+    //} else if (ForCartContentsDesignType == 1) {
+    // if (IdKala) {
+    //   const ForCartWidth = document.querySelector(
+    //     refForfather.current +
+    //     " #ForCart-" +
+    //     IdKala +
+    //     " .input-group"
+    //   );
+    //   if (ForCartWidth instanceof HTMLElement) {
+    //     ForCartWidth.style.width = "auto";
+    //   }
+    // }
+    //} else if (ForCartContentsDesignType == 2) {
+    // if (IdKala) {
+    //   const ForCartWidth = document.querySelector(
+    //     refForfather.current +
+    //     " #ForCart-" +
+    //     IdKala +
+    //     " .input-group"
+    //   );
+    //   if (ForCartWidth instanceof HTMLElement) {
+    //     ForCartWidth.style.width = "auto";
+    //   }
+    // }
+    //}
+    ////zare_nk_041127_commented_end
+  });
+
+  if (ForCartContentsDesignType == 0) {
+    return (
+      <div
+        className={`text-center align-items-center justify-content-center ForCart ${idTag}`}
+        id={`${idTag}`}
+        style={{ width: "100%", display: "flex", alignItems: 'center', justifyContent: 'center', }}
+      >
+        <div
+          className="input-group rounded-pill"
+          style={{
+            backgroundColor: "white",
+            height: "35px",
+            display: "flex",
+            flexWrap: "nowrap",
+            justifyContent: "center",
+            alignItems: "center",
+            alignContent: "center",
+            // border: "1px solid red",  ////zare_nk_050414_commented
+            boxShadow: '0px 2px 5px rgba(0,0,0,.2)',  ////zare_nk_050414_added
+            overflow: "hidden",
+            width: "35px",  ////zare_nk_050414_added
+
+            direction: 'rtl',  ////zare_nk_050414_added
+            flexDirection: 'row-reverse',  ////zare_nk_050414_added 
+            borderRadius: 100,   ////zare_nk_050414_added
+          }}
+        // dir="ltr"  ////zare_nk_050414_commented
+        >
+          <div
+            className="addremmCont"
+            id={`removeCont-${IdKala}`}
+            style={{ height: "100%", flex: "1 1 auto", display: "none" }}
+          >
+            <div
+              style={{
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                alignContent: "center",
+                overflow: "hidden",
+              }}
+            >
+              <a
+                data-baz="0"
+                style={{
+                  flex: "1 1 auto",
+                  height: "100%",
+                  padding: "0px 2px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  textDecoration: "none",
+                  borderRadius: "50%",
+                }}
+                className={`rem-${IdKala}`}
+                href="/login"
+              >
+                <button
+                  style={{
+                    height: "80%",
+                    backgroundColor: "white",
+                    border: "none",
+                    padding: "0",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  className="plussMinus"
+                >
+                  <img
+                    src="https://img.tochikala.com/tochikala/remove-icon.svg"
+                    alt="حذف از سبد"
+                    className="d-inline-block"
+                    style={{ objectFit: "contain", width: "20px" }}
+                  />
+                </button>
+              </a>
+            </div>
+          </div>
+
+          <div
+            className={`middleCount-${IdKala}`}
+            style={{
+              height: "100%",
+              flex: "1 1 auto",
+              display: "flex",
+              // flexFlow: "column", ////zare_nk_050414_commented
+            }}
+          >
+            {/* zare_nk_050415_nokteh(span be div tabdil shod) */}
+            <div
+              style={{
+                height: "100%",
+                // border: "none", ////zare_nk_050414_commented
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                alignContent: "center",
+                overflow: "hidden",
+                padding: "0px 4px", ////zare_nk_050414_added
+              }}
+            >
+              {/* <a
+                data-baz="1"
+                style={{
+                  flex: "1 1 auto",
+                  height: "100",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  textDecoration: "none",
+                  borderRadius: "50%",
+                }}
+                className={`add-${IdKala}`}
+                href="/login"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlerForAddClick(e);
+                }}
+              > */}
+              <button
+                onClick={() => { handlerForAddClick(); }}
+                data-baz="1"
+                id={`inp-${IdKala}`}
+                style={{
+                  flex: "1 1 auto",
+                  flexDirection: 'row',
+                  justifyContent: "center",
+                  alignItems: "center",
+                  opacity: Number(bishAzMaxTedadYaMojoodi) === 1 ? 0.3 : 1,  ////zare_nk_050414_added
+                  display: "flex",
+                  // color: "red",  ////zare_nk_050414_commented
+                  fontSize: "14px",
+                  borderRadius: "100px",////zare_nk_050414_added
+                  width: "28px",////zare_nk_050414_added
+                  height: "28px",////zare_nk_050414_added
+                  backgroundColor: "#1b1c1d",////zare_nk_050414_added
+                  border: "none",  ////zare_nk_050415_nokteh(baraye buttone web niaze ta az css haye dakheliye buttone web jologiri koneh )
+                  padding: "0",  ////zare_nk_050415_nokteh(baraye buttone web niaze ta az css haye dakheliye buttone web jologiri koneh )
+                }}
+                disabled={Boolean(Number(bishAzMaxTedadYaMojoodi))}
+               // className="plussMinus card-linkk text-dangerr fa fa-plus"
+              >
+                {/* <span
+                  style={{
+                    color: "red",
+                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),
+                    borderRadius: "100px",
+                    width: "20px",
+                    height: "20px",
+                  }}
+                > */}
+                {/* <AddToCartTapsiIcon /> */}
+                <img
+                  // src="https://img.tochikala.com/tochikala/add-to-cart.svg"
+                  src="/images/addRemm/add-to-cart-tapsi.svg"
+                  alt="اضافه به سبد"
+                  className="d-inline-block"
+                  style={{ objectFit: "contain", width: "20px" }}
+                />
+                {/* </span> */}
+              </button>
+              {/* </a> */}
+            </div>
+          </div>
+
+          <div
+            className="addremmCont"
+            id={`addCont-${IdKala}`}
+            style={{ height: "100%", flex: "1 1 auto", display: "none" }}
+          >
+            <div
+              style={{
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                alignContent: "center",
+                overflow: "hidden",
+              }}
+            >
+              <a
+                data-baz="0"
+                style={{
+                  flex: "1 1 auto",
+                  height: "100%",
+                  padding: "0px 2px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  textDecoration: "none",
+                  borderRadius: "50%",
+                }}
+                className={`add-${IdKala}`}
+                href="/login"
+              >
+                <button
+                  style={{
+                    height: "80%",
+                    backgroundColor: "white",
+                    border: "none",
+                    padding: "0",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  className="plussMinus"
+                >
+                  <img
+                    src="https://img.tochikala.com/tochikala/add-to-cart.svg"
+                    alt="اضافه به سبد"
+                    className="d-inline-block"
+                    style={{ objectFit: "contain", width: "20px" }}
+                  />
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  } else if (ForCartContentsDesignType == 1) {
+    return (
+      <div
+        className={`text-center align-items-center justify-content-center ForCart ${idTag}`}
+        id={`${idTag}`}
+        style={{ width: "100%", display: "flex", alignItems: 'center', justifyContent: 'center', }}
+      >
+        <div
+          className="input-group rounded-pill"
+          style={{
+            backgroundColor: "white",
+            height: "35px",
+            display: "flex",
+            flexWrap: "nowrap",
+            justifyContent: "center",
+            alignItems: "center",
+            alignContent: "center",
+            // border: "1px solid red",   ////zare_nk_050415_commented
+            boxShadow: '0px 2px 5px rgba(0,0,0,.2)',   ////zare_nk_050415_added
+            overflow: "hidden",
+            width: "auto",
+            direction: 'rtl',   ////zare_nk_050415_added
+            flexDirection: 'row-reverse',   ////zare_nk_050415_added
+            borderRadius: "100px",   ////zare_nk_050415_added
+          }}
+          dir="ltr"   ////zare_nk_050415_commented
+        >
+          <div
+            className="addremmCont"
+            id={`removeCont-${IdKala}`}
+            style={{ height: "100%", flex: "1 1 auto" }}
+          >
+            <div
+              style={{
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                alignContent: "center",
+                overflow: "hidden",
+                padding: "0px 4px",
+              }}
+            >
+              {/* <a
+                data-baz="1"
+                style={{
+                  flex: "1 1 auto",
+                  height: "100%",
+                  padding: "0px 2px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "50%",
+                }}
+                className={`rem-${IdKala}`}
+                href="/login"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlerForRemClick(e);
+                }}
+              > */}
+              <button
+                onClick={() => { handlerForRemClick(); }}   ////zare_nk_050415_added
+                data-baz="1"
+                style={{
+                  // height: "80%",  ////zare_nk_050415_commented
+                  flex: '0 0 auto',
+                  // backgroundColor: "white",  ////zare_nk_050415_commented
+                  backgroundColor: "#e6e9ea",  ////zare_nk_050415_added
+                  border: "none",  ////zare_nk_050415_nokteh(baraye buttone web niaze ta az css haye dakheliye buttone web jologiri koneh )
+                  padding: "0",  ////zare_nk_050415_nokteh(baraye buttone web niaze ta az css haye dakheliye buttone web jologiri koneh )
+                  display: "flex",
+                  flexDirection: 'row',   ////zare_nk_050415_added             
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "100px",   ////zare_nk_050415_added 
+                  width: "28px",
+                  height: "28px",
+                }}
+              // className="plussMinus"  ////zare_nk_050415_commented
+              >
+                {/* <span style={{
+                  // height: "80%",  //zare_nk_041202_commented
+                  // backgroundColor: "blue",
+                  ////zare_nk_041202_commented_st
+                  // padding: 0,
+                  // alignItems: "center",
+                  // justifyContent: "center",
+                  ////zare_nk_041202_commented_end
+                  ////zare_nk_050316_added_st
+                  borderRadius: "100px",
+                  width: "20px",
+                  height: "20px",
+                  ////zare_nk_050316_added_end
+                }}> */}
+                <img
+                  // src="https://img.tochikala.com/tochikala/remove-icon.svg"
+                  src="/images/addRemm/recycle-bin.svg"
+                  alt="حذف از سبد"
+                  className="d-inline-block"
+                  style={{ objectFit: "contain", width: "20px" }}
+                />
+                {/* </span> */}
+              </button>
+              {/* </a> */}
+            </div>
+          </div>
+
+          <div
+            // className={`middleCount-${IdKala}`}  ////zare_nk_050415_commented
+            // style={{ height: "100%", display: "flex", flexFlow: "column" }}  ////zare_nk_050415_commented
+            style={{
+              height: "100%", display: "flex", flexFlow: "row",
+              width: "30px", justifyContent: "center", alignItems: 'center', alignContent: "center",
+            }}>
+            <span
+              // id={`inp-${IdKala}`}  ////zare_nk_050415_commented
+              // className="text-center titleStyle"  ////zare_nk_050415_commented
+              style={{
+                backgroundColor: "white",
+                ////zare_nk_050415_commented_st
+                // border: "none",
+                // flex: "1 0 40%",
+                // width: "40px",
+                // display: "flex",
+                // justifyContent: "center",
+                // alignItems: "center",
+                // alignContent: "center",
+                ////zare_nk_050415_commented_end
+              }}
+            >
+              {tedadInSabadOrDet}
+            </span>
+            {/* zare_nk_050415_commented */}
+            {/* <span style={{ border: "none" }}> </span> */}
+          </div>
+
+          <div
+            // className="addremmCont"   ////zare_nk_050415_commented
+            // id={`addCont-${IdKala}`}  ////zare_nk_050415_commented
+            style={{ height: "100%", flex: "1 1 auto" }}
+          >
+            <div
+              style={{
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                alignContent: "center",
+                overflow: "hidden",
+                padding: '0px 4px',  ////zare_nk_050415_added
+              }}
+            >
+              {/* <a
+                data-baz="1"
+                style={{
+                  flex: "1 1 auto",
+                  height: "100%",
+                  padding: "0px 2px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "50%",
+                }}
+                className={`add-${IdKala}`}
+                href="/login"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlerForAddClick(e);
+                }}
+              > */}
+              <button
+                onClick={() => { handlerForAddClick(); }}
+                data-baz="1"
+                title={Number(bishAzMaxTedadYaMojoodi) === 1 ? "موجودی کافی نیست" : ""}
+                style={{
+                  flex: '0 0 auto',  ////zare_nk_050415_added
+                  // height: "80%",   ////zare_nk_050415_commented
+                  // backgroundColor: "white",   ////zare_nk_050415_commented
+                  backgroundColor: "#1b1c1d",  ////zare_nk_050415_added
+                  border: "none",  ////zare_nk_050415_nokteh(baraye buttone web niaze ta az css haye dakheliye buttone web jologiri koneh )
+                  padding: "0",  ////zare_nk_050415_nokteh(baraye buttone web niaze ta az css haye dakheliye buttone web jologiri koneh )
+                  display: "flex",
+                  flexDirection: 'row',     ////zare_nk_050415_added            
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "100px",  ////zare_nk_050415_added
+                  // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
+                  // barmigardoone va ...(Number(bishAzMaxTedadYaMojoodi) === 1 ham ya true ya false barmigardoone,va darkol ba and(&&) natijeye kolli ya true 
+                  // midshe ya false,pas opacity meghdare nemigireh va faghat meghdari boolean barmigardooneh!!  )
+
+                  // opacity: Number(bishAzMaxTedadYaMojoodi) === 1 ? 0.3 : 1, //zare_nk_050124_nokteh(rahe1-in dastoor dorosteh va javab mideh)
+                  ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 } : { opacity: 1 }), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
+                  ////zare_nk_050124_nokteh(rahe1 age gharare hamin opacity faghat meghdar begire khanatare,vali age bakhaim chandin khasiat ra meghdar bedim rahe2
+                  // tosiyeh mishe (masalan ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3,color:'silver' }:{opacity: 1,color:'red'}),))
+                  width: "28px",  ////zare_nk_050415_added
+                  height: "28px",  ////zare_nk_050415_added
+                }}
+                className="plussMinus"
+                disabled={Boolean(Number(bishAzMaxTedadYaMojoodi))}
+              >
+                {/* zare_nk_050415_added(spane wrapere img ra az sabade andrpidi elham gereftam(ghablan img dakhele spani nabood)) 
+                and zare_nk_041202_commented(be in natijeh residam img tooye span bimoredeh) */}
+                {/* <span style={{
+                  // height: "80%",  //zare_nk_041202_commented
+                  // backgroundColor: "blue",
+                  ////zare_nk_041202_commented_st
+                  // padding: 0,
+                  // alignItems: "center",
+                  // justifyContent: "center",
+                  ////zare_nk_041202_commented_end
+                  ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),
+
+                  ////zare_nk_050316_added_st
+                  // display:'flex',
+                  // flexDirection:'row',
+                  // justifyContent:'center',
+                  // alignItems:'center',
+                  borderRadius: "100px",
+                  width: "20px",
+                  height: "20px",
+                  ////zare_nk_050316_added_end
+                }}> */}
+                <img
+                  // src="https://img.tochikala.com/tochikala/add-to-cart.svg"
+                  src="/images/addRemm/add-to-cart-tapsi.svg"
+                  alt="اضافه به سبد"
+                  className="d-inline-block"
+                  style={{ objectFit: "contain", width: "20px" }}
+                />
+                {/* </span> */}
+
+              </button>
+              {/* </a> */}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  } else if (ForCartContentsDesignType == 2) {
+    return (
+      <div
+        // className={`text-center align-items-center justify-content-center ForCart ${idTag}`}  ////zare_nk_050415_commented
+        // id={`${idTag}`}  ////zare_nk_050415_commented
+        style={{ width: "100%", display: "flex", alignItems: 'center', justifyContent: 'center', }}
+      >
+        <div
+          className="input-group rounded-pill"
+          style={{
+            backgroundColor: "white",
+            height: "35px",
+            display: "flex",
+            flexWrap: "nowrap",
+            justifyContent: "center",
+            alignItems: "center",
+            alignContent: "center",
+            // border: "1px solid red",  ////zare_nk_050415_commented
+            boxShadow: '0px 2px 5px rgba(0,0,0,.2)',   ////zare_nk_050415_added
+            overflow: "hidden",
+            width: "auto",
+
+            direction: 'rtl',   ////zare_nk_050415_added
+            flexDirection: 'row-reverse',   ////zare_nk_050415_added
+            borderRadius: "100px",     ////zare_nk_050415_added
+          }}
+        // dir="ltr"  ////zare_nk_050415_commented
+        >
+          <div
+            // className="addremmCont"  ////zare_nk_050415_commented
+            // id={`removeCont-${IdKala}`}  ////zare_nk_050415_commented
+            style={{ height: "100%", flex: "1 1 auto" }}
+          >
+            <div
+              style={{
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                alignContent: "center",
+                overflow: "hidden",
+                padding: '0px 4px',  ////zare_nk_050415_added
+              }}
+            >
+              {/* <a
+                data-baz="1"
+                style={{
+                  flex: "1 1 auto",
+                  height: "100%",
+                  padding: "0px 2px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "50%",
+                }}
+                className={`rem-${IdKala}`}
+                href="/login"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlerForRemClick(e);
+                }}
+              > */}
+              <button
+                onClick={() => { handlerForRemClick(); }}
+                data-baz="1"
+                style={{
+                  flex: '0 0 auto', ////zare_nk_050415_added
+                  // height: "80%", ////zare_nk_050415_commented
+                  // backgroundColor: "white", ////zare_nk_050415_commented
+                  backgroundColor: "#e6e9ea", ////zare_nk_050415_added
+                  border: "none",  ////zare_nk_050415_nokteh(baraye buttone web niaze ta az css haye dakheliye buttone web jologiri koneh )
+                  padding: "0",  ////zare_nk_050415_nokteh(baraye buttone web niaze ta az css haye dakheliye buttone web jologiri koneh )
+                  display: "flex",
+                  flexDirection: 'row', ////zare_nk_050415_added
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: "100px", ////zare_nk_050415_added
+                  width: "28px", ////zare_nk_050415_added
+                  height: "28px", ////zare_nk_050415_added
+                }}
+              // className="plussMinus"  ////zare_nk_050415_commented
+              >
+
+                {/* <span style={{
+                  // height: "80%",  //zare_nk_041202_commented
+                  // backgroundColor: "white",  ////zare_nk_050316_commented
+                  // backgroundColor: "blue",  ////zare_nk_050316_added
+                  ////zare_nk_041202_commented_st
+                  // padding: 0,
+                  // alignItems: "center",
+                  // justifyContent: "center",
+                  ////zare_nk_041202_commented_end
+                  ////zare_nk_050316_added_st  
+                  borderRadius: "100px",
+                  width: "20px",
+                  height: "20px",
+                  ////zare_nk_050316_added_end
+                }}> */}
+                <img
+                  // src="https://img.tochikala.com/tochikala/remove-from-cart.svg"
+                  src="/images/addRemm/remove-from-cart-tapsi.svg"
+                  alt="حذف از سبد"
+                  className="d-inline-block"
+                  style={{ objectFit: "contain", width: "20px" }}
+                />
+                {/* </span> */}
+              </button>
+              {/* </a> */}
+            </div>
+          </div>
+
+          <div
+            // className={`middleCount-${IdKala}`}   ////zare_nk_050415_commented
+            // style={{ height: "100%", display: "flex", flexFlow: "column" }}   ////zare_nk_050415_commented
+            style={{   ////zare_nk_050415_added
+              height: "100%", display: "flex", flexFlow: "row", width: "30px",
+              justifyContent: "center", alignItems: 'center', alignContent: "center",
+            }}
+          >
+            <span
+              // id={`inp-${IdKala}`}    ////zare_nk_050415_commented 
+              // className="text-center titleStyle"   ////zare_nk_050415_commented
+              style={{
+                backgroundColor: "white",
+                ////zare_nk_050415_commented_st
+                // border: "none",
+                // flex: "1 0 40%",
+                // width: "40px",
+                // display: "flex",
+                // justifyContent: "center",
+                // alignItems: "center",
+                // alignContent: "center",
+                ////zare_nk_050415_commented_end
+              }}
+            >
+              {tedadInSabadOrDet}
+            </span>
+            <span style={{ border: "none" }}> </span>
+          </div>
+
+          <div
+            // className="addremmCont"     ////zare_nk_050415_commented
+            // id={`addCont-${IdKala}`}   ////zare_nk_050415_commented
+            style={{ height: "100%", flex: "1 1 auto" }}
+          >
+            <div
+              style={{
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                alignContent: "center",
+                overflow: "hidden",
+                padding: '0px 4px',     ////zare_nk_050415_added
+              }}
+            >
+              {/* <a
+                data-baz="1"
+                style={{
+                  flex: "1 1 auto",
+                  height: "100%",
+                  padding: "0px 2px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "50%",
+                }}
+                className={`add-${IdKala}`}
+                href="/login"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlerForAddClick(e);
+                }}
+              > */}
+              <button
+                onClick={() => { handlerForAddClick(); }}
+                data-baz="1"
+                title={Number(bishAzMaxTedadYaMojoodi) === 1 ? "موجودی کافی نیست" : ""}
+                style={{
+                  flex: '0 0 auto', ////zare_nk_050415_added
+                  // height: "80%", ////zare_nk_050415_commented
+                  // backgroundColor: "white", ////zare_nk_050415_commented
+                  backgroundColor: "#1b1c1d", ////zare_nk_050415_added
+                  border: "none",  ////zare_nk_050415_nokteh(baraye buttone web niaze ta az css haye dakheliye buttone web jologiri koneh )
+                  padding: "0",   ////zare_nk_050415_nokteh(baraye buttone web niaze ta az css haye dakheliye buttone web jologiri koneh )
+                  display: "flex",
+                  flexDirection: 'row', ////zare_nk_050415_added
+                  alignItems: "center",
+                  justifyContent: "center",
+                  // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
+                  // barmigardoone va ...(Number(bishAzMaxTedadYaMojoodi) === 1 ham ya true ya false barmigardoone,va darkol ba and(&&) natijeye kolli ya true 
+                  // midshe ya false,pas opacity meghdare nemigireh va faghat meghdari boolean barmigardooneh!!  )
+
+                  // opacity: Number(bishAzMaxTedadYaMojoodi) === 1 ? 0.3 : 1, //zare_nk_050124_nokteh(rahe1-in dastoor dorosteh va javab mideh)
+                  ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 } : { opacity: 1 }), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
+                  ////zare_nk_050124_nokteh(rahe1 age gharare hamin opacity faghat meghdar begire khanatare,vali age bakhaim chandin khasiat ra meghdar bedim rahe2
+                  // tosiyeh mishe (masalan ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3,color:'silver' }:{opacity: 1,color:'red'}),))
+
+                  borderRadius: "100px", ////zare_nk_050415_added
+                  width: "28px", ////zare_nk_050415_added
+                  height: "28px", ////zare_nk_050415_added
+                }}
+                // className="plussMinus"  ////zare_nk_050415_commented
+                disabled={Boolean(Number(bishAzMaxTedadYaMojoodi))}
+              >
+                {/* <span style={{
+                  // height: "80%",  //zare_nk_041202_commented
+                  // backgroundColor: "white",  ////zare_nk_050316_commented
+                  // backgroundColor: "blue",  ////zare_nk_050316_added
+                  ////zare_nk_041202_commented_st
+                  // padding: 0,
+                  // alignItems: "center",
+                  // justifyContent: "center",
+                  ////zare_nk_041202_commented_end
+                  ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),
+
+                  // borderWidth: 1,
+                  // borderStyle: 'dashed',
+                  // borderColor: 'red',
+                  ////zare_nk_050316_added_st
+                  // display:'flex',
+                  // flexDirection:'row',   
+                  // justifyContent:'center',
+                  // alignItems:'center',
+                  borderRadius: "100px",
+                  width: "20px",
+                  height: "20px",
+                  ////zare_nk_050316_added_end
+                }}> */}
+                <img
+                  // src="https://img.tochikala.com/tochikala/add-to-cart.svg"
+                  src="/images/addRemm/add-to-cart-tapsi.svg"
+                  alt="اضافه به سبد"
+                  className="d-inline-block"
+                  style={{ objectFit: "contain", width: "20px" }}
+                />
+                {/* </span> */}
+              </button>
+              {/* </a> */}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }  
+}
+////zare_nk_050416_added_end(for add rem buttons)
 
 type responsedListFromApiSelectAddressListType = {
     IdAdress: number;
@@ -423,8 +1226,6 @@ export default function CartDetails() {
         }
         , [isEpmtyAdressList, responsedListFromApiSelectAddressList])
 
-
-
     type responsedListFromApiSelectShobehAtrafUserType = {
         IdShobe: number;
         NameSobe: string;
@@ -551,15 +1352,15 @@ export default function CartDetails() {
             width: '100%',
             // height: '100%',  ////height :100% dorost nist, chon shayad dar layout alaveh ba children satrhaye dife ham dashe bashim(mesle footer va header va...)
             display: "flex",
-            flexDirection: 'column', 
+            flexDirection: 'column',
             position: 'relative',  ////zare_nk_050404_added
         }}>
             <header style={{
-                position: 'sticky',  
+                position: 'sticky',
                 backgroundColor: 'white',
                 flexShrink: '0px',
-                width: '100%', 
-                top: '0px', 
+                width: '100%',
+                top: '0px',
                 // boxShadow: '0px 3px 2px -1px #d7d6d6',
                 boxShadow: '0px 4px 20px 0px #0000000f',
 
@@ -574,7 +1375,7 @@ export default function CartDetails() {
                         display: 'flex',
                         flexFlow: 'row-reverse',
                         justifyContent: 'space-between',
-                        alignItems: 'center', 
+                        alignItems: 'center',
                         paddingRight: '1rem',
                         paddingLeft: '1rem',
                         // border: '1px dashed blue',
@@ -615,8 +1416,8 @@ export default function CartDetails() {
                         // border: '1px dashed orange',
                         flex: '1 1 auto',
                     }}>
-                       سبد خرید
-                    </div>                    
+                        سبد خرید
+                    </div>
                 </div>
             </header >
 
@@ -633,12 +1434,16 @@ export default function CartDetails() {
                     flex: '1 0 auto',
                     // border: '3px solid orange',
                     direction: 'rtl',
-                    // paddingTop: '10px',   
+                    // paddingTop: '10px',    
 
+                    minHeight: '900px',  ////zare_nk_050416_added_movaghat(pak kardani)
 
-                    minHeight:'900px',  ////zare_nk_050416_added_movaghat(pak kardani)
+                    paddingLeft: '1rem',  ////zare_nk_050416_added
+                    paddingRight: '1rem',  ////zare_nk_050416_added
                 }}>
-                {isEpmtyAdressList &&  ////zare_nk_050329_updated(sharte isEpmtyAdressList emal shod ke isEpmtyAdressList==false bood component ra aslan seda nazanim)
+
+                {/* zare_nk_050416_added_st(inja address haro niaz nadaram felan) */}
+                {/* {isEpmtyAdressList &&   
                     <AdressListComponent
                         isEpmtyAdressList={isEpmtyAdressList}
                         setIsEpmtyAdressList={setIsEpmtyAdressList}
@@ -650,7 +1455,8 @@ export default function CartDetails() {
                         showAddressListDrawer={showAddressListDrawer}
                     // setCurrentAddress={setCurrentAddress}  ////zare_nk_050329_commented(currentAddress az seState tabdil shod be useContext)
                     />
-                }
+                } */}
+                {/* zare_nk_050416_added_end(inja address haro niaz nadaram felan) */}
 
                 <div style={{ marginBottom: '.70rem' }}></div>
 
@@ -715,39 +1521,345 @@ export default function CartDetails() {
                 <div id="sabdRowsCont" style={{
                     display: 'flex', flexFlow: 'column', width: '100%', //border: '2px dashed red', 
                 }}>
+
+                    <div style={{// backgroundColor: 'red',
+                        paddingBottom: '.75rem', paddingTop: '.75rem', paddingLeft: '.5rem', paddingRight: '.5rem', borderRadius: '.75rem', gap: '.5rem', alignItems: 'center',
+                        width: '100%', height: 'min-content', display: 'flex', marginTop: '1.25rem', boxShadow: '0 1px 2px 0 #0000000d',
+                    }}>
+                        <div style={{
+                            border: '2px solid #f7f7f8', borderRadius: '9999px', width: '3.5rem', height: '3.5rem', //position: 'relative',
+                        }}>
+                            <img
+                                style={{
+                                    borderRadius: '9999px', width: '100%', height: '100%', inset: 0,
+                                    objectFit: 'cover',
+                                }}
+                                // src={`https://img.tochikala.com/Product/8882.webp`} />
+                                src={`/images/movaghat/vendorPage/tupchi-tag.jpg`} />
+                        </div>
+
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '.25rem',
+                            flex: '1 1 0%',
+
+                        }}>
+                            <div style={{
+                                fontSize: '.875rem',
+                                color: '#313335',
+
+                                // این بخش برای سه‌نقطه و محدودیت ۲ خط
+                                display: '-webkit-box',
+                                WebkitLineClamp: 1,
+                                WebkitBoxOrient: 'vertical',
+                                overflow: 'hidden',
+
+                                // این بخش برای تثبیت ارتفاع روی ۴۰ پیکسل 
+                                lineHeight: '1.25rem',
+                                // height: '2.5rem',
+                                height: '1.25rem',
+
+                                minHeight: '1.25rem',  // minHeight: '2.5rem', // اجبار به کمتر نشدن
+                                maxHeight: '1.25rem',  // maxHeight: '2.5rem', // اجبار به بیشتر نشدن
+                                boxSizing: 'border-box', // برای اینکه بُردر (border) به ارتفاع اضافه نشود
+
+                                textAlign: 'start',
+                            }}>
+                                پیتزا دهه 60 آمریکایی یک نفره
+                                {/* {rowItem.NameKala} */}
+                            </div>
+                            <div style={{
+                                display: 'flex',
+                                gap: '.25rem',
+                                alignItems: 'center',
+                                width: '100%',
+                            }}>
+                                <img
+                                    src="/images/cartDetails/zaman-entezar-icon.svg"
+                                    alt="زمان انتظار"
+                                    style={{ width: '1rem', height: '1rem', }}
+                                />
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+                                    <span style={{ color: '#313335', fontSize: '.75rem', lineHeight: '1rem', }}>50</span>
+                                    <span style={{ color: '#878b92', fontSize: '.625rem', }}>دقیقه</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <Link
+                            href={`/vendor/${vendorId}`}
+                            style={{
+                                display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#eef0f1', color: '#1b1c1d', fontSize: '.75rem', lineHeight: '1rem', paddingBottom: '.5rem',
+                                paddingTop: '.5rem', paddingLeft: '10px', paddingRight: '10px', borderRadius: '.75rem', minWidth: '.25rem', height: '2rem', textDecoration: 'none',
+                            }}                            >
+                            <span style={{ fontSize: '.75rem', lineHeight: '1rem', }}>مشاهده منو</span>
+                            <img src="/images/movaghat/vendorPage/see-vendor-menu.svg" alt="دیدن منو"
+                                style={{ width: '1rem', height: '1rem', borderRadius: '.5rem', }}
+                            />
+                        </Link>
+
+
+                    </div>
+
+                    <div style={{ color: '#878b92', paddingTop: '1.25rem', paddingBottom: '1rem', }}>اقلام سفارش</div>
+
                     {sabadRows?.map((rowItem, rowIndex) => {
-                        // alert("titrItem.IdSabadKharidTitr: " + titrItem.IdSabadKharidTitr + "rowItem.IdSabadKharidTitr: " + rowItem.IdSabadKharidTitr);                                                       
                         return (
                             <div id={`sabdRow-${rowItem.IdSabadKharidSatr}`} key={rowItem.IdSabadKharidSatr}
                                 style={{
-                                    display: 'flex', flexFlow: 'column', width: '100%',
-                                    //border: '2px dashed blue',
+                                    display: 'flex', justifyContent: 'flex-start', paddingLeft: '0px', paddingRight: '0px', backgroundColor: 'white', gap: '.75rem',
+                                    width: '100%', height: '100px', marginBottom: '35px', zIndex: 10,
                                 }}>
                                 <div style={{
-                                    display: 'flex',
-                                    paddingBottom: '.75rem',
-                                    paddingTop: '.75rem',
-                                    gap: '.5rem', justifyContent: 'space-between', alignItems: 'center',
-                                    width: '100%',  ////zare_nk_050413_commented
-                                    //  height: '100px',  ////zare_nk_050413_commented
+                                    borderRadius: '.5rem', flexShrink: 0, width: '100px', height: '100%', position: 'relative',
+                                }}>
+                                    <img
+                                        style={{
+                                            objectFit: 'cover', borderRadius: '.5rem', width: '100%', height: '100%', inset: 0, position: 'absolute',
+                                        }}
+                                        // src={`https://img.tochikala.com/Product/8882.webp`} />
+                                        // src={`https://img.tochikala.com/Product/8882.webp`} 
+                                        src={`https://img.tochikala.com/Product/${rowItem.IdKala}.webp`}
+                                    />
+
+                                    {/* right: 11px;bottom: -1rem;position: absolute; +++---*/}
+                                    <MiddleCountTedadSefr
+                // SabadRow={SabadRow}  //zare_nk_041120_commented
+                ////zare_nk_041120_added_st
+                refForfather={SabadRow.refForfather}
+                fromShowDetails={SabadRow.fromShowDetails}
+                IdKala={SabadRow.IdKala}
+                idTag={SabadRow.idTag}
+                tedadInSabadOrDet={SabadRow.tedadInSabadOrDet}
+                ////zare_nk_041120_added_end
+                handlerForAddClick={(e) => {
+                  return handlerForAddClick(
+                    {
+                      tedadInSabadOrDet: SabadRow.tedadInSabadOrDet,
+                      ZaribForoosh: SabadRow.ZaribForoosh,
+                      IdKala: SabadRow.IdKala,
+                      NameKala: SabadRow.NameKala,
+                      DarsadTakhfif: SabadRow.DarsadTakhfif,
+                      NameBerand: SabadRow.NameBerand,  //zare_nk_041118_nokteh(dar api selectKalaShobeh NameBerand dar pasokh hast pas ma meghdaresh ro dadim)
+                      FeeForoosh: SabadRow.FeeForoosh,
+                      FeeMasraf: SabadRow.FeeMasraf,
+                      BarcodeKala: SabadRow.BarcodeKala,
+                      Mojoodi: SabadRow.Mojoodi,
+                      MaxTedad: SabadRow.MaxTedad,
+                      father: SabadRow.father,
+                      bishAzMaxTedadYaMojoodi: bishAzMaxTedadYaMojoodi,
+                      fromShowDetails: false,
+                      event: e,
+                    }
+                  );
+                }}
+                handlerForRemClick={(e) => {
+                  return handlerForRemClick(
+                    {
+                      tedadInSabadOrDet: SabadRow.tedadInSabadOrDet,
+                      ZaribForoosh: SabadRow.ZaribForoosh,
+                      IdKala: SabadRow.IdKala,
+                      NameKala: SabadRow.NameKala,
+                      DarsadTakhfif: SabadRow.DarsadTakhfif,
+                      NameBerand: SabadRow.NameBerand,  //zare_nk_041118_nokteh(dar api selectKalaShobeh NameBerand dar pasokh hast pas ma meghdaresh ro dadim)
+                      FeeForoosh: SabadRow.FeeForoosh,
+                      FeeMasraf: SabadRow.FeeMasraf,
+                      BarcodeKala: SabadRow.BarcodeKala,
+                      Mojoodi: SabadRow.Mojoodi,
+                      MaxTedad: SabadRow.MaxTedad,
+                      father: SabadRow.father,
+                      bishAzMaxTedadYaMojoodi: bishAzMaxTedadYaMojoodi,
+                      fromShowDetails: false,
+                      event: e,
+                    }
+                  );
+                }}
+                ForCartContentsDesignType={ForCartContentsDesignTypeLet}
+                bishAzMaxTedadYaMojoodi={bishAzMaxTedadYaMojoodi}
+              />
+
+
+                                </div>
+
+                                <div style={{
+                                    display: 'flex', flexDirection: 'column', width: '100%', height: '100px',
+                                }}>
+                                    <div style={{
+                                        display: 'flex', flexDirection: 'column', gap: '.5rem',
+                                    }}>
+                                        <div style={{
+                                            fontSize: '14px',
+                                            color: '#313335',
+
+                                            // این بخش برای سه‌نقطه و محدودیت ۲ خط
+                                            display: '-webkit-box',
+                                            WebkitLineClamp: 1,
+                                            WebkitBoxOrient: 'vertical',
+                                            overflow: 'hidden',
+
+                                            // این بخش برای تثبیت ارتفاع روی ۴۰ پیکسل 
+                                            lineHeight: '1.5rem',
+                                            // height: '2.5rem',
+                                            height: '3rem',
+
+                                            minHeight: '3rem',  // minHeight: '2.5rem', // اجبار به کمتر نشدن
+                                            maxHeight: '3rem',  // maxHeight: '2.5rem', // اجبار به بیشتر نشدن
+                                            boxSizing: 'border-box', // برای اینکه بُردر (border) به ارتفاع اضافه نشود
+
+                                            textAlign: 'start',
+                                        }}>
+                                            {rowItem.NameKala}
+                                        </div>
+                                    </div>
+                                    <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', marginTop: 'auto', }}>
+                                        <div style={{ display: 'flex', flexFlow: 'column', }}>
+                                            {(rowItem.DarsadTakhfif != null && rowItem.DarsadTakhfif != 0) ? ( //&& (   
+                                                <div style={{
+                                                    // visibility: "visible",  ////zare_nk_050316_commented(dar react native visibility nadarim)
+                                                    opacity: 1,  ////zare_nk_050316_added(dar react native visibility nadarim)
+                                                    display: "flex",
+                                                    flexDirection: "row",
+                                                    paddingLeft: 10,
+                                                    justifyContent: 'flex-end',
+                                                    alignItems: "center",
+                                                    width: "100%",
+                                                    // borderWidth: 1,
+                                                    // borderStyle: 'dashed',
+                                                    // borderColor: 'red',
+                                                }}>
+                                                    <span style={{
+                                                        fontSize: '0.65rem',
+                                                        textDecoration: "line-through",
+                                                        color: '#888',
+                                                        fontFamily: "IRANSansWeb(FaNum)_Medium",
+                                                        lineHeight: '10px',
+                                                    }}>
+                                                        {rowItem.FeeMasraf.toLocaleString()}
+                                                    </span>
+                                                </div>
+                                            ) : (
+                                                <div style={{
+                                                    // visibility: "hidden",  ////zare_nk_050316_commented(dar react native visibility nadarim)
+                                                    opacity: 0,  ////zare_nk_050316_added(dar react native visibility nadarim)
+                                                    display: "flex",
+                                                    flexDirection: "row",
+                                                    paddingLeft: 10,
+                                                    justifyContent: 'flex-end',
+                                                    alignItems: "center",
+                                                    width: "100%",
+                                                    // borderWidth: 1,
+                                                    // borderStyle: 'dashed',
+                                                    // borderColor: 'blue',
+                                                }}>
+                                                    <span style={{
+                                                        // fontSize: 11,
+                                                        fontSize: '0.65rem',
+                                                        // opacity: 0.7,  
+                                                        textDecorationLine: "line-through",
+                                                        color: '#888',  ////zare_nk_050316_added
+                                                        fontFamily: "IRANSansWeb(FaNum)_Medium",
+                                                        lineHeight: '10px',
+                                                    }}>
+                                                        {rowItem.FeeMasraf.toLocaleString()}
+                                                    </span>
+                                                </div>
+                                            )}
+                                            <div
+                                                style={{
+                                                    display: "flex",
+                                                    flexWrap: "wrap",
+                                                    flexDirection: "row",
+                                                    marginTop: 0,
+                                                    marginBottom: 5,
+                                                    // padding: "0px 10px 0px 10px",  ////zare_nk_050331_commented
+                                                    // paddingVertical: 0,
+                                                    // paddingHorizontal: 10,
+                                                    // justifyContent: 'space-between',  ////zare_nk_050316_commented
+                                                    justifyContent: 'flex-start',  ////zare_nk_050316_added
+                                                    alignItems: "center",
+                                                    width: "100%",
+                                                    // borderWidth: 1,
+                                                    // borderStyle: 'dashed',
+                                                    // borderColor: 'black',
+                                                }} >
+                                                {(rowItem.DarsadTakhfif != null && rowItem.DarsadTakhfif != 0) && (
+                                                    <div
+                                                        // id={`darsadTakhfifInsabad-${item.IdKala}`}
+                                                        // className="darsadTakhfifInsabad rounded-pill"
+                                                        style={{
+                                                            // backgroundColor: "#ff3151",  ////zare_nk_050413_commented
+                                                            backgroundColor: "#ff5a00",   ////zare_nk_050413_added
+                                                            // width: 39,  ////zare_nk_050413_commented
+                                                            // height: 20,  ////zare_nk_050413_commented
+                                                            width: '1.5rem',   ////zare_nk_050413_added
+                                                            height: '1.25rem',   ////zare_nk_050413_added
+
+                                                            // flex: "0 0 auto",
+                                                            display: 'flex',
+                                                            flexDirection: "row",
+                                                            justifyContent: "center",
+                                                            alignItems: 'center',
+                                                            flexGrow: 0,
+                                                            flexShrink: 0,
+                                                            flexBasis: 'auto',
+                                                            marginLeft: 5,
+                                                            borderRadius: '.25rem',
+                                                        }}>
+                                                        <span
+                                                            style={{
+                                                                fontSize: '.625rem',
+                                                                color: "white",
+                                                                opacity: 1,
+                                                                fontFamily: "IRANSansWeb(FaNum)_Medium",
+                                                            }}
+                                                        >
+                                                            {`${rowItem.DarsadTakhfif}%`}
+                                                        </span>
+                                                    </div>
+                                                )}
+                                                <div style={{
+                                                    flex: "1 0 auto", display: "flex", flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center',
+                                                }} >
+                                                    <span style={{
+                                                        fontSize: '1rem', marginLeft: 2, fontFamily: "IRANSansWeb(FaNum)_Medium", color: '#1b1c1d', alignItems: 'center',
+                                                        lineHeight: '1.5rem',
+                                                    }}>
+                                                        {rowItem.FeeForoosh.toLocaleString()}
+                                                    </span>
+                                                    <span style={{
+                                                        fontSize: '.625rem', fontFamily: "IRANSansWeb(FaNum)_Medium", color: '#6d6d6d',
+                                                    }}>
+                                                        تومان
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+
+                    {/* {sabadRows?.map((rowItem, rowIndex) => {                                                      
+                        return (
+                            <div id={`sabdRow-${rowItem.IdSabadKharidSatr}`} key={rowItem.IdSabadKharidSatr}
+                                style={{
+                                    display: 'flex', flexFlow: 'column', width: '100%', 
+                                }}>
+                                <div style={{
+                                    display: 'flex', paddingBottom: '.75rem', paddingTop: '.75rem', gap: '.5rem', justifyContent: 'space-between', alignItems: 'center',                                    width: '100%',  
                                 }}>
                                     <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', gap: '.5rem' }}>
                                         <div style={{
-                                            borderRadius: '.5rem', flexShrink: 0, width: '40px', minWidth: '40px',
-                                            height: '40px', position: 'relative',
+                                            borderRadius: '.5rem', flexShrink: 0, width: '40px', minWidth: '40px', height: '40px', position: 'relative',
                                         }}>
-                                            <img
-                                                style={{
-                                                    width: '100%',
-                                                    height: '100%',
-                                                    objectFit: 'cover',
-                                                    borderRadius: '.5rem',
-                                                    zIndex: '1',
+                                            <img style={{
+                                                    width: '100%', height: '100%', objectFit: 'cover', borderRadius: '.5rem', zIndex: '1',
                                                 }}
                                                 // src={`https://img.tochikala.com/Product/${responsedListFromApiSelectKalaShobeh[0].IdKala}.webp`} />
                                                 // src={`/images/movaghat/shoppingBasket/g1Img.jpg`} />
                                                 src={`https://img.tochikala.com/Product/${rowItem.IdKala}.webp`} />
-
                                         </div>
                                         <div style={{
                                             fontSize: '.875rem',
@@ -769,17 +1881,13 @@ export default function CartDetails() {
                                             boxSizing: 'border-box', // برای اینکه بُردر (border) به ارتفاع اضافه نشود
 
                                             textAlign: 'center',
-                                        }}>
-                                            {/* پیتزا دهه 60 آمریکایی یک نفره */}
+                                        }}> 
                                             {rowItem.NameKala}
                                         </div>
                                     </div>
 
                                     <div style={{
-                                        display: 'flex',
-                                        flexFlow: 'column',
-                                        // width: '100%',  ////zare_nk_050413_commented
-                                        // marginBottom: '2px',
+                                        display: 'flex', flexFlow: 'column',
                                     }}>
                                         {(rowItem.DarsadTakhfif != null && rowItem.DarsadTakhfif != 0) ? ( //&& (   
                                             <div style={{
@@ -791,9 +1899,6 @@ export default function CartDetails() {
                                                 justifyContent: 'flex-end',
                                                 alignItems: "center",
                                                 width: "100%",
-                                                // borderWidth: 1,
-                                                // borderStyle: 'dashed',
-                                                // borderColor: 'red',
                                             }}>
                                                 <span style={{
                                                     fontSize: '0.65rem',
@@ -815,14 +1920,9 @@ export default function CartDetails() {
                                                 justifyContent: 'flex-end',
                                                 alignItems: "center",
                                                 width: "100%",
-                                                // borderWidth: 1,
-                                                // borderStyle: 'dashed',
-                                                // borderColor: 'blue',
                                             }}>
                                                 <span style={{
-                                                    // fontSize: 11,
                                                     fontSize: '0.65rem',
-                                                    // opacity: 0.7,  
                                                     textDecorationLine: "line-through",
                                                     color: '#888',  ////zare_nk_050316_added
                                                     fontFamily: "IRANSansWeb(FaNum)_Medium",
@@ -833,30 +1933,12 @@ export default function CartDetails() {
                                             </div>
                                         )}
 
-                                        <div
-                                            style={{
-                                                display: "flex",
-                                                flexWrap: "wrap",
-                                                flexDirection: "row",
-                                                marginTop: 0,
-                                                marginBottom: 5,
-                                                // padding: "0px 10px 0px 10px",  ////zare_nk_050331_commented
-                                                // paddingVertical: 0,
-                                                // paddingHorizontal: 10,
-                                                // justifyContent: 'space-between',  ////zare_nk_050316_commented
-                                                justifyContent: 'flex-start',  ////zare_nk_050316_added
-                                                alignItems: "center",
-                                                width: "100%",
-                                                // borderWidth: 1,
-                                                // borderStyle: 'dashed',
-                                                // borderColor: 'black',
-                                            }} >
-
+                                        <div style={{
+                                                display: "flex", flexWrap: "wrap", flexDirection: "row", marginTop: 0, marginBottom: 5,                                               
+                                                justifyContent: 'flex-start', alignItems: "center", width: "100%",
+                                            }}>
                                             {(rowItem.DarsadTakhfif != null && rowItem.DarsadTakhfif != 0) && (
-                                                <div
-                                                    // id={`darsadTakhfifInsabad-${item.IdKala}`}
-                                                    // className="darsadTakhfifInsabad rounded-pill"
-                                                    style={{
+                                                <div style={{
                                                         // backgroundColor: "#ff3151",  ////zare_nk_050413_commented
                                                         backgroundColor: "#ff5a00",   ////zare_nk_050413_added
                                                         // width: 39,  ////zare_nk_050413_commented
@@ -873,62 +1955,37 @@ export default function CartDetails() {
                                                         flexShrink: 0,
                                                         flexBasis: 'auto',
                                                         marginLeft: 5,
-                                                        // borderRadius: 100,    ////zare_nk_050413_commented
-                                                        borderRadius: '.25rem',  ////zare_nk_050413_added                                             
+                                                        borderRadius: '.25rem',
                                                     }}>
                                                     <span
-                                                        // className="forDiscount"
                                                         style={{
-                                                            //   fontSize: 12,
                                                             fontSize: '.625rem',
                                                             color: "white",
                                                             opacity: 1,
                                                             fontFamily: "IRANSansWeb(FaNum)_Medium",
-                                                            // borderWidth: 2,
-                                                            // borderStyle: 'dashed',
-                                                            // borderColor: 'black',
                                                         }}
                                                     >
                                                         {`${rowItem.DarsadTakhfif}%`}
                                                     </span>
                                                 </div>
-                                            )}
-                                            <div
-                                                style={{
-                                                    // flex: "1 0 auto", 
-                                                    flexGrow: 1,
-                                                    flexShrink: 0,
-                                                    flexBasis: 'auto',
-                                                    display: "flex",
-                                                    flexDirection: 'row',
-                                                    justifyContent: 'flex-end',
-                                                    // borderWidth: 1,
-                                                    // borderStyle: 'dashed',
-                                                    // borderColor: 'green',
-                                                }}
-                                            >
-                                                <span
-                                                    //  className="mablagh" 
-                                                    style={{
-                                                        // fontSize: 13,
-                                                        fontSize: '0.75rem',
-                                                        marginLeft: 5,
-                                                        fontFamily: "IRANSansWeb(FaNum)_Medium",
-                                                        color: '#3d3d3d',   ////zare_nk_050316_added
-                                                    }}>
+                                            )} 
+                                            <div style={{
+                                                flex: "1 0 auto", display: "flex", flexDirection: 'row', justifyContent: 'flex-end',
+                                            }}>
+                                                <span style={{
+                                                    fontSize: '0.75rem', marginLeft: 5, fontFamily: "IRANSansWeb(FaNum)_Medium", color: '#3d3d3d', alignItems: 'center',
+                                                }}>
                                                     {rowItem.FeeForoosh.toLocaleString()}
                                                 </span>
                                                 <span
                                                     style={{
-                                                        //  fontSize: 12,
-                                                        fontSize: '0.70rem',
-                                                        fontFamily: "IRANSansWeb(FaNum)_Medium", color: '#6d6d6d',
-                                                    }}
-                                                >تومان</span>
-                                            </div>
+                                                        fontSize: '0.70rem', fontFamily: "IRANSansWeb(FaNum)_Medium", color: '#6d6d6d',
+                                                    }} >
+                                                    تومان
+                                                </span>
+                                            </div> 
                                         </div>
                                     </div>
-
                                 </div>
                                 <div style={{
                                     display: 'flex',
@@ -937,16 +1994,14 @@ export default function CartDetails() {
                                     gap: '.5rem', justifyContent: 'space-between', alignItems: 'center',
                                     width: '100%',
                                 }}>
-                                    <span style={{ color: '#63676e', fontSize: '.875rem', lineHeight: '1.25rem', }}>بدون افزودنی</span>
-                                    {/* zare_nk_050414_added_st(baraye addremBtn) */}
-
-                                    {/* zare_nk_050414_added_end(baraye addremBtn) */}
+                                    <span style={{ color: '#63676e', fontSize: '.875rem', lineHeight: '1.25rem', }}>بدون افزودنی</span>                                   
                                     <span style={{ color: '#63676e', fontSize: '.875rem', lineHeight: '1.25rem', }}>رایگان</span>
                                 </div>
                             </div>
                         );
-                    })}
+                    })} */}
                 </div>
+                {/* zare_nk_050413_added_end(berim mohtavaye sabad) */}
             </main>
 
             <footer></footer>
