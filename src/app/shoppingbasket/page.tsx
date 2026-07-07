@@ -152,9 +152,10 @@ export default function Shoppingbasket() {
     const [sabadRows, setSabadRows] = useState<SabadRowType[]>([]);
     ////zare_nk_050414_added_end
 
-    const goToCartDetails=async (IdShobe:number)=>{
-        alert('goToCartDetails-IdShobe: '+IdShobe);
-         router.push(`/vendor/${IdShobe}/cart-details`);  
+    const goToCartDetails=async (IdShobe:number,IdSabadKharidTitr:number)=>{ 
+        alert('goToCartDetails-IdShobe: '+IdShobe); 
+        //  router.push(`/vendor/${IdShobe}/cart-details`); 
+        router.push(`/vendor/${IdShobe}/cart-details?idTitr=${IdSabadKharidTitr}`);  
     }
 
     useEffect(() => {
@@ -1557,7 +1558,7 @@ export default function Shoppingbasket() {
                                                 //   goToEdditAddressMap(e);
                                                 // }}
                                                 onClick={(e) => {
-                                                  goToCartDetails(titrItem.IdShobeh);
+                                                  goToCartDetails(titrItem.IdShobeh,titrItem.IdSabadKharidTitr);
                                                 }}
                                                 ///vendor/271r73/cart-details
                                                 style={{
