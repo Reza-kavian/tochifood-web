@@ -2,7 +2,7 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
-import { useRouter, useSearchParams, redirect } from "next/navigation";
+import { useRouter, useSearchParams, redirect,useParams, } from "next/navigation";
 import Styles from "@/styles/components/location.module.css";
 import globalsStyles from "@/styles/components/globals.module.css";
 
@@ -58,8 +58,10 @@ const GetScrollsSecInVendor = ({
     sectionRefs: RefObject<Record<string, HTMLDivElement | null>>;
 }) => {
     // const GetScrollsSecInVendor = () => {
+     const { vendorId } = useParams();  ////zare_nk_050416_nokteh(ehtemalan chon Componente GetScrollsSecInVendor joze farzandane safheye [vendorId]/page.tsx hast, pas be useParams 
+     //// jaddesh dastresi dareh, va niazi be pas dadane parametr be Componente farzand ya tarife useContext nist baraye dastresi dar farzand)
+     console.log('050329-GetScrollsSecInVendor rendered!!-vendorId isss: '+Number(vendorId)); 
 
-    console.log('050329-GetScrollsSecInVendor rendered!!');   ////zare_nk_050329_added
     const [errorInGetScrollsSecInVendor, setErrorInGetScrollsSecInVendor] = useState<string | null>(null);
 
     const router = useRouter();
@@ -112,9 +114,9 @@ const GetScrollsSecInVendor = ({
     };
 
     const inputData: InputDataType = {
-        IdShobeh: 6,
-        IsJashnvareh: 1,
-        // IsJashnvareh: -1,
+        IdShobeh: Number(vendorId) ,
+        // IsJashnvareh: 1,  ////zare_nk_050416_nokteh(baraye switch beine satrhaye kam va satrhaye ziad dar pasokhe api baraye lezat az enetaf va sorate site!)
+        IsJashnvareh: -1,    ////zare_nk_050416_nokteh(baraye switch beine satrhaye kam va satrhaye ziad dar pasokhe api baraye lezat az enetaf va sorate site!)
         NameKala: "",
         IdG1: -1,
         IdG2: -1,

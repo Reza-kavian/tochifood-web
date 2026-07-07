@@ -551,35 +551,36 @@ export default function CartDetails() {
             width: '100%',
             // height: '100%',  ////height :100% dorost nist, chon shayad dar layout alaveh ba children satrhaye dife ham dashe bashim(mesle footer va header va...)
             display: "flex",
-            flexDirection: 'column',
-            // border: '3px solid orange',
+            flexDirection: 'column', 
             position: 'relative',  ////zare_nk_050404_added
         }}>
             <header style={{
-                position: 'sticky',
-                top: '0px',
+                position: 'sticky',  
+                backgroundColor: 'white',
+                flexShrink: '0px',
+                width: '100%', 
+                top: '0px', 
                 // boxShadow: '0px 3px 2px -1px #d7d6d6',
+                boxShadow: '0px 4px 20px 0px #0000000f',
+
                 display: 'flex',
                 flexFlow: 'column',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                paddingTop: '5px',
-                paddingBottom: '5px',
-                zIndex: 899,
-                // backgroundColor: 'white',
-                // border: '1px dashed red',
+                zIndex: 30,
             }}>
                 <div
                     style={{
                         display: 'flex',
                         flexFlow: 'row-reverse',
                         justifyContent: 'space-between',
-                        alignItems: 'center',
+                        alignItems: 'center', 
                         paddingRight: '1rem',
                         paddingLeft: '1rem',
                         // border: '1px dashed blue',
                         width: '100%',
                         height: '3.5rem',
+                        position: 'relative',
                     }}>
                     <button
                         id="goBackBtn"
@@ -597,6 +598,7 @@ export default function CartDetails() {
                             height: '2rem',
                             borderRadius: '9999px',
                             cursor: 'pointer',
+                            position: 'absolute',
                         }}>
                         <img
                             src="/images/Icon/back-icon.svg"
@@ -605,37 +607,16 @@ export default function CartDetails() {
                         />
                     </button>
 
-                    {/* <div style={{
+                    <div style={{
                         display: 'flex',
                         flexFlow: 'row',
-                        justifyContent: 'space-between',
+                        justifyContent: 'center',
                         alignItems: 'center',
                         // border: '1px dashed orange',
+                        flex: '1 1 auto',
                     }}>
-                        فروشگاه‌های اطراف
+                       سبد خرید
                     </div>                    
-                    <button
-                        id="goShoppingBacketBtn"
-                        // onClick={showAddressListDrawer}
-                        //   onClick={() => { setError('goooo!!') }}
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: 'inherit',
-                            border: 'none',
-                            // border: '2px dashed green',
-                            fontSize: '.875rem',
-                            width: '2rem',
-                            height: '2rem',
-                            borderRadius: '9999px',
-                            cursor: 'pointer',
-                        }}>
-                        <img
-                            src="/images/header/shoppingBacket.svg"
-                            alt="سبد خرید"
-                        />
-                    </button> */}
                 </div>
             </header >
 
@@ -653,6 +634,9 @@ export default function CartDetails() {
                     // border: '3px solid orange',
                     direction: 'rtl',
                     // paddingTop: '10px',   
+
+
+                    minHeight:'900px',  ////zare_nk_050416_added_movaghat(pak kardani)
                 }}>
                 {isEpmtyAdressList &&  ////zare_nk_050329_updated(sharte isEpmtyAdressList emal shod ke isEpmtyAdressList==false bood component ra aslan seda nazanim)
                     <AdressListComponent

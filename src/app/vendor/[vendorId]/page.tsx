@@ -1,9 +1,8 @@
 // ////zare_nk_050413_okk(1)
 'use client'
-import { useParams } from 'next/navigation';
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
-import { useRouter, useSearchParams, redirect } from "next/navigation";
+import { useRouter, useSearchParams, redirect, useParams, } from "next/navigation";
 
 import globalsStyles from "@/styles/components/globals.module.css";
 
@@ -52,29 +51,12 @@ function getCookie(name: any) {
 export default function VendorPage() {
     const { vendorId } = useParams();
     ////zare_nk_050405_nokteh_end(rahe2- baraye serverComponent)
-    console.log('050329-VendorPage rendered!!-vendorId: '+vendorId);   ////zare_nk_050329_added
+    console.log('050329-VendorPage rendered!!-vendorId: ' + vendorId);   ////zare_nk_050329_added
     // ////zare_nk_050404_added_st
 
     const [errorInVendorPage, setErrorInVendorPage] = useState<string | null>(null);
 
     const router = useRouter();
-
-    type responsedListFromApiSelectKalaShobehType = {
-        IdKala: number;
-        BarcodeKala: number;
-        IdBerand: number;
-        IdTaminkonnande: number;
-        IdShobe: number;
-        NameSobe: string;
-        // .
-        // .
-        // .
-        [key: string]: any;
-    };
-
-    const [responsedListFromApiSelectKalaShobeh, SetResponsedListFromApiSelectKalaShobeh] = useState<responsedListFromApiSelectKalaShobehType[] | null>(null);
-
-    // console.log('050404-responsedListFromApiSelectKalaShobeh: ' + responsedListFromApiSelectKalaShobeh?[0].IdKala);   ////zare_nk_050329_added
 
     type responsedListFromApiSelectShobehAtrafUserType = {
         IdShobe: number;
@@ -87,50 +69,64 @@ export default function VendorPage() {
     };
     const [currentShobeState, setCurrentShobeState] = useState<responsedListFromApiSelectShobehAtrafUserType | null>(null);
 
-    const getVendorPage = async () => {
-        let token = await getCookie("token");
-        if (!token) {
-            setErrorInVendorPage("lotfan avval online shid");
-            return;
-        }
-        // console.log('tokentokentoken: ' + token);
+    ////zare_nk_050416_commented_st
+    // type responsedListFromApiSelectKalaShobehType = {
+    //     IdKala: number;
+    //     BarcodeKala: number;
+    //     IdBerand: number;
+    //     IdTaminkonnande: number;
+    //     IdShobe: number;
+    //     NameSobe: string;
+    //     // .
+    //     // .
+    //     // .
+    //     [key: string]: any;
+    // };
+    // const [responsedListFromApiSelectKalaShobeh, SetResponsedListFromApiSelectKalaShobeh] = useState<responsedListFromApiSelectKalaShobehType[] | null>(null);   
 
-        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-        const response = await fetch(ApiUrl + "Api_SelectKalaShobeh", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + token,
-            },
-            body: JSON.stringify({
-                // "IdShobeh": 6,
-                IdShobeh: vendorId,
-                // page: 1,
-                // take: 3,
-            }),
-        });
-        const data = await response.json();
-        console.log('datadatadata: ' + JSON.stringify(data));
-        if (response.ok) {
-            if (data.status == 0) {
-                if (data.data.list == undefined) {
-                    return;
-                }
-                var parsedList = JSON.parse(data.data.list);
+    // const getVendorPage = async () => {
+    //     let token = await getCookie("token");
+    //     if (!token) {
+    //         setErrorInVendorPage("lotfan avval online shid");
+    //         return;
+    //     }
+    //     // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
+    //     let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
+    //     const response = await fetch(ApiUrl + "Api_SelectKalaShobeh", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             Authorization: "Bearer " + token,
+    //         },
+    //         body: JSON.stringify({
+    //             // "IdShobeh": 6,
+    //             IdShobeh: vendorId,
+    //             // page: 1,
+    //             // take: 3,
+    //         }),
+    //     });
+    //     const data = await response.json();
+    //     console.log('datadatadata: ' + JSON.stringify(data));
+    //     if (response.ok) {
+    //         if (data.status == 0) {
+    //             if (data.data.list == undefined) {
+    //                 return;
+    //             }
+    //             var parsedList = JSON.parse(data.data.list);
 
-                SetResponsedListFromApiSelectKalaShobeh(() => {
-                    return parsedList
-                });
-            } else {
-                setErrorInVendorPage("متاسفانه خطایی رخ داده است34:" + data.errors);
-                console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
-            }
-        } else {
-            console.log("zare_nk_050110-!response.ok" + response.ok);
-            setErrorInVendorPage("متاسفانه خطایی رخ داده است35");
-        }
-    }
+    //             SetResponsedListFromApiSelectKalaShobeh(() => {
+    //                 return parsedList
+    //             });
+    //         } else {
+    //             setErrorInVendorPage("متاسفانه خطایی رخ داده است34:" + data.errors);
+    //             console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
+    //         }
+    //     } else {
+    //         console.log("zare_nk_050110-!response.ok" + response.ok);
+    //         setErrorInVendorPage("متاسفانه خطایی رخ داده است35");
+    //     }
+    // }
+    ////zare_nk_050416_commented_end
 
     useEffect(() => {
         const tempAsync = async () => {
@@ -140,7 +136,7 @@ export default function VendorPage() {
         }
         tempAsync();
 
-        getVendorPage();  ////zare_nk_050403_commented_movaghat
+        // getVendorPage();  ////zare_nk_050416_commented
     }, []);
     // ////zare_nk_050404_added_end 
 
@@ -331,14 +327,15 @@ export default function VendorPage() {
                     // border: '2px solid red',
                     position: 'relative',
                 }}>
-                    {responsedListFromApiSelectKalaShobeh && (
+                    {/* {responsedListFromApiSelectKalaShobeh && ( */}
+                    {currentShobeState && (
                         <img
                             style={{
                                 width: '100%',
                                 height: '230px',
                                 objectFit: 'cover',
                             }}
-                            // src={`https://img.tochikala.com/Product/${responsedListFromApiSelectKalaShobeh[0].IdKala}.webp`} />
+                            // src={`https://img.tochikala.com/Product/${currentShobeState.IdKala}.webp`} />   ////zare_nk_050416_nookteh(ehtemalan bayad logoye restaurant ha ro ham dashteh bashim badan)
                             src={`/images/movaghat/vendorPage/1.jpg`} />
                     )}
                     <div style={{
@@ -377,8 +374,11 @@ export default function VendorPage() {
                             margin: '0rem',
                         }}>
                             {/* فست&zwnj;فود توپچی */}
-                            {responsedListFromApiSelectKalaShobeh &&
+                            {/* {responsedListFromApiSelectKalaShobeh &&
                                 responsedListFromApiSelectKalaShobeh[0].NameSobe
+                            } */}
+                            {currentShobeState &&
+                                currentShobeState.NameSobe
                             }
                         </h2>
                     </div>
@@ -502,7 +502,7 @@ export default function VendorPage() {
                                 flexFlow: 'row',
                                 alignItems: 'center',
                                 gap: '.25rem',
-                            }}>
+                            }}> 
                                 {currentShobeState?.NazdikTarinZamanErsal &&
                                     <>
                                         <span style={{

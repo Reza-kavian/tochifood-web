@@ -96,7 +96,7 @@ const SwiperShopsInVendorComp = () => {
             },
             // body: JSON.stringify({}),
             body: JSON.stringify({
-                "Id": 1,
+                "Id": 1,  ////zare_nk_050416_nokteh(manzoor az Id hamoon IdAddress hast ke ya vaghei midam ya pishfarz hatman 1 mizaram(ehtemalan 1 haman meydoon saate) )
             }),
         });
         const data = await response.json();
@@ -139,18 +139,11 @@ const SwiperShopsInVendorComp = () => {
         //`/vendor/${item.IdShobe}`
         router.push(`/vendor/${Shobe?.IdShobe}`);
 
-
         const expires = new Date();
         expires.setFullYear(expires.getFullYear() + 5);
         const expiresString = expires.toUTCString();
-        document.cookie = Shobe ? (
-            `currentShobe=${encodeURIComponent(
-                JSON.stringify(Shobe)
-            )}; path=/; expires=${expiresString};secure; samesite=None`
-        ) :
-            (
-                `currentShobe=; path=/; expires=${expiresString};secure; samesite=None`
-            )
+        document.cookie = Shobe ? (`currentShobe=${encodeURIComponent(JSON.stringify(Shobe))}; path=/; expires=${expiresString};secure; samesite=None`) :
+            (`currentShobe=; path=/; expires=${expiresString};secure; samesite=None`)
 
         const currentShobe = await getCookie("currentShobe");
         var parsedurrentShobe: responsedListFromApiSelectShobehAtrafUserType | null = currentShobe ? JSON.parse(currentShobe) : null;
