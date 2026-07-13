@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050422_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -62,16 +62,16 @@ const SwiperTapBestsComp = () => {
 
     const [responsedListFromApiSelectGoroohJson, SetResponsedListFromApiSelectGoroohJson] = useState<responsedListFromApiSelectGoroohJsonType[] | null>(null);
 
-    const getSwiperTapBests = async () => {
+    const getSwiperTapBests = async () => {  ////zare_nk_050422_nokteh(manteghitar ine ke api be shobehaye atraf bezanam ke tedadi shobeh begirm beonvane behtarin forooshgahhaye 
+        ////  tochifood,alan api be groohbandiha mizanam ke manteghi nist!!)
         let token = getCookie("token");
         if (!token) {
             setErrorInSwiperTapBests("lotfan avval online shid");
             return;
         }
         console.log('tokentokentoken: ' + token);
-        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-        const response = await fetch(ApiUrl + "Api_SelectGoroohJson", {
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+        const response = await fetch(NextJsApiUrl + "Api_SelectGoroohJson", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -413,7 +413,6 @@ const SwiperTapBestsComp = () => {
                                                             تا 50 دقیقه
                                                         </span>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>

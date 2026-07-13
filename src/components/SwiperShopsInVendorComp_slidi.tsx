@@ -12,13 +12,15 @@ import { JwtPayload } from "jsonwebtoken";
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog)
 
-import { useAuthentication } from '../context/AuthenticationContext';
+import { useAuthentication } from '../context/AuthenticationContext';  //zare_nk_050111_added
 
+////zare_nk_050226_added_st
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
+////zare_nk_050226_added_end
 
-import { NextJsApiUrl } from "../constants/Urls";
+import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
 
 function getCookie(name: any) {
     ////zare_nk_050209_added_st
@@ -44,11 +46,23 @@ function getCookie(name: any) {
 }
 
 const SwiperShopsInVendorComp = () => {
-    console.log('050329-SwiperShopsInVendorComp rendered!!');
+    console.log('050329-SwiperShopsInVendorComp rendered!!');   ////zare_nk_050329_added
     const [errorInSwiperShopsInVendorComp, setErrorInSwiperShopsInVendorComp] = useState<string | null>(null);
 
     const router = useRouter();
 
+    // type responsedListFromApiSelectGoroohJsonType = {
+    //     IdG1: number;
+    //     NameG1: string;
+    //     AxG1: string;
+    //     Tozihat: string;
+    //     // MetaDesc: string;  //؟؟
+    //     // tbl_Gorooh2
+    //     // .
+    //     // .
+    //     // .
+    //     [key: string]: any;
+    // };
     type responsedListFromApiSelectShobehAtrafUserType = {
         IdShobe: number;
         NameSobe: string;
@@ -59,8 +73,9 @@ const SwiperShopsInVendorComp = () => {
         NazdikTarinZamanErsal: string;
     };
 
+    // const [responsedListFromApiSelectGoroohJson, SetResponsedListFromApiSelectGoroohJson] = useState<responsedListFromApiSelectGoroohJsonType[] | null>(null);
     const [responsedListFromApiSelectShobehAtrafUser, SetResponsedListFromApiSelectShobehAtrafUser] = useState<responsedListFromApiSelectShobehAtrafUserType[] | null>(null);
-
+  
     const getSwiperShopsInVendorComp = async () => {
         let token = await getCookie("token");
         if (!token) {
@@ -136,14 +151,16 @@ const SwiperShopsInVendorComp = () => {
     return (
         <>
             <div style={{
-                display: 'flex', flexFlow: 'column', width: '100%', overflow: 'hidden',alignItems:'center',
+                display: 'flex', flexFlow: 'column', width: '100%', overflow: 'hidden',
             }}>
-                {/* <Swiper */}
-                <div
-                    // modules={[Navigation, Pagination]}
-                    // spaceBetween={24}   
-                    // slidesPerView="auto"   
-                    // navigation={false} 
+                <Swiper
+                    modules={[Navigation, Pagination]}
+                    spaceBetween={24}  ////zare_nk_050305_nokteh(moadele 1.5rem(chon spaceBetween adad 1.5rem))  
+                    slidesPerView="auto"  ////zare_nk_050226_nokteh(meghdaresh ro auto dadim ta bar asase arze SwiperSlide ha tedadesh automat tavasoote 
+                    //// barnameh moshakhas she(pishfarz slidesPerView={1} hast))
+                    // centeredSlides={true}
+                    navigation={false}
+
                     className="SwiperTapBests"
                     style={{
                         // width: '100%',
@@ -161,8 +178,7 @@ const SwiperShopsInVendorComp = () => {
                         // if (index >= 1) return null;
                         ////zare_nk_050331_added_end(soori helghehaye badi ra biasar kardam-chon tapsifood faghat yek tasvir dashe va man baraye inke badan betoonam manovr bedam az swipere ye slidi estefadeh kardam)
                         return (
-                            //  <SwiperSlide
-                            <div
+                            <SwiperSlide
                                 key={index}
                                 style={{
                                     //  width: '72px',
@@ -171,7 +187,6 @@ const SwiperShopsInVendorComp = () => {
                                     // width: 'auto',
                                     // width: '230px',
                                     width: '100%',
-                                    marginBottom:'25px',  ////zare_nk_050422_added
                                 }}>
                                 <div className="contInSlide" style={{
                                     display: 'flex', alignItems: 'center', justifyContent: 'center', //// width: '100%', height: '100%',
@@ -434,12 +449,10 @@ const SwiperShopsInVendorComp = () => {
                                         </div>
                                     </button>
                                 </div>
-                            </div>
-                            //</SwiperSlide> 
+                            </SwiperSlide>
                         )
                     })}
-                </div>
-                {/* </Swiper> */}
+                </Swiper>
             </div>
         </>
     );

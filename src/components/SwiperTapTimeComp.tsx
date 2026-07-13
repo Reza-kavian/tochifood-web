@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050422_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -98,13 +98,12 @@ const SwiperTapTimeComp = () => {
         [key: string]: any;
     };
 
-
     const [responsedListFromApiSelectShobehJashnvareh, SetResponsedListFromApiSelectShobehJashnvareh] = useState<responsedListFromApiSelectShobehJashnvarehType[] | null>(null);
     const [timer, setTimer] = useState(0);
     ////zare_nk_050422_added_st
     // useEffect(() => {
-    const getSwiperShopsInVendorComp = async (mycurrentAddressState: responsedListFromApiSelectAddressListType | null) => {
-        // const getSwiperShopsInVendorComp = async () => { 
+    const getShobehAtrafUser = async (mycurrentAddressState: responsedListFromApiSelectAddressListType | null) => {
+        // const getShobehAtrafUser = async () => { 
         let token = await getCookie("token");
         if (!token) {
             // setErrorInSwiperShopsInVendorComp("lotfan avval online shid");
@@ -164,7 +163,7 @@ const SwiperTapTimeComp = () => {
             return null; ////zare_nk_050422_added
         }
     }
-    //     getSwiperShopsInVendorComp();
+    //     getShobehAtrafUser();
     // }, [currentShobeState]);
     ////zare_nk_050422_added_end
 
@@ -236,20 +235,13 @@ const SwiperTapTimeComp = () => {
                 console.log('050422-parsedurrentShobe is not null');
                 setCurrentShobeState(parsedurrentShobe);
                 return;
-            }
-            // let getIdShobehFromAddress: number | null = null;
-            // if (currentShobeState == null && mycurrentAddressState != null) {
-            //     getIdShobehFromAddress = await getSwiperShopsInVendorComp(mycurrentAddressState);
-            // }
-            // else if (currentShobeState == null && mycurrentAddressState == null) {
-            //     getIdShobehFromAddress = await getSwiperShopsInVendorComp(null);
-            // }
+            } 
 
             if (mycurrentAddressState != null) {
-                parsedurrentShobe = await getSwiperShopsInVendorComp(mycurrentAddressState);
+                parsedurrentShobe = await getShobehAtrafUser(mycurrentAddressState);
             }
             else if (mycurrentAddressState == null) {
-                parsedurrentShobe = await getSwiperShopsInVendorComp(null);
+                parsedurrentShobe = await getShobehAtrafUser(null);
             }
 
             const expires = new Date();
@@ -972,12 +964,15 @@ const SwiperTapTimeComp = () => {
                                                                         marginLeft: 5,
                                                                         fontFamily: "IRANSansWeb(FaNum)_Medium",
                                                                         color: '#3d3d3d',   ////zare_nk_050316_added
-                                                                    }}>
-                                                                    58000
+                                                                    }}> 
+                                                                    {currentShobeState!=null?(currentShobeState.Keraye!=0?currentShobeState.Keraye:'رایگان'):
+                                                                    '50000'.toLocaleString()
+                                                                     } 
                                                                 </span>
+ 
                                                                 <span
                                                                     style={{
-                                                                        //  fontSize: 12,
+                                                                        ...(currentShobeState!=null && currentShobeState.Keraye==0 ? {display:'none'  } : { display: 'inline-block' }),
                                                                         fontSize: '0.70rem',
                                                                         fontFamily: "IRANSansWeb(FaNum)_Medium", color: '#6d6d6d',
                                                                     }}

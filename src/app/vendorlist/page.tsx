@@ -223,7 +223,7 @@ export default function VendorList() {
 
                 <div style={{ marginBottom: '1.5rem' }}></div>
 
-                <SwiperShopsInVendorComp />
+                {/* <SwiperShopsInVendorComp />
 
                 <div style={{ marginBottom: '1.5rem' }}></div>
 
@@ -257,7 +257,7 @@ export default function VendorList() {
 
                 <SwiperShopsInVendorComp />
 
-                <div style={{ marginBottom: '1.5rem' }}></div>
+                <div style={{ marginBottom: '1.5rem' }}></div> */}
 
                 <CollapseAndClickAwayForSortingComp
                     isEpmtyCollapseForSorting={isEpmtyCollapseForSorting}

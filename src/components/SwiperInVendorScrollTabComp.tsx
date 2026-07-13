@@ -1,4 +1,4 @@
-////zare_nk_050411_okk(1)
+////zare_nk_050422_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -59,7 +59,7 @@ const SwiperInVendorHeaderComp = ({
     // const SwiperInVendorHeaderComp = () => {
 
     console.log('050329-SwiperInVendorHeaderComp rendered!!');   ////zare_nk_050329_added
-    const [errorInSwiperTapBests, setErrorInSwiperTapBests] = useState<string | null>(null);
+    const [errorInSwiperVendorHeader, setErrorInSwiperVendorHeader] = useState<string | null>(null);
 
     const router = useRouter();
 
@@ -67,9 +67,7 @@ const SwiperInVendorHeaderComp = ({
         IdG1: number;
         NameG1: string;
         AxG1: string;
-        Tozihat: string;
-        // MetaDesc: string;  //؟؟
-        // tbl_Gorooh2
+        Tozihat: string;        
         // .
         // .
         // .
@@ -78,17 +76,16 @@ const SwiperInVendorHeaderComp = ({
 
     const [responsedListFromApiSelectGoroohJson, SetResponsedListFromApiSelectGoroohJson] = useState<responsedListFromApiSelectGoroohJsonType[] | null>(null);
 
-    const getSwiperTapBests = async () => {
+    const getGoroohHa = async () => {
         let token = await getCookie("token");
         if (!token) {
-            setErrorInSwiperTapBests("lotfan avval online shid");
+            setErrorInSwiperVendorHeader("lotfan avval online shid");
             return;
         }
         console.log('tokentokentoken: ' + token);
 
-        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-        const response = await fetch(ApiUrl + "Api_SelectGoroohJson", {
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+        const response = await fetch(NextJsApiUrl + "Api_SelectGoroohJson", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -113,17 +110,17 @@ const SwiperInVendorHeaderComp = ({
                     return Gorooh
                 });
             } else {
-                setErrorInSwiperTapBests("متاسفانه خطایی رخ داده است34:" + data.errors);
+                setErrorInSwiperVendorHeader("متاسفانه خطایی رخ داده است34:" + data.errors);
                 console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
             }
         } else {
             console.log("zare_nk_050110-!response.ok" + response.ok);
-            setErrorInSwiperTapBests("متاسفانه خطایی رخ داده است35");
+            setErrorInSwiperVendorHeader("متاسفانه خطایی رخ داده است35");
         }
     }
 
     useEffect(() => {
-        getSwiperTapBests();  ////zare_nk_050403_nokteh(mthode getSwiperTapBests dar in header bomorede va baraye olgu gozashte shode!)  ////zare_nk_050403_commented_movaghat
+        getGoroohHa();  ////zare_nk_050403_nokteh(mthode getSwiperVendorHeader dar in header bomorede va baraye olgu gozashte shode!)  ////zare_nk_050403_commented_movaghat
     }, []);
 
     return (
@@ -139,7 +136,7 @@ const SwiperInVendorHeaderComp = ({
                     // centeredSlides={true}
                     navigation={false}
 
-                    className="SwiperTapBests"
+                    className="SwiperVendorHeader"
                     style={{
                         width: '100%',
                         //  margin: '0px 19px',
@@ -251,7 +248,7 @@ const SwiperInVendorHeaderComp = ({
                     // centeredSlides={true}
                     navigation={false}
 
-                    className="SwiperTapBests"
+                    className="SwiperVendorHeader"
                     style={{
                         width: '100%',
                         //  margin: '0px 19px',
