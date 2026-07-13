@@ -244,7 +244,6 @@ const SwiperShopsInVendorComp = () => {
                                                 {/* zare_nk_050228_nokteh_st(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
                                                 {
                                                     (index == 0 || index == 3 || index == 6) ?
-
                                                         // <img
                                                         //     style={{
                                                         //         width: '100%',

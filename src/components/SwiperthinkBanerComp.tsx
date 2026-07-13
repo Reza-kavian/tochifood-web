@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050422_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -77,9 +77,8 @@ const SwiperThinkBanerComp = () => {
         }
         // console.log('tokentokentoken: ' + token);
 
-        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-        const response = await fetch(ApiUrl + "Api_SelectBaner", {
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+        const response = await fetch(NextJsApiUrl + "Api_SelectBaner", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -90,7 +89,9 @@ const SwiperThinkBanerComp = () => {
             }),
         });
 
-        const data = await response.json();
+        const data = await response.json();   ////zare_nk_050422_nokteh(response.json() makhsoose "Content-Type": "application/json" hast(yani pasokhe api json hast) vali
+        //// age bejaye application/json az anvae text ya xml , ... bashe pasokhe api response.json() khata mideh ke pasokh nemishe be json tabdil beshe va masalan response.text
+        ////  monaseb hast(albateh dar api haye parsafar mamoolan pasokhha shamele satrhaye jadavele database hastand ke jsoni barmegardoone be karbar va ma da client az response.json() estefadeh mikonim))
 
         if (response.ok) {
             // console.log("zare_nk_050228-data: " + JSON.stringify(data));
@@ -133,8 +134,7 @@ const SwiperThinkBanerComp = () => {
                 <SwiperSlide >
                     <div className="contInSlide" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Link href="https://tapsi.food/vendor-list?vendorListId=banner-1624" >
-                            <img
-                                style={{
+                            <img style={{
                                     width: '100%', display: 'block', ////zare_nk_050303_nokteh(age display:'block' nadam tage pedare img ertefaei hodoode 10px bishtar az img migireh!)
                                 }}
                                 src={`/images/baners/top-baner/ThinkBanerFromBasalam.gif`} />

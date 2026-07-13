@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050422_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -77,9 +77,8 @@ const SwiperTopBanerComp = () => {
         }
         console.log('tokentokentoken: ' + token);
 
-        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-        const response = await fetch(ApiUrl + "Api_SelectBaner", {
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+        const response = await fetch(NextJsApiUrl + "Api_SelectBaner", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -167,7 +166,7 @@ const SwiperTopBanerComp = () => {
                     ////zare_nk_050216_nokteh_end(dokmehaye raftan be safhe ke momoolan dar vasat va paeine swiper namayash dadeh mishan, age nazarim pishfarz false hast, mishe ham boolean 
                     //// dad, va ham meghdare objecti dad ke dokmehaye yadshodeh ra sefareshi konim)
 
-                    // autoplay={{ delay: 5000, disableOnInteraction: false }} //zare_nk_050226_nokteh(age mikhaim barnameh automat slide ha ro varagh bezaneh)
+                    // autoplay={{ delay: 5000, disableOnInteraction: false }}  ////zare_nk_050226_nokteh(age mikhaim barnameh automat slide ha ro varagh bezaneh)
                     className="SwiperTopBaner"
                     style={{
                         width: '100%',
@@ -196,13 +195,11 @@ const SwiperTopBanerComp = () => {
                                         {/* zare_nk_050408_nokteh_st(rahe2) */}
                                         <button onClick={() => {
                                             goToVendorList(item.IdBaner);
-                                        }}
-                                            style={{
-                                                border: 'none',
-                                                backgroundColor: 'inherit',
-                                                padding: '0px',
-                                            }}
-                                        >
+                                        }} style={{
+                                            border: 'none',
+                                            backgroundColor: 'inherit',
+                                            padding: '0px',
+                                        }}>
                                             <img
                                                 style={{
                                                     width: '100%',

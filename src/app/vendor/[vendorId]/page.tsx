@@ -2050,6 +2050,8 @@ export default function VendorPage() {
                     direction: 'rtl',
                     position: 'absolute',  ////zare_nk_050404_added   
                     top: '0px ',  ////zare_nk_050404_added      
+
+                    paddingBottom: '96px',  ////zare_nk_050421_added
                 }}>
                 <div style={{
                     width: '100%',

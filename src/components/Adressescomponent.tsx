@@ -75,12 +75,24 @@ type AdressescomponentType = {
   // setCurrentAddress: React.Dispatch<React.SetStateAction<responsedListFromApiSelectAddressListType | null>>; ////zare_nk_050329_commented(currentAddress az useState tabdil shod be createContext)
 };
 
-const Adressescomponent = function Adressescomponent({   
+////zare_nk_050422_added_st
+type responsedListFromApiSelectShobehAtrafUserType = {
+  IdShobe: number;
+  NameSobe: string;
+  KafKharid: number;
+  Fasele: number;
+  ZarfiatErsal: number;
+  Keraye: number;
+  NazdikTarinZamanErsal: string;
+};
+////zare_nk_050422_added_end
+
+const Adressescomponent = function Adressescomponent({
   responsedListFromApiSelectAddressList,
   isEpmtyShowAddRemAddress,
-  setIsEpmtyShowAddRemAddress, 
+  setIsEpmtyShowAddRemAddress,
   setIsEpmtyAdressList,
-  showAddressListDrawer,  
+  showAddressListDrawer,
   // setCurrentAddress, ////zare_nk_050329_commented(currentAddress az useState tabdil shod be createContext)
 }: AdressescomponentType) {
   console.log('050329-Adressescomponent rendered!!');   ////zare_nk_050329_added
@@ -143,11 +155,76 @@ const Adressescomponent = function Adressescomponent({
     }
     , [isEpmtyShowAddRemAddress]);
 
+  ////zare_nk_050422_added_st
+  const getSwiperShopsInVendorComp = async (mycurrentAddressState: responsedListFromApiSelectAddressListType | null) => {
+    // const getSwiperShopsInVendorComp = async () => { 
+    let token = await getCookie("token");
+    if (!token) {
+      // setErrorInSwiperShopsInVendorComp("lotfan avval online shid");
+      return null;
+    }
+    console.log('tokentokentoken: ' + token);
+    // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented  
+    try {
+      const response = await fetch(NextJsApiUrl + "Api_SelectShobehAtrafUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        // body: JSON.stringify({}),
+        body: JSON.stringify({
+          "Id": mycurrentAddressState != null ? mycurrentAddressState.IdAdress : 1,  ////zare_nk_050416_nokteh(manzoor az Id hamoon IdAddress hast ke ya vaghei midam ya pishfarz hatman 1 mizaram(ehtemalan 1 haman meydoon saate) )
+        }),
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("zare_nk_050404-Api_SelectGoroohJson data1: " + JSON.stringify(data));
+        if (data.status == 0) {
+          if (data.data.list == undefined) {
+            // return;  ////zare_nk_050422_commented
+            return null;  ////zare_nk_050422_added
+          }
+          // var parsedList = JSON.parse(data.data.list);
+          // var Gorooh = parsedList.Gorooh;
+          // SetResponsedListFromApiSelectGoroohJson(() => {
+          //     return Gorooh
+          // });
+          var parsedList = JSON.parse(data.data.list);
+          ////zare_nk_050422_added_st
+          if (parsedList.length == 0) {
+            return null;
+          }
+          ////zare_nk_050422_added_end
+          // SetResponsedListFromApiSelectShobehAtrafUser(() => {
+          //     return parsedList
+          // });
+          // return Number(parsedList[0].IdShobe) ?? null;
+          return parsedList[0] ?? null;
+        } else {
+          // setErrorInSwiperShopsInVendorComp("متاسفانه خطایی رخ داده است34:" + data.errors);
+          return null;  ////zare_nk_050422_added
+          console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
+        }
+      } else {
+        console.log("zare_nk_050110-!response.ok" + response.ok);
+        // setErrorInSwiperShopsInVendorComp("متاسفانه خطایی رخ داده است35");
+        return null; ////zare_nk_050422_added
+      }
+    }
+    catch (error) {
+      return null; ////zare_nk_050422_added
+    }
+  }
+  ////zare_nk_050422_added_end
+
+
   var currentAddressUseContext = useContext(currentAddressContext);   ////zare_nk_050329_added 
 
   const chosenAddress = useCallback(
     async (chosenAddressItem: responsedListFromApiSelectAddressListType | null) => {
-      // console.log('chosenAddressItem.IdAdress: ' + chosenAddressItem.IdAdress);
+      console.log('chosenAddress called!!');
       // document.cookie = `chosenAddress=${JSON.stringify(chosenAddressItem)}; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;  ////zare_nk_050210_nokteh(expires=Thu, 01 Jan 1970 00:00:00 UTC baese monghazi shodane cookie dar hamin khatte tarif mishe! pas 
       //// majboorim ye tarikhe dastiy behesh badim,age mikhaim abadi basshe ye cookiye dastiye toolani behesh midim ke shabiye abadiye(age expires ra dasti nadim 
       //// behesh pishfarz SessionCookie darnazar gerefteh mishe(yani moroorgar ro bebandim cookie hazf mishe) ) )
@@ -158,16 +235,14 @@ const Adressescomponent = function Adressescomponent({
       // document.cookie = `chosenAddress=${JSON.stringify(chosenAddressItem)}; path=/; expires=${expiresString};secure; samesite=None`;
       ////zare_nk_050210_nokteh(mamoolan JSON.stringify kefayat mikoneh, vali age matne cookie shamele characterhaye ; va ... bashe shayad barnameh eshtebahan anra 
       //// beonvane jodakonandeh dar reshteye document.cookie darnazar begire va kharabkari koneh, pas encodeURIComponent tosiye mishavad)
-      document.cookie = chosenAddressItem ? (
-        `chosenAddress=${encodeURIComponent(
-          JSON.stringify(chosenAddressItem)
-        )}; path=/; expires=${expiresString};secure; samesite=None`
+      document.cookie =await chosenAddressItem ? (
+        `chosenAddress=${encodeURIComponent(JSON.stringify(chosenAddressItem))}; path=/; expires=${expiresString};secure; samesite=None`
       ) :
         (
           `chosenAddress=; path=/; expires=${expiresString};secure; samesite=None`
         )
 
-      const chosenAddress = getCookie("chosenAddress");
+      const chosenAddress =await getCookie("chosenAddress");
       // alert('chosenAddress is: ' + chosenAddress);
       var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
       // alert('chosenAddress IdAdress is: ' + parsedChosenAddress.IdAdress);
@@ -182,6 +257,25 @@ const Adressescomponent = function Adressescomponent({
       currentAddressUseContext?.setMycurrentAddress(parsedChosenAddress)
       // console.log('050329-currentAddressUseContext?.mycurrentAddress?.Adress: ' + currentAddressUseContext?.mycurrentAddress?.Adress);
       ////zare_nk_050329_added_end(currentAddress az useState tabdil shod be createContext)
+
+      ////zare_nk_050422_added_st
+      var parsedurrentShobe: responsedListFromApiSelectShobehAtrafUserType | null = null;
+      if (parsedChosenAddress != null) {
+        parsedurrentShobe = await getSwiperShopsInVendorComp(parsedChosenAddress);
+      }
+      else if (parsedChosenAddress == null) {
+        parsedurrentShobe = await getSwiperShopsInVendorComp(null);
+      }
+
+      document.cookie =await parsedurrentShobe ? (`currentShobe=${encodeURIComponent(JSON.stringify(parsedurrentShobe))}; path=/; expires=${expiresString};secure; samesite=None`) :
+        (`currentShobe=; path=/; expires=${expiresString};secure; samesite=None`)
+      //// const currentShobe = await getCookie("currentShobe");
+      //// var parsedurrentShobe: responsedListFromApiSelectShobehAtrafUserType | null = currentShobe ? JSON.parse(currentShobe) : null;
+      //setCurrentShobeState(parsedurrentShobe);   ////zare_nk_050422_commented(be useState felan niazi nadaram) 
+
+      // router.refresh();
+      window.location.reload();
+      ////zare_nk_050422_added_end
     }
     , [currentAddressUseContext])
 

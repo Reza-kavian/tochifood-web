@@ -1268,7 +1268,7 @@ export default function CartDetails() {
     ////zare_nk_050416_commented_end 
 
     ////zare_nk_050405_added_st
-    
+
     const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
     const [activeTab, setActiveTab] = useState<string | null>(null);
@@ -1890,6 +1890,15 @@ export default function CartDetails() {
     // const handlerForRemClick = useCallback(remveFromCartInIndex, [remveFromCartInIndex]);
     ////zare_nk_050416_added_st(baraye add va rem va ...)
 
+    ////zare_nk_050421_added_st
+    const goToCheckout = async (IdShobe: number, IdSabadKharidTitr: number) => {
+        alert('goToCheckout-IdShobe: ' + IdShobe);
+        //router.push(`/vendor/${IdShobe}/cart-details`); 
+        //router.push(`/vendor/${IdShobe}/checkout?idTitr=${IdSabadKharidTitr}`);  
+        router.push(`/vendor/${IdShobe}/checkout`);
+    }
+    ////zare_nk_050421_added_end
+
     return (
         <div style={{
             // backgroundColor: 'white', 
@@ -1984,6 +1993,8 @@ export default function CartDetails() {
 
                     paddingLeft: '1rem',  ////zare_nk_050416_added
                     paddingRight: '1rem',  ////zare_nk_050416_added
+
+                    paddingBottom: '96px',  ////zare_nk_050421_added
                 }}>
 
                 {/* zare_nk_050416_added_st(inja address haro niaz nadaram felan) */}
@@ -2552,12 +2563,204 @@ export default function CartDetails() {
                     })} */}
                 </div>
                 {/* zare_nk_050413_added_end(berim mohtavaye sabad) */}
-            </main>
+                {/* zare_nk_050420_added_st */}
+                <div className="-mx-4 my-4 h-3 bg-gray-50" style={{
+                    backgroundColor: '#f7f7f8', height: '.75rem', margin: '1rem -1rem', width: '450px',
+                }}></div>
 
-            <footer></footer>
+                <div className="pb-4 text-gray" style={{
+                    display: "flex", flexFlow: 'row', width: '100%', justifyContent: 'start', alignItems: 'center', paddingBottom: '1rem',
+                }}>
+                    <span style={{ color: '#878b92', }}>
+                        جزئیات پرداخت
+                    </span>
+                </div>
+
+                <div className="flex flex-col gap-y-3 rounded-xl bg-gray-50 p-4 pb-6" style={{
+                    display: 'flex', width: '100%', flexDirection: 'column', rowGap: '.75rem',
+                    paddingBottom: '1.5rem', padding: '1rem', backgroundColor: '#f7f7f8', borderRadius: '.75rem',
+                }}>
+
+                    <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.5rem', }}>
+                        <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                            <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#878b92', }}>جمع سفارش</span>
+                            <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#878b92', }}>(</span>
+                            <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#878b92', }}>4</span>
+                            <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#878b92', }}>)</span>
+                        </div>
+                        <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                            <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#313335', }}>{'4600000'.toLocaleString()}</span>
+                            <span style={{ fontSize: '0.625rem', color: '#313335', marginRight: '3px', }}>تومان</span>
+                        </div>
+                    </div>
+
+                    <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.5rem', }}>
+                        <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                            <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#878b92', }}>مجموع اقلام پس از تخفیف</span>
+                        </div>
+                        <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                            <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#313335', }}>{'4360000'.toLocaleString()}</span>
+                            <span style={{ fontSize: '0.625rem', color: '#313335', marginRight: '3px', }}>تومان</span>
+                        </div>
+                    </div>
+
+                    <div //class="relative flex w-full items-center justify-center my-3"
+                        style={{
+                            display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center', margin: '.75rem 0px', position: 'relative',
+                        }}>
+                        <div //class="absolute border left-[-16px] rounded-r-full border-l-0 border-gray-200 bg-white" 
+                            style={{
+                                width: '12px', height: '24px', backgroundColor: 'white', borderColor: '#e0e3e5', borderLeftWidth: '0px', borderWidth: '1px',
+                                borderBottomRightRadius: '9999px', borderTopRightRadius: '9999px', left: '-16px', position: 'absolute',
+                            }}>
+                        </div>
+
+                        <div //class="w-full border border-dashed border-gray-200"
+                            style={{ borderColor: '#e0e3e5', borderStyle: 'dashed', borderWidth: '1px', width: '100%', }}>
+                        </div>
+
+                        <div //class="absolute border right-[-16px] rounded-l-full border-r-0 border-gray-200 bg-white" 
+                            style={{
+                                width: '12px', height: '24px', backgroundColor: 'white', borderColor: '#e0e3e5', borderRightWidth: '0px', borderWidth: '1px',
+                                borderBottomLeftRadius: '9999px', borderTopLeftRadius: '9999px', right: '-16px', position: 'absolute',
+                            }}>
+                        </div>
+                    </div>
+
+                    <button style={{
+                        display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.5rem',
+                        border: 'none', backgroundColor: 'inherit', cursor: 'pointer', padding: '0px',
+                    }}>
+                        <div style={{
+                            display: 'flex', flexFlow: 'row', alignItems: 'center', direction: 'rtl', color: '#313335',
+                            minWidth: '124px', maxWidth: '256px', gap: '0.25rem',
+                        }}>
+                            <span style={{ textAlign: 'right', color: '#059464', fontSize: '.875rem', lineHeight: '1.25rem', }}>سود شما از این خرید</span>
+                            <img src="/images/cartDetails/sood-kharid.svg" alt="ادرس ها" style={{ height: '1rem', width: '1rem', }} />
+                        </div>
+
+                        <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                            <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#059464', }}>{'4360000'.toLocaleString()}</span>
+                            <span style={{ fontSize: '0.625rem', color: '#059464', marginRight: '3px', }}>تومان</span>
+                        </div>
+                    </button>
+
+                    <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.5rem', }}>
+                        <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                            <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#878b92', }}>هزینه ارسال</span>
+                        </div>
+                        <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                            <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#313335', }}>{'37000'.toLocaleString()}</span>
+                            <span style={{ fontSize: '0.625rem', color: '#313335', marginRight: '3px', }}>تومان</span>
+                        </div>
+                    </div>
+
+                    <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.5rem', }}>
+                        <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                            <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#878b92', }}>هزینه خدمات</span>
+                        </div>
+                        <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                            <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#313335', }}>رایگان</span>
+                            {/* <span style={{ fontSize: '0.625rem', color: '#313335', marginRight: '3px', }}>تومان</span> */}
+                        </div>
+                    </div>
+
+                    <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.5rem', }}>
+                        <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                            <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#878b92', }}>هزینه بسته‌بندی</span>
+                        </div>
+                        <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                            <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#313335', }}>{'5000'.toLocaleString()}</span>
+                            <span style={{ fontSize: '0.625rem', color: '#313335', marginRight: '3px', }}>تومان</span>
+                        </div>
+                    </div>
+
+                    <div style={{
+                        display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.25rem',
+                        padding: '.75rem', backgroundColor: 'white', borderRadius: '.5rem', height: '3rem',
+                    }}>
+                        <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                            <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#878b92', }}>جمع کل</span>
+                        </div>
+                        <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                            <span style={{
+                                fontSize: '0.875rem', lineHeight: '1.25rem', color: '#313335',
+                            }}>
+                                {'612000'.toLocaleString()}
+                            </span>
+                            <span style={{ fontSize: '0.625rem', color: '#313335', marginRight: '3px', }}>تومان</span>
+                        </div>
+                    </div>
+                </div>
+                {/* zare_nk_050420_added_end */}
+            </main >
+
+            <footer style={{
+                maxWidth: '450px', marginLeft: 'auto', marginRight: 'auto', zIndex: 50, bottom: 0, left: 0, right: 0, position: 'fixed',
+            }}>
+                <div style={{
+                    position: 'relative',
+                    boxShadow: '0px 10px 15px -3px #0000001a',
+                    opacity: 1, backgroundColor: 'white', borderTopLeftRadius: '.375rem', borderTopRightRadius: '.375rem', overflow: 'hidden', height: '100%',
+
+                    paddingBottom: '1.5rem', padding: '1rem',
+                }}>
+
+                    <button
+                        onClick={() => {
+                            // goToCheckout(titrItem.IdShobeh,titrItem.IdSabadKharidTitr);
+                            goToCheckout(vendorId);
+
+                        }} style={{
+                            color: 'white',
+                            fontSize: '1rem',
+                            lineHeight: '1.5rem', padding: '1rem', backgroundColor: '#ff5900', borderRadius: '.75rem',
+                            display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', height: '3.5rem', position: 'relative', cursor: 'pointer',
+                            direction: 'rtl', border: 'none',
+
+                            minWidth: '.25rem',
+                        }}>
+                        <div style={{ flexShrink: 0, gap: '.5rem', justifyContent: 'space-between', alignItems: 'center', display: 'flex', }}>
+                            <span style={{
+                                color: '#ff5900', fontSize: '.75rem',
+                                lineHeight: '1rem', backgroundColor: 'white', borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', height: '1.25rem',
+                                width: '1.25rem', display: 'flex',
+
+                            }}>3</span>
+                            <span style={{ color: "white" }}>نهایی کردن خرید</span>
+                        </div>
+
+                        <div style={{
+                            fontSize: '.875rem',
+                            lineHeight: '1.25rem',
+                            display: 'flex',
+                            flexFlow: 'row',
+                            alignItems: 'center',
+                            gap: '2px',
+                        }}>
+                            <span style={{
+                                color: 'white', fontSize: '.875rem',
+                                lineHeight: '1.25rem',
+                            }}>
+                                {/* {jamKolNahaei &&
+                                    jamKolNahaei.toLocaleString()
+                                } */}
+                                {'612000'.toLocaleString()}
+                            </span>
+
+                            <span style={{
+                                color: 'white', fontSize: '.625rem',
+                            }}>تومان</span>
+
+                        </div>
+
+
+                    </button>
+                </div>
+            </footer>
 
             <div className="tabIndexOne-in-LayoutWrapper" tabIndex={1}>
             </div>
-        </div>
+        </div >
     );
 }
