@@ -1,4 +1,4 @@
-// ////zare_nk_050413_okk(1)
+// ////zare_nk_050423_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -967,11 +967,11 @@ export default function CartDetails() {
     const [warningTextInMymodalForWarning, setWarningTextInMymodalForWarning] = useState('');
 
     useEffect(() => {
-        const chosenAddress = getCookie("chosenAddress");
-        var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
-        setMycurrentAddressState(parsedChosenAddress);
-
         const tempAsync = async () => {
+            const chosenAddress = await getCookie("chosenAddress");
+            var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
+            setMycurrentAddressState(parsedChosenAddress);
+
             const currentShobe = await getCookie("currentShobe");
             var parsedurrentShobe: responsedListFromApiSelectShobehAtrafUserType | null = currentShobe ? JSON.parse(currentShobe) : null;
             setCurrentShobeState(parsedurrentShobe);
@@ -1109,9 +1109,8 @@ export default function CartDetails() {
                 alert("لطفا ابتدا آنلاین شوید");
                 return;
             }
-            // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-            let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-            var urlSelectSabad = ApiUrl + "Api_SelectSabadKharidSatr";
+            // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+            var urlSelectSabad = NextJsApiUrl + "Api_SelectSabadKharidSatr";
             const response = await fetch(urlSelectSabad, {
                 method: "POST",
                 headers: {
@@ -1255,71 +1254,7 @@ export default function CartDetails() {
     };
 
     const [currentShobeState, setCurrentShobeState] = useState<responsedListFromApiSelectShobehAtrafUserType | null>(null);
-
-    ////zare_nk_050416_commented_st
-    // useEffect(() => {
-    //     const tempAsync = async () => {
-    //         const currentShobe = await getCookie("currentShobe");
-    //         var parsedurrentShobe: responsedListFromApiSelectShobehAtrafUserType | null = currentShobe ? JSON.parse(currentShobe) : null;
-    //         setCurrentShobeState(parsedurrentShobe);
-    //     }
-    //     tempAsync(); 
-    // }, []);
-    ////zare_nk_050416_commented_end 
-
-    ////zare_nk_050405_added_st
-
-    const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
-
-    const [activeTab, setActiveTab] = useState<string | null>(null);
-
-    const scrollToSection = useCallback(
-        (id: string) => {
-            console.log('050405-scrollToSection called!!-id: ' + id);
-            console.log('050405-scrollToSection called!!-sectionRefs.current[id] : ' + sectionRefs.current[id]);
-            const section = sectionRefs.current[id];
-            if (!section) return;
-
-            section.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-            });
-        }
-        , [activeTab]);
-
-    useEffect(() => {
-        const HEADER_HEIGHT = 40;
-        const handleScroll = () => {
-            let currentSection = "";
-            Object.values(sectionRefs.current).forEach((section) => {
-                if (!section) return;
-
-                const rect = section.getBoundingClientRect();  ////zare_nk_050405_nokteh(mogheiyate section ra nesbat be viewport dar har scroll midahad)
-
-                console.log('050405-rect: ' + JSON.stringify(rect));
-                ////050405-rect: {"x":612,"y":336,"width":446,"height":300,"top":336,"right":1058,"bottom":636,"left":612}
-
-                if (rect.top <= HEADER_HEIGHT + 5) {  ////zare_nk_050405_nokteh(5 pixel ra baraye teloranse gozashtim)
-                    console.log('050405-rect if bargharare-section.id: ' + section.id);
-                    currentSection = section.id;
-                }
-            });
-
-            if (currentSection !== "" && currentSection !== activeTab) {
-                setActiveTab(currentSection);
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-
-        handleScroll();
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, [activeTab]);
-    ////zare_nk_050405_added_end
-
+ 
     ////zare_nk_050416_added_st(baraye add va rem va ...)
     async function addToCartInIndex(
         addRemParam: addRemParamType,
@@ -2076,7 +2011,6 @@ export default function CartDetails() {
                 <div id="sabdRowsCont" style={{
                     display: 'flex', flexFlow: 'column', width: '100%', //border: '2px dashed red', 
                 }}>
-
                     <div style={{// backgroundColor: 'red',
                         paddingBottom: '.75rem', paddingTop: '.75rem', paddingLeft: '.5rem', paddingRight: '.5rem', borderRadius: '.75rem', gap: '.5rem', alignItems: 'center',
                         width: '100%', height: 'min-content', display: 'flex', marginTop: '1.25rem', boxShadow: '0 1px 2px 0 #0000000d',
@@ -2750,11 +2684,8 @@ export default function CartDetails() {
 
                             <span style={{
                                 color: 'white', fontSize: '.625rem',
-                            }}>تومان</span>
-
-                        </div>
-
-
+                            }}>تومان</span> 
+                        </div> 
                     </button>
                 </div>
             </footer>

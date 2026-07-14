@@ -1,4 +1,4 @@
-// ////zare_nk_050413_okk(1)
+// ////zare_nk_050423_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -61,7 +61,6 @@ type responsedListFromApiSelectAddressListType = {
     [key: string]: any;
 };
 
-////zare_nk_050414_added_st
 type SabadTitrType = {
     IdSabadKharidTitr: number;
     SumFeeMasraf: number;
@@ -92,10 +91,7 @@ type SabadRowType = {
     ForCartContentsDesignType: number,  ////zare_nk_050416_added
     idTag: string;
 };
-////zare_nk_050414_added_end
 
-
-////zare_nk_050416_added_st
 type addRemParamType = {
     tedadInSabadOrDet: number;
     ZaribForoosh: number;
@@ -114,7 +110,6 @@ type addRemParamType = {
     // event?: MouseEvent<HTMLAnchorElement> | null | undefined;  //zare_nk_041127_commented
     event?: null;  //zare_nk_041127_added
 };
-////zare_nk_050416_added_end
 
 ////zare_nk_050405_nokteh_st(rahe1- baraye serverComponent)
 // type Props2 = {
@@ -164,11 +159,11 @@ export default function Checkout() {
     const [warningTextInMymodalForWarning, setWarningTextInMymodalForWarning] = useState('');
 
     useEffect(() => {
-        const chosenAddress = getCookie("chosenAddress");
-        var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
-        setMycurrentAddressState(parsedChosenAddress);
-
         const tempAsync = async () => {
+            const chosenAddress = getCookie("chosenAddress");
+            var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
+            setMycurrentAddressState(parsedChosenAddress);
+
             const currentShobe = await getCookie("currentShobe");
             var parsedurrentShobe: responsedListFromApiSelectShobehAtrafUserType | null = currentShobe ? JSON.parse(currentShobe) : null;
             setCurrentShobeState(parsedurrentShobe);
@@ -1357,9 +1352,7 @@ export default function Checkout() {
                             {/* {currentAddress?.Adress ? currentAddress.Adress : 'آدرسسس'} */}
                             {mycurrentAddressState?.Adress ? mycurrentAddressState.Adress : ''}
                         </div>
-
                     </div>
-
                 </div>
 
                 <div className="-mx-4 my-4 h-3 bg-gray-50" style={{
@@ -1419,7 +1412,7 @@ export default function Checkout() {
                         }}>
                         {/* zare_nk_050421_added_st(raveshe pardakhti haaaaaaaaaaaaaaaaaa) */}
                         <div
-                        onClick={() => { radionClickedFunc(1) }}
+                            onClick={() => { radionClickedFunc(1) }}
                             // key={item.IdAdress}   ////zare_nk_050319_added
                             // // onClick={() => {
                             // //   setRowItem(item);
@@ -1482,7 +1475,7 @@ export default function Checkout() {
                                 }}>
                                     <span
                                         style={{
-                                            ...(radionClicked==1 ? { color: '#059666' } : { color: '#1b1c1d' }),
+                                            ...(radionClicked == 1 ? { color: '#059666' } : { color: '#1b1c1d' }),
                                             fontWeight: '500',
                                             fontSize: '.875rem',
                                             lineHeight: '1.25rem',
@@ -1491,7 +1484,7 @@ export default function Checkout() {
                                         آنلاین
                                         {/* {item.OnvanAdress ? item.OnvanAdress : 'خونه'} */}
                                     </span>
-                                   
+
                                     {/* zare_nk_050421_alaaaaaaaan_st */}
                                     <div style={{
                                         display: 'flex', flexFlow: 'row', width: '100%', marginBottom: '2px',
@@ -1530,8 +1523,7 @@ export default function Checkout() {
                                                         // borderStyle: 'dashed',
                                                         // borderColor: 'green',
                                                         marginRight: '5px', ////zare_nk_050331_added
-                                                    }}
-                                                >
+                                                    }} >
                                                     <span //className="mablagh" 
                                                         style={{
                                                             lineHeight: '1rem',
@@ -1577,7 +1569,7 @@ export default function Checkout() {
                                             width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center',
                                         }}>
                                         <div className="size-3/4 rounded-full bg-current"
-                                            style={{ height: '75%', width: '75%', borderRadius: '9999px', backgroundColor: '#059666',}}>
+                                            style={{ height: '75%', width: '75%', borderRadius: '9999px', backgroundColor: '#059666', }}>
                                         </div>
                                     </span>}
                             </button>
@@ -1589,8 +1581,8 @@ export default function Checkout() {
 
 
 
-                         <div
-                         onClick={() => { radionClickedFunc(2) }}
+                        <div
+                            onClick={() => { radionClickedFunc(2) }}
                             // key={item.IdAdress}   ////zare_nk_050319_added
                             // // onClick={() => {
                             // //   setRowItem(item);
@@ -1653,7 +1645,7 @@ export default function Checkout() {
                                 }}>
                                     <span
                                         style={{
-                                            ...(radionClicked==2 ? { color: '#059666' } : { color: '#1b1c1d' }),
+                                            ...(radionClicked == 2 ? { color: '#059666' } : { color: '#1b1c1d' }),
                                             fontWeight: '500',
                                             fontSize: '.875rem',
                                             lineHeight: '1.25rem',
@@ -1662,7 +1654,7 @@ export default function Checkout() {
                                         تارا
                                         {/* {item.OnvanAdress ? item.OnvanAdress : 'خونه'} */}
                                     </span>
-                                   
+
                                     {/* zare_nk_050421_alaaaaaaaan_st */}
                                     <div style={{
                                         display: 'flex', flexFlow: 'row', width: '100%', marginBottom: '2px',
@@ -1760,8 +1752,8 @@ export default function Checkout() {
 
 
 
-                         <div
-                         onClick={() => { radionClickedFunc(3) }}
+                        <div
+                            onClick={() => { radionClickedFunc(3) }}
                             // key={item.IdAdress}   ////zare_nk_050319_added
                             // // onClick={() => {
                             // //   setRowItem(item);
@@ -1824,7 +1816,7 @@ export default function Checkout() {
                                 }}>
                                     <span
                                         style={{
-                                            ...(radionClicked==3 ? { color: '#059666' } : { color: '#1b1c1d' }),
+                                            ...(radionClicked == 3 ? { color: '#059666' } : { color: '#1b1c1d' }),
                                             fontWeight: '500',
                                             fontSize: '.875rem',
                                             lineHeight: '1.25rem',
@@ -1833,7 +1825,7 @@ export default function Checkout() {
                                         اوزون
                                         {/* {item.OnvanAdress ? item.OnvanAdress : 'خونه'} */}
                                     </span>
-                                   
+
                                     {/* zare_nk_050421_alaaaaaaaan_st */}
                                     <div style={{
                                         display: 'flex', flexFlow: 'row', width: '100%', marginBottom: '2px',
@@ -1933,8 +1925,8 @@ export default function Checkout() {
 
 
 
-                         <div
-                         onClick={() => { radionClickedFunc(4) }}
+                        <div
+                            onClick={() => { radionClickedFunc(4) }}
                             // key={item.IdAdress}   ////zare_nk_050319_added
                             // // onClick={() => {
                             // //   setRowItem(item);
@@ -1970,11 +1962,11 @@ export default function Checkout() {
                                     // border:'2px dashed red'
                                 }}>
                                 <button id="locationBtnInEveryAddressRow" style={{
-                                        backgroundColor: 'inherit',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1) 
-                                        fill: 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
-                                        borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
-                                        flex: '0 0 auto',
-                                    }} > 
+                                    backgroundColor: 'inherit',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1) 
+                                    fill: 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
+                                    borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
+                                    flex: '0 0 auto',
+                                }} >
                                     <img src="/images/checkout/ravesh-online.svg" alt="پرداخت آنلاین" style={{
                                         // height: '1.25rem', width: '1.25rem',
                                     }} />
@@ -1992,8 +1984,8 @@ export default function Checkout() {
                                 }}>
                                     <span
                                         style={{
-                                            ...(radionClicked==4 ? { color: '#059666' } : { color: '#1b1c1d' }),
-                                               
+                                            ...(radionClicked == 4 ? { color: '#059666' } : { color: '#1b1c1d' }),
+
                                             fontWeight: '500',
                                             fontSize: '.875rem',
                                             lineHeight: '1.25rem',
@@ -2002,7 +1994,7 @@ export default function Checkout() {
                                         دیجی‌پی
                                         {/* {item.OnvanAdress ? item.OnvanAdress : 'خونه'} */}
                                     </span>
-                                   
+
                                     {/* zare_nk_050421_alaaaaaaaan_st */}
                                     <div style={{
                                         display: 'flex', flexFlow: 'row', width: '100%', marginBottom: '2px',
@@ -2014,7 +2006,7 @@ export default function Checkout() {
                                             <div style={{
                                                 display: 'flex', flexFlow: 'row', gap: '.5rem', alignItems: 'center',
                                             }}>
-                                              <img src="/images/checkout/motor-peyk.svg" alt="پیک" style={{
+                                                <img src="/images/checkout/motor-peyk.svg" alt="پیک" style={{
                                                     height: '1rem', width: '1',
                                                 }} />
                                                 <div
@@ -2041,8 +2033,8 @@ export default function Checkout() {
                                                         }}>
                                                         ارسال رایگان با پرداخت آنلاین
                                                     </span>
-                                                </div> 
-                                            </div> 
+                                                </div>
+                                            </div>
                                         </div>
 
                                     </div>

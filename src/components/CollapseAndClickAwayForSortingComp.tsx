@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050423_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext, memo } from "react";
@@ -290,8 +290,7 @@ const CollapseAndClickAwayForSortingComp = ({
                 keepMounted: true,
                 disableScrollLock: true,  ////zare_nk_050402_nokteh(agge disableScrollLock: true nadim baes mishe hengame baz shodane Drawer barname automat be 
                 ////tage <body> style css rooberoo ro bede: padding-right: 10px; overflow: hidden;(pishfarza disableScrollLock: false hast va style yad shode ro migire ke nemikhaim begireh!!  ))
-            }}
-        >
+            }}>
             {/* zare_nk_050204_rahe2_end(Drawer baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
             {error && <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>{error}</p>}
             {/* <Paper> */}
@@ -301,8 +300,7 @@ const CollapseAndClickAwayForSortingComp = ({
                 style={{ padding: '1rem', }}
                 onSubmit={(event) => {
                     event.preventDefault();
-                }}
-            >
+                }}>
                 <div style={{
                     display: "flex",
                     flexFlow: 'row',

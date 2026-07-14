@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050423_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -241,9 +241,7 @@ const GetScrollsSecInVendor = ({
             return;
         }
         console.log('tokentokentoken: ' + token);
-        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
         // const response = await fetch(ApiUrl + "Api_SelectGoroohJson", {
         //     method: "POST",
         //     headers: {
@@ -252,7 +250,7 @@ const GetScrollsSecInVendor = ({
         //     },
         //     body: JSON.stringify({}),
         // }); 
-        const response = await fetch(ApiUrl + "Api_SelectKalaShobeh", {
+        const response = await fetch(NextJsApiUrl + "Api_SelectKalaShobeh", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -353,11 +351,14 @@ const GetScrollsSecInVendor = ({
     }
 
     useEffect(() => {
-        const chosenAddress = getCookie("chosenAddress");
-        var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
-        setMycurrentAddressState(parsedChosenAddress);
+        async function asyncTempFunc() {
+            const chosenAddress = await getCookie("chosenAddress");
+            var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
+            setMycurrentAddressState(parsedChosenAddress);
 
-        getResponsedListFromApiSelectKalaShobeh();  ////zare_nk_050403_nokteh(methode getResponsedListFromApiSelectKalaShobeh dar in header bomorede va baraye olgu gozashte shode!)  ////zare_nk_050403_commented_movaghat
+            getResponsedListFromApiSelectKalaShobeh();  ////zare_nk_050403_nokteh(methode getResponsedListFromApiSelectKalaShobeh dar in header bimorede va baraye olgu gozashte shode!)  ////zare_nk_050403_commented_movaghat
+        }
+        asyncTempFunc();
     }, []);
 
     useEffect(() => {
@@ -379,9 +380,8 @@ const GetScrollsSecInVendor = ({
                 alert("لطفا ابتدا آنلاین شوید");
                 return;
             }
-            // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-            let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-            var urlSelectSabad = ApiUrl + "Api_SelectSabadKharidSatr";
+            // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+            var urlSelectSabad = NextJsApiUrl + "Api_SelectSabadKharidSatr";
             const response = await fetch(urlSelectSabad, {
                 method: "POST",
                 headers: {
@@ -466,7 +466,7 @@ const GetScrollsSecInVendor = ({
                                 else if (item.Tedad == item.ZaribForoosh) {
                                     ForCartContentsDesignTypeLet = 1;
                                 }
-                                console.log()
+
                                 return ({
                                     IdSabadKharidSatr: item.IdSabadKharidSatr,
                                     IdSabadKharidTitr: item.IdSabadKharidTitr,
@@ -530,7 +530,6 @@ const GetScrollsSecInVendor = ({
             item => item.IdG1
         );
         console.log('050405-responsedListFromApiSelectKalaShobeh called!!grouped: ' + JSON.stringify(grouped));
-
         console.log('050405-responsedListFromApiSelectKalaShobeh.l:' + responsedListFromApiSelectKalaShobeh.length +
             '-responsedListFromApiSelectKalaShobeh2: ' + JSON.stringify(responsedListFromApiSelectKalaShobeh));
     }
@@ -750,8 +749,6 @@ const GetScrollsSecInVendor = ({
                     setJamKol(tittrInoInResult.SumFeeMasraf);
                     setJamKolTakhfif(tittrInoInResult.Sood);
                     setJamKolNahaei(tittrInoInResult.MablaghNahaee);
-
-
                 }
             } else {
                 console.log('041120-addToCartInIndex-else 6 IdKala !!!!response.ok');
@@ -1066,7 +1063,7 @@ const GetScrollsSecInVendor = ({
                             return curItem;
                         })
                     })
-                    
+
                     setJamKol(tittrInoInResult.SumFeeMasraf);
                     setJamKolTakhfif(tittrInoInResult.Sood);
                     setJamKolNahaei(tittrInoInResult.MablaghNahaee);
@@ -1294,13 +1291,11 @@ const GetScrollsSecInVendor = ({
                     return (
                         <div key={idG1} id={idG1}
                             style={{
-                                // border: '2px dashed blue',
                                 scrollMarginTop: "40px",  ////zare_nk_050405_nokteh(baes mishe hengame paresh sectione morede nazar zire headere chasboon nare, balke paeinesh bereh)
                             }}
                             ref={el => {
                                 sectionRefs.current[idG1.toString()] = el;
-                            }}
-                        >
+                            }} >
                             <div style={{
                                 width: '100%',
                                 height: '82px',
@@ -1529,8 +1524,7 @@ const GetScrollsSecInVendor = ({
 
                                                     <span style={{ fontSize: '.625rem', color: '#6d6d6d', marginRight: '3px', }}>
                                                         تومان
-                                                    </span>
-                                                    {/* ya ali */}
+                                                    </span> 
                                                 </div>
                                             </div>
                                         </div>

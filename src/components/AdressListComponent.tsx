@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050423_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, memo } from "react";
@@ -147,8 +147,7 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
             flexDirection: 'column',
             flex: '0 0 auto',
             width: '100%',
-          }}
-        >
+          }} >
           <div
             style={{
               opacity: '1',
@@ -171,8 +170,7 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
               style={{
                 width: '32px', height: '32px', border: 'none', flex: '0 0 auto', display: "flex", flexFlow: "row", justifyContent: 'center',
                 justifyItems: 'center', alignItems: 'center', borderRadius: '9999px',
-              }}
-            >
+              }}>
               <svg style={{ width: '1.25rem', height: '1.25rem' }} fill="#ff5900" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-6 fill-gray"><path fillRule="evenodd" clipRule="evenodd" d="M17.6565 7.75735L13.4138 12L17.6565 16.2426L16.2423 17.6568L11.9996 13.4142L7.75699 17.6568L6.34277 16.2426L10.5854 12L6.34277 7.75735L7.75699 6.34314L11.9996 10.5858L16.2423 6.34314L17.6565 7.75735Z" fill="inherit"></path></svg>
             </button>
           </div>
@@ -199,9 +197,7 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
                 backgroundColor: '#fff7eb',
                 width: '32px', height: '32px', border: 'none', flex: '0 0 auto', display: "flex",
                 flexFlow: "row", justifyContent: 'center', justifyItems: 'center', alignItems: 'center', borderRadius: '9999px',
-
-              }}
-            >
+              }} >
               <svg style={{ height: ' 1.25rem', width: '1.25rem', fill: "#ff5900" }} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-5 fill-primary-600"><path d="M18 11.25H12.75V6C12.75 5.59 12.41 5.25 12 5.25C11.59 5.25 11.25 5.59 11.25 6V11.25H6C5.59 11.25 5.25 11.59 5.25 12C5.25 12.41 5.59 12.75 6 12.75H11.25V18C11.25 18.41 11.59 18.75 12 18.75C12.41 18.75 12.75 18.41 12.75 18V12.75H18C18.41 12.75 18.75 12.41 18.75 12C18.75 11.59 18.41 11.25 18 11.25Z" fill="inherit"></path></svg>
             </button>
             <span style={{

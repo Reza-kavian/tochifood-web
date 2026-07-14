@@ -1,4 +1,4 @@
-////zare_nk_050422_okk(1)
+////zare_nk_050423_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -364,13 +364,12 @@ const SwiperTapTimeComp = () => {
                 width: '100%', height: '1rem', boxShadow: 'rgba(0, 0, 0, 0.1) 0px 6px 8px 0px',marginBottom:'0.5rem',
                 backgroundColor: '#fcfcfc', borderBottomLeftRadius: '.75rem', borderBottomRightRadius: '.75rem',
             }}>
-            </div>   */}
+            </div> */}
 
             <div style={{
                 display: 'flex', flexFlow: 'column', gap: '.5rem', width: '100%',
                 // backgroundColor: '#a1a8ff',    ////zare_nk_050331_commented(az gradient estefadeh shod)  
                 backgroundImage: 'linear-gradient(to bottom, #5f69f0, #e8e9fe)',    ////zare_nk_050331_added(az gradient estefadeh shod)
-
             }}>
                 <div style={{
                     width: '100%', height: '1rem',
@@ -379,8 +378,7 @@ const SwiperTapTimeComp = () => {
                 }}>
                 </div>
 
-                <div
-                    style={{
+                <div style={{
                         display: 'flex', flexFlow: "row", justifyContent: "space-between", alignItems: 'center',
                         width: '100%', paddingLeft: '1rem', paddingRight: '1rem',
                     }} >
@@ -892,10 +890,8 @@ const SwiperTapTimeComp = () => {
                                                                         // borderWidth: 1,
                                                                         // borderStyle: 'dashed',
                                                                         // borderColor: 'green',
-                                                                    }}
-                                                                >
-                                                                    <span
-                                                                        //  className="mablagh" 
+                                                                    }}>
+                                                                    <span //className="mablagh" 
                                                                         style={{
                                                                             // fontSize: 13,
                                                                             fontSize: '0.75rem',

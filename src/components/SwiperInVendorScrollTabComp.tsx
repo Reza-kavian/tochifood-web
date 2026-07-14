@@ -1,4 +1,4 @@
-////zare_nk_050422_okk(1)
+////zare_nk_050423_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -43,7 +43,7 @@ function getCookie(name: any) {
     return null; //اگر کوکی پیدا نشد
 }
 
-const SwiperInVendorHeaderComp = ({
+const SwiperInVendorScrollTabComp = ({
     // openCollapseForSorting,
     // openCollapseForRaveshErsal
     scrollToSection,
@@ -136,7 +136,7 @@ const SwiperInVendorHeaderComp = ({
                     // centeredSlides={true}
                     navigation={false}
 
-                    className="SwiperVendorHeader"
+                    className="SwiperVendorScrollTab"
                     style={{
                         width: '100%',
                         //  margin: '0px 19px',
@@ -563,4 +563,4 @@ const SwiperInVendorHeaderComp = ({
     );
 }
 
-export default memo(SwiperInVendorHeaderComp); 
+export default memo(SwiperInVendorScrollTabComp); 

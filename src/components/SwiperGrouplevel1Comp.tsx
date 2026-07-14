@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050423_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -69,9 +69,8 @@ const SwiperGrouplevel1Comp = () => {
             return;
         }
         console.log('tokentokentoken: ' + token);
-        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-        const response = await fetch(ApiUrl + "Api_SelectGoroohJson", {
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+        const response = await fetch(NextJsApiUrl + "Api_SelectGoroohJson", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -126,10 +125,9 @@ const SwiperGrouplevel1Comp = () => {
                         // height: '95px',
                         // width: '100%',
                         width: '450px',
-                        overflow: 'visible', ////zare_nk_050226_nokteh(baraye inke darsade takhfifha ke biroon mizanan dideh beshan)   ////zare_nk_050317_commented(baraye swiper overflow: 'visible' 
-                        //// manteghi nist, chon arze colle slideha ro migire, na arze masalan 100% pedaresh ro) 
-                    }}
-                >
+                        overflow: 'visible', ////zare_nk_050226_nokteh(baraye inke darsade takhfifha ke biroon mizanan dideh beshan(be dive pedaresh overflow:hidden dadim ke slide ha
+                        //// kollan maloom nabashan va scroll ke mahiate swiper hast bi bimani nashe))   
+                    }} >
                     {responsedListFromApiSelectGoroohJson?.map((item, index) => {
                         console.log('000-item.IdAdress: ' + JSON.stringify(item));
                         console.log('000-item.IdAdress: ' + JSON.stringify(item));

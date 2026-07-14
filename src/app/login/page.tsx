@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050423_okk(1)
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -807,9 +807,8 @@ export default function Toolbar() {
       token = localStorage.getItem("Token") || "";
     }
     try {
-      // var ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-      var ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-      const response = await fetch(ApiUrl + "Api_LoginUser1", {
+      // var ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+      const response = await fetch(NextJsApiUrl + "Api_LoginUser1", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -1011,7 +1010,7 @@ export default function Toolbar() {
     //   vall = input?.value;
     // }
 
-    let vall: string = textVaredeh;
+    // let vall: string = textVaredeh;
     let tempnewSmsVal = '';
     ////zare_nk_050211_nokteh_st(rahe smschandtaei01, commnet shod chon faghat be tartib ezafe mikone, age inpute vasatiha ro tagheir bedim charachtere varedeh eshtebahi dar entehaye resheteheye newSmsVal darj mishe)
     // tempnewSmsVal += vall;   
@@ -1136,8 +1135,7 @@ export default function Toolbar() {
             // display: "flex",
             // justifyContent: "center", 
             // border: '2px solid black',
-          }}
-        >
+          }} >
           <svg
             viewBox="0 0 500 500"
             width="500"
@@ -1224,8 +1222,7 @@ export default function Toolbar() {
             position: 'relative',
             justifyContent: 'flex-end',
             // border: '2px dashed green',
-          }}
-        >
+          }}>
           {/* zare_nk_050102_commented_st(move to FirstPageComponent component) */}
           {/* <div style={{ position: 'absolute', padding: '1rem', width: "100%", backgroundColor: 'white', border:'3px dotted yellow', }}>
             <form

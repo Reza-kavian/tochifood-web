@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050423_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext } from "react";
@@ -127,9 +127,8 @@ export default function Home() {
         return;
       }
 
-      // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-      let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-      const response = await fetch(ApiUrl + "Api_SelectAddress", {
+      // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+      const response = await fetch(NextJsApiUrl + "Api_SelectAddress", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -146,11 +145,9 @@ export default function Home() {
           // console.log("zare_nk_050206-parsedList1: " + parsedList[0].Adress);
           // console.log("zare_nk_050206-parsedList2: " + parsedList[1].Adress);
           setIsEpmtyAdressList('notNull');
-
           SetResponsedListFromApiSelectAddressList(() => {
             return parsedList
           });
-
         } else {
           setError("متاسفانه خطایی رخ داده است34:" + data.errors);
           // console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
@@ -262,7 +259,6 @@ export default function Home() {
           zIndex: 899,
           backgroundColor: 'white',
         }}>
-
           <button
             id="showAddressListDrawerBtn"
             onClick={showAddressListDrawer}   //zare_nk_050329_commented_nokteh(ba setState hayash baese reRendere Home mishe(bayad az reRendere farzandane birabte home jologiri beshe)) 
@@ -436,9 +432,7 @@ export default function Home() {
               display: 'flex', flexFlow: "row", justifyContent: "space-between", alignItems: 'center',
               width: '100%',
               // paddingLeft: '1rem', paddingRight: '1rem',
-            }}
-            >
-
+            }} >
               <img
                 style={{
                   // width: '137px',  

@@ -1,4 +1,4 @@
-////zare_nk_050422_okk(1)
+////zare_nk_050423_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -75,9 +75,8 @@ const SwiperSecondBanerComp = () => {
             return;
         }
         console.log('tokentokentoken: ' + token);
-        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-        const response = await fetch(ApiUrl + "Api_SelectBaner", {
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+        const response = await fetch(NextJsApiUrl + "Api_SelectBaner", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

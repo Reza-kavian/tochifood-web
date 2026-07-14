@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050423_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -45,7 +45,7 @@ function getCookie(name: any) {
     return null; //اگر کوکی پیدا نشد
 }
 
-const SwiperInVendorHeaderComp = ({
+const SwiperInVendorListHeaderComp = ({
     openCollapseForSorting,
     openCollapseForRaveshErsal
 }: {
@@ -68,7 +68,7 @@ const SwiperInVendorHeaderComp = ({
 
     const [responsedListFromApiSelectGoroohJson, SetResponsedListFromApiSelectGoroohJson] = useState<responsedListFromApiSelectGoroohJsonType[] | null>(null);
 
-    const getSwiperTapBests = async () => {
+    const getGoroohHa = async () => {
         let token = await getCookie("token");
         if (!token) {
             setErrorInSwiperTapBests("lotfan avval online shid");
@@ -76,9 +76,8 @@ const SwiperInVendorHeaderComp = ({
         }
         console.log('tokentokentoken: ' + token);
 
-        // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented
-        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-        const response = await fetch(ApiUrl + "Api_SelectGoroohJson", {
+        // let ApiUrl = "https://api.tochikala.com/api/";  ////zare_nk_050407_commented 
+        const response = await fetch(NextJsApiUrl + "Api_SelectGoroohJson", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -110,7 +109,7 @@ const SwiperInVendorHeaderComp = ({
     }
 
     useEffect(() => {
-        getSwiperTapBests();  ////zare_nk_050403_nokteh(mthode getSwiperTapBests dar in header bomorede va baraye olgu gozashte shode!)  ////zare_nk_050403_commented_movaghat
+        // getGoroohHa();  ////zare_nk_050403_nokteh(mthode getSwiperTapBests dar in header bomorede va baraye olgu gozashte shode!)  ////zare_nk_050403_commented_movaghat
     }, []);
 
     return (
@@ -221,9 +220,7 @@ const SwiperInVendorHeaderComp = ({
                 </Swiper>
             </div> */}
 
-            <div style={{
-                display: 'flex', flexFlow: 'column', width: '100%',
-            }} >
+            <div style={{ display: 'flex', flexFlow: 'column', width: '100%', }} >
                 <Swiper
                     modules={[Navigation, Pagination]}
                     spaceBetween={12}  ////zare_nk_050305_nokteh(moadele 0.75rem(chon spaceBetween adad 0.75rem))  
@@ -232,7 +229,7 @@ const SwiperInVendorHeaderComp = ({
                     // centeredSlides={true}
                     navigation={false}
 
-                    className="SwiperTapBests"
+                    className="SwiperInVendorListHeaderComp"
                     style={{
                         width: '100%',
                         //  margin: '0px 19px',
@@ -243,8 +240,7 @@ const SwiperInVendorHeaderComp = ({
                     }}
                     dir="rtl"  ////zare_nk_050331_added(baraye rtl kardane slide ha)
                 >
-                    <SwiperSlide
-                        style={{
+                    <SwiperSlide style={{
                             //  width: '72px',
                             //  height: '80px',
                             // height: '89px',
@@ -255,8 +251,7 @@ const SwiperInVendorHeaderComp = ({
                             display: 'flex', alignItems: 'center', justifyContent: 'center', //// width: '100%', height: '100%',
                             backgroundColor: 'inherit', borderRadius: '.75rem', border: '1px solid #f6f6f7',
                         }}>
-                            <button
-                                id="openCollapseForSortingBtn"  ////zare_nk_050401_nokteh(rooydade in dokmeh nist badan pak she)
+                            <button id="openCollapseForSortingBtn"  ////zare_nk_050401_nokteh(rooydade in dokmeh nist badan pak she)
                                 onClick={openCollapseForSorting}  ////zare_nk_050401_nokteh(rooydade in dokmeh nist badan pak she) 
                                 style={{
                                     display: 'flex',
@@ -332,8 +327,7 @@ const SwiperInVendorHeaderComp = ({
                             display: 'flex', alignItems: 'center', justifyContent: 'center', //// width: '100%', height: '100%',
                             backgroundColor: 'inherit', borderRadius: '.75rem', border: '1px solid #f6f6f7',
                         }}>
-                            <button
-                                id="openCollapseForRaveshErsalBtn"  ////zare_nk_050401_nokteh(rooydade in dokmeh nist badan pak she)
+                            <button id="openCollapseForRaveshErsalBtn"  ////zare_nk_050401_nokteh(rooydade in dokmeh nist badan pak she)
                                 onClick={openCollapseForRaveshErsal}  ////zare_nk_050401_nokteh(rooydade in dokmeh nist badan pak she) 
                                 style={{
                                     display: 'flex',
@@ -553,4 +547,4 @@ const SwiperInVendorHeaderComp = ({
     );
 }
 
-export default memo(SwiperInVendorHeaderComp); 
+export default memo(SwiperInVendorListHeaderComp); 

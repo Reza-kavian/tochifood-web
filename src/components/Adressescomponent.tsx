@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050423_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, memo, useContext, } from "react";
@@ -283,8 +283,7 @@ const Adressescomponent = function Adressescomponent({
     <div style={{ display: 'flex', flexFlow: 'column', padding: '0px', margin: '0px', }}>
       {responsedListFromApiSelectAddressList?.map((item, index) => {
         return (
-          <div
-            key={item.IdAdress}   ////zare_nk_050319_added
+          <div key={item.IdAdress}   ////zare_nk_050319_added
             // onClick={() => {
             //   setRowItem(item);
             //   chosenAddress(item);
@@ -325,13 +324,11 @@ const Adressescomponent = function Adressescomponent({
                   fill: 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
                   borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
                   flex: '0 0 auto',
-                }}
-              >
+                }} >
                 <svg style={{ width: '18px', height: '18px' }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-[18px] w-[18px] fill-inherit"><g id="Location"><path id="Union" d="M11.99 2C7.34 2 3.5 5.72 3.5 10.32C3.5 12.64 4.34 14.79 5.73 16.61C7.25 18.62 9.13 20.37 11.27 21.75C11.8 22.09 12.24 22.07 12.73 21.75C14.85 20.37 16.74 18.62 18.27 16.61C19.66 14.79 20.5 12.63 20.5 10.32C20.5 5.72 16.66 2 11.99 2ZM11.99 13.33C10.45 13.33 9.19 12.12 9.19 10.58C9.19 9.04 10.45 7.78 11.99 7.78C13.53 7.78 14.8 9.05 14.8 10.58C14.8 12.11 13.53 13.33 11.99 13.33Z" fill="inherit"></path></g></svg>
               </button>
 
-              <div
-                style={{
+              <div style={{
                   paddingTop: '.5rem',
                   display: 'flex',
                   justifyContent: 'flex-start',
@@ -340,8 +337,7 @@ const Adressescomponent = function Adressescomponent({
                   flex: '1 1 0%',
                   height: 'min-content',
                   marginLeft: '.5rem',
-                }}
-              >
+                }} >
                 <span
                   style={{
                     color: '#1b1c1d',

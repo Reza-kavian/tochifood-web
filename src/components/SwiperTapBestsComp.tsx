@@ -1,4 +1,4 @@
-////zare_nk_050422_okk(1)
+////zare_nk_050423_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -114,17 +114,12 @@ const SwiperTapBestsComp = () => {
             }}>
             </div> */}
 
-            <div style={{
-                display: 'flex', flexFlow: 'column', gap: '.5rem', width: '100%',
-
-            }}>
-                <div
-                    style={{
-                        display: 'flex', flexFlow: "row", justifyContent: "space-between",
-                        width: '100%', paddingLeft: '1rem', paddingRight: '1rem',
-                        marginTop: '5px',
-                    }}
-                >
+            <div style={{ display: 'flex', flexFlow: 'column', gap: '.5rem', width: '100%', }}>
+                <div style={{
+                    display: 'flex', flexFlow: "row", justifyContent: "space-between",
+                    width: '100%', paddingLeft: '1rem', paddingRight: '1rem',
+                    marginTop: '5px',
+                }}>
                     {/* &zwnj; */}
                     <h2 style={{ color: '#313335', lineHeight: '1.75rem', fontSize: '1.125rem', fontWeight: '500', margin: '0px', }}>
                         بهترین&zwnj;های تپسی&zwnj;فود
@@ -169,8 +164,7 @@ const SwiperTapBestsComp = () => {
                         // height: '95px',
                         // overflow: 'visible', ////zare_nk_050226_nokteh(baraye inke darsade takhfifha ke biroon mizanan dideh beshan)   ////zare_nk_050317_commented(baraye swiper overflow: 'visible' 
                         //// manteghi nist, chon arze colle slideha ro migire, na arze masalan 100% pedaresh ro)ب
-                    }}
-                >
+                    }}>
                     {responsedListFromApiSelectGoroohJson?.map((item, index) => {
                         console.log('00-item.IdAdress: ' + JSON.stringify(item));
                         console.log('00-item.IdAdress: ' + JSON.stringify(item));
@@ -377,12 +371,10 @@ const SwiperTapBestsComp = () => {
                                                         <div style={{
                                                             display: 'flex', flexFlow: 'row', gap: '2px', alignItems: 'center',
                                                         }}>
-                                                            <span
-                                                                style={{
-                                                                    color: '#878b92',
-                                                                    fontSize: '.75rem',
-                                                                }}
-                                                            >
+                                                            <span style={{
+                                                                color: '#878b92',
+                                                                fontSize: '.75rem',
+                                                            }}>
                                                                 پیک تپسی&zwnj;فود:
                                                             </span>
                                                             <div style={{

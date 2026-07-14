@@ -1,4 +1,4 @@
-// ////zare_nk_050413_okk(1)
+// ////zare_nk_050423_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -1303,7 +1303,6 @@ export default function VendorPage() {
         ////zare_nk_050417_added_end
     }, []);
 
-    ////zare_nk_050405_added_st
     const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
     const [activeTab, setActiveTab] = useState<string | null>(null);
@@ -2543,11 +2542,10 @@ export default function VendorPage() {
                                     jamKolNahaei.toLocaleString()
                                 }
                             </span>
-
+                            
                             <span style={{
                                 color: 'white', fontSize: '.625rem',
                             }}>تومان</span>
-
                         </div>
 
 

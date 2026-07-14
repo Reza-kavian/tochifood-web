@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050423_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext } from "react";
@@ -10,7 +10,7 @@ import { JwtPayload } from "jsonwebtoken";
 import { useAuthentication } from '../../context/AuthenticationContext';
 
 import SwiperShopsInVendorComp from '../../components/SwiperShopsInVendorComp';
-import SwiperInVendorHeaderComp from '../../components/SwiperInVendorHeaderComp';
+import SwiperInVendorListHeaderComp from '../../components/SwiperInVendorListHeaderComp';
 
 import CollapseAndClickAwayForSortingComp from '../../components/CollapseAndClickAwayForSortingComp';  //zare_nk_050401_added 
 import CollapseAndClickAwayForRaveshErsalComp from '../../components/CollapseAndClickAwayForRaveshErsalComp';  //zare_nk_050401_added 
@@ -65,7 +65,7 @@ export default function VendorList() {
     ////seState dar componente farzand baese reRendere ezafiye farzand mishe)
 
     const openCollapseForSorting = useCallback(
-        async () => {   ////zare_nk_050401_nokteh(haman lafze bigShow sabegh)
+        async () => {  
             console.log('050401-openCollapseForSorting called!!');
             let token = await getCookie("token");
             console.log('050401-token is: ' + getCookie("token"));
@@ -82,7 +82,7 @@ export default function VendorList() {
         , [isEpmtyCollapseForSorting]);
 
     const openCollapseForRaveshErsal = useCallback(
-        async () => {   ////zare_nk_050401_nokteh(haman lafze bigShow sabegh)
+        async () => {   
             console.log('050401-openCollapseForRaveshErsal called!!');
             let token = await getCookie("token");
             console.log('050401-token is: ' + getCookie("token"));
@@ -94,7 +94,6 @@ export default function VendorList() {
                 console.log('050401-token nadarim');
                 saveAddress(false);  ////zare_nk_050205_nokteh(age offLine ham bood taraf address ra zakhireh kon ehtemalan ba user movaghat!!)
             }
-            ////zare_nk_050205_added_end
         }
         , [isEpmtyCollapseForRaveshErsal]);
 
@@ -195,7 +194,7 @@ export default function VendorList() {
                         width: '100%',
                         cursor: 'grab',
                     }}>
-                    <SwiperInVendorHeaderComp
+                    <SwiperInVendorListHeaderComp
                         openCollapseForSorting={openCollapseForSorting}
                         openCollapseForRaveshErsal={openCollapseForRaveshErsal}
                     />

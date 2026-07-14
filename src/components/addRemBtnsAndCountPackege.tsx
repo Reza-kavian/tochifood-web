@@ -1,4 +1,4 @@
-// ////zare_nk_050413_okk(1)
+// ////zare_nk_050423_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -41,9 +41,8 @@ function getCookie(name: any) {
     return null; //اگر کوکی پیدا نشد
 }
 
- 
 // type MiddleCountTedadSefrType = {
-    type addRemBtnsAndCountPackegeType = {
+type addRemBtnsAndCountPackegeType = {
     // SabadRow: SabadRowType | ForCartContInProdDetValType;  //zare_nk_041120_nokteh(in khat commenteh, faghat jahate olgue hazf nakardam)
     ////zare_nk_041120_added_st
     refForfather: RefObject<string | null>;
@@ -69,16 +68,16 @@ function getCookie(name: any) {
 //     ForCartContentsDesignType,
 //     bishAzMaxTedadYaMojoodi, 
 // }: MiddleCountTedadSefrType) {
-const AddRemBtnsAndCountPackege = ({   
+const AddRemBtnsAndCountPackege = ({
     refForfather,
     fromShowDetails,
     IdKala,
     idTag,
-    tedadInSabadOrDet, 
+    tedadInSabadOrDet,
     handlerForAddClick,
     handlerForRemClick,
     ForCartContentsDesignType,
-    bishAzMaxTedadYaMojoodi, 
+    bishAzMaxTedadYaMojoodi,
 }: addRemBtnsAndCountPackegeType) => {
     console.log('ShallowRoutingExample called-MiddleCountTedadSefr-ForCartContentsDesignType: ' + ForCartContentsDesignType);
     useEffect(() => {
@@ -143,37 +142,28 @@ const AddRemBtnsAndCountPackege = ({
 
     if (ForCartContentsDesignType == 0) {
         return (
-            <div
-                className={`text-center align-items-center justify-content-center ForCart ${idTag}`}
-                id={`${idTag}`}
-                style={{ width: "100%", display: "flex", alignItems: 'center', justifyContent: 'center', }}
-            >
-                <div
-                    className="input-group rounded-pill"
-                    style={{
-                        backgroundColor: "white",
-                        height: "35px",
-                        display: "flex",
-                        flexWrap: "nowrap",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        alignContent: "center",
-                        // border: "1px solid red",  ////zare_nk_050414_commented
-                        boxShadow: '0px 2px 5px rgba(0,0,0,.2)',  ////zare_nk_050414_added
-                        overflow: "hidden",
-                        width: "35px",  ////zare_nk_050414_added
+            <div className={`text-center align-items-center justify-content-center ForCart ${idTag}`}
+                id={`${idTag}`} style={{ width: "100%", display: "flex", alignItems: 'center', justifyContent: 'center', }} >
+                <div className="input-group rounded-pill" style={{
+                    backgroundColor: "white",
+                    height: "35px",
+                    display: "flex",
+                    flexWrap: "nowrap",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    alignContent: "center",
+                    // border: "1px solid red",  ////zare_nk_050414_commented
+                    boxShadow: '0px 2px 5px rgba(0,0,0,.2)',  ////zare_nk_050414_added
+                    overflow: "hidden",
+                    width: "35px",  ////zare_nk_050414_added
 
-                        direction: 'rtl',  ////zare_nk_050414_added
-                        flexDirection: 'row-reverse',  ////zare_nk_050414_added 
-                        borderRadius: 100,   ////zare_nk_050414_added
-                    }}
+                    direction: 'rtl',  ////zare_nk_050414_added
+                    flexDirection: 'row-reverse',  ////zare_nk_050414_added 
+                    borderRadius: 100,   ////zare_nk_050414_added
+                }}
                 // dir="ltr"  ////zare_nk_050414_commented
                 >
-                    <div
-                        className="addremmCont"
-                        id={`removeCont-${IdKala}`}
-                        style={{ height: "100%", flex: "1 1 auto", display: "none" }}
-                    >
+                    <div className="addremmCont" id={`removeCont-${IdKala}`} style={{ height: "100%", flex: "1 1 auto", display: "none" }} >
                         <div
                             style={{
                                 height: "100%",
@@ -182,11 +172,8 @@ const AddRemBtnsAndCountPackege = ({
                                 alignItems: "center",
                                 alignContent: "center",
                                 overflow: "hidden",
-                            }}
-                        >
-                            <a
-                                data-baz="0"
-                                style={{
+                            }} >
+                            <a data-baz="0" style={{
                                     flex: "1 1 auto",
                                     height: "100%",
                                     padding: "0px 2px",
@@ -197,8 +184,7 @@ const AddRemBtnsAndCountPackege = ({
                                     borderRadius: "50%",
                                 }}
                                 className={`rem-${IdKala}`}
-                                href="/login"
-                            >
+                                href="/login" >
                                 <button
                                     style={{
                                         height: "80%",

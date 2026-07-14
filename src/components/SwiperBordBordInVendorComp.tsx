@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050422_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -53,7 +53,7 @@ function getCookie(name: any) {
 // }) => {
 const SwiperBordBordInVendorComp = () => {
     console.log('050329-SwiperBordBordInVendorComp rendered!!');   ////zare_nk_050329_added
-    const [errorInSwiperTapBests, setErrorInSwiperTapBests] = useState<string | null>(null);
+    const [errorInSwiperBordBord, setErrorInSwiperBordBord] = useState<string | null>(null);
 
     const router = useRouter();
 
@@ -68,10 +68,10 @@ const SwiperBordBordInVendorComp = () => {
 
     const [responsedListFromApiSelectGoroohJson, SetResponsedListFromApiSelectGoroohJson] = useState<responsedListFromApiSelectGoroohJsonType[] | null>(null);
 
-    const getSwiperTapBests = async () => {
+    const getSwiperBordBord = async () => {
         let token = await getCookie("token");
         if (!token) {
-            setErrorInSwiperTapBests("lotfan avval online shid");
+            setErrorInSwiperBordBord("lotfan avval online shid");
             return;
         }
         console.log('tokentokentoken: ' + token);
@@ -99,17 +99,17 @@ const SwiperBordBordInVendorComp = () => {
                     return Gorooh
                 });
             } else {
-                setErrorInSwiperTapBests("متاسفانه خطایی رخ داده است34:" + data.errors);
+                setErrorInSwiperBordBord("متاسفانه خطایی رخ داده است34:" + data.errors);
                 console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
             }
         } else {
             console.log("zare_nk_050110-!response.ok" + response.ok);
-            setErrorInSwiperTapBests("متاسفانه خطایی رخ داده است35");
+            setErrorInSwiperBordBord("متاسفانه خطایی رخ داده است35");
         }
     }
 
     useEffect(() => {
-        // getSwiperTapBests();  ////zare_nk_050403_nokteh(methode getSwiperTapBests dar in header bimorede va baraye olgu gozashte shode!) 
+        // getSwiperBordBord();  ////zare_nk_050403_nokteh(methode getSwiperBordBord dar in header bimorede va baraye olgu gozashte shode!) 
     }, []);
 
     return (
@@ -125,7 +125,7 @@ const SwiperBordBordInVendorComp = () => {
                     // centeredSlides={true}
                     navigation={false}
 
-                    className="SwiperTapBests"
+                    className="SwiperBordBord"
                     style={{
                         width: '100%',
                         //  margin: '0px 19px',
@@ -237,7 +237,7 @@ const SwiperBordBordInVendorComp = () => {
                     // centeredSlides={true}
                     navigation={false}
 
-                    className="SwiperTapBests"
+                    className="SwiperBordBord"
                     style={{
                         width: '100%',
                         //  margin: '0px 19px',
@@ -390,7 +390,7 @@ const SwiperBordBordInVendorComp = () => {
 
                                                 textAlign: 'center',
                                             }}>
-                                                200.000 تومان تا ارسال رایگان
+                                                {'200000'.toLocaleString()} تومان تا ارسال رایگان
                                             </div>
                                         </div>
                                     </div>

@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050423_okk(2)
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -94,8 +94,7 @@ export default function LogoutButton() {
           <button
             className="loginOutBtn"
             id="forlogoutBtnInHeader"
-            onClick={forlogout}
-          >
+            onClick={forlogout}>
             logout
           </button>
         </>

@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050423_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, memo } from "react";
@@ -88,14 +88,14 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({
       onClose={() => {
         setIsEpmtyShowAddRemAddress(true);
       }}
-      // hideBackdrop={true} ////zare_nk_040502(albateh hideBackdrop={true} baes mishe alave bar hazfe tariye poshte drawer,ba click dar fazaye poshtesh,automat 
+      // hideBackdrop={true} ////zare_nk_040502(albateh hideBackdrop={true} baes mishe alave bar hazfe tariye poshte drawer, ba click dar fazaye poshtesh,automat 
       //// basteh nashe va niaz be modiriate dastiye document.addEventListener dar useEffect dashteh bashim) 
       slotProps={{
         paper: {
           sx: {
             width: '450px', ////zare_nk_050206_added(chon Drawer dar DOM kharej az componente pedaresh mireh va be risheye body mire, pas 100% body ro migireh na 100% taghi
             //// ke dar component beonvane tage pedaresh tarif kardim,pas bejaye width:100% majboorim dasti arze 450 ro behesh bedim)
-            ////zare_nk_050206_commented_st(baraye vasat raftane ofoghiye Drawer ke javab nadad(translate kar nakard,chon ba codehaye dakheliye Drawer MUI tadakhol dareh))
+            ////zare_nk_050206_commented_st(baraye vasat raftane ofoghiye Drawer ke javab nadad(translate kar nakard, chon ba codehaye dakheliye Drawer MUI tadakhol dareh))
             // left: '50%', 
             // transform: 'translate(-50%, 0%)', 
             ////zare_nk_050206_commented_end(baraye vasat raftane ofoghiye Drawer ke javab nadad(translate kar nakard, chon ba codehaye dakheliye Drawer MUI tadakhol dareh))
@@ -115,12 +115,10 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({
       }}
       ModalProps={{
         keepMounted: true,
-      }}
-    >
+      }}>
       {errorInShowAddRemAddressComponent && <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>{errorInShowAddRemAddressComponent}</p>}
 
-      <Box sx={{
-      }}>
+      <Box sx={{ }}>
         <div
           id="addRemAddressHeader"
           style={{
