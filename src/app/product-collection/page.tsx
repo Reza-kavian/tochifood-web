@@ -485,11 +485,19 @@ export default function Home() {
                     // setCurrentAddress={setCurrentAddress}  ////zare_nk_050329_commented(currentAddress az seState tabdil shod be useContext)
                     />
                 }
+                {/* zare_nk_050429_added_st(sabke gride tapsifoodi be jaye flex(baraye chandsotoone kardane farzandane)) */}
+                <div style={{ marginBottom: '1.25rem' }}></div>
                 <div style={{
-
+                    // display: 'flex', flexFlow: 'row', flexWrap: 'wrap', paddingLeft: '1rem', paddingRight: '1rem', gap: '0px',position:'relative',
+                    display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', paddingBottom: '253px', paddingTop: '0px', width: '100%',
                 }}>
-
+                    <div style={{ width: '100%', border: '2px solid red' }}>111</div>
+                    <div style={{ width: '100%', border: '2px solid red' }}>222</div>
+                    <div style={{ width: '100%', border: '2px solid red' }}>333</div>
+                    <div style={{ width: '100%', border: '2px solid red' }}>444</div>
+                    <div style={{ width: '100%', border: '2px solid red' }}>555</div>
                 </div>
+                {/* zare_nk_050429_added_end(sabke gride tapsifoodi be jaye flex(baraye chandsotoone kardane farzandane)) */}
 
                 {/* zare_nk_050429_nokteh_st(copy az home baraye olgu) */}
                 <div style={{ marginBottom: '.70rem' }}></div>
