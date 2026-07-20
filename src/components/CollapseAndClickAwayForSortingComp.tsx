@@ -1,4 +1,4 @@
-////zare_nk_050423_okk(2)
+////zare_nk_050428_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext, memo } from "react";
@@ -294,9 +294,7 @@ const CollapseAndClickAwayForSortingComp = ({
             {/* zare_nk_050204_rahe2_end(Drawer baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
             {error && <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>{error}</p>}
             {/* <Paper> */}
-            <form
-                id="addressInfForm"
-                className={`${Styles.loginForm} ${Styles.valueStyle}`}
+            <form id="addressInfForm" className={`${Styles.loginForm} ${Styles.valueStyle}`}
                 style={{ padding: '1rem', }}
                 onSubmit={(event) => {
                     event.preventDefault();
@@ -308,8 +306,7 @@ const CollapseAndClickAwayForSortingComp = ({
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>
-                    <div className="mt-3 h-1 w-10 shrink-0 rounded-[20px] bg-[#EAEAEB] opacity-100"
-                        style={{ marginTop: '.75rem', backgroundColor: '#eaeaeb', height: '.25rem', width: '2.5rem', borderRadius: '20px', }}></div>
+                    <div style={{ marginTop: '.75rem', backgroundColor: '#eaeaeb', height: '.25rem', width: '2.5rem', borderRadius: '20px', }}></div>
                 </div>
 
                 <div style={{
@@ -323,11 +320,12 @@ const CollapseAndClickAwayForSortingComp = ({
                         color: '#1b1c1d',
                         fontWeight: 600,
                         marginBottom: '0px',
-                    }}>مرتب&zwnj;سازی براساس</p>
+                    }}>
+                        مرتب&zwnj;سازی براساس
+                        </p>
                 </div>
 
-                <div
-                    onClick={() => { radionClickedFunc(1) }}
+                <div onClick={() => { radionClickedFunc(1) }}
                     style={{
                         display: "flex",
                         flexFlow: 'row',

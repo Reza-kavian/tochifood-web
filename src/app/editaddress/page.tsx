@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050428_okk(1)
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -338,8 +338,7 @@ function BoxHtmlComponent({
         if (!isEpmtyHeightBox && !isToggleButton) {
           setIsEpmtyHeightBox(true); // ببند
         }
-      }}
-    >
+      }}>
       <Collapse
         ref={refForBox}
         id="box"
@@ -362,8 +361,7 @@ function BoxHtmlComponent({
           style={{ padding: '1rem', }}
           onSubmit={(event) => {
             event.preventDefault();
-          }}
-        >
+          }}>
           <div style={{
             paddingTop: '2rem',
             padding: '1rem',

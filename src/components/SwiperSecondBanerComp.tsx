@@ -1,4 +1,4 @@
-////zare_nk_050423_okk(2)
+////zare_nk_050428_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";

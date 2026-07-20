@@ -1,4 +1,4 @@
-////zare_nk_050423_okk(2)
+////zare_nk_050428_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -136,7 +136,7 @@ const SwiperShopsInVendorComp = () => {
     return (
         <>
             <div style={{
-                display: 'flex', flexFlow: 'column', width: '100%', overflow: 'hidden',alignItems:'center',
+                display: 'flex', flexFlow: 'column', width: '100%', overflow: 'hidden', alignItems: 'center',
             }}>
                 {/* <Swiper */}
                 <div
@@ -171,7 +171,7 @@ const SwiperShopsInVendorComp = () => {
                                     // width: 'auto',
                                     // width: '230px',
                                     width: '100%',
-                                    marginBottom:'25px',  ////zare_nk_050422_added
+                                    marginBottom: '25px',  ////zare_nk_050422_added
                                 }}>
                                 <div className="contInSlide" style={{
                                     display: 'flex', alignItems: 'center', justifyContent: 'center', //// width: '100%', height: '100%',
@@ -199,26 +199,24 @@ const SwiperShopsInVendorComp = () => {
                                                     position: 'absolute', bottom: '-6px', right: '.75rem',
                                                     width: '42px', height: '42px',
                                                 }}>
-                                                    <img
-                                                        style={{
-                                                            width: '100%', height: '100%',
-                                                            objectFit: 'cover',
-                                                            borderRadius: '.5rem',
-                                                            border: '1px solid #efefef',
-                                                        }}
+                                                    <img style={{
+                                                        width: '100%', height: '100%',
+                                                        objectFit: 'cover',
+                                                        borderRadius: '.5rem',
+                                                        border: '1px solid #efefef',
+                                                    }}
                                                         src={`/images/movaghat/vendorPage/restaurant-tag.jpg`} />
                                                 </div>
 
-                                                <img
-                                                    style={{
-                                                        width: '100%',
-                                                        // marginTop: '5px', marginBottom: '0px',
-                                                        ////zare_nk_050314_added_st
-                                                        height: '105px', objectFit: 'cover',
-                                                        borderTopLeftRadius: '.5rem',
-                                                        borderTopRightRadius: '.5rem',
-                                                        ////zare_nk_050314_added_end 
-                                                    }}
+                                                <img style={{
+                                                    width: '100%',
+                                                    // marginTop: '5px', marginBottom: '0px',
+                                                    ////zare_nk_050314_added_st
+                                                    height: '105px', objectFit: 'cover',
+                                                    borderTopLeftRadius: '.5rem',
+                                                    borderTopRightRadius: '.5rem',
+                                                    ////zare_nk_050314_added_end 
+                                                }}
                                                     // src={`/images/SwiperGrouplevel1/${item.AxG1}.png`} />  ////zare_nk_050229_nokteh(age az database bekhooneh bade emale database food tavassote parsa)
                                                     // src={`/images/SwiperGrouplevel1/${index}.png`} />
                                                     src={`/images/movaghat/vendorPage/${index}.jpg`} />
@@ -236,18 +234,14 @@ const SwiperShopsInVendorComp = () => {
                                                         //     // src={`/images/SwiperGrouplevel1/${item.AxG1}.png`} />  ////zare_nk_050229_nokteh(age az database bekhooneh bade emale database food tavassote parsa)
                                                         //     // src={`/images/SwiperGrouplevel1/${index}.png`} />
                                                         //     src={`/images/Icon/Ghesti_Tile.svg`} />
-                                                        <div className="flex items-center rounded-sm px-2 pt-[2px] text-white rounded-br-none absolute right-[-8px] top-2 z-10 h-[30px]"
-                                                            style={{
-                                                                backgroundColor: 'rgb(31, 117, 242)',
-                                                                display: 'flex', alignItems: 'center', borderRadius: '.25rem', paddingLeft: '.5rem', paddingRight: '.5rem', paddingTop: '2px',
-                                                                color: 'white',  ////zare_nk_050401_nokteh(tapsifood css digeei baraye sefid kardane matn gozasht)
-                                                                borderBottomRightRadius: 0, position: 'absolute', right: '-8px', top: '.5rem', zIndex: 10, height: '30px',
-                                                            }}>
-                                                            <span className="text-xs font-bold"
-                                                                style={{ fontSize: '.75rem', lineHeight: '1rem', fontWeight: 700, }}
-                                                            >خرید قسطی!</span>
-                                                            <span className="absolute bottom-[-8px] inline-block size-0 border-l-0 border-solid border-b-transparent right-0 border-b-0 border-r-[8px] border-t-[8px] border-x-transparent"
-                                                                style={{
+                                                        <div style={{
+                                                            backgroundColor: 'rgb(31, 117, 242)',
+                                                            display: 'flex', alignItems: 'center', borderRadius: '.25rem', paddingLeft: '.5rem', paddingRight: '.5rem', paddingTop: '2px',
+                                                            color: 'white',  ////zare_nk_050401_nokteh(tapsifood css digeei baraye sefid kardane matn gozasht)
+                                                            borderBottomRightRadius: 0, position: 'absolute', right: '-8px', top: '.5rem', zIndex: 10, height: '30px',
+                                                        }}>
+                                                            <span style={{ fontSize: '.75rem', lineHeight: '1rem', fontWeight: 700, }}>خرید قسطی!</span>
+                                                            <span style={{
                                                                     position: 'absolute',
 
                                                                     height: 0, width: 0,
@@ -271,18 +265,14 @@ const SwiperShopsInVendorComp = () => {
                                                             </span>
                                                         </div>
                                                         :
-                                                        <div className="flex items-center rounded-sm px-2 pt-[2px] text-white rounded-br-none absolute right-[-8px] top-2 z-10 h-[30px]"
-                                                            style={{
-                                                                backgroundColor: '#ff5a00',
-                                                                display: 'flex', alignItems: 'center', borderRadius: '.25rem', paddingLeft: '.5rem', paddingRight: '.5rem', paddingTop: '2px',
-                                                                color: 'white',  ////zare_nk_050401_nokteh(tapsifood css digeei baraye sefid kardane matn gozasht)
-                                                                borderBottomLeftRadius: 0, position: 'absolute', left: '-8px', top: '.5rem', zIndex: 10, height: '30px',
-                                                            }}>
-                                                            <span className="text-xs font-bold"
-                                                                style={{ fontSize: '.75rem', lineHeight: '1rem', fontWeight: 700, }}
-                                                            >تا 50%</span>
-                                                            <span className="absolute bottom-[-8px] inline-block size-0 border-l-0 border-solid border-b-transparent right-0 border-b-0 border-r-[8px] border-t-[8px] border-x-transparent"
-                                                                style={{
+                                                        <div style={{
+                                                            backgroundColor: '#ff5a00',
+                                                            display: 'flex', alignItems: 'center', borderRadius: '.25rem', paddingLeft: '.5rem', paddingRight: '.5rem', paddingTop: '2px',
+                                                            color: 'white',  ////zare_nk_050401_nokteh(tapsifood css digeei baraye sefid kardane matn gozasht)
+                                                            borderBottomLeftRadius: 0, position: 'absolute', left: '-8px', top: '.5rem', zIndex: 10, height: '30px',
+                                                        }}>
+                                                            <span style={{ fontSize: '.75rem', lineHeight: '1rem', fontWeight: 700, }}>تا 50%</span>
+                                                            <span style={{
                                                                     position: 'absolute',
 
                                                                     height: 0, width: 0,
@@ -386,8 +376,7 @@ const SwiperShopsInVendorComp = () => {
                                                                 style={{
                                                                     color: '#878b92',
                                                                     fontSize: '.75rem',
-                                                                }}
-                                                            >
+                                                                }}>
                                                                 پیک تپسی&zwnj;فود:
                                                             </span>
                                                             <div style={{

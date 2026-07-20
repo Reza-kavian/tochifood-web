@@ -1,4 +1,4 @@
-// ////zare_nk_050423_okk(2)
+// ////zare_nk_050428_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -355,10 +355,8 @@ const AddRemBtnsAndCountPackege = ({
             <div
                 className={`text-center align-items-center justify-content-center ForCart ${idTag}`}
                 id={`${idTag}`}
-                style={{ width: "100%", display: "flex", alignItems: 'center', justifyContent: 'center', }}
-            >
-                <div
-                    className="input-group rounded-pill"
+                style={{ width: "100%", display: "flex", alignItems: 'center', justifyContent: 'center', }}>
+                <div className="input-group rounded-pill"
                     style={{
                         backgroundColor: "white",
                         height: "35px",
@@ -380,10 +378,8 @@ const AddRemBtnsAndCountPackege = ({
                     <div
                         className="addremmCont"
                         id={`removeCont-${IdKala}`}
-                        style={{ height: "100%", flex: "1 1 auto" }}
-                    >
-                        <div
-                            style={{
+                        style={{ height: "100%", flex: "1 1 auto" }}>
+                        <div style={{
                                 height: "100%",
                                 display: "flex",
                                 justifyContent: "center",
@@ -391,8 +387,7 @@ const AddRemBtnsAndCountPackege = ({
                                 alignContent: "center",
                                 overflow: "hidden",
                                 padding: "0px 4px",
-                            }}
-                        >
+                            }} >
                             {/* <a
                 data-baz="1"
                 style={{
@@ -596,10 +591,8 @@ const AddRemBtnsAndCountPackege = ({
             <div
                 className={`text-center align-items-center justify-content-center ForCart ${idTag}`}
                 id={`${idTag}`}
-                style={{ width: "100%", display: "flex", alignItems: 'center', justifyContent: 'center', }}
-            >
-                <div
-                    className="input-group rounded-pill"
+                style={{ width: "100%", display: "flex", alignItems: 'center', justifyContent: 'center', }}>
+                <div className="input-group rounded-pill"
                     style={{
                         backgroundColor: "white",
                         height: "35px",
@@ -622,8 +615,7 @@ const AddRemBtnsAndCountPackege = ({
                     <div
                         // className="addremmCont"  ////zare_nk_050415_commented
                         // id={`removeCont-${IdKala}`}  ////zare_nk_050415_commented
-                        style={{ height: "100%", flex: "1 1 auto" }}
-                    >
+                        style={{ height: "100%", flex: "1 1 auto" }}>
                         <div
                             style={{
                                 height: "100%",
@@ -633,8 +625,7 @@ const AddRemBtnsAndCountPackege = ({
                                 alignContent: "center",
                                 overflow: "hidden",
                                 padding: '0px 4px',  ////zare_nk_050415_added
-                            }}
-                        >
+                            }}>
                             {/* <a
                 data-baz="1"
                 style={{

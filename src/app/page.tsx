@@ -1,8 +1,8 @@
-////zare_nk_050423_okk(2)
+////zare_nk_050428_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext } from "react";
-import { useRouter, useSearchParams, redirect } from "next/navigation";
+import { useRouter, useSearchParams, redirect,usePathname } from "next/navigation";
 import Styles from "@/styles/components/location.module.css";
 import globalsStyles from "@/styles/components/globals.module.css";
 import jwt from "jsonwebtoken";
@@ -103,6 +103,17 @@ export default function Home() {
   // const [currentAddress, setCurrentAddress] = useState<responsedListFromApiSelectAddressListType | null>(null);    ////zare_nk_050329_commented(currentAddress az useState 
   //// tabdil shod be createContext(ta beshe az jadde bozorgvar be nave pas dadeh beshe bedoone vasetehha!!))
 
+  type footerBtnClickedType = {
+    home: boolean;
+    orders: boolean;
+    profile: boolean;
+  };
+  const [footerBtnClicked, setFooterBtnClicked] = useState<footerBtnClickedType>({
+    home: true,
+    orders: false,
+    profile: false,
+  });
+
   useEffect(() => {
     const chosenAddress = getCookie("chosenAddress");
     var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
@@ -114,9 +125,9 @@ export default function Home() {
 
   const goTosShoppingbasket = () => {
     // router.push("/folder03?tab=comments2");
-    // redirect("/login");
-    //router.replace("/location");
-    router.push("/shoppingbasket");
+    // redirect("/login"); 
+    // router.replace("/testPage");
+    router.push("/shoppingbasket"); 
   };
 
   const showAddressListDrawer = useCallback(
@@ -361,7 +372,7 @@ export default function Home() {
             flex: '1 0 auto',
             // border: '3px solid orange',
             direction: 'rtl',
-            // paddingTop: '10px',   
+            paddingBottom: '96px',
           }}>
           {isEpmtyAdressList &&  ////zare_nk_050329_updated(sharte isEpmtyAdressList emal shod ke isEpmtyAdressList==false bood component ra aslan seda nazanim)
             <AdressListComponent
@@ -450,7 +461,150 @@ export default function Home() {
             </div>
           </div>
         </main>
-        <footer></footer>
+
+        <footer style={{
+          maxWidth: '450px', marginLeft: 'auto', marginRight: 'auto', zIndex: 50, bottom: 0, left: 0, right: 0, position: 'fixed',
+        }}>
+          <div style={{  
+            position: 'relative', boxShadow: '0px -1px 5px 2px #0000000d', opacity: 1, backgroundColor: 'white',  
+            overflow: 'hidden', height: '100%', padding: '0px 1rem',
+          }}>
+            <div style={{
+              fontSize: '1rem', lineHeight: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+              width: '100%', height: '4rem', position: 'relative', direction: 'rtl', border: 'none', minWidth: '.25rem',
+            }}>
+              <div style={{
+                display: 'flex', flexFlow: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%', position: 'absolute',
+              }}>
+                <button onClick={() => {
+                  router.replace("/orders");
+                  // setFooterBtnClicked(() => {
+                  //   return ({
+                  //     home: false,
+                  //     orders: true,
+                  //     profile: false,
+                  //   })
+                  // })
+                }}
+                  style={{
+                    fontSize: '.875rem', lineHeight: '1.25rem', display: 'flex', flexFlow: 'column', alignItems: 'center',
+                    gap: '.25rem', cursor: 'pointer', border: 'none', padding: '0rem', backgroundColor: 'inherit', height: '100%',
+                  }}>
+                  {
+                    footerBtnClicked.orders == true ?
+                      <div style={{
+                        display: 'flex', flexFlow: 'column', alignItems: 'center', justifyContent: 'center', margin: '.5rem', marginBottom: '0px',
+                      }}>
+                        <img src="/images/homeFooter/orders-icon.svg" alt="سفارش‌ها" style={{
+                          height: '1.5rem', width: '1.5rem',
+                        }} />
+                      </div> :
+                      <div style={{
+                        display: 'flex', flexFlow: 'column', alignItems: 'center', justifyContent: 'center', margin: '.5rem', marginBottom: '0px',
+                      }}>
+                        <img src="/images/homeFooter/orders-icon-kamrang.svg" alt="سفارش‌ها" style={{
+                          height: '1.5rem', width: '1.5rem',
+                        }} />
+                      </div>
+                  }
+
+                  <span style={{
+                    fontSize: '.75rem', lineHeight: '1rem', textAlign: 'center',
+                    ...(footerBtnClicked.orders == true ? { color: '#1b1c1d' } : { color: '#878b92' }),
+                  }}>
+                    سفارش‌ها
+                  </span>
+                </button>
+              </div>
+
+              <div style={{
+                display: 'flex', flexFlow: 'row', justifyContent: 'center', alignItems: 'center', height: '100%', zIndex: '2',
+              }}>
+                <button onClick={() => {
+                  // setFooterBtnClicked(() => {
+                  //   return ({
+                  //     home: true,
+                  //     orders: false,
+                  //     profile: false,
+                  //   })
+                  // })
+                }}
+                  style={{
+                    fontSize: '.875rem', lineHeight: '1.25rem', display: 'flex', flexFlow: 'column', alignItems: 'center',
+                    gap: '.25rem', cursor: 'pointer', border: 'none', padding: '0rem', backgroundColor: 'inherit', width: '4rem', height: '100%',
+                  }}>
+                  {footerBtnClicked.home == true ?
+                    <div style={{
+                      display: 'flex', flexFlow: 'column', alignItems: 'center', justifyContent: 'center', margin: '.5rem', marginBottom: '0px',
+                    }}>
+                      <img src="/images/homeFooter/home-icon.svg" alt="خانه" style={{
+                        height: '1.5rem', width: '1.5rem',
+                      }} />
+                    </div> :
+                    <div style={{
+                      display: 'flex', flexFlow: 'column', alignItems: 'center', justifyContent: 'center', margin: '.5rem', marginBottom: '0px',
+                    }}>
+                      <img src="/images/homeFooter/home-icon-kamrang.svg" alt="خانه" style={{
+                        height: '1.5rem', width: '1.5rem',
+                      }} />
+                    </div>
+                  }
+
+                  <span style={{
+                    fontSize: '.75rem', lineHeight: '1rem', textAlign: 'center',
+                    ...(footerBtnClicked.home == true ? { color: '#1b1c1d' } : { color: '#878b92' }),
+                  }}>
+                    خانه
+                  </span>
+                </button>
+              </div>
+
+              <div style={{
+                display: 'flex', flexFlow: 'row', justifyContent: 'center', alignItems: 'center', height: '100%', zIndex: '2',
+              }}>
+                <button onClick={() => { 
+                  router.replace("/profile");
+                  // setFooterBtnClicked(() => {
+                  //   return ({
+                  //     home: false,
+                  //     orders: false,
+                  //     profile: true,
+                  //   })
+                  // });
+                }}
+                  style={{
+                    fontSize: '.875rem', lineHeight: '1.25rem', display: 'flex', flexFlow: 'column', alignItems: 'center',
+                    gap: '.25rem', cursor: 'pointer', border: 'none', padding: '0rem', backgroundColor: 'inherit', width: '4rem', height: '100%',
+                  }}>
+                  {footerBtnClicked.profile == true ?
+                    <div style={{
+                      display: 'flex', flexFlow: 'column', alignItems: 'center', justifyContent: 'center', margin: '.5rem', marginBottom: '0px',
+                    }}>
+                      <img src="/images/homeFooter/profile-icon.svg" alt="پروفایل" style={{
+                        height: '1.5rem', width: '1.5rem',
+                      }} />
+                    </div> :
+                    <div style={{
+                      display: 'flex', flexFlow: 'column', alignItems: 'center', justifyContent: 'center', margin: '.5rem', marginBottom: '0px',
+                    }}>
+                      <img src="/images/homeFooter/profile-icon-kamrang.svg" alt="پروفایل" style={{
+                        height: '1.5rem', width: '1.5rem',
+                      }} />
+                    </div>
+                  }
+
+                  <span style={{
+                    fontSize: '.75rem', lineHeight: '1rem', textAlign: 'center',
+                    ...(footerBtnClicked.profile == true ? { color: '#1b1c1d' } : { color: '#878b92' }),
+                  }}>
+                    پروفایل
+                  </span>
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </footer>
 
         <div className="tabIndexOne-in-LayoutWrapper" tabIndex={1}>
         </div>

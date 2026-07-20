@@ -1,4 +1,4 @@
-////zare_nk_050423_okk(2)
+////zare_nk_050428_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -91,7 +91,7 @@ const SwiperThinkBanerComp = () => {
 
         const data = await response.json();   ////zare_nk_050422_nokteh(response.json() makhsoose "Content-Type": "application/json" hast(yani pasokhe api json hast) vali
         //// age bejaye application/json az anvae text ya xml , ... bashe pasokhe api response.json() khata mideh ke pasokh nemishe be json tabdil beshe va masalan response.text
-        ////  monaseb hast(albateh dar api haye parsafar mamoolan pasokhha shamele satrhaye jadavele database hastand ke jsoni barmegardoone be karbar va ma da client az response.json() estefadeh mikonim))
+        //// monaseb hast(albateh dar api haye parsafar mamoolan pasokhha shamele satrhaye jadavele database hastand ke jsoni barmegardoone be karbar va ma da client az response.json() estefadeh mikonim))
 
         if (response.ok) {
             // console.log("zare_nk_050228-data: " + JSON.stringify(data));

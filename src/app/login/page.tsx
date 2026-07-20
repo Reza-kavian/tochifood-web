@@ -1,4 +1,4 @@
-////zare_nk_050423_okk(1)
+////zare_nk_050428_okk(1)
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -93,8 +93,8 @@ function FirstPageComponent({
           onSubmit={(event) => {
             event.preventDefault();
           }}
-          className={`${Styles.loginForm} ${Styles.valueStyle}`}
-        >
+          className={`${Styles.loginForm} ${Styles.valueStyle}`}>
+
           <div className={`${Styles.formsRow}`}>
             <p className={`${Styles.titleStyle}`} style={{ fontSize: '16px', color: '#1b1c1d', marginBottom: '0px', }}>ثبت&zwnj;نام یا ورود</p>
             <p className={`${Styles.valueStyle}`} style={{ fontSize: '14px', color: '#878b92', marginBottom: '0px', paddingTop: '.25rem' }}>برای آمدن به توچی&zwnj;فود، شماره موبایلت را وارد کن</p>
@@ -106,8 +106,7 @@ function FirstPageComponent({
               id="mobileCheckBtn"
               className={Styles.disabledBtn}
               onClick={mobileButtonClick}
-              disabled={isDisabledMobileCheckBtn}
-            >
+              disabled={isDisabledMobileCheckBtn}>
               {/* #878b92 */}
               <img
                 ref={refForIconInMobileCheckBtn}            //zare_nk_050215_added
@@ -586,10 +585,8 @@ export default function Toolbar() {
     }
 
     try {
-      // var ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-      var ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-
-      const response = await fetch(ApiUrl + "Api_LoginUser1", {
+      // var ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+      const response = await fetch(NextJsApiUrl + "Api_LoginUser1", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -669,11 +666,9 @@ export default function Toolbar() {
     }
     // const token = getCookie("token");  //zare_nk_041125_commented(chon token null hast ke be login oomadim digeh!!) 
 
-    // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-    let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-
-    console.log('mobileVal: ' + mobileVal + '-newSmsVal: ' + newSmsVal);
-    const response = await fetch(ApiUrl + "Api_LoginUser2", {
+    // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+    console.log('mobileVal: ' + NextJsApiUrl + '-newSmsVal: ' + newSmsVal);
+    const response = await fetch(NextJsApiUrl + "Api_LoginUser2", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -740,8 +735,8 @@ export default function Toolbar() {
 
             // const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString();  //zare_nk_040219-nokteh(zamane monghazi ra khodam taein kardam, 1 saate bad)   
             // const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();  //zare_nk_050118-nokteh(zamane monghazi ra khodam taein kardam, 30 rooze bad) 
-            const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString();  //zare_nk_050118-nokteh(zamane monghazi ra khodam taein kardam, 1 rooze bad) 
-            // const expires = data.decoded.exp;//zare_nk_040219-nokteh(zamane monghazi ra az dadeye parsafar taein kardam)
+            // const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString();  //zare_nk_050118-nokteh(zamane monghazi ra khodam taein kardam, 1 rooze bad) 
+            const expires = data.decoded.exp;//zare_nk_040219-nokteh(zamane monghazi ra az dadeye parsafar taein kardam)
 
             document.cookie = `token=${token}; path=/; expires=${expires}; secure; samesite=None`;
             const redirect = getCookie("redirect") || "/";

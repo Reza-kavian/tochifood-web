@@ -1,4 +1,4 @@
-////zare_nk_050423_okk(2)
+////zare_nk_050428_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -89,7 +89,6 @@ const SwiperTopBanerComp = () => {
             }),
         });
         const data = await response.json();
-
         if (response.ok) {
             console.log("zare_nk_050228-data: " + JSON.stringify(data));
             if (data.status == 0) {
@@ -171,8 +170,7 @@ const SwiperTopBanerComp = () => {
                     style={{
                         width: '100%',
                         //  margin: '0px 19px',
-                    }}
-                >
+                    }}>
                     {responsedListFromApiSelectBaner?.map((item, index) => {
                         console.log('0-item.IdAdress: ' + JSON.stringify(item));
                         console.log('0-item.IdAdress: ' + JSON.stringify(item));
@@ -200,8 +198,7 @@ const SwiperTopBanerComp = () => {
                                             backgroundColor: 'inherit',
                                             padding: '0px',
                                         }}>
-                                            <img
-                                                style={{
+                                            <img style={{
                                                     width: '100%',
                                                     borderRadius: '0.5rem',
                                                 }}

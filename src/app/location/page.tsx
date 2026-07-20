@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050428_okk(1)
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -408,7 +408,7 @@ function BoxHtmlComponent({
   return (<>
     {/* zare_nk_050204_rahe1_st(ClickAwayListener+Collapse baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
     {/* zare_nk_050204_nokteh(ClickAwayListener componente MUI hast ke rooyadade click kharej az taghayei ke dar mohtavayash moshakhas mikonim ra modiriat mikonih, 
-va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast) */}
+    va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast) */}
     <ClickAwayListener
       onClickAway={(event) => {
         console.log('dgdgdg');
@@ -421,8 +421,7 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
           // // kardane isToggleButton inja bimorede va niazi nist,age ye roozi absolutesh konim be kharej az Collapse ya fixed konim be kharaej az Collapse in shart karbordiye)
           setIsEpmtyHeightBox(true); // ببند
         }
-      }}
-    >
+      }}>
       <Collapse
         ref={refForBox}
         id="box"
@@ -473,14 +472,11 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
         {/* zare_nk_050204_rahe2_end(Drawer baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}
         {error && <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>{error}</p>}
         {/* <Paper> */}
-        <form
-          id="addressInfForm"
-          className={`${Styles.loginForm} ${Styles.valueStyle}`}
+        <form id="addressInfForm" className={`${Styles.loginForm} ${Styles.valueStyle}`}
           style={{ padding: '1rem', }}
           onSubmit={(event) => {
             event.preventDefault();
-          }}
-        >
+          }}>
           <div style={{
             paddingTop: '2rem',
             padding: '1rem',
@@ -504,9 +500,7 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
               <span style={{ width: '100%' }}>جزئیات آدرس</span>
             </div>
 
-            <textarea
-              id="AddressTxt"
-              name="Address"
+            <textarea id="AddressTxt" name="Address"
               // value={addressVal}
               value={addressFormInputsVal.Address}
               // onChange={addressMatnChanged}
@@ -576,15 +570,11 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
               flex: '1 1 47%'
             }}>
               {/* <div className={`${Styles.translateDiv} ${isInputFocused || !isMobileTextEmty ? Styles.animateFocus : Styles.animateBlur}`} */}
-              <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.pelak || !isAddressFormInputsTextEmty.pelak ? Styles.animateFocus : Styles.animateBlur}`}
-              >
+              <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.pelak || !isAddressFormInputsTextEmty.pelak ? Styles.animateFocus : Styles.animateBlur}`}>
                 <span style={{ width: '100%' }}>پلاک</span>
               </div>
 
-              <input
-                id="pelakTxt"
-                name="pelak"
-
+              <input id="pelakTxt" name="pelak"
                 // value={pelakVal}  
                 value={addressFormInputsVal.pelak}
 
@@ -677,8 +667,7 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
             marginBottom: '1.25rem',
           }}>
             {/* <div className={`${Styles.translateDiv} ${isAddressNameFocused || !isAddressNameTextEmty ? Styles.animateFocus : Styles.animateBlur}`} */}
-            <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.addressName || !isAddressFormInputsTextEmty.addressName ? Styles.animateFocus : Styles.animateBlur}`}
-            >
+            <div className={`${Styles.translateDiv} ${isAddressFormInputsFocused.addressName || !isAddressFormInputsTextEmty.addressName ? Styles.animateFocus : Styles.animateBlur}`}>
               <span style={{ width: '100%' }}>اسم آدرس (اختیاری)</span>
             </div>
             <input
@@ -795,11 +784,11 @@ export default function LocationPage() {
   const refForVectorSource = useRef<VectorSource | null>(null);  //zare_nk_050213_added
 
   //  const [vSource1, setVSource1] = useState<VectorSource<Feature<Point>> | null>(null); 
-  //// zare_nk_050208_nokteh(dar asl bayad noe jenerice VectorSource(yani Feature<Point>) ro 
-  //// begim,vali chon dar tarife in class tavassote barnamenevisane openlayer behesh voroodiye pishfarze Geometry dadand man nadam error nemideh)
+  //// zare_nk_050208_nokteh(dar asl bayad noe jenerice VectorSource(yani Feature<Point>) ro begim,vali chon dar tarife in class tavassote 
+  // barnamenevisane openlayer behesh voroodiye pishfarze Geometry dadand man nadam error nemideh)
 
   //// const [vLayer1, setVLayer1] = useState<VectorLayer | null>(null);  //zare_nk_050109_commented(VectorLayer yek classe generic hast)
-  ////zare_nk_050126_nokteh_st(VectorLayer yek classe generic hast,va baraye clashaye generic bayad noe manbae(yani source) dakhelash moshakhas shavad,ma ham
+  ////zare_nk_050126_nokteh_st(VectorLayer yek classe generic hast,va baraye clashaye generic bayad noe manbae(yani source) dakhelash moshakhas shavad, ma ham
   //  ba dastoore VectorLayer<VectorSource> noe soursesh ra VectorSource lahaz kardim(age noe source genericha ro nagim az nazare typeScript khata hast))
   // const [vLayer1, setVLayer1] = useState<VectorLayer<VectorSource> | null>(null);  //zare_nk_050213_commented
   const refForVectorLayer = useRef<VectorLayer<VectorSource> | null>(null);  //zare_nk_050213_added
@@ -1425,9 +1414,8 @@ export default function LocationPage() {
     })
 
 
-    // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-    let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-    const response = await fetch(ApiUrl + "Api_CreateAddress", {
+    // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+    const response = await fetch(NextJsApiUrl + "Api_CreateAddress", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

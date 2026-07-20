@@ -1,2 +1,2 @@
-////zare_nk_050423_okk(2)
+////zare_nk_050425_okk(1)
 declare module "bootstrap";     

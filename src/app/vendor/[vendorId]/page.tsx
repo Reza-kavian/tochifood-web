@@ -1,4 +1,4 @@
-// ////zare_nk_050423_okk(2)
+// ////zare_nk_050428_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -1055,9 +1055,8 @@ export default function VendorPage() {
                 alert("لطفا ابتدا آنلاین شوید");
                 return;
             } else {
-                // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-                let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-                var urlSelectSabadTitr = ApiUrl + "Api_SelectSabadKharidTitr";
+                // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+                var urlSelectSabadTitr = NextJsApiUrl + "Api_SelectSabadKharidTitr";
 
                 const response = await fetch(urlSelectSabadTitr, {
                     method: "POST",
@@ -2034,8 +2033,7 @@ export default function VendorPage() {
                 </div> */}
             </header >
 
-            <main
-                style={{
+            <main style={{
                     backgroundColor: 'white',
                     // height: '100dvh',   ////zare_nk_050317_commented(A001-ba A002 tadakhol dareh)
                     width: '100%',
@@ -2355,8 +2353,7 @@ export default function VendorPage() {
                     display: 'flex',
                     flexFlow: 'column', width: '100%', height: 'min-content', paddingTop: '.5rem', marginTop: '.5rem', //backgroundColor: '#fff7ec',
                 }}>
-                    <div
-                        style={{
+                    <div style={{
                             display: 'flex',
                             flexFlow: 'row-reverse',
                             justifyContent: 'space-between',

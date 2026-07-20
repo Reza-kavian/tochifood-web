@@ -1,4 +1,4 @@
-////zare_nk_050422_okk(1)
+////zare_nk_050428_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext } from "react";
@@ -152,17 +152,22 @@ export default function Shoppingbasket() {
     const [sabadRows, setSabadRows] = useState<SabadRowType[]>([]);
     ////zare_nk_050414_added_end
 
-    const goToCartDetails=async (IdShobe:number,IdSabadKharidTitr:number)=>{ 
-        alert('goToCartDetails-IdShobe: '+IdShobe); 
+    const goToCartDetails = async (IdShobe: number, IdSabadKharidTitr: number) => {
+        alert('goToCartDetails-IdShobe: ' + IdShobe);
         //  router.push(`/vendor/${IdShobe}/cart-details`); 
-        router.push(`/vendor/${IdShobe}/cart-details?idTitr=${IdSabadKharidTitr}`);  
+        router.push(`/vendor/${IdShobe}/cart-details?idTitr=${IdSabadKharidTitr}`);
     }
 
     useEffect(() => {
-        const chosenAddress = getCookie("chosenAddress");
-        var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
+        const asyncTempFunc = async () => {
 
-        setMycurrentAddressState(parsedChosenAddress);
+
+            const chosenAddress = await getCookie("chosenAddress");
+            var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
+
+            setMycurrentAddressState(parsedChosenAddress);
+        }
+        asyncTempFunc();
         ////zare_nk_050413_added_st
 
         async function getSabadTitrs() {
@@ -294,9 +299,8 @@ export default function Shoppingbasket() {
                 alert("لطفا ابتدا آنلاین شوید");
                 return;
             }
-            // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-            let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-            var urlSelectSabad = ApiUrl + "Api_SelectSabadKharidSatr";
+            // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+            var urlSelectSabad = NextJsApiUrl + "Api_SelectSabadKharidSatr";
             const response = await fetch(urlSelectSabad, {
                 method: "POST",
                 headers: {
@@ -358,7 +362,7 @@ export default function Shoppingbasket() {
                     setSabadRows(() => {
                         return (
                             result.map((item: any) => {
-                                return ({ 
+                                return ({
                                     IdSabadKharidSatr: item.IdSabadKharidSatr,
                                     IdSabadKharidTitr: item.IdSabadKharidTitr,
                                     tedadInSabadOrDet: item.Tedad,
@@ -413,9 +417,8 @@ export default function Shoppingbasket() {
                 return;
             }
 
-            // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-            let ApiUrl = NextJsApiUrl;  ////zare_nk_050407_added
-            const response = await fetch(ApiUrl + "Api_SelectAddress", {
+            // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+            const response = await fetch(NextJsApiUrl + "Api_SelectAddress", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -563,14 +566,14 @@ export default function Shoppingbasket() {
                             fontSize: '.875rem',
                             cursor: "pointer",
                         }}>
-                        <span
+                        {/* <span
                             style={{
                                 fontSize: '.875rem',
                                 lineHeight: '1.25rem',
                                 color: '#878b92',
                                 textAlign: "right",
                             }}
-                        >ارسال به</span>
+                        >ارسال به</span> */}
                         <div style={{
                             display: 'flex',
                             flexFlow: 'row',
@@ -580,8 +583,11 @@ export default function Shoppingbasket() {
                             // maxWidth: '256px',   ////zare_nk_050413_commented
                             width: '100%',    ////zare_nk_050413_added
                             gap: '.5rem',
+                            alignItems:'center',
                         }}>
-                            <span style={{ textAlign: "right", }}>
+                            <span style={{ 
+                                textAlign: "right",whiteSpace: 'nowrap',    fontSize: '0.875rem',lineHeight: '1.25rem',color:'#8f959e' 
+                                }}>
                                 {/* zare_nk_050329_nokteh(currentAddress az useState tabdil shod be useContext) */}
                                 {mycurrentAddressState?.Adress ? mycurrentAddressState.OnvanAdress : ''}
                                 آدرس فعلی
@@ -1558,7 +1564,7 @@ export default function Shoppingbasket() {
                                                 //   goToEdditAddressMap(e);
                                                 // }}
                                                 onClick={(e) => {
-                                                  goToCartDetails(titrItem.IdShobeh,titrItem.IdSabadKharidTitr);
+                                                    goToCartDetails(titrItem.IdShobeh, titrItem.IdSabadKharidTitr);
                                                 }}
                                                 ///vendor/271r73/cart-details
                                                 style={{

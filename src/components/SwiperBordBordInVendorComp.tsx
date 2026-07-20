@@ -1,4 +1,4 @@
-////zare_nk_050422_okk(2)
+////zare_nk_050428_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -75,9 +75,8 @@ const SwiperBordBordInVendorComp = () => {
             return;
         }
         console.log('tokentokentoken: ' + token);
-        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-        const response = await fetch(ApiUrl + "Api_SelectGoroohJson", {
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+        const response = await fetch(NextJsApiUrl + "Api_SelectGoroohJson", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -363,9 +362,7 @@ const SwiperBordBordInVendorComp = () => {
                                             width: '100%',
                                             height: '30px',
                                         }}>
-                                            <img
-                                                src="/images/movaghat/vendorPage/ghofl.svg"
-                                                alt="قفل"
+                                            <img src="/images/movaghat/vendorPage/ghofl.svg" alt="قفل"
                                             // style={{ width: '1rem', height: '1rem', }}
                                             />
 

@@ -1,4 +1,4 @@
-////zare_nk_050423_okk(2)
+////zare_nk_050428_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -553,8 +553,7 @@ const SwiperTapTimeComp = () => {
                         // height: '95px',
                         // overflow: 'visible', ////zare_nk_050226_nokteh(baraye inke darsade takhfifha ke biroon mizanan dideh beshan)   ////zare_nk_050317_commented(baraye swiper overflow: 'visible' 
                         //// manteghi nist, chon colle slideha biroon iz swiper namayesh dadeh mishan va be scroll ke mahiate swiper hast digeh ehtiaji nist)
-                    }}
-                >
+                    }}>
                     {responsedListFromApiSelectShobehJashnvareh?.map((item, index) => {
                         console.log('050422-item iss: ' + JSON.stringify(item));
                         console.log('050422-currentShobeState: ' + JSON.stringify(currentShobeState));
@@ -758,7 +757,7 @@ const SwiperTapTimeComp = () => {
                                                             display: 'flex', flexFlow: 'column', width: '100%', // marginBottom: '2px',
                                                         }}>
                                                             {(item.DarsadTakhfif != null && item.DarsadTakhfif != 0) ? (
-                                                                <div                                                                    // id={`PriceBeforeDiscount-${item.IdKala}`}
+                                                                <div //id={`PriceBeforeDiscount-${item.IdKala}`}
                                                                     style={{
                                                                         // visibility: "visible",  ////zare_nk_050316_commented(dar react native visibility nadarim)
                                                                         opacity: 1,  ////zare_nk_050316_added(dar react native visibility nadarim)
@@ -859,8 +858,7 @@ const SwiperTapTimeComp = () => {
                                                                             flexBasis: 'auto',
                                                                             marginLeft: 5,
                                                                             borderRadius: 100,
-                                                                        }}
-                                                                    >
+                                                                        }}>
                                                                         <span
                                                                             // className="forDiscount"
                                                                             style={{

@@ -1,4 +1,4 @@
-////zare_nk_050423_okk(2)
+////zare_nk_050428_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -285,8 +285,7 @@ const SwiperTapBestsComp = () => {
                                                 </span>
                                             </div>
 
-                                            <img
-                                                style={{
+                                            <img style={{
                                                     width: '100%',
                                                     // marginTop: '5px', marginBottom: '0px',
                                                     ////zare_nk_050314_added_st

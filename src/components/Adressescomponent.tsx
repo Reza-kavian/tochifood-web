@@ -1,4 +1,4 @@
-////zare_nk_050423_okk(2)
+////zare_nk_050428_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, memo, useContext, } from "react";
@@ -119,9 +119,8 @@ const Adressescomponent = function Adressescomponent({
       const token = getCookie("token");
       // console.log('zare_nk_050110-RemoveAddress-token hala is: ' + getCookie("token"));
 
-      // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-      let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-      const response = await fetch(ApiUrl + "Api_DeleteAddress", {
+      // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+      const response = await fetch(NextJsApiUrl + "Api_DeleteAddress", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

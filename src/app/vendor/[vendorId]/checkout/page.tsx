@@ -22,6 +22,8 @@ import { json } from "stream/consumers";
 
 import AddRemBtnsAndCountPackege from '../../../../components/addRemBtnsAndCountPackege';
 
+import Switch from "@mui/material/Switch";
+
 function getCookie(name: any) {
     ////zare_nk_050209_added_st
     if (typeof document === 'undefined') {
@@ -1139,6 +1141,8 @@ export default function Checkout() {
     const radionClickedFunc = (index: number) => {
         setRadionClicked(index);
     }
+    const [switchBtnChecked, setSwitchBtnChecked] = useState<boolean>(false);  ////zare_nk_050423_added
+
     return (
         <div style={{
             // backgroundColor: 'white', 
@@ -1323,9 +1327,12 @@ export default function Checkout() {
                     </div >
 
                     <div style={{
-                        display: 'flex', flexFlow: 'row', width: '100%', justifyContent: 'center', alignItems: 'center',
+                        display: 'flex', flexFlow: 'row', width: '100%', justifyContent: 'start', alignItems: 'center',
                     }}>
-                        <span style={{ marginLeft: '2px', fontSize: '.875rem', color: '#313335', lineHeight: '1.25rem', }}>
+                        <span style={{
+                            marginLeft: '2px', fontSize: '.875rem', color: '#313335', lineHeight: '1.25rem',
+                            alignSelf: 'start',  ////zare_nk_050423_added
+                        }}>
                             خونه:
                         </span>
                         <div style={{
@@ -1360,7 +1367,7 @@ export default function Checkout() {
                 }}></div>
 
                 <div className="flex flex-col gap-y-4 p-4" style={{
-                    display: 'flex', flexFlow: 'column', width: '100%', rowGap: '1rem', padding: '1rem 0px',
+                    display: 'flex', flexFlow: 'column', width: '100%', rowGap: '1rem',  //padding: '1rem 0px',  ////zare_nk_050423_commented
                 }}>
                     <div style={{
                         display: 'flex', flexFlow: 'row', //justifyContent: 'center', alignItems: 'center',
@@ -1392,7 +1399,7 @@ export default function Checkout() {
                 }}></div>
 
                 <div className="flex flex-col p-4" style={{
-                    display: 'flex', flexFlow: 'column', padding: '1rem 0px', width: '100%',
+                    display: 'flex', width: '100%', flexFlow: 'column', //padding: '1rem 0px',  ////zare_nk_050423_commented
                 }}>
                     <div style={{
                         display: 'flex', flexFlow: 'row', //justifyContent: 'center', alignItems: 'center',
@@ -1406,11 +1413,9 @@ export default function Checkout() {
                         </span>
                     </div>
 
-                    <div //dir="rtl"
-                        className="grid mt-4 gap-3" style={{
-                            display: 'flex', flexFlow: 'column', outline: 'none', gap: '.75rem', marginTop: '1rem',
-                        }}>
-                        {/* zare_nk_050421_added_st(raveshe pardakhti haaaaaaaaaaaaaaaaaa) */}
+                    <div className="grid mt-4 gap-3" style={{
+                        display: 'flex', flexFlow: 'column', outline: 'none', gap: '.75rem', marginTop: '1rem',
+                    }}>
                         <div
                             onClick={() => { radionClickedFunc(1) }}
                             // key={item.IdAdress}   ////zare_nk_050319_added
@@ -1421,8 +1426,616 @@ export default function Checkout() {
                             style={{
                                 borderTop: '1px solid #2b364f14',
                                 display: 'flex',
-                                paddingBottom: '.75rem',
-                                paddingTop: '.75rem',
+                                // paddingBottom: '.75rem',   ////zare_nk_050423_commented
+                                // paddingTop: '.75rem',   ////zare_nk_050423_commented
+                                gap: '.5rem',
+                                justifyContent: 'space-between',
+                                cursor: 'pointer',
+                                height: 'min-content',
+                                alignItems: 'center',
+                            }}>
+                            <div
+                                //   onClick={() => {
+                                //     setRowItem(item);
+                                //     chosenAddress(item);
+                                //   }}
+                                style={{
+                                    // borderTop: '1px solid #2b364f14',
+                                    display: 'flex',
+                                    flex: '1 1 0%',
+                                    // paddingBottom: '.75rem',
+                                    // paddingTop: '.75rem',
+                                    gap: '.5rem',
+                                    justifyContent: 'space-between',
+                                    // cursor: 'pointer',  ////zare_nk_050421_commented
+                                    height: 'min-content',
+                                    alignItems: 'center',
+                                    // border:'2px dashed red'
+                                }}>
+                                <button
+                                    id="locationBtnInEveryAddressRow"   //zare_nk_050208_nokteh(in dokmeh engar karbordi nadare va faghat ye design hast! badan shayad tabdilesh konam be ye tage div)
+                                    style={{
+                                        backgroundColor: 'inherit',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1) 
+                                        fill: 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
+                                        borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
+                                        flex: '0 0 auto',
+                                    }}> 
+                                    <img src="/images/checkout/ravesh-online.svg" alt="پرداخت آنلاین" style={{
+                                        // height: '1.25rem', width: '1.25rem',
+                                    }} />
+                                </button>
+
+                                <div style={{
+                                    paddingTop: '.5rem',
+                                    display: 'flex',
+                                    justifyContent: 'flex-start',
+                                    alignItems: 'flex-start',
+                                    flexFlow: 'column',
+                                    flex: '1 1 0%',
+                                    height: 'min-content',
+                                    marginLeft: '.5rem',
+                                    rowGap: '.25rem',  ////zare_nk_050424_added
+                                }}>
+                                    <span style={{
+                                        ...(radionClicked == 1 ? { color: '#059666' } : { color: '#1b1c1d' }),
+                                        fontWeight: '500',
+                                        fontSize: '.875rem',
+                                        lineHeight: '1.25rem',
+                                    }}>
+                                        آنلاین
+                                        {/* {item.OnvanAdress ? item.OnvanAdress : 'خونه'} */}
+                                    </span>
+
+                                    <div style={{
+                                        display: 'flex', flexFlow: 'row', width: '100%', marginBottom: '2px',
+                                    }}>
+                                        <div style={{
+                                            display: 'flex', flexFlow: 'row', width: '100%', justifyContent: 'space-between',
+                                        }}>
+                                            <div style={{
+                                                display: 'flex', flexFlow: 'row', gap: '.5rem', alignItems: 'center',
+                                            }}>
+                                                <img src="/images/checkout/ravesh-pardakht-online.svg" alt="پیک" style={{
+                                                    width: '1rem', height: '1rem',
+                                                }} />
+                                                <div
+                                                    style={{
+                                                        // flex: "1 0 auto", 
+                                                        flexGrow: 1,
+                                                        flexShrink: 0,
+                                                        flexBasis: 'auto',
+                                                        display: "flex",
+                                                        flexDirection: 'row',
+                                                        justifyContent: 'flex-end',
+                                                        // borderWidth: 1,
+                                                        // borderStyle: 'dashed',
+                                                        // borderColor: 'green',
+                                                        marginRight: '5px', ////zare_nk_050331_added
+                                                    }} >
+                                                    <span //className="mablagh" 
+                                                        style={{
+                                                            lineHeight: '1rem',
+                                                            fontSize: '0.75rem',
+                                                            fontFamily: "IRANSansWeb(FaNum)_Medium",
+                                                            color: '#703bed',   ////zare_nk_050316_added
+                                                        }}>
+                                                        تخفیف {'100000'.toLocaleString()} تومان با پرداخت آنلاین
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="button"
+                                // onClick={() => { radionClickedFunc(1) }}
+                                role="radio"
+                                aria-checked="true"
+                                data-state="checked"
+                                value="distance"
+                                className="peer aspect-square rounded-full border border-solid border-gray text-foreground ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 disabled:cursor-not-allowed disabled:!border-gray-200 disabled:text-gray-200 size-5"
+                                id="distance" tabIndex={0} data-radix-collection-item=""
+                                style={{ borderRadius: '9999px', border: '1px solid #878b92', height: '1.25rem', width: '1.25rem', padding: '0px', backgroundColor: 'transparent', }}>
+                                {radionClicked == 1 &&
+                                    <span id="spanInDistance" data-state="checked" className="flex size-full items-center justify-center"
+                                        style={{
+                                            display: 'flex',
+                                            width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center',
+                                        }}>
+                                        <div className="size-3/4 rounded-full bg-current"
+                                            style={{ height: '75%', width: '75%', borderRadius: '9999px', backgroundColor: '#059666', }}>
+                                        </div>
+                                    </span>}
+                            </button>
+                        </div>
+
+                        <div
+                            onClick={() => { radionClickedFunc(2) }}
+                            // key={item.IdAdress}   ////zare_nk_050319_added
+                            // // onClick={() => {
+                            // //   setRowItem(item);
+                            // //   chosenAddress(item);
+                            // // }}
+                            style={{
+                                borderTop: '1px solid #2b364f14',
+                                display: 'flex',
+                                // paddingBottom: '.75rem',   ////zare_nk_050423_commented
+                                // paddingTop: '.75rem',   ////zare_nk_050423_commented
+                                gap: '.5rem',
+                                justifyContent: 'space-between',
+                                cursor: 'pointer',
+                                height: 'min-content',
+                                alignItems: 'center',
+                            }}>
+                            <div
+                                //   onClick={() => {
+                                //     setRowItem(item);
+                                //     chosenAddress(item);
+                                //   }}
+                                style={{
+                                    // borderTop: '1px solid #2b364f14',
+                                    display: 'flex',
+                                    flex: '1 1 0%',
+                                    // paddingBottom: '.75rem',
+                                    // paddingTop: '.75rem',
+                                    gap: '.5rem',
+                                    justifyContent: 'space-between',
+                                    // cursor: 'pointer',  ////zare_nk_050421_commented
+                                    height: 'min-content',
+                                    alignItems: 'center',
+                                    // border:'2px dashed red'
+                                }}>
+                                <button
+                                    id="locationBtnInEveryAddressRow"   //zare_nk_050208_nokteh(in dokmeh engar karbordi nadare va faghat ye design hast! badan shayad tabdilesh konam be ye tage div)
+                                    style={{
+                                        backgroundColor: 'inherit',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1) 
+                                        fill: 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
+                                        borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
+                                        flex: '0 0 auto',
+                                    }}
+                                >
+                                   
+                                    <img src="/images/checkout/taraIcon.png" alt="پرداخت آنلاین" style={{
+                                         height: '1rem', width: '1rem',
+                                    }} />
+                                </button>
+
+                                <div style={{
+                                    paddingTop: '.5rem',
+                                    display: 'flex',
+                                    justifyContent: 'flex-start',
+                                    alignItems: 'flex-start',
+                                    flexFlow: 'column',
+                                    flex: '1 1 0%',
+                                    height: 'min-content',
+                                    marginLeft: '.5rem',
+                                    rowGap: '.25rem',  ////zare_nk_050424_added
+                                }}>
+                                    <span style={{
+                                            ...(radionClicked == 2 ? { color: '#059666' } : { color: '#1b1c1d' }),
+                                            fontWeight: '500',
+                                            fontSize: '.875rem',
+                                            lineHeight: '1.25rem',
+                                        }}>
+                                        تارا
+                                        {/* {item.OnvanAdress ? item.OnvanAdress : 'خونه'} */}
+                                    </span>
+
+                                    {/* zare_nk_050421_alaaaaaaaan_st */}
+                                    <div style={{
+                                        display: 'flex', flexFlow: 'row', width: '100%', marginBottom: '2px',
+                                    }}>
+                                        <div style={{
+                                            display: 'flex', flexFlow: 'row', width: '100%', justifyContent: 'space-between',
+                                            // marginTop: '8px',
+                                        }}>
+                                            <div style={{
+                                                display: 'flex', flexFlow: 'row', gap: '.5rem', alignItems: 'center',
+                                            }}>
+                                                {/* <img src="/images/checkout/motor-peyk.svg" alt="پیک" style={{
+                                                    height: '1rem', width: '1rem',
+                                                }} /> */}
+                                                <div style={{
+                                                    flex: "1 0 auto",
+                                                    display: "flex",
+                                                    flexDirection: 'row',
+                                                    justifyContent: 'flex-end',
+                                                    // marginRight: '5px',  
+                                                }} >
+                                                    <span //className="mablagh" 
+                                                        style={{
+                                                            lineHeight: '1rem',
+                                                            fontSize: '0.75rem',
+                                                            fontFamily: "IRANSansWeb(FaNum)_Medium",
+                                                            color: '#703bed',   ////zare_nk_050316_added
+                                                        }}>
+                                                        پرداخت با اعتبار تارا
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    {/* zare_nk_050421_alaaaaaaaan_end */}
+
+                                </div>
+                            </div>
+
+                            <button type="button"
+                                // onClick={() => { radionClickedFunc(1) }}
+                                role="radio"
+                                aria-checked="true"
+                                data-state="checked"
+                                value="distance"
+                                className="peer aspect-square rounded-full border border-solid border-gray text-foreground ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 disabled:cursor-not-allowed disabled:!border-gray-200 disabled:text-gray-200 size-5"
+                                id="distance" tabIndex={0} data-radix-collection-item=""
+                                style={{ borderRadius: '9999px', border: '1px solid #878b92', height: '1.25rem', width: '1.25rem', padding: '0px', backgroundColor: 'transparent', }}>
+                                {radionClicked == 2 &&
+                                    <span id="spanInDistance" data-state="checked" className="flex size-full items-center justify-center"
+                                        style={{
+                                            display: 'flex',
+                                            width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center',
+                                        }}>
+                                        <div className="size-3/4 rounded-full bg-current"
+                                            style={{ height: '75%', width: '75%', borderRadius: '9999px', backgroundColor: '#059666', }}>
+                                        </div>
+                                    </span>}
+                            </button>
+                        </div>
+
+                        <div
+                            onClick={() => { radionClickedFunc(3) }}
+                            // key={item.IdAdress}   ////zare_nk_050319_added
+                            // // onClick={() => {
+                            // //   setRowItem(item);
+                            // //   chosenAddress(item);
+                            // // }}
+                            style={{
+                                borderTop: '1px solid #2b364f14',
+                                display: 'flex',
+                                // paddingBottom: '.75rem',   ////zare_nk_050423_commented
+                                // paddingTop: '.75rem',   ////zare_nk_050423_commented
+                                gap: '.5rem',
+                                justifyContent: 'space-between',
+                                cursor: 'pointer',
+                                height: 'min-content',
+                                alignItems: 'center',
+                            }}>
+                            <div
+                                //   onClick={() => {
+                                //     setRowItem(item);
+                                //     chosenAddress(item);
+                                //   }}
+                                style={{
+                                    // borderTop: '1px solid #2b364f14',
+                                    display: 'flex',
+                                    flex: '1 1 0%',
+                                    // paddingBottom: '.75rem',
+                                    // paddingTop: '.75rem',
+                                    gap: '.5rem',
+                                    justifyContent: 'space-between',
+                                    // cursor: 'pointer',  ////zare_nk_050421_commented
+                                    height: 'min-content',
+                                    alignItems: 'center',
+                                    // border:'2px dashed red'
+                                }}>
+                                <button
+                                    id="locationBtnInEveryAddressRow"   //zare_nk_050208_nokteh(in dokmeh engar karbordi nadare va faghat ye design hast! badan shayad tabdilesh konam be ye tage div)
+                                    style={{
+                                        backgroundColor: 'inherit',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1) 
+                                        fill: 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
+                                        borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
+                                        flex: '0 0 auto',
+                                    }}
+                                >
+                                    {/* <svg style={{ width: '18px', height: '18px' }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-[18px] w-[18px] fill-inherit"><g id="Location"><path id="Union" d="M11.99 2C7.34 2 3.5 5.72 3.5 10.32C3.5 12.64 4.34 14.79 5.73 16.61C7.25 18.62 9.13 20.37 11.27 21.75C11.8 22.09 12.24 22.07 12.73 21.75C14.85 20.37 16.74 18.62 18.27 16.61C19.66 14.79 20.5 12.63 20.5 10.32C20.5 5.72 16.66 2 11.99 2ZM11.99 13.33C10.45 13.33 9.19 12.12 9.19 10.58C9.19 9.04 10.45 7.78 11.99 7.78C13.53 7.78 14.8 9.05 14.8 10.58C14.8 12.11 13.53 13.33 11.99 13.33Z" fill="inherit"></path></g></svg> */}
+                                    {/* /images/checkout/ravesh-online.svg */}
+                                    <img src="/images/checkout/ozon-icon.svg" alt="پرداخت آنلاین" style={{
+                                        // height: '1.25rem', width: '1.25rem',
+                                    }} />
+                                </button>
+
+                                <div style={{
+                                    paddingTop: '.5rem',
+                                    display: 'flex',
+                                    justifyContent: 'flex-start',
+                                    alignItems: 'flex-start',
+                                    flexFlow: 'column',
+                                    flex: '1 1 0%',
+                                    height: 'min-content',
+                                    marginLeft: '.5rem',
+                                    rowGap: '.25rem',  ////zare_nk_050424_added
+                                }}>
+                                    <span
+                                        style={{
+                                            ...(radionClicked == 3 ? { color: '#059666' } : { color: '#1b1c1d' }),
+                                            fontWeight: '500',
+                                            fontSize: '.875rem',
+                                            lineHeight: '1.25rem',
+                                        }}>
+                                        اوزون
+                                        {/* {item.OnvanAdress ? item.OnvanAdress : 'خونه'} */}
+                                    </span>
+
+                                    <div style={{
+                                        display: 'flex', flexFlow: 'row', width: '100%', marginBottom: '2px',
+                                    }}>
+                                        <div style={{
+                                            display: 'flex', flexFlow: 'row', width: '100%', justifyContent: 'space-between',
+                                            // marginTop: '8px',
+                                        }}>
+                                            <div style={{
+                                                display: 'flex', flexFlow: 'row', gap: '.5rem', alignItems: 'center',
+                                            }}>
+                                                {/* <img src="/images/checkout/motor-peyk.svg" alt="پیک" style={{
+                                                    height: '1rem', width: '1',
+                                                }} /> */}
+                                                <div style={{
+                                                    flex: "1 0 auto",
+                                                    display: "flex",
+                                                    flexDirection: 'row',
+                                                    justifyContent: 'flex-end',
+                                                    // marginRight: '5px',  
+                                                }}>
+                                                    <span //className="mablagh" 
+                                                        style={{
+                                                            lineHeight: '1rem',
+                                                            fontSize: '0.75rem',
+                                                            fontFamily: "IRANSansWeb(FaNum)_Medium",
+                                                            color: '#703bed',
+                                                        }}>
+                                                        پرداخت به‌صورت ترکیبی
+                                                    </span>
+                                                </div>
+
+                                            </div>
+
+                                            {/* <span style={{
+                                                            color: '#878b92',
+                                                            // fontSize: '.75rem',  ////zare_nk_050331_commented
+                                                            fontSize: '.70rem',  ////zare_nk_050331_added
+                                                            lineHeight: '18px',
+                                                        }}>
+                                                            تا 50 دقیقه
+                                                        </span> */}
+                                        </div>
+
+                                    </div>
+                                    {/* zare_nk_050421_alaaaaaaaan_end */}
+
+                                </div>
+                            </div>
+
+                            <button type="button"
+                                // onClick={() => { radionClickedFunc(1) }}
+                                role="radio"
+                                aria-checked="true"
+                                data-state="checked"
+                                value="distance"
+                                className="peer aspect-square rounded-full border border-solid border-gray text-foreground ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 disabled:cursor-not-allowed disabled:!border-gray-200 disabled:text-gray-200 size-5"
+                                id="distance" tabIndex={0} data-radix-collection-item=""
+                                style={{ borderRadius: '9999px', border: '1px solid #878b92', height: '1.25rem', width: '1.25rem', padding: '0px', backgroundColor: 'transparent', }}>
+                                {radionClicked == 3 &&
+                                    <span id="spanInDistance" data-state="checked" className="flex size-full items-center justify-center"
+                                        style={{
+                                            display: 'flex',
+                                            width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center',
+                                        }}>
+                                        <div className="size-3/4 rounded-full bg-current"
+                                            style={{ height: '75%', width: '75%', borderRadius: '9999px', backgroundColor: '#059666', }}>
+                                        </div>
+                                    </span>}
+                            </button>
+                        </div>
+
+                        <div onClick={() => { radionClickedFunc(4) }}
+                            // key={item.IdAdress}   ////zare_nk_050319_added
+                            // // onClick={() => {
+                            // //   setRowItem(item);
+                            // //   chosenAddress(item);
+                            // // }}
+                            style={{
+                                borderTop: '1px solid #2b364f14',
+                                display: 'flex',
+                                // paddingBottom: '.75rem',   ////zare_nk_050423_commented
+                                // paddingTop: '.75rem',   ////zare_nk_050423_commented
+                                gap: '.5rem',
+                                justifyContent: 'space-between',
+                                cursor: 'pointer',
+                                height: 'min-content',
+                                alignItems: 'center',
+                            }}>
+                            <div style={{
+                                    // borderTop: '1px solid #2b364f14',
+                                    display: 'flex',
+                                    flex: '1 1 0%',
+                                    // paddingBottom: '.75rem',
+                                    // paddingTop: '.75rem',
+                                    gap: '.5rem',
+                                    justifyContent: 'space-between',
+                                    // cursor: 'pointer',  ////zare_nk_050421_commented
+                                    height: 'min-content',
+                                    alignItems: 'center',
+                                    // border:'2px dashed red'
+                                }}>
+                                <button id="locationBtnInEveryAddressRow" style={{
+                                    backgroundColor: 'inherit',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1) 
+                                    fill: 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
+                                    borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
+                                    flex: '0 0 auto',
+                                }} >
+                                    <img src="/images/checkout/digipay-Icon.svg" alt="پرداخت آنلاین" style={{
+                                          height: '1rem', width: '1rem',
+                                    }} />
+                                </button>
+
+                                <div style={{
+                                    paddingTop: '.5rem',
+                                    display: 'flex',
+                                    justifyContent: 'flex-start',
+                                    alignItems: 'flex-start',
+                                    flexFlow: 'column',
+                                    flex: '1 1 0%',
+                                    height: 'min-content',
+                                    marginLeft: '.5rem',
+                                    rowGap: '.25rem',  ////zare_nk_050424_added
+                                }}>
+                                    <span style={{
+                                        ...(radionClicked == 4 ? { color: '#059666' } : { color: '#1b1c1d' }),
+                                        fontWeight: '500',
+                                        fontSize: '.875rem',
+                                        lineHeight: '1.25rem',
+                                    }}>
+                                        دیجی‌پی
+                                        {/* {item.OnvanAdress ? item.OnvanAdress : 'خونه'} */}
+                                    </span>
+
+                                    {/* zare_nk_050421_alaaaaaaaan_st */}
+                                    <div style={{
+                                        display: 'flex', flexFlow: 'row', width: '100%', marginBottom: '2px',
+                                    }}>
+                                        <div style={{
+                                            display: 'flex', flexFlow: 'row', width: '100%', justifyContent: 'space-between',
+                                            // marginTop: '8px',
+                                        }}>
+                                            <div style={{
+                                                display: 'flex', flexFlow: 'row', gap: '.5rem', alignItems: 'center',
+                                            }}>
+                                                {/* <img src="/images/checkout/motor-peyk.svg" alt="پیک" style={{
+                                                    height: '1rem', width: '1',
+                                                }} /> */}
+                                                <div
+                                                    style={{
+                                                        flex: "1 0 auto",
+                                                        display: "flex",
+                                                        flexDirection: 'row',
+                                                        justifyContent: 'flex-end',
+                                                        // marginRight: '5px', 
+                                                    }}>
+                                                    <span style={{
+                                                        lineHeight: '1rem',
+                                                        fontSize: '0.75rem',
+                                                        fontFamily: "IRANSansWeb(FaNum)_Medium",
+                                                        color: '#703bed',
+                                                    }}>
+                                                        پرداخت با اعتبار دیجی‌پی
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    {/* zare_nk_050421_alaaaaaaaan_end */}
+
+                                </div>
+                            </div>
+
+                            <button type="button"
+                                // onClick={() => { radionClickedFunc(1) }}
+                                role="radio"
+                                aria-checked="true"
+                                data-state="checked"
+                                value="distance"
+                                className="peer aspect-square rounded-full border border-solid border-gray text-foreground ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 disabled:cursor-not-allowed disabled:!border-gray-200 disabled:text-gray-200 size-5"
+                                id="distance" tabIndex={0} data-radix-collection-item=""
+                                style={{ borderRadius: '9999px', border: '1px solid #878b92', height: '1.25rem', width: '1.25rem', padding: '0px', backgroundColor: 'transparent', }}>
+                                {radionClicked == 4 &&
+                                    <span id="spanInDistance" data-state="checked" className="flex size-full items-center justify-center"
+                                        style={{
+                                            display: 'flex',
+                                            width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center',
+                                        }}>
+                                        <div className="size-3/4 rounded-full bg-current"
+                                            style={{ height: '75%', width: '75%', borderRadius: '9999px', backgroundColor: '#059666', }}>
+                                        </div>
+                                    </span>}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="-mx-4 my-4 h-3 bg-gray-50" style={{
+                    backgroundColor: '#f7f7f8', height: '.75rem', margin: '1rem -1rem', width: '450px',
+                }}></div>
+
+                <div style={{
+                    paddingTop: '.5rem', //marginTop: '.5rem', ////zare_nk_050423_commented
+                    backgroundColor: '#fff7ec', display: 'flex', flexFlow: 'column', width: '100%', height: 'min-content', paddingBottom: '10px',
+                }}>
+                    <div style={{
+                        padding: '.125rem 1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%',
+                    }}>
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '.5rem',
+                        }}>
+                            <img src='/images/movaghat/vendorPage/bord-bord-icon.svg'
+                                style={{ width: '20px', height: '20px' }} />
+
+                            <h2 style={{ fontSize: '.875rem', lineHeight: '1.25rem', margin: 0, }}>فرصت برد برد</h2>
+                        </div>
+
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            color: '#ff5a00',
+                            fontSize: '.875rem',
+                            lineHeight: '1.25rem',
+                            gap: '1px',
+                            cursor: 'pointer',
+                        }}>
+                            <span>تغییر</span>
+                            <img src='/images/movaghat/vendorPage/show-all-bord-bord.svg'
+                                style={{ width: '24px', height: '24px' }} />
+                        </div>
+                    </div>
+                    <SwiperBordBordInVendorComp
+                    // // openCollapseForSorting={openCollapseForSorting}
+                    // // openCollapseForRaveshErsal={openCollapseForRaveshErsal}
+                    // scrollToSection={scrollToSection}
+                    // activeTab={activeTab}
+                    />
+                </div>
+
+                <div className="-mx-4 my-4 h-3 bg-gray-50" style={{
+                    backgroundColor: '#f7f7f8', height: '.75rem', margin: '1rem -1rem', marginBottom: '0px', width: '450px',
+                }}></div>
+
+
+                {/* zare_nk_050423_added_st */}
+                <div className="flex flex-col p-4" style={{
+                    display: 'flex', width: '100%', flexFlow: 'column', padding: '1rem 0px',
+                }}>
+                    <div style={{
+                        display: 'flex', flexFlow: 'row', //justifyContent: 'center', alignItems: 'center',
+                    }}>
+                        <span style={{
+                            fontSize: '1rem',
+                            lineHeight: '1.25rem',
+                            color: '#313335',
+                        }}>
+                            استفاده از کیف پول
+                        </span>
+                    </div>
+
+                    <div className="grid mt-4 gap-3" style={{
+                        display: 'flex', flexFlow: 'column', outline: 'none', gap: '.75rem', marginTop: '1rem',
+                    }}>
+                        <div
+                            // onClick={() => { radionClickedFunc(1) }}
+                            // key={item.IdAdress}   ////zare_nk_050319_added
+                            // // onClick={() => {
+                            // //   setRowItem(item);
+                            // //   chosenAddress(item);
+                            // // }}
+                            style={{
+                                // borderTop: '1px solid #2b364f14',  ////zare_nk_050423_commented
+                                display: 'flex',
+                                // paddingBottom: '.75rem',   ////zare_nk_050423_commented
+                                // paddingTop: '.75rem',   ////zare_nk_050423_commented
                                 gap: '.5rem',
                                 justifyContent: 'space-between',
                                 cursor: 'pointer',
@@ -1479,9 +2092,8 @@ export default function Checkout() {
                                             fontWeight: '500',
                                             fontSize: '.875rem',
                                             lineHeight: '1.25rem',
-                                        }}
-                                    >
-                                        آنلاین
+                                        }}>
+                                        توچی‌فود
                                         {/* {item.OnvanAdress ? item.OnvanAdress : 'خونه'} */}
                                     </span>
 
@@ -1494,544 +2106,41 @@ export default function Checkout() {
                                             // marginTop: '8px',
                                         }}>
                                             <div style={{
-                                                display: 'flex', flexFlow: 'row', gap: '.5rem', alignItems: 'center',
+                                                display: 'flex', flexFlow: 'row', gap: '.25rem', alignItems: 'center', opacity: '0.5',
                                             }}>
-                                                {/* <span
-                                                                style={{
-                                                                    color: '#878b92',
-                                                                    fontSize: '.75rem',
-
-                                                                }}
-                                                            > 
-                                                                ارسال:
-                                                            </span> */}
-                                                {/* <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-[14px] fill-[#54575B]"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.3399 7.0758C11.5966 7.1283 12.2208 7.3033 12.5883 7.8633V7.87497C12.7166 8.06747 12.6641 8.32997 12.4716 8.4583C12.3958 8.50497 12.3199 8.5283 12.2383 8.5283C12.1041 8.5283 11.9699 8.46413 11.8883 8.34163C11.7599 8.15497 11.5733 8.04997 11.4099 7.9858C11.4063 7.99565 11.4026 8.00576 11.3988 8.01602C11.3848 8.05437 11.37 8.09482 11.3516 8.13163C11.8883 8.45247 12.2441 9.0358 12.2441 9.68913C12.2441 10.6925 11.4274 11.515 10.4183 11.515C9.51995 11.515 8.77328 10.8616 8.62161 10.01H6.29995C6.14245 10.8616 5.40161 11.5091 4.50328 11.5091C3.60495 11.5091 2.86411 10.8616 2.70661 10.01H2.15828C1.92495 10.01 1.73828 9.8233 1.73828 9.58997V8.18997C1.73828 7.5658 1.99495 7.0058 2.40911 6.59747C2.30411 6.5333 2.20495 6.4633 2.12328 6.3758C1.87828 6.1133 1.74411 5.7633 1.74411 5.35497V4.0308C1.74411 3.63413 1.87828 3.27247 2.11745 3.00997C2.36828 2.74163 2.72995 2.58413 3.13245 2.58413H5.19745C5.59995 2.58413 5.96161 2.7358 6.21245 3.00413C6.45745 3.26663 6.59161 3.61663 6.59161 4.02497V5.34913C6.59745 5.80413 6.42828 6.1833 6.14828 6.43997C6.26495 6.55663 6.36995 6.69663 6.45161 6.85413L6.81911 7.6008C6.89495 7.7583 7.05828 7.85747 7.23328 7.85747H7.76995C7.90995 7.85747 8.02661 7.74663 8.03245 7.60663L7.99745 5.1858C7.99161 4.85913 8.11995 4.54997 8.34745 4.31663C8.56328 4.09497 8.84911 3.97247 9.15245 3.95497L8.95995 3.48247C8.93661 3.42413 8.81995 3.3483 8.75578 3.3483H7.56578C7.33245 3.3483 7.14578 3.16163 7.14578 2.9283C7.14578 2.69497 7.33245 2.5083 7.56578 2.5083H8.75578C9.15828 2.5083 9.58412 2.79413 9.73578 3.16747L10.1616 4.2058C10.1674 4.21163 10.1733 4.22913 10.1733 4.22913L10.1908 4.26413C10.4183 3.97247 10.7333 3.75663 11.0716 3.6808C11.2174 3.65163 11.3574 3.69247 11.4624 3.79163C12.1099 4.42747 12.2966 5.2208 11.9874 6.0783C11.9349 6.21247 11.8241 6.31163 11.6841 6.34663C11.5733 6.36997 11.4566 6.38163 11.3399 6.38163C11.2408 6.38163 11.1416 6.36413 11.0424 6.34663L11.3399 7.0758ZM11.0424 4.5908C10.9666 4.6433 10.8966 4.70747 10.8383 4.7833C10.7391 4.91747 10.6924 5.0633 10.7216 5.17997C10.7566 5.33163 10.9024 5.41913 10.9841 5.45997C11.0716 5.5008 11.1649 5.52413 11.2583 5.5358C11.3283 5.1858 11.2583 4.87663 11.0424 4.5908ZM3.12661 3.41247C2.95161 3.41247 2.81745 3.46497 2.72411 3.56413C2.62495 3.66913 2.57828 3.82663 2.57828 4.0133V5.33747C2.57828 5.52413 2.63078 5.68163 2.72995 5.78663C2.82328 5.8858 2.95745 5.9383 3.13245 5.9383H5.19745C5.69911 5.93247 5.74578 5.51247 5.74578 5.33163V4.00747C5.74578 3.8208 5.69328 3.6633 5.59411 3.5583C5.50078 3.45913 5.37828 3.41247 5.19161 3.41247H3.12661ZM3.97245 6.7783C3.19661 6.7783 2.57245 7.4083 2.57245 8.1783H2.57828V9.1583H8.95411C8.98911 9.1583 9.02995 9.14663 9.05911 9.11747L10.5816 7.74663C10.6341 7.69997 10.6458 7.62997 10.6224 7.5658L9.48495 4.7833H9.20495C9.10578 4.7833 9.01245 4.82413 8.94245 4.89413C8.87245 4.96997 8.83745 5.0633 8.83745 5.16247L8.87245 7.61247C8.83745 8.22497 8.35328 8.67997 7.76995 8.67997H7.23328C6.73745 8.67997 6.28828 8.4058 6.06661 7.95663L5.69911 7.20997C5.56495 6.94163 5.30245 6.7783 5.00495 6.7783H3.97245ZM3.56995 9.9983C3.70995 10.3833 4.07161 10.6575 4.49745 10.6575C4.92911 10.6575 5.29078 10.3833 5.42495 9.9983H3.56995ZM9.44411 9.86413C9.53745 10.3191 9.93411 10.6575 10.4124 10.6575L10.4183 10.6458C10.9666 10.6458 11.4099 10.2025 11.4099 9.65997C11.4099 9.23997 11.1358 8.86663 10.7449 8.73247L10.4183 9.02413L10.7391 9.39747C10.8908 9.5783 10.8674 9.8408 10.6924 9.99247C10.6108 10.0566 10.5174 10.0916 10.4183 10.0916C10.2958 10.0916 10.1791 10.045 10.0974 9.9458L9.78828 9.58997L9.63078 9.7358C9.57245 9.7883 9.50828 9.82913 9.44411 9.86413ZM4.61996 4.60825H3.70413C3.4708 4.60825 3.28413 4.42158 3.28413 4.18825C3.28413 3.95492 3.4708 3.76825 3.70413 3.76825H4.61996C4.8533 3.76825 5.03996 3.95492 5.03996 4.18825C5.03996 4.42158 4.8533 4.60825 4.61996 4.60825Z" fill="#54575B"></path></svg> */}
-                                                {/* <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-[14px] fill-[#54575B]"><path fillRule="evenodd" clipRule="evenodd" d="M11.3399 7.0758C11.5966 7.1283 12.2208 7.3033 12.5883 7.8633V7.87497C12.7166 8.06747 12.6641 8.32997 12.4716 8.4583C12.3958 8.50497 12.3199 8.5283 12.2383 8.5283C12.1041 8.5283 11.9699 8.46413 11.8883 8.34163C11.7599 8.15497 11.5733 8.04997 11.4099 7.9858C11.4063 7.99565 11.4026 8.00576 11.3988 8.01602C11.3848 8.05437 11.37 8.09482 11.3516 8.13163C11.8883 8.45247 12.2441 9.0358 12.2441 9.68913C12.2441 10.6925 11.4274 11.515 10.4183 11.515C9.51995 11.515 8.77328 10.8616 8.62161 10.01H6.29995C6.14245 10.8616 5.40161 11.5091 4.50328 11.5091C3.60495 11.5091 2.86411 10.8616 2.70661 10.01H2.15828C1.92495 10.01 1.73828 9.8233 1.73828 9.58997V8.18997C1.73828 7.5658 1.99495 7.0058 2.40911 6.59747C2.30411 6.5333 2.20495 6.4633 2.12328 6.3758C1.87828 6.1133 1.74411 5.7633 1.74411 5.35497V4.0308C1.74411 3.63413 1.87828 3.27247 2.11745 3.00997C2.36828 2.74163 2.72995 2.58413 3.13245 2.58413H5.19745C5.59995 2.58413 5.96161 2.7358 6.21245 3.00413C6.45745 3.26663 6.59161 3.61663 6.59161 4.02497V5.34913C6.59745 5.80413 6.42828 6.1833 6.14828 6.43997C6.26495 6.55663 6.36995 6.69663 6.45161 6.85413L6.81911 7.6008C6.89495 7.7583 7.05828 7.85747 7.23328 7.85747H7.76995C7.90995 7.85747 8.02661 7.74663 8.03245 7.60663L7.99745 5.1858C7.99161 4.85913 8.11995 4.54997 8.34745 4.31663C8.56328 4.09497 8.84911 3.97247 9.15245 3.95497L8.95995 3.48247C8.93661 3.42413 8.81995 3.3483 8.75578 3.3483H7.56578C7.33245 3.3483 7.14578 3.16163 7.14578 2.9283C7.14578 2.69497 7.33245 2.5083 7.56578 2.5083H8.75578C9.15828 2.5083 9.58412 2.79413 9.73578 3.16747L10.1616 4.2058C10.1674 4.21163 10.1733 4.22913 10.1733 4.22913L10.1908 4.26413C10.4183 3.97247 10.7333 3.75663 11.0716 3.6808C11.2174 3.65163 11.3574 3.69247 11.4624 3.79163C12.1099 4.42747 12.2966 5.2208 11.9874 6.0783C11.9349 6.21247 11.8241 6.31163 11.6841 6.34663C11.5733 6.36997 11.4566 6.38163 11.3399 6.38163C11.2408 6.38163 11.1416 6.36413 11.0424 6.34663L11.3399 7.0758ZM11.0424 4.5908C10.9666 4.6433 10.8966 4.70747 10.8383 4.7833C10.7391 4.91747 10.6924 5.0633 10.7216 5.17997C10.7566 5.33163 10.9024 5.41913 10.9841 5.45997C11.0716 5.5008 11.1649 5.52413 11.2583 5.5358C11.3283 5.1858 11.2583 4.87663 11.0424 4.5908ZM3.12661 3.41247C2.95161 3.41247 2.81745 3.46497 2.72411 3.56413C2.62495 3.66913 2.57828 3.82663 2.57828 4.0133V5.33747C2.57828 5.52413 2.63078 5.68163 2.72995 5.78663C2.82328 5.8858 2.95745 5.9383 3.13245 5.9383H5.19745C5.69911 5.93247 5.74578 5.51247 5.74578 5.33163V4.00747C5.74578 3.8208 5.69328 3.6633 5.59411 3.5583C5.50078 3.45913 5.37828 3.41247 5.19161 3.41247H3.12661ZM3.97245 6.7783C3.19661 6.7783 2.57245 7.4083 2.57245 8.1783H2.57828V9.1583H8.95411C8.98911 9.1583 9.02995 9.14663 9.05911 9.11747L10.5816 7.74663C10.6341 7.69997 10.6458 7.62997 10.6224 7.5658L9.48495 4.7833H9.20495C9.10578 4.7833 9.01245 4.82413 8.94245 4.89413C8.87245 4.96997 8.83745 5.0633 8.83745 5.16247L8.87245 7.61247C8.83745 8.22497 8.35328 8.67997 7.76995 8.67997H7.23328C6.73745 8.67997 6.28828 8.4058 6.06661 7.95663L5.69911 7.20997C5.56495 6.94163 5.30245 6.7783 5.00495 6.7783H3.97245ZM3.56995 9.9983C3.70995 10.3833 4.07161 10.6575 4.49745 10.6575C4.92911 10.6575 5.29078 10.3833 5.42495 9.9983H3.56995ZM9.44411 9.86413C9.53745 10.3191 9.93411 10.6575 10.4124 10.6575L10.4183 10.6458C10.9666 10.6458 11.4099 10.2025 11.4099 9.65997C11.4099 9.23997 11.1358 8.86663 10.7449 8.73247L10.4183 9.02413L10.7391 9.39747C10.8908 9.5783 10.8674 9.8408 10.6924 9.99247C10.6108 10.0566 10.5174 10.0916 10.4183 10.0916C10.2958 10.0916 10.1791 10.045 10.0974 9.9458L9.78828 9.58997L9.63078 9.7358C9.57245 9.7883 9.50828 9.82913 9.44411 9.86413ZM4.61996 4.60825H3.70413C3.4708 4.60825 3.28413 4.42158 3.28413 4.18825C3.28413 3.95492 3.4708 3.76825 3.70413 3.76825H4.61996C4.8533 3.76825 5.03996 3.95492 5.03996 4.18825C5.03996 4.42158 4.8533 4.60825 4.61996 4.60825Z" fill="green"></path></svg> */}
-                                                <img src="/images/checkout/motor-peyk.svg" alt="پیک" style={{
+                                                <span style={{
+                                                    color: '#53565a', fontSize: '.75rem',
+                                                }}>
+                                                    موجودی:
+                                                </span>
+                                                {/* <img src="/images/checkout/motor-peyk.svg" alt="پیک" style={{
                                                     height: '1rem', width: '1',
-                                                }} />
-                                                <div
-                                                    style={{
-                                                        // flex: "1 0 auto", 
-                                                        flexGrow: 1,
-                                                        flexShrink: 0,
-                                                        flexBasis: 'auto',
-                                                        display: "flex",
-                                                        flexDirection: 'row',
-                                                        justifyContent: 'flex-end',
-                                                        // borderWidth: 1,
-                                                        // borderStyle: 'dashed',
-                                                        // borderColor: 'green',
-                                                        marginRight: '5px', ////zare_nk_050331_added
-                                                    }} >
-                                                    <span //className="mablagh" 
-                                                        style={{
-                                                            lineHeight: '1rem',
-                                                            fontSize: '0.75rem',
-                                                            fontFamily: "IRANSansWeb(FaNum)_Medium",
-                                                            color: '#703bed',   ////zare_nk_050316_added
-                                                        }}>
-                                                        ارسال رایگان با پرداخت آنلاین
+                                                }} /> */}
+                                                <div style={{
+                                                    // flex: "1 0 auto", 
+                                                    flexGrow: 1,
+                                                    flexShrink: 0,
+                                                    flexBasis: 'auto',
+                                                    display: "flex",
+                                                    flexDirection: 'row',
+                                                    justifyContent: 'flex-end',
+                                                    gap: '.25rem',
+                                                }}>
+                                                    <span style={{
+                                                        lineHeight: '1rem',
+                                                        fontSize: '0.75rem',
+                                                        fontFamily: "IRANSansWeb(FaNum)_Medium",
+                                                        color: '#53565a',
+                                                    }}>
+                                                        0
                                                     </span>
-                                                </div>
-
-                                            </div>
-
-                                            {/* <span style={{
-                                                            color: '#878b92',
-                                                            // fontSize: '.75rem',  ////zare_nk_050331_commented
-                                                            fontSize: '.70rem',  ////zare_nk_050331_added
-                                                            lineHeight: '18px',
-                                                        }}>
-                                                            تا 50 دقیقه
-                                                        </span> */}
-                                        </div>
-
-                                    </div>
-                                    {/* zare_nk_050421_alaaaaaaaan_end */}
-
-                                </div>
-                            </div>
-
-                            <button type="button"
-                                // onClick={() => { radionClickedFunc(1) }}
-                                role="radio"
-                                aria-checked="true"
-                                data-state="checked"
-                                value="distance"
-                                className="peer aspect-square rounded-full border border-solid border-gray text-foreground ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 disabled:cursor-not-allowed disabled:!border-gray-200 disabled:text-gray-200 size-5"
-                                id="distance" tabIndex={0} data-radix-collection-item=""
-                                style={{ borderRadius: '9999px', border: '1px solid #878b92', height: '1.25rem', width: '1.25rem', padding: '0px', backgroundColor: 'transparent', }}>
-                                {radionClicked == 1 &&
-                                    <span id="spanInDistance" data-state="checked" className="flex size-full items-center justify-center"
-                                        style={{
-                                            display: 'flex',
-                                            width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center',
-                                        }}>
-                                        <div className="size-3/4 rounded-full bg-current"
-                                            style={{ height: '75%', width: '75%', borderRadius: '9999px', backgroundColor: '#059666', }}>
-                                        </div>
-                                    </span>}
-                            </button>
-                        </div>
-
-
-
-
-
-
-
-                        <div
-                            onClick={() => { radionClickedFunc(2) }}
-                            // key={item.IdAdress}   ////zare_nk_050319_added
-                            // // onClick={() => {
-                            // //   setRowItem(item);
-                            // //   chosenAddress(item);
-                            // // }}
-                            style={{
-                                borderTop: '1px solid #2b364f14',
-                                display: 'flex',
-                                paddingBottom: '.75rem',
-                                paddingTop: '.75rem',
-                                gap: '.5rem',
-                                justifyContent: 'space-between',
-                                cursor: 'pointer',
-                                height: 'min-content',
-                                alignItems: 'center',
-                            }}>
-                            <div
-                                //   onClick={() => {
-                                //     setRowItem(item);
-                                //     chosenAddress(item);
-                                //   }}
-                                style={{
-                                    // borderTop: '1px solid #2b364f14',
-                                    display: 'flex',
-                                    flex: '1 1 0%',
-                                    // paddingBottom: '.75rem',
-                                    // paddingTop: '.75rem',
-                                    gap: '.5rem',
-                                    justifyContent: 'space-between',
-                                    // cursor: 'pointer',  ////zare_nk_050421_commented
-                                    height: 'min-content',
-                                    alignItems: 'center',
-                                    // border:'2px dashed red'
-                                }}>
-                                <button
-                                    id="locationBtnInEveryAddressRow"   //zare_nk_050208_nokteh(in dokmeh engar karbordi nadare va faghat ye design hast! badan shayad tabdilesh konam be ye tage div)
-                                    style={{
-                                        backgroundColor: 'inherit',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1) 
-                                        fill: 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
-                                        borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
-                                        flex: '0 0 auto',
-                                    }}
-                                >
-                                    {/* <svg style={{ width: '18px', height: '18px' }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-[18px] w-[18px] fill-inherit"><g id="Location"><path id="Union" d="M11.99 2C7.34 2 3.5 5.72 3.5 10.32C3.5 12.64 4.34 14.79 5.73 16.61C7.25 18.62 9.13 20.37 11.27 21.75C11.8 22.09 12.24 22.07 12.73 21.75C14.85 20.37 16.74 18.62 18.27 16.61C19.66 14.79 20.5 12.63 20.5 10.32C20.5 5.72 16.66 2 11.99 2ZM11.99 13.33C10.45 13.33 9.19 12.12 9.19 10.58C9.19 9.04 10.45 7.78 11.99 7.78C13.53 7.78 14.8 9.05 14.8 10.58C14.8 12.11 13.53 13.33 11.99 13.33Z" fill="inherit"></path></g></svg> */}
-                                    {/* /images/checkout/ravesh-online.svg */}
-                                    <img src="/images/checkout/ravesh-online.svg" alt="پرداخت آنلاین" style={{
-                                        // height: '1.25rem', width: '1.25rem',
-                                    }} />
-                                </button>
-
-                                <div style={{
-                                    paddingTop: '.5rem',
-                                    display: 'flex',
-                                    justifyContent: 'flex-start',
-                                    alignItems: 'flex-start',
-                                    flexFlow: 'column',
-                                    flex: '1 1 0%',
-                                    height: 'min-content',
-                                    marginLeft: '.5rem',
-                                }}>
-                                    <span
-                                        style={{
-                                            ...(radionClicked == 2 ? { color: '#059666' } : { color: '#1b1c1d' }),
-                                            fontWeight: '500',
-                                            fontSize: '.875rem',
-                                            lineHeight: '1.25rem',
-                                        }}
-                                    >
-                                        تارا
-                                        {/* {item.OnvanAdress ? item.OnvanAdress : 'خونه'} */}
-                                    </span>
-
-                                    {/* zare_nk_050421_alaaaaaaaan_st */}
-                                    <div style={{
-                                        display: 'flex', flexFlow: 'row', width: '100%', marginBottom: '2px',
-                                    }}>
-                                        <div style={{
-                                            display: 'flex', flexFlow: 'row', width: '100%', justifyContent: 'space-between',
-                                            // marginTop: '8px',
-                                        }}>
-                                            <div style={{
-                                                display: 'flex', flexFlow: 'row', gap: '.5rem', alignItems: 'center',
-                                            }}>
-                                                {/* <span
-                                                                style={{
-                                                                    color: '#878b92',
-                                                                    fontSize: '.75rem',
-
-                                                                }}
-                                                            > 
-                                                                ارسال:
-                                                            </span> */}
-                                                {/* <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-[14px] fill-[#54575B]"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.3399 7.0758C11.5966 7.1283 12.2208 7.3033 12.5883 7.8633V7.87497C12.7166 8.06747 12.6641 8.32997 12.4716 8.4583C12.3958 8.50497 12.3199 8.5283 12.2383 8.5283C12.1041 8.5283 11.9699 8.46413 11.8883 8.34163C11.7599 8.15497 11.5733 8.04997 11.4099 7.9858C11.4063 7.99565 11.4026 8.00576 11.3988 8.01602C11.3848 8.05437 11.37 8.09482 11.3516 8.13163C11.8883 8.45247 12.2441 9.0358 12.2441 9.68913C12.2441 10.6925 11.4274 11.515 10.4183 11.515C9.51995 11.515 8.77328 10.8616 8.62161 10.01H6.29995C6.14245 10.8616 5.40161 11.5091 4.50328 11.5091C3.60495 11.5091 2.86411 10.8616 2.70661 10.01H2.15828C1.92495 10.01 1.73828 9.8233 1.73828 9.58997V8.18997C1.73828 7.5658 1.99495 7.0058 2.40911 6.59747C2.30411 6.5333 2.20495 6.4633 2.12328 6.3758C1.87828 6.1133 1.74411 5.7633 1.74411 5.35497V4.0308C1.74411 3.63413 1.87828 3.27247 2.11745 3.00997C2.36828 2.74163 2.72995 2.58413 3.13245 2.58413H5.19745C5.59995 2.58413 5.96161 2.7358 6.21245 3.00413C6.45745 3.26663 6.59161 3.61663 6.59161 4.02497V5.34913C6.59745 5.80413 6.42828 6.1833 6.14828 6.43997C6.26495 6.55663 6.36995 6.69663 6.45161 6.85413L6.81911 7.6008C6.89495 7.7583 7.05828 7.85747 7.23328 7.85747H7.76995C7.90995 7.85747 8.02661 7.74663 8.03245 7.60663L7.99745 5.1858C7.99161 4.85913 8.11995 4.54997 8.34745 4.31663C8.56328 4.09497 8.84911 3.97247 9.15245 3.95497L8.95995 3.48247C8.93661 3.42413 8.81995 3.3483 8.75578 3.3483H7.56578C7.33245 3.3483 7.14578 3.16163 7.14578 2.9283C7.14578 2.69497 7.33245 2.5083 7.56578 2.5083H8.75578C9.15828 2.5083 9.58412 2.79413 9.73578 3.16747L10.1616 4.2058C10.1674 4.21163 10.1733 4.22913 10.1733 4.22913L10.1908 4.26413C10.4183 3.97247 10.7333 3.75663 11.0716 3.6808C11.2174 3.65163 11.3574 3.69247 11.4624 3.79163C12.1099 4.42747 12.2966 5.2208 11.9874 6.0783C11.9349 6.21247 11.8241 6.31163 11.6841 6.34663C11.5733 6.36997 11.4566 6.38163 11.3399 6.38163C11.2408 6.38163 11.1416 6.36413 11.0424 6.34663L11.3399 7.0758ZM11.0424 4.5908C10.9666 4.6433 10.8966 4.70747 10.8383 4.7833C10.7391 4.91747 10.6924 5.0633 10.7216 5.17997C10.7566 5.33163 10.9024 5.41913 10.9841 5.45997C11.0716 5.5008 11.1649 5.52413 11.2583 5.5358C11.3283 5.1858 11.2583 4.87663 11.0424 4.5908ZM3.12661 3.41247C2.95161 3.41247 2.81745 3.46497 2.72411 3.56413C2.62495 3.66913 2.57828 3.82663 2.57828 4.0133V5.33747C2.57828 5.52413 2.63078 5.68163 2.72995 5.78663C2.82328 5.8858 2.95745 5.9383 3.13245 5.9383H5.19745C5.69911 5.93247 5.74578 5.51247 5.74578 5.33163V4.00747C5.74578 3.8208 5.69328 3.6633 5.59411 3.5583C5.50078 3.45913 5.37828 3.41247 5.19161 3.41247H3.12661ZM3.97245 6.7783C3.19661 6.7783 2.57245 7.4083 2.57245 8.1783H2.57828V9.1583H8.95411C8.98911 9.1583 9.02995 9.14663 9.05911 9.11747L10.5816 7.74663C10.6341 7.69997 10.6458 7.62997 10.6224 7.5658L9.48495 4.7833H9.20495C9.10578 4.7833 9.01245 4.82413 8.94245 4.89413C8.87245 4.96997 8.83745 5.0633 8.83745 5.16247L8.87245 7.61247C8.83745 8.22497 8.35328 8.67997 7.76995 8.67997H7.23328C6.73745 8.67997 6.28828 8.4058 6.06661 7.95663L5.69911 7.20997C5.56495 6.94163 5.30245 6.7783 5.00495 6.7783H3.97245ZM3.56995 9.9983C3.70995 10.3833 4.07161 10.6575 4.49745 10.6575C4.92911 10.6575 5.29078 10.3833 5.42495 9.9983H3.56995ZM9.44411 9.86413C9.53745 10.3191 9.93411 10.6575 10.4124 10.6575L10.4183 10.6458C10.9666 10.6458 11.4099 10.2025 11.4099 9.65997C11.4099 9.23997 11.1358 8.86663 10.7449 8.73247L10.4183 9.02413L10.7391 9.39747C10.8908 9.5783 10.8674 9.8408 10.6924 9.99247C10.6108 10.0566 10.5174 10.0916 10.4183 10.0916C10.2958 10.0916 10.1791 10.045 10.0974 9.9458L9.78828 9.58997L9.63078 9.7358C9.57245 9.7883 9.50828 9.82913 9.44411 9.86413ZM4.61996 4.60825H3.70413C3.4708 4.60825 3.28413 4.42158 3.28413 4.18825C3.28413 3.95492 3.4708 3.76825 3.70413 3.76825H4.61996C4.8533 3.76825 5.03996 3.95492 5.03996 4.18825C5.03996 4.42158 4.8533 4.60825 4.61996 4.60825Z" fill="#54575B"></path></svg> */}
-                                                {/* <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-[14px] fill-[#54575B]"><path fillRule="evenodd" clipRule="evenodd" d="M11.3399 7.0758C11.5966 7.1283 12.2208 7.3033 12.5883 7.8633V7.87497C12.7166 8.06747 12.6641 8.32997 12.4716 8.4583C12.3958 8.50497 12.3199 8.5283 12.2383 8.5283C12.1041 8.5283 11.9699 8.46413 11.8883 8.34163C11.7599 8.15497 11.5733 8.04997 11.4099 7.9858C11.4063 7.99565 11.4026 8.00576 11.3988 8.01602C11.3848 8.05437 11.37 8.09482 11.3516 8.13163C11.8883 8.45247 12.2441 9.0358 12.2441 9.68913C12.2441 10.6925 11.4274 11.515 10.4183 11.515C9.51995 11.515 8.77328 10.8616 8.62161 10.01H6.29995C6.14245 10.8616 5.40161 11.5091 4.50328 11.5091C3.60495 11.5091 2.86411 10.8616 2.70661 10.01H2.15828C1.92495 10.01 1.73828 9.8233 1.73828 9.58997V8.18997C1.73828 7.5658 1.99495 7.0058 2.40911 6.59747C2.30411 6.5333 2.20495 6.4633 2.12328 6.3758C1.87828 6.1133 1.74411 5.7633 1.74411 5.35497V4.0308C1.74411 3.63413 1.87828 3.27247 2.11745 3.00997C2.36828 2.74163 2.72995 2.58413 3.13245 2.58413H5.19745C5.59995 2.58413 5.96161 2.7358 6.21245 3.00413C6.45745 3.26663 6.59161 3.61663 6.59161 4.02497V5.34913C6.59745 5.80413 6.42828 6.1833 6.14828 6.43997C6.26495 6.55663 6.36995 6.69663 6.45161 6.85413L6.81911 7.6008C6.89495 7.7583 7.05828 7.85747 7.23328 7.85747H7.76995C7.90995 7.85747 8.02661 7.74663 8.03245 7.60663L7.99745 5.1858C7.99161 4.85913 8.11995 4.54997 8.34745 4.31663C8.56328 4.09497 8.84911 3.97247 9.15245 3.95497L8.95995 3.48247C8.93661 3.42413 8.81995 3.3483 8.75578 3.3483H7.56578C7.33245 3.3483 7.14578 3.16163 7.14578 2.9283C7.14578 2.69497 7.33245 2.5083 7.56578 2.5083H8.75578C9.15828 2.5083 9.58412 2.79413 9.73578 3.16747L10.1616 4.2058C10.1674 4.21163 10.1733 4.22913 10.1733 4.22913L10.1908 4.26413C10.4183 3.97247 10.7333 3.75663 11.0716 3.6808C11.2174 3.65163 11.3574 3.69247 11.4624 3.79163C12.1099 4.42747 12.2966 5.2208 11.9874 6.0783C11.9349 6.21247 11.8241 6.31163 11.6841 6.34663C11.5733 6.36997 11.4566 6.38163 11.3399 6.38163C11.2408 6.38163 11.1416 6.36413 11.0424 6.34663L11.3399 7.0758ZM11.0424 4.5908C10.9666 4.6433 10.8966 4.70747 10.8383 4.7833C10.7391 4.91747 10.6924 5.0633 10.7216 5.17997C10.7566 5.33163 10.9024 5.41913 10.9841 5.45997C11.0716 5.5008 11.1649 5.52413 11.2583 5.5358C11.3283 5.1858 11.2583 4.87663 11.0424 4.5908ZM3.12661 3.41247C2.95161 3.41247 2.81745 3.46497 2.72411 3.56413C2.62495 3.66913 2.57828 3.82663 2.57828 4.0133V5.33747C2.57828 5.52413 2.63078 5.68163 2.72995 5.78663C2.82328 5.8858 2.95745 5.9383 3.13245 5.9383H5.19745C5.69911 5.93247 5.74578 5.51247 5.74578 5.33163V4.00747C5.74578 3.8208 5.69328 3.6633 5.59411 3.5583C5.50078 3.45913 5.37828 3.41247 5.19161 3.41247H3.12661ZM3.97245 6.7783C3.19661 6.7783 2.57245 7.4083 2.57245 8.1783H2.57828V9.1583H8.95411C8.98911 9.1583 9.02995 9.14663 9.05911 9.11747L10.5816 7.74663C10.6341 7.69997 10.6458 7.62997 10.6224 7.5658L9.48495 4.7833H9.20495C9.10578 4.7833 9.01245 4.82413 8.94245 4.89413C8.87245 4.96997 8.83745 5.0633 8.83745 5.16247L8.87245 7.61247C8.83745 8.22497 8.35328 8.67997 7.76995 8.67997H7.23328C6.73745 8.67997 6.28828 8.4058 6.06661 7.95663L5.69911 7.20997C5.56495 6.94163 5.30245 6.7783 5.00495 6.7783H3.97245ZM3.56995 9.9983C3.70995 10.3833 4.07161 10.6575 4.49745 10.6575C4.92911 10.6575 5.29078 10.3833 5.42495 9.9983H3.56995ZM9.44411 9.86413C9.53745 10.3191 9.93411 10.6575 10.4124 10.6575L10.4183 10.6458C10.9666 10.6458 11.4099 10.2025 11.4099 9.65997C11.4099 9.23997 11.1358 8.86663 10.7449 8.73247L10.4183 9.02413L10.7391 9.39747C10.8908 9.5783 10.8674 9.8408 10.6924 9.99247C10.6108 10.0566 10.5174 10.0916 10.4183 10.0916C10.2958 10.0916 10.1791 10.045 10.0974 9.9458L9.78828 9.58997L9.63078 9.7358C9.57245 9.7883 9.50828 9.82913 9.44411 9.86413ZM4.61996 4.60825H3.70413C3.4708 4.60825 3.28413 4.42158 3.28413 4.18825C3.28413 3.95492 3.4708 3.76825 3.70413 3.76825H4.61996C4.8533 3.76825 5.03996 3.95492 5.03996 4.18825C5.03996 4.42158 4.8533 4.60825 4.61996 4.60825Z" fill="green"></path></svg> */}
-                                                <img src="/images/checkout/motor-peyk.svg" alt="پیک" style={{
-                                                    height: '1rem', width: '1',
-                                                }} />
-                                                <div
-                                                    style={{
-                                                        // flex: "1 0 auto", 
-                                                        flexGrow: 1,
-                                                        flexShrink: 0,
-                                                        flexBasis: 'auto',
-                                                        display: "flex",
-                                                        flexDirection: 'row',
-                                                        justifyContent: 'flex-end',
-                                                        // borderWidth: 1,
-                                                        // borderStyle: 'dashed',
-                                                        // borderColor: 'green',
-                                                        marginRight: '5px', ////zare_nk_050331_added
-                                                    }}
-                                                >
-                                                    <span //className="mablagh" 
-                                                        style={{
-                                                            lineHeight: '1rem',
-                                                            fontSize: '0.75rem',
-                                                            fontFamily: "IRANSansWeb(FaNum)_Medium",
-                                                            color: '#703bed',   ////zare_nk_050316_added
-                                                        }}>
-                                                        ارسال رایگان با پرداخت آنلاین
-                                                    </span>
-                                                </div>
-
-                                            </div>
-
-                                            {/* <span style={{
-                                                            color: '#878b92',
-                                                            // fontSize: '.75rem',  ////zare_nk_050331_commented
-                                                            fontSize: '.70rem',  ////zare_nk_050331_added
-                                                            lineHeight: '18px',
-                                                        }}>
-                                                            تا 50 دقیقه
-                                                        </span> */}
-                                        </div>
-
-                                    </div>
-                                    {/* zare_nk_050421_alaaaaaaaan_end */}
-
-                                </div>
-                            </div>
-
-                            <button type="button"
-                                // onClick={() => { radionClickedFunc(1) }}
-                                role="radio"
-                                aria-checked="true"
-                                data-state="checked"
-                                value="distance"
-                                className="peer aspect-square rounded-full border border-solid border-gray text-foreground ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 disabled:cursor-not-allowed disabled:!border-gray-200 disabled:text-gray-200 size-5"
-                                id="distance" tabIndex={0} data-radix-collection-item=""
-                                style={{ borderRadius: '9999px', border: '1px solid #878b92', height: '1.25rem', width: '1.25rem', padding: '0px', backgroundColor: 'transparent', }}>
-                                {radionClicked == 2 &&
-                                    <span id="spanInDistance" data-state="checked" className="flex size-full items-center justify-center"
-                                        style={{
-                                            display: 'flex',
-                                            width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center',
-                                        }}>
-                                        <div className="size-3/4 rounded-full bg-current"
-                                            style={{ height: '75%', width: '75%', borderRadius: '9999px', backgroundColor: '#059666', }}>
-                                        </div>
-                                    </span>}
-                            </button>
-                        </div>
-
-
-
-
-
-
-
-                        <div
-                            onClick={() => { radionClickedFunc(3) }}
-                            // key={item.IdAdress}   ////zare_nk_050319_added
-                            // // onClick={() => {
-                            // //   setRowItem(item);
-                            // //   chosenAddress(item);
-                            // // }}
-                            style={{
-                                borderTop: '1px solid #2b364f14',
-                                display: 'flex',
-                                paddingBottom: '.75rem',
-                                paddingTop: '.75rem',
-                                gap: '.5rem',
-                                justifyContent: 'space-between',
-                                cursor: 'pointer',
-                                height: 'min-content',
-                                alignItems: 'center',
-                            }}>
-                            <div
-                                //   onClick={() => {
-                                //     setRowItem(item);
-                                //     chosenAddress(item);
-                                //   }}
-                                style={{
-                                    // borderTop: '1px solid #2b364f14',
-                                    display: 'flex',
-                                    flex: '1 1 0%',
-                                    // paddingBottom: '.75rem',
-                                    // paddingTop: '.75rem',
-                                    gap: '.5rem',
-                                    justifyContent: 'space-between',
-                                    // cursor: 'pointer',  ////zare_nk_050421_commented
-                                    height: 'min-content',
-                                    alignItems: 'center',
-                                    // border:'2px dashed red'
-                                }}>
-                                <button
-                                    id="locationBtnInEveryAddressRow"   //zare_nk_050208_nokteh(in dokmeh engar karbordi nadare va faghat ye design hast! badan shayad tabdilesh konam be ye tage div)
-                                    style={{
-                                        backgroundColor: 'inherit',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1) 
-                                        fill: 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
-                                        borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
-                                        flex: '0 0 auto',
-                                    }}
-                                >
-                                    {/* <svg style={{ width: '18px', height: '18px' }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-[18px] w-[18px] fill-inherit"><g id="Location"><path id="Union" d="M11.99 2C7.34 2 3.5 5.72 3.5 10.32C3.5 12.64 4.34 14.79 5.73 16.61C7.25 18.62 9.13 20.37 11.27 21.75C11.8 22.09 12.24 22.07 12.73 21.75C14.85 20.37 16.74 18.62 18.27 16.61C19.66 14.79 20.5 12.63 20.5 10.32C20.5 5.72 16.66 2 11.99 2ZM11.99 13.33C10.45 13.33 9.19 12.12 9.19 10.58C9.19 9.04 10.45 7.78 11.99 7.78C13.53 7.78 14.8 9.05 14.8 10.58C14.8 12.11 13.53 13.33 11.99 13.33Z" fill="inherit"></path></g></svg> */}
-                                    {/* /images/checkout/ravesh-online.svg */}
-                                    <img src="/images/checkout/ravesh-online.svg" alt="پرداخت آنلاین" style={{
-                                        // height: '1.25rem', width: '1.25rem',
-                                    }} />
-                                </button>
-
-                                <div style={{
-                                    paddingTop: '.5rem',
-                                    display: 'flex',
-                                    justifyContent: 'flex-start',
-                                    alignItems: 'flex-start',
-                                    flexFlow: 'column',
-                                    flex: '1 1 0%',
-                                    height: 'min-content',
-                                    marginLeft: '.5rem',
-                                }}>
-                                    <span
-                                        style={{
-                                            ...(radionClicked == 3 ? { color: '#059666' } : { color: '#1b1c1d' }),
-                                            fontWeight: '500',
-                                            fontSize: '.875rem',
-                                            lineHeight: '1.25rem',
-                                        }}
-                                    >
-                                        اوزون
-                                        {/* {item.OnvanAdress ? item.OnvanAdress : 'خونه'} */}
-                                    </span>
-
-                                    {/* zare_nk_050421_alaaaaaaaan_st */}
-                                    <div style={{
-                                        display: 'flex', flexFlow: 'row', width: '100%', marginBottom: '2px',
-                                    }}>
-                                        <div style={{
-                                            display: 'flex', flexFlow: 'row', width: '100%', justifyContent: 'space-between',
-                                            // marginTop: '8px',
-                                        }}>
-                                            <div style={{
-                                                display: 'flex', flexFlow: 'row', gap: '.5rem', alignItems: 'center',
-                                            }}>
-                                                {/* <span
-                                                                style={{
-                                                                    color: '#878b92',
-                                                                    fontSize: '.75rem',
-
-                                                                }}
-                                                            > 
-                                                                ارسال:
-                                                            </span> */}
-                                                {/* <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-[14px] fill-[#54575B]"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.3399 7.0758C11.5966 7.1283 12.2208 7.3033 12.5883 7.8633V7.87497C12.7166 8.06747 12.6641 8.32997 12.4716 8.4583C12.3958 8.50497 12.3199 8.5283 12.2383 8.5283C12.1041 8.5283 11.9699 8.46413 11.8883 8.34163C11.7599 8.15497 11.5733 8.04997 11.4099 7.9858C11.4063 7.99565 11.4026 8.00576 11.3988 8.01602C11.3848 8.05437 11.37 8.09482 11.3516 8.13163C11.8883 8.45247 12.2441 9.0358 12.2441 9.68913C12.2441 10.6925 11.4274 11.515 10.4183 11.515C9.51995 11.515 8.77328 10.8616 8.62161 10.01H6.29995C6.14245 10.8616 5.40161 11.5091 4.50328 11.5091C3.60495 11.5091 2.86411 10.8616 2.70661 10.01H2.15828C1.92495 10.01 1.73828 9.8233 1.73828 9.58997V8.18997C1.73828 7.5658 1.99495 7.0058 2.40911 6.59747C2.30411 6.5333 2.20495 6.4633 2.12328 6.3758C1.87828 6.1133 1.74411 5.7633 1.74411 5.35497V4.0308C1.74411 3.63413 1.87828 3.27247 2.11745 3.00997C2.36828 2.74163 2.72995 2.58413 3.13245 2.58413H5.19745C5.59995 2.58413 5.96161 2.7358 6.21245 3.00413C6.45745 3.26663 6.59161 3.61663 6.59161 4.02497V5.34913C6.59745 5.80413 6.42828 6.1833 6.14828 6.43997C6.26495 6.55663 6.36995 6.69663 6.45161 6.85413L6.81911 7.6008C6.89495 7.7583 7.05828 7.85747 7.23328 7.85747H7.76995C7.90995 7.85747 8.02661 7.74663 8.03245 7.60663L7.99745 5.1858C7.99161 4.85913 8.11995 4.54997 8.34745 4.31663C8.56328 4.09497 8.84911 3.97247 9.15245 3.95497L8.95995 3.48247C8.93661 3.42413 8.81995 3.3483 8.75578 3.3483H7.56578C7.33245 3.3483 7.14578 3.16163 7.14578 2.9283C7.14578 2.69497 7.33245 2.5083 7.56578 2.5083H8.75578C9.15828 2.5083 9.58412 2.79413 9.73578 3.16747L10.1616 4.2058C10.1674 4.21163 10.1733 4.22913 10.1733 4.22913L10.1908 4.26413C10.4183 3.97247 10.7333 3.75663 11.0716 3.6808C11.2174 3.65163 11.3574 3.69247 11.4624 3.79163C12.1099 4.42747 12.2966 5.2208 11.9874 6.0783C11.9349 6.21247 11.8241 6.31163 11.6841 6.34663C11.5733 6.36997 11.4566 6.38163 11.3399 6.38163C11.2408 6.38163 11.1416 6.36413 11.0424 6.34663L11.3399 7.0758ZM11.0424 4.5908C10.9666 4.6433 10.8966 4.70747 10.8383 4.7833C10.7391 4.91747 10.6924 5.0633 10.7216 5.17997C10.7566 5.33163 10.9024 5.41913 10.9841 5.45997C11.0716 5.5008 11.1649 5.52413 11.2583 5.5358C11.3283 5.1858 11.2583 4.87663 11.0424 4.5908ZM3.12661 3.41247C2.95161 3.41247 2.81745 3.46497 2.72411 3.56413C2.62495 3.66913 2.57828 3.82663 2.57828 4.0133V5.33747C2.57828 5.52413 2.63078 5.68163 2.72995 5.78663C2.82328 5.8858 2.95745 5.9383 3.13245 5.9383H5.19745C5.69911 5.93247 5.74578 5.51247 5.74578 5.33163V4.00747C5.74578 3.8208 5.69328 3.6633 5.59411 3.5583C5.50078 3.45913 5.37828 3.41247 5.19161 3.41247H3.12661ZM3.97245 6.7783C3.19661 6.7783 2.57245 7.4083 2.57245 8.1783H2.57828V9.1583H8.95411C8.98911 9.1583 9.02995 9.14663 9.05911 9.11747L10.5816 7.74663C10.6341 7.69997 10.6458 7.62997 10.6224 7.5658L9.48495 4.7833H9.20495C9.10578 4.7833 9.01245 4.82413 8.94245 4.89413C8.87245 4.96997 8.83745 5.0633 8.83745 5.16247L8.87245 7.61247C8.83745 8.22497 8.35328 8.67997 7.76995 8.67997H7.23328C6.73745 8.67997 6.28828 8.4058 6.06661 7.95663L5.69911 7.20997C5.56495 6.94163 5.30245 6.7783 5.00495 6.7783H3.97245ZM3.56995 9.9983C3.70995 10.3833 4.07161 10.6575 4.49745 10.6575C4.92911 10.6575 5.29078 10.3833 5.42495 9.9983H3.56995ZM9.44411 9.86413C9.53745 10.3191 9.93411 10.6575 10.4124 10.6575L10.4183 10.6458C10.9666 10.6458 11.4099 10.2025 11.4099 9.65997C11.4099 9.23997 11.1358 8.86663 10.7449 8.73247L10.4183 9.02413L10.7391 9.39747C10.8908 9.5783 10.8674 9.8408 10.6924 9.99247C10.6108 10.0566 10.5174 10.0916 10.4183 10.0916C10.2958 10.0916 10.1791 10.045 10.0974 9.9458L9.78828 9.58997L9.63078 9.7358C9.57245 9.7883 9.50828 9.82913 9.44411 9.86413ZM4.61996 4.60825H3.70413C3.4708 4.60825 3.28413 4.42158 3.28413 4.18825C3.28413 3.95492 3.4708 3.76825 3.70413 3.76825H4.61996C4.8533 3.76825 5.03996 3.95492 5.03996 4.18825C5.03996 4.42158 4.8533 4.60825 4.61996 4.60825Z" fill="#54575B"></path></svg> */}
-                                                {/* <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-[14px] fill-[#54575B]"><path fillRule="evenodd" clipRule="evenodd" d="M11.3399 7.0758C11.5966 7.1283 12.2208 7.3033 12.5883 7.8633V7.87497C12.7166 8.06747 12.6641 8.32997 12.4716 8.4583C12.3958 8.50497 12.3199 8.5283 12.2383 8.5283C12.1041 8.5283 11.9699 8.46413 11.8883 8.34163C11.7599 8.15497 11.5733 8.04997 11.4099 7.9858C11.4063 7.99565 11.4026 8.00576 11.3988 8.01602C11.3848 8.05437 11.37 8.09482 11.3516 8.13163C11.8883 8.45247 12.2441 9.0358 12.2441 9.68913C12.2441 10.6925 11.4274 11.515 10.4183 11.515C9.51995 11.515 8.77328 10.8616 8.62161 10.01H6.29995C6.14245 10.8616 5.40161 11.5091 4.50328 11.5091C3.60495 11.5091 2.86411 10.8616 2.70661 10.01H2.15828C1.92495 10.01 1.73828 9.8233 1.73828 9.58997V8.18997C1.73828 7.5658 1.99495 7.0058 2.40911 6.59747C2.30411 6.5333 2.20495 6.4633 2.12328 6.3758C1.87828 6.1133 1.74411 5.7633 1.74411 5.35497V4.0308C1.74411 3.63413 1.87828 3.27247 2.11745 3.00997C2.36828 2.74163 2.72995 2.58413 3.13245 2.58413H5.19745C5.59995 2.58413 5.96161 2.7358 6.21245 3.00413C6.45745 3.26663 6.59161 3.61663 6.59161 4.02497V5.34913C6.59745 5.80413 6.42828 6.1833 6.14828 6.43997C6.26495 6.55663 6.36995 6.69663 6.45161 6.85413L6.81911 7.6008C6.89495 7.7583 7.05828 7.85747 7.23328 7.85747H7.76995C7.90995 7.85747 8.02661 7.74663 8.03245 7.60663L7.99745 5.1858C7.99161 4.85913 8.11995 4.54997 8.34745 4.31663C8.56328 4.09497 8.84911 3.97247 9.15245 3.95497L8.95995 3.48247C8.93661 3.42413 8.81995 3.3483 8.75578 3.3483H7.56578C7.33245 3.3483 7.14578 3.16163 7.14578 2.9283C7.14578 2.69497 7.33245 2.5083 7.56578 2.5083H8.75578C9.15828 2.5083 9.58412 2.79413 9.73578 3.16747L10.1616 4.2058C10.1674 4.21163 10.1733 4.22913 10.1733 4.22913L10.1908 4.26413C10.4183 3.97247 10.7333 3.75663 11.0716 3.6808C11.2174 3.65163 11.3574 3.69247 11.4624 3.79163C12.1099 4.42747 12.2966 5.2208 11.9874 6.0783C11.9349 6.21247 11.8241 6.31163 11.6841 6.34663C11.5733 6.36997 11.4566 6.38163 11.3399 6.38163C11.2408 6.38163 11.1416 6.36413 11.0424 6.34663L11.3399 7.0758ZM11.0424 4.5908C10.9666 4.6433 10.8966 4.70747 10.8383 4.7833C10.7391 4.91747 10.6924 5.0633 10.7216 5.17997C10.7566 5.33163 10.9024 5.41913 10.9841 5.45997C11.0716 5.5008 11.1649 5.52413 11.2583 5.5358C11.3283 5.1858 11.2583 4.87663 11.0424 4.5908ZM3.12661 3.41247C2.95161 3.41247 2.81745 3.46497 2.72411 3.56413C2.62495 3.66913 2.57828 3.82663 2.57828 4.0133V5.33747C2.57828 5.52413 2.63078 5.68163 2.72995 5.78663C2.82328 5.8858 2.95745 5.9383 3.13245 5.9383H5.19745C5.69911 5.93247 5.74578 5.51247 5.74578 5.33163V4.00747C5.74578 3.8208 5.69328 3.6633 5.59411 3.5583C5.50078 3.45913 5.37828 3.41247 5.19161 3.41247H3.12661ZM3.97245 6.7783C3.19661 6.7783 2.57245 7.4083 2.57245 8.1783H2.57828V9.1583H8.95411C8.98911 9.1583 9.02995 9.14663 9.05911 9.11747L10.5816 7.74663C10.6341 7.69997 10.6458 7.62997 10.6224 7.5658L9.48495 4.7833H9.20495C9.10578 4.7833 9.01245 4.82413 8.94245 4.89413C8.87245 4.96997 8.83745 5.0633 8.83745 5.16247L8.87245 7.61247C8.83745 8.22497 8.35328 8.67997 7.76995 8.67997H7.23328C6.73745 8.67997 6.28828 8.4058 6.06661 7.95663L5.69911 7.20997C5.56495 6.94163 5.30245 6.7783 5.00495 6.7783H3.97245ZM3.56995 9.9983C3.70995 10.3833 4.07161 10.6575 4.49745 10.6575C4.92911 10.6575 5.29078 10.3833 5.42495 9.9983H3.56995ZM9.44411 9.86413C9.53745 10.3191 9.93411 10.6575 10.4124 10.6575L10.4183 10.6458C10.9666 10.6458 11.4099 10.2025 11.4099 9.65997C11.4099 9.23997 11.1358 8.86663 10.7449 8.73247L10.4183 9.02413L10.7391 9.39747C10.8908 9.5783 10.8674 9.8408 10.6924 9.99247C10.6108 10.0566 10.5174 10.0916 10.4183 10.0916C10.2958 10.0916 10.1791 10.045 10.0974 9.9458L9.78828 9.58997L9.63078 9.7358C9.57245 9.7883 9.50828 9.82913 9.44411 9.86413ZM4.61996 4.60825H3.70413C3.4708 4.60825 3.28413 4.42158 3.28413 4.18825C3.28413 3.95492 3.4708 3.76825 3.70413 3.76825H4.61996C4.8533 3.76825 5.03996 3.95492 5.03996 4.18825C5.03996 4.42158 4.8533 4.60825 4.61996 4.60825Z" fill="green"></path></svg> */}
-                                                <img src="/images/checkout/motor-peyk.svg" alt="پیک" style={{
-                                                    height: '1rem', width: '1',
-                                                }} />
-                                                <div
-                                                    style={{
-                                                        // flex: "1 0 auto", 
-                                                        flexGrow: 1,
-                                                        flexShrink: 0,
-                                                        flexBasis: 'auto',
-                                                        display: "flex",
-                                                        flexDirection: 'row',
-                                                        justifyContent: 'flex-end',
-                                                        // borderWidth: 1,
-                                                        // borderStyle: 'dashed',
-                                                        // borderColor: 'green',
-                                                        marginRight: '5px', ////zare_nk_050331_added
-                                                    }}
-                                                >
-                                                    <span //className="mablagh" 
-                                                        style={{
-                                                            lineHeight: '1rem',
-                                                            fontSize: '0.75rem',
-                                                            fontFamily: "IRANSansWeb(FaNum)_Medium",
-                                                            color: '#703bed',   ////zare_nk_050316_added
-                                                        }}>
-                                                        ارسال رایگان با پرداخت آنلاین
-                                                    </span>
-                                                </div>
-
-                                            </div>
-
-                                            {/* <span style={{
-                                                            color: '#878b92',
-                                                            // fontSize: '.75rem',  ////zare_nk_050331_commented
-                                                            fontSize: '.70rem',  ////zare_nk_050331_added
-                                                            lineHeight: '18px',
-                                                        }}>
-                                                            تا 50 دقیقه
-                                                        </span> */}
-                                        </div>
-
-                                    </div>
-                                    {/* zare_nk_050421_alaaaaaaaan_end */}
-
-                                </div>
-                            </div>
-
-                            <button type="button"
-                                // onClick={() => { radionClickedFunc(1) }}
-                                role="radio"
-                                aria-checked="true"
-                                data-state="checked"
-                                value="distance"
-                                className="peer aspect-square rounded-full border border-solid border-gray text-foreground ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 disabled:cursor-not-allowed disabled:!border-gray-200 disabled:text-gray-200 size-5"
-                                id="distance" tabIndex={0} data-radix-collection-item=""
-                                style={{ borderRadius: '9999px', border: '1px solid #878b92', height: '1.25rem', width: '1.25rem', padding: '0px', backgroundColor: 'transparent', }}>
-                                {radionClicked == 3 &&
-                                    <span id="spanInDistance" data-state="checked" className="flex size-full items-center justify-center"
-                                        style={{
-                                            display: 'flex',
-                                            width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center',
-                                        }}>
-                                        <div className="size-3/4 rounded-full bg-current"
-                                            style={{ height: '75%', width: '75%', borderRadius: '9999px', backgroundColor: '#059666', }}>
-                                        </div>
-                                    </span>}
-                            </button>
-                        </div>
-
-
-
-
-
-
-
-
-
-                        <div
-                            onClick={() => { radionClickedFunc(4) }}
-                            // key={item.IdAdress}   ////zare_nk_050319_added
-                            // // onClick={() => {
-                            // //   setRowItem(item);
-                            // //   chosenAddress(item);
-                            // // }}
-                            style={{
-                                borderTop: '1px solid #2b364f14',
-                                display: 'flex',
-                                paddingBottom: '.75rem',
-                                paddingTop: '.75rem',
-                                gap: '.5rem',
-                                justifyContent: 'space-between',
-                                cursor: 'pointer',
-                                height: 'min-content',
-                                alignItems: 'center',
-                            }}>
-                            <div
-                                //   onClick={() => {
-                                //     setRowItem(item);
-                                //     chosenAddress(item);
-                                //   }}
-                                style={{
-                                    // borderTop: '1px solid #2b364f14',
-                                    display: 'flex',
-                                    flex: '1 1 0%',
-                                    // paddingBottom: '.75rem',
-                                    // paddingTop: '.75rem',
-                                    gap: '.5rem',
-                                    justifyContent: 'space-between',
-                                    // cursor: 'pointer',  ////zare_nk_050421_commented
-                                    height: 'min-content',
-                                    alignItems: 'center',
-                                    // border:'2px dashed red'
-                                }}>
-                                <button id="locationBtnInEveryAddressRow" style={{
-                                    backgroundColor: 'inherit',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1) 
-                                    fill: 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
-                                    borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
-                                    flex: '0 0 auto',
-                                }} >
-                                    <img src="/images/checkout/ravesh-online.svg" alt="پرداخت آنلاین" style={{
-                                        // height: '1.25rem', width: '1.25rem',
-                                    }} />
-                                </button>
-
-                                <div style={{
-                                    paddingTop: '.5rem',
-                                    display: 'flex',
-                                    justifyContent: 'flex-start',
-                                    alignItems: 'flex-start',
-                                    flexFlow: 'column',
-                                    flex: '1 1 0%',
-                                    height: 'min-content',
-                                    marginLeft: '.5rem',
-                                }}>
-                                    <span
-                                        style={{
-                                            ...(radionClicked == 4 ? { color: '#059666' } : { color: '#1b1c1d' }),
-
-                                            fontWeight: '500',
-                                            fontSize: '.875rem',
-                                            lineHeight: '1.25rem',
-                                        }}
-                                    >
-                                        دیجی‌پی
-                                        {/* {item.OnvanAdress ? item.OnvanAdress : 'خونه'} */}
-                                    </span>
-
-                                    {/* zare_nk_050421_alaaaaaaaan_st */}
-                                    <div style={{
-                                        display: 'flex', flexFlow: 'row', width: '100%', marginBottom: '2px',
-                                    }}>
-                                        <div style={{
-                                            display: 'flex', flexFlow: 'row', width: '100%', justifyContent: 'space-between',
-                                            // marginTop: '8px',
-                                        }}>
-                                            <div style={{
-                                                display: 'flex', flexFlow: 'row', gap: '.5rem', alignItems: 'center',
-                                            }}>
-                                                <img src="/images/checkout/motor-peyk.svg" alt="پیک" style={{
-                                                    height: '1rem', width: '1',
-                                                }} />
-                                                <div
-                                                    style={{
-                                                        // flex: "1 0 auto", 
-                                                        flexGrow: 1,
-                                                        flexShrink: 0,
-                                                        flexBasis: 'auto',
-                                                        display: "flex",
-                                                        flexDirection: 'row',
-                                                        justifyContent: 'flex-end',
-                                                        // borderWidth: 1,
-                                                        // borderStyle: 'dashed',
-                                                        // borderColor: 'green',
-                                                        marginRight: '5px', ////zare_nk_050331_added
-                                                    }}
-                                                >
-                                                    <span //className="mablagh" 
-                                                        style={{
-                                                            lineHeight: '1rem',
-                                                            fontSize: '0.75rem',
-                                                            fontFamily: "IRANSansWeb(FaNum)_Medium",
-                                                            color: '#703bed',   ////zare_nk_050316_added
-                                                        }}>
-                                                        ارسال رایگان با پرداخت آنلاین
+                                                    <span style={{
+                                                        lineHeight: '1rem',
+                                                        fontSize: '0.75rem',
+                                                        fontFamily: "IRANSansWeb(FaNum)_Medium",
+                                                        color: '#53565a',
+                                                    }}>
+                                                        تومان
                                                     </span>
                                                 </div>
                                             </div>
@@ -2043,32 +2152,240 @@ export default function Checkout() {
                                 </div>
                             </div>
 
-                            <button type="button"
-                                // onClick={() => { radionClickedFunc(1) }}
-                                role="radio"
-                                aria-checked="true"
-                                data-state="checked"
-                                value="distance"
-                                className="peer aspect-square rounded-full border border-solid border-gray text-foreground ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 disabled:cursor-not-allowed disabled:!border-gray-200 disabled:text-gray-200 size-5"
-                                id="distance" tabIndex={0} data-radix-collection-item=""
-                                style={{ borderRadius: '9999px', border: '1px solid #878b92', height: '1.25rem', width: '1.25rem', padding: '0px', backgroundColor: 'transparent', }}>
-                                {radionClicked == 4 &&
-                                    <span id="spanInDistance" data-state="checked" className="flex size-full items-center justify-center"
-                                        style={{
-                                            display: 'flex',
-                                            width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center',
-                                        }}>
-                                        <div className="size-3/4 rounded-full bg-current"
-                                            style={{ height: '75%', width: '75%', borderRadius: '9999px', backgroundColor: '#059666', }}>
-                                        </div>
-                                    </span>}
-                            </button>
-                        </div>
-                        {/* zare_nk_050421_added_end(raveshe pardakhti haaaaaaaaaaaaaaaaaa) */}
+                            <Switch
+                                // color="primary"
+                                // color="secondary"
+                                // color="warning"
+                                // color="error"
+                                // color="info"
+                                color="success"
+                                checked={switchBtnChecked}
+                                onChange={(event) => setSwitchBtnChecked(event.target.checked)}
+                                sx={{
+                                    width: 46,
+                                    height: 24,
+                                    padding: 0,
 
+                                    "& .MuiSwitch-switchBase": {
+                                        padding: "2px",
+                                        transitionDuration: "300ms",
+                                    },
+
+                                    "& .MuiSwitch-switchBase.Mui-checked": {
+                                        transform: "translateX(20px)",
+                                        color: "#fff",
+                                    },
+
+                                    "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
+                                        backgroundColor: "#4caf50",
+                                        opacity: 1,
+                                    },
+
+                                    "& .MuiSwitch-thumb": {
+                                        width: 20,
+                                        height: 20,
+                                        boxSizing: "border-box",
+                                    },
+
+                                    "& .MuiSwitch-track": {
+                                        borderRadius: 12,
+                                        backgroundColor: "#bdbdbd",
+                                        opacity: 1,
+                                    },
+                                }}
+                            />
+                        </div>
+                    </div>
+                </div>
+                {/* zare_nk_050423_added_end */}
+                <div className="-mx-4 my-4 h-3 bg-gray-50" style={{
+                    backgroundColor: '#f7f7f8', height: '.75rem', margin: '0rem -1rem', width: '450px',
+                }}></div>
+
+                <div className="flex flex-col gap-y-4 p-4" style={{
+                    display: 'flex', flexFlow: 'column', width: '100%', padding: '1rem 0rem',
+                }}>
+
+                    <div className="flex gap-x-2" style={{
+                        display: 'flex', flexFlow: 'row', columnGap: '.5rem',
+                    }}>
+                        <img src="/images/checkout/code-takhfif.svg" alt="کد تخفیف" style={{
+                            // height: '1.25rem', width: '1.25rem',
+                        }} />
+                        <span style={{
+                            lineHeight: '1.25rem', fontSize: '.875rem', color: '#1b1c1d',
+                            paddingTop: '2px',  ////zare_nk_050423_added
+                        }}>
+                            افزودن کد تخفیف
+                        </span>
+                    </div>
+                </div>
+
+                <div className="-mx-4 my-4 h-3 bg-gray-50" style={{
+                    backgroundColor: '#f7f7f8', height: '.75rem', margin: '0rem -1rem', width: '450px',
+                }}></div>
+
+                <div className="flex flex-col gap-y-4 p-4" style={{
+                    display: 'flex', flexFlow: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%', padding: '1rem 0rem', cursor: 'pointer',
+                }}>
+
+                    <div className="flex gap-x-2" style={{
+                        display: 'flex', flexFlow: 'row', columnGap: '.5rem',
+                    }}>
+                        <img src="/images/checkout/code-takhfif.svg" alt="کد تخفیف" style={{
+                            // height: '1.25rem', width: '1.25rem',
+                        }} />
+                        <span style={{
+                            lineHeight: '1.25rem', fontSize: '.875rem', color: '#1b1c1d',
+                            paddingTop: '3px',  ////zare_nk_050423_added
+                        }}>
+                            مشاهده اقلام
+                        </span>
+                    </div>
+                    <div style={{
+                        display: 'flex', flexFlow: 'row', justifyContent: 'center', alignItems: 'center',
+                    }}>
+                        <img src="/images/checkout/see-aghlam.svg" alt="کد تخفیف" style={{
+                            // height: '1.25rem', width: '1.25rem',
+                        }} />
+                    </div>
+                </div>
+
+                <div className="-mx-4 my-4 h-3 bg-gray-50" style={{
+                    backgroundColor: '#f7f7f8', height: '.75rem', margin: '0rem -1rem', width: '450px',
+                }}></div>
+
+                {/* zare_nk_050424_added_alan */}
+
+                <div className="flex flex-col gap-y-3 rounded-xl bg-gray-50 p-4 pb-6" style={{
+                    // paddingBottom: '1.5rem',  backgroundColor: '#f7f7f8', borderRadius: '.75rem',
+                    display: 'flex', width: '100%', flexDirection: 'column', padding: '1rem 0rem', rowGap: '1rem',
+                }}>
+                    <div style={{
+                        display: "flex", flexFlow: 'row', width: '100%', justifyContent: 'start', alignItems: 'center',
+                    }}>
+                        <span style={{ color: '#1b1c1d', }}>
+                            جزئیات پرداخت
+                        </span>
                     </div>
 
+                    <div style={{
+                        display: 'flex', width: '100%', flexDirection: 'column', rowGap: '.75rem',
+                    }}>
+                        <div style={{
+                            display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', //marginTop: '0.5rem',
+                        }}>
+                            <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                                <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#64686f', }}>جمع سفارش</span>
+                                <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#64686f', }}>(</span>
+                                <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#64686f', }}>4</span>
+                                <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#64686f', }}>)</span>
+                            </div>
+                            <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                                <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#313335', }}>{'4600000'.toLocaleString()}</span>
+                                <span style={{ fontSize: '0.625rem', color: '#313335', marginRight: '3px', }}>تومان</span>
+                            </div>
+                        </div>
+
+                        <div style={{
+                            display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', //marginTop: '0.5rem',
+                        }}>
+                            <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                                <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#64686f', }}>مجموع اقلام پس از تخفیف</span>
+                            </div>
+                            <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                                <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#313335', }}>{'4360000'.toLocaleString()}</span>
+                                <span style={{ fontSize: '0.625rem', color: '#313335', marginRight: '3px', }}>تومان</span>
+                            </div>
+                        </div>
+
+                        {/* <div style={{
+                            display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center', margin: '.75rem 0px', position: 'relative',
+                        }}>
+                            <div style={{
+                                width: '12px', height: '24px', backgroundColor: 'white', borderColor: '#e0e3e5', borderLeftWidth: '0px', borderWidth: '1px',
+                                borderBottomRightRadius: '9999px', borderTopRightRadius: '9999px', left: '-16px', position: 'absolute',
+                            }}>
+                            </div>
+
+                            <div style={{ borderColor: '#e0e3e5', borderStyle: 'dashed', borderWidth: '1px', width: '100%', }}>
+                            </div>
+
+                            <div style={{
+                                width: '12px', height: '24px', backgroundColor: 'white', borderColor: '#e0e3e5', borderRightWidth: '0px', borderWidth: '1px',
+                                borderBottomLeftRadius: '9999px', borderTopLeftRadius: '9999px', right: '-16px', position: 'absolute',
+                            }}>
+                            </div>
+                        </div> */}
+
+                        <button style={{
+                            display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.5rem',
+                            border: 'none', backgroundColor: 'inherit', cursor: 'pointer', padding: '0px',
+                        }}>
+                            <div style={{
+                                display: 'flex', flexFlow: 'row', alignItems: 'center', direction: 'rtl', color: '#313335',
+                                minWidth: '124px', maxWidth: '256px', gap: '0.25rem',
+                            }}>
+                                <span style={{ textAlign: 'right', color: '#059464', fontSize: '.875rem', lineHeight: '1.25rem', }}>سود شما از این خرید</span>
+                                <img src="/images/cartDetails/sood-kharid.svg" alt="ادرس ها" style={{ height: '1rem', width: '1rem', }} />
+                            </div>
+
+                            <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                                <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#059464', }}>{'4360000'.toLocaleString()}</span>
+                                <span style={{ fontSize: '0.625rem', color: '#059464', marginRight: '3px', }}>تومان</span>
+                            </div>
+                        </button>
+
+                        <div style={{
+                            display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', //marginTop: '0.5rem',
+                        }}>
+                            <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                                <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#64686F', }}>هزینه ارسال</span>
+                            </div>
+                            <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                                <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#313335', }}>{'37000'.toLocaleString()}</span>
+                                <span style={{ fontSize: '0.625rem', color: '#313335', marginRight: '3px', }}>تومان</span>
+                            </div>
+                        </div>
+
+                        <div style={{
+                            display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', //marginTop: '0.5rem', 
+                        }}>
+                            <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                                <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#64686F', }}>هزینه خدمات</span>
+                            </div>
+                            <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                                <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#313335', }}>رایگان</span>
+                                {/* <span style={{ fontSize: '0.625rem', color: '#313335', marginRight: '3px', }}>تومان</span> */}
+                            </div>
+                        </div>
+
+                        <div style={{
+                            display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', //marginTop: '0.5rem',
+                        }}>
+                            <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                                <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#64686F', }}>هزینه بسته‌بندی</span>
+                            </div>
+                            <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                                <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#313335', }}>{'5000'.toLocaleString()}</span>
+                                <span style={{ fontSize: '0.625rem', color: '#313335', marginRight: '3px', }}>تومان</span>
+                            </div>
+                        </div>
+
+                        <div style={{
+                            display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', //marginTop: '0.5rem',
+                        }}>
+                            <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                                <span style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#000000', }}>مبلغ قابل پرداخت</span>
+                            </div>
+                            <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', }}>
+                                <span style={{ fontSize: '1rem', lineHeight: '1.5rem', color: '#000000', }}>{'1678250'.toLocaleString()}</span>
+                                <span style={{ fontSize: '0.625rem', color: '#313335', marginRight: '3px', }}>تومان</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                {/* zare_nk_050424_added_alan */}
 
                 {/* zare_nk_050413_added_end(berim mohtavaye checkout) */}
             </main >
@@ -2083,51 +2400,33 @@ export default function Checkout() {
 
                     paddingBottom: '1.5rem', padding: '1rem',
                 }}>
-
-                    <button
-                        onClick={() => {
-                            // goToCartDetails(Number(vendorId), 67476);
-                        }} style={{
-                            color: 'white',
-                            fontSize: '1rem',
-                            lineHeight: '1.5rem', padding: '1rem', backgroundColor: '#ff5900', borderRadius: '.75rem',
-                            display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', height: '3.5rem', position: 'relative', cursor: 'pointer',
-                            direction: 'rtl', border: 'none',
-
-                            minWidth: '.25rem',
-                        }}>
-                        <div style={{ flexShrink: 0, gap: '.5rem', justifyContent: 'space-between', alignItems: 'center', display: 'flex', }}>
-                            {/* <span style={{
-                                color: '#ff5900', fontSize: '.75rem',
-                                lineHeight: '1rem', backgroundColor: 'white', borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', height: '1.25rem',
-                                width: '1.25rem', display: 'flex',
-
-                            }}>3</span> */}
+                    <button onClick={() => {
+                        // goToCartDetails(Number(vendorId), 67476);
+                    }} style={{
+                        color: 'white', fontSize: '1rem', lineHeight: '1.5rem', backgroundColor: '#ff5900', borderRadius: '.75rem',
+                        display: 'flex', justifyContent: 'end', alignItems: 'center', width: '100%', height: '3.5rem', position: 'relative',
+                        cursor: 'pointer', direction: 'rtl', border: 'none', minWidth: '.25rem', padding: '0rem',
+                    }}>
+                        <div
+                            // style={{ flexShrink: 0, gap: '.5rem', justifyContent: 'space-between', alignItems: 'center', display: 'flex', }}
+                            style={{
+                                display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', position: 'absolute',
+                            }}>
                             <span style={{ color: "white" }}>پرداخت</span>
                         </div>
 
                         <div style={{
-                            fontSize: '.875rem',
-                            lineHeight: '1.25rem',
-                            display: 'flex',
-                            flexFlow: 'row',
-                            alignItems: 'center',
-                            gap: '2px',
+                            fontSize: '.875rem', lineHeight: '1.25rem', display: 'flex', flexFlow: 'row', alignItems: 'center', gap: '2px', marginLeft: '1rem',
                         }}>
                             <span style={{
-                                color: 'white', fontSize: '.875rem',
-                                lineHeight: '1.25rem',
+                                color: 'white', fontSize: '.875rem', lineHeight: '1.25rem',
                             }}>
                                 {'612000'.toLocaleString()}
                             </span>
-
-                            <span style={{
-                                color: 'white', fontSize: '.625rem',
-                            }}>تومان</span>
-
+                            <span style={{ color: 'white', fontSize: '.625rem', }}>
+                                تومان
+                            </span>
                         </div>
-
-
                     </button>
                 </div>
             </footer>

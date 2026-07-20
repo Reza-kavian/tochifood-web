@@ -1,4 +1,4 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050428_okk(1)
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
@@ -37,7 +37,7 @@ function getCookie(name: any) {
 export default function ShallowRoutingExample() {
   const router = useRouter();
 
-  type sumValsForForooshSatrType = { 
+  type sumValsForForooshSatrType = {
     ShomarehFaktorForoosh: number;
     IdFaktorForoosh: number;
     TarikhSefaresh: string;
@@ -86,9 +86,7 @@ export default function ShallowRoutingExample() {
   // const [isShowFaktorForooshTitr, setIsShowFaktorForooshTitr] = useState<ShowFaktorType>(null);
   ////zare_nk_040410_added_end(and commented-lafze notNull ra yek no mishnase va maghadire digeye string ro ghabool nemikone,felan az in sabk estefadeh nakardam va hamoon string baram kafiteh)
   ////zare_nk_040410_added_st
-  const [isShowFaktorForooshTitr, setIsShowFaktorForooshTitr] = useState<
-    string | null
-  >(null);
+  const [isShowFaktorForooshTitr, setIsShowFaktorForooshTitr] = useState<string | null>(null);
   //zare_nk_040410_added_end
 
   type ShowForooshSatrHideForooshTitrType = {
@@ -134,9 +132,8 @@ export default function ShallowRoutingExample() {
       // const token = getCookie("token");  //zare_nk_041130_commented(ezafi hast va token balatar tarif shod)
       // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
       // var urlSelectFaktorForooshSatr = ApiUrl + "Api_SelectFaktorForooshSatr";
-      // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-      let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-      var urlSelectFaktorForooshSatr = ApiUrl + "Api_SelectForooshSatr";
+      // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+      var urlSelectFaktorForooshSatr = NextJsApiUrl + "Api_SelectForooshSatr";
       const response = await fetch(urlSelectFaktorForooshSatr, {
         method: "POST",
         headers: {
@@ -226,9 +223,8 @@ export default function ShallowRoutingExample() {
         // const token = getCookie("token"); //zare_nk_041130_commented(chon ezafiye va balatar tarif shode)
         // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
         // var urlSelectFaktorForooshTitr = ApiUrl + "Api_SelectFaktorForooshTitr";
-        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-        var urlSelectFaktorForooshTitr = ApiUrl + "Api_SelectForooshTitr";
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+        var urlSelectFaktorForooshTitr = NextJsApiUrl + "Api_SelectForooshTitr";
         const response = await fetch(urlSelectFaktorForooshTitr, {
           method: "POST",
           headers: {
@@ -304,8 +300,7 @@ export default function ShallowRoutingExample() {
         flexFlow: "column",
         width: "100%",
         direction: "rtl",
-      }}
-    >
+      }}>
       <div
         id="MyOrderDet"
         className="MyOrderDet"
@@ -316,8 +311,7 @@ export default function ShallowRoutingExample() {
           marginBottom: "40px",
           marginTop: "10px",
           direction: "rtl",
-        }}
-      >
+        }}>
         {/* Header */}
         <div
           style={{
@@ -334,8 +328,7 @@ export default function ShallowRoutingExample() {
               display: "flex",
               flexFlow: "row",
               alignItems: "center",
-            }}
-          >
+            }}>
             <h6 style={{ marginLeft: 10, fontSize: 18 }}>جزئیات سفارش</h6>
             {ForooshSatrHideForooshTitr != null && (
               <span>{ForooshSatrHideForooshTitr.IdFaktorForoosh}</span>
@@ -346,12 +339,8 @@ export default function ShallowRoutingExample() {
               display: "flex",
               flexFlow: "row",
               justifyContent: "start",
-            }}
-          >
-            <a
-              className="buttonHover titleStyle"
-              href="#"
-              onClick={onBackClick}
+            }}>
+            <a className="buttonHover titleStyle" href="#" onClick={onBackClick}
               style={{
                 padding: 10,
                 borderRadius: 7,
@@ -359,8 +348,7 @@ export default function ShallowRoutingExample() {
                 flexFlow: "row",
                 textDecoration: "none",
                 backgroundColor: "inherit",
-              }}
-            >
+              }}>
               <div
                 style={{
                   display: "flex",

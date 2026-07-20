@@ -1,4 +1,4 @@
-// src\app\api\auth\google  ////zare_nk_050411_okk(1)
+// src\app\api\auth\google  ////zare_nk_050428_okk(1)
 import { NextResponse } from "next/server";
 import { google } from "googleapis";
 import { cookies } from "next/headers";

@@ -1,4 +1,4 @@
-// ////zare_nk_050423_okk(2)
+// ////zare_nk_050428_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -1195,7 +1195,7 @@ export default function CartDetails() {
                                 else if (item.Tedad == item.ZaribForoosh) {
                                     ForCartContentsDesignTypeLet = 1;
                                 }
-                                console.log()
+                                
                                 return ({
                                     IdSabadKharidSatr: item.IdSabadKharidSatr,
                                     IdSabadKharidTitr: item.IdSabadKharidTitr,
@@ -1858,8 +1858,7 @@ export default function CartDetails() {
                 alignItems: 'center',
                 zIndex: 30,
             }}>
-                <div
-                    style={{
+                <div style={{
                         display: 'flex',
                         flexFlow: 'row-reverse',
                         justifyContent: 'space-between',
@@ -1871,9 +1870,7 @@ export default function CartDetails() {
                         height: '3.5rem',
                         position: 'relative',
                     }}>
-                    <button
-                        id="goBackBtn"
-                        onClick={() => router.back()}
+                    <button id="goBackBtn" onClick={() => router.back()}
                         style={{
                             display: 'flex',
                             justifyContent: 'center',
@@ -1909,8 +1906,7 @@ export default function CartDetails() {
                 </div>
             </header >
 
-            <main
-                style={{
+            <main style={{
                     backgroundColor: 'white',
                     // height: '100dvh',   ////zare_nk_050317_commented(A001-ba A002 tadakhol dareh)
                     width: '100%',
@@ -2032,7 +2028,6 @@ export default function CartDetails() {
                             flexDirection: 'column',
                             gap: '.25rem',
                             flex: '1 1 0%',
-
                         }}>
                             <div style={{
                                 fontSize: '.875rem',
@@ -2076,8 +2071,7 @@ export default function CartDetails() {
                             </div>
                         </div>
 
-                        <Link
-                            href={`/vendor/${vendorId}`}
+                        <Link href={`/vendor/${vendorId}`}
                             style={{
                                 display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#eef0f1', color: '#1b1c1d', fontSize: '.75rem', lineHeight: '1rem', paddingBottom: '.5rem',
                                 paddingTop: '.5rem', paddingLeft: '10px', paddingRight: '10px', borderRadius: '.75rem', minWidth: '.25rem', height: '2rem', textDecoration: 'none',
@@ -2087,8 +2081,6 @@ export default function CartDetails() {
                                 style={{ width: '1rem', height: '1rem', borderRadius: '.5rem', }}
                             />
                         </Link>
-
-
                     </div>
 
                     <div style={{ color: '#878b92', paddingTop: '1.25rem', paddingBottom: '1rem', }}>اقلام سفارش</div>
@@ -2538,23 +2530,19 @@ export default function CartDetails() {
                         </div>
                     </div>
 
-                    <div //class="relative flex w-full items-center justify-center my-3"
-                        style={{
+                    <div style={{
                             display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center', margin: '.75rem 0px', position: 'relative',
                         }}>
-                        <div //class="absolute border left-[-16px] rounded-r-full border-l-0 border-gray-200 bg-white" 
-                            style={{
+                        <div style={{
                                 width: '12px', height: '24px', backgroundColor: 'white', borderColor: '#e0e3e5', borderLeftWidth: '0px', borderWidth: '1px',
                                 borderBottomRightRadius: '9999px', borderTopRightRadius: '9999px', left: '-16px', position: 'absolute',
                             }}>
                         </div>
 
-                        <div //class="w-full border border-dashed border-gray-200"
-                            style={{ borderColor: '#e0e3e5', borderStyle: 'dashed', borderWidth: '1px', width: '100%', }}>
+                        <div style={{ borderColor: '#e0e3e5', borderStyle: 'dashed', borderWidth: '1px', width: '100%', }}>
                         </div>
 
-                        <div //class="absolute border right-[-16px] rounded-l-full border-r-0 border-gray-200 bg-white" 
-                            style={{
+                        <div style={{
                                 width: '12px', height: '24px', backgroundColor: 'white', borderColor: '#e0e3e5', borderRightWidth: '0px', borderWidth: '1px',
                                 borderBottomLeftRadius: '9999px', borderTopLeftRadius: '9999px', right: '-16px', position: 'absolute',
                             }}>
@@ -2643,8 +2631,7 @@ export default function CartDetails() {
                     <button
                         onClick={() => {
                             // goToCheckout(titrItem.IdShobeh,titrItem.IdSabadKharidTitr);
-                            goToCheckout(vendorId);
-
+                            // goToCheckout(vendorId);
                         }} style={{
                             color: 'white',
                             fontSize: '1rem',

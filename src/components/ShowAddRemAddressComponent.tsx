@@ -1,4 +1,4 @@
-////zare_nk_050423_okk(2)
+////zare_nk_050428_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, memo } from "react";
@@ -127,8 +127,7 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({
             flexDirection: 'column',
             flex: '0 0 auto',
             width: '100%',
-          }}
-        >
+          }}>
           <div
             style={{
               opacity: '1',

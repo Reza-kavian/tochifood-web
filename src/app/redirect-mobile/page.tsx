@@ -1,4 +1,4 @@
-//\src\app\redirect-mobile\page.tsx  //zare_nk_050413_okk(1)
+//\src\app\redirect-mobile\page.tsx  //zare_nk_050428_okk(1)
 "use client";
 import { useEffect } from "react";
 import { redirect } from "next/navigation"; 
@@ -25,20 +25,17 @@ export default function MobileRedirectPage({ searchParams }: any) {
   }, [deepLink]);
 
   return (
-    <div
-      style={{
+    <div style={{
         padding: "24px",
         fontFamily: "sans-serif",
         textAlign: "center",
-      }}
-    >
+      }}>
       <h3>در حال بازگشت به اپلیکیشن…</h3>
 
       {deepLink && (
         <>
           <p>اگر اپلیکیشن به‌صورت خودکار باز نشد، روی دکمه زیر بزنید:</p>
-          <a
-            href={deepLink}
+          <a href={deepLink}
             style={{
               display: "inline-block",
               marginTop: 16,

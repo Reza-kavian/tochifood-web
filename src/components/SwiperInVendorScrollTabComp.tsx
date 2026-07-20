@@ -1,4 +1,4 @@
-////zare_nk_050423_okk(2)
+////zare_nk_050428_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -165,9 +165,7 @@ const SwiperInVendorScrollTabComp = ({
                                     // backgroundColor: 'inherit',  
                                     borderRadius: '.75rem', border: '1px solid #f6f6f7',
                                 }}>
-                                    <button
-                                        // onClick={() => { scrollToSection('111') }}  ////zare_nk_050405_added
-                                        onClick={() => { scrollToSection(item.IdG1.toString()) }}  ////zare_nk_050405_added
+                                    <button onClick={() => { scrollToSection(item.IdG1.toString()) }}  ////zare_nk_050405_added
                                         style={{
                                             display: 'flex',
                                             justifyContent: 'center',

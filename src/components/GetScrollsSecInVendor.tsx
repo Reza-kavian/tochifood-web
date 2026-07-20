@@ -1,4 +1,4 @@
-////zare_nk_050423_okk(2)
+////zare_nk_050428_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -1316,9 +1316,7 @@ const GetScrollsSecInVendor = ({
                             {items?.map((item) => {
                                 console.log('050417-item: ' + JSON.stringify(item));
                                 return (
-                                    <div
-                                        key={item.IdKala}
-                                        id={item.IdKala.toString()}
+                                    <div key={item.IdKala} id={item.IdKala.toString()}
                                         style={{
                                             width: '100%',
                                             display: "flex",
