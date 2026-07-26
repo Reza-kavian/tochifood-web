@@ -703,16 +703,12 @@ export default function EditPage() {
         // });
         return parsedList;  //zare_nk_050213_added
 
-      } else {
-        // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-        // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+      } else {       
         setError("متاسفانه خطایی رخ داده است34:" + data.errors);
         console.log("zare_nk_050213-getAddressInf-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
       }
     } else {
-      console.log("zare_nk_050213-getAddressInf-!response.ok" + response.ok);
-      // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-      // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+      console.log("zare_nk_050213-getAddressInf-!response.ok" + response.ok);      
       setError("متاسفانه خطایی رخ داده است35");
     }
   }

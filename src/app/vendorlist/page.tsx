@@ -201,8 +201,7 @@ export default function VendorList() {
                 </div>
             </header >
 
-            <main
-                style={{
+            <main style={{
                     backgroundColor: 'white',
                     // height: '100dvh',   ////zare_nk_050317_commented(A001-ba A002 tadakhol dareh)
                     width: '100%',

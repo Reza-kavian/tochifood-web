@@ -1,4 +1,4 @@
-////zare_nk_050425_okk(1) ////zare_nk_050413(az jose baraye samte karbar estefadeh konam(masalan dar login) age javab mideh(ke api be verifytoken nazanam))
+////zare_nk_050504_okk(1) ////zare_nk_050413(az jose baraye samte karbar estefadeh konam(masalan dar login) age javab mideh(ke api be verifytoken nazanam))
 import { NextResponse, NextRequest } from "next/server";
 // import jwt from "jsonwebtoken";  //chon middleware.ts dar Edge Runtime ejra mishavad, az majoole crypto poshtibani nemikoneh 
 // va az jsonwebtoken nemishe dar middleware.ts estefadeh kard, pas api zadim be verifytoken va dar anja az jsonwebtoken estefade kardim 
@@ -7,6 +7,7 @@ import { jwtVerify } from "jose"; ////zare_nk_040403_added
 
 const publicPaths = [
   "/about",
+  "/folder01",  ////zare_nk_050504_added
   "/folder02",
   "/folder03",
   "/login",
@@ -133,7 +134,7 @@ export async function middleware(request: NextRequest) {
       );
 
       if (!validPayload) {
-        var ishomePage: boolean = request.nextUrl.pathname == "/" ? true : false;  //zare_nk_050205_added
+        var ishomePage: boolean = request.nextUrl.pathname == "/" ? true : false;  
 
         // const response = NextResponse.redirect(new URL("/login", request.url));   //zare_nk_050205_commented
         const response = ishomePage ? NextResponse.redirect(new URL("/onboarding", request.url)) :
@@ -183,79 +184,6 @@ export async function middleware(request: NextRequest) {
       response.headers.set("x-pathname", pathname);
       console.log("zare_nk_050205-fullUrl002: " + fullUrl);
       return response;
-
-      ////zare_nk_040403_added_end
-
-      ////zare_nk_040403_commented_st
-      // const response = await fetch(
-      //   request.nextUrl.origin + "/api/auth/verifyToken",
-      //   {
-      //     method: "POST",
-      //     headers: { "Content-Type": "application/json" },
-      //     body: JSON.stringify({ token }), // ارسال توکن به سرور
-      //   }
-      // );
-      // console.log("zare_nk_040403-03-taghiir-tempTest-inja 004-token daaarim3");
-      // const data = await response.json();
-      // console.log(
-      //   "zare_nk_040403-04-taghiir-tempTest-inja 004-data: " +
-      //     JSON.stringify(data)
-      // );
-      // if (response.ok) {
-      //   console.log(
-      //     "zare_nk_040403-04-taghiir-decodedToken: " +
-      //       JSON.stringify(data.decoded)
-      //   );
-      //   //zare_nk_040209-taghiir-decodedToken: {"unique_name":"20109","CodeMoshtari":"20109",
-      //   // "Mobile":"9351091287","NameMoshtari":"","nbf":1746772412,"exp":1747377212,"iat":1746772412}
-
-      //   // var idUser = data.decoded.IdUser;
-      //   // console.log("zare_nk_040209-taghiir-idUser: " + idUser);
-      //   var unique_name = data.decoded.unique_name;
-      //   console.log("zare_nk_040209-taghiir-unique_name: " + unique_name);
-
-      //   //zare_nk_040228_added_st
-      //   const response = NextResponse.next();
-      //   const fullUrl = request.nextUrl.href;
-      //   const pathname = request.nextUrl.pathname;
-      //   // ست کردن header برای استفاده در layout
-      //   response.headers.set("x-url", fullUrl);
-      //   response.headers.set("x-pathname", pathname);
-      //   console.log("zare_nk_040228-fullUrl002: " + fullUrl);
-
-      //   return response;
-      // } else {
-      //   console.log(
-      //     "zare_nk_040403-05-taghiir-tempTest-inja 002-token namotabare ya monghazi shodeh-data.error: " +
-      //       data.errorMessage
-      //   );
-      //   const response = NextResponse.redirect(new URL("/login", request.url));
-      //   const isValidRedirectPath = !publicPaths.some((path) =>
-      //     request.nextUrl.pathname.startsWith(path)
-      //   );
-      //   if (isValidRedirectPath) {
-      //     response.cookies.set("redirect", request.nextUrl.pathname, {
-      //       path: "/",
-      //       httpOnly: false,
-      //     });
-      //   }
-      //   var tempTest = response.cookies.get("redirect")?.value;
-      //   console.log("zare_nk_040209-taghiir-tempTest: " + tempTest);
-      //   console.log(
-      //     "zare_nk_040209-response.Cookies(not ok) in middleware:",
-      //     response.cookies.get("token")?.value
-      //   );
-
-      //   //zare_nk_040228_added_st
-      //   const fullUrl = request.nextUrl.href;
-      //   const pathname = request.nextUrl.pathname;
-      //   // ست کردن header برای استفاده در layout
-      //   response.headers.set("x-url", fullUrl);
-      //   response.headers.set("x-pathname", pathname);
-      //   console.log("zare_nk_040228-fullUrl003: " + fullUrl);
-      //   return response;
-      // }
-      ////zare_nk_040403_commented_end
     } catch (error) {
       console.log(
         "zare_nk_050205-02-taghiir-tempTest-inja 003-amaliate barrasiye token ba khata movajeh shod-error: " +

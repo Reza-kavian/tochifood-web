@@ -12,6 +12,18 @@ import { factchecktools } from "googleapis/build/src/apis/factchecktools";
 
 import { NextJsApiUrl } from "../../constants/Urls";  ////zare_nk_050407_added
 
+import { jwtDecode } from "jwt-decode";
+
+interface MyJwtPayload {
+  FullName: string | null;
+  Mobile: string | null;
+  IdUser: number | null;
+  exp: number | null;
+  // .
+  // .
+  [key: string]: any;
+}
+
 function getCookie(name: any) {
   const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
   const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
@@ -668,40 +680,41 @@ export default function Toolbar() {
 
     // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
     console.log('mobileVal: ' + NextJsApiUrl + '-newSmsVal: ' + newSmsVal);
-    const response = await fetch(NextJsApiUrl + "Api_LoginUser2", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        //// Authorization: "Bearer " + token,   
-      },
-      body: JSON.stringify({
-        Mobile: mobileVal,
-        // SmsCode: smsVal,  //zare_nk_050105_commented
-        SmsCode: sms,  //zare_nk_050105_added
-        Password: ""
-      }),
-      // credentials: "include", //zare_nk_040202_commented
-    });
-    const data = await response.json();
-    if (response.ok) {
-      console.log("zare_nk_040218-data222: " + JSON.stringify(data));
-      //zare_nk_040218-data222: {"status":-8,"message":"","data":null,"errors":["52 دقیقه ی دیگر مجددا تلاش کنید"]}
-      //zare_nk_040218-data222:
-      // {"status":0,"message":"",
-      // "data":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjIwMTA5IiwiQ29kZU1vc2h0YXJpIjoiMjAxMDkiLCJNb2JpbGUiOiI5MzUxMDkxMjg3IiwiTmFtZU1vc2h0YXJpIjoiIiwibmJmIjoxNzQ2NzI1OTI4LCJleHAiOjE3NDczMzA3MjgsImlhdCI6MTc0NjcyNTkyOH0.9Jfv71v3D_s13gSyf3gXqgEfiXaV-lx93hDey4DSLM8"
-      // },"errors":[]}
-      if (data.status == 0) {
-        let token = data.data.token;
-        ////zare_nk_040603_added_st 
-        // // const secretKey = Buffer.from(
-        // //   process.env.JWT_SECRET_BASE64!,
-        // //   "base64"
-        // // ).toString("utf-8");
-        // // const decoded = jwt.verify(token, secretKey);
-        // const decoded = jwt.decode(token) as JwtPayload | null;
-        // console.log("040530-03-token: " + JSON.stringify(decoded));
-        ////zare_nk_040603_added_end    
-        try {
+    try {
+      const response = await fetch(NextJsApiUrl + "Api_LoginUser2", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          //// Authorization: "Bearer " + token,   
+        },
+        body: JSON.stringify({
+          Mobile: mobileVal,
+          // SmsCode: smsVal,  //zare_nk_050105_commented
+          SmsCode: sms,  //zare_nk_050105_added
+          Password: ""
+        }),
+        // credentials: "include", //zare_nk_040202_commented
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log("zare_nk_040218-data222: " + JSON.stringify(data));
+        //zare_nk_040218-data222: {"status":-8,"message":"","data":null,"errors":["52 دقیقه ی دیگر مجددا تلاش کنید"]}
+        //zare_nk_040218-data222:
+        // {"status":0,"message":"",
+        // "data":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjIwMTA5IiwiQ29kZU1vc2h0YXJpIjoiMjAxMDkiLCJNb2JpbGUiOiI5MzUxMDkxMjg3IiwiTmFtZU1vc2h0YXJpIjoiIiwibmJmIjoxNzQ2NzI1OTI4LCJleHAiOjE3NDczMzA3MjgsImlhdCI6MTc0NjcyNTkyOH0.9Jfv71v3D_s13gSyf3gXqgEfiXaV-lx93hDey4DSLM8"
+        // },"errors":[]}
+        if (data.status == 0) {
+          let token = data.data.token;
+          ////zare_nk_040603_added_st 
+          // // const secretKey = Buffer.from(
+          // //   process.env.JWT_SECRET_BASE64!,
+          // //   "base64"
+          // // ).toString("utf-8");
+          // // const decoded = jwt.verify(token, secretKey);
+          // const decoded = jwt.decode(token) as JwtPayload | null;
+          // console.log("040530-03-token: " + JSON.stringify(decoded));
+          ////zare_nk_040603_added_end    
+
           ////zare_nk_041114_added_st(and commented. chon methode HttpContext.SignInAsync ro anjam mideh baraye online kardan be sabke HttpContext marboot be .net core c# 
           // vali man ino nemikham chon hamin cookie token sakhtan baram kafiye be onvane amale online kardan va amale estelame online boodane karbar. dar zemn ma dar view haye c#
           // ke nistim ba hamin emkanate HttpContext mesle(HttpContextAccessor.HttpContext!.User.Identity!.IsAuthenticated) baraye estelame online boodan estefadeh konim!
@@ -720,51 +733,29 @@ export default function Toolbar() {
           // pas az haman sakhte va vakeshiye cookie haviye token ke name token ra behesh dadam baraye moshakhas kardane online shodan va estelame online boodaanesh estefadeh mikonam
           //va in kar ra dar methode verifyToken gonjandim)
 
-          const response = await fetch("/api/auth/verifyToken", {  //zare_nk_041115_nokteh(methode Api_LoginUser2 tavassote aghaye parsafar chek mishe dar morede dorostiye sms va zamane monghazi shodanesh,
-            //vali man mikham bedoonam tokeni ke methode Api_LoginUser2 be man mideh ba secretKey amn shodeh bashe,va projeye samte cllient hatman bayad kelide dastresi ro dashteh bashe ta kasi 
-            //ba sooeestefade token ro natooneh vakeshi koneh(masalan dar proje haye haker ha),pas az methode verifyToken ke ba dastoore jwt.verify az ma secretKey mikhad estefadeh kardam)
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ token }),
-          });
-          const data = await response.json();
-          if (response.ok) {
-            console.log("zare_nk_040925-decodedToken: " + JSON.stringify(data.decoded));
-            ////zare_nk_040925-decodedToken: {"IdUser":"10006","Mobile":"9351091287","FullName":"رضا کاویان","Type":"User","nbf":1770193087,"exp":1772785087,"iat":1770193087}  //zare_nk_041115_nokteh(from api tochikala)
-            ////zare_nk_040925-decodedToken: {"unique_name":"20109","CodeMoshtari":"20109","Mobile":"9351091287","NameMoshtari":"","nbf":1750740741,"exp":1751345541,"iat":1750740741}  //zare_nk_041115_nokteh(from api testotmapi)
+          const DecodeToken = jwtDecode<MyJwtPayload>(token);
+          console.log('zare_nk_050501_DecodeToken is: ' + JSON.stringify(DecodeToken));
+          ////zare_nk_050501_DecodeToken is: {"unique_name":"9351091287","CodeMoshtari":"9649","Mobile":"9351091287","NameMoshtari":"غلامرضا کاویان","nbf":1784822288,"exp":1785427088,"iat":1784822288}
+          const expires = (DecodeToken.exp ?? 0) * 1000; ////zare_nk_050501_nokteh(lahaz kardane expires az tokene pasokhe apiye Api_LoginUser2(chon bar hasbe saniye ast 
+          //// be milisaniye tabdil kardim ba 1000 barabar kardan))    
+ 
+          ////zare_nk_040925-decodedToken: {"IdUser":"10006","Mobile":"9351091287","FullName":"رضا کاویان","Type":"User","nbf":1770193087,"exp":1772785087,"iat":1770193087}  //zare_nk_041115_nokteh(from api tochikala)
+          ////zare_nk_040925-decodedToken: {"unique_name":"20109","CodeMoshtari":"20109","Mobile":"9351091287","NameMoshtari":"","nbf":1750740741,"exp":1751345541,"iat":1750740741}  //zare_nk_041115_nokteh(from api testotmapi)
+          // const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString();  //zare_nk_040219-nokteh(zamane monghazi ra khodam taein kardam, 1 saate bad)   
+          // const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();  //zare_nk_050118-nokteh(zamane monghazi ra khodam taein kardam, 30 rooze bad) 
+          // const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString();  //zare_nk_050118-nokteh(zamane monghazi ra khodam taein kardam, 1 rooze bad) 
+          // const expires = data.decoded.exp * 1000;   ////zare_nk_050504_nokteh(lahaz kardane expires az tokene pasokhe apiye Api_LoginUser2(chon bar hasbe saniye ast 
 
-            // const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString();  //zare_nk_040219-nokteh(zamane monghazi ra khodam taein kardam, 1 saate bad)   
-            // const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();  //zare_nk_050118-nokteh(zamane monghazi ra khodam taein kardam, 30 rooze bad) 
-            // const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString();  //zare_nk_050118-nokteh(zamane monghazi ra khodam taein kardam, 1 rooze bad) 
-            const expires = data.decoded.exp;//zare_nk_040219-nokteh(zamane monghazi ra az dadeye parsafar taein kardam)
-
-            document.cookie = `token=${token}; path=/; expires=${expires}; secure; samesite=None`;
-            const redirect = getCookie("redirect") || "/";
-            document.cookie =
-              "redirect=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC"; // حذف کوکی
-            console.log('redirect iss: ' + getCookie("redirect"));
-            console.log('zare_nk_050110-token is: ' + getCookie("token"));
-            router.replace(redirect); //zare_nk_040228_commented(and zare_nk_040312 uncommented(chon safheh ro refresh nemikoneh va behtare ehtemalan))
-            // NextResponse.redirect(new URL("/login", request.url));//zare_nk_040228_added
-            // window.location.href = redirect;
-            // window.location.replace(redirect); //zare_nk_040312_commented(chon router.replace ya router.push safheh ro kamel refresh nemikonam behtare)
-          } else {
-            document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-            document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-            setError("متاسفانه خطایی رخ داده است313:" + (data?.errorMessage ? ": " + data.errorMessage : ""));  //zare_nk_041107_added_tahlilshe(niaz bood??!!) 
-          }
-        } catch (error) {
-          document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-          document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-          console.error("zare_nk_040925-❌ خطااااااااااااااااااای JWT:", error);
-          // setError("متاسفانه خطایی رخ داده است33:" + error);  //zare_nk_041107_commented
-          ////zare_nk_041107_added_st
-          if (error instanceof Error) {
-            setError("متاسفانه خطایی رخ داده است323:" + error.message);
-          } else {
-            setError("متاسفانه خطایی رخ داده است343:" + String(error));
-          }
-          ////zare_nk_041107_added_end
+          document.cookie = `token=${token}; path=/; expires=${expires}; secure; samesite=None`;
+          const redirect = getCookie("redirect") || "/";
+          document.cookie =
+            "redirect=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC"; // حذف کوکی
+          console.log('redirect iss: ' + getCookie("redirect"));
+          console.log('zare_nk_050110-token is: ' + getCookie("token"));
+          router.replace(redirect); //zare_nk_040228_commented(and zare_nk_040312 uncommented(chon safheh ro refresh nemikoneh va behtare ehtemalan))
+          // NextResponse.redirect(new URL("/login", request.url));//zare_nk_040228_added
+          // window.location.href = redirect;
+          // window.location.replace(redirect); //zare_nk_040312_commented(chon router.replace ya router.push safheh ro kamel refresh nemikonam behtare)
         }
       } else {
         ////zare_nk_050111_commented_movaghat_st(hengame nayamadane sms az sms.ir bekhatere ekhtelele zirsakht)
@@ -787,12 +778,17 @@ export default function Toolbar() {
         // router.replace(redirect);
         ////zare_nk_050111_added_movaghat_end(hengame nayamadane sms az sms.ir bekhatere ekhtelele zirsakht)
       }
-    } else {
-      console.log("zare_nk_040925--!!response.ok");
+    }
+    catch (error) {
       document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
       document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-      setError("متاسفانه خطایی رخ داده است35");
-    }
+      console.error("zare_nk_040925-❌ خطااااااااااااااااااای JWT:", error); 
+      if (error instanceof Error) {
+        setError("متاسفانه خطایی رخ داده است323:" + error.message);
+      } else {
+        setError("متاسفانه خطایی رخ داده است343:" + String(error));
+      } 
+    } 
   }
 
   async function ResendCodefunc() {

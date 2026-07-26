@@ -1,8 +1,8 @@
 ////zare_nk_050303_okk
 'use client'
 
-import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
-import { useRouter, useSearchParams, redirect } from "next/navigation";
+import { useState, useEffect, useRef, useCallback, JSXElementConstructor, useMemo } from "react";
+import { useRouter, useSearchParams, redirect, usePathname } from "next/navigation";
 import Styles from "@/styles/components/location.module.css";
 import globalsStyles from "@/styles/components/globals.module.css";
 import { RefObject } from "react";
@@ -68,7 +68,7 @@ import { Console } from "console";
 
 // import Layer from '@neshan-maps-platform/ol/layer/Layer.js'; 
 
-import { useAuthentication } from '../context/AuthenticationContext';  //zare_nk_050111_added
+import { useAuthentication } from '../../context/AuthenticationContext';  //zare_nk_050111_added
 
 ////zare_nk_050226_added_st
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -76,17 +76,17 @@ import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
 ////zare_nk_050226_added_end
 
-import SwiperGrouplevel1Comp from '../components/SwiperGrouplevel1Comp';
+import SwiperGrouplevel1Comp from '../../components/SwiperGrouplevel1Comp';
 
-import SwiperTapBestsComp from '../components/SwiperTapBestsComp';  //zare_nk_050305_added
+import SwiperTapBestsComp from '../../components/SwiperTapBestsComp';  //zare_nk_050305_added
 
-import SwiperTopBanerComp from '../components/SwiperTopBanerComp';
+import SwiperTopBanerComp from '../../components/SwiperTopBanerComp';
 
-import SwiperthinkBanerComp from '../components/SwiperthinkBanerComp';
+import SwiperthinkBanerComp from '../../components/SwiperthinkBanerComp';
 
-import SwiperTapTimeComp from '../components/SwiperTapTimeComp';
+import SwiperTapTimeComp from '../../components/SwiperTapTimeComp';
 
-import SwiperSecondBanerComp from '../components/SwiperSecondBanerComp';  //zare_nk_050305_added
+import SwiperSecondBanerComp from '../../components/SwiperSecondBanerComp';  //zare_nk_050305_added
 
 function getCookie(name: any) {
   ////zare_nk_050209_added_st
@@ -203,89 +203,89 @@ const Adressescomponent = function Adressescomponent({    ////zare_nk_050209_add
   return (<>
     <div style={{ display: 'flex', flexFlow: 'column', padding: '0px', margin: '0px', }}>
       {responsedListFromApiSelectAddressList?.map((item, index) => {
-        return ( 
+        return (
+          <div
+            key={item.IdAdress}   ////zare_nk_050319_added
+            onClick={() => {
+              setRowItem(item);
+              chosenAddress(item);
+            }}
+            style={{
+              borderTop: '1px solid #2b364f14',
+              display: 'flex',
+              paddingBottom: '.75rem',
+              paddingTop: '.75rem',
+              gap: '.5rem',
+              justifyContent: 'space-between',
+              cursor: 'pointer',
+              height: 'min-content',
+              alignItems: 'center',
+            }}>
+            <button
+              id="locationBtnInEveryAddressRow"   //zare_nk_050208_nokteh(in dokmeh engar karbordi nadare va faghat ye design hast! badan shayad tabdilesh konam be ye tage div)
+              style={{
+                backgroundColor: '#1b1c1d',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1) 
+                fill: 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
+                borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
+                flex: '0 0 auto',
+              }}
+            >
+              <svg style={{ width: '18px', height: '18px' }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-[18px] w-[18px] fill-inherit"><g id="Location"><path id="Union" d="M11.99 2C7.34 2 3.5 5.72 3.5 10.32C3.5 12.64 4.34 14.79 5.73 16.61C7.25 18.62 9.13 20.37 11.27 21.75C11.8 22.09 12.24 22.07 12.73 21.75C14.85 20.37 16.74 18.62 18.27 16.61C19.66 14.79 20.5 12.63 20.5 10.32C20.5 5.72 16.66 2 11.99 2ZM11.99 13.33C10.45 13.33 9.19 12.12 9.19 10.58C9.19 9.04 10.45 7.78 11.99 7.78C13.53 7.78 14.8 9.05 14.8 10.58C14.8 12.11 13.53 13.33 11.99 13.33Z" fill="inherit"></path></g></svg>
+            </button>
+
             <div
-              key={item.IdAdress}   ////zare_nk_050319_added
+              style={{
+                paddingTop: '.5rem',
+                display: 'flex',
+                justifyContent: 'flex-start',
+                alignItems: 'flex-start',
+                flexFlow: 'column',
+                flex: '1 1 0%',
+                height: 'min-content',
+                marginLeft: '.5rem',
+              }}
+            >
+              <span
+                style={{
+                  color: '#1b1c1d',
+                  fontWeight: '500',
+                  fontSize: '.875rem',
+                  lineHeight: '1.25rem',
+                }}
+              >
+                {/* خونه */}
+                {item.OnvanAdress ? item.OnvanAdress : 'خونه'}
+              </span>
+              <p
+                style={{
+                  color: '#1b1c1d',  //zare_nk_050206_nokteh(age entekhab nabasheh: color:#a5abb1)   
+                  fontSize: '.75rem',
+                  lineHeight: '1rem',
+                  marginBottom: '0px',
+                }}
+              >
+                {/* خ. وحدت اسلامی، نرسیده به خ. مولوی، ک. غلامرضا زندی، خ. صالح زاده */}
+                {item.Adress}
+              </p>
+            </div>
+
+            <button
+              id="showAddRemAddressBtn"
               onClick={() => {
-                setRowItem(item);
-                chosenAddress(item);
+                // showAddRemAddress();  //zare_nk_050209_commented
+                setIsEpmtyShowAddRemAddress(false);  //zare_nk_050209_added 
+                setRowItem(item);  //zare_nk_050209_added 
               }}
               style={{
-                borderTop: '1px solid #2b364f14',
-                display: 'flex',
-                paddingBottom: '.75rem',
-                paddingTop: '.75rem',
-                gap: '.5rem',
-                justifyContent: 'space-between',
-                cursor: 'pointer',
-                height: 'min-content',
-                alignItems: 'center',
-              }}>
-              <button
-                id="locationBtnInEveryAddressRow"   //zare_nk_050208_nokteh(in dokmeh engar karbordi nadare va faghat ye design hast! badan shayad tabdilesh konam be ye tage div)
-                style={{
-                  backgroundColor: '#1b1c1d',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1) 
-                  fill: 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
-                  borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
-                  flex: '0 0 auto',
-                }}
-              >
-                <svg style={{ width: '18px', height: '18px' }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-[18px] w-[18px] fill-inherit"><g id="Location"><path id="Union" d="M11.99 2C7.34 2 3.5 5.72 3.5 10.32C3.5 12.64 4.34 14.79 5.73 16.61C7.25 18.62 9.13 20.37 11.27 21.75C11.8 22.09 12.24 22.07 12.73 21.75C14.85 20.37 16.74 18.62 18.27 16.61C19.66 14.79 20.5 12.63 20.5 10.32C20.5 5.72 16.66 2 11.99 2ZM11.99 13.33C10.45 13.33 9.19 12.12 9.19 10.58C9.19 9.04 10.45 7.78 11.99 7.78C13.53 7.78 14.8 9.05 14.8 10.58C14.8 12.11 13.53 13.33 11.99 13.33Z" fill="inherit"></path></g></svg>
-              </button>
-
-              <div
-                style={{
-                  paddingTop: '.5rem',
-                  display: 'flex',
-                  justifyContent: 'flex-start',
-                  alignItems: 'flex-start',
-                  flexFlow: 'column',
-                  flex: '1 1 0%',
-                  height: 'min-content',
-                  marginLeft: '.5rem',
-                }}
-              >
-                <span
-                  style={{
-                    color: '#1b1c1d',
-                    fontWeight: '500',
-                    fontSize: '.875rem',
-                    lineHeight: '1.25rem',
-                  }}
-                >
-                  {/* خونه */}
-                  {item.OnvanAdress ? item.OnvanAdress : 'خونه'}
-                </span>
-                <p
-                  style={{
-                    color: '#1b1c1d',  //zare_nk_050206_nokteh(age entekhab nabasheh: color:#a5abb1)   
-                    fontSize: '.75rem',
-                    lineHeight: '1rem',
-                    marginBottom: '0px',
-                  }}
-                >
-                  {/* خ. وحدت اسلامی، نرسیده به خ. مولوی، ک. غلامرضا زندی، خ. صالح زاده */}
-                  {item.Adress}
-                </p>
-              </div>
-
-              <button
-                id="showAddRemAddressBtn"
-                onClick={() => {
-                  // showAddRemAddress();  //zare_nk_050209_commented
-                  setIsEpmtyShowAddRemAddress(false);  //zare_nk_050209_added 
-                  setRowItem(item);  //zare_nk_050209_added 
-                }}
-                style={{
-                  // backgroundColor: '#1b1c1d',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1)  
-                  backgroundColor: 'white',
-                  borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
-                  flex: '0 0 auto',
-                }}
-              >
-                <svg style={{ width: '18px', height: '18px', fill: '#a5abb1', transform: 'rotate(90deg)', }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-[18px] fill-gray-500 rotate-90"><g id="Info menu"><path id="Union" fill="inherit" fillRule="evenodd" clipRule="evenodd" d="M5 14C6.10457 14 7 13.1046 7 12C7 10.8954 6.10457 10 5 10C3.89543 10 3 10.8954 3 12C3 13.1046 3.89543 14 5 14ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14ZM21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12Z"></path></g></svg>
-              </button>
-            </div> 
+                // backgroundColor: '#1b1c1d',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1)  
+                backgroundColor: 'white',
+                borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
+                flex: '0 0 auto',
+              }}
+            >
+              <svg style={{ width: '18px', height: '18px', fill: '#a5abb1', transform: 'rotate(90deg)', }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-[18px] fill-gray-500 rotate-90"><g id="Info menu"><path id="Union" fill="inherit" fillRule="evenodd" clipRule="evenodd" d="M5 14C6.10457 14 7 13.1046 7 12C7 10.8954 6.10457 10 5 10C3.89543 10 3 10.8954 3 12C3 13.1046 3.89543 14 5 14ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14ZM21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12Z"></path></g></svg>
+            </button>
+          </div>
         )
       })}
       {rowItem &&
@@ -767,9 +767,14 @@ export default function Page() {
 
   const refForBox = useRef<HTMLDivElement | null>(null);
 
-  // const { userData, login, logout } = useAuthentication(); //zare_nk_050111_added
-  const { isLogin } = useAuthentication(); //zare_nk_050111_added //zare_nk_050221_tahlilshe(ke chera estefadeh nashod)
-  console.log('zare_nk_050111-Page rendered!!');
+  ////zare_nk_050504_nokteh_st(sabke estadade az context ha baraye barrasiye login boodan ya naboodane karbar)
+  const { isLoginAndInf, refreshLoginStatus } = useAuthentication();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    refreshLoginStatus();
+  }, [pathname]); ////zare_nk_050504_nokteh(pathname gozashtim, ta harbar ke masir tagheir mikoneh useEffect seda zadeh beshe.)
+  ////zare_nk_050504_nokteh_end(sabke estadade az context ha baraye barrasiye login boodan ya naboodane karbar)
 
   const [responsedListFromApiSelectAddressList, SetResponsedListFromApiSelectAddressList] = useState<responsedListFromApiSelectAddressListType[] | null>(null);
 
@@ -956,22 +961,13 @@ export default function Page() {
 
         </button>
 
-        <button
-          id="goShoppingBacketBtn"
-          onClick={showAddressListDrawer}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            backgroundColor: 'inherit',
-            border: 'none',
-            fontSize: '.875rem',
-            height: '50px',
-          }}>
-          <img
-            src="/images/header/shoppingBacket.svg"
-            alt="سبد خرید"
-          />
-        </button>
+        {
+        isLoginAndInf.isLogin == true ?
+          <span>{isLoginAndInf.FullName}</span> :
+          isLoginAndInf.isLogin == false ?
+            <span>log outim!!</span> :
+            <span></span>
+        }
       </header >
 
       <main

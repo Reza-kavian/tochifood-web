@@ -489,18 +489,174 @@ export default function Home() {
                 <div style={{ marginBottom: '1.25rem' }}></div>
                 <div style={{
                     // display: 'flex', flexFlow: 'row', flexWrap: 'wrap', paddingLeft: '1rem', paddingRight: '1rem', gap: '0px',position:'relative',
-                    display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', paddingBottom: '253px', paddingTop: '0px', width: '100%',
+                    display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', paddingBottom: '253px', paddingTop: '0px', width: '100%', paddingRight: '5px', paddingLeft: '5px',
                 }}>
-                    <div style={{ width: '100%', border: '2px solid red' }}>111</div>
-                    <div style={{ width: '100%', border: '2px solid red' }}>222</div>
-                    <div style={{ width: '100%', border: '2px solid red' }}>333</div>
-                    <div style={{ width: '100%', border: '2px solid red' }}>444</div>
-                    <div style={{ width: '100%', border: '2px solid red' }}>555</div>
+                    {
+                        [...Array(9)].map((_, index) => {
+ 
+
+                    return(<div key={index} style={{
+                        paddingBottom: '.25rem', padding: '.5rem', backgroundColor: 'white', borderRadius: '.5rem', gap: '.25rem', justifyContent: 'space-between',
+                        flexDirection: 'column', height: 'fit-content', display: 'flex', border: '1px solid #ebeef3',
+                    }}>
+                        <div style={{
+                            position: 'relative', border: '1px solid #ebeef3', borderRadius: '.375rem',
+                        }}>
+                            <div style={{
+                                color: '#141414', fontSize: '.75rem', lineHeight: '1rem', paddingLeft: '.25rem', paddingRight: '.25rem', borderRadius: '.25rem',
+                                gap: '2px', justifyContent: 'center', alignItems: 'center', display: 'flex', zIndex: 10, top: '.25rem', left: '.25rem', position: 'absolute',
+                            }}>
+                                <span style={{ marginTop: '2px', }}>5.0</span>
+                                <img src="/images/product-collection/gold-start.svg" alt="بازگشت"
+                                    style={{ width: '.75rem', height: '.75rem', }} />
+                            </div>
+                            <div style={{ width: '100%', height: '100px', }}>
+                                <img src="/images/product-collection/movaghat/ice-americano.jpg" alt="آیس آمریکانو" style={{
+                                    objectFit: 'cover', borderRadius: '.375rem', userSelect: 'none', width: '100%! important', height: '100%', //position: 'absolute',  ////zare_nk_050430_nokteh(tapsifoodabsolute kard vali niazi nist va commentesh kardam)
+                                }} />
+                            </div>
+                        </div>
+                        <div style={{
+                            flexDirection: 'column', height: 'fit-content', display: 'flex', marginBottom: '.25rem', marginTop: '.25rem', gap: '.25rem',  ////zare_nk_050430_commented
+                        }}>
+                            <div style={{
+                                display: 'flex', flexDirection: 'column', width: '100%',
+                            }}>
+                                <div style={{
+                                    fontSize: '0.875rem',
+                                    color: 'black',
+
+                                    // این بخش برای سه‌نقطه و محدودیت ۲ خط
+                                    display: '-webkit-box',
+                                    WebkitLineClamp: 1,
+                                    WebkitBoxOrient: 'vertical',
+                                    overflow: 'hidden',
+
+                                    // این بخش برای تثبیت ارتفاع روی ۴۰ پیکسل 
+                                    lineHeight: '1rem',
+                                    // height: '2.5rem',
+                                    height: '2rem',
+
+                                    minHeight: '2rem',  // minHeight: '2.5rem', // اجبار به کمتر نشدن
+                                    maxHeight: '2rem',  // maxHeight: '2.5rem', // اجبار به بیشتر نشدن
+                                    boxSizing: 'border-box', // برای اینکه بُردر (border) به ارتفاع اضافه نشود
+
+                                    textAlign: 'right',
+                                    // width: '128px',  ////zare_nk_050430_nokteh(dar safheye product-collection az widthe sabete 128px estefadeh shod(jahate olgu baraye jahaye digeh hatman barrasi she))
+                                }}>
+                                    آیس آمریکانو
+                                </div>
+
+                                <div style={{
+                                    fontSize: '0.75rem',
+                                    color: '#8e949d',
+
+                                    // این بخش برای سه‌نقطه و محدودیت ۲ خط
+                                    display: '-webkit-box',
+                                    WebkitLineClamp: 1,
+                                    WebkitBoxOrient: 'vertical',
+                                    overflow: 'hidden',
+
+                                    // این بخش برای تثبیت ارتفاع روی ۴۰ پیکسل 
+                                    lineHeight: '1rem',
+                                    // height: '2.5rem',
+                                    height: '1rem',
+
+                                    minHeight: '1rem',  // minHeight: '2.5rem', // اجبار به کمتر نشدن
+                                    maxHeight: '1rem',  // maxHeight: '2.5rem', // اجبار به بیشتر نشدن
+                                    boxSizing: 'border-box', // برای اینکه بُردر (border) به ارتفاع اضافه نشود
+
+                                    textAlign: 'right',
+                                    // width: '128px',  ////zare_nk_050430_nokteh(dar safheye product-collection az widthe sabete 128px estefadeh shod(jahate olgu baraye jahaye digeh hatman barrasi she))
+                                }}>
+                                    قهوه چینو
+                                </div>
+                            </div>
+                            <div style={{
+                                alignItems: 'center', flexDirection: 'column', display: 'flex', position: 'relative',
+                            }}>
+                                <span style={{
+                                    textDecorationLine: 'line-through', color: '#7d95b3', fontSize: '.75rem',
+                                    lineHeight: '1rem', textAlign: 'left', width: '100%', height: '1rem',
+                                }}>
+                                    {(150000).toLocaleString()}
+                                </span>
+
+                                <div style={{
+                                    backgroundColor: '#ff5a00',
+                                    display: 'flex', alignItems: 'center', borderRadius: '.25rem', paddingLeft: '.5rem', paddingRight: '.5rem', paddingTop: '2px',
+                                    color: 'white',  ////zare_nk_050401_nokteh(tapsifood css digeei baraye sefid kardane matn gozasht)
+                                    borderBottomRightRadius: 0, position: 'absolute', right: '-17px', bottom: '.5rem', zIndex: 10, height: '30px',
+                                }}>
+                                    <span style={{ fontSize: '.75rem', lineHeight: '1rem', fontWeight: 700, }}>30%</span>
+                                    <span style={{
+                                        position: 'absolute',
+
+                                        height: 0, width: 0,
+
+                                        borderTopWidth: '8px',
+                                        borderRightWidth: '8px',
+                                        borderBottomWidth: 0,
+                                        borderLeftWidth: 0,
+
+                                        bottom: '-8px', right: 0,
+
+                                        display: 'inline-block',
+
+                                        borderStyle: 'solid',
+
+                                        borderTopColor: '#ff5a00',
+                                        borderRightColor: 'transparent',
+                                        borderBottomColor: 'transparent',
+                                        borderLeftColor: 'transparent',
+                                    }}>
+                                    </span>
+                                </div>
+
+
+                                <div style={{
+                                    width: "100%", display: "flex", flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center',
+                                }}>
+                                    <span style={{
+                                        fontSize: '1rem', marginLeft: 2, fontFamily: "IRANSansWeb(FaNum)_Medium", color: '#141414', alignItems: 'center',
+                                        lineHeight: '1.5rem',
+                                    }}>
+                                        {(105000).toLocaleString()}
+                                    </span>
+                                    <span style={{
+                                        fontSize: '.625rem', fontFamily: "IRANSansWeb(FaNum)_Medium", color: '#6d6d6d',
+                                    }}>
+                                        تومان
+                                    </span>
+                                </div> 
+
+                            </div>
+
+                            <div style={{ gap: '.5rem', flexDirection: 'column', display: 'flex', }}>
+                                <span style={{ borderBottom: '1px solid #ebeef3', }}>
+                                </span>
+
+                                <div style={{
+                                    display: 'flex', gap: '.25rem', alignItems: 'center', width: '100%',
+                                }}>
+                                    <img src="/images/product-collection/motor-peyk.svg" alt="زمان انتظار"
+                                        style={{ width: '14px', height: '14px', }}
+                                    />
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+                                        <span style={{ color: '#575a63', fontSize: '.75rem', lineHeight: '1rem', }}>{(58000).toLocaleString()}</span>
+                                        <span style={{ color: '#575a63', fontSize: '.625rem', }}>تومان</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>)
+                             })
+                    }
                 </div>
                 {/* zare_nk_050429_added_end(sabke gride tapsifoodi be jaye flex(baraye chandsotoone kardane farzandane)) */}
 
                 {/* zare_nk_050429_nokteh_st(copy az home baraye olgu) */}
-                <div style={{ marginBottom: '.70rem' }}></div>
+                {/* <div style={{ marginBottom: '.70rem' }}></div>
                 <Link style={{
                     display: 'flex', justifyContent: 'flex-start', alignItems: 'center', width: 'calc(100% - 2rem)', height: '40px', marginLeft: '1rem', marginRight: '1rem',
                     position: 'relative', padding: '10px 1rem', backgroundColor: '#f1f2f3', borderRadius: '9999px', gap: '0.25rem', textDecoration: 'none',
@@ -545,7 +701,7 @@ export default function Home() {
                             // src={`/images/movaghat/SwiperTapTime/${index}.jpg`} />
                             src={`/images/baners/single-punched-banner/single-punched-banner-01.png`} />
                     </div>
-                </div>
+                </div> */}
                 {/* zare_nk_050429_nokteh_end(copy az home baraye olgu) */}
 
                 <CollapseAndClickAwayForSortingComp
@@ -565,7 +721,7 @@ export default function Home() {
                 />
 
 
-            </main>
+            </main >
 
             <footer style={{
                 maxWidth: '450px', marginLeft: 'auto', marginRight: 'auto', zIndex: 50, bottom: 0, left: 0, right: 0, position: 'fixed',
@@ -575,6 +731,6 @@ export default function Home() {
 
             <div className="tabIndexOne-in-LayoutWrapper" tabIndex={1}>
             </div>
-        </div>
+        </div >
     );
 }
