@@ -1,7 +1,7 @@
-////zare_nk_050428_okk(1)
+////zare_nk_050505_okk(1)
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Styles from "@/styles/components/location.module.css";
 import globalsStyles from "@/styles/components/globals.module.css";
 import jwt from "jsonwebtoken";
@@ -80,24 +80,24 @@ function getCookie(name: any) {
   return null; //اگر کوکی پیدا نشد
 }
 
-type BoxHtmlComponentType = {
-  isEpmtyHeightBox: boolean;
-  setIsEpmtyHeightBox: React.Dispatch<React.SetStateAction<boolean>>;
+type AddressFormInputsComponentType = {
+  isEpmtyAddressFormInputs: boolean;
+  setIsEpmtyAddressFormInputs: React.Dispatch<React.SetStateAction<boolean>>;
   refForBox: RefObject<HTMLDivElement | null>;
-  saveAddress: (isOnline: boolean) => void;
+  saveAddress: (isLogin: boolean) => void;
   addressFormInputsVal: any;   //zare_nk_050205_added(noe any update she)
   setAddressFormInputsVal: React.Dispatch<React.SetStateAction<any>>;   //zare_nk_050205_added(noe any update she)
 };
 
-function BoxHtmlComponent({
-  isEpmtyHeightBox,
-  setIsEpmtyHeightBox,
+function AddressFormInputsComponent({
+  isEpmtyAddressFormInputs,
+  setIsEpmtyAddressFormInputs,
   refForBox,
   saveAddress,
   addressFormInputsVal,
   setAddressFormInputsVal
-}: BoxHtmlComponentType) {
-  console.log('zare_nk_050126_BoxHtmlComponent called!!-isEpmtyHeightBox: ' + isEpmtyHeightBox);
+}: AddressFormInputsComponentType) {
+  console.log('zare_nk_050126_BoxHtmlComponent called!!-isEpmtyAddressFormInputs: ' + isEpmtyAddressFormInputs);
 
   const [error, setError] = useState<string | null>(null);
 
@@ -413,13 +413,13 @@ function BoxHtmlComponent({
       onClickAway={(event) => {
         console.log('dgdgdg');
         const target = event.target as HTMLElement;
-        // const isToggleButton = target.id === 'bigShooBtn';   ////zare_nk_050401_commented(chon age tage bigShooBtn dakhelesh tage digehi mesle span ya img dashteh bashe va karbar 
-        ////rooye oona click koneh barnameh target ro onna midoone na bigShooBtn, chareye kar estefadeh az !!target.closest('#bigShooBtn') hast) 
-        const isToggleButton = !!target.closest('#bigShooBtn');   ////zare_nk_050401_added(amalgare !! meghdar ra be boolean tabdil mikoneh(null => false va HTMLElement=> true))
+        // const isToggleButton = target.id === 'showAddressFormInputsBtn';   ////zare_nk_050401_commented(chon age tage showAddressFormInputsBtn dakhelesh tage digehi mesle span ya img dashteh bashe va karbar 
+        ////rooye oona click koneh barnameh target ro onna midoone na showAddressFormInputsBtn, chareye kar estefadeh az !!target.closest('#showAddressFormInputsBtn') hast) 
+        const isToggleButton = !!target.closest('#showAddressFormInputsBtn');   ////zare_nk_050401_added(amalgare !! meghdar ra be boolean tabdil mikoneh(null => false va HTMLElement=> true))
 
-        if (!isEpmtyHeightBox && !isToggleButton) { ////zare_nk_050208_nokteh(tage bigShooBtn alan dar dakhele Collapse hast na dar kharejesh,va in check 
+        if (!isEpmtyAddressFormInputs && !isToggleButton) { ////zare_nk_050208_nokteh(tage showAddressFormInputsBtn alan dar dakhele Collapse hast na dar kharejesh,va in check 
           // // kardane isToggleButton inja bimorede va niazi nist,age ye roozi absolutesh konim be kharej az Collapse ya fixed konim be kharaej az Collapse in shart karbordiye)
-          setIsEpmtyHeightBox(true); // ببند
+          setIsEpmtyAddressFormInputs(true); // ببند
         }
       }}>
       <Collapse
@@ -432,7 +432,7 @@ function BoxHtmlComponent({
           borderRadius: '20px 20px 0px 0px',
           boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.2)',
         }}
-        in={!isEpmtyHeightBox} //zare_nk_050202_nokteh(moadele show() va hide() dar bootstrap) 
+        in={!isEpmtyAddressFormInputs} //zare_nk_050202_nokteh(moadele show() va hide() dar bootstrap) 
         timeout="auto"
         unmountOnExit  //zare_nk_050202_nokteh(age in attribute ra benevisim age in={false} beshe az dom hazf mishe,age in attribute ra nanevisim 
       // age in={false} beshe az dom hazf nemishe va dar inspect vojood dareh va faghat hidden mishe)
@@ -443,10 +443,10 @@ function BoxHtmlComponent({
         id="box"
         ref={refForBox}
         anchor="bottom"
-        open={!isEpmtyHeightBox}
+        open={!isEpmtyAddressFormInputs}
         onClose={() => {
           console.log('zare_nk_050204-Drawer closed!');
-          setIsEpmtyHeightBox(true)
+          setIsEpmtyAddressFormInputs(true)
         }}
         hideBackdrop={true} //zare_nk_040502(albateh hideBackdrop={true} baes mishe alave bar hazfe tariye poshte drawer,ba click dar fazaye poshtesh,automat 
         // basteh nashe va niaz be modiriate dastiye document.addEventListener dar useEffect dashteh bashim)
@@ -750,11 +750,13 @@ export default function LocationPage() {
   const [mobileVal, setMobileVal] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const [isEpmtyHeightBox, setIsEpmtyHeightBox] = useState(true);
+  // const [isEpmtyHeightBox, setIsEpmtyHeightBox] = useState(true);  ////zare_nk_050505_commented
+  const [isEpmtyAddressFormInputs, setIsEpmtyAddressFormInputs] = useState(true);  ////zare_nk_050505_added
+
   const refForBox = useRef<HTMLDivElement | null>(null);
 
-  const { isLogin } = useAuthentication();
-  console.log('zare_nk_050111-isLogin from context:', isLogin);
+  // const { isLogin } = useAuthentication();
+  // console.log('zare_nk_050111-isLogin from context:', isLogin);
 
   type AddressFormInputsType = {
     Address: string;
@@ -1275,97 +1277,28 @@ export default function LocationPage() {
     refForMap.current?.updateSize();     //zare_nk_050213_added
   }
 
-  ////zare_nk_050213_commented_st
-  // useEffect(() => {   //zare_nk_050208_nokteh(dar useEffecte [map, vLayer1] motmaen mishim map va vLayer1 meghdar daran,age daran showPosition ro ba positioni ke inja 
-  //   //// behesh midim seda mizanim ta state feature ra meghdardehi koneh)
-  //   if (map && vLayer1) {
-  //     if ((map.getView().getZoom() ?? 0) < 18) {
-  //       console.log('less than 18');
-  //     }
-  //     else {
-  //       console.log('bigger than 18');
-  //     }
+  ////zare_nk_050505_nokteh_st(chon dar middleware.ts ma baraye masirhaye azad(ke niaz be login nadaran mesle hamin 
+  //// editaddress) ejazeye oboor midim va vojoode token va monghazi naboodanesh ro aslan barresi nemikonim pas baraye api haye inja tanha vojoode cookiye token kafi 
+  //// nist va bayad monghazi boodanesh ham barrresi she, pas az componente useAuthentication estefadeh kardim baraye estelame token(age monghazi biid cookiye token ro
+  //// hazf ham mikoneh va dar api ha hamoon sharte [let token = getCookie("token"); if (!token) {... return;}] kafiye)(useAuthentication 
+  //// ham mitooneh be /api/verifytoken api bezaneh va ham samte khodesh barresi koneh(man tarjih dadam samte khodesh barresi koneh(chon ba vojoode amniati
+  //// boodane /api/verifytoken ke samte server hast va kamtar emkane hack kardanesh hast man sorate barresi samte karbar bedoone api zadan ro tarjih midam,
+  //// amniatesh ham ba tavajoh be inke tamame api haye .net core ke token mohemme parsafar ham etebarsanji mikoneh man dige negarane amniatesh nistam )) ))     
+  const { isLoginAndInf, refreshLoginStatus } = useAuthentication();
+  const pathname = usePathname();
+  useEffect(() => {
+    console.log('zare_nk_050505_rere_01-useEffect pathname called');
+    refreshLoginStatus();
+  }, [pathname]);
+  ////zare_nk_050505_nokteh_end(chon dar middleware.ts ma baraye masirhaye azad(ke niaz be login nadaran mesle hamin 
+  //// editaddress) ejazeye oboor midim va vojoode token va monghazi naboodanesh ro aslan barresi nemikonim pas baraye api haye inja tanha vojoode cookiye token kafi 
+  //// nist va bayad monghazi boodanesh ham barrresi she, pas az componente useAuthentication estefadeh kardim baraye estelame token(age monghazi bood cookiye token ro
+  //// hazf ham mikoneh va dar api ha hamoon sharte [let token = getCookie("token"); if (!token) {... return;}] kafiye)(useAuthentication 
+  //// ham mitooneh be /api/verifytoken api bezaneh va ham samte khodesh barresi koneh(man tarjih dadam samte khodesh barresi koneh(chon ba vojoode amniati
+  //// boodane /api/verifytoken ke samte server hast va kamtar emkane hack kardanesh hast man sorate barresi samte karbar bedoone api zadan ro tarjih midam,
+  //// amniatesh ham ba tavajoh be inke tamame api haye .net core ke token mohemme parsafar ham etebarsanji mikoneh man dige negarane amniatesh nistam )) )) 
 
-  //     showPosition([53.0585, 36.5659]);
-  //   }
-  // }, [map, vLayer1]);
-  ////zare_nk_050213_commented_end
-
-
-  ////zare_nk_050213_commented_st
-  // useEffect(() => {   //zare_nk_050208_nokteh(useEffecte [map, feature] check mikoneh age map va vSource1 va feature meghdar daran,feature ra be vSource1 midim, 
-  //   // hamchenin modiriat mikonim dar rooydade moveend va pointerdrag feature meghdare jadid begire )
-  //   console.log("001");
-  //   if (map && feature) {
-  //     console.log("002");
-  //     featureToPaskari = feature;
-  //     vSource1?.removeFeature(feature);
-  //     vSource1?.clear();
-  //     vSource1?.getFeatures().map(item => {
-  //       vSource1.removeFeature(item);
-  //     });
-  //     vSource1?.addFeature(feature);
-  //     featuresArr.push(feature);
-  //     console.log("longitude: " + longitude.current + '-latitude: ' + latitude.current);
-  //     LocationArr = [];
-  //     LocationArr.push({
-  //       'loc': {
-  //         'X': longitude.current,
-  //         'Y': latitude.current
-  //       }
-  //     });
-  //     continuation();
-
-  //     map?.on('moveend', function (event) {
-  //       ////zare_nk_040912_added_st
-  //       if ((map.getView().getZoom() ?? 0) < 18) {
-  //         // alert('less than 18');
-  //       }
-  //       else {
-  //         // alert('bigger than 18');
-  //       }
-  //       ////zare_nk_040912_added_end 
-
-  //       let centerCoords3857 = map.getView().getCenter();
-  //       console.log("moveend-feature.get('name').X: " + feature);
-  //       if (centerCoords3857) {
-  //         console.log("moveend-feature.get('name').X: " + feature.get('name').X);
-  //         // feature?.getGeometry()?.setCoordinates(centerCoords3857);
-  //         feature.setGeometry(new Point(centerCoords3857));
-  //         let coordinate = transform(centerCoords3857, 'EPSG:3857', 'EPSG:4326');
-  //         let lat = coordinate[1]// ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[1]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-  //         let lng = coordinate[0]// ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[0];  // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-  //         feature.get('name').X = lng; feature.get('name').Y = lat;
-  //       }
-  //     });
-
-  //     map.on('pointerdrag', function () {
-  //       defZoom = map.getView().getZoom();
-
-  //       ////zare_nk_040911_added_st
-  //       let centerCoords3857 = map.getView().getCenter();
-  //       if (centerCoords3857) {
-  //         console.log("pointermove-feature.get('name').X: " + feature.get('name').X + '-feature.getGeometry().getCoordinates()[0]: ' + feature.getGeometry() ? [0] : 777
-  //           + "-pointermove-feature.get('name').Y: " + feature.get('name').Y + '-feature.getGeometry().getCoordinates()[1]: ' + feature.getGeometry() ? [1] : 888); //feature.getGeometry().getCoordinates()[1]);
-  //         // feature.getGeometry().setCoordinates(centerCoords3857);
-  //         feature.setGeometry(new Point(centerCoords3857));
-  //         let coordinate = transform(centerCoords3857, 'EPSG:3857', 'EPSG:4326');
-  //         ////zare_nk_040911_added_end 
-  //         //let coordinate = feature.getGeometry().getCoordinates();  //zare_nk_040911_commented  
-  //         let lat = coordinate[1]//ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[1]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-  //         let lng = coordinate[0]//ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[0]; // age age az scripte ol dar view estefade nakonim va az sabke import estefade konim nabayad az ol.proj.transform estefade kard,vagarna bayad az ol.proj.transform estefade kard
-  //         feature.get('name').X = lng; feature.get('name').Y = lat;
-  //       }
-  //     });
-
-  //   }
-  //   else {
-  //     console.log("003");
-  //   }
-  // }, [map, feature]);
-  ////zare_nk_050213_commented_end
-
-  async function saveAddress(isOnline: boolean) {
+  async function saveAddress(isLogin: boolean) {
     // if (!feature) {   //zare_nk_050213_commented
     if (!refForFeature.current) {  //zare_nk_050213_added
       return;
@@ -1374,16 +1307,13 @@ export default function LocationPage() {
     console.log('zare_nk_050110-reza02-feature.get("name").Y: ' + refForFeature.current.get('name').Y + "-feature.get('name').X: " + refForFeature.current.get('name').X +
       '-mobileVal: ' + mobileVal + "-feature.get('name').Address: " + refForFeature.current.get('name').Address);
 
-    let token = getCookie("token");
-    console.log('zare_nk_050110-token hala is: ' + getCookie("token"));
-    // if (typeof window !== "undefined") {
-    //   alert('hhhhhhhhhhhhhhh');
-    //   token = localStorage.getItem("Token") || "";
-    // }
-    console.log('zare_nk_050110-token: ' + token);
+    let token = getCookie("token"); ////zare_nk_050505(tebghe revale tapsifoodi dar apiye Api_CreateAddress sharte vojoode token ro barresi nemikonim(ta karbar
+    //// age logout ham bashe betooneh address sabt koneh))
+
+    // console.log('zare_nk_050110-token: ' + token);
     var Api_CreateAddressParams = null;
 
-    Api_CreateAddressParams = isOnline ? (
+    Api_CreateAddressParams = isLogin ? (
       {
         'FName': 'reza',
         'LName': 'kavian',
@@ -1412,7 +1342,6 @@ export default function LocationPage() {
       // 'TahvilGirande': TahvilGirande,
       // 'OnvanAdress': $('#OnvanAdress').val(),
     })
-
 
     // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
     const response = await fetch(NextJsApiUrl + "Api_CreateAddress", {
@@ -1451,13 +1380,13 @@ export default function LocationPage() {
     }
   }
 
-  const bigShoo = () => {
+  const showAddressFormInputs = () => {
     // setIsEpmtyHeightBox(false);  //zare_nk_050205_comemnted
     ////zare_nk_050205_added_st
     let token = getCookie("token");
     console.log('zare_nk_050110-token hala is: ' + getCookie("token"));
     if (token) {
-      setIsEpmtyHeightBox(false);
+      setIsEpmtyAddressFormInputs(false);
     }
     else {
       saveAddress(false);  ////zare_nk_050205_nokteh(age offLine ham bood taraf address ra zakhireh kon ehtemalan ba user movaghat!!)
@@ -1588,8 +1517,8 @@ export default function LocationPage() {
 
           <div style={{ display: "flex", flexFlow: "row", justifyContent: "center", alignItems: "center" }}>
             <button
-              id="bigShooBtn"
-              onClick={bigShoo}
+              id="showAddressFormInputsBtn"
+              onClick={showAddressFormInputs}
               style={{
                 width: '100%', color: '#ffffff',
                 fontSize: '.875rem',
@@ -1602,9 +1531,9 @@ export default function LocationPage() {
 
         </div>
 
-        <BoxHtmlComponent
-          isEpmtyHeightBox={isEpmtyHeightBox}
-          setIsEpmtyHeightBox={setIsEpmtyHeightBox}
+        <AddressFormInputsComponent
+          isEpmtyAddressFormInputs={isEpmtyAddressFormInputs}
+          setIsEpmtyAddressFormInputs={setIsEpmtyAddressFormInputs}
           refForBox={refForBox}
           saveAddress={saveAddress}
           addressFormInputsVal={addressFormInputsVal}

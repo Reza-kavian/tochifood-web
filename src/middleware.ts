@@ -1,4 +1,4 @@
-////zare_nk_050504_okk(1) ////zare_nk_050413(az jose baraye samte karbar estefadeh konam(masalan dar login) age javab mideh(ke api be verifytoken nazanam))
+////zare_nk_050505_okk(1) ////zare_nk_050413(az jose baraye samte karbar estefadeh konam(masalan dar login) age javab mideh(ke api be verifytoken nazanam))
 import { NextResponse, NextRequest } from "next/server";
 // import jwt from "jsonwebtoken";  //chon middleware.ts dar Edge Runtime ejra mishavad, az majoole crypto poshtibani nemikoneh 
 // va az jsonwebtoken nemishe dar middleware.ts estefadeh kard, pas api zadim be verifytoken va dar anja az jsonwebtoken estefade kardim 
@@ -78,30 +78,16 @@ export async function middleware(request: NextRequest) {
   // }
   ////zare_nk_040419_added_end(and commented)
 
-  ////zare_nk_040520_commented_st(baes mishe vaghti "/tryreact" dar arayeye publicPaths bashe barnameh "/tryreact2" ro ham ejazeye dastresi bedoone login ro bedeh,hatta age "/tryreact2" dar araye nabashe!)
-  // const isPublic = publicPaths.some((path) => {
-  //   return request.nextUrl.pathname.startsWith(path);  //yani ba /tryreact shoroo beshe, masalan /tryreact23244(vali in nadoroste chon masire /tryreact23244 dar araye nist va mikham bedoone login toosh narim vali barname jelogiri nemikone!)
-  // });
-  ////zare_nk_040520_commented_end
-  ////zare_nk_040520_added_st
-  const isPublic = publicPaths.some((path) => {
-    ////zare_nk_040520_rahe1_st(pichidehtare va faghat baraye masirhaye pichide tosiye mishe)
-    // const escapedPath = path.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    // const regex = new RegExp(`^${escapedPath}(?:/.*)?$`);
-    // return regex.test(request.nextUrl.pathname);
-    ////zare_nk_040520_rahe1_end(pichidehtare va faghat baraye masirhaye pichide tosiye mishe)
-    ////zare_nk_040520_rahe2_st(sadehtare va baraye masirhaye sade mesle projeye man tosiye mishe)
+
+  const isPublic = publicPaths.some((path) => {    
     return (
       request.nextUrl.pathname === path ||  ////yani daghighan khode /tryreact
       request.nextUrl.pathname.startsWith(path + "/") ////yani zir majmooe haye /tryreact, masalan /tryreact/...
     );
   });
-  ////zare_nk_040520_rahe2_end(sadehtare va baraye masirhaye sade mesle projeye man tosiye mishe)
-  ////zare_nk_040520_added_end
 
   // if (isPublic || request.nextUrl.pathname == "/") {  //zare_nk_050205_commented
   if (isPublic) {
-    ////zare_nk_050205_added
     const response = NextResponse.next();
     const fullUrl = request.nextUrl.href;
     const pathname = request.nextUrl.pathname;
@@ -118,7 +104,7 @@ export async function middleware(request: NextRequest) {
   // console.log("zare_nk_050108-Token from cookie:", token);
   ////zare_nk_050111_added_movaghat_st
   // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjIwMTA5IiwiQ29kZU1vc2h0YXJpIjoiMjAxMDkiLCJNb2JpbGUiOiI5MzUxMDkxMjg3IiwiTmFtZU1vc2h0YXJpIjoiIiwibmJmIjoxNzQ2NzI1OTI4LCJleHAiOjE3NDczMzA3MjgsImlhdCI6MTc0NjcyNTkyOH0.9Jfv71v3D_s13gSyf3gXqgEfiXaV-lx93hDey4DSLM8";
-  ////zare_nk_050111_added_movaghat_ثدی
+  ////zare_nk_050111_added_movaghat_end
   if (token) {
     console.log("zare_nk_050205-01-taghiir-tempTest-inja 004-token daaarim1");
     try {
@@ -190,9 +176,8 @@ export async function middleware(request: NextRequest) {
         error
         //zare_nk_040403-taghiir-tempTest-inja 003-amaliate barrasiye token ba khata movajeh shod-error: TypeError: fetch failed
       );
-      // return NextResponse.json({ error: "توکن نامعتبر است" }, { status: 401 });
 
-      var ishomePage: boolean = request.nextUrl.pathname == "/" ? true : false;  //zare_nk_050205_added
+      var ishomePage: boolean = request.nextUrl.pathname == "/" ? true : false;  
 
       // const response = NextResponse.redirect(new URL("/login", request.url));  //zare_nk_050205_commented
       const response = ishomePage ? NextResponse.redirect(new URL("/onboarding", request.url)) :

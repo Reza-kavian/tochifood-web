@@ -381,7 +381,6 @@ export default function Orders() {
         flexDirection: 'column',
         // border: '3px solid orange',
       }}>
-
         <main
           style={{
             backgroundColor: 'white',

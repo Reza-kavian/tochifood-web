@@ -1,4 +1,4 @@
-//src\app\api\auth\callback\google  ////zare_nk_050428_okk(1)
+//src\app\api\auth\callback\google  ////zare_nk_050505_okk(1)
 import { NextRequest, NextResponse } from "next/server";  ////zare_nk_041013_nokteh(cookies marboot be NextResponse(mesle res.cookies.set("token", "123");) ham khandani va ham neveshtani hastan )
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { cookies } from "next/headers";  ////zare_nk_041013_nokteh(cookies import shodeh az next/headers faghat khandani hast, va marboot be cooki haei ke az samte karbar ba request mian)
@@ -52,12 +52,10 @@ export async function GET(req: NextRequest) {
 
     ////zare_nk_041013_nokteh_end(cooki haye zakhireh shodeh)
     if (!cookieStateStr || !returnedParamState) {
-      ////zare_nk_041105_added_st
       cookieStore.delete("oauth_state");
-      // let { source } = decodeState(cookieStateStr); //zare_nk_041105_commented
-      const source: "web" | "mobile" = cookieStateStr  //zare_nk_041105_added
+      const source: "web" | "mobile" = cookieStateStr
         ? decodeState(cookieStateStr).source
-        : "web"; // fallback امن
+        : "web";
 
       if (source === "mobile") {
         const url = new URL("https://testotm.sarinmehr.com/redirect-mobile");
@@ -70,7 +68,6 @@ export async function GET(req: NextRequest) {
         });
         return res;
       }
-      ////zare_nk_041105_added_end
 
       const res = NextResponseRedirect("/login");
       res.cookies.delete("token");
@@ -82,11 +79,9 @@ export async function GET(req: NextRequest) {
 
     if (returnedParamState !== cookieStateStr) {
       cookieStore.delete("oauth_state");
-      ////zare_nk_041105_added_st
-      // let { source } = decodeState(cookieStateStr); //zare_nk_041105_commented
-      const source: "web" | "mobile" = cookieStateStr  //zare_nk_041105_added
+      const source: "web" | "mobile" = cookieStateStr
         ? decodeState(cookieStateStr).source
-        : "web"; // fallback امن
+        : "web";
       if (source === "mobile") {
         const url = new URL("https://testotm.sarinmehr.com/redirect-mobile");
         url.searchParams.set("error", error ?? "google_login_failed");
@@ -98,7 +93,6 @@ export async function GET(req: NextRequest) {
         });
         return res;
       }
-      ////zare_nk_041105_added_end
       // return NextResponseRedirect("/login");
       const res = NextResponseRedirect("/login");
       res.cookies.delete("token");
@@ -107,8 +101,8 @@ export async function GET(req: NextRequest) {
       });
       return res;
     }
-
-    const { source } = decodeState(cookieStateStr);
+    // const source = decodeState(cookieStateStr).source  ////zare_nk_050505_nokteh(rahe1)
+    const { source } = decodeState(cookieStateStr);   ////zare_nk_050505_nokteh(rahe2)
     console.log("zare_nk_041010-source: " + source);
     cookieStore.delete("oauth_state");
     /* ---------------- Cancel or Error ---------------- */

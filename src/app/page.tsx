@@ -2,7 +2,7 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext } from "react";
-import { useRouter, useSearchParams, redirect,usePathname } from "next/navigation";
+import { useRouter, useSearchParams, redirect, usePathname } from "next/navigation";
 import Styles from "@/styles/components/location.module.css";
 import globalsStyles from "@/styles/components/globals.module.css";
 import jwt from "jsonwebtoken";
@@ -88,8 +88,7 @@ export default function Home() {
 
   const refForBox = useRef<HTMLDivElement | null>(null);
 
-
-  const { isLogin } = useAuthentication();
+  // const { isLogin } = useAuthentication();
 
   const [responsedListFromApiSelectAddressList, SetResponsedListFromApiSelectAddressList] = useState<responsedListFromApiSelectAddressListType[] | null>(null);
 
@@ -114,12 +113,29 @@ export default function Home() {
     profile: false,
   });
 
+  ////zare_nk_050505_commented_st
+  // useEffect(() => {
+  //   const chosenAddress = getCookie("chosenAddress");
+  //   var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
+  //   setMycurrentAddressState(parsedChosenAddress);
+  // }, []);
+  ////zare_nk_050505_commented_end
+  // ////zare_nk_050505_added_st
   useEffect(() => {
     const chosenAddress = getCookie("chosenAddress");
     var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
 
-    setMycurrentAddressState(parsedChosenAddress);
-  }, []);
+    if (parsedChosenAddress == null) {
+      showAddressListDrawer();
+      // chosenAddress(responsedListFromApiSelectAddressList ? responsedListFromApiSelectAddressList[0] : null) 
+      return;
+    }
+    if (mycurrentAddressState == null) {
+      setMycurrentAddressState(parsedChosenAddress);
+    } 
+
+  }, [isEpmtyAdressList]); ////zare_nk_050505_addeded
+  // ////zare_nk_050505_added_end
 
   const router = useRouter();
 
@@ -127,7 +143,7 @@ export default function Home() {
     // router.push("/folder03?tab=comments2");
     // redirect("/login"); 
     // router.replace("/testPage");
-    router.push("/shoppingbasket"); 
+    router.push("/shoppingbasket");
   };
 
   const showAddressListDrawer = useCallback(
@@ -331,10 +347,7 @@ export default function Home() {
                 {mycurrentAddressState?.Adress ? mycurrentAddressState.Adress : ''}
               </div>
 
-              <img
-                src="/images/header/getAddresses.svg"
-                alt=" ادرس ها"
-              />
+              <img src="/images/header/getAddresses.svg" alt=" ادرس ها" />
               {/* <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="inherit" class="size-6 shrink-0 fill-gray-950 rotate-90"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.55017 15.5355L12.085 12.0007L8.55017 8.46445L9.96438 7.05023L14.9141 12L9.96438 16.9497L8.55017 15.5355Z" fill="inherit"></path></svg> */}
             </div>
           </button>
@@ -465,8 +478,8 @@ export default function Home() {
         <footer style={{
           maxWidth: '450px', marginLeft: 'auto', marginRight: 'auto', zIndex: 50, bottom: 0, left: 0, right: 0, position: 'fixed',
         }}>
-          <div style={{  
-            position: 'relative', boxShadow: '0px -1px 5px 2px #0000000d', opacity: 1, backgroundColor: 'white',  
+          <div style={{
+            position: 'relative', boxShadow: '0px -1px 5px 2px #0000000d', opacity: 1, backgroundColor: 'white',
             overflow: 'hidden', height: '100%', padding: '0px 1rem',
           }}>
             <div style={{
@@ -562,7 +575,7 @@ export default function Home() {
               <div style={{
                 display: 'flex', flexFlow: 'row', justifyContent: 'center', alignItems: 'center', height: '100%', zIndex: '2',
               }}>
-                <button onClick={() => { 
+                <button onClick={() => {
                   router.replace("/profile");
                   // setFooterBtnClicked(() => {
                   //   return ({

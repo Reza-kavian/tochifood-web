@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(1)
+////zare_nk_050504_okk(1)
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -735,7 +735,6 @@ export default function Toolbar() {
 
           const DecodeToken = jwtDecode<MyJwtPayload>(token);
           console.log('zare_nk_050501_DecodeToken is: ' + JSON.stringify(DecodeToken));
-          ////zare_nk_050501_DecodeToken is: {"unique_name":"9351091287","CodeMoshtari":"9649","Mobile":"9351091287","NameMoshtari":"غلامرضا کاویان","nbf":1784822288,"exp":1785427088,"iat":1784822288}
           const expires = (DecodeToken.exp ?? 0) * 1000; ////zare_nk_050501_nokteh(lahaz kardane expires az tokene pasokhe apiye Api_LoginUser2(chon bar hasbe saniye ast 
           //// be milisaniye tabdil kardim ba 1000 barabar kardan))    
  
@@ -748,8 +747,7 @@ export default function Toolbar() {
 
           document.cookie = `token=${token}; path=/; expires=${expires}; secure; samesite=None`;
           const redirect = getCookie("redirect") || "/";
-          document.cookie =
-            "redirect=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC"; // حذف کوکی
+          document.cookie = "redirect=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC"; // حذف کوکی
           console.log('redirect iss: ' + getCookie("redirect"));
           console.log('zare_nk_050110-token is: ' + getCookie("token"));
           router.replace(redirect); //zare_nk_040228_commented(and zare_nk_040312 uncommented(chon safheh ro refresh nemikoneh va behtare ehtemalan))

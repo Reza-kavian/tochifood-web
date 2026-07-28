@@ -332,13 +332,10 @@ export default function Profile() {
 
     let token = getCookie("token");
     console.log('zare_nk_050110-token hala is: ' + getCookie("token"));
-    if (token == null) {
-      alert('!token-token nadarim!');
+    if (!token) {
+      console.log('!token-token nadarim!');
+      return;
     }
-    // if (typeof window !== "undefined") {
-    //   alert('hhhhhhhhhhhhhhh');
-    //   token = localStorage.getItem("Token") || "";
-    // }
     console.log('zare_nk_050110-token: ' + token);
     // var Api_CreateProfileParams = null;
 
@@ -416,7 +413,13 @@ export default function Profile() {
     }
   }
 
-  ////zare_nk_050429_added_end
+  ////zare_nk_050506_added_st
+  function forlogout() {
+    document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;   
+    router.replace('/');
+  }
+  ////zare_nk_050506_added_end
+
   return (
     <>
       {/*<button onClick={() => { func33() }}>for func3</button> 
@@ -744,7 +747,7 @@ export default function Profile() {
             {isDisabledsaveProfileFormInputsBtn ?
               <button ref={refForLogOutBtn} id="LogOutBtn" className={Styles.disabledBtn}
                 onClick={() => {
-                  // saveAddress(true);
+                  forlogout();
                 }}
                 style={{
                   display: 'flex', justifyContent: 'center', alignItems: 'center',

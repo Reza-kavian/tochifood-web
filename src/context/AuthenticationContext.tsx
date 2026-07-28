@@ -1,4 +1,4 @@
-//// context/AuthenticationContext.js   ////zare_nk_050428_okk(1)
+//// context/AuthenticationContext.js   ////zare_nk_050505_okk(1)
 'use client';
 
 import { createContext, useState, useContext, useCallback } from 'react';
@@ -23,11 +23,9 @@ interface setIsLoginAndInfType {
 }
 
 function getCookie(name: string) {
-    ////zare_nk_050209_added_st
     if (typeof document === 'undefined') {
         return null; // برای جلوگیری از خطای عدم وجود document
     }
-    ////zare_nk_050209_added_end
     const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
     const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
     if (parts.length === 2) {
@@ -61,6 +59,7 @@ export function AuthenticationProvider({ children }: { children: React.ReactNode
     });
 
     const refreshLoginStatus = useCallback(async () => {
+        console.log('zare_nk_050505_rere_01.01-refreshLoginStatus called');
         const token = getCookie("token");
         if (token) {
             ////zare_nk_050504_nokteh_st(raveshe 1-estelame samte client(amniate kamtar vali saritar, chon api nemizanim, vali chon baraye hameye api

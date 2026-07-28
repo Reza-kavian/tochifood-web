@@ -218,7 +218,6 @@ const Adressescomponent = function Adressescomponent({
   }
   ////zare_nk_050422_added_end
 
-
   var currentAddressUseContext = useContext(currentAddressContext);   ////zare_nk_050329_added 
 
   const chosenAddress = useCallback(
@@ -234,14 +233,14 @@ const Adressescomponent = function Adressescomponent({
       // document.cookie = `chosenAddress=${JSON.stringify(chosenAddressItem)}; path=/; expires=${expiresString};secure; samesite=None`;
       ////zare_nk_050210_nokteh(mamoolan JSON.stringify kefayat mikoneh, vali age matne cookie shamele characterhaye ; va ... bashe shayad barnameh eshtebahan anra 
       //// beonvane jodakonandeh dar reshteye document.cookie darnazar begire va kharabkari koneh, pas encodeURIComponent tosiye mishavad)
-      document.cookie =await chosenAddressItem ? (
+      document.cookie = await chosenAddressItem ? (
         `chosenAddress=${encodeURIComponent(JSON.stringify(chosenAddressItem))}; path=/; expires=${expiresString};secure; samesite=None`
       ) :
         (
           `chosenAddress=; path=/; expires=${expiresString};secure; samesite=None`
         )
 
-      const chosenAddress =await getCookie("chosenAddress");
+      const chosenAddress = await getCookie("chosenAddress");
       // alert('chosenAddress is: ' + chosenAddress);
       var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
       // alert('chosenAddress IdAdress is: ' + parsedChosenAddress.IdAdress);
@@ -266,7 +265,7 @@ const Adressescomponent = function Adressescomponent({
         parsedurrentShobe = await getSwiperShopsInVendorComp(null);
       }
 
-      document.cookie =await parsedurrentShobe ? (`currentShobe=${encodeURIComponent(JSON.stringify(parsedurrentShobe))}; path=/; expires=${expiresString};secure; samesite=None`) :
+      document.cookie = await parsedurrentShobe ? (`currentShobe=${encodeURIComponent(JSON.stringify(parsedurrentShobe))}; path=/; expires=${expiresString};secure; samesite=None`) :
         (`currentShobe=; path=/; expires=${expiresString};secure; samesite=None`)
       //// const currentShobe = await getCookie("currentShobe");
       //// var parsedurrentShobe: responsedListFromApiSelectShobehAtrafUserType | null = currentShobe ? JSON.parse(currentShobe) : null;
@@ -277,6 +276,19 @@ const Adressescomponent = function Adressescomponent({
       ////zare_nk_050422_added_end
     }
     , [currentAddressUseContext])
+
+  ////zare_nk_050505_added_st
+  useEffect(() => {
+    const chosenAddressCookie = getCookie("chosenAddress");
+    var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddressCookie ? JSON.parse(chosenAddressCookie) : null;
+
+    if (parsedChosenAddress == null && responsedListFromApiSelectAddressList && responsedListFromApiSelectAddressList.length > 0) {
+      chosenAddress(responsedListFromApiSelectAddressList ? responsedListFromApiSelectAddressList[0] : null)
+      return;
+    }
+
+  }, [responsedListFromApiSelectAddressList]);
+  ////zare_nk_050505_added_end
 
   return (<>
     <div style={{ display: 'flex', flexFlow: 'column', padding: '0px', margin: '0px', }}>
@@ -298,11 +310,10 @@ const Adressescomponent = function Adressescomponent({
               height: 'min-content',
               alignItems: 'center',
             }}>
-            <div
-              onClick={() => {
-                setRowItem(item);
-                chosenAddress(item);
-              }}
+            <div onClick={() => {
+              setRowItem(item);
+              chosenAddress(item);
+            }}
               style={{
                 // borderTop: '1px solid #2b364f14',
                 display: 'flex',
@@ -328,15 +339,15 @@ const Adressescomponent = function Adressescomponent({
               </button>
 
               <div style={{
-                  paddingTop: '.5rem',
-                  display: 'flex',
-                  justifyContent: 'flex-start',
-                  alignItems: 'flex-start',
-                  flexFlow: 'column',
-                  flex: '1 1 0%',
-                  height: 'min-content',
-                  marginLeft: '.5rem',
-                }} >
+                paddingTop: '.5rem',
+                display: 'flex',
+                justifyContent: 'flex-start',
+                alignItems: 'flex-start',
+                flexFlow: 'column',
+                flex: '1 1 0%',
+                height: 'min-content',
+                marginLeft: '.5rem',
+              }} >
                 <span
                   style={{
                     color: '#1b1c1d',

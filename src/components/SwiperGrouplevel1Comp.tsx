@@ -65,7 +65,7 @@ const SwiperGrouplevel1Comp = () => {
     const getSwiperGrouplevel1 = async () => {
         let token = getCookie("token");
         if (!token) {
-            setErrorInSwiperGrouplevel1("lotfan avval online shid");
+            setErrorInSwiperGrouplevel1("لطفا ابتدا وارد حساب کاربری خود شوید");
             return;
         }
         console.log('tokentokentoken: ' + token);

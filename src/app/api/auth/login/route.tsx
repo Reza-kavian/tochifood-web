@@ -1,4 +1,4 @@
-////src\app\api\auth\login  ////zare_nk_050428_okk(1)
+////src\app\api\auth\login  ////zare_nk_050505_okk(1)
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
   try {
     console.log('040930-b-00');
     const pool = await getConnection();
-    const { username, password } = await request.json();
+    const { username, password } = await request.json();    
     // ورود با نام کاربری و رمزعبور
     let user = await pool
       .request()

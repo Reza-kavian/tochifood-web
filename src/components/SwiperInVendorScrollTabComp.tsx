@@ -79,7 +79,7 @@ const SwiperInVendorScrollTabComp = ({
     const getGoroohHa = async () => {
         let token = await getCookie("token");
         if (!token) {
-            setErrorInSwiperVendorHeader("lotfan avval online shid");
+            setErrorInSwiperVendorHeader("لطفا ابتدا وارد حساب کاربری خود شوید");
             return;
         }
         console.log('tokentokentoken: ' + token);

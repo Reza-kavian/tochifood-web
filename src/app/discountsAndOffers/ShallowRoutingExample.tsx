@@ -1,7 +1,7 @@
-////zare_nk_050413_okk(1)
+////zare_nk_050505_okk(1)
 "use client";
 import { useRouter } from "next/navigation";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, RefObject, MouseEvent } from "react";
 
 // import "bootstrap/dist/css/bootstrap.min.css";  //zare_nk_040416_commented(chon enteghalesh dadam be layout.tsx)
 // import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -12,9 +12,6 @@ let cachedBootstrap: typeof import("bootstrap") | null = null; //zare_nk_040417_
 // import { NotFoundException } from "@zxing/library";    //zare_nk_040417_commented
 // import { json } from "stream/consumers";  ////zare_nk_040417_commented(estefadeh ham nashod)
 import "@/styles/DiscountsAndOffersCss.css";
-
-import { RefObject } from "react";
-import { MouseEvent } from "react";
 
 import { NextJsApiUrl } from "../../constants/Urls";  ////zare_nk_050407_added
 
@@ -720,15 +717,13 @@ export function SabadSatrComponent({
 }: SabadSatrProps) {
   var Tedad = SabadRow.tedadInSabadOrDet;
   var bishAzMaxTedadYaMojoodi = 0;
-  if (SabadRow.MaxTedad != null) {
-    if (SabadRow.MaxTedad <= Tedad) {
-      bishAzMaxTedadYaMojoodi = 1;
-    }
-  } else {
-    if (SabadRow.Mojoodi <= Tedad) {
-      bishAzMaxTedadYaMojoodi = 1;
-    }
+  if (SabadRow.MaxTedad <= Tedad) {
+    bishAzMaxTedadYaMojoodi = 1;
   }
+  if (SabadRow.Mojoodi <= Tedad) {
+    bishAzMaxTedadYaMojoodi = 1;
+  }
+
   console.log('zare_nk_041121-SabadRow: ' + JSON.stringify(SabadRow));
   // const ForCartContentsDesignTypeLet = useMemo(() => {
   const tedadInSabadOrDetToNumber = Number(SabadRow.tedadInSabadOrDet);
@@ -1108,9 +1103,8 @@ export default function ShallowRoutingExample() {
       return;  //zare_nk_041130_added
     }
 
-    // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-    let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-    var urlApi_SelectKalaShobeh = ApiUrl + "Api_SelectKalaShobeh";
+    // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+    var urlApi_SelectKalaShobeh = NextJsApiUrl + "Api_SelectKalaShobeh";
     const response = await fetch(urlApi_SelectKalaShobeh, {
       method: "POST",
       headers: {
@@ -1364,9 +1358,8 @@ export default function ShallowRoutingExample() {
           IsFavorite: -1,
           IdVitrin: -1,
         };
-        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-        let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-        var urlSelectKalaShobeh = ApiUrl + "Api_SelectKalaShobeh";
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+        var urlSelectKalaShobeh = NextJsApiUrl + "Api_SelectKalaShobeh";
         const response = await fetch(urlSelectKalaShobeh, {   //zare_nk_041121_added(for shopToDiscount)
           method: "POST",
           headers: {
@@ -1519,9 +1512,8 @@ export default function ShallowRoutingExample() {
       const token = getCookie("token");
       console.log('041120-addToCartInIndex-tedad: ' + addRemParam.tedadInSabadOrDet + '-zarib: ' + addRemParam.ZaribForoosh + '-TedadOut: ' + TedadOut);
 
-      // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-      let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-      var urlInsertToSabad = ApiUrl + "Api_AddRemoveSabadKharidSatr";
+      // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+      var urlInsertToSabad = NextJsApiUrl + "Api_AddRemoveSabadKharidSatr";
       const response = await fetch(urlInsertToSabad, {
         method: "POST",
         headers: {

@@ -1,4 +1,4 @@
-// src\app\api\auth\google  ////zare_nk_050428_okk(1)
+// src\app\api\auth\google  ////zare_nk_050505_okk(1)
 import { NextResponse } from "next/server";
 import { google } from "googleapis";
 import { cookies } from "next/headers";
@@ -19,8 +19,7 @@ export async function GET(req: Request) {
 
   // ✅ خواندن کوکی‌ها (تشخیص موبایل یا وب)
   const cookieStore = await cookies();
-  const source =
-    cookieStore.get("oauth_source")?.value === "mobile"
+  const source = cookieStore.get("oauth_source")?.value === "mobile"
       ? "mobile"
       : "web";
   // 🔐 یک‌بار مصرف
@@ -33,18 +32,18 @@ export async function GET(req: Request) {
   const authUrl = oauth2Client.generateAuthUrl({
     access_type: "offline",
     prompt: "consent",
-    scope: ["profile", "email"],  //zare_nk_041011_nokteh(yani man az hesabe googgle daghighan be che ettelaati dastresi mikham?)
-    // state: source,     //zare_nk_041002_commented
-    state: oauthStateStr,  //zare_nk_041002_added
+    scope: ["profile", "email"],  ////zare_nk_041011_nokteh(yani man az hesabe googgle daghighan be che ettelaati dastresi mikham?)
+    // state: source,     ////zare_nk_041002_commented
+    state: oauthStateStr,  ////zare_nk_041002_added
   });
 
-  console.log("040603-authUrl:", authUrl);   //zare_nk_040519_nokteh-in bakhsh be dorosti dar https://testotm.sarinmehr.com/api/auth/callback/google sakhte mishe
+  console.log("040603-authUrl:", authUrl);   ////zare_nk_040519_nokteh-in bakhsh be dorosti dar https://testotm.sarinmehr.com/api/auth/callback/google sakhte mishe
   //authUrl: https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&prompt=consent&scope=profile%20email&response_type=code&client_id=733109327570-t2qo3siffjpe5f23kud6inul4n2k4p00.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Ftestotm.sarinmehr.com%2Fapi%2Fauth%2Fcallback%2Fgoogle
 
   const res = NextResponse.redirect(authUrl);
   res.cookies.set("oauth_state", oauthStateStr, {
-    // httpOnly: true,  //zare_nk_041106_commented
-    httpOnly: false,  //zare_nk_041106_added
+    // httpOnly: true,  ////zare_nk_041106_commented
+    httpOnly: false,    ////zare_nk_041106_added
     secure: true,
     sameSite: "lax",
     maxAge: 5 * 60, // ۵ دقیقه

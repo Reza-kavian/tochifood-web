@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(1)
+////zare_nk_050505_okk(1)
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -96,9 +96,9 @@ function getCookie(name: any) {
 // };
 ////zare_nk_050213_added_end
 
-type BoxHtmlComponentType = {
-  isEpmtyHeightBox: boolean;
-  setIsEpmtyHeightBox: React.Dispatch<React.SetStateAction<boolean>>;
+type AddressFormInputsComponentType = {
+  isEpmtyAddressFormInputs: boolean;
+  setIsEpmtyAddressFormInputs: React.Dispatch<React.SetStateAction<boolean>>;
   refForBox: RefObject<HTMLDivElement | null>;
   saveAddress: (idAddress: number | null) => void;
   addressFormInputsVal: any;   //zare_nk_050205_added(noe any update she)
@@ -106,16 +106,16 @@ type BoxHtmlComponentType = {
   getIdAdressFromSearchParams: () => number | null; //zare_nk_050213_added
 };
 
-function BoxHtmlComponent({
-  isEpmtyHeightBox,
-  setIsEpmtyHeightBox,
+function AddressFormInputsComponent({
+  isEpmtyAddressFormInputs,
+  setIsEpmtyAddressFormInputs,
   refForBox,
   saveAddress,
   addressFormInputsVal,
   setAddressFormInputsVal,
   getIdAdressFromSearchParams, //zare_nk_050213_added
-}: BoxHtmlComponentType) {
-  console.log('zare_nk_050126_BoxHtmlComponent called!!-isEpmtyHeightBox: ' + isEpmtyHeightBox);
+}: AddressFormInputsComponentType) {
+  console.log('zare_nk_050126_AddressFormInputsComponent called!!-isEpmtyAddressFormInputs: ' + isEpmtyAddressFormInputs);
 
   const [error, setError] = useState<string | null>(null);
 
@@ -309,7 +309,6 @@ function BoxHtmlComponent({
   useEffect(() => {
     const hasNotNullValue = Object.values(addressFormInputsMatnError).some(value => value !== null);
     console.log('050205-addressFormInputsMatnError: ' + JSON.stringify(addressFormInputsMatnError));
-    ////zare_nk_050206_nokteh_st(in dastoorat dar in makan javab dad be khoobi)
     if (hasNotNullValue) {
       console.log('050205-hasNullValue');
       setIsDisabledsaveAddressFormInputsBtn(true);
@@ -326,17 +325,16 @@ function BoxHtmlComponent({
         refForSaveAddressFormInputsBtn.current.classList.add(Styles.btn);
       }
     }
-    ////zare_nk_050206_nokteh_end(in dastoorat dar in makan javab dad be khoobi)
   }, [addressFormInputsMatnError]);
 
   return (<>
     <ClickAwayListener
       onClickAway={(event) => {
         const target = event.target as HTMLElement;
-        const isToggleButton = target.id === 'bigShooBtn';  ////zare_nk_050208_nokteh(tage bigShooBtn alan dar dakhele Collapse hast na dar kharejesh,va in check 
+        const isToggleButton = target.id === 'showAddressFormInputsBtn';  ////zare_nk_050208_nokteh(tage showAddressFormInputsBtn alan dar dakhele Collapse hast na dar kharejesh,va in check 
         //// kardane isToggleButton inja bimorede va niazi nist,age ye roozi absolutesh konim be kharej az Collapse ya fixed konim be kharaej az Collapse in shart karbordiye)
-        if (!isEpmtyHeightBox && !isToggleButton) {
-          setIsEpmtyHeightBox(true); // ببند
+        if (!isEpmtyAddressFormInputs && !isToggleButton) {
+          setIsEpmtyAddressFormInputs(true); // ببند
         }
       }}>
       <Collapse
@@ -349,7 +347,7 @@ function BoxHtmlComponent({
           borderRadius: '20px 20px 0px 0px',
           boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.2)',
         }}
-        in={!isEpmtyHeightBox}  ////zare_nk_050202_nokteh(moadele show() va hide() dar bootstrap) 
+        in={!isEpmtyAddressFormInputs}  ////zare_nk_050202_nokteh(moadele show() va hide() dar bootstrap) 
         timeout="auto"
         unmountOnExit  ////zare_nk_050202_nokteh(age in attribute ra benevisim age in={false} beshe az dom hazf mishe,age in attribute ra nanevisim 
       //// age in={false} beshe az dom hazf nemishe va dar inspect vojood dareh va faghat hidden mishe)
@@ -630,11 +628,10 @@ export default function EditPage() {
   const [mobileVal, setMobileVal] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const [isEpmtyHeightBox, setIsEpmtyHeightBox] = useState(true);
-  const refForBox = useRef<HTMLDivElement | null>(null);
+  // const [isEpmtyHeightBox, setIsEpmtyHeightBox] = useState<boolean>(true);  ////zare_nk_050505_commented
+  const [isEpmtyAddressFormInputs, setIsEpmtyAddressFormInputs] = useState<boolean>(true);  ////zare_nk_050505_added
 
-  const { isLogin } = useAuthentication();
-  console.log('zare_nk_050111-isLogin from context:', isLogin);
+  const refForBox = useRef<HTMLDivElement | null>(null);
 
   type AddressFormInputsType = {
     Address: string;
@@ -664,20 +661,53 @@ export default function EditPage() {
 
   const refForFeature = useRef<Feature | null>(null);
 
+  ////zare_nk_050505_nokteh_st(chon dar middleware.ts ma baraye masirhaye azad(ke niaz be login nadaran mesle hamin 
+  //// editaddress) ejazeye oboor midim va vojoode token va monghazi naboodanesh ro aslan barresi nemikonim pas baraye api haye inja tanha vojoode cookiye token kafi 
+  //// nist va bayad monghazi boodanesh ham barrresi she, pas az componente useAuthentication estefadeh kardim baraye estelame token(age monghazi biid cookiye token ro
+  //// hazf ham mikoneh va dar api ha hamoon sharte [let token = getCookie("token"); if (!token) {... return;}] kafiye)(useAuthentication 
+  //// ham mitooneh be /api/verifytoken api bezaneh va ham samte khodesh barresi koneh(man tarjih dadam samte khodesh barresi koneh(chon ba vojoode amniati
+  //// boodane /api/verifytoken ke samte server hast va kamtar emkane hack kardanesh hast man sorate barresi samte karbar bedoone api zadan ro tarjih midam,
+  //// amniatesh ham ba tavajoh be inke tamame api haye .net core ke token mohemme parsafar ham etebarsanji mikoneh man dige negarane amniatesh nistam )) ))     
+  const { isLoginAndInf, refreshLoginStatus } = useAuthentication();
+  const pathname = usePathname();
+  useEffect(() => {
+    console.log('zare_nk_050505_rere_01-useEffect pathname called');
+    refreshLoginStatus();
+  }, [pathname]);
+  ////zare_nk_050505_nokteh_end(chon dar middleware.ts ma baraye masirhaye azad(ke niaz be login nadaran mesle hamin 
+  //// editaddress) ejazeye oboor midim va vojoode token va monghazi naboodanesh ro aslan barresi nemikonim pas baraye api haye inja tanha vojoode cookiye token kafi 
+  //// nist va bayad monghazi boodanesh ham barrresi she, pas az componente useAuthentication estefadeh kardim baraye estelame token(age monghazi bood cookiye token ro
+  //// hazf ham mikoneh va dar api ha hamoon sharte [let token = getCookie("token"); if (!token) {... return;}] kafiye)(useAuthentication 
+  //// ham mitooneh be /api/verifytoken api bezaneh va ham samte khodesh barresi koneh(man tarjih dadam samte khodesh barresi koneh(chon ba vojoode amniati
+  //// boodane /api/verifytoken ke samte server hast va kamtar emkane hack kardanesh hast man sorate barresi samte karbar bedoone api zadan ro tarjih midam,
+  //// amniatesh ham ba tavajoh be inke tamame api haye .net core ke token mohemme parsafar ham etebarsanji mikoneh man dige negarane amniatesh nistam )) )) 
+
   ////zare_nk_050213_added_st
   const getAddressInf = async (IdAdressForEddit: number | null) => {
-    console.log('getAddressInf: ' + getAddressInf);
+    console.log('zare_nk_050505_IdAdressForEddit: ' + IdAdressForEddit);
     if (!IdAdressForEddit) {
       setError("addresse peida nashod!");
       return;
     }
-    let token = getCookie("token");  //zare_nk_thlilshe(age manteghiye conste isLogin ke az useAuthentication meghdar gereft jaigozine getCookie beshe, methode
-    //// getCookie ham comment she(chon niazi nadarim sedah bezanim va be AuthenticationContext.js montaghel shod va in ja ham ba useAuthentication vakeshish kardim))
+
+    let token = getCookie("token");
+    ////zare_nk_050505_nokteh_st(chon az componente useAuthentication dar  useEffect(() => {...}, [pathname]); ke dar rendere ebtedaeiye safhe estelam migereh baraye
+    ////  estelame vojood va monghazi boodane cookiye token estefadeh kardim, age monghazi bood cookiye token ro hazf ham mikoneh, pas dar api ha hamoon 
+    //// sharte [if (!token) {... return;}] kafiye. dar zemn revale karim ine hamon estelam dar rendere ebtedaeiye safhe kafiye va baraye har api mojadad estelam nemigirim
+    ////  ta sorat bala bashe(agar ham zamani ke daghayeghi dar safheye jar hastim va token bad az vorood be in safheh monghazi shod age api bezanim bedoone estelam khode 
+    //// api .net core zahmate estelam ro mikeshe va statuse manfi mideh va moshkeli pish nemiad)) 
+    // if (!token || !isLoginAndInf.isLogin) {  ////zare_nk_050506_nokteh(chon dar useAuthentication age estelam adame token ya monghazi shodan bashe ham token ro hazf
+    ////  mikoneh ham isLogin ro false mikoneh pas !token va !isLoginAndInf.isLogin hamishe yek javab midan va yeki ro benevisim kafiye(hamoon !token ro tebghe gozashte mizarim basheh))
     if (!token) {
-      setError("lotfan avval online shid");
+      setError("لطفا وارد حساب کاربری خود شوید");
       return;
     }
-    console.log('zare_nk_050213-getAddressInf-token: ' + token);
+    ////zare_nk_050505_nokteh_end(chon az componente useAuthentication dar  useEffect(() => {...}, [pathname]); ke dar rendere ebtedaeiye safhe estelam migereh baraye
+    ////  estelame vojood va monghazi boodane cookiye token estefadeh kardim, age monghazi bood cookiye token ro hazf ham mikoneh, pas dar api ha hamoon 
+    //// sharte [if (!token) {... return;}] kafiye. dar zemn revale karim ine hamon estelam dar rendere ebtedaeiye safhe kafiye va baraye har api mojadad estelam nemigirim
+    ////  ta sorat bala bashe(agar ham zamani ke daghayeghi dar safheye jar hastim va token bad az vorood be in safheh monghazi shod age api bezanim bedoone estelam khode 
+    //// api .net core zahmate estelam ro mikeshe va statuse manfi mideh va moshkeli pish nemiad)) 
+    console.log('zare_nk_050505_isLoginAndInf: ' + JSON.stringify(isLoginAndInf));
 
     // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
     let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
@@ -703,20 +733,25 @@ export default function EditPage() {
         // });
         return parsedList;  //zare_nk_050213_added
 
-      } else {       
+      } else {
         setError("متاسفانه خطایی رخ داده است34:" + data.errors);
         console.log("zare_nk_050213-getAddressInf-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
       }
     } else {
-      console.log("zare_nk_050213-getAddressInf-!response.ok" + response.ok);      
+      console.log("zare_nk_050213-getAddressInf-!response.ok" + response.ok);
       setError("متاسفانه خطایی رخ داده است35");
     }
   }
   ////zare_nk_050213_added_end
 
   useEffect(() => {
+    console.log('zare_nk_050505_rere_02-useEffect isLoginAndInf called-isLoginAndInf is: ' + JSON.stringify(isLoginAndInf));
+    if (!isLoginAndInf || isLoginAndInf.isLogin != true) {
+      console.log('zare_nk_050505_rere_03');
+      return;
+    }
     async function tempFuncForAsync() {
-      console.log('rezam-first useEffect');
+      console.log('zare_nk_050505_rere_04-tempFuncForAsync called!');
 
       if (!refForMap.current) {
         const newMap = new Map({
@@ -770,7 +805,7 @@ export default function EditPage() {
 
       if (!refForVectorSource.current) {
         const newVectorSource = new VectorSource({
-          // projection: 'EPSG:4326', //zare_nk_050109_nokteh(tosiye mishe projection dar View gonjoondeh beshe,baraye hamin comment shod az inja)
+          // projection: 'EPSG:4326', //zare_nk_050109_nokteh(tosiye mishe projection dar View gonjoondeh beshe, baraye hamin comment shod az inja)
         });
         refForVectorSource.current = newVectorSource;
       }
@@ -797,6 +832,12 @@ export default function EditPage() {
         const IdAdressForEddit: number | null = getIdAdressFromSearchParams();
         console.log("zare_nk_050213-IdAdressForEddit: " + IdAdressForEddit);
         const getAddressInfParsedList = await getAddressInf(IdAdressForEddit);
+
+        if (!getAddressInfParsedList) {
+          alert('getAddressInfParsedList undefinedeh!!!');
+          return
+        }
+
         console.log("zare_nk_050213-getAddressInfParsedList: " + JSON.stringify(getAddressInfParsedList));
         console.log("zare_nk_050213-getAddressInfParsedList.Lon: " + getAddressInfParsedList[0].Lon + '-getAddressInfParsedList.Lat: ' + getAddressInfParsedList[0].Lat);
 
@@ -845,8 +886,8 @@ export default function EditPage() {
             // feature?.getGeometry()?.setCoordinates(centerCoords3857);
             refForFeature.current?.setGeometry(new Point(centerCoords3857));
             let coordinate = transform(centerCoords3857, 'EPSG:3857', 'EPSG:4326');
-            let lat = coordinate[1]   // ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[1];  
-            let lng = coordinate[0]   // ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326')[0];  
+            let lat = coordinate[1]
+            let lng = coordinate[0]
             if (refForFeature.current) {
               refForFeature.current.get('name').X = lng; refForFeature.current.get('name').Y = lat;
             }
@@ -876,11 +917,12 @@ export default function EditPage() {
       else {
         console.log("useeeeeeeeeeeeeeeeeeeeeeeeeeeeee refForVectorLayer.current  in else");
       }
-
     }
 
     tempFuncForAsync();
-  }, []);
+    // }, []);  ////zare_nk_050505_commented
+  }, [isLoginAndInf]);  ////zare_nk_050505_added
+
 
   var LocationArr: any = []; var featuresArr: any = [];
 
@@ -969,12 +1011,23 @@ export default function EditPage() {
     console.log('zare_nk_050110-reza02-feature.get("name").Y: ' + refForFeature.current.get('name').Y + "-feature.get('name').X: " + refForFeature.current.get('name').X +
       '-mobileVal: ' + mobileVal + "-feature.get('name').Address: " + refForFeature.current.get('name').Address);
 
-    let token = getCookie("token");
-    alert('zare_nk_050110-token hala is: ' + getCookie("token"));
-    // if (typeof window !== "undefined") {
-    //   alert('hhhhhhhhhhhhhhh');
-    //   token = localStorage.getItem("Token") || "";
-    // }
+    let token = getCookie("token"); 
+    ////zare_nk_050505_nokteh_st(chon az componente useAuthentication dar  useEffect(() => {...}, [pathname]); ke dar rendere ebtedaeiye safhe estelam migereh baraye
+    ////  estelame vojood va monghazi boodane cookiye token estefadeh kardim, age monghazi bood cookiye token ro hazf ham mikoneh, pas dar api ha hamoon 
+    //// sharte [if (!token) {... return;}] kafiye. dar zemn revale karim ine hamon estelam dar rendere ebtedaeiye safhe kafiye va baraye har api mojadad estelam nemigirim
+    ////  ta sorat bala bashe(agar ham zamani ke daghayeghi dar safheye jar hastim va token bad az vorood be in safheh monghazi shod age api bezanim bedoone estelam khode 
+    //// api .net core zahmate estelam ro mikeshe va statuse manfi mideh va moshkeli pish nemiad)) 
+    // if (!token || !isLoginAndInf.isLogin) {  ////zare_nk_050506_nokteh(chon dar useAuthentication age estelam adame token ya monghazi shodan bashe ham token ro hazf
+    ////  mikoneh ham isLogin ro false mikoneh pas !token va !isLoginAndInf.isLogin hamishe yek javab midan va yeki ro benevisim kafiye(hamoon !token ro tebghe gozashte mizarim basheh))
+    if (!token) {
+      setError("لطفا وارد حساب کاربری خود شوید");
+      return;
+    }
+    ////zare_nk_050505_nokteh_end(chon az componente useAuthentication dar  useEffect(() => {...}, [pathname]); ke dar rendere ebtedaeiye safhe estelam migereh baraye
+    ////  estelame vojood va monghazi boodane cookiye token estefadeh kardim, age monghazi bood cookiye token ro hazf ham mikoneh, pas dar api ha hamoon 
+    //// sharte [if (!token) {... return;}] kafiye. dar zemn revale karim ine hamon estelam dar rendere ebtedaeiye safhe kafiye va baraye har api mojadad estelam nemigirim
+    ////  ta sorat bala bashe(agar ham zamani ke daghayeghi dar safheye jar hastim va token bad az vorood be in safheh monghazi shod age api bezanim bedoone estelam khode 
+    //// api .net core zahmate estelam ro mikeshe va statuse manfi mideh va moshkeli pish nemiad))     
     console.log('zare_nk_050110-token: ' + token);
     var Api_CreateAddressParams = null;
     Api_CreateAddressParams =
@@ -994,9 +1047,8 @@ export default function EditPage() {
       'IdAdress': idAddress,
     }
 
-    // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented
-    let ApiUrl = NextJsApiUrl; ////zare_nk_050407_added
-    const response = await fetch(ApiUrl + "Api_EditAddress", {
+    // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
+    const response = await fetch(NextJsApiUrl + "Api_EditAddress", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1026,17 +1078,21 @@ export default function EditPage() {
     }
   }
 
-  const bigShoo = () => {
+  const showAddressFormInputs = () => {
     let token = getCookie("token");
     console.log('zare_nk_050110-token hala is: ' + getCookie("token"));
     if (token) {
-      setIsEpmtyHeightBox(false);
+      setIsEpmtyAddressFormInputs(false);
     }
-    ////zare_nk_050213_commented_st
+    ////zare_nk_050213_commented_st(chon ebghe revale tapsifoodi age karbar login nabood ke dokmeye edit(baraye hedayat be safheye editaddress)
+    //// namayesh dadeh nemishe, va faghat karbar mitoone address ijad koneh(dar safheye /location) ke (dar database chon jaigozine feli mishe va
+    //// baraye karbarane logout faghat yek address sabt mimooneh) va edit nadareh)
     // else {
     //   saveAddress(false);  ////zare_nk_050205_nokteh(age offLine ham bood taraf address ra zakhireh kon ehtemalan ba user movaghat!!)
     // }
-    ////zare_nk_050213_commented_st 
+    ////zare_nk_050213_commented_end(chon ebghe revale tapsifoodi age karbar login nabood ke dokmeye edit(baraye hedayat be safheye editaddress)
+    //// namayesh dadeh nemishe, va faghat karbar mitoone address ijad koneh(dar safheye /location) ke (dar database chon jaigozine feli mishe va
+    //// baraye karbarane logout faghat yek address sabt mimooneh) va edit nadareh)
   }
 
   return (
@@ -1097,8 +1153,8 @@ export default function EditPage() {
 
           <div style={{ display: "flex", flexFlow: "row", justifyContent: "center", alignItems: "center" }}>
             <button
-              id="bigShooBtn"
-              onClick={bigShoo}
+              id="showAddressFormInputsBtn"
+              onClick={showAddressFormInputs}
               style={{
                 width: '100%', color: '#ffffff',
                 fontSize: '.875rem',
@@ -1110,9 +1166,9 @@ export default function EditPage() {
           </div>
         </div>
 
-        <BoxHtmlComponent
-          isEpmtyHeightBox={isEpmtyHeightBox}
-          setIsEpmtyHeightBox={setIsEpmtyHeightBox}
+        <AddressFormInputsComponent
+          isEpmtyAddressFormInputs={isEpmtyAddressFormInputs}
+          setIsEpmtyAddressFormInputs={setIsEpmtyAddressFormInputs}
           refForBox={refForBox}
           saveAddress={saveAddress}
           addressFormInputsVal={addressFormInputsVal}
