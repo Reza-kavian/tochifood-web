@@ -1,4 +1,4 @@
-////zare_nk_050505_okk(1) ////zare_nk_050413(az jose baraye samte karbar estefadeh konam(masalan dar login) age javab mideh(ke api be verifytoken nazanam))
+////zare_nk_050506_okk(1)
 import { NextResponse, NextRequest } from "next/server";
 // import jwt from "jsonwebtoken";  //chon middleware.ts dar Edge Runtime ejra mishavad, az majoole crypto poshtibani nemikoneh 
 // va az jsonwebtoken nemishe dar middleware.ts estefadeh kard, pas api zadim be verifytoken va dar anja az jsonwebtoken estefade kardim 
@@ -7,7 +7,7 @@ import { jwtVerify } from "jose"; ////zare_nk_040403_added
 
 const publicPaths = [
   "/about",
-  "/folder01",  ////zare_nk_050504_added
+  "/folder01",
   "/folder02",
   "/folder03",
   "/login",
@@ -17,22 +17,17 @@ const publicPaths = [
   "/static",
   "/favicon.ico",
   "/tryreact",
-  "/tryreact2",  //zare_nk_041113_added
+  "/tryreact2",
   "/tryreact3",
-  "/tryreact5",  //zare_nk_041113_added
+  "/tryreact5",
   "/.well-known",
-  // "/.well-known/appspecific/com.chrome.devtools.json"//zare_nk_040220_commented(/.well-known/ neveshtam ke zirshakhehaye digarash ye vaght seda zadeh shodand ham dar in araye begonjand)
   "/images", //zare_nk_040311_nokteh(age in ro nagzarim tamame akshaye ba src="/images/..." ra barname be onvane masir dar nazar migire)
   "/discountsAndOffers",
-  "/games", //zare_nk_040331_added
-  "/o/oauth2", //zare_nk_040419_added
-  "/redirect-mobile", //zare_nk_040930_added_st_testi
-  ////zare_nk_040522_added_st_movaghat(pak kardani)
-  // "/ordersHistory",
-  // "/shoppingbasket",
-  ////zare_nk_040522_added_end_movaghat(pak kardani)
-  "/location",  //zare_nk_050108_added(and commented)
-  "/onboarding", //zare_nk_050205_added 
+  "/games",
+  "/o/oauth2",
+  "/redirect-mobile",
+  "/location",
+  "/onboarding",
 ];
 
 async function verifyToken(token: string) {
@@ -45,7 +40,6 @@ async function verifyToken(token: string) {
     console.log(
       "zare_nk_050205-03-POST called!!-decoded secretKey: " + secretKey
     );
-
     const SECRET = new TextEncoder().encode(secretKey);
     const { payload } = await jwtVerify(token, SECRET);  //zare_nk_041009_nokteh(jwtVerify lafze payload ra barmigardooneh )
     console.log("zare_nk_050205-04-payload: " + JSON.stringify(payload));
@@ -69,7 +63,6 @@ export async function middleware(request: NextRequest) {
     "zare_nk_050205-00-Middleware called!!-All cookies: " +
     request.headers.get("cookie")
   );
-
   ////zare_nk_040419_added_st(and commented)
   // const isGoogleOAuth = request.nextUrl.pathname.startsWith("/o/oauth2/");
   // if (isGoogleOAuth) {
@@ -78,8 +71,7 @@ export async function middleware(request: NextRequest) {
   // }
   ////zare_nk_040419_added_end(and commented)
 
-
-  const isPublic = publicPaths.some((path) => {    
+  const isPublic = publicPaths.some((path) => {
     return (
       request.nextUrl.pathname === path ||  ////yani daghighan khode /tryreact
       request.nextUrl.pathname.startsWith(path + "/") ////yani zir majmooe haye /tryreact, masalan /tryreact/...
@@ -120,13 +112,15 @@ export async function middleware(request: NextRequest) {
       );
 
       if (!validPayload) {
-        var ishomePage: boolean = request.nextUrl.pathname == "/" ? true : false;  
+        var ishomePage: boolean = request.nextUrl.pathname == "/" ? true : false;
 
         // const response = NextResponse.redirect(new URL("/login", request.url));   //zare_nk_050205_commented
         const response = ishomePage ? NextResponse.redirect(new URL("/onboarding", request.url)) :
           NextResponse.redirect(new URL("/login", request.url));  //zare_nk_050205_added
 
-        const isValidRedirectPath = !publicPaths.some((path) =>
+        const isValidRedirectPath = !publicPaths.some((path) =>  ////zare_nk_050506_nokteh(manzooram ine ke masire yad shodeh dar arayeye publicPaths nabashe(chon age bashe
+          //// azade va nabayad login boodanesh check beshe(albateh dar sharte if (isPublic) {... return response;} dige badesh ejra nemishe va age barnameh be khotoote badesh 
+          //// raft ya ni dar arraye nist va in check kardane mojadad ezafiyeh, vali jahate olgu gozashtam bemooneh)))
           request.nextUrl.pathname.startsWith(path)
         );
         // if (isValidRedirectPath) {  ////zare_nk_050205_commented
@@ -177,7 +171,7 @@ export async function middleware(request: NextRequest) {
         //zare_nk_040403-taghiir-tempTest-inja 003-amaliate barrasiye token ba khata movajeh shod-error: TypeError: fetch failed
       );
 
-      var ishomePage: boolean = request.nextUrl.pathname == "/" ? true : false;  
+      var ishomePage: boolean = request.nextUrl.pathname == "/" ? true : false;
 
       // const response = NextResponse.redirect(new URL("/login", request.url));  //zare_nk_050205_commented
       const response = ishomePage ? NextResponse.redirect(new URL("/onboarding", request.url)) :

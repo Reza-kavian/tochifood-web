@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(1)
+////zare_nk_050506_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -11,24 +11,17 @@ import { JwtPayload } from "jsonwebtoken";
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog)
 
-import { useAuthentication } from '../context/AuthenticationContext';  //zare_nk_050111_added
-
-////zare_nk_050226_added_st
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
-////zare_nk_050226_added_end
 
 import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
 
 function getCookie(name: any) {
-    ////zare_nk_050209_added_st
     if (typeof document === 'undefined') {
         // console.log("document === 'undefined'");
         return null; // برای جلوگیری از خطای عدم وجود document
     }
-    // console.log("document !== 'undefined'");
-    ////zare_nk_050209_added_end
     const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
     // console.log("value is: " + value);
     const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
@@ -44,7 +37,7 @@ function getCookie(name: any) {
     return null; //اگر کوکی پیدا نشد
 }
 
-const SwiperThinkBanerComp = () => { 
+const SwiperThinkBanerComp = () => {
     console.log('050329-SwiperThinkBanerComp called!!');
     const [errorInSwiperThinkBaner, setErrorInSwiperThinkBaner] = useState<string | null>(null);
 
@@ -75,7 +68,6 @@ const SwiperThinkBanerComp = () => {
             setErrorInSwiperThinkBaner("lotfan avval online shid");
             return;
         }
-        // console.log('tokentokentoken: ' + token);
 
         // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
         const response = await fetch(NextJsApiUrl + "Api_SelectBaner", {
@@ -99,9 +91,7 @@ const SwiperThinkBanerComp = () => {
                 if (data.data.list == undefined) {
                     return;
                 }
-
                 var parsedList = JSON.parse(data.data.list);
-
                 SetResponsedListFromApiSelectBaner(() => {
                     return parsedList
                 });
@@ -120,29 +110,28 @@ const SwiperThinkBanerComp = () => {
     }, []);
 
     return (
-        <>
-            <Swiper
-                modules={[Navigation, Pagination]}
-                spaceBetween={10}
-                slidesPerView={1}
-                centeredSlides={true}
-                navigation={false}
-                className="SwiperThinkBaner"
-                style={{
-                    width: '100%',
-                }}>
-                <SwiperSlide >
-                    <div className="contInSlide" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Link href="https://tapsi.food/vendor-list?vendorListId=banner-1624" >
-                            <img style={{
-                                    width: '100%', display: 'block', ////zare_nk_050303_nokteh(age display:'block' nadam tage pedare img ertefaei hodoode 10px bishtar az img migireh!)
-                                }}
-                                src={`/images/baners/top-baner/ThinkBanerFromBasalam.gif`} />
-                        </Link>
+        <Swiper
+            modules={[Navigation, Pagination]}
+            spaceBetween={10}
+            slidesPerView={1}
+            centeredSlides={true}
+            navigation={false}
+            className="SwiperThinkBaner"
+            style={{
+                width: '100%',
+            }}>
+            <SwiperSlide>
+                <div className="contInSlide" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Link href="https://tapsi.food/vendor-list?vendorListId=banner-1624">
+                        <img style={{
+                            width: '100%', display: 'block', ////zare_nk_050303_nokteh(age display:'block' nadam tage pedare img ertefaei hodoode 10px bishtar az img migireh!)
+                        }}
+                            src={`/images/baners/top-baner/ThinkBanerFromBasalam.gif`} />
+                    </Link>
 
-                    </div>
-                </SwiperSlide>
-                {/* {responsedListFromApiSelectBaner?.map((item, index) => {
+                </div>
+            </SwiperSlide>
+            {/* {responsedListFromApiSelectBaner?.map((item, index) => {
                     console.log('0-item.IdAdress: ' + JSON.stringify(item));
                     console.log('0-item.IdAdress: ' + JSON.stringify(item));
                     if (item.Size == 1 && item.Type == 'main') {
@@ -162,8 +151,7 @@ const SwiperThinkBanerComp = () => {
                         )
                     }
                 })} */}
-            </Swiper>
-        </>
+        </Swiper>
     );
 }
 

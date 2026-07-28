@@ -88,8 +88,6 @@ export default function Home() {
 
   const refForBox = useRef<HTMLDivElement | null>(null);
 
-  // const { isLogin } = useAuthentication();
-
   const [responsedListFromApiSelectAddressList, SetResponsedListFromApiSelectAddressList] = useState<responsedListFromApiSelectAddressListType[] | null>(null);
 
   let currentAddressUseContext = useContext(currentAddressContext);   ////zare_nk_050329_added  
@@ -107,6 +105,7 @@ export default function Home() {
     orders: boolean;
     profile: boolean;
   };
+
   const [footerBtnClicked, setFooterBtnClicked] = useState<footerBtnClickedType>({
     home: true,
     orders: false,
@@ -132,7 +131,7 @@ export default function Home() {
     }
     if (mycurrentAddressState == null) {
       setMycurrentAddressState(parsedChosenAddress);
-    } 
+    }
 
   }, [isEpmtyAdressList]); ////zare_nk_050505_addeded
   // ////zare_nk_050505_added_end
@@ -146,13 +145,47 @@ export default function Home() {
     router.push("/shoppingbasket");
   };
 
+  ////zare_nk_050506_nokteh_st(chon dar middleware.ts ma baraye masirhaye azad(ke niaz be login nadaran mesle hamin 
+  //// editaddress) ejazeye oboor midim va vojoode token va monghazi naboodanesh ro aslan barresi nemikonim pas baraye api haye inja tanha vojoode cookiye token kafi 
+  //// nist va bayad monghazi boodanesh ham barrresi she, pas az componente useAuthentication estefadeh kardim baraye estelame token(age monghazi biid cookiye token ro
+  //// hazf ham mikoneh va dar api ha hamoon sharte [let token = getCookie("token"); if (!token) {... return;}] kafiye)(useAuthentication 
+  //// ham mitooneh be /api/verifytoken api bezaneh va ham samte khodesh barresi koneh(man tarjih dadam samte khodesh barresi koneh(chon ba vojoode amniati
+  //// boodane /api/verifytoken ke samte server hast va kamtar emkane hack kardanesh hast man sorate barresi samte karbar bedoone api zadan ro tarjih midam,
+  //// amniatesh ham ba tavajoh be inke tamame api haye .net core ke token mohemme parsafar ham etebarsanji mikoneh man dige negarane amniatesh nistam )) ))     
+  const { isLoginAndInf, refreshLoginStatus } = useAuthentication();
+  const pathname = usePathname();
+  useEffect(() => {
+    console.log('zare_nk_050505_rere_01-useEffect pathname called');
+    refreshLoginStatus();
+  }, [pathname]);
+  ////zare_nk_050506_nokteh_end(chon dar middleware.ts ma baraye masirhaye azad(ke niaz be login nadaran mesle hamin 
+  //// editaddress) ejazeye oboor midim va vojoode token va monghazi naboodanesh ro aslan barresi nemikonim pas baraye api haye inja tanha vojoode cookiye token kafi 
+  //// nist va bayad monghazi boodanesh ham barrresi she, pas az componente useAuthentication estefadeh kardim baraye estelame token(age monghazi bood cookiye token ro
+  //// hazf ham mikoneh va dar api ha hamoon sharte [let token = getCookie("token"); if (!token) {... return;}] kafiye)(useAuthentication 
+  //// ham mitooneh be /api/verifytoken api bezaneh va ham samte khodesh barresi koneh(man tarjih dadam samte khodesh barresi koneh(chon ba vojoode amniati
+  //// boodane /api/verifytoken ke samte server hast va kamtar emkane hack kardanesh hast man sorate barresi samte karbar bedoone api zadan ro tarjih midam,
+  //// amniatesh ham ba tavajoh be inke tamame api haye .net core ke token mohemme parsafar ham etebarsanji mikoneh man dige negarane amniatesh nistam )) )) 
+
+
   const showAddressListDrawer = useCallback(
     async () => {
       let token = getCookie("token");
+      ////zare_nk_050506_nokteh_st(chon az componente useAuthentication dar  useEffect(() => {...}, [pathname]); ke dar rendere ebtedaeiye safhe estelam migereh baraye
+      ////  estelame vojood va monghazi boodane cookiye token estefadeh kardim, age monghazi bood cookiye token ro hazf ham mikoneh, pas dar api ha hamoon 
+      //// sharte [if (!token) {... return;}] kafiye. dar zemn revale karim ine hamon estelam dar rendere ebtedaeiye safhe kafiye va baraye har api mojadad estelam nemigirim
+      ////  ta sorat bala bashe(agar ham zamani ke daghayeghi dar safheye jar hastim va token bad az vorood be in safheh monghazi shod age api bezanim bedoone estelam khode 
+      //// api .net core zahmate estelam ro mikeshe va statuse manfi mideh va moshkeli pish nemiad)) 
+      // if (!token || !isLoginAndInf.isLogin) {  ////zare_nk_050506_nokteh(chon dar useAuthentication age estelam adame token ya monghazi shodan bashe ham token ro hazf
+      ////  mikoneh ham isLogin ro false mikoneh pas !token va !isLoginAndInf.isLogin hamishe yek javab midan va yeki ro benevisim kafiye(hamoon !token ro tebghe gozashte mizarim basheh))
       if (!token) {
         setError("lotfan avval online shid");
         return;
       }
+      ////zare_nk_050506_nokteh_end(chon az componente useAuthentication dar  useEffect(() => {...}, [pathname]); ke dar rendere ebtedaeiye safhe estelam migereh baraye
+      ////  estelame vojood va monghazi boodane cookiye token estefadeh kardim, age monghazi bood cookiye token ro hazf ham mikoneh, pas dar api ha hamoon 
+      //// sharte [if (!token) {... return;}] kafiye. dar zemn revale karim ine hamon estelam dar rendere ebtedaeiye safhe kafiye va baraye har api mojadad estelam nemigirim
+      ////  ta sorat bala bashe(agar ham zamani ke daghayeghi dar safheye jar hastim va token bad az vorood be in safheh monghazi shod age api bezanim bedoone estelam khode 
+      //// api .net core zahmate estelam ro mikeshe va statuse manfi mideh va moshkeli pish nemiad))
 
       // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
       const response = await fetch(NextJsApiUrl + "Api_SelectAddress", {

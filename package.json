@@ -16,9 +16,9 @@
     "@neshan-maps-platform/ol": "^1.0.5",
     "@tensorflow-models/mobilenet": "^2.1.1",
     "@tensorflow/tfjs-node": "^4.22.0",
-    "@zxing/browser": "^0.1.5",
+    "@zxing/browser": "^0.2.1",
     "bcryptjs": "^2.4.3",
-    "google-auth-library": "^9.15.1",
+    "google-auth-library": "^10.9.1",
     "googleapis": "^146.0.0",
     "jose": "^6.0.11",
     "jsonwebtoken": "^8.5.1",
@@ -29,15 +29,15 @@
     "next-auth": "^4.24.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "swiper": "^12.1.4"
+    "swiper": "^14.0.6"
   },
   "devDependencies": {
     "@types/bcryptjs": "^3.0.0",
-    "@types/bootstrap": "^5.2.10",
+    "@types/bootstrap": "^5.2.11",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/node": "^26.1.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
     "typescript": "^5"
   }
 }

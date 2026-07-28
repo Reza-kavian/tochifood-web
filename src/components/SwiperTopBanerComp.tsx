@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(1)
+////zare_nk_050506_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -71,10 +71,16 @@ const SwiperTopBanerComp = () => {
 
     const getSwiperTopBaner = async () => {
         let token = getCookie("token");
+        ////zare_nk_050506_nokteh_st(chon az componente useAuthentication dar  useEffect(() => {...}, [pathname]); ke dar rendere ebtedaeiye safheye pedare in component estelam migereh baraye
+        ////  estelame vojood va monghazi boodane cookiye token estefadeh kardim, age monghazi bood cookiye token ro hazf ham mikoneh, pas dar api ha hamoon 
+        //// sharte [if (!token) {... return;}] kafiye)
         if (!token) {
             setErrorInSwiperTopBaner("lotfan avval online shid");
             return;
         }
+        ////zare_nk_050506_nokteh_end(chon az componente useAuthentication dar  useEffect(() => {...}, [pathname]); ke dar rendere ebtedaeiye pedare in component safheye estelam migereh baraye
+        ////  estelame vojood va monghazi boodane cookiye token estefadeh kardim, age monghazi bood cookiye token ro hazf ham mikoneh, pas dar api ha hamoon 
+        //// sharte [if (!token) {... return;}] kafiye)
         console.log('tokentokentoken: ' + token);
 
         // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
@@ -199,9 +205,9 @@ const SwiperTopBanerComp = () => {
                                             padding: '0px',
                                         }}>
                                             <img style={{
-                                                    width: '100%',
-                                                    borderRadius: '0.5rem',
-                                                }}
+                                                width: '100%',
+                                                borderRadius: '0.5rem',
+                                            }}
                                                 // src="./images/top-baner/top-baner-slide01.png" />
                                                 src={`https://img.tochikala.com/Baners/${item.AxBaner}`} />
                                         </button>
