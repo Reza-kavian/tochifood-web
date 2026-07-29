@@ -80,6 +80,10 @@ export function AuthenticationProvider({ children }: { children: React.ReactNode
                     if (expiresTime <= Date.now()) {
                         console.log('zare_nk_050504_2-expiresTime <= Date.now()');
                         document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+                        ////zare_nk_050507_added_st
+                        document.cookie = `currentShobe=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+                        document.cookie = `chosenAddress=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+                        ////zare_nk_050507_added_end
                         setIsLoginAndInf({
                             isLogin: false,
                             FullName: null,
@@ -99,6 +103,10 @@ export function AuthenticationProvider({ children }: { children: React.ReactNode
                 else {
                     console.log('zare_nk_050504_4-!expires');
                     document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+                    ////zare_nk_050507_added_st
+                    document.cookie = `currentShobe=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+                    document.cookie = `chosenAddress=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+                    ////zare_nk_050507_added_end
                     setIsLoginAndInf({
                         isLogin: false,
                         FullName: null,
@@ -108,6 +116,10 @@ export function AuthenticationProvider({ children }: { children: React.ReactNode
                 }
             } catch {
                 document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+                ////zare_nk_050507_added_st
+                document.cookie = `currentShobe=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+                document.cookie = `chosenAddress=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+                ////zare_nk_050507_added_end
                 setIsLoginAndInf({
                     isLogin: false,
                     FullName: null,
@@ -166,6 +178,10 @@ export function AuthenticationProvider({ children }: { children: React.ReactNode
         else {
             console.log('zare_nk_050504_4-!token');
             document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+            ////zare_nk_050507_added_st
+            document.cookie = `currentShobe=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+            document.cookie = `chosenAddress=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+            ////zare_nk_050507_added_end
             setIsLoginAndInf({
                 isLogin: false,
                 FullName: null,

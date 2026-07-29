@@ -53,8 +53,7 @@ type ShowAddRemAddressComponentType = {
   responsedListFromApiRemoveAddress: responsedListFromApiRemoveAddressType | null;     ////zare_nk_050207_added         
 
   isEpmtyShowAddRemAddress: boolean;
-  setIsEpmtyShowAddRemAddress: React.Dispatch<React.SetStateAction<boolean>>;
-  // showAddRemAddress: () => void;    //zare_nk_050329_commented
+  setIsEpmtyShowAddRemAddress: React.Dispatch<React.SetStateAction<boolean>>; 
   setRowItem: React.Dispatch<React.SetStateAction<responsedListFromApiSelectAddressListType | null>>;
 };
 
@@ -67,8 +66,7 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({
   responsedListFromApiRemoveAddress,
 
   isEpmtyShowAddRemAddress,
-  setIsEpmtyShowAddRemAddress,
-  // showAddRemAddress,    //zare_nk_050329_commented
+  setIsEpmtyShowAddRemAddress, 
   setRowItem,
 }: ShowAddRemAddressComponentType) {
   console.log('050329-ShowAddRemAddressComponent rendered!!');   ////zare_nk_050329_added
@@ -164,7 +162,7 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({
           <div className="btn-cont" style={{
             display: 'flex', width: '100%', flexFlow: 'row-reverse', flexWrap: 'wrap', marginBottom: '2rem',
             columnGap: '1rem', backgroundColor: 'inherit',
-          }} >
+          }}>
             <div style={{ display: 'flex', padding: '0px 10px', flex: '1 1 47%' }}>
               <button
                 onClick={(e) => {

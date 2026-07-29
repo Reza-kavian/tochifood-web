@@ -166,7 +166,6 @@ export default function Home() {
   //// boodane /api/verifytoken ke samte server hast va kamtar emkane hack kardanesh hast man sorate barresi samte karbar bedoone api zadan ro tarjih midam,
   //// amniatesh ham ba tavajoh be inke tamame api haye .net core ke token mohemme parsafar ham etebarsanji mikoneh man dige negarane amniatesh nistam )) )) 
 
-
   const showAddressListDrawer = useCallback(
     async () => {
       let token = getCookie("token");
@@ -181,6 +180,8 @@ export default function Home() {
         setError("lotfan avval online shid");
         return;
       }
+      setIsEpmtyAdressList('notNull');   ////zare_nk_050507_nokteh(az entehaye tabe avorder shod inja)
+
       ////zare_nk_050506_nokteh_end(chon az componente useAuthentication dar  useEffect(() => {...}, [pathname]); ke dar rendere ebtedaeiye safhe estelam migereh baraye
       ////  estelame vojood va monghazi boodane cookiye token estefadeh kardim, age monghazi bood cookiye token ro hazf ham mikoneh, pas dar api ha hamoon 
       //// sharte [if (!token) {... return;}] kafiye. dar zemn revale karim ine hamon estelam dar rendere ebtedaeiye safhe kafiye va baraye har api mojadad estelam nemigirim
@@ -202,31 +203,30 @@ export default function Home() {
         // console.log("zare_nk_050206-data: " + JSON.stringify(data));
         if (data.status == 0) {
           var parsedList = JSON.parse(data.data.list);
-          // console.log("zare_nk_050206-parsedList1: " + parsedList[0].Adress);
-          // console.log("zare_nk_050206-parsedList2: " + parsedList[1].Adress);
-          setIsEpmtyAdressList('notNull');
+          // setIsEpmtyAdressList('notNull');  ////zare_nk_050507_nokteh(vaghti bala hast inja ezafiye va commentesh kardam)
           SetResponsedListFromApiSelectAddressList(() => {
             return parsedList
           });
+          ////zare_nk_050507_added_st
+          // if (parsedList.length == 0) {
+          //   return null;
+          // }
+          // else {
+            return parsedList;
+          // }
+          ////zare_nk_050507_added_end
         } else {
           setError("متاسفانه خطایی رخ داده است34:" + data.errors);
-          // console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
-          ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
+          return null; ////zare_nk_050507_added
         }
       } else {
-        // console.log("zare_nk_050110-!response.ok" + response.ok);
         setError("متاسفانه خطایی رخ داده است35");
-        ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
+        return null; ////zare_nk_050507_added
       }
 
-      // console.log('zare_nk_050110-token hala is: ' + getCookie("token"));
-      if (token) {
-        setIsEpmtyAdressList('notNull');   //zare_nk_050221_nokteh(age online bashe va address nadashteh bashe ke manteghi nist setIsEpmtyAdressList('notNull') beshe!!)
-      }
-      else {
-        // alert('lotfan avval online shid');
-        ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
-      }
+      // if (token) {  ////zare_nk_050507_nokteh(az inja bordeh shod be entehaye tabe)
+      //   setIsEpmtyAdressList('notNull');   
+      // }      
     }
     , [isEpmtyAdressList, responsedListFromApiSelectAddressList])
 
@@ -427,10 +427,8 @@ export default function Home() {
               refForBox={refForBox}
               responsedListFromApiSelectAddressList={responsedListFromApiSelectAddressList}
               isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}
-              setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}
-              // showAddRemAddress={showAddRemAddress}     //zare_nk_050329_commented
-              showAddressListDrawer={showAddressListDrawer}
-            // setCurrentAddress={setCurrentAddress}  ////zare_nk_050329_commented(currentAddress az seState tabdil shod be useContext)
+              setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress} 
+              showAddressListDrawer={showAddressListDrawer} 
             />
           }
 

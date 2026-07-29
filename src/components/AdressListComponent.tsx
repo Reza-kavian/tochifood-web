@@ -9,7 +9,6 @@ import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } 
 
 import Adressescomponent from '../components/Adressescomponent';  //zare_nk_050328_added
 
-
 type responsedListFromApiSelectAddressListType = {
   IdAdress: number;
   IdUser: number;
@@ -34,10 +33,9 @@ type AdressListComponentType = {
   refForBox: RefObject<HTMLDivElement | null>;
   responsedListFromApiSelectAddressList: responsedListFromApiSelectAddressListType[] | null;
   isEpmtyShowAddRemAddress: boolean;    //zare_nk_050207_added
-  setIsEpmtyShowAddRemAddress: React.Dispatch<React.SetStateAction<boolean>>;    //zare_nk_050207_added
-  // showAddRemAddress: () => void;   //zare_nk_050329_commented
-  showAddressListDrawer: () => void;   //zare_nk_050209_added
-  // setCurrentAddress: React.Dispatch<React.SetStateAction<responsedListFromApiSelectAddressListType | null>>;  ////zare_nk_050329_commented(currentAddress az useState tabdil shod be createContext)
+  setIsEpmtyShowAddRemAddress: React.Dispatch<React.SetStateAction<boolean>>;
+  // showAddressListDrawer: () => void;  ////zare_nk_050507_commented
+  showAddressListDrawer: () =>  Promise<responsedListFromApiSelectAddressListType[] | null>; ////zare_nk_050507_added    
 };
 
 // export const AdressListComponent = function AdressListComponent({      //zare_nk_050209_commented
@@ -48,12 +46,10 @@ const AdressListComponent = function AdressListComponent({      //zare_nk_050209
   responsedListFromApiSelectAddressList,
   isEpmtyShowAddRemAddress,
   setIsEpmtyShowAddRemAddress,
-  // showAddRemAddress,   //zare_nk_050329_commented
   showAddressListDrawer,
-  // setCurrentAddress,  ////zare_nk_050329_commented(currentAddress az useState tabdil shod be createContext)
 }: AdressListComponentType) {
-  // console.log('zare_nk_050126_AdressListComponent called!!-isEpmtyAdressList: ' + isEpmtyAdressList);
-  console.log('050329-AdressListComponent rendered!!');   ////zare_nk_050329_added
+
+  console.log('050329-AdressListComponent rendered!!');
 
   const router = useRouter();
 

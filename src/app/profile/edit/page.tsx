@@ -415,7 +415,11 @@ export default function Profile() {
 
   ////zare_nk_050506_added_st
   function forlogout() {
-    document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;   
+    document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+    ////zare_nk_050507_added_st
+    document.cookie = `currentShobe=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+    document.cookie = `chosenAddress=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+    ////zare_nk_050507_added_end 
     router.replace('/');
   }
   ////zare_nk_050506_added_end
