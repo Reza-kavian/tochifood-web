@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(2)
+////zare_nk_050510_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -12,24 +12,20 @@ import { JwtPayload } from "jsonwebtoken";
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog)
 
-import { useAuthentication } from '../context/AuthenticationContext';  //zare_nk_050111_added
+import { useAuthentication } from '../context/AuthenticationContext'; 
 
-////zare_nk_050226_added_st
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
-////zare_nk_050226_added_end
 
-import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
+import { NextJsApiUrl } from "../constants/Urls"; 
 
 function getCookie(name: any) {
-    ////zare_nk_050209_added_st
     if (typeof document === 'undefined') {
         console.log("document === 'undefined'");
         return null; // برای جلوگیری از خطای عدم وجود document
     }
     console.log("document !== 'undefined'");
-    ////zare_nk_050209_added_end
     const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
     console.log("value is: " + value);
     const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
@@ -46,7 +42,7 @@ function getCookie(name: any) {
 }
 
 const SwiperGrouplevel1Comp = () => {
-    console.log('050329-SwiperGrouplevel1Comp rendered!!');   ////zare_nk_050329_added
+    console.log('050329-SwiperGrouplevel1Comp rendered!!'); 
     const [errorInSwiperGrouplevel1, setErrorInSwiperGrouplevel1] = useState<string | null>(null);
 
     const router = useRouter();
@@ -198,8 +194,7 @@ const SwiperGrouplevel1Comp = () => {
                                                 </span>
                                             </div>
 
-                                            <img
-                                                style={{
+                                            <img style={{
                                                     // width:'412px',
                                                     width: '48px',
                                                     borderRadius: '0.5rem',

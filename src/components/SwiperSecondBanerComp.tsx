@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(1)
+////zare_nk_050510_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -12,24 +12,20 @@ import { JwtPayload } from "jsonwebtoken";
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog)
 
-import { useAuthentication } from '../context/AuthenticationContext';  //zare_nk_050111_added
+import { useAuthentication } from '../context/AuthenticationContext'; 
 
-////zare_nk_050226_added_st
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
-////zare_nk_050226_added_end
 
-import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
+import { NextJsApiUrl } from "../constants/Urls";
 
 function getCookie(name: any) {
-    ////zare_nk_050209_added_st
     if (typeof document === 'undefined') {
         console.log("document === 'undefined'");
         return null; // برای جلوگیری از خطای عدم وجود document
     }
     console.log("document !== 'undefined'");
-    ////zare_nk_050209_added_end
     const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
     console.log("value is: " + value);
     const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
@@ -46,7 +42,7 @@ function getCookie(name: any) {
 }
 
 const SwiperSecondBanerComp = () => {
-    console.log('050329-SwiperSecondBanerComp rendered!!');   ////zare_nk_050329_added
+    console.log('050329-SwiperSecondBanerComp rendered!!');   
     const [errorInSwiperSecondBaner, setErrorInSwiperSecondBaner] = useState<string | null>(null);
 
     const router = useRouter();
@@ -71,7 +67,7 @@ const SwiperSecondBanerComp = () => {
     const getSwiperSecondBaner = async () => {
         let token = getCookie("token");
         if (!token) {
-            setErrorInSwiperSecondBaner("lotfan avval online shid");
+            setErrorInSwiperSecondBaner("لطفا ابتدا وارد حساب کاربری خود شوید");
             return;
         }
         console.log('tokentokentoken: ' + token);
@@ -94,9 +90,7 @@ const SwiperSecondBanerComp = () => {
                 if (data.data.list == undefined) {
                     return;
                 }
-
                 var parsedList = JSON.parse(data.data.list);
-
                 SetResponsedListFromApiSelectBaner(() => {
                     return parsedList
                 });
@@ -159,8 +153,7 @@ const SwiperSecondBanerComp = () => {
                     style={{
                         width: '100%',
                         //  margin: '0px 19px',
-                    }}
-                >
+                    }}>
                     {responsedListFromApiSelectBaner?.map((item, index) => {
                         console.log('0-item.IdAdress: ' + JSON.stringify(item));
                         console.log('0-item.IdAdress: ' + JSON.stringify(item));
@@ -170,9 +163,7 @@ const SwiperSecondBanerComp = () => {
                                 <SwiperSlide key={index}>
                                     <div className="contInSlide" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                         <Link href="https://tapsi.food/vendor-list?vendorListId=banner-1624" >
-                                            <img
-                                                alt={`alt${index}`}
-                                                style={{
+                                            <img alt={`alt${index}`} style={{
                                                     width: '100%',
                                                     borderRadius: '0.5rem',
                                                 }}

@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(2)
+////zare_nk_050510_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, memo } from "react";
@@ -42,16 +42,10 @@ type responsedListFromApiRemoveAddressType = {
 ////zare_nk_050207_nokteh(for ShowAddRemAddressList)
 type ShowAddRemAddressComponentType = {
   refForShowAddRemAddressBox: RefObject<HTMLDivElement | null>;
-
-  // goToEdditAddressMap: (IdAdress: number) => void;  //zare_nk_050209_commented
-  goToEdditAddressMap: (e?: MouseEvent<HTMLButtonElement>) => void;  //zare_nk_050209_added
-
-  // RemoveAddress: (IdAdress: number) => void;  //zare_nk_050209_commented
-  RemoveAddress: (e?: MouseEvent<HTMLButtonElement>) => void;  //zare_nk_050209_added
-
-  // responsedListFromApiEditAddress: responsedListFromApiEditAddressType | null;      ////zare_nk_050207_added(and zare_nk_050207_commented(chon aslan api editeAddresss ra dar in safhe nemizanim va dar safheye editAddress mizanim))           
-  responsedListFromApiRemoveAddress: responsedListFromApiRemoveAddressType | null;     ////zare_nk_050207_added         
-
+  goToEdditAddressMap: (e?: MouseEvent<HTMLButtonElement>) => void;  
+  RemoveAddress: (e?: MouseEvent<HTMLButtonElement>) => void;  
+  // responsedListFromApiEditAddress: responsedListFromApiEditAddressType | null;     zare_nk_050207_commented(chon aslan api editeAddresss ra dar in safhe nemizanim va dar safheye editAddress mizanim)           
+  responsedListFromApiRemoveAddress: responsedListFromApiRemoveAddressType | null;            
   isEpmtyShowAddRemAddress: boolean;
   setIsEpmtyShowAddRemAddress: React.Dispatch<React.SetStateAction<boolean>>; 
   setRowItem: React.Dispatch<React.SetStateAction<responsedListFromApiSelectAddressListType | null>>;
@@ -61,10 +55,8 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({
   refForShowAddRemAddressBox,
   goToEdditAddressMap,
   RemoveAddress,
-
   // responsedListFromApiEditAddress,   //zare_nk_050207_commented(chon aslan api editeAddresss ra dar in safhe nemizanim va dar safheye editAddress mizanim))
   responsedListFromApiRemoveAddress,
-
   isEpmtyShowAddRemAddress,
   setIsEpmtyShowAddRemAddress, 
   setRowItem,
@@ -72,8 +64,7 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({
   console.log('050329-ShowAddRemAddressComponent rendered!!');   ////zare_nk_050329_added
   const router = useRouter();
 
-  // const [error, setError] = useState<string | null>(null);  //zare_nk_050207_commented
-  const [errorInShowAddRemAddressComponent, setErrorInShowAddRemAddressComponent] = useState<string | null>(null);    //zare_nk_050207_added
+  const [errorInShowAddRemAddressComponent, setErrorInShowAddRemAddressComponent] = useState<string | null>(null); 
 
   const refForEditAddressBtn = useRef<HTMLButtonElement | null>(null);
 
@@ -140,8 +131,7 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({
 
           <div style={{ padding: '1rem', justifyContent: 'space-between', alignItems: 'center', flex: '0 0 auto', width: '100%', height: '3.5rem', display: 'flex', }}>
             <span style={{ color: "#1b1c1d", fontSize: '16px', flex: '0 0 auto', }}>انتخاب آدرس</span>
-            <button
-              id="closeAddRemAddressBtn"
+            <button id="closeAddRemAddressBtn"
               onClick={() => {
                 setIsEpmtyShowAddRemAddress(true);
                 setRowItem(null);
@@ -149,8 +139,7 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({
               style={{
                 width: '32px', height: '32px', border: 'none', flex: '0 0 auto', display: "flex", flexFlow: "row", justifyContent: 'center',
                 justifyItems: 'center', alignItems: 'center', borderRadius: '9999px',
-              }}
-            >
+              }}>
               <svg style={{ width: '1.25rem', height: '1.25rem' }} fill="#ff5900" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-6 fill-gray"><path fillRule="evenodd" clipRule="evenodd" d="M17.6565 7.75735L13.4138 12L17.6565 16.2426L16.2423 17.6568L11.9996 13.4142L7.75699 17.6568L6.34277 16.2426L10.5854 12L6.34277 7.75735L7.75699 6.34314L11.9996 10.5858L16.2423 6.34314L17.6565 7.75735Z" fill="inherit"></path></svg>
             </button>
           </div>
@@ -164,8 +153,7 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({
             columnGap: '1rem', backgroundColor: 'inherit',
           }}>
             <div style={{ display: 'flex', padding: '0px 10px', flex: '1 1 47%' }}>
-              <button
-                onClick={(e) => {
+              <button onClick={(e) => {
                   RemoveAddress(e);
                   setIsEpmtyShowAddRemAddress(true);
                 }}
@@ -189,12 +177,7 @@ const ShowAddRemAddressComponent = function ShowAddRemAddressComponent({
               </button>
             </div>
             <div style={{ display: 'flex', padding: '0px 10px', flex: '1 1 47%' }}>
-              <button
-                // onClick={goToEdditAddressMap} 
-                // onClick={() => {
-                //   goToEdditAddressMap
-                // }}
-                onClick={(e) => {
+              <button onClick={(e) => {
                   goToEdditAddressMap(e);
                 }}
                 style={{

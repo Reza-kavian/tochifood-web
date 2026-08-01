@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(1)
+////zare_nk_050510_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, memo, useContext, } from "react";
@@ -10,14 +10,12 @@ import { currentAddressContext } from '../context/currentAddressContext';  //zar
 
 import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
 
-function getCookie(name: any) {
-  ////zare_nk_050209_added_st
+function getCookie(name: any) { 
   if (typeof document === 'undefined') {
     // console.log("document === 'undefined'");
     return null; // برای جلوگیری از خطای عدم وجود document
   }
-  // console.log("document !== 'undefined'");
-  ////zare_nk_050209_added_end
+  // console.log("document !== 'undefined'"); 
   const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
   // console.log("value is: " + value);
   const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
@@ -70,11 +68,9 @@ type AdressescomponentType = {
   isEpmtyShowAddRemAddress: boolean;
   setIsEpmtyShowAddRemAddress: React.Dispatch<React.SetStateAction<boolean>>;
   setIsEpmtyAdressList: React.Dispatch<React.SetStateAction<string | null>>;
-  // showAddressListDrawer: () => void;  ////zare_nk_050507_commented
-  showAddressListDrawer: () =>  Promise<responsedListFromApiSelectAddressListType[] | null>; ////zare_nk_050507_added 
+  showAddressListDrawer: () =>  Promise<responsedListFromApiSelectAddressListType[] | null>; 
 };
 
-////zare_nk_050422_added_st
 type responsedListFromApiSelectShobehAtrafUserType = {
   IdShobe: number;
   NameSobe: string;
@@ -84,7 +80,6 @@ type responsedListFromApiSelectShobehAtrafUserType = {
   Keraye: number;
   NazdikTarinZamanErsal: string;
 };
-////zare_nk_050422_added_end
 
 const Adressescomponent = function Adressescomponent({
   responsedListFromApiSelectAddressList,
@@ -92,10 +87,8 @@ const Adressescomponent = function Adressescomponent({
   setIsEpmtyShowAddRemAddress,
   setIsEpmtyAdressList,
   showAddressListDrawer,
-  // setCurrentAddress, ////zare_nk_050329_commented(currentAddress az useState tabdil shod be createContext)
 }: AdressescomponentType) {
-  console.log('050329-Adressescomponent rendered!!');   ////zare_nk_050329_added
-
+  console.log('050329-Adressescomponent rendered!!');
   const router = useRouter();
 
   const refForShowAddRemAddressBox = useRef<HTMLDivElement | null>(null);
@@ -177,7 +170,6 @@ const Adressescomponent = function Adressescomponent({
     }
     , [isEpmtyShowAddRemAddress]);
 
-  ////zare_nk_050422_added_st
   const getSwiperShopsInVendorComp = async (mycurrentAddressState: responsedListFromApiSelectAddressListType | null) => {
     // const getSwiperShopsInVendorComp = async () => { 
     let token = await getCookie("token");
@@ -239,7 +231,6 @@ const Adressescomponent = function Adressescomponent({
       return null; ////zare_nk_050422_added
     }
   }
-  ////zare_nk_050422_added_end
 
   var currentAddressUseContext = useContext(currentAddressContext);   ////zare_nk_050329_added 
 
@@ -381,34 +372,29 @@ const Adressescomponent = function Adressescomponent({
                 flex: '1 1 0%',
                 height: 'min-content',
                 marginLeft: '.5rem',
-              }} >
-                <span
-                  style={{
+              }}>
+                <span style={{
                     color: '#1b1c1d',
                     fontWeight: '500',
                     fontSize: '.875rem',
                     lineHeight: '1.25rem',
-                  }}
-                >
+                  }}>
                   {/* خونه */}
                   {item.OnvanAdress ? item.OnvanAdress : 'خونه'}
                 </span>
-                <p
-                  style={{
+                <p style={{
                     color: '#1b1c1d',  //zare_nk_050206_nokteh(age entekhab nabasheh: color:#a5abb1)   
                     fontSize: '.75rem',
                     lineHeight: '1rem',
                     marginBottom: '0px',
-                  }}
-                >
+                  }}>
                   {/* خ. وحدت اسلامی، نرسیده به خ. مولوی، ک. غلامرضا زندی، خ. صالح زاده */}
                   {item.Adress}
                 </p>
               </div>
             </div>
 
-            <button
-              id="showAddRemAddressBtn"
+            <button id="showAddRemAddressBtn"
               onClick={() => { 
                 setIsEpmtyShowAddRemAddress(false);   
                 setRowItem(item);  
@@ -429,12 +415,10 @@ const Adressescomponent = function Adressescomponent({
         <ShowAddRemAddressComponent
           key={rowItem.IdAdress}
           refForShowAddRemAddressBox={refForShowAddRemAddressBox}
-          goToEdditAddressMap={() => {
-            // console.log('zare_nk_050209-sh01-edit-rowItem.IdAdress: ' + rowItem.IdAdress + '-rowItem.Fullname: ' + rowItem.Fullname);
+          goToEdditAddressMap={() => { 
             goToEdditAddressMap(rowItem.IdAdress);
           }}
-          RemoveAddress={() => {
-            // console.log('zare_nk_050209-sh01-rem-item.IdAdress: ' + rowItem.IdAdress + '-rowItem.Fullname: ' + rowItem.Fullname);   //item.IdAdress dar zamane click dar dom naberooz va notokk
+          RemoveAddress={() => { 
             RemoveAddress(rowItem.IdAdress);
           }}
           // responsedListFromApiEditAddress={responsedListFromApiEditAddress}  //zare_nk_050207_commented(chon aslan api editeAddresss ra dar in safhe nemizanim va dar safheye editAddress mizanim)

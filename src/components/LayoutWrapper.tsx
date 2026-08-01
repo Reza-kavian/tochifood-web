@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(2)
+////zare_nk_050510_okk(2)
 "use client";
 
 import React, { useState, useRef, useEffect } from 'react';
@@ -6,22 +6,20 @@ import React, { useState, useRef, useEffect } from 'react';
 import { usePathname } from "next/navigation";
 import LogoutButton from "@/components/LogoutButton";
 
-import { useAuthentication } from '../context/AuthenticationContext';  ////zare_nk_050111_added
+import { useAuthentication } from '../context/AuthenticationContext';  
 
 ////zare_nk_050202_added_st(for use MUI)
-// MUI imports
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 ////zare_nk_050202_added_end(for use MUI)
 
-import Styles from "@/styles/components/globals.module.css";  ////zare_nk_050204_added 
+import Styles from "@/styles/components/globals.module.css"; 
 
 interface RootLayoutProps {
   children: React.ReactNode;
 }
 
 ////zare_nk_050202_added_st(for use MUI)
-//// Define your MUI theme
 const theme = createTheme({
   palette: {
     mode: 'light', ////zare_nk_050203_nokteh(shabihe bg-dark bootstrap)
@@ -56,9 +54,6 @@ export default function LayoutWrapper({ children }: RootLayoutProps) {
   const pathname = usePathname();
   const isLoginPage = pathname === "/login";
   const isLoginPageOrPage = pathname === "/login" || pathname === "/";
-
-  // const { userData, login, logout } = useAuthentication(); //zare_nk_050111_added
-  const { isLogin } = useAuthentication(); //zare_nk_050111_added
 
   return (
     //// zare_nk_050202_added_st(for use MUI) 
@@ -95,27 +90,7 @@ export default function LayoutWrapper({ children }: RootLayoutProps) {
         {/* zare_nk_041225_commented_end(tebghe revale tapsifood header ra baraye aksare safahat motefavet ast,pas dar safahat mizaraim) */}
         <main className="main-in-LayoutWrapper">
           <section className="section-in-LayoutWrapper">
-            {/* {isLogin ? (
-            <div>
-              <p>شما وارد شده‌اید  -  {isLogin} </p>
-            </div>
-          ) : (
-            <div>
-              <p>شما وارد نشده‌اید  -  {isLogin} </p>
-            </div>
-          )} */}
-
-
-            {/* {isLogin ? (<>
-              {children}
-            </>
-            ) : (
-              <div>
-                <p>شما وارد نشده‌اید  -  {isLogin} </p>
-              </div>
-            )} */}
             {children}
-            {/* zare_nk_041225_added_st(baraye collapse paeine safhe(ehtemalan tapsifood dar layout gozashteh!shayad khodam tooye safheh bebaram!)) */}
             <div className="tabIndexOne-in-LayoutWrapper" tabIndex={1}>
             </div>
           </section>

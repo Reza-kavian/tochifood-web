@@ -1,4 +1,4 @@
-//// context/AuthenticationContext.js   ////zare_nk_050506_okk(1)
+//// context/AuthenticationContext.js   ////zare_nk_050510_okk(1)
 'use client';
 
 import { createContext, useState, useContext, useCallback } from 'react';
@@ -50,7 +50,6 @@ const AuthenticationContext = createContext<{ isLoginAndInf: setIsLoginAndInfTyp
 
 export function AuthenticationProvider({ children }: { children: React.ReactNode }) {
     console.log('050329-AuthenticationProvider rendered!!');
-    // const [isLogin, setIsLogin] = useState<boolean | null>(null);
     const [isLoginAndInf, setIsLoginAndInf] = useState<setIsLoginAndInfType>({
         isLogin: null,
         FullName: null,

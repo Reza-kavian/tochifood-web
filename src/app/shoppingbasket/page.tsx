@@ -119,8 +119,7 @@ export default function Shoppingbasket() {
 
     const refForBox = useRef<HTMLDivElement | null>(null);
 
-    // const { userData, login, logout } = useAuthentication(); //zare_nk_050111_added
-    const { isLogin } = useAuthentication(); //zare_nk_050111_added //zare_nk_050221_tahlilshe(ke chera estefadeh nashod)
+    // const { isLogin } = useAuthentication(); //zare_nk_050510_commented
 
     const [responsedListFromApiSelectAddressList, SetResponsedListFromApiSelectAddressList] = useState<responsedListFromApiSelectAddressListType[] | null>(null);
 
@@ -160,8 +159,6 @@ export default function Shoppingbasket() {
 
     useEffect(() => {
         const asyncTempFunc = async () => {
-
-
             const chosenAddress = await getCookie("chosenAddress");
             var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
 

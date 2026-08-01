@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(1)
+////zare_nk_050510_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -14,7 +14,7 @@ import { useAuthentication } from '../context/AuthenticationContext';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 
-import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
+import { NextJsApiUrl } from "../constants/Urls";
 
 function getCookie(name: any) {
     ////zare_nk_050209_added_st
@@ -39,18 +39,6 @@ function getCookie(name: any) {
     return null; //اگر کوکی پیدا نشد
 }
 
-// const SwiperBordBordInVendorComp = ({
-//     // openCollapseForSorting,
-//     // openCollapseForRaveshErsal
-//     scrollToSection,
-//     activeTab
-// }: {
-//     // openCollapseForSorting: () => void;
-//     // openCollapseForRaveshErsal: () => void;
-//     scrollToSection: (id: string) => void;
-//     activeTab: string | null;
-
-// }) => {
 const SwiperBordBordInVendorComp = () => {
     console.log('050329-SwiperBordBordInVendorComp rendered!!');   ////zare_nk_050329_added
     const [errorInSwiperBordBord, setErrorInSwiperBordBord] = useState<string | null>(null);

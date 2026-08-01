@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(1)
+////zare_nk_050510_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -108,12 +108,6 @@ const SwiperTapBestsComp = () => {
 
     return (
         <>
-            {/* <div style={{
-                width: '100%', height: '1rem', boxShadow: 'rgba(0, 0, 0, 0.1) 0px 6px 8px 0px',marginBottom:'0.5rem',
-                backgroundColor: '#fcfcfc', borderBottomLeftRadius: '.75rem', borderBottomRightRadius: '.75rem',
-            }}>
-            </div> */}
-
             <div style={{ display: 'flex', flexFlow: 'column', gap: '.5rem', width: '100%', }}>
                 <div style={{
                     display: 'flex', flexFlow: "row", justifyContent: "space-between",
@@ -125,8 +119,7 @@ const SwiperTapBestsComp = () => {
                         بهترین&zwnj;های تپسی&zwnj;فود
                     </h2>
 
-                    <button
-                        id="goShoppingBacketBtn"
+                    <button id="goShoppingBacketBtn"
                         // onClick={showAddressListDrawer}
                         style={{
                             display: 'flex',
@@ -140,11 +133,8 @@ const SwiperTapBestsComp = () => {
                             borderRadius: '9999px',
                             cursor: 'pointer',
                         }}>
-                        <img
-                            src="/images/Icon/see-all.svg"
-                            alt="سبد خرید"
-                            style={{ width: '1.25rem', height: '1.25rem', }}
-                        />
+                        <img src="/images/Icon/see-all.svg" alt="نمایش همه"
+                            style={{ width: '1.25rem', height: '1.25rem', }} />
                     </button>
                 </div>
 
@@ -286,14 +276,14 @@ const SwiperTapBestsComp = () => {
                                             </div>
 
                                             <img style={{
-                                                    width: '100%',
-                                                    // marginTop: '5px', marginBottom: '0px',
-                                                    ////zare_nk_050314_added_st
-                                                    height: '105px', objectFit: 'cover',
-                                                    borderTopLeftRadius: '.5rem',
-                                                    borderTopRightRadius: '.5rem',
-                                                    ////zare_nk_050314_added_end 
-                                                }}
+                                                width: '100%',
+                                                // marginTop: '5px', marginBottom: '0px',
+                                                ////zare_nk_050314_added_st
+                                                height: '105px', objectFit: 'cover',
+                                                borderTopLeftRadius: '.5rem',
+                                                borderTopRightRadius: '.5rem',
+                                                ////zare_nk_050314_added_end 
+                                            }}
                                                 // src={`/images/SwiperGrouplevel1/${item.AxG1}.png`} />  ////zare_nk_050229_nokteh(age az database bekhooneh bade emale database food tavassote parsa)
                                                 // src={`/images/SwiperGrouplevel1/${index}.png`} />
                                                 src={`/images/movaghat/SwiperTapBests/${index}.jpg`} />
@@ -351,11 +341,8 @@ const SwiperTapBestsComp = () => {
                                                                 margin: '0px',
 
                                                             }}>4.2</p>
-                                                            <img
-                                                                src="/images/movaghat/SwiperTapBests/star/star.svg"
-                                                                alt="علاقه مندی"
-                                                                style={{ width: '.75rem', height: '.75rem', }}
-                                                            />
+                                                            <img src="/images/movaghat/SwiperTapBests/star/star.svg" alt="علاقه مندی"
+                                                                style={{ width: '.75rem', height: '.75rem', }} />
                                                         </div>
                                                     </div>
                                                 </div>

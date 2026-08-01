@@ -1,10 +1,17 @@
-////zare_nk_050506_okk(1)
+////zare_nk_050510_okk(1)
 ////zare_nk_050128(file tsconfig.json haviye tanzimate makhsoose typeScript hast)
 {
   "compilerOptions": {
-    "typeRoots": ["./types", "./node_modules/@types"],  ////zare_nk_050309_nokteh(typeRoots dar projehhaye next khoobeh, vali dar projehhaye reactNative tosiyeh nemisheh)
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types"
+    ], ////zare_nk_050309_nokteh(typeRoots dar projehhaye next khoobeh, vali dar projehhaye reactNative tosiyeh nemisheh)
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -16,16 +23,26 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".",  
+    // "baseUrl": ".",  //zare_nk_050510_nokteh(az noskheye TypeScript 4.1 be bad baseUrl mansookhe va hamoon "paths": {..} kafiyeh, manam commentesh kardam)
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]   ////zare_nk_050302_nokteh(risheye addressdehi ba slash(/) ra dar nazar migirim(dar inja masire ./src/* ra dadim))
+      "@/*": [
+        "./src/*"
+      ] ////zare_nk_050302_nokteh(risheye addressdehi ba slash(/) ra dar nazar migirim(dar inja masire ./src/* ra dadim))
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts","src/types"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/types"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

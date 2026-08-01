@@ -92,8 +92,7 @@ export default function Home() {
 
     const refForBox = useRef<HTMLDivElement | null>(null);
 
-    // const { userData, login, logout } = useAuthentication(); //zare_nk_050111_added
-    const { isLogin } = useAuthentication(); //zare_nk_050111_added //zare_nk_050221_tahlilshe(ke chera estefadeh nashod)
+    // const { isLogin } = useAuthentication(); //zare_nk_050510_commented 
 
     const [responsedListFromApiSelectAddressList, SetResponsedListFromApiSelectAddressList] = useState<responsedListFromApiSelectAddressListType[] | null>(null);
 

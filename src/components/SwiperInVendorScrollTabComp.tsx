@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(1)
+////zare_nk_050510_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -18,16 +18,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
 
-import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
+import { NextJsApiUrl } from "../constants/Urls"; 
 
 function getCookie(name: any) {
-    ////zare_nk_050209_added_st
     if (typeof document === 'undefined') {
         console.log("document === 'undefined'");
         return null; // برای جلوگیری از خطای عدم وجود document
     }
     console.log("document !== 'undefined'");
-    ////zare_nk_050209_added_end
     const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
     console.log("value is: " + value);
     const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
@@ -44,21 +42,15 @@ function getCookie(name: any) {
 }
 
 const SwiperInVendorScrollTabComp = ({
-    // openCollapseForSorting,
-    // openCollapseForRaveshErsal
     scrollToSection,
     activeTab,
     IdShobe,
 }: {
-    // openCollapseForSorting: () => void;
-    // openCollapseForRaveshErsal: () => void;
     scrollToSection: (id: string) => void;
     activeTab: string | null;
     IdShobe: number | undefined;
 }) => {
-    // const SwiperInVendorHeaderComp = () => {
-
-    console.log('050329-SwiperInVendorHeaderComp rendered!!');   ////zare_nk_050329_added
+    console.log('050329-SwiperInVendorHeaderComp rendered!!');  
     const [errorInSwiperVendorHeader, setErrorInSwiperVendorHeader] = useState<string | null>(null);
 
     const router = useRouter();
@@ -120,7 +112,7 @@ const SwiperInVendorScrollTabComp = ({
     }
 
     useEffect(() => {
-        getGoroohHa();  ////zare_nk_050403_nokteh(mthode getSwiperVendorHeader dar in header bomorede va baraye olgu gozashte shode!)  ////zare_nk_050403_commented_movaghat
+        getGoroohHa();   
     }, []);
 
     return (
@@ -165,7 +157,7 @@ const SwiperInVendorScrollTabComp = ({
                                     // backgroundColor: 'inherit',  
                                     borderRadius: '.75rem', border: '1px solid #f6f6f7',
                                 }}>
-                                    <button onClick={() => { scrollToSection(item.IdG1.toString()) }}  ////zare_nk_050405_added
+                                    <button onClick={() => { scrollToSection(item.IdG1.toString()) }}
                                         style={{
                                             display: 'flex',
                                             justifyContent: 'center',
@@ -183,7 +175,7 @@ const SwiperInVendorScrollTabComp = ({
                                             // height: '2rem',
                                             padding: '8px 10px',
 
-                                            backgroundColor: (activeTab == item.IdG1.toString() ? 'black' : 'white'), ////zare_nk_050405_added
+                                            backgroundColor: (activeTab == item.IdG1.toString() ? 'black' : 'white'),
                                         }}>
                                         <div style={{
                                             display: 'flex', flexFlow: 'row-reverse', position: 'relative', width: '100%', height: '100%',

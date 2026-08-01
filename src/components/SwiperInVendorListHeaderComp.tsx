@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(2)
+////zare_nk_050510_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -12,15 +12,13 @@ import { JwtPayload } from "jsonwebtoken";
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog)
 
-import { useAuthentication } from '../context/AuthenticationContext';  //zare_nk_050111_added
+import { useAuthentication } from '../context/AuthenticationContext'; 
 
-////zare_nk_050226_added_st
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
-////zare_nk_050226_added_end
 
-import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
+import { NextJsApiUrl } from "../constants/Urls"; 
 
 function getCookie(name: any) {
     ////zare_nk_050209_added_st
@@ -52,7 +50,7 @@ const SwiperInVendorListHeaderComp = ({
     openCollapseForSorting: () => void;
     openCollapseForRaveshErsal: () => void;
 }) => {
-    console.log('050329-SwiperInVendorHeaderComp rendered!!');   ////zare_nk_050329_added
+    console.log('050329-SwiperInVendorHeaderComp rendered!!');   
     const [errorInSwiperTapBests, setErrorInSwiperTapBests] = useState<string | null>(null);
 
     const router = useRouter();
@@ -109,7 +107,7 @@ const SwiperInVendorListHeaderComp = ({
     }
 
     useEffect(() => {
-        // getGoroohHa();  ////zare_nk_050403_nokteh(mthode getSwiperTapBests dar in header bomorede va baraye olgu gozashte shode!)  ////zare_nk_050403_commented_movaghat
+        // getGoroohHa();  ////zare_nk_050403_nokteh(methode getGoroohHa dar in header bimorede va baraye olgu gozashte shode!)  ////zare_nk_050403_commented_movaghat
     }, []);
 
     return (
@@ -251,8 +249,8 @@ const SwiperInVendorListHeaderComp = ({
                             display: 'flex', alignItems: 'center', justifyContent: 'center', //// width: '100%', height: '100%',
                             backgroundColor: 'inherit', borderRadius: '.75rem', border: '1px solid #f6f6f7',
                         }}>
-                            <button id="openCollapseForSortingBtn"  ////zare_nk_050401_nokteh(rooydade in dokmeh nist badan pak she)
-                                onClick={openCollapseForSorting}  ////zare_nk_050401_nokteh(rooydade in dokmeh nist badan pak she) 
+                            <button id="openCollapseForSortingBtn"   
+                                onClick={openCollapseForSorting}   
                                 style={{
                                     display: 'flex',
                                     justifyContent: 'center',
@@ -327,8 +325,8 @@ const SwiperInVendorListHeaderComp = ({
                             display: 'flex', alignItems: 'center', justifyContent: 'center', //// width: '100%', height: '100%',
                             backgroundColor: 'inherit', borderRadius: '.75rem', border: '1px solid #f6f6f7',
                         }}>
-                            <button id="openCollapseForRaveshErsalBtn"  ////zare_nk_050401_nokteh(rooydade in dokmeh nist badan pak she)
-                                onClick={openCollapseForRaveshErsal}  ////zare_nk_050401_nokteh(rooydade in dokmeh nist badan pak she) 
+                            <button id="openCollapseForRaveshErsalBtn"  
+                                onClick={openCollapseForRaveshErsal}  
                                 style={{
                                     display: 'flex',
                                     justifyContent: 'center',

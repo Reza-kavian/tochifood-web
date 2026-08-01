@@ -1,4 +1,4 @@
-// ////zare_nk_050428_okk(1)
+// ////zare_nk_050510_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -19,13 +19,11 @@ import Link from "next/link";
 import { json } from "stream/consumers";
 
 function getCookie(name: any) {
-    ////zare_nk_050209_added_st
     if (typeof document === 'undefined') {
         console.log("document === 'undefined'");
         return null; // برای جلوگیری از خطای عدم وجود document
     }
     console.log("document !== 'undefined'");
-    ////zare_nk_050209_added_end
     const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
     console.log("value is: " + value);
     const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
@@ -41,33 +39,20 @@ function getCookie(name: any) {
     return null; //اگر کوکی پیدا نشد
 }
 
-// type MiddleCountTedadSefrType = {
 type addRemBtnsAndCountPackegeType = {
-    // SabadRow: SabadRowType | ForCartContInProdDetValType;  //zare_nk_041120_nokteh(in khat commenteh, faghat jahate olgue hazf nakardam)
-    ////zare_nk_041120_added_st
     refForfather: RefObject<string | null>;
     fromShowDetails: boolean;
     IdKala: number;
     idTag: string;
     tedadInSabadOrDet: number;
-    ////zare_nk_041120_added_end
-    handlerForAddClick: (e?: MouseEvent<HTMLAnchorElement>) => void;
-    handlerForRemClick: (e?: MouseEvent<HTMLAnchorElement>) => void;
+    // handlerForAddClick: (e?: MouseEvent<HTMLAnchorElement>) => void;  ////zare_nk_050510_commented(chon <button> jaigozine <a> shod)
+    handlerForAddClick: (e?: MouseEvent<HTMLButtonElement>) => void;   ////zare_nk_050510_added(chon <button> jaigozine <a> shod)
+    // handlerForRemClick: (e?: MouseEvent<HTMLAnchorElement>) => void;  ////zare_nk_050510_commented(chon <button> jaigozine <a> shod)
+    handlerForRemClick: (e?: MouseEvent<HTMLButtonElement>) => void;   ////zare_nk_050510_added(chon <button> jaigozine <a> shod)
     ForCartContentsDesignType: number;
     bishAzMaxTedadYaMojoodi: number | null;
 };
 
-// function MiddleCountTedadSefr({    
-//     refForfather,
-//     fromShowDetails,
-//     IdKala,
-//     idTag,
-//     tedadInSabadOrDet, 
-//     handlerForAddClick,
-//     handlerForRemClick,
-//     ForCartContentsDesignType,
-//     bishAzMaxTedadYaMojoodi, 
-// }: MiddleCountTedadSefrType) {
 const AddRemBtnsAndCountPackege = ({
     refForfather,
     fromShowDetails,
@@ -215,11 +200,9 @@ const AddRemBtnsAndCountPackege = ({
                             flex: "1 1 auto",
                             display: "flex",
                             // flexFlow: "column", ////zare_nk_050414_commented
-                        }}
-                    >
+                        }}>
                         {/* zare_nk_050415_nokteh(span be div tabdil shod) */}
-                        <div
-                            style={{
+                        <div style={{
                                 height: "100%",
                                 // border: "none", ////zare_nk_050414_commented
                                 display: "flex",
@@ -228,8 +211,7 @@ const AddRemBtnsAndCountPackege = ({
                                 alignContent: "center",
                                 overflow: "hidden",
                                 padding: "0px 4px", ////zare_nk_050414_added
-                            }}
-                        >
+                            }}>
                             {/* <a
                 data-baz="1"
                 style={{

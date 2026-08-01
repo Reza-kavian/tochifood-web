@@ -1,4 +1,4 @@
-////zare_nk_050506_okk(1)
+////zare_nk_050510_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -125,10 +125,8 @@ const SwiperThinkBanerComp = () => {
                     <Link href="https://tapsi.food/vendor-list?vendorListId=banner-1624">
                         <img style={{
                             width: '100%', display: 'block', ////zare_nk_050303_nokteh(age display:'block' nadam tage pedare img ertefaei hodoode 10px bishtar az img migireh!)
-                        }}
-                            src={`/images/baners/top-baner/ThinkBanerFromBasalam.gif`} />
+                        }} src={`/images/baners/top-baner/ThinkBanerFromBasalam.gif`} />
                     </Link>
-
                 </div>
             </SwiperSlide>
             {/* {responsedListFromApiSelectBaner?.map((item, index) => {

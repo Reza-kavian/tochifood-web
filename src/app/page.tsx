@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(2)
+////zare_nk_050510_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext } from "react";
@@ -11,8 +11,6 @@ import { JwtPayload } from "jsonwebtoken";
 import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Drawer } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
 
-// import "@neshan-maps-platform/ol/ol.css"   ////zare_nk_050328_commented(in safhe be naghshe niazi nist ke)
-
 import { useAuthentication } from '../context/AuthenticationContext';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -21,7 +19,7 @@ import Link from "next/link";
 
 import SwiperGrouplevel1Comp from '../components/SwiperGrouplevel1Comp';
 
-import SwiperTapBestsComp from '../components/SwiperTapBestsComp';  ////zare_nk_050305_added
+import SwiperTapBestsComp from '../components/SwiperTapBestsComp';  
 
 import SwiperTopBanerComp from '../components/SwiperTopBanerComp';
 
@@ -29,11 +27,12 @@ import SwiperThinkBanerComp from '../components/SwiperthinkBanerComp';
 
 import SwiperTapTimeComp from '../components/SwiperTapTimeComp';
 
-import SwiperSecondBanerComp from '../components/SwiperSecondBanerComp';  //zare_nk_050305_added
+import SwiperSecondBanerComp from '../components/SwiperSecondBanerComp';  
 
-import AdressListComponent from '../components/AdressListComponent';  //zare_nk_050328_added 
+import AdressListComponent from '../components/AdressListComponent'; 
 
-import { currentAddressContext } from '../context/currentAddressContext';  //zare_nk_050329_added 
+import { currentAddressContext } from '../context/currentAddressContext';  
+
 import { json } from "node:stream/consumers";
 import { relative } from "node:path";
 
@@ -42,13 +41,11 @@ import { relative } from "node:path";
 import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
 
 function getCookie(name: any) {
-  ////zare_nk_050209_added_st
   if (typeof document === 'undefined') {
     // console.log("document === 'undefined'");
     return null; // برای جلوگیری از خطای عدم وجود document
   }
   // console.log("document !== 'undefined'");
-  ////zare_nk_050209_added_end
   const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
   // console.log("value is: " + value);
   const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
@@ -81,7 +78,7 @@ type responsedListFromApiSelectAddressListType = {
 };
 
 export default function Home() {
-  console.log('050329-Home rendered!!');   ////zare_nk_050329_added
+  console.log('050329-Home rendered!!');   
   const [error, setError] = useState<string | null>(null);
   const [isEpmtyAdressList, setIsEpmtyAdressList] = useState<string | null>(null);
   const [isEpmtyShowAddRemAddress, setIsEpmtyShowAddRemAddress] = useState(true);
@@ -90,11 +87,8 @@ export default function Home() {
 
   const [responsedListFromApiSelectAddressList, SetResponsedListFromApiSelectAddressList] = useState<responsedListFromApiSelectAddressListType[] | null>(null);
 
-  let currentAddressUseContext = useContext(currentAddressContext);   ////zare_nk_050329_added  
-
-  // const chosenAddress = getCookie("chosenAddress"); 
-  // var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
-  // const [mycurrentAddressState, setMycurrentAddressState] = useState<responsedListFromApiSelectAddressListType | null>(parsedChosenAddress);    
+  let currentAddressUseContext = useContext(currentAddressContext);     
+   
   const [mycurrentAddressState, setMycurrentAddressState] = useState<responsedListFromApiSelectAddressListType | null>(null);
 
   // const [currentAddress, setCurrentAddress] = useState<responsedListFromApiSelectAddressListType | null>(null);    ////zare_nk_050329_commented(currentAddress az useState 
@@ -112,29 +106,18 @@ export default function Home() {
     profile: false,
   });
 
-  ////zare_nk_050505_commented_st
-  // useEffect(() => {
-  //   const chosenAddress = getCookie("chosenAddress");
-  //   var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
-  //   setMycurrentAddressState(parsedChosenAddress);
-  // }, []);
-  ////zare_nk_050505_commented_end
-  // ////zare_nk_050505_added_st
   useEffect(() => {
     const chosenAddress = getCookie("chosenAddress");
     var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
 
     if (parsedChosenAddress == null) {
-      showAddressListDrawer();
-      // chosenAddress(responsedListFromApiSelectAddressList ? responsedListFromApiSelectAddressList[0] : null) 
+      showAddressListDrawer(); 
       return;
     }
     if (mycurrentAddressState == null) {
       setMycurrentAddressState(parsedChosenAddress);
     }
-
-  }, [isEpmtyAdressList]); ////zare_nk_050505_addeded
-  // ////zare_nk_050505_added_end
+  }, [isEpmtyAdressList]);
 
   const router = useRouter();
 
@@ -203,30 +186,18 @@ export default function Home() {
         // console.log("zare_nk_050206-data: " + JSON.stringify(data));
         if (data.status == 0) {
           var parsedList = JSON.parse(data.data.list);
-          // setIsEpmtyAdressList('notNull');  ////zare_nk_050507_nokteh(vaghti bala hast inja ezafiye va commentesh kardam)
           SetResponsedListFromApiSelectAddressList(() => {
             return parsedList
-          });
-          ////zare_nk_050507_added_st
-          // if (parsedList.length == 0) {
-          //   return null;
-          // }
-          // else {
+          });          
             return parsedList;
-          // }
-          ////zare_nk_050507_added_end
         } else {
           setError("متاسفانه خطایی رخ داده است34:" + data.errors);
-          return null; ////zare_nk_050507_added
+          return null; 
         }
       } else {
         setError("متاسفانه خطایی رخ داده است35");
-        return null; ////zare_nk_050507_added
-      }
-
-      // if (token) {  ////zare_nk_050507_nokteh(az inja bordeh shod be entehaye tabe)
-      //   setIsEpmtyAdressList('notNull');   
-      // }      
+        return null;
+      }     
     }
     , [isEpmtyAdressList, responsedListFromApiSelectAddressList])
 
@@ -321,11 +292,11 @@ export default function Home() {
         }}>
           <button
             id="showAddressListDrawerBtn"
-            onClick={showAddressListDrawer}   //zare_nk_050329_commented_nokteh(ba setState hayash baese reRendere Home mishe(bayad az reRendere farzandane birabte home jologiri beshe)) 
+            onClick={showAddressListDrawer} 
             style={{
               borderRadius: 10,
               display: 'flex',
-              visibility: (mycurrentAddressState?.Adress ? 'visible' : 'hidden'),  ////zare_nk_050329_added
+              visibility: (mycurrentAddressState?.Adress ? 'visible' : 'hidden'),   
               flexDirection: 'column',
               backgroundColor: 'inherit',
               border: 'none',

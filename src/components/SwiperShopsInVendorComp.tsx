@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(2)
+////zare_nk_050510_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -43,6 +43,22 @@ function getCookie(name: any) {
     return null; //اگر کوکی پیدا نشد
 }
 
+type responsedListFromApiSelectAddressListType = {
+    IdAdress: number;
+    IdUser: number;
+    Adress: string;
+    CodePosti: string;
+    Lon: number;
+    Lat: number;
+    Mobile: number;
+    FName: string;
+    LName: string;
+    OnvanAdress: string;
+    Fullname: string;
+
+    [key: string]: any;
+};
+
 const SwiperShopsInVendorComp = () => {
     console.log('050329-SwiperShopsInVendorComp rendered!!');
     const [errorInSwiperShopsInVendorComp, setErrorInSwiperShopsInVendorComp] = useState<string | null>(null);
@@ -62,6 +78,14 @@ const SwiperShopsInVendorComp = () => {
     const [responsedListFromApiSelectShobehAtrafUser, SetResponsedListFromApiSelectShobehAtrafUser] = useState<responsedListFromApiSelectShobehAtrafUserType[] | null>(null);
 
     const getSwiperShopsInVendorComp = async () => {
+        ////zare_nk_050510_added_st
+        const chosenAddress = await getCookie("chosenAddress");
+        var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
+        // setMycurrentAddressState(parsedChosenAddress);  ////zare_nk_050510_commented(chon dar in file,dar haminja faghat be parsedChosenAddress niaz darim va dar jahaye dige va
+        ////  jsx niazi be estefadeh azash nist dakhele setState negahesh nadashtam(age dar tavabehe digeh mikham azash estefadeh konam(albateh dar in file felan hich ja azash estefadeh
+        ////  nemikonam), vali dar jsx(dar dome html) nemikham azash etefadeh konam mamoolan useRef behtare nesbat be useState ke(useState baese reRender mishe)))
+        ////zare_nk_050510_added_end
+
         let token = await getCookie("token");
         if (!token) {
             setErrorInSwiperShopsInVendorComp("lotfan avval online shid");
@@ -69,7 +93,6 @@ const SwiperShopsInVendorComp = () => {
         }
         console.log('tokentokentoken: ' + token);
         // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
-        // const response = await fetch(ApiUrl + "Api_SelectGoroohJson", {
         const response = await fetch(NextJsApiUrl + "Api_SelectShobehAtrafUser", {
             method: "POST",
             headers: {
@@ -78,7 +101,8 @@ const SwiperShopsInVendorComp = () => {
             },
             // body: JSON.stringify({}),
             body: JSON.stringify({
-                "Id": 1,  ////zare_nk_050416_nokteh(manzoor az Id hamoon IdAddress hast ke ya vaghei midam ya pishfarz hatman 1 mizaram(ehtemalan 1 haman meydoon saate) )
+                // "Id": 1,  ////zare_nk_050510_commented(manzoor az Id hamoon IdAddress hast,meghdare 1 ehtemalan meydoon saate sari hast)
+                "Id": parsedChosenAddress != null ? parsedChosenAddress.IdAdress : 1, ////zare_nk_050510_added(manzoor az Id hamoon IdAddress hast,meghdare 1 ehtemalan meydoon saate sari hast)
             }),
         });
         const data = await response.json();
@@ -209,13 +233,9 @@ const SwiperShopsInVendorComp = () => {
                                                 </div>
 
                                                 <img style={{
-                                                    width: '100%',
-                                                    // marginTop: '5px', marginBottom: '0px',
-                                                    ////zare_nk_050314_added_st
-                                                    height: '105px', objectFit: 'cover',
+                                                    width: '100%', height: '105px', objectFit: 'cover',
                                                     borderTopLeftRadius: '.5rem',
                                                     borderTopRightRadius: '.5rem',
-                                                    ////zare_nk_050314_added_end 
                                                 }}
                                                     // src={`/images/SwiperGrouplevel1/${item.AxG1}.png`} />  ////zare_nk_050229_nokteh(age az database bekhooneh bade emale database food tavassote parsa)
                                                     // src={`/images/SwiperGrouplevel1/${index}.png`} />
@@ -242,26 +262,26 @@ const SwiperShopsInVendorComp = () => {
                                                         }}>
                                                             <span style={{ fontSize: '.75rem', lineHeight: '1rem', fontWeight: 700, }}>خرید قسطی!</span>
                                                             <span style={{
-                                                                    position: 'absolute',
+                                                                position: 'absolute',
 
-                                                                    height: 0, width: 0,
+                                                                height: 0, width: 0,
 
-                                                                    borderTopWidth: '8px',
-                                                                    borderRightWidth: '8px',
-                                                                    borderBottomWidth: 0,
-                                                                    borderLeftWidth: 0,
+                                                                borderTopWidth: '8px',
+                                                                borderRightWidth: '8px',
+                                                                borderBottomWidth: 0,
+                                                                borderLeftWidth: 0,
 
-                                                                    bottom: '-8px', right: 0,
+                                                                bottom: '-8px', right: 0,
 
-                                                                    display: 'inline-block',
+                                                                display: 'inline-block',
 
-                                                                    borderStyle: 'solid',
+                                                                borderStyle: 'solid',
 
-                                                                    borderTopColor: 'rgb(19, 60, 135)',
-                                                                    borderRightColor: 'transparent',
-                                                                    borderBottomColor: 'transparent',
-                                                                    borderLeftColor: 'transparent',
-                                                                }}>
+                                                                borderTopColor: 'rgb(19, 60, 135)',
+                                                                borderRightColor: 'transparent',
+                                                                borderBottomColor: 'transparent',
+                                                                borderLeftColor: 'transparent',
+                                                            }}>
                                                             </span>
                                                         </div>
                                                         :
@@ -273,26 +293,26 @@ const SwiperShopsInVendorComp = () => {
                                                         }}>
                                                             <span style={{ fontSize: '.75rem', lineHeight: '1rem', fontWeight: 700, }}>تا 50%</span>
                                                             <span style={{
-                                                                    position: 'absolute',
+                                                                position: 'absolute',
 
-                                                                    height: 0, width: 0,
+                                                                height: 0, width: 0,
 
-                                                                    borderTopWidth: '8px',
-                                                                    borderRightWidth: 0,
-                                                                    borderBottomWidth: 0,
-                                                                    borderLeftWidth: '8px',
+                                                                borderTopWidth: '8px',
+                                                                borderRightWidth: 0,
+                                                                borderBottomWidth: 0,
+                                                                borderLeftWidth: '8px',
 
-                                                                    bottom: '-8px', left: 0,
+                                                                bottom: '-8px', left: 0,
 
-                                                                    display: 'inline-block',
+                                                                display: 'inline-block',
 
-                                                                    borderStyle: 'solid',
+                                                                borderStyle: 'solid',
 
-                                                                    borderTopColor: '#b23f00',
-                                                                    borderRightColor: 'transparent',
-                                                                    borderBottomColor: 'transparent',
-                                                                    borderLeftColor: 'transparent',
-                                                                }}>
+                                                                borderTopColor: '#b23f00',
+                                                                borderRightColor: 'transparent',
+                                                                borderBottomColor: 'transparent',
+                                                                borderLeftColor: 'transparent',
+                                                            }}>
                                                             </span>
                                                         </div>
                                                 }

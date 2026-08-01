@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(2)
+////zare_nk_050510_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext, memo } from "react";
@@ -17,196 +17,19 @@ import { Navigation, Pagination } from 'swiper/modules';
 import Link from "next/link";
 
 type CollapseAndClickAwayForSortingCompType = {
-    //   isEpmtyHeightBox: boolean;
-    //   setIsEpmtyHeightBox: React.Dispatch<React.SetStateAction<boolean>>;
     isEpmtyCollapseForSorting: boolean;
     setIsEpmtyCollapseForSorting: React.Dispatch<React.SetStateAction<boolean>>;
     saveAddress: (isOnline: boolean) => void;
-    // addressFormInputsVal: any;   //zare_nk_050205_added(noe any update she)
-    // setAddressFormInputsVal: React.Dispatch<React.SetStateAction<any>>;   //zare_nk_050205_added(noe any update she) 
 };
 
 const CollapseAndClickAwayForSortingComp = ({
     isEpmtyCollapseForSorting,
     setIsEpmtyCollapseForSorting,
     saveAddress,
-    // addressFormInputsVal,
-    // setAddressFormInputsVal,
 }: CollapseAndClickAwayForSortingCompType) => {
-    console.log('050329-CollapseAndClickAwayForSortingComp rendered!!');   ////zare_nk_050329_added
     console.log('050401-CollapseAndClickAwayForSortingComp called!!-isEpmtyCollapseForSorting: ' + isEpmtyCollapseForSorting);
 
     const [error, setError] = useState<string | null>(null);
-
-    ////zare_nk_050402_commented_st
-    // type AddressFormInputsMatnErrorType = {
-    //     Address: string | null;
-    //     pelak: string | null;
-    //     vahed: string | null;
-    //     addressName: string | null;
-    // };
-
-    // const [addressFormInputsMatnError, setAddressFormInputsMatnError] = useState<AddressFormInputsMatnErrorType>({
-    //     Address: '',
-    //     pelak: '',
-    //     vahed: '',
-    //     addressName: '',
-    // });
-
-    // type IsAddressFormInputsFocusedType = {
-    //     Address: boolean;
-    //     pelak: boolean;
-    //     vahed: boolean;
-    //     addressName: boolean;
-    // }; 
-
-    // const [isAddressFormInputsFocused, setIsAddressFormInputsFocused] = useState<IsAddressFormInputsFocusedType>({
-    //     Address: false,
-    //     pelak: false,
-    //     vahed: false,
-    //     addressName: false,
-    // });
-    ////zare_nk_050402_commented_end
-
-    ////zare_nk_050408_commented_st
-    //  type IsAddressFormInputsTextType = {
-    //         Address: boolean;
-    //         pelak: boolean;
-    //         vahed: boolean;
-    //         addressName: boolean;
-    //     };
-    // // const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<boolean[]>(Array(4).fill(true));   //zare_nk_050208_nokteh(state arayeei)   
-    // const [isAddressFormInputsTextEmty, setIsAddressFormInputsTextEmty] = useState<IsAddressFormInputsTextType>({   //zare_nk_050208_nokteh(state objecti)
-    //     Address: true,
-    //     pelak: true,
-    //     vahed: true,
-    //     addressName: true,
-    // });
-
-    // type RefForAddressFormInputsType = {
-    //     Address: HTMLTextAreaElement | null;
-    //     pelak: HTMLInputElement | null;
-    //     vahed: HTMLInputElement | null;
-    //     addressName: HTMLInputElement | null;
-    // };
-
-    // // const refForAddressInput = useRef<(HTMLTextAreaElement | null)>(null); //zare_nk_050206_nokteh(chon baraye yek tage na araye lazemeh na object)
-    // // const refForAddressFormInputs = useRef<(HTMLInputElement | HTMLTextAreaElement | null)[]>([]); //zare_nk_050206_nokteh(chon baraye chandin tage araye gozashtim)
-    // const refForAddressFormInputs = useRef<RefForAddressFormInputsType>({  //zare_nk_050206_nokteh(chon baraye chandin tage object gozashtim)
-    //     Address: null,
-    //     pelak: null,
-    //     vahed: null,
-    //     addressName: null,
-    // });
-    ////zare_nk_050408_commented_end
-    ////zare_nk_050402_commented_st
-    // const refForSaveAddressFormInputsBtn = useRef<HTMLButtonElement | null>(null);
-    // const [isDisabledsaveAddressFormInputsBtn, setIsDisabledsaveAddressFormInputsBtn] = useState(true);
-    // const handleAddressFormInputsFocus = (eventOrElement: ChangeEvent<HTMLInputElement> | HTMLInputElement | ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null) => {
-    //     var inputsName = '';
-    //     let input: HTMLInputElement | HTMLTextAreaElement | null = null;
-    //     // let vall: string = "";
-    //     if (eventOrElement && "target" in eventOrElement) {
-    //         input = eventOrElement.target;
-    //         // vall = input.value;
-    //         inputsName = input.name;
-    //     } else {
-    //         input = eventOrElement;
-    //         // vall = input?.value ?? "";
-    //         inputsName = input?.name ?? "";
-    //     }
-    //     // setIsAddressInputFocused(true);
-    //     setIsAddressFormInputsFocused((cur) => {
-    //         return (
-    //             { ...cur, [inputsName]: true }
-    //         );
-    //     });
-    // };    
-
-    // const handleAddressFormInputsBlur = (eventOrElement: ChangeEvent<HTMLInputElement> | HTMLInputElement | ChangeEvent<HTMLTextAreaElement> | HTMLTextAreaElement | null) => {
-    //     var inputsName = '';
-    //     let input: HTMLInputElement | HTMLTextAreaElement | null = null;
-    //     // let vall: string = "";
-    //     if (eventOrElement && "target" in eventOrElement) {
-    //         input = eventOrElement.target;
-    //         // vall = input.value;
-    //         inputsName = input.name;
-    //     } else {
-    //         input = eventOrElement;
-    //         // vall = input?.value ?? "";
-    //         inputsName = input?.name ?? "";
-    //     }
-    //     // setIsAddressInputFocused(true);
-    //     setIsAddressFormInputsFocused((cur) => {
-    //         return (
-    //             { ...cur, [inputsName]: false }
-    //         );
-    //     });
-    // };
-    ////zare_nk_050402_commented_end
-
-    ////zare_nk_050206_nokteh001_st(yek rooydade ekhtesasi baraye yek tag(voroodiye yek tag ro migireh, khoroojiye yek tag ro mideh)) 
-    // const handleAddressInputFocus = () => {
-    //   // setIsInputFocused(true);
-    //   setIsAddressInputFocused(true);
-    // };
-
-    // const handleAddressInputBlur = () => {
-    //   // setIsInputFocused(false);
-    //   setIsAddressInputFocused(false);
-    // };
-
-    // const handlePelakInputFocus = () => {
-    //   setIsPelakInputFocused(true);
-    // };
-
-    // const handlePelakInputBlur = () => {
-    //   setIsPelakInputFocused(false);
-    // };
-
-    // const handleVahedInputFocus = () => {
-    //   setIsVahedInputFocused(true);
-    // };
-
-    // const handleVahedInputBlur = () => {
-    //   setIsVahedInputFocused(false);
-    // };
-
-    // const handleAddressNameInputFocus = () => {
-    //   setIsAddressNameInputFocused(true);
-    // };
-
-    // const handleAddressNameInputBlur = () => {
-    //   setIsAddressNameInputFocused(false);
-    // }; 
-    ////zare_nk_050206_nokteh001_end(yek rooydade ekhtesasi baraye yek tag(voroodiye yek tag ro migireh, khoroojiye yek tag ro mideh))
-
-
-
-    ////zare_nk_050408_commented_st
-    // useEffect(() => {   //u001
-    //     const hasNotNullValue = Object.values(addressFormInputsMatnError).some(value => value !== null);
-    //     console.log('050205-addressFormInputsMatnError: ' + JSON.stringify(addressFormInputsMatnError));
-    //     ////zare_nk_050206_nokteh_st(in dastoorat dar in makan javab dad be khoobi)
-    //     if (hasNotNullValue) {
-    //         console.log('050205-hasNullValue');
-    //         setIsDisabledsaveAddressFormInputsBtn(true);
-    //         if (refForSaveAddressFormInputsBtn.current) {
-    //             refForSaveAddressFormInputsBtn.current.classList.add(Styles.disabledBtn);
-    //             refForSaveAddressFormInputsBtn.current.classList.remove(Styles.btn);
-    //         }
-    //     }
-    //     else {
-    //         console.log('050205-has not NullValue');
-    //         setIsDisabledsaveAddressFormInputsBtn(false);
-    //         if (refForSaveAddressFormInputsBtn.current) {
-    //             refForSaveAddressFormInputsBtn.current.classList.remove(Styles.disabledBtn);
-    //             refForSaveAddressFormInputsBtn.current.classList.add(Styles.btn);
-    //         }
-    //     }
-    //     ////zare_nk_050206_nokteh_end(in dastoorat dar in makan javab dad be khoobi)
-    // }, [addressFormInputsMatnError]);
-    ////zare_nk_050408_commented_end
 
     const [radionClicked, setRadionClicked] = useState<number>(1);
 
@@ -322,7 +145,7 @@ const CollapseAndClickAwayForSortingComp = ({
                         marginBottom: '0px',
                     }}>
                         مرتب&zwnj;سازی براساس
-                        </p>
+                    </p>
                 </div>
 
                 <div onClick={() => { radionClickedFunc(1) }}

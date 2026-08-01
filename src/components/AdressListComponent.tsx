@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(1)
+////zare_nk_050510_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, memo } from "react";
@@ -26,20 +26,18 @@ type responsedListFromApiSelectAddressListType = {
 };
 
 type AdressListComponentType = {
-  // isEpmtyAdressList: boolean;    //zare_nk_050209_commented
-  isEpmtyAdressList: string | null;    //zare_nk_050209_added
-  // setIsEpmtyAdressList: React.Dispatch<React.SetStateAction<boolean>>;     //zare_nk_050209_commented
-  setIsEpmtyAdressList: React.Dispatch<React.SetStateAction<string | null>>;   //zare_nk_050209_added
+  isEpmtyAdressList: string | null;
+  setIsEpmtyAdressList: React.Dispatch<React.SetStateAction<string | null>>;
   refForBox: RefObject<HTMLDivElement | null>;
   responsedListFromApiSelectAddressList: responsedListFromApiSelectAddressListType[] | null;
-  isEpmtyShowAddRemAddress: boolean;    //zare_nk_050207_added
+  isEpmtyShowAddRemAddress: boolean;
   setIsEpmtyShowAddRemAddress: React.Dispatch<React.SetStateAction<boolean>>;
   // showAddressListDrawer: () => void;  ////zare_nk_050507_commented
-  showAddressListDrawer: () =>  Promise<responsedListFromApiSelectAddressListType[] | null>; ////zare_nk_050507_added    
+  showAddressListDrawer: () => Promise<responsedListFromApiSelectAddressListType[] | null>; ////zare_nk_050507_added    
 };
 
-// export const AdressListComponent = function AdressListComponent({      //zare_nk_050209_commented
-const AdressListComponent = function AdressListComponent({      //zare_nk_050209_added
+
+const AdressListComponent = function AdressListComponent({
   isEpmtyAdressList,
   setIsEpmtyAdressList,
   refForBox,
@@ -48,9 +46,7 @@ const AdressListComponent = function AdressListComponent({      //zare_nk_050209
   setIsEpmtyShowAddRemAddress,
   showAddressListDrawer,
 }: AdressListComponentType) {
-
   console.log('050329-AdressListComponent rendered!!');
-
   const router = useRouter();
 
   const [error, setError] = useState<string | null>(null);
@@ -160,7 +156,7 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
             <button
               id="closeAddresListBtn"
               onClick={() => {
-                setIsEpmtyAdressList(null);  //zare_nk_050221_nulle alan moadele truye versione ghbli hast-va meghdare stringi ham moadele false versione ghabli hast
+                setIsEpmtyAdressList(null);  //zare_nk_050221_nulle alan moadele truye versione ghabli hast-va meghdare stringi ham moadele false versione ghabli hast
               }}
               style={{
                 width: '32px', height: '32px', border: 'none', flex: '0 0 auto', display: "flex", flexFlow: "row", justifyContent: 'center',
@@ -203,17 +199,13 @@ va jaigozine khoobi baraye neveshtane dastiye rooydade click dar useEffect hast)
             }}>آدرس جدید</span>
           </div>
 
-          {/* zare_nk_050206_added_addressHa_st(behtare dar componenti joda sedash bezanim ke maghadir ra ba api por koneh) */}
           <Adressescomponent
             responsedListFromApiSelectAddressList={responsedListFromApiSelectAddressList}
             isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}
-            setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}
-            // showAddRemAddress={showAddRemAddress}  ////zare_nk_050329_commented
+            setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress} 
             setIsEpmtyAdressList={setIsEpmtyAdressList}
-            showAddressListDrawer={showAddressListDrawer}
-          // setCurrentAddress={setCurrentAddress}  ////zare_nk_050329_commented(currentAddress az useState tabdil shod be createContext)
+            showAddressListDrawer={showAddressListDrawer} 
           />
-          {/* zare_nk_050206_added_addressHa_end(behtare dar componenti joda sedash bezanim ke maghadir ra ba api por koneh) */}
         </div>
       </Box>
       {/* zare_nk_050204_rahe2_st(Drawer baraye collapse chasboone paeine safhe va baste shodanesh vaghti biroone collapse click she) */}

@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(1)
+////zare_nk_050510_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -24,13 +24,11 @@ import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
 import AddRemBtnsAndCountPackege from './addRemBtnsAndCountPackege'; ////zare_nk_050417_added
 
 function getCookie(name: any) {
-    ////zare_nk_050209_added_st
     if (typeof document === 'undefined') {
         console.log("document === 'undefined'");
         return null; // برای جلوگیری از خطای عدم وجود document
     }
     console.log("document !== 'undefined'");
-    ////zare_nk_050209_added_end
     const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
     console.log("value is: " + value);
     const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
@@ -45,21 +43,6 @@ function getCookie(name: any) {
     console.log("do nist-parts.length: " + parts.length);
     return null; //اگر کوکی پیدا نشد
 }
-
-// type MiddleCountTedadSefrType = {
-//     // SabadRow: SabadRowType | ForCartContInProdDetValType;  //zare_nk_041120_nokteh(in khat commenteh, faghat jahate olgue hazf nakardam)
-//     ////zare_nk_041120_added_st
-//     refForfather: RefObject<string | null>;
-//     fromShowDetails: boolean;
-//     IdKala: number;
-//     idTag: string;
-//     tedadInSabadOrDet: number;
-//     ////zare_nk_041120_added_end
-//     handlerForAddClick: (e?: MouseEvent<HTMLAnchorElement>) => void;
-//     handlerForRemClick: (e?: MouseEvent<HTMLAnchorElement>) => void;
-//     ForCartContentsDesignType: number;
-//     bishAzMaxTedadYaMojoodi: number | null;
-// };
 
 type SabadRowType = {
     IdSabadKharidSatr: number;
@@ -104,37 +87,18 @@ type addRemParamType = {
 };
 
 const GetScrollsSecInVendor = ({
-    // // openCollapseForSorting,
-    // // openCollapseForRaveshErsal
-    // scrollToSection,
-    // activeTab
     sectionRefs,
     IdSabadKharidTitr,
     setJamKol,
     setJamKolTakhfif,
     setJamKolNahaei,
-    // MiddleCountTedadSefr,
-    // refForfather,
-    // sabadRows,
-    // handlerForAddClick,
-    // handlerForRemClick,
 }: {
-    // // openCollapseForSorting: () => void;
-    // // openCollapseForRaveshErsal: () => void;
-    // scrollToSection: (id:string) => void;
-    // activeTab: string|null; 
     sectionRefs: RefObject<Record<string, HTMLDivElement | null>>;
     IdSabadKharidTitr: number | null;
     setJamKol: React.Dispatch<React.SetStateAction<number | null>>;
     setJamKolTakhfif: React.Dispatch<React.SetStateAction<number | null>>;
     setJamKolNahaei: React.Dispatch<React.SetStateAction<number | null>>;
-    // MiddleCountTedadSefr: MiddleCountTedadSefrType;
-    // refForfather: RefObject<string | null>;
-    // sabadRows: SabadRowType;
-    // handlerForAddClick: addRemParamType;
-    // handlerForRemClick: addRemParamType;
 }) => {
-    // const GetScrollsSecInVendor = () => {
     const { vendorId } = useParams();  ////zare_nk_050416_nokteh(ehtemalan chon Componente GetScrollsSecInVendor joze farzandane safheye [vendorId]/page.tsx hast, pas be useParams 
     //// jaddesh dastresi dareh, va niazi be pas dadane parametr be Componente farzand ya tarife useContext nist baraye dastresi dar farzand)
     console.log('050329-GetScrollsSecInVendor rendered!!-vendorId isss: ' + Number(vendorId));
@@ -145,16 +109,6 @@ const GetScrollsSecInVendor = ({
 
     const [isOpenedMymodalForWarning, setIsOpenedMymodalForWarning] = useState(false);
     const [warningTextInMymodalForWarning, setWarningTextInMymodalForWarning] = useState('');
-
-    // type responsedListFromApiSelectGoroohJsonType = {
-    //     IdG1: number;
-    //     NameG1: string;
-    //     AxG1: string;
-    //     Tozihat: string;
-
-    //     [key: string]: any;
-    // };
-    // const [responsedListFromApiSelectGoroohJson, SetResponsedListFromApiSelectGoroohJson] = useState<responsedListFromApiSelectGoroohJsonType[] | null>(null);
 
     type ForCartContInProdDetValType = {
         tedadInSabadOrDet: number;
@@ -224,15 +178,16 @@ const GetScrollsSecInVendor = ({
         [key: string]: any;
     };
 
-    const [mycurrentAddressState, setMycurrentAddressState] = useState<responsedListFromApiSelectAddressListType | null>(null);
+    // const [mycurrentAddressState, setMycurrentAddressState] = useState<responsedListFromApiSelectAddressListType | null>(null);  ////zare_nk_050510_commented
+    const refForMycurrentAddressState = useRef<responsedListFromApiSelectAddressListType | null>(null);  ////zare_nk_050510_added
 
     // const [responsedListFromApiSelectKalaShobeh, SetResponsedListFromApiSelectKalaShobeh] = useState<ForCartContInProdDetValType[] | null>(null);
     const [responsedListFromApiSelectKalaShobeh, SetResponsedListFromApiSelectKalaShobeh] = useState<ForCartContInProdDetValType[]>([]);
     // const [responsedListFromApiSelectKalaShobeh, SetResponsedListFromApiSelectKalaShobeh] = useState<Record<number, ForCartContInProdDetValType > | null>(null);
     console.log('050417-responsedListFromApiSelectKalaShobeh is: ' + JSON.stringify(responsedListFromApiSelectKalaShobeh));
-    const [sabadRows, setSabadRows] = useState<SabadRowType[]>([]); ////zare_nk_050417_added_st 
+    const [sabadRows, setSabadRows] = useState<SabadRowType[]>([]);
     // console.log('050417-sabadRows is: ' + JSON.stringify(sabadRows));
-    const refForfather = useRef<string | null>(null);  ////zare_nk_050417_added(dar sabade food karbord nadareh,baraye marja boodane componente MiddleCountTedadSefr gozashtam)
+    const refForfather = useRef<string | null>(null);  ////zare_nk_050417_added(dar sabade food karbord nadareh, baraye marja boodane componente MiddleCountTedadSefr gozashtam)
 
     const getResponsedListFromApiSelectKalaShobeh = async () => {
         let token = await getCookie("token");
@@ -241,15 +196,7 @@ const GetScrollsSecInVendor = ({
             return;
         }
         console.log('tokentokentoken: ' + token);
-        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
-        // const response = await fetch(ApiUrl + "Api_SelectGoroohJson", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         Authorization: "Bearer " + token,
-        //     },
-        //     body: JSON.stringify({}),
-        // }); 
+        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented      
         const response = await fetch(NextJsApiUrl + "Api_SelectKalaShobeh", {
             method: "POST",
             headers: {
@@ -354,9 +301,10 @@ const GetScrollsSecInVendor = ({
         async function asyncTempFunc() {
             const chosenAddress = await getCookie("chosenAddress");
             var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
-            setMycurrentAddressState(parsedChosenAddress);
+            // setMycurrentAddressState(parsedChosenAddress);   ////zare_nk_050510_commented(chon dar daome jsx az parsedChosenAddress estefadeh nakardim ke be reRender niazi bashe va az setStae estefadeh konim(pas useRef bekhatere adame reRender kardane component manteghitare inja))
+            refForMycurrentAddressState.current = parsedChosenAddress;   ////zare_nk_050510_commented(chon dar daome jsx az parsedChosenAddress estefadeh nakardim ke be reRender niazi bashe va az setStae estefadeh konim(pas useRef bekhatere adame reRender kardane component manteghitare inja))
 
-            getResponsedListFromApiSelectKalaShobeh();  ////zare_nk_050403_nokteh(methode getResponsedListFromApiSelectKalaShobeh dar in header bimorede va baraye olgu gozashte shode!)  ////zare_nk_050403_commented_movaghat
+            getResponsedListFromApiSelectKalaShobeh();
         }
         asyncTempFunc();
     }, []);
@@ -537,10 +485,9 @@ const GetScrollsSecInVendor = ({
         console.log('050405-responsedListFromApiSelectKalaShobeh called!!');
     }
 
-    ////zare_nk_050416_added_st(baraye add va rem va ...)
     async function addToCartInIndex(
         addRemParam: addRemParamType,
-    ) {
+    ) { 
         console.log('040517-addToCartInIndex called!-addRemParam is: ' + JSON.stringify(addRemParam));
         // console.log('041120-addToCartInIndex called!-addRemParam: ' + JSON.stringify(addRemParam)); //zare_nk_041120_commented(error mideh:    // console.log('041120-addToCartInIndex called!-addRemParam: ' + JSON.stringify(addRemParam)); //zare_nk_041120_commented_tahlilshe(error mideh:TypeError: Converting circular structure to JSON)
         ////zare_nk_050416_commented_st
@@ -552,7 +499,7 @@ const GetScrollsSecInVendor = ({
         const token = getCookie("token");
         if (token == null) {
             setIsOpenedMymodalForWarning(true);
-            setWarningTextInMymodalForWarning("لطفا ابتدا لاگین شوید");
+            setWarningTextInMymodalForWarning("لطفا ابتدا وارد حساب کاربری خود شوید");
             ////zare_nk_041129_commented_st
             //   const bootstrap = await getBootstrap();
             //   const mymodalForWarning = new bootstrap.Modal(
@@ -568,14 +515,12 @@ const GetScrollsSecInVendor = ({
             ////zare_nk_041129_commented_end
             return;
         }
-        //else {  ////zare_nk_050416_commented(dar sharte token == null return gozashtim dige else nemikhaim)
+
         try {
             console.log('041120-addToCartInIndex-else 1');
             var TedadOut = 0;
-            var TedadOuttoAjax = 0;
             const zarib = parseFloat(String(addRemParam.ZaribForoosh ?? 0));
             TedadOut = addRemParam.tedadInSabadOrDet + zarib;
-            TedadOuttoAjax = addRemParam.ZaribForoosh;
             // const token = getCookie("token");  ////zare_nk_050416_commented
             console.log('041120-addToCartInIndex-tedad: ' + addRemParam.tedadInSabadOrDet + '-zarib: ' + addRemParam.ZaribForoosh + '-TedadOut: ' + TedadOut);
 
@@ -591,8 +536,9 @@ const GetScrollsSecInVendor = ({
                     BarcodeKala: addRemParam.BarcodeKala,
                     Tedad: TedadOut,
                     IdKala: addRemParam.IdKala,
-                    IdShobeh: vendorId,  ////zare_nk_050416_nokteh(meghdare dynamic bedam)
-                    IdAddress: mycurrentAddressState?.IdAdress,  // 23990,  ////zare_nk_050416_nokteh(meghdare dynamic bedam)
+                    IdShobeh: vendorId,
+                    // IdAddress: mycurrentAddressState?.IdAdress,   ////zare_nk_050510_commented(az useRef bejaye state estefadeh shod)
+                    IdAddress: refForMycurrentAddressState.current?.IdAdress,     ////zare_nk_050510_added(az useRef bejaye state estefadeh shod)
                 }),
             });
             const data = await response.json();
@@ -619,25 +565,22 @@ const GetScrollsSecInVendor = ({
                 else if (result.status == 0) {
                     let tittrInoInResult = JSON.parse(result.data.titr)[0];  ////zare_nk_050416_added
                     let satrInoInResult = JSON.parse(result.data.satr)[0];  //zare_nk_041124_added
-                    let Tedad = satrInoInResult.Tedad;
+                    let Tedad: number = satrInoInResult.Tedad;
                     console.log("zare_nk_050416-tittrInoInResult.IdSabadKharidSatr: " + tittrInoInResult.IdSabadKharidTitr +
                         "satrInoInResult.IdSabadKharidSatr: " + satrInoInResult.IdSabadKharidSatr
                     );
                     var bishAzMaxTedadYaMojoodi = 0;
-                    if (addRemParam.MaxTedad != null) {
-                        if (addRemParam.MaxTedad <= Tedad) {
-                            bishAzMaxTedadYaMojoodi = 1;
-                        }
-                    } else {
-                        if (addRemParam.Mojoodi <= Tedad) {
-                            bishAzMaxTedadYaMojoodi = 1;
-                        }
+
+                    if (addRemParam.MaxTedad <= Tedad) {
+                        bishAzMaxTedadYaMojoodi = 1;
+                    }
+                    if (addRemParam.Mojoodi <= Tedad) {
+                        bishAzMaxTedadYaMojoodi = 1;
                     }
 
                     refForfather.current = addRemParam.father;
 
                     let ForCartContentsDesignTypeLet = 0
-
                     if (Tedad == 0) {
                         ForCartContentsDesignTypeLet = 0;
                     }
@@ -800,18 +743,11 @@ const GetScrollsSecInVendor = ({
                 return (WarningText)
             });
         }
-        // } ////zare_nk_050416_commented(dar sharte token == null return gozashtim dige else nemikhaim)
     }
 
     async function remveFromCartInIndex(
         addRemParam: addRemParamType,
-    ) {
-        ////zare_nk_050416_commented_st
-        // if (addRemParam.event != null) {
-        //   addRemParam.event.stopPropagation();
-        //   addRemParam.event.preventDefault();
-        // }
-        ////zare_nk_050416_commented_end
+    ) { 
         const token = getCookie("token");
         if (token == null) {
             setIsOpenedMymodalForWarning(true);
@@ -832,16 +768,12 @@ const GetScrollsSecInVendor = ({
             return;
             return;
         }
-        //else {  ////zare_nk_050326_commented(dar sharte token == null return gozashtim dige else nemikhaim)
+
         try {
             console.log('041116-001');
             var TedadOut = 0;
-            var TedadOuttoAjax = 0;
             const zarib = parseFloat(String(addRemParam.ZaribForoosh ?? 0));
             TedadOut = addRemParam.tedadInSabadOrDet - zarib;
-            TedadOuttoAjax = -(addRemParam.ZaribForoosh);
-            // const token = getCookie("token");
-
             // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
             var urlInsertToSabad = NextJsApiUrl + "Api_AddRemoveSabadKharidSatr";
             const response = await fetch(urlInsertToSabad, {
@@ -854,8 +786,9 @@ const GetScrollsSecInVendor = ({
                     BarcodeKala: addRemParam.BarcodeKala,
                     Tedad: TedadOut,
                     IdKala: addRemParam.IdKala,
-                    IdShobeh: vendorId,  ////zare_nk_050416_nokteh(meghdare dynamic bedam)
-                    IdAddress: mycurrentAddressState?.IdAdress,  // 23990,  ////zare_nk_050416_nokteh(meghdare dynamic bedam)
+                    IdShobeh: vendorId,
+                    // IdAddress: mycurrentAddressState?.IdAdress,   ////zare_nk_050510_commented(az useRef bejaye state estefadeh shod)
+                    IdAddress: refForMycurrentAddressState.current?.IdAdress,     ////zare_nk_050510_added(az useRef bejaye state estefadeh shod)
                 }),
             });
 
@@ -926,28 +859,23 @@ const GetScrollsSecInVendor = ({
                     // }
                 } else if (result.status == 0) {
                     console.log('041116-result.status == 0');
-                    let tittrInoInResult = JSON.parse(result.data.titr)[0];  ////zare_nk_050416_added
-                    let satrInoInResult = JSON.parse(result.data.satr)[0];  //zare_nk_041124_added
+                    let tittrInoInResult = JSON.parse(result.data.titr)[0];
+                    let satrInoInResult = JSON.parse(result.data.satr)[0];
                     let Tedad = satrInoInResult === undefined ? 0 : satrInoInResult.Tedad;
-
                     console.log("zare_nk_050416-tittrInoInResult.IdSabadKharidSatr: " + tittrInoInResult.IdSabadKharidTitr +
                         "Tedad: " + Tedad
                     );
-
                     var bishAzMaxTedadYaMojoodi = 0;
-                    if (addRemParam.MaxTedad != null) {
-                        if (addRemParam.MaxTedad <= Tedad) {
-                            bishAzMaxTedadYaMojoodi = 1;
-                        }
-                    } else {
-                        if (addRemParam.Mojoodi <= Tedad) {
-                            bishAzMaxTedadYaMojoodi = 1;
-                        }
+                    if (addRemParam.MaxTedad <= Tedad) {
+                        bishAzMaxTedadYaMojoodi = 1;
                     }
+                    if (addRemParam.Mojoodi <= Tedad) {
+                        bishAzMaxTedadYaMojoodi = 1;
+                    }
+
                     refForfather.current = addRemParam.father;
 
-                    let ForCartContentsDesignTypeLet = 0
-
+                    let ForCartContentsDesignTypeLet = 0;
                     if (Tedad == 0) {
                         ForCartContentsDesignTypeLet = 0;
                     }
@@ -1068,40 +996,7 @@ const GetScrollsSecInVendor = ({
                     setJamKolTakhfif(tittrInoInResult.Sood);
                     setJamKolNahaei(tittrInoInResult.MablaghNahaee);
                     ////zare_nk_050416_added_st(raveshe samte client ke jaigozine setAddOrRemChanged va useEffect(...[addOrRemChanged]) 
-                    //// shod(ke dakhele useEffect(...[addOrRemChanged]) api sabadekharid ra mojadad seda mizadim) )
-
-                    if (Tedad == 0) {
-                        ////zare_nk_041129_commented_st
-                        // const inputGroup = document.querySelector(
-                        //   ".ForCart-" + addRemParam.IdKala + " .input-group"
-                        // );
-                        // if (inputGroup) {
-                        //   let parent = inputGroup.closest(".flxpedar2_new");
-                        //   if (parent) {
-                        //     if (JSON.parse(result.data.titr).length == 0) {
-                        //       alert('2222222');
-                        //       parent.remove();
-                        //     }
-                        //   }
-                        // }
-                        ////zare_nk_041129_commented_end
-                    }
-                    else if (Tedad == addRemParam.ZaribForoosh) {
-                        ////zare_nk_041129_commented_st
-                        // alert('1 shoddd!!!')
-                        // let htmlTag;
-                        // if (addRemParam.event) {
-                        //   htmlTag = addRemParam.event.target as HTMLElement;
-                        // }
-
-                        // const wrapper = htmlTag?.closest(
-                        //   ".flxpedar2_new"
-                        // ) as HTMLElement | null;
-                        // if (wrapper) {
-                        //   wrapper.style.backgroundColor = "inherit";
-                        // }
-                        ////zare_nk_041129_commented_end
-                    }
+                    //// shod(ke dakhele useEffect(...[addOrRemChanged]) api sabadekharid ra mojadad seda mizadim) )                    
                 }
             } else {
                 console.log('041116-!!response.ok');
@@ -1154,8 +1049,6 @@ const GetScrollsSecInVendor = ({
                 return (WarningText)
             });
         }
-
-        // }  ////zare_nk_050326_commented(dar sharte token == null return gozashtim dige else nemikhaim) 
     }
 
     const handlerForAddClick: (
@@ -1176,116 +1069,9 @@ const GetScrollsSecInVendor = ({
         );
     };
     // const handlerForRemClick = useCallback(remveFromCartInIndex, [remveFromCartInIndex]);
-    ////zare_nk_050416_added_end(baraye add va rem va ...)
 
     return (
         <>
-            {/* <div style={{
-                display: 'flex', flexFlow: 'column', width: '100%',
-
-            }} > 
-                <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={12}  ////zare_nk_050305_nokteh(moadele 0.75rem(chon spaceBetween adad 0.75rem))  
-                    slidesPerView="auto"  ////zare_nk_050226_nokteh(meghdaresh ro auto dadim ta bar asase arze SwiperSlide ha tedadesh automat tavasoote 
-                    //// barnameh moshakhas she(pishfarz slidesPerView={1} hast))
-                    // centeredSlides={true}
-                    navigation={false}
-
-                    className="responsedListFromApiSelectKalaShobeh"
-                    style={{
-                        width: '100%',
-                        //  margin: '0px 19px',
-                        //  height: '86px',
-                        // height: '95px',
-                        // overflow: 'visible', ////zare_nk_050226_nokteh(baraye inke darsade takhfifha ke biroon mizanan dideh beshan)   ////zare_nk_050317_commented(baraye swiper overflow: 'visible' 
-                        //// manteghi nist, chon arze colle slideha ro migire, na arze masalan 100% pedaresh ro)ب
-                    }}
-                >
-                    {responsedListFromApiSelectGoroohJson?.map((item, index) => {
-                        console.log('00-item.IdAdress: ' + JSON.stringify(item));
-                        console.log('00-item.IdAdress: ' + JSON.stringify(item));
-                        return (
-                            <SwiperSlide
-                                key={index}
-                                style={{
-                                    //  width: '72px',
-                                    //  height: '80px',
-                                    // height: '89px',
-                                    width: 'auto',  ////zare_nk_050331_added
-                                    // width: '230px',  ////zare_nk_050331_commented
-                                }}>
-                                <div className="contInSlide" style={{
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center', //// width: '100%', height: '100%',
-                                    backgroundColor: 'inherit', borderRadius: '.75rem', border: '1px solid #f6f6f7',
-                                }}>
-                                    <button style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        // width: '100%', 
-                                        // height: '100%',
-                                        textDecoration: 'none',
-                                        // backgroundColor: '#f1f2f3',
-                                        backgroundColor: 'white',
-                                        // border: 'none',
-                                        border: '1px solid #cdd2d5',
-                                        fontSize: '.875rem',
-                                        borderRadius: '9999px',
-                                        cursor: 'pointer',
-                                        // width: '2rem',
-                                        // height: '2rem',
-                                        padding: '8px 10px',
-                                    }}>
-                                        <div style={{
-                                            display: 'flex', flexFlow: 'row-reverse', position: 'relative', width: '100%', height: '100%',
-                                            justifyContent: 'center', alignItems: 'center', gap: '0.5rem',
-                                            // rowGap: '0.25rem',   ////zare_nk_050304_commented(rowGap nazasht tapsifood)
-                                        }}>
-                                            <div style={{
-                                                display: 'flex', flexFlow: 'row', justifyContent: 'center', alignItems: 'center',
-                                            }}>                                                
-                                                <svg style={{ width: '1rem', height: '1rem', }} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-4"><g id="Swap"><path id="Union" fillRule="evenodd" clipRule="evenodd" d="M7.42002 3.28999C7.43002 3.29999 7.44002 3.29999 7.44002 3.29999L11.52 7.39999C11.81 7.68999 11.81 8.16999 11.52 8.45999C11.37 8.60999 11.18 8.67999 10.99 8.67999C10.8 8.67999 10.61 8.60999 10.46 8.45999L7.66002 5.64999V17.45C7.66002 17.86 7.32002 18.2 6.91002 18.2C6.50002 18.2 6.16002 17.86 6.16002 17.45V5.64999L3.36002 8.45999C3.07002 8.74999 2.59002 8.74999 2.30002 8.45999C2.01002 8.16999 2.01002 7.68999 2.30002 7.39999L6.38002 3.29999C6.39002 3.28999 6.40002 3.28999 6.40002 3.28999C6.53002 3.15999 6.71002 3.07999 6.91002 3.07999C7.11002 3.07999 7.29002 3.15999 7.42002 3.28999ZM20.3899 15.54C20.68 15.25 21.16 15.25 21.45 15.54C21.74 15.83 21.74 16.31 21.45 16.6L17.37 20.7C17.3176 20.7524 17.2652 20.7819 17.2062 20.8151C17.1976 20.82 17.1888 20.8249 17.18 20.83C17.1721 20.8339 17.1657 20.8394 17.1597 20.8446C17.1505 20.8527 17.1421 20.86 17.13 20.86C17.04 20.9 16.94 20.92 16.84 20.92C16.74 20.92 16.64 20.9 16.55 20.86C16.54 20.86 16.5325 20.8525 16.525 20.845C16.5175 20.8375 16.51 20.83 16.5 20.83C16.43 20.79 16.36 20.75 16.31 20.7L12.23 16.6C11.94 16.31 11.94 15.83 12.23 15.54C12.52 15.25 13 15.25 13.29 15.54L16.09 18.35V6.54999C16.09 6.13999 16.43 5.79999 16.84 5.79999C17.25 5.79999 17.59 6.13999 17.59 6.54999V18.35L20.3899 15.54Z" fill="#63676e"></path></g></svg>
-                                            </div>
-
-                                            <div style={{
-                                                display: 'flex', flexFlow: 'row', justifyContent: 'center', alignItems: 'center',
-                                            }}>
-                                                <div style={{
-                                                    fontSize: '0.875rem',
-                                                    // color: '#1b1c1d',    ////zare_nk_050331_commented
-                                                    color: '#000',     ////zare_nk_050331_added
-
-                                                    // این بخش برای سه‌نقطه و محدودیت ۲ خط
-                                                    display: '-webkit-box',
-                                                    WebkitLineClamp: 1,
-                                                    WebkitBoxOrient: 'vertical',
-                                                    overflow: 'hidden',
-
-                                                    // این بخش برای تثبیت ارتفاع روی ۴۰ پیکسل 
-                                                    lineHeight: '1.25rem',
-                                                    // height: '2.5rem',
-                                                    height: '1.25rem',
-
-                                                    minHeight: '1.25rem',  // minHeight: '2.5rem', // اجبار به کمتر نشدن
-                                                    maxHeight: '1.25rem',  // maxHeight: '2.5rem', // اجبار به بیشتر نشدن
-                                                    boxSizing: 'border-box', // برای اینکه بُردر (border) به ارتفاع اضافه نشود
-
-                                                    textAlign: 'center',
-                                                }}>
-                                                    {item.NameG1}
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </button>
-                                </div>
-                            </SwiperSlide>
-                        )
-                    })}
-                </Swiper>
-            </div> */}
-
             {grouped &&
                 Object.entries(grouped).map(([idG1, items]) => {   ////zare_nk_050408_nokteh(chon methode map makhsoose arraye hast az Object.entries estefade kardim baraye tabdile object be arraye)
                     return (
@@ -1295,7 +1081,7 @@ const GetScrollsSecInVendor = ({
                             }}
                             ref={el => {
                                 sectionRefs.current[idG1.toString()] = el;
-                            }} >
+                            }} >                                
                             <div style={{
                                 width: '100%',
                                 height: '82px',
@@ -1337,8 +1123,7 @@ const GetScrollsSecInVendor = ({
                                             width: '100%', height: '100px', display: 'flex',
                                         }}>
                                             <div style={{ borderRadius: '.5rem', flexShrink: 0, width: '100px', height: '100%', position: 'relative', }}>
-                                                <img
-                                                    style={{
+                                                <img style={{
                                                         width: '100%',
                                                         height: '100%',
                                                         objectFit: 'cover',
@@ -1347,11 +1132,9 @@ const GetScrollsSecInVendor = ({
                                                     }}
                                                     // src={`https://img.tochikala.com/Product/${responsedListFromApiSelectKalaShobeh[0].IdKala}.webp`} />
                                                     src={`/images/movaghat/vendorPage/g1Img.jpg`} />
-
                                                 <div style={{
                                                     display: 'flex', flexDirection: 'column', position: 'absolute', right: '11px', bottom: '-1rem',
-                                                }}>
-                                                    {/* <MiddleCountTedadSefr */}
+                                                }}> 
                                                     <AddRemBtnsAndCountPackege
                                                         refForfather={refForfather}
                                                         fromShowDetails={false}
@@ -1363,20 +1146,19 @@ const GetScrollsSecInVendor = ({
                                                                 {
                                                                     tedadInSabadOrDet: item.tedadInSabadOrDet,
                                                                     ZaribForoosh: item.ZaribForoosh,
-                                                                    IdKala: item.IdKala,  //01
-                                                                    NameKala: item.NameKala,  //03
-                                                                    DarsadTakhfif: item.DarsadTakhfif,  //okk
-                                                                    NameBerand: item.NameBerand,  //okk  //zare_nk_041118_nokteh(dar api selectKalaShobeh NameBerand dar pasokh hast pas ma meghdaresh ro dadim)
-                                                                    FeeForoosh: item.FeeForoosh, //okk
-                                                                    FeeMasraf: item.FeeMasraf, //okk
-                                                                    BarcodeKala: item.BarcodeKala,  //02
-                                                                    Mojoodi: item.Mojoodi, //okk
-                                                                    MaxTedad: item.MaxTedad,  //okk
+                                                                    IdKala: item.IdKala,   
+                                                                    NameKala: item.NameKala,   
+                                                                    DarsadTakhfif: item.DarsadTakhfif,   
+                                                                    NameBerand: item.NameBerand,   
+                                                                    FeeForoosh: item.FeeForoosh,  
+                                                                    FeeMasraf: item.FeeMasraf,  
+                                                                    BarcodeKala: item.BarcodeKala,   
+                                                                    Mojoodi: item.Mojoodi, 
+                                                                    MaxTedad: item.MaxTedad,   
                                                                     father: '',
                                                                     bishAzMaxTedadYaMojoodi: item.bishAzMaxTedadYaMojoodi,
-                                                                    fromShowDetails: item.fromShowDetails,
-                                                                    // event: e,  //zare_nk_041127_commented
-                                                                    event: null,  //zare_nk_041127_added
+                                                                    fromShowDetails: item.fromShowDetails, 
+                                                                    event: null,  
                                                                 }
                                                             );
                                                         }}
@@ -1388,7 +1170,7 @@ const GetScrollsSecInVendor = ({
                                                                     IdKala: item.IdKala,
                                                                     NameKala: item.NameKala,
                                                                     DarsadTakhfif: item.DarsadTakhfif,
-                                                                    NameBerand: item.NameBerand,  //zare_nk_041118_nokteh(dar api selectKalaShobeh NameBerand dar pasokh hast pas ma meghdaresh ro dadim)
+                                                                    NameBerand: item.NameBerand,   
                                                                     FeeForoosh: item.FeeForoosh,
                                                                     FeeMasraf: item.FeeMasraf,
                                                                     BarcodeKala: item.BarcodeKala,
@@ -1396,9 +1178,8 @@ const GetScrollsSecInVendor = ({
                                                                     MaxTedad: item.MaxTedad,
                                                                     father: '',
                                                                     bishAzMaxTedadYaMojoodi: item.bishAzMaxTedadYaMojoodi,
-                                                                    fromShowDetails: false,
-                                                                    // event: e,  //zare_nk_041127_commented
-                                                                    event: null,  //zare_nk_041127_added
+                                                                    fromShowDetails: false, 
+                                                                    event: null,   
                                                                 }
                                                             );
                                                         }}
@@ -1487,21 +1268,16 @@ const GetScrollsSecInVendor = ({
                                             </div>
                                         </div>
 
-                                        <div
-                                            // key={item.IdKala}
-                                            // id={item.IdKala.toString()}
-                                            style={{
+                                        <div style={{
                                                 width: '100%',
                                                 paddingRight: '1.75rem',
                                                 paddingLeft: '1rem',
                                                 display: "flex",
                                                 flexDirection: 'column',
-
                                                 justifyContent: 'space-between',
                                                 alignItems: 'center',
                                                 marginTop: '1rem',
                                             }}>
-
                                             <div style={{
                                                 display: "flex",
                                                 gap: '.75rem', alignItems: 'center', flex: '1 1 0%', width: '100%',
@@ -1513,7 +1289,6 @@ const GetScrollsSecInVendor = ({
                                             }}>
                                                 <div style={{ display: "flex", flexFlow: 'row', alignItems: 'center', }}>
                                                     <span style={{
-                                                        // fontSize: '1rem',
                                                         fontSize: '0.875rem',
                                                         lineHeight: '1.5rem', color: '#1b1c1d',
                                                     }}>
@@ -1522,7 +1297,7 @@ const GetScrollsSecInVendor = ({
 
                                                     <span style={{ fontSize: '.625rem', color: '#6d6d6d', marginRight: '3px', }}>
                                                         تومان
-                                                    </span> 
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -1538,101 +1313,6 @@ const GetScrollsSecInVendor = ({
                     )
                 })
             }
-
-            {/* {responsedListFromApiSelectKalaShobeh?.map((item, index) => {
-                return (
-                    <div
-                        key={item.IdKala}
-                        id={item.IdKala.toString() ?? '111'}
-                        style={{
-                            width: '100%',
-                            display: "flex",
-                            flexDirection: 'column',
-                            border: '1px dashed black',
-                            height: '300px',
-                            marginTop: '200px',
-                            scrollMarginTop: "40px",
-                        }}
-                        ref={(el) => {
-                            sectionRefs.current[item.IdKala.toString() ?? '111'] = el;
-                        }}
-                    >
-                        <h2>{item.NameKala}</h2>
-                    </div>
-                );
-            })} */}
-
-
-
-            {/* <div
-                id="111"
-                style={{
-                    width: '100%',
-                    display: "flex",
-                    flexDirection: 'column',
-                    border: '1px dashed black',
-                    height: '300px',
-                    marginTop: '200px',
-                    scrollMarginTop: "40px",
-                }}
-                ref={(el) => {
-                    sectionRefs.current["111"] = el;
-                }}
-            >
-                <h2>1111-111</h2>
-            </div>
-
-            <div
-                id="222"
-                style={{
-                    width: '100%',
-                    display: "flex",
-                    flexDirection: 'column',
-                    border: '1px dashed black',
-                    height: '300px',
-                    scrollMarginTop: "40px",
-                }}
-                ref={(el) => {
-                    sectionRefs.current["222"] = el;
-                }}
-            >
-                <h2>2222</h2>
-            </div>
-
-            <div
-                id="333"
-                style={{
-                    width: '100%',
-                    display: "flex",
-                    flexDirection: 'column',
-                    border: '1px dashed black',
-                    height: '300px',
-                    scrollMarginTop: "40px",
-                }}
-                ref={(el) => {
-                    sectionRefs.current["333"] = el;
-                }}
-            >
-                <h2>3333</h2>
-            </div>
-
-            <div
-                id="444"
-                style={{
-                    width: '100%',
-                    display: "flex",
-                    flexDirection: 'column',
-                    border: '1px dashed black',
-                    height: '300px',
-                    scrollMarginTop: "40px",
-                }}
-                ref={(el) => {
-                    sectionRefs.current["444"] = el;
-                }}
-            >
-                <h2>4444</h2>
-            </div> */}
-
         </>
     );
 }

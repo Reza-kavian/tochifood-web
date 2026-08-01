@@ -1,4 +1,4 @@
-////zare_nk_050506_okk(1)
+////zare_nk_050510_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -553,8 +553,7 @@ const SwiperTapTimeComp = () => {
                                         {/* zare_nk_050305_added_enf */}
 
                                         <img style={{
-                                            width: '137px',  //'100%', marginTop: '5px', marginBottom: '0px', 
-                                            height: '105px', objectFit: 'cover', borderTopLeftRadius: '.375rem', borderTopRightRadius: '.375rem',
+                                            width: '137px', height: '105px', objectFit: 'cover', borderTopLeftRadius: '.375rem', borderTopRightRadius: '.375rem',
                                         }}
                                             // src={`/images/SwiperGrouplevel1/${item.AxG1}.png`} />  ////zare_nk_050229_nokteh(age az database bekhooneh bade emale database food tavassote parsa)
                                             // src={`/images/SwiperGrouplevel1/${index}.png`} />
@@ -642,133 +641,113 @@ const SwiperTapTimeComp = () => {
                                                                     // borderWidth: 1,
                                                                     // borderStyle: 'dashed',
                                                                     // borderColor: 'red',
-                                                                }} >
-                                                                <span
-                                                                    // className="PriceBeforeDiscount"
-                                                                    style={{
-                                                                        // fontSize: 11,
-                                                                        fontSize: '0.65rem',
-                                                                        // spanDecorationLine: "line-through",
-                                                                        textDecoration: "line-through",
-                                                                        color: '#888',  ////zare_nk_050316_added
-                                                                        fontFamily: "IRANSansWeb(FaNum)_Medium",
-                                                                        lineHeight: '10px',
-                                                                    }}
-                                                                >
+                                                                }}>
+                                                                <span style={{
+                                                                    // fontSize: 11,
+                                                                    fontSize: '0.65rem',
+                                                                    // spanDecorationLine: "line-through",
+                                                                    textDecoration: "line-through",
+                                                                    color: '#888',  ////zare_nk_050316_added
+                                                                    fontFamily: "IRANSansWeb(FaNum)_Medium",
+                                                                    lineHeight: '10px',
+                                                                }}>
                                                                     {item.FeeMasraf.toLocaleString()}
                                                                 </span>
                                                             </div>
                                                         ) : (
-                                                            <div
-                                                                // id={`PriceBeforeDiscount-${item.IdKala}`}
-                                                                style={{
-                                                                    // visibility: "hidden",  ////zare_nk_050316_commented(dar react native visibility nadarim)
-                                                                    opacity: 0,  ////zare_nk_050316_added(dar react native visibility nadarim)
-                                                                    display: "flex",
-                                                                    flexDirection: "row",
-                                                                    paddingLeft: 10,
-                                                                    justifyContent: 'flex-end',
-                                                                    alignItems: "center",
-                                                                    width: "100%",
-                                                                    // borderWidth: 1,
-                                                                    // borderStyle: 'dashed',
-                                                                    // borderColor: 'blue',
-                                                                }}                                                                >
-                                                                <span
-                                                                    // className="PriceBeforeDiscount"
-                                                                    style={{
-                                                                        // fontSize: 11,
-                                                                        fontSize: '0.65rem',
-                                                                        // opacity: 0.7,  
-                                                                        textDecorationLine: "line-through",
-                                                                        color: '#888',  ////zare_nk_050316_added
-                                                                        fontFamily: "IRANSansWeb(FaNum)_Medium",
-                                                                        lineHeight: '10px',
-                                                                    }}
-                                                                >
-                                                                    {item.FeeMasraf.toLocaleString()}
-                                                                </span>
-                                                            </div>
-                                                        )}
-
-                                                        <div
-                                                            style={{
+                                                            <div style={{
+                                                                // visibility: "hidden",  ////zare_nk_050316_commented(dar react native visibility nadarim)
+                                                                opacity: 0,  ////zare_nk_050316_added(dar react native visibility nadarim)
                                                                 display: "flex",
-                                                                flexWrap: "wrap",
                                                                 flexDirection: "row",
-                                                                marginTop: 0,
-                                                                marginBottom: 5,
-                                                                // padding: "0px 10px 0px 10px",  ////zare_nk_050331_commented
-                                                                // paddingVertical: 0,
-                                                                // paddingHorizontal: 10,
-                                                                // justifyContent: 'space-between',  ////zare_nk_050316_commented
-                                                                justifyContent: 'flex-start',  ////zare_nk_050316_added
+                                                                paddingLeft: 10,
+                                                                justifyContent: 'flex-end',
                                                                 alignItems: "center",
                                                                 width: "100%",
                                                                 // borderWidth: 1,
                                                                 // borderStyle: 'dashed',
-                                                                // borderColor: 'black',
-                                                            }}
-                                                        >
-
+                                                                // borderColor: 'blue',
+                                                            }}                                                                >
+                                                                <span style={{
+                                                                    // fontSize: 11,
+                                                                    fontSize: '0.65rem',
+                                                                    // opacity: 0.7,  
+                                                                    textDecorationLine: "line-through",
+                                                                    color: '#888',  ////zare_nk_050316_added
+                                                                    fontFamily: "IRANSansWeb(FaNum)_Medium",
+                                                                    lineHeight: '10px',
+                                                                }}>
+                                                                    {item.FeeMasraf.toLocaleString()}
+                                                                </span>
+                                                            </div>
+                                                        )}
+                                                        <div style={{
+                                                            display: "flex",
+                                                            flexWrap: "wrap",
+                                                            flexDirection: "row",
+                                                            marginTop: 0,
+                                                            marginBottom: 5,
+                                                            // padding: "0px 10px 0px 10px",  ////zare_nk_050331_commented
+                                                            // paddingVertical: 0,
+                                                            // paddingHorizontal: 10,
+                                                            // justifyContent: 'space-between',  ////zare_nk_050316_commented
+                                                            justifyContent: 'flex-start',  ////zare_nk_050316_added
+                                                            alignItems: "center",
+                                                            width: "100%",
+                                                            // borderWidth: 1,
+                                                            // borderStyle: 'dashed',
+                                                            // borderColor: 'black',
+                                                        }}>
                                                             {/* {((item.DarsadTakhfif ?? 0) != 0) &&(  */}
                                                             {(item.DarsadTakhfif != null && item.DarsadTakhfif != 0) && (
-                                                                <div
-                                                                    // id={`darsadTakhfifInsabad-${item.IdKala}`}
-                                                                    // className="darsadTakhfifInsabad rounded-pill"
-                                                                    style={{
-                                                                        backgroundColor: "#ff3151",
-                                                                        width: 39,
-                                                                        height: 20,
-                                                                        // flex: "0 0 auto",
-                                                                        display: 'flex',
-                                                                        flexDirection: "row",
-                                                                        justifyContent: "center",
-                                                                        alignItems: 'center',
-                                                                        flexGrow: 0,
-                                                                        flexShrink: 0,
-                                                                        flexBasis: 'auto',
-                                                                        marginLeft: 5,
-                                                                        borderRadius: 100,
+                                                                <div style={{
+                                                                    backgroundColor: "#ff3151",
+                                                                    width: 39,
+                                                                    height: 20,
+                                                                    // flex: "0 0 auto",
+                                                                    display: 'flex',
+                                                                    flexDirection: "row",
+                                                                    justifyContent: "center",
+                                                                    alignItems: 'center',
+                                                                    flexGrow: 0,
+                                                                    flexShrink: 0,
+                                                                    flexBasis: 'auto',
+                                                                    marginLeft: 5,
+                                                                    borderRadius: 100,
+                                                                }}>
+                                                                    <span style={{
+                                                                        //   fontSize: 12,
+                                                                        fontSize: '0.70rem',
+                                                                        color: "white",
+                                                                        opacity: 1,
+                                                                        fontFamily: "IRANSansWeb(FaNum)_Medium",
+                                                                        // borderWidth: 2,
+                                                                        // borderStyle: 'dashed',
+                                                                        // borderColor: 'black',
                                                                     }}>
-                                                                    <span
-                                                                        // className="forDiscount"
-                                                                        style={{
-                                                                            //   fontSize: 12,
-                                                                            fontSize: '0.70rem',
-                                                                            color: "white",
-                                                                            opacity: 1,
-                                                                            fontFamily: "IRANSansWeb(FaNum)_Medium",
-                                                                            // borderWidth: 2,
-                                                                            // borderStyle: 'dashed',
-                                                                            // borderColor: 'black',
-                                                                        }}
-                                                                    >
                                                                         {`${item.DarsadTakhfif}%`}
                                                                     </span>
                                                                 </div>
                                                             )}
-                                                            <div
-                                                                style={{
-                                                                    // flex: "1 0 auto", 
-                                                                    flexGrow: 1,
-                                                                    flexShrink: 0,
-                                                                    flexBasis: 'auto',
-                                                                    display: "flex",
-                                                                    flexDirection: 'row',
-                                                                    justifyContent: 'flex-end',
-                                                                    // borderWidth: 1,
-                                                                    // borderStyle: 'dashed',
-                                                                    // borderColor: 'green',
+                                                            <div style={{
+                                                                // flex: "1 0 auto", 
+                                                                flexGrow: 1,
+                                                                flexShrink: 0,
+                                                                flexBasis: 'auto',
+                                                                display: "flex",
+                                                                flexDirection: 'row',
+                                                                justifyContent: 'flex-end',
+                                                                // borderWidth: 1,
+                                                                // borderStyle: 'dashed',
+                                                                // borderColor: 'green',
+                                                            }}>
+                                                                <span style={{
+                                                                    // fontSize: 13,
+                                                                    fontSize: '0.75rem',
+                                                                    marginLeft: 5,
+                                                                    fontFamily: "IRANSansWeb(FaNum)_Medium",
+                                                                    color: '#3d3d3d',   ////zare_nk_050316_added
                                                                 }}>
-                                                                <span //className="mablagh" 
-                                                                    style={{
-                                                                        // fontSize: 13,
-                                                                        fontSize: '0.75rem',
-                                                                        marginLeft: 5,
-                                                                        fontFamily: "IRANSansWeb(FaNum)_Medium",
-                                                                        color: '#3d3d3d',   ////zare_nk_050316_added
-                                                                    }}>
                                                                     {item.FeeForoosh.toLocaleString()}
                                                                 </span>
                                                                 <span
@@ -776,8 +755,9 @@ const SwiperTapTimeComp = () => {
                                                                         //  fontSize: 12,
                                                                         fontSize: '0.70rem',
                                                                         fontFamily: "IRANSansWeb(FaNum)_Medium", color: '#6d6d6d',
-                                                                    }}
-                                                                >تومان</span>
+                                                                    }}>
+                                                                    تومان
+                                                                </span>
                                                             </div>
                                                         </div>
 
@@ -792,7 +772,6 @@ const SwiperTapTimeComp = () => {
                                             }}>
                                                 <div style={{
                                                     display: 'flex', flexFlow: 'row', width: '100%', padding: '0px .5rem', justifyContent: 'space-between',
-                                                    // marginTop: '8px',
                                                 }}>
                                                     <div style={{
                                                         display: 'flex', flexFlow: 'row', gap: '2px', alignItems: 'center',
@@ -821,28 +800,25 @@ const SwiperTapTimeComp = () => {
                                                             // borderStyle: 'dashed',
                                                             // borderColor: 'green',
                                                             marginRight: '5px', ////zare_nk_050331_added
-                                                        }} >
-                                                            <span
-                                                                //  className="mablagh" 
-                                                                style={{
-                                                                    // fontSize: 13,
-                                                                    fontSize: '0.75rem',
-                                                                    marginLeft: 5,
-                                                                    fontFamily: "IRANSansWeb(FaNum)_Medium",
-                                                                    color: '#3d3d3d',   ////zare_nk_050316_added
-                                                                }}>
+                                                        }}>
+                                                            <span style={{
+                                                                // fontSize: 13,
+                                                                fontSize: '0.75rem',
+                                                                marginLeft: 5,
+                                                                fontFamily: "IRANSansWeb(FaNum)_Medium",
+                                                                color: '#3d3d3d',   ////zare_nk_050316_added
+                                                            }}>
                                                                 {currentShobeState != null ? (currentShobeState.Keraye != 0 ? currentShobeState.Keraye : 'رایگان') :
                                                                     '50000'.toLocaleString()
                                                                 }
                                                             </span>
-
-                                                            <span
-                                                                style={{
-                                                                    ...(currentShobeState != null && currentShobeState.Keraye == 0 ? { display: 'none' } : { display: 'inline-block' }),
-                                                                    fontSize: '0.70rem',
-                                                                    fontFamily: "IRANSansWeb(FaNum)_Medium", color: '#6d6d6d',
-                                                                }}
-                                                            >تومان</span>
+                                                            <span style={{
+                                                                ...(currentShobeState != null && currentShobeState.Keraye == 0 ? { display: 'none' } : { display: 'inline-block' }),
+                                                                fontSize: '0.70rem',
+                                                                fontFamily: "IRANSansWeb(FaNum)_Medium", color: '#6d6d6d',
+                                                            }}>
+                                                                تومان
+                                                            </span>
                                                         </div>
                                                     </div>
 
