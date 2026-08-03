@@ -19,7 +19,7 @@ import Link from "next/link";
 
 import SwiperGrouplevel1Comp from '../components/SwiperGrouplevel1Comp';
 
-import SwiperTapBestsComp from '../components/SwiperTapBestsComp';  
+import SwiperTapBestsComp from '../components/SwiperTapBestsComp';
 
 import SwiperTopBanerComp from '../components/SwiperTopBanerComp';
 
@@ -27,11 +27,11 @@ import SwiperThinkBanerComp from '../components/SwiperthinkBanerComp';
 
 import SwiperTapTimeComp from '../components/SwiperTapTimeComp';
 
-import SwiperSecondBanerComp from '../components/SwiperSecondBanerComp';  
+import SwiperSecondBanerComp from '../components/SwiperSecondBanerComp';
 
-import AdressListComponent from '../components/AdressListComponent'; 
+import AdressListComponent from '../components/AdressListComponent';
 
-import { currentAddressContext } from '../context/currentAddressContext';  
+import { currentAddressContext } from '../context/currentAddressContext';
 
 import { json } from "node:stream/consumers";
 import { relative } from "node:path";
@@ -78,7 +78,7 @@ type responsedListFromApiSelectAddressListType = {
 };
 
 export default function Home() {
-  console.log('050329-Home rendered!!');   
+  console.log('050329-Home rendered!!');
   const [error, setError] = useState<string | null>(null);
   const [isEpmtyAdressList, setIsEpmtyAdressList] = useState<string | null>(null);
   const [isEpmtyShowAddRemAddress, setIsEpmtyShowAddRemAddress] = useState(true);
@@ -87,8 +87,8 @@ export default function Home() {
 
   const [responsedListFromApiSelectAddressList, SetResponsedListFromApiSelectAddressList] = useState<responsedListFromApiSelectAddressListType[] | null>(null);
 
-  let currentAddressUseContext = useContext(currentAddressContext);     
-   
+  let currentAddressUseContext = useContext(currentAddressContext);
+
   const [mycurrentAddressState, setMycurrentAddressState] = useState<responsedListFromApiSelectAddressListType | null>(null);
 
   // const [currentAddress, setCurrentAddress] = useState<responsedListFromApiSelectAddressListType | null>(null);    ////zare_nk_050329_commented(currentAddress az useState 
@@ -111,7 +111,7 @@ export default function Home() {
     var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
 
     if (parsedChosenAddress == null) {
-      showAddressListDrawer(); 
+      showAddressListDrawer();
       return;
     }
     if (mycurrentAddressState == null) {
@@ -188,16 +188,16 @@ export default function Home() {
           var parsedList = JSON.parse(data.data.list);
           SetResponsedListFromApiSelectAddressList(() => {
             return parsedList
-          });          
-            return parsedList;
+          });
+          return parsedList;
         } else {
           setError("متاسفانه خطایی رخ داده است34:" + data.errors);
-          return null; 
+          return null;
         }
       } else {
         setError("متاسفانه خطایی رخ داده است35");
         return null;
-      }     
+      }
     }
     , [isEpmtyAdressList, responsedListFromApiSelectAddressList])
 
@@ -292,11 +292,11 @@ export default function Home() {
         }}>
           <button
             id="showAddressListDrawerBtn"
-            onClick={showAddressListDrawer} 
+            onClick={showAddressListDrawer}
             style={{
               borderRadius: 10,
               display: 'flex',
-              visibility: (mycurrentAddressState?.Adress ? 'visible' : 'hidden'),   
+              visibility: (mycurrentAddressState?.Adress ? 'visible' : 'hidden'),
               flexDirection: 'column',
               backgroundColor: 'inherit',
               border: 'none',
@@ -398,8 +398,8 @@ export default function Home() {
               refForBox={refForBox}
               responsedListFromApiSelectAddressList={responsedListFromApiSelectAddressList}
               isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}
-              setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress} 
-              showAddressListDrawer={showAddressListDrawer} 
+              setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}
+              showAddressListDrawer={showAddressListDrawer}
             />
           }
 

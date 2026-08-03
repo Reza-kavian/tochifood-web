@@ -96,15 +96,9 @@ export default function Home() {
 
     const [responsedListFromApiSelectAddressList, SetResponsedListFromApiSelectAddressList] = useState<responsedListFromApiSelectAddressListType[] | null>(null);
 
-    let currentAddressUseContext = useContext(currentAddressContext);   ////zare_nk_050329_added  
-
-    // const chosenAddress = getCookie("chosenAddress"); 
-    // var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
-    // const [mycurrentAddressState, setMycurrentAddressState] = useState<responsedListFromApiSelectAddressListType | null>(parsedChosenAddress);    
+    let currentAddressUseContext = useContext(currentAddressContext);  
+  
     const [mycurrentAddressState, setMycurrentAddressState] = useState<responsedListFromApiSelectAddressListType | null>(null);
-
-    // const [currentAddress, setCurrentAddress] = useState<responsedListFromApiSelectAddressListType | null>(null);    ////zare_nk_050329_commented(currentAddress az useState 
-    //// tabdil shod be createContext(ta beshe az jadde bozorgvar be nave pas dadeh beshe bedoone vasetehha!!))
 
     useEffect(() => {
         const chosenAddress = getCookie("chosenAddress");

@@ -113,11 +113,7 @@ const SwiperShopsInVendorComp = () => {
                 if (data.data.list == undefined) {
                     return;
                 }
-                // var parsedList = JSON.parse(data.data.list);
-                // var Gorooh = parsedList.Gorooh;
-                // SetResponsedListFromApiSelectGoroohJson(() => {
-                //     return Gorooh
-                // });
+                
                 var parsedList = JSON.parse(data.data.list);
                 SetResponsedListFromApiSelectShobehAtrafUser(() => {
                     return parsedList
