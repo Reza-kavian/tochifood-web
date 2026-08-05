@@ -1,13 +1,15 @@
  ////zare_nk_050428_okk(1)
 "use client";   
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 // import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
-import * as bootstrap from "bootstrap";
+// import * as bootstrap from "bootstrap";
 import Link from "next/link"; //zare_nk_040331_added
 
 export default function ShallowRoutingExample() {
   return (
-    <div style={{ display: "flex", flexFlow: "column", direction: "rtl" }}>
+    <div style={{ display: "flex", flexFlow: "column", direction: "rtl",
+      flex: '1 1 auto',  ////zare_nk_050514_added
+     }}>
       <div
         id="SubprogramsCont"
         style={{

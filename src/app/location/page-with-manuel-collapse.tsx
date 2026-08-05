@@ -1048,8 +1048,8 @@ export default function LocationPage() {
   ////zare_nk_050117_added_end
 
   // const { userData, login, logout } = useAuthentication(); //zare_nk_050111_added
-  const { isLogin } = useAuthentication(); //zare_nk_050111_added
-  console.log('zare_nk_050111-isLogin from context:', isLogin);
+  // const { isLogin } = useAuthentication();  
+  // console.log('zare_nk_050111-isLogin from context:', isLogin);
 
   ////zare_nk_050109_added_st
   var defZoom: number | undefined = 18;
@@ -1931,8 +1931,7 @@ export default function LocationPage() {
 
         </div>
 
-        <div
-          style={{
+        <div style={{
             border: '2px dashed yellow',
             flex: '0 0 auto',
             width: '100%',
@@ -1940,7 +1939,7 @@ export default function LocationPage() {
             display: "flex", flexFlow: "column", gap: '1.25rem',
           }}>
 
-          {isLogin ? (<>
+          {/* {isLogin ? (<> */}
             <h1 style={{ fontWeight: 600, color: '#1b1c1d', margin: 0, fontSize: 'inherit', }}>موقعیت مکانی</h1>
 
             <div style={{
@@ -1982,14 +1981,14 @@ export default function LocationPage() {
                 }}
               >ادامه</button>
             </div>
-          </>
+          {/* </>
           ) : (
             <>
               <div>
                 <p>شما وارد نشده‌اید  -  {isLogin} </p>
               </div>
             </>
-          )}
+          )} */}
         </div>
 
         {/* <div

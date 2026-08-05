@@ -762,8 +762,8 @@ export default function LocationPage() {
   const [isEpmtyHeightBox, setIsEpmtyHeightBox] = useState(true);
   const refForBox = useRef<HTMLDivElement | null>(null);
 
-  const { isLogin } = useAuthentication();
-  console.log('zare_nk_050111-isLogin from context:', isLogin);
+  // const { isLogin } = useAuthentication();
+  // console.log('zare_nk_050111-isLogin from context:', isLogin);
 
   type AddressFormInputsType = {
     Address: string;

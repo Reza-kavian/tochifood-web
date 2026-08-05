@@ -11,25 +11,27 @@ export default function HeroSlider() {
   const refForwiperButtonPrev = useRef<HTMLButtonElement | null>(null);
   const swiperRef = useRef(null);
 
-  useEffect(() => {
-    // اگر ریفرنس‌ها هنوز پر نشده باشند، کاری نکن
-    if (!refForwiperButtonNext.current || !refForwiperButtonPrev.current) return;
+  ////zare_nk_050514_commented_st(swiperRef.current.swiper error mideh va dar npm run build baese shekaste builde projeh mishe, pas commentesh kardam badan barrasi konam rahe halle error ra)
+  // useEffect(() => {
+  //   // اگر ریفرنس‌ها هنوز پر نشده باشند، کاری نکن
+  //   if (!refForwiperButtonNext.current || !refForwiperButtonPrev.current) return;
 
-    // اگر swiperRef هنوز ساخته نشده، صبر کن (چون Swiper کمی دیرتر رندر میشه)
-    if (!swiperRef.current) return;
+  //   // اگر swiperRef هنوز ساخته نشده، صبر کن (چون Swiper کمی دیرتر رندر میشه)
+  //   if (!swiperRef.current) return;
 
-    // ۴. اینجا به Swiper می‌گوییم دکمه‌هایش کدام هستند
-    // ماژول Navigation را از داخل instance Swiper پیدا می‌کنیم
-    const swiperInstance = swiperRef.current.swiper;
+  //   // ۴. اینجا به Swiper می‌گوییم دکمه‌هایش کدام هستند
+  //   // ماژول Navigation را از داخل instance Swiper پیدا می‌کنیم
+  //   const swiperInstance = swiperRef.current.swiper;
 
-    // تنظیم دکمه‌ها
-    swiperInstance.params.navigation.nextEl = refForwiperButtonNext.current;
-    swiperInstance.params.navigation.prevEl = refForwiperButtonPrev.current;
+  //   // تنظیم دکمه‌ها
+  //   swiperInstance.params.navigation.nextEl = refForwiperButtonNext.current;
+  //   swiperInstance.params.navigation.prevEl = refForwiperButtonPrev.current;
 
-    // فعال‌سازی مجدد دکمه‌ها
-    swiperInstance.navigation.update();
-    swiperInstance.navigation.init();
-  }, []);
+  //   // فعال‌سازی مجدد دکمه‌ها
+  //   swiperInstance.navigation.update();
+  //   swiperInstance.navigation.init();
+  // }, []);
+  ////zare_nk_050514_commented_end(swiperRef.current.swiper error mideh va dar npm run build baese shekaste builde projeh mishe, pas commentesh kardam badan barrasi konam rahe halle error ra)
 
   return (
     <div className="slider-container">

@@ -1842,6 +1842,7 @@ export default function CartDetails() {
             display: "flex",
             flexDirection: 'column',
             position: 'relative',  ////zare_nk_050404_added
+            flex: '1 1 auto',  ////zare_nk_050514_added
         }}>
             <header style={{
                 position: 'sticky',
@@ -1912,15 +1913,13 @@ export default function CartDetails() {
                     width: '100%',
                     display: "flex",
                     flexDirection: 'column',
-                    // overflow: 'hidden',        ////zare_nk_050317_commented(A002-ba A001 tadakhol dareh)
+                    overflow: 'hidden',        ////zare_nk_050317_commented(A002-ba A001 tadakhol dareh)
                     // justifyContent: 'center',  ////zare_nk_050229_nokteh(be lahaze amoodi vasat chin mikoneh mohtavaye safheh ro ke ma inro nemikhaim)
                     alignItems: 'center',
                     flex: '1 0 auto',
                     // border: '3px solid orange',
                     direction: 'rtl',
-                    // paddingTop: '10px',    
-
-                    minHeight: '900px',  ////zare_nk_050416_added_movaghat(pak kardani)
+                    // paddingTop: '10px',     
 
                     paddingLeft: '1rem',  ////zare_nk_050416_added
                     paddingRight: '1rem',  ////zare_nk_050416_added
@@ -2491,7 +2490,7 @@ export default function CartDetails() {
                 {/* zare_nk_050413_added_end(berim mohtavaye sabad) */}
                 {/* zare_nk_050420_added_st */}
                 <div className="-mx-4 my-4 h-3 bg-gray-50" style={{
-                    backgroundColor: '#f7f7f8', height: '.75rem', margin: '1rem -1rem', width: '450px',
+                    backgroundColor: '#f7f7f8', height: '.75rem', margin: '1rem -1rem',  width: '450px',   
                 }}></div>
 
                 <div className="pb-4 text-gray" style={{

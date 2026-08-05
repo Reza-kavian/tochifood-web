@@ -1125,6 +1125,7 @@ export default function VendorPage() {
             flexDirection: 'column',
             // border: '3px solid orange',
             position: 'relative',  ////zare_nk_050404_added
+            flex: '1 1 auto',  ////zare_nk_050514_added
         }}>
             <header style={{
                 position: 'sticky',

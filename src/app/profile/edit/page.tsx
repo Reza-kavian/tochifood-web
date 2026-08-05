@@ -435,6 +435,7 @@ export default function Profile() {
         display: "flex",
         flexDirection: 'column',
         // border: '3px solid orange',
+        flex: '1 1 auto',  ////zare_nk_050514_added
       }}>
         <header style={{
           position: 'sticky',

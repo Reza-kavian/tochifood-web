@@ -1,4 +1,4 @@
-////zare_nk_050510_okk(1)
+////zare_nk_050514_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, memo } from "react";
@@ -32,10 +32,8 @@ type AdressListComponentType = {
   responsedListFromApiSelectAddressList: responsedListFromApiSelectAddressListType[] | null;
   isEpmtyShowAddRemAddress: boolean;
   setIsEpmtyShowAddRemAddress: React.Dispatch<React.SetStateAction<boolean>>;
-  // showAddressListDrawer: () => void;  ////zare_nk_050507_commented
-  showAddressListDrawer: () => Promise<responsedListFromApiSelectAddressListType[] | null>; ////zare_nk_050507_added    
+  showAddressListDrawer: () => Promise<responsedListFromApiSelectAddressListType[] | null>;  
 };
-
 
 const AdressListComponent = function AdressListComponent({
   isEpmtyAdressList,

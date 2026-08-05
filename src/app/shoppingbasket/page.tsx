@@ -413,6 +413,7 @@ export default function Shoppingbasket() {
                 setError("lotfan avval online shid");
                 return;
             }
+            setIsEpmtyAdressList('notNull');   ////zare_nk_050507_nokteh(az entehaye tabe avorder shod inja)
 
             // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
             const response = await fetch(NextJsApiUrl + "Api_SelectAddress", {
@@ -432,30 +433,22 @@ export default function Shoppingbasket() {
                     // console.log("zare_nk_050206-parsedList1: " + parsedList[0].Adress);
                     // console.log("zare_nk_050206-parsedList2: " + parsedList[1].Adress);
                     setIsEpmtyAdressList('notNull');
-
                     SetResponsedListFromApiSelectAddressList(() => {
                         return parsedList
                     });
-
+                    return parsedList;
                 } else {
                     setError("متاسفانه خطایی رخ داده است34:" + data.errors);
                     // console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
                     ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
+                    return null;
                 }
             } else {
                 // console.log("zare_nk_050110-!response.ok" + response.ok);
                 setError("متاسفانه خطایی رخ داده است35");
                 ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
-            }
-
-            // console.log('zare_nk_050110-token hala is: ' + getCookie("token"));
-            if (token) {
-                setIsEpmtyAdressList('notNull');   //zare_nk_050221_nokteh(age online bashe va address nadashteh bashe ke manteghi nist setIsEpmtyAdressList('notNull') beshe!!)
-            }
-            else {
-                // alert('lotfan avval online shid');
-                ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
-            }
+                return null;
+            } 
         }
         , [isEpmtyAdressList, responsedListFromApiSelectAddressList])
 
@@ -533,6 +526,7 @@ export default function Shoppingbasket() {
                 display: "flex",
                 flexDirection: 'column',
                 // border: '3px solid orange',
+                flex: '1 1 auto',  ////zare_nk_050514_added
             }}>
                 {/* zare_k_050413_commented(SwiperThinkBanerComp nemikhaim dar sabad) */}
                 {/* <SwiperThinkBanerComp /> */}
@@ -580,11 +574,11 @@ export default function Shoppingbasket() {
                             // maxWidth: '256px',   ////zare_nk_050413_commented
                             width: '100%',    ////zare_nk_050413_added
                             gap: '.5rem',
-                            alignItems:'center',
+                            alignItems: 'center',
                         }}>
-                            <span style={{ 
-                                textAlign: "right",whiteSpace: 'nowrap',    fontSize: '0.875rem',lineHeight: '1.25rem',color:'#8f959e' 
-                                }}>
+                            <span style={{
+                                textAlign: "right", whiteSpace: 'nowrap', fontSize: '0.875rem', lineHeight: '1.25rem', color: '#8f959e'
+                            }}>
                                 {/* zare_nk_050329_nokteh(currentAddress az useState tabdil shod be useContext) */}
                                 {mycurrentAddressState?.Adress ? mycurrentAddressState.OnvanAdress : ''}
                                 آدرس فعلی

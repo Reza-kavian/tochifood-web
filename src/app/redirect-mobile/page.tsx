@@ -29,6 +29,7 @@ export default function MobileRedirectPage({ searchParams }: any) {
         padding: "24px",
         fontFamily: "sans-serif",
         textAlign: "center",
+        flex: '1 1 auto',  ////zare_nk_050514_added
       }}>
       <h3>در حال بازگشت به اپلیکیشن…</h3>
 

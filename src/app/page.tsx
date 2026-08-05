@@ -275,6 +275,7 @@ export default function Home() {
         display: "flex",
         flexDirection: 'column',
         // border: '3px solid orange',
+        flex: '1 1 auto',  ////zare_nk_050514_added
       }}>
         <SwiperThinkBanerComp />
 
@@ -415,8 +416,7 @@ export default function Home() {
           {/* zare_nk_050226_nokteh_end(dokmehaye navigation va pagination dasti(jahate olgu gozashtim)) */}
 
           <div style={{ marginBottom: '.70rem' }}></div>
-          <Link //className="relative mx-4 flex h-[40px] w-[calc(100%-2rem)] items-center justify-start gap-1 rounded-full bg-gray-75 px-4 py-[10px]"
-            style={{
+          <Link style={{
               display: 'flex', justifyContent: 'flex-start', alignItems: 'center', width: 'calc(100% - 2rem)', height: '40px', marginLeft: '1rem', marginRight: '1rem',
               position: 'relative', padding: '10px 1rem', backgroundColor: '#f1f2f3', borderRadius: '9999px', gap: '0.25rem', textDecoration: 'none',
             }}

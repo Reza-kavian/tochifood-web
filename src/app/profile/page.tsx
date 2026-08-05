@@ -428,6 +428,7 @@ export default function Profile() {
         flexDirection: 'column',
         // border: '3px solid orange',
         color: '#1b1c1d', ////zare_nk_050429_added(range madare site)
+        flex: '1 1 auto',  ////zare_nk_050514_added
       }}>
         <header style={{
           position: 'sticky',

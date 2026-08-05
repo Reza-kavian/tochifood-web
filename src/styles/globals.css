@@ -133,9 +133,6 @@ body {
 
 @media screen and (min-width: 1400px) {}
 
-/* zare_nk_041225_added_st */
-
-/* .page-cont { */
 .main-in-LayoutWrapper {
   display: flex;
   justify-content: center;
@@ -145,7 +142,6 @@ body {
   background-color: #f1f1f2;
 }
 
-/* .main { */
 .section-in-LayoutWrapper {
   width: 100%;
   max-width: 450px;
@@ -153,14 +149,14 @@ body {
   position: relative;
   /* zare_nk_050331_added_st */
   display: flex;
-  flex-flow: row;
+  /* zare_nk_050514_commented */
+  /* flex-flow: row; */
+  /* zare_nk_050514_added */
+  flex-flow: column;
   /* zare_nk_050331_added_end */
   /* border: 2px dashed rgb(255, 0, 170); */
 }
 
-/* zare_nk_041225_added_end */
-
-/* zare_nk_050131_added_st */
 html {
   overflow-y: auto;
   scrollbar-width: thin;
@@ -206,5 +202,3 @@ html::-webkit-scrollbar-thumb:hover,
   background: #555555;
   box-shadow: 0px 0px 3px 1px #555555 inset;
 }
-
-/* zare_nk_050131_added_end */

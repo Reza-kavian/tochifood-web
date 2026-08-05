@@ -100,7 +100,6 @@ type ForooshTitrType = {
   // be man nagan va timi kar nakonim,pas [key: string]: any; gozashtam ke kolli hast(chon hameye fieldha ro neveshtam commentesh kardam)
 };
 
-
 type ShowForooshSatrHideForooshTitrType = {
   ShomarehFaktorForoosh: number;
   IdFaktorForoosh: number;
@@ -111,26 +110,6 @@ type ShowForooshSatrHideForooshTitrType = {
   MablaghKhales: number;
   forooshTitrRowsLength: number;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export default function Orders() {
   const router = useRouter();
@@ -380,6 +359,7 @@ export default function Orders() {
         display: "flex",
         flexDirection: 'column',
         // border: '3px solid orange',
+        flex: '1 1 auto',  ////zare_nk_050514_added
       }}>
         <main
           style={{

@@ -9,7 +9,9 @@ export default function NotFound() {
   }, []);
 
   return (
-    <div style={{ padding: "3rem", textAlign: "center" }}>
+    <div style={{ padding: "3rem", textAlign: "center" ,
+      flex: '1 1 auto',  ////zare_nk_050514_added
+    }}>
       <h1 style={{ fontSize: "3rem", color: "crimson" }}>صفحه پیدا نشد 😢</h1>
       <p>به نظر می‌رسه صفحه‌ای که دنبالش هستی وجود نداره.</p>
       <Link href="/" style={{ 

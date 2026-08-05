@@ -1,4 +1,4 @@
-////zare_nk_050510_okk(1)
+////zare_nk_050514_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, memo, useContext, } from "react";
@@ -134,14 +134,14 @@ const Adressescomponent = function Adressescomponent({
           //  hanooz meghdare ghabl az seda zadane tabeye showAddressListDrawer() ro dare)
           const responsedListFromApiSelectAddressListBeforeRerender: responsedListFromApiSelectAddressListType[] | null = await showAddressListDrawer(); 
           if (responsedListFromApiSelectAddressListBeforeRerender == null || responsedListFromApiSelectAddressListBeforeRerender[0]==undefined) {  ////zare_nk_050507_nokteh(yanai age null bashe ya age arayeye khali bashe)
-            alert('khaliye111!!' + responsedListFromApiSelectAddressListBeforeRerender);
+            // alert('khaliye111!!' + responsedListFromApiSelectAddressListBeforeRerender);
             chosenAddress(null);
           }
           else {
             const getchosenAddress = getCookie("chosenAddress");
             var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = getchosenAddress ? JSON.parse(getchosenAddress) : null;
             if (parsedChosenAddress?.IdAdress == IdAdress) {
-              alert('porre111!!' + JSON.stringify( responsedListFromApiSelectAddressListBeforeRerender)); 
+              // alert('porre111!!' + JSON.stringify( responsedListFromApiSelectAddressListBeforeRerender)); 
               chosenAddress(responsedListFromApiSelectAddressListBeforeRerender ? responsedListFromApiSelectAddressListBeforeRerender[0] : null)            
             }
           }

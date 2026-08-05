@@ -96,8 +96,8 @@ export default function Home() {
 
     const [responsedListFromApiSelectAddressList, SetResponsedListFromApiSelectAddressList] = useState<responsedListFromApiSelectAddressListType[] | null>(null);
 
-    let currentAddressUseContext = useContext(currentAddressContext);  
-  
+    let currentAddressUseContext = useContext(currentAddressContext);
+
     const [mycurrentAddressState, setMycurrentAddressState] = useState<responsedListFromApiSelectAddressListType | null>(null);
 
     useEffect(() => {
@@ -123,6 +123,7 @@ export default function Home() {
                 setError("lotfan avval online shid");
                 return;
             }
+            setIsEpmtyAdressList('notNull');   ////zare_nk_050507_nokteh(az entehaye tabe avorder shod inja)
 
             // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
             const response = await fetch(NextJsApiUrl + "Api_SelectAddress", {
@@ -145,25 +146,19 @@ export default function Home() {
                     SetResponsedListFromApiSelectAddressList(() => {
                         return parsedList
                     });
+                    return parsedList;
                 } else {
                     setError("متاسفانه خطایی رخ داده است34:" + data.errors);
                     // console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
                     ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
+                     return null;
                 }
             } else {
                 // console.log("zare_nk_050110-!response.ok" + response.ok);
                 setError("متاسفانه خطایی رخ داده است35");
                 ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
-            }
-
-            // console.log('zare_nk_050110-token hala is: ' + getCookie("token"));
-            if (token) {
-                setIsEpmtyAdressList('notNull');   //zare_nk_050221_nokteh(age online bashe va address nadashteh bashe ke manteghi nist setIsEpmtyAdressList('notNull') beshe!!)
-            }
-            else {
-                // alert('lotfan avval online shid');
-                ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
-            }
+                 return null;
+            } 
         }
         , [isEpmtyAdressList, responsedListFromApiSelectAddressList])
 
@@ -280,6 +275,7 @@ export default function Home() {
             display: "flex",
             flexDirection: 'column',
             // border: '3px solid orange',
+            flex: '1 1 auto',  ////zare_nk_050514_added
         }}>
             {/* <SwiperThinkBanerComp /> */}
 
@@ -486,164 +482,164 @@ export default function Home() {
                 }}>
                     {
                         [...Array(9)].map((_, index) => {
- 
 
-                    return(<div key={index} style={{
-                        paddingBottom: '.25rem', padding: '.5rem', backgroundColor: 'white', borderRadius: '.5rem', gap: '.25rem', justifyContent: 'space-between',
-                        flexDirection: 'column', height: 'fit-content', display: 'flex', border: '1px solid #ebeef3',
-                    }}>
-                        <div style={{
-                            position: 'relative', border: '1px solid #ebeef3', borderRadius: '.375rem',
-                        }}>
-                            <div style={{
-                                color: '#141414', fontSize: '.75rem', lineHeight: '1rem', paddingLeft: '.25rem', paddingRight: '.25rem', borderRadius: '.25rem',
-                                gap: '2px', justifyContent: 'center', alignItems: 'center', display: 'flex', zIndex: 10, top: '.25rem', left: '.25rem', position: 'absolute',
-                            }}>
-                                <span style={{ marginTop: '2px', }}>5.0</span>
-                                <img src="/images/product-collection/gold-start.svg" alt="بازگشت"
-                                    style={{ width: '.75rem', height: '.75rem', }} />
-                            </div>
-                            <div style={{ width: '100%', height: '100px', }}>
-                                <img src="/images/product-collection/movaghat/ice-americano.jpg" alt="آیس آمریکانو" style={{
-                                    objectFit: 'cover', borderRadius: '.375rem', userSelect: 'none', width: '100%! important', height: '100%', //position: 'absolute',  ////zare_nk_050430_nokteh(tapsifoodabsolute kard vali niazi nist va commentesh kardam)
-                                }} />
-                            </div>
-                        </div>
-                        <div style={{
-                            flexDirection: 'column', height: 'fit-content', display: 'flex', marginBottom: '.25rem', marginTop: '.25rem', gap: '.25rem',  ////zare_nk_050430_commented
-                        }}>
-                            <div style={{
-                                display: 'flex', flexDirection: 'column', width: '100%',
+
+                            return (<div key={index} style={{
+                                paddingBottom: '.25rem', padding: '.5rem', backgroundColor: 'white', borderRadius: '.5rem', gap: '.25rem', justifyContent: 'space-between',
+                                flexDirection: 'column', height: 'fit-content', display: 'flex', border: '1px solid #ebeef3',
                             }}>
                                 <div style={{
-                                    fontSize: '0.875rem',
-                                    color: 'black',
-
-                                    // این بخش برای سه‌نقطه و محدودیت ۲ خط
-                                    display: '-webkit-box',
-                                    WebkitLineClamp: 1,
-                                    WebkitBoxOrient: 'vertical',
-                                    overflow: 'hidden',
-
-                                    // این بخش برای تثبیت ارتفاع روی ۴۰ پیکسل 
-                                    lineHeight: '1rem',
-                                    // height: '2.5rem',
-                                    height: '2rem',
-
-                                    minHeight: '2rem',  // minHeight: '2.5rem', // اجبار به کمتر نشدن
-                                    maxHeight: '2rem',  // maxHeight: '2.5rem', // اجبار به بیشتر نشدن
-                                    boxSizing: 'border-box', // برای اینکه بُردر (border) به ارتفاع اضافه نشود
-
-                                    textAlign: 'right',
-                                    // width: '128px',  ////zare_nk_050430_nokteh(dar safheye product-collection az widthe sabete 128px estefadeh shod(jahate olgu baraye jahaye digeh hatman barrasi she))
+                                    position: 'relative', border: '1px solid #ebeef3', borderRadius: '.375rem',
                                 }}>
-                                    آیس آمریکانو
-                                </div>
-
-                                <div style={{
-                                    fontSize: '0.75rem',
-                                    color: '#8e949d',
-
-                                    // این بخش برای سه‌نقطه و محدودیت ۲ خط
-                                    display: '-webkit-box',
-                                    WebkitLineClamp: 1,
-                                    WebkitBoxOrient: 'vertical',
-                                    overflow: 'hidden',
-
-                                    // این بخش برای تثبیت ارتفاع روی ۴۰ پیکسل 
-                                    lineHeight: '1rem',
-                                    // height: '2.5rem',
-                                    height: '1rem',
-
-                                    minHeight: '1rem',  // minHeight: '2.5rem', // اجبار به کمتر نشدن
-                                    maxHeight: '1rem',  // maxHeight: '2.5rem', // اجبار به بیشتر نشدن
-                                    boxSizing: 'border-box', // برای اینکه بُردر (border) به ارتفاع اضافه نشود
-
-                                    textAlign: 'right',
-                                    // width: '128px',  ////zare_nk_050430_nokteh(dar safheye product-collection az widthe sabete 128px estefadeh shod(jahate olgu baraye jahaye digeh hatman barrasi she))
-                                }}>
-                                    قهوه چینو
-                                </div>
-                            </div>
-                            <div style={{
-                                alignItems: 'center', flexDirection: 'column', display: 'flex', position: 'relative',
-                            }}>
-                                <span style={{
-                                    textDecorationLine: 'line-through', color: '#7d95b3', fontSize: '.75rem',
-                                    lineHeight: '1rem', textAlign: 'left', width: '100%', height: '1rem',
-                                }}>
-                                    {(150000).toLocaleString()}
-                                </span>
-
-                                <div style={{
-                                    backgroundColor: '#ff5a00',
-                                    display: 'flex', alignItems: 'center', borderRadius: '.25rem', paddingLeft: '.5rem', paddingRight: '.5rem', paddingTop: '2px',
-                                    color: 'white',  ////zare_nk_050401_nokteh(tapsifood css digeei baraye sefid kardane matn gozasht)
-                                    borderBottomRightRadius: 0, position: 'absolute', right: '-17px', bottom: '.5rem', zIndex: 10, height: '30px',
-                                }}>
-                                    <span style={{ fontSize: '.75rem', lineHeight: '1rem', fontWeight: 700, }}>30%</span>
-                                    <span style={{
-                                        position: 'absolute',
-
-                                        height: 0, width: 0,
-
-                                        borderTopWidth: '8px',
-                                        borderRightWidth: '8px',
-                                        borderBottomWidth: 0,
-                                        borderLeftWidth: 0,
-
-                                        bottom: '-8px', right: 0,
-
-                                        display: 'inline-block',
-
-                                        borderStyle: 'solid',
-
-                                        borderTopColor: '#ff5a00',
-                                        borderRightColor: 'transparent',
-                                        borderBottomColor: 'transparent',
-                                        borderLeftColor: 'transparent',
+                                    <div style={{
+                                        color: '#141414', fontSize: '.75rem', lineHeight: '1rem', paddingLeft: '.25rem', paddingRight: '.25rem', borderRadius: '.25rem',
+                                        gap: '2px', justifyContent: 'center', alignItems: 'center', display: 'flex', zIndex: 10, top: '.25rem', left: '.25rem', position: 'absolute',
                                     }}>
-                                    </span>
-                                </div>
-
-
-                                <div style={{
-                                    width: "100%", display: "flex", flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center',
-                                }}>
-                                    <span style={{
-                                        fontSize: '1rem', marginLeft: 2, fontFamily: "IRANSansWeb(FaNum)_Medium", color: '#141414', alignItems: 'center',
-                                        lineHeight: '1.5rem',
-                                    }}>
-                                        {(105000).toLocaleString()}
-                                    </span>
-                                    <span style={{
-                                        fontSize: '.625rem', fontFamily: "IRANSansWeb(FaNum)_Medium", color: '#6d6d6d',
-                                    }}>
-                                        تومان
-                                    </span>
-                                </div> 
-
-                            </div>
-
-                            <div style={{ gap: '.5rem', flexDirection: 'column', display: 'flex', }}>
-                                <span style={{ borderBottom: '1px solid #ebeef3', }}>
-                                </span>
-
-                                <div style={{
-                                    display: 'flex', gap: '.25rem', alignItems: 'center', width: '100%',
-                                }}>
-                                    <img src="/images/product-collection/motor-peyk.svg" alt="زمان انتظار"
-                                        style={{ width: '14px', height: '14px', }}
-                                    />
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
-                                        <span style={{ color: '#575a63', fontSize: '.75rem', lineHeight: '1rem', }}>{(58000).toLocaleString()}</span>
-                                        <span style={{ color: '#575a63', fontSize: '.625rem', }}>تومان</span>
+                                        <span style={{ marginTop: '2px', }}>5.0</span>
+                                        <img src="/images/product-collection/gold-start.svg" alt="بازگشت"
+                                            style={{ width: '.75rem', height: '.75rem', }} />
+                                    </div>
+                                    <div style={{ width: '100%', height: '100px', }}>
+                                        <img src="/images/product-collection/movaghat/ice-americano.jpg" alt="آیس آمریکانو" style={{
+                                            objectFit: 'cover', borderRadius: '.375rem', userSelect: 'none', width: '100%! important', height: '100%', //position: 'absolute',  ////zare_nk_050430_nokteh(tapsifoodabsolute kard vali niazi nist va commentesh kardam)
+                                        }} />
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>)
-                             })
+                                <div style={{
+                                    flexDirection: 'column', height: 'fit-content', display: 'flex', marginBottom: '.25rem', marginTop: '.25rem', gap: '.25rem',  ////zare_nk_050430_commented
+                                }}>
+                                    <div style={{
+                                        display: 'flex', flexDirection: 'column', width: '100%',
+                                    }}>
+                                        <div style={{
+                                            fontSize: '0.875rem',
+                                            color: 'black',
+
+                                            // این بخش برای سه‌نقطه و محدودیت ۲ خط
+                                            display: '-webkit-box',
+                                            WebkitLineClamp: 1,
+                                            WebkitBoxOrient: 'vertical',
+                                            overflow: 'hidden',
+
+                                            // این بخش برای تثبیت ارتفاع روی ۴۰ پیکسل 
+                                            lineHeight: '1rem',
+                                            // height: '2.5rem',
+                                            height: '2rem',
+
+                                            minHeight: '2rem',  // minHeight: '2.5rem', // اجبار به کمتر نشدن
+                                            maxHeight: '2rem',  // maxHeight: '2.5rem', // اجبار به بیشتر نشدن
+                                            boxSizing: 'border-box', // برای اینکه بُردر (border) به ارتفاع اضافه نشود
+
+                                            textAlign: 'right',
+                                            // width: '128px',  ////zare_nk_050430_nokteh(dar safheye product-collection az widthe sabete 128px estefadeh shod(jahate olgu baraye jahaye digeh hatman barrasi she))
+                                        }}>
+                                            آیس آمریکانو
+                                        </div>
+
+                                        <div style={{
+                                            fontSize: '0.75rem',
+                                            color: '#8e949d',
+
+                                            // این بخش برای سه‌نقطه و محدودیت ۲ خط
+                                            display: '-webkit-box',
+                                            WebkitLineClamp: 1,
+                                            WebkitBoxOrient: 'vertical',
+                                            overflow: 'hidden',
+
+                                            // این بخش برای تثبیت ارتفاع روی ۴۰ پیکسل 
+                                            lineHeight: '1rem',
+                                            // height: '2.5rem',
+                                            height: '1rem',
+
+                                            minHeight: '1rem',  // minHeight: '2.5rem', // اجبار به کمتر نشدن
+                                            maxHeight: '1rem',  // maxHeight: '2.5rem', // اجبار به بیشتر نشدن
+                                            boxSizing: 'border-box', // برای اینکه بُردر (border) به ارتفاع اضافه نشود
+
+                                            textAlign: 'right',
+                                            // width: '128px',  ////zare_nk_050430_nokteh(dar safheye product-collection az widthe sabete 128px estefadeh shod(jahate olgu baraye jahaye digeh hatman barrasi she))
+                                        }}>
+                                            قهوه چینو
+                                        </div>
+                                    </div>
+                                    <div style={{
+                                        alignItems: 'center', flexDirection: 'column', display: 'flex', position: 'relative',
+                                    }}>
+                                        <span style={{
+                                            textDecorationLine: 'line-through', color: '#7d95b3', fontSize: '.75rem',
+                                            lineHeight: '1rem', textAlign: 'left', width: '100%', height: '1rem',
+                                        }}>
+                                            {(150000).toLocaleString()}
+                                        </span>
+
+                                        <div style={{
+                                            backgroundColor: '#ff5a00',
+                                            display: 'flex', alignItems: 'center', borderRadius: '.25rem', paddingLeft: '.5rem', paddingRight: '.5rem', paddingTop: '2px',
+                                            color: 'white',  ////zare_nk_050401_nokteh(tapsifood css digeei baraye sefid kardane matn gozasht)
+                                            borderBottomRightRadius: 0, position: 'absolute', right: '-17px', bottom: '.5rem', zIndex: 10, height: '30px',
+                                        }}>
+                                            <span style={{ fontSize: '.75rem', lineHeight: '1rem', fontWeight: 700, }}>30%</span>
+                                            <span style={{
+                                                position: 'absolute',
+
+                                                height: 0, width: 0,
+
+                                                borderTopWidth: '8px',
+                                                borderRightWidth: '8px',
+                                                borderBottomWidth: 0,
+                                                borderLeftWidth: 0,
+
+                                                bottom: '-8px', right: 0,
+
+                                                display: 'inline-block',
+
+                                                borderStyle: 'solid',
+
+                                                borderTopColor: '#ff5a00',
+                                                borderRightColor: 'transparent',
+                                                borderBottomColor: 'transparent',
+                                                borderLeftColor: 'transparent',
+                                            }}>
+                                            </span>
+                                        </div>
+
+
+                                        <div style={{
+                                            width: "100%", display: "flex", flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center',
+                                        }}>
+                                            <span style={{
+                                                fontSize: '1rem', marginLeft: 2, fontFamily: "IRANSansWeb(FaNum)_Medium", color: '#141414', alignItems: 'center',
+                                                lineHeight: '1.5rem',
+                                            }}>
+                                                {(105000).toLocaleString()}
+                                            </span>
+                                            <span style={{
+                                                fontSize: '.625rem', fontFamily: "IRANSansWeb(FaNum)_Medium", color: '#6d6d6d',
+                                            }}>
+                                                تومان
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                    <div style={{ gap: '.5rem', flexDirection: 'column', display: 'flex', }}>
+                                        <span style={{ borderBottom: '1px solid #ebeef3', }}>
+                                        </span>
+
+                                        <div style={{
+                                            display: 'flex', gap: '.25rem', alignItems: 'center', width: '100%',
+                                        }}>
+                                            <img src="/images/product-collection/motor-peyk.svg" alt="زمان انتظار"
+                                                style={{ width: '14px', height: '14px', }}
+                                            />
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+                                                <span style={{ color: '#575a63', fontSize: '.75rem', lineHeight: '1rem', }}>{(58000).toLocaleString()}</span>
+                                                <span style={{ color: '#575a63', fontSize: '.625rem', }}>تومان</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>)
+                        })
                     }
                 </div>
                 {/* zare_nk_050429_added_end(sabke gride tapsifoodi be jaye flex(baraye chandsotoone kardane farzandane)) */}

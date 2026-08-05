@@ -1089,6 +1089,8 @@ export default function Checkout() {
                 setError("lotfan avval online shid");
                 return;
             }
+            setIsEpmtyAdressList('notNull');   ////zare_nk_050507_nokteh(az entehaye tabe avorder shod inja)
+
             // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
             const response = await fetch(NextJsApiUrl + "Api_SelectAddress", {
                 method: "POST",
@@ -1107,29 +1109,21 @@ export default function Checkout() {
                     // console.log("zare_nk_050206-parsedList1: " + parsedList[0].Adress);
                     // console.log("zare_nk_050206-parsedList2: " + parsedList[1].Adress);
                     setIsEpmtyAdressList('notNull');
-
                     SetResponsedListFromApiSelectAddressList(() => {
                         return parsedList
                     });
-
+                    return parsedList;
                 } else {
                     setError("متاسفانه خطایی رخ داده است34:" + data.errors);
                     // console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
                     ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
+                    return null;
                 }
             } else {
                 // console.log("zare_nk_050110-!response.ok" + response.ok);
                 setError("متاسفانه خطایی رخ داده است35");
                 ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
-            }
-
-            // console.log('zare_nk_050110-token hala is: ' + getCookie("token"));
-            if (token) {
-                setIsEpmtyAdressList('notNull');   //zare_nk_050221_nokteh(age online bashe va address nadashteh bashe ke manteghi nist setIsEpmtyAdressList('notNull') beshe!!)
-            }
-            else {
-                // alert('lotfan avval online shid');
-                ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
+                return null;
             }
         }
         , [isEpmtyAdressList, responsedListFromApiSelectAddressList])
@@ -1151,6 +1145,7 @@ export default function Checkout() {
             display: "flex",
             flexDirection: 'column',
             position: 'relative',  ////zare_nk_050404_added
+            flex: '1 1 auto',  ////zare_nk_050514_added
         }}>
             <header style={{
                 position: 'sticky',
@@ -1459,7 +1454,7 @@ export default function Checkout() {
                                         fill: 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
                                         borderRadius: '9999px', justifyContent: 'center', alignItems: 'center', width: '2rem', height: '2rem', display: "flex", flexFlow: "row", border: 'none',
                                         flex: '0 0 auto',
-                                    }}> 
+                                    }}>
                                     <img src="/images/checkout/ravesh-online.svg" alt="پرداخت آنلاین" style={{
                                         // height: '1.25rem', width: '1.25rem',
                                     }} />
@@ -1596,9 +1591,9 @@ export default function Checkout() {
                                         flex: '0 0 auto',
                                     }}
                                 >
-                                   
+
                                     <img src="/images/checkout/taraIcon.png" alt="پرداخت آنلاین" style={{
-                                         height: '1rem', width: '1rem',
+                                        height: '1rem', width: '1rem',
                                     }} />
                                 </button>
 
@@ -1614,11 +1609,11 @@ export default function Checkout() {
                                     rowGap: '.25rem',  ////zare_nk_050424_added
                                 }}>
                                     <span style={{
-                                            ...(radionClicked == 2 ? { color: '#059666' } : { color: '#1b1c1d' }),
-                                            fontWeight: '500',
-                                            fontSize: '.875rem',
-                                            lineHeight: '1.25rem',
-                                        }}>
+                                        ...(radionClicked == 2 ? { color: '#059666' } : { color: '#1b1c1d' }),
+                                        fontWeight: '500',
+                                        fontSize: '.875rem',
+                                        lineHeight: '1.25rem',
+                                    }}>
                                         تارا
                                         {/* {item.OnvanAdress ? item.OnvanAdress : 'خونه'} */}
                                     </span>
@@ -1848,18 +1843,18 @@ export default function Checkout() {
                                 alignItems: 'center',
                             }}>
                             <div style={{
-                                    // borderTop: '1px solid #2b364f14',
-                                    display: 'flex',
-                                    flex: '1 1 0%',
-                                    // paddingBottom: '.75rem',
-                                    // paddingTop: '.75rem',
-                                    gap: '.5rem',
-                                    justifyContent: 'space-between',
-                                    // cursor: 'pointer',  ////zare_nk_050421_commented
-                                    height: 'min-content',
-                                    alignItems: 'center',
-                                    // border:'2px dashed red'
-                                }}>
+                                // borderTop: '1px solid #2b364f14',
+                                display: 'flex',
+                                flex: '1 1 0%',
+                                // paddingBottom: '.75rem',
+                                // paddingTop: '.75rem',
+                                gap: '.5rem',
+                                justifyContent: 'space-between',
+                                // cursor: 'pointer',  ////zare_nk_050421_commented
+                                height: 'min-content',
+                                alignItems: 'center',
+                                // border:'2px dashed red'
+                            }}>
                                 <button id="locationBtnInEveryAddressRow" style={{
                                     backgroundColor: 'inherit',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1) 
                                     fill: 'white',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#a5abb1)  
@@ -1867,7 +1862,7 @@ export default function Checkout() {
                                     flex: '0 0 auto',
                                 }} >
                                     <img src="/images/checkout/digipay-Icon.svg" alt="پرداخت آنلاین" style={{
-                                          height: '1rem', width: '1rem',
+                                        height: '1rem', width: '1rem',
                                     }} />
                                 </button>
 
