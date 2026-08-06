@@ -1,4 +1,4 @@
-////zare_nk_050514_okk(1)
+////zare_nk_050515_okk(1)
 import { NextResponse, NextRequest } from "next/server";
 // import jwt from "jsonwebtoken";  ////chon middleware.ts dar Edge Runtime ejra mishavad, az majoole crypto poshtibani nemikoneh 
 // va az jsonwebtoken nemishe dar middleware.ts estefadeh kard, pas api zadim be verifytoken va dar anja az jsonwebtoken estefade kardim 
@@ -78,7 +78,7 @@ export async function middleware(request: NextRequest) {
     );
   });
 
-  // if (isPublic || request.nextUrl.pathname == "/") {  //zare_nk_050205_commented
+  // if (isPublic || request.nextUrl.pathname == "/") {  ////zare_nk_050205_commented
   if (isPublic) {
     const response = NextResponse.next();
     const fullUrl = request.nextUrl.href;
