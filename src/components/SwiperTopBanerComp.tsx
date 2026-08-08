@@ -1,4 +1,4 @@
-////zare_nk_050514_okk(1)
+////zare_nk_050517_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -24,13 +24,11 @@ import { none } from "@neshan-maps-platform/ol/centerconstraint";
 import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
 
 function getCookie(name: any) {
-    ////zare_nk_050209_added_st
     if (typeof document === 'undefined') {
         console.log("document === 'undefined'");
         return null; // برای جلوگیری از خطای عدم وجود document
     }
     console.log("document !== 'undefined'");
-    ////zare_nk_050209_added_end
     const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
     console.log("value is: " + value);
     const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
@@ -47,7 +45,7 @@ function getCookie(name: any) {
 }
 
 const SwiperTopBanerComp = () => {
-    console.log('050329-SwiperTopBanerComp rendered!!');   ////zare_nk_050329_added
+    console.log('050329-SwiperTopBanerComp rendered!!');
     const [errorInSwiperTopBaner, setErrorInSwiperTopBaner] = useState<string | null>(null);
 
     const router = useRouter();
@@ -134,59 +132,58 @@ const SwiperTopBanerComp = () => {
     };
 
     return (
-        <>
-            {/* zare_nk_050317_nokteh_st(age div pedare Swiper ra bardarim vaghti Swiper dar Dom gharar migire ertefaesh kam mishe!!(ehtemalan bekhatere ertefa dadan be body dar layout hast ke bayad tahlilshe hatman)) */}
-            <div style={{
-                display: 'flex', flexFlow: 'column', width: '100%',
-            }}>
-                <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={10}    ////zare_nk_050216_nokteh(faseleye beine slideha dar har ghabele namayesh(be px hast))
-                    slidesPerView={1.09}   ////zare_nk_050216_nokteh(tedad slideha dar har ghabele moshahedeh)
-                    centeredSlides={true}  ////zare_nk_050226_added(baraye vasat gharar gereftane slide ha dar swiper)
-                    ////zare_nk_050215_nokteh_st(dokmeye raftan be badi va ghabli ro modiriat mikoneh, age nazarim pishfarz false hast, mishe ham boolean dad, va ham meghdare objecti dad 
-                    //// ke dokmehaye ghablo bad , ... ra sefareshi konim(midoonim useRef age masalan string ya namber ,... bashe tagheiresh bedim dar hamin render tagheiresh ghabale 
-                    // moshahedeh hast, vali manzoore ma useRefi hast ke be taghaye jsx nesbat midim ke ta dar dom naran useRef be tage jsx nemichasbe ))
-                    navigation={false}
-                    // navigation={{
-                    //   nextEl: '.swiper-button-next2',  ////zare_nk_050216_nokteh(dorost kar mikoneh)
-                    //   // nextEl: null, ////refForwiperButtonNext.current,  
+        ////zare_nk_050317_nokteh_st(age div pedare Swiper ra bardarim vaghti Swiper dar Dom gharar migire ertefaesh kam mishe!!(ehtemalan bekhatere ertefa dadan be body dar layout hast ke bayad tahlilshe hatman)) 
+        <div style={{
+            display: 'flex', flexFlow: 'column', width: '100%',
+        }}>
+            <Swiper
+                modules={[Navigation, Pagination]}
+                spaceBetween={10}    ////zare_nk_050216_nokteh(faseleye beine slideha dar har ghabele namayesh(be px hast))
+                slidesPerView={1.09}   ////zare_nk_050216_nokteh(tedad slideha dar har ghabele moshahedeh)
+                centeredSlides={true}  ////zare_nk_050226_added(baraye vasat gharar gereftane slide ha dar swiper)
+                ////zare_nk_050215_nokteh_st(dokmeye raftan be badi va ghabli ro modiriat mikoneh, age nazarim pishfarz false hast, mishe ham boolean dad, va ham meghdare objecti dad 
+                //// ke dokmehaye ghablo bad , ... ra sefareshi konim(midoonim useRef age masalan string ya namber ,... bashe tagheiresh bedim dar hamin render tagheiresh ghabale 
+                // moshahedeh hast, vali manzoore ma useRefi hast ke be taghaye jsx nesbat midim ke ta dar dom naran useRef be tage jsx nemichasbe ))
+                navigation={false}
+                // navigation={{
+                //   nextEl: '.swiper-button-next2',  ////zare_nk_050216_nokteh(dorost kar mikoneh)
+                //   // nextEl: null, ////refForwiperButtonNext.current,  
 
-                    //   prevEl: '.swiper-button-prev',  ////zare_nk_050216_nokteh(dorost kar mikoneh)
-                    //   // prevEl: null, ////refForwiperButtonPrev.current,   
-                    // }}
-                    ////zare_nk_050215_nokteh_end(dokmeye raftan be badi va ghabli ro modiriat mikoneh, age nazarim pishfarz false hast, mishe ham boolean dad, va ham meghdare objecti dad 
-                    //// ke dokmehaye ghablo bad , ... ra sefareshi konim(midoonim useRef age masalan string ya namber ,... bashe tagheiresh bedim dar hamin render tagheiresh ghabale 
-                    // moshahedeh hast, vali manzoore ma useRefi hast ke be taghaye jsx nesbat midim ke ta dar dom naran useRef be tage jsx nemichasbe ))
+                //   prevEl: '.swiper-button-prev',  ////zare_nk_050216_nokteh(dorost kar mikoneh)
+                //   // prevEl: null, ////refForwiperButtonPrev.current,   
+                // }}
+                ////zare_nk_050215_nokteh_end(dokmeye raftan be badi va ghabli ro modiriat mikoneh, age nazarim pishfarz false hast, mishe ham boolean dad, va ham meghdare objecti dad 
+                //// ke dokmehaye ghablo bad , ... ra sefareshi konim(midoonim useRef age masalan string ya namber ,... bashe tagheiresh bedim dar hamin render tagheiresh ghabale 
+                // moshahedeh hast, vali manzoore ma useRefi hast ke be taghaye jsx nesbat midim ke ta dar dom naran useRef be tage jsx nemichasbe ))
 
-                    ////zare_nk_050216_nokteh_st(dokmehaye raftan be safhe ke momoolan dar vasat va paeine swiper namayash dadeh mishan, age nazarim pishfarz false hast, mishe ham boolean 
-                    //// dad, va ham meghdare objecti dad ke dokmehaye adshodeh ra sefareshi konim)
-                    // pagination={true}  ////zare_nk_050226_nokteh(pagination={true} ra gozashtam faghat nameyesh mideh safheye feli ra ba toopor va tookhali kardane bullet ha, vali inke click
-                    ////  konim rooshoon amal konan bayad clickable: true, benevisim(chon pishfarz false hast va faghat ba angosht ya mouseclick chaporast mikeshim slide ha ra(na click rooye bullet ha)))
-                    // pagination={{
-                    //   clickable: true,
-                    //   // el: '.swiper-pagination',
-                    //   type: 'bullets',
-                    // }}
-                    ////zare_nk_050216_nokteh_end(dokmehaye raftan be safhe ke momoolan dar vasat va paeine swiper namayash dadeh mishan, age nazarim pishfarz false hast, mishe ham boolean 
-                    //// dad, va ham meghdare objecti dad ke dokmehaye yadshodeh ra sefareshi konim)
+                ////zare_nk_050216_nokteh_st(dokmehaye raftan be safhe ke momoolan dar vasat va paeine swiper namayash dadeh mishan, age nazarim pishfarz false hast, mishe ham boolean 
+                //// dad, va ham meghdare objecti dad ke dokmehaye adshodeh ra sefareshi konim)
+                // pagination={true}  ////zare_nk_050226_nokteh(pagination={true} ra gozashtam faghat nameyesh mideh safheye feli ra ba toopor va tookhali kardane bullet ha, vali inke click
+                ////  konim rooshoon amal konan bayad clickable: true, benevisim(chon pishfarz false hast va faghat ba angosht ya mouseclick chaporast mikeshim slide ha ra(na click rooye bullet ha)))
+                // pagination={{
+                //   clickable: true,
+                //   // el: '.swiper-pagination',
+                //   type: 'bullets',
+                // }}
+                ////zare_nk_050216_nokteh_end(dokmehaye raftan be safhe ke momoolan dar vasat va paeine swiper namayash dadeh mishan, age nazarim pishfarz false hast, mishe ham boolean 
+                //// dad, va ham meghdare objecti dad ke dokmehaye yadshodeh ra sefareshi konim)
 
-                    // autoplay={{ delay: 5000, disableOnInteraction: false }}  ////zare_nk_050226_nokteh(age mikhaim barnameh automat slide ha ro varagh bezaneh)
-                    className="SwiperTopBaner"
-                    style={{
-                        width: '100%',
-                        //  margin: '0px 19px',
-                    }}>
-                    {responsedListFromApiSelectBaner?.map((item, index) => {
-                        console.log('0-item.IdAdress: ' + JSON.stringify(item));
-                        console.log('0-item.IdAdress: ' + JSON.stringify(item));
-                        if (item.Size == 1 && item.Type == 'main') {
-                            return (
-                                <SwiperSlide key={index}>
-                                    <div className="contInSlide" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        {/* <Link href={`https://tapsi.food/vendor-list?vendorListId=${item.IdBaner}`} > */}
-                                        {/* zare_nk_050408_nokteh_st(rahe1) */}
-                                        {/* <Link href={`/vendorlist?IdBaner=${item.IdBaner}`} >
+                // autoplay={{ delay: 5000, disableOnInteraction: false }}  ////zare_nk_050226_nokteh(age mikhaim barnameh automat slide ha ro varagh bezaneh)
+                className="SwiperTopBaner"
+                style={{
+                    width: '100%',
+                    //  margin: '0px 19px',
+                }}>
+                {responsedListFromApiSelectBaner?.map((item, index) => {
+                    console.log('0-item.IdAdress: ' + JSON.stringify(item));
+                    console.log('0-item.IdAdress: ' + JSON.stringify(item));
+                    if (item.Size == 1 && item.Type == 'main') {
+                        return (
+                            <SwiperSlide key={index}>
+                                <div className="contInSlide" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    {/* <Link href={`https://tapsi.food/vendor-list?vendorListId=${item.IdBaner}`} > */}
+                                    {/* zare_nk_050408_nokteh_st(rahe1) */}
+                                    {/* <Link href={`/vendorlist?IdBaner=${item.IdBaner}`} >
                                             <img
                                                 style={{
                                                     width: '100%',
@@ -195,31 +192,30 @@ const SwiperTopBanerComp = () => {
                                                 // src="./images/top-baner/top-baner-slide01.png" />
                                                 src={`https://img.tochikala.com/Baners/${item.AxBaner}`} />
                                         </Link> */}
-                                        {/* zare_nk_050408_nokteh_end(rahe1) */}
-                                        {/* zare_nk_050408_nokteh_st(rahe2) */}
-                                        <button onClick={() => {
-                                            goToVendorList(item.IdBaner);
-                                        }} style={{
-                                            border: 'none',
-                                            backgroundColor: 'inherit',
-                                            padding: '0px',
-                                        }}>
-                                            <img style={{
-                                                width: '100%',
-                                                borderRadius: '0.5rem',
-                                            }}
-                                                // src="./images/top-baner/top-baner-slide01.png" />
-                                                src={`https://img.tochikala.com/Baners/${item.AxBaner}`} />
-                                        </button>
-                                        {/* zare_nk_050408_nokteh_end(rahe2) */}
-                                    </div>
-                                </SwiperSlide>
-                            )
-                        }
-                    })}
-                </Swiper>
-            </div>
-        </>
+                                    {/* zare_nk_050408_nokteh_end(rahe1) */}
+                                    {/* zare_nk_050408_nokteh_st(rahe2) */}
+                                    <button onClick={() => {
+                                        goToVendorList(item.IdBaner);
+                                    }} style={{
+                                        border: 'none',
+                                        backgroundColor: 'inherit',
+                                        padding: '0px',
+                                    }}>
+                                        <img style={{
+                                            width: '100%',
+                                            borderRadius: '0.5rem',
+                                        }}
+                                            // src="./images/top-baner/top-baner-slide01.png" />
+                                            src={`https://img.tochikala.com/Baners/${item.AxBaner}`} />
+                                    </button>
+                                    {/* zare_nk_050408_nokteh_end(rahe2) */}
+                                </div>
+                            </SwiperSlide>
+                        )
+                    }
+                })}
+            </Swiper>
+        </div>
     );
 }
 

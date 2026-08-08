@@ -1,4 +1,4 @@
-////zare_nk_050514_okk(2)
+////zare_nk_050515_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -75,7 +75,6 @@ const SwiperGrouplevel1Comp = () => {
             body: JSON.stringify({}),
         });
         const data = await response.json();
-
         if (response.ok) {
             console.log("zare_nk_050228-data: " + JSON.stringify(data));
             if (data.status == 0) {
@@ -104,8 +103,8 @@ const SwiperGrouplevel1Comp = () => {
     return (
         <>
             <div style={{
-                display: 'flex', flexFlow: 'column', width: '100%', overflow: 'hidden', paddingTop: '5px',
-            }} >
+                display: 'flex', flexFlow: 'column', width: '100%', 
+            }}>
                 <Swiper
                     modules={[Navigation, Pagination]}
                     spaceBetween={10}
@@ -121,9 +120,11 @@ const SwiperGrouplevel1Comp = () => {
                         // height: '95px',
                         // width: '100%',
                         width: '450px',
-                        overflow: 'visible', ////zare_nk_050226_nokteh(baraye inke darsade takhfifha ke biroon mizanan dideh beshan(be dive pedaresh overflow:hidden dadim ke slide ha
-                        //// kollan maloom nabashan va scroll ke mahiate swiper hast bi bimani nashe))   
-                    }} >
+                        // overflow: 'visible',  ////zare_nk_050515_commented(az nazaram manteghi nist be swiper ke slide hast overflow: 'visible' bedim va tamame slidehayash
+                        ////  tooyat beshan va majboor beshim be pedare swiper overflow: 'hidden' bedim ke hameye slideha maloom nashan)   
+                        paddingTop: '5px',  ////zare_nk_050515_nokteh(paddingTop dadam ke farzandane absolutish azashbiroon nazanan(chon age biroon bezanan nesfeh namayash dadeh
+                        //// mishan(chon swiper pishfarz owelflow:'hidden hast')))
+                    }}>
                     {responsedListFromApiSelectGoroohJson?.map((item, index) => {
                         console.log('000-item.IdAdress: ' + JSON.stringify(item));
                         console.log('000-item.IdAdress: ' + JSON.stringify(item));
@@ -138,7 +139,7 @@ const SwiperGrouplevel1Comp = () => {
                                     width: '85px',
                                 }}>
                                 <div className="contInSlide" style={{
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center', //// width: '100%', height: '100%',
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%',
                                     backgroundColor: '#f5f6f7', borderRadius: '.75rem',
                                 }}>
                                     <Link href="https://tapsi.food/business-lines?businessTypeId=6" style={{ width: '100%', height: '100%', textDecoration: 'none', }}>

@@ -1,4 +1,4 @@
-////zare_nk_050514_okk(1)
+////zare_nk_050517_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -196,10 +196,14 @@ const SwiperTapTimeComp = () => {
                 return;
             }
 
-            if (mycurrentAddressState != null) {
+            // if (mycurrentAddressState != null) {   ////zare_nk_050517_commented(chon dastoore setState setMycurrentAddressState dar componente jari ke amal nemikoneh 
+            //// va meghdare jadide state mycurrentAddressState dar reRendere badidiye component tazeh emal mishe, pas az hamin parsedChosenAddress estefadeh mikonim )
+            if (parsedChosenAddress != null) {
                 parsedurrentShobe = await getShobehAtrafUser(mycurrentAddressState);
             }
-            else if (mycurrentAddressState == null) {
+            // else if (mycurrentAddressState == null) {   ////zare_nk_050517_commented(chon dastoore setState setMycurrentAddressState dar componente jari ke amal nemikoneh 
+            //// va meghdare jadide state mycurrentAddressState dar reRendere badidiye component tazeh emal mishe, pas az hamin parsedChosenAddress estefadeh mikonim )
+            else if (parsedChosenAddress == null) {
                 parsedurrentShobe = await getShobehAtrafUser(null);
             }
 
@@ -804,7 +808,6 @@ const SwiperTapTimeComp = () => {
                                                             <span style={{
                                                                 // fontSize: 13,
                                                                 fontSize: '0.75rem',
-                                                                marginLeft: 5,
                                                                 fontFamily: "IRANSansWeb(FaNum)_Medium",
                                                                 color: '#3d3d3d',   ////zare_nk_050316_added
                                                             }}>
@@ -814,8 +817,9 @@ const SwiperTapTimeComp = () => {
                                                             </span>
                                                             <span style={{
                                                                 ...(currentShobeState != null && currentShobeState.Keraye == 0 ? { display: 'none' } : { display: 'inline-block' }),
-                                                                fontSize: '0.70rem',
+                                                                fontSize: '0.625rem',
                                                                 fontFamily: "IRANSansWeb(FaNum)_Medium", color: '#6d6d6d',
+                                                                marginRight: '2px',marginTop:'2px', ////zare_nk_050517_added
                                                             }}>
                                                                 تومان
                                                             </span>
