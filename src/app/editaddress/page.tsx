@@ -1,4 +1,4 @@
-////zare_nk_050505_okk(1)
+////zare_nk_050518_okk(1)
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -682,7 +682,6 @@ export default function EditPage() {
   //// boodane /api/verifytoken ke samte server hast va kamtar emkane hack kardanesh hast man sorate barresi samte karbar bedoone api zadan ro tarjih midam,
   //// amniatesh ham ba tavajoh be inke tamame api haye .net core ke token mohemme parsafar ham etebarsanji mikoneh man dige negarane amniatesh nistam )) )) 
 
-  ////zare_nk_050213_added_st
   const getAddressInf = async (IdAdressForEddit: number | null) => {
     console.log('zare_nk_050505_IdAdressForEddit: ' + IdAdressForEddit);
     if (!IdAdressForEddit) {
@@ -742,7 +741,6 @@ export default function EditPage() {
       setError("متاسفانه خطایی رخ داده است35");
     }
   }
-  ////zare_nk_050213_added_end
 
   useEffect(() => {
     console.log('zare_nk_050505_rere_02-useEffect isLoginAndInf called-isLoginAndInf is: ' + JSON.stringify(isLoginAndInf));
@@ -922,7 +920,6 @@ export default function EditPage() {
     tempFuncForAsync();
     // }, []);  ////zare_nk_050505_commented
   }, [isLoginAndInf]);  ////zare_nk_050505_added
-
 
   var LocationArr: any = []; var featuresArr: any = [];
 
