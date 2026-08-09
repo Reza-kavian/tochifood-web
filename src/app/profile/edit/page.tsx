@@ -91,6 +91,8 @@ type ProfileFormInputsType = {
 };
 export default function Profile() {
   const router = useRouter();
+  const { isLoginAndInf, refreshLoginStatus, setIsLoginAndInf } = useAuthentication();  ////zare_nk_050518_added
+
   type footerBtnClickedType = {
     home: boolean;
     orders: boolean;
@@ -413,16 +415,26 @@ export default function Profile() {
     }
   }
 
-  ////zare_nk_050506_added_st
   function forlogout() {
     document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-    ////zare_nk_050507_added_st
     document.cookie = `currentShobe=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
     document.cookie = `chosenAddress=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-    ////zare_nk_050507_added_end 
+
+    ////zare_nk_050518_nokteh_st(dar in safhe az maghadire state isLoginAndInf(mesle isLogin va FullName , ...) estefadehei nemishe, vali jahate olgue gozashtam 
+    //// bemooneh(baraye jahaei khobe ke masalan dar header age login boodim FullName namayesh dadeh shavad va age login naboodim FullName namayesh dadeh nashe va
+    ////  faghat dokmeye Login ro karbar bebineh))
+    setIsLoginAndInf({
+      isLogin: false,
+      FullName: null,
+      Mobile: null,
+      IdUser: null,
+    });
+    ////zare_nk_050518_nokteh_end(dar in safhe az maghadire state isLoginAndInf(mesle isLogin va FullName , ...) estefadehei nemishe, vali jahate olgue gozashtam 
+    //// bemooneh(baraye jahaei khobe ke masalan dar header age login boodim FullName namayesh dadeh shavad va age login naboodim FullName namayesh dadeh nashe va
+    ////  faghat dokmeye Login ro karbar bebineh))
+
     router.replace('/');
   }
-  ////zare_nk_050506_added_end
 
   return (
     <>

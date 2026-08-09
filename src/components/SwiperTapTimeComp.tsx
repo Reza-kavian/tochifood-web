@@ -462,96 +462,72 @@ const SwiperTapTimeComp = () => {
                                         }}>
                                             {/* zare_nk_050228_nokteh_st(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
                                             {
-                                                (index == 2 || index == 3 || index == 6) ?
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="28" viewBox="0 0 48 28" fill="none">
-                                                        <path d="M44.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.30698 22 1.00094 22H41.5732C42.1255 22 42.5732 22.4477 42.5732 23V26.619C42.5732 27.0866 43.158 27.2983 43.4574 26.9391L47.1097 22.5563C47.4092 22.1968 47.5732 21.7438 47.5732 21.2759V3.41421C47.5732 2.50871 47.2135 1.64029 46.5732 1C45.933 0.359711 45.0645 0 44.159 0Z" fill="url(#paint0_linear_19043_112501)" />
-                                                        <defs>
-                                                            <linearGradient id="paint0_linear_19043_112501" x1="3.57324" y1="11" x2="47.5732" y2="11" gradientUnits="userSpaceOnUse">
-                                                                <stop stopColor="#1747A1" />
-                                                                <stop offset="1" stopColor="#2269EE" />
-                                                            </linearGradient>
-                                                        </defs>
-                                                    </svg>
-                                                    :
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg" width="44" height="28" viewBox="0 0 44 28" fill="none">
-                                                        <path d="M40.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.306976 22 1.00094 22H37.5732C38.1255 22 38.5732 22.4477 38.5732 23V26.619C38.5732 27.0866 39.158 27.2983 39.4574 26.9391L43.1097 22.5563C43.4092 22.1968 43.5732 21.7438 43.5732 21.2759V3.41421C43.5732 2.50871 43.2135 1.64029 42.5732 1C41.933 0.359711 41.0645 0 40.159 0Z" fill="url(#paint0_linear_19043_112508)" />
-                                                        <defs>
-                                                            <linearGradient id="paint0_linear_19043_112508" x1="-8.42676" y1="11" x2="43.5732" y2="11" gradientUnits="userSpaceOnUse">
-                                                                <stop stopColor="#CC4800" />
-                                                                <stop offset="1" stopColor="#FF5A00" />
-                                                            </linearGradient>
-                                                        </defs>
-                                                    </svg>
+                                                (index == 0 || index == 1 || index == 4) &&
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="44" height="28" viewBox="0 0 44 28" fill="none">
+                                                    <path d="M40.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.306976 22 1.00094 22H37.5732C38.1255 22 38.5732 22.4477 38.5732 23V26.619C38.5732 27.0866 39.158 27.2983 39.4574 26.9391L43.1097 22.5563C43.4092 22.1968 43.5732 21.7438 43.5732 21.2759V3.41421C43.5732 2.50871 43.2135 1.64029 42.5732 1C41.933 0.359711 41.0645 0 40.159 0Z" fill="url(#paint0_linear_19043_112508)" />
+                                                    <defs>
+                                                        <linearGradient id="paint0_linear_19043_112508" x1="-8.42676" y1="11" x2="43.5732" y2="11" gradientUnits="userSpaceOnUse">
+                                                            <stop stopColor="#CC4800" />
+                                                            <stop offset="1" stopColor="#FF5A00" />
+                                                        </linearGradient>
+                                                    </defs>
+                                                </svg>
                                             }
                                             {/* zare_nk_050228_nokteh_end(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
 
                                             <span style={{
+                                                // zare_nk_050228_nokteh_st(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh))  
+                                                ...((index == 0 || index == 1 || index == 4) ? { display: 'flex' } : { display: 'none' }),
+                                                // zare_nk_050228_nokteh_end(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh))  
                                                 position: 'absolute',
                                                 top: '-5px',
                                                 width: '44px', height: '33px',
                                                 // border: '1px dashed red',
                                                 fontSize: '.625rem',
-                                                color: '#ffffff',
-                                                display: 'flex',
+                                                color: '#ffffff', 
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
                                             }}>
-                                                {/* zare_nk_050228_nokteh_st(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
-                                                {
-                                                    (index == 2 || index == 3 || index == 6) ? 'قسطی!' : 'تخفیف'
-                                                }
-                                                {/* zare_nk_050228_nokteh_end(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
+                                                تخفیف
                                             </span>
                                         </div>
 
                                         {/* zare_nk_050305_added_st */}
                                         <div style={{
-                                            position: 'absolute', top: '.5rem', left: '-5px',
+                                            position: 'absolute', top: '.5rem', left: '-1px',
                                             width: '44px', height: '28px',
                                         }}>
 
                                             {/* zare_nk_050228_nokteh_st(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
                                             {
-                                                (index == 2 || index == 3 || index == 6) ?
-                                                    <svg style={{ transform: 'scaleX(-1)', }} xmlns="http://www.w3.org/2000/svg" width="48" height="28" viewBox="0 0 48 28" fill="none">
-                                                        <path d="M44.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.30698 22 1.00094 22H41.5732C42.1255 22 42.5732 22.4477 42.5732 23V26.619C42.5732 27.0866 43.158 27.2983 43.4574 26.9391L47.1097 22.5563C47.4092 22.1968 47.5732 21.7438 47.5732 21.2759V3.41421C47.5732 2.50871 47.2135 1.64029 46.5732 1C45.933 0.359711 45.0645 0 44.159 0Z" fill="url(#paint0_linear_19043_112501)" />
-                                                        <defs>
-                                                            <linearGradient id="paint0_linear_19043_112501" x1="3.57324" y1="11" x2="47.5732" y2="11" gradientUnits="userSpaceOnUse">
-                                                                <stop stopColor="#1747A1" />
-                                                                <stop offset="1" stopColor="#2269EE" />
-                                                            </linearGradient>
-                                                        </defs>
-                                                    </svg>
-                                                    :
-                                                    <svg style={{ transform: 'scaleX(-1)', }} xmlns="http://www.w3.org/2000/svg" width="44" height="28" viewBox="0 0 44 28" fill="none">
-                                                        <path d="M40.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.306976 22 1.00094 22H37.5732C38.1255 22 38.5732 22.4477 38.5732 23V26.619C38.5732 27.0866 39.158 27.2983 39.4574 26.9391L43.1097 22.5563C43.4092 22.1968 43.5732 21.7438 43.5732 21.2759V3.41421C43.5732 2.50871 43.2135 1.64029 42.5732 1C41.933 0.359711 41.0645 0 40.159 0Z" fill="url(#paint0_linear_19043_112508)" />
-                                                        <defs>
-                                                            <linearGradient id="paint0_linear_19043_112508" x1="-8.42676" y1="11" x2="43.5732" y2="11" gradientUnits="userSpaceOnUse">
-                                                                <stop stopColor="#CC4800" />
-                                                                <stop offset="1" stopColor="#FF5A00" />
-                                                            </linearGradient>
-                                                        </defs>
-                                                    </svg>
+                                                (index == 0 || index == 2 || index == 3) &&
+                                                <svg style={{ transform: 'scaleX(-1)', }} xmlns="http://www.w3.org/2000/svg" width="51" height="28" viewBox="0 0 51 28" fill="none">
+                                                    <path d="M44.159 0H1.00094C0.306976 0 -0.17601 0.689558 0.0611496 1.34174L3.44897 10.6583C3.52925 10.879 3.52925 11.121 3.44897 11.3417L0.0611496 20.6583C-0.17601 21.3104 0.30698 22 1.00094 22H41.5732C42.1255 22 42.5732 22.4477 42.5732 23V26.619C42.5732 27.0866 43.158 27.2983 43.4574 26.9391L47.1097 22.5563C47.4092 22.1968 47.5732 21.7438 47.5732 21.2759V3.41421C47.5732 2.50871 47.2135 1.64029 46.5732 1C45.933 0.359711 45.0645 0 44.159 0Z" fill="url(#paint0_linear_19043_112501)" />
+                                                    <defs>
+                                                        <linearGradient id="paint0_linear_19043_112501" x1="3.57324" y1="11" x2="47.5732" y2="11" gradientUnits="userSpaceOnUse">
+                                                            <stop stopColor="#1747A1" />
+                                                            <stop offset="1" stopColor="#2269EE" />
+                                                        </linearGradient>
+                                                    </defs>
+                                                </svg>
                                             }
                                             {/* zare_nk_050228_nokteh_end(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
 
                                             <span style={{
+                                                // zare_nk_050228_nokteh_st(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh))  
+                                                ...((index == 0 || index == 2 || index == 3) ? { display: 'flex' } : { display: 'none' }),
+                                                // zare_nk_050228_nokteh_end(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh))  
                                                 position: 'absolute',
                                                 top: '-5px',
                                                 width: '44px', height: '33px',
                                                 // border: '1px dashed red',
                                                 fontSize: '.625rem',
-                                                color: '#ffffff',
-                                                display: 'flex',
+                                                color: '#ffffff', 
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
                                             }}>
-                                                {/* zare_nk_050228_nokteh_st(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
-                                                {
-                                                    (index == 2 || index == 3 || index == 6) ? 'قسطی!' : 'تخفیف'
-                                                }
-                                                {/* zare_nk_050228_nokteh_end(birabt be API hast baraye designe gozashtam(badan dar api gonjandeh beshe ya age salah nist hazf besheh)) */}
+                                                قسطی!
                                             </span>
                                         </div>
                                         {/* zare_nk_050305_added_enf */}

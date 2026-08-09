@@ -17,9 +17,9 @@ import { Collapse, Button, Box, Paper, Typography, Grow, ClickAwayListener, Draw
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material'; //zare_nk_050204_added(for use Dialog)
 
 import { useAuthentication } from '../../context/AuthenticationContext';  //zare_nk_050111_added
- 
 
-export default function Page() {  
+
+export default function Page() {
   ////zare_nk_050504_nokteh_st(sabke estadade az context ha baraye barrasiye login boodan ya naboodane karbar)
   const { isLoginAndInf, refreshLoginStatus } = useAuthentication();
   const pathname = usePathname();
@@ -28,9 +28,9 @@ export default function Page() {
     refreshLoginStatus();
   }, [pathname]); ////zare_nk_050504_nokteh(pathname gozashtim, ta harbar ke masir tagheir mikoneh useEffect seda zadeh beshe.)
   ////zare_nk_050504_nokteh_end(sabke estadade az context ha baraye barrasiye login boodan ya naboodane karbar)
-   
+
   return (
-    <> 
+    <>
       <header style={{
         position: 'sticky',
         top: '0px',
@@ -42,13 +42,13 @@ export default function Page() {
         padding: '5px',
         zIndex: 899,
         backgroundColor: 'white',
-      }}> 
+      }}>
         {
-        isLoginAndInf.isLogin == true ?
-          <span>{isLoginAndInf.FullName}</span> :
-          isLoginAndInf.isLogin == false ?
-            <span>log outim!!</span> :
-            <span></span>
+          isLoginAndInf?.isLogin == true ?
+            <span>{isLoginAndInf?.FullName}</span> :
+            isLoginAndInf?.isLogin == false ?
+              <span>log outim!!</span> :
+              <span></span>
         }
       </header >
 
@@ -66,7 +66,7 @@ export default function Page() {
           // border: '3px solid orange',
           direction: 'rtl',
           // paddingTop: '10px',   
-        }}>  
+        }}>
       </main>
       <footer></footer>
 

@@ -38,7 +38,20 @@ function getCookie(name: string) {
     return null; //اگر کوکی پیدا نشد
 }
 
-const AuthenticationContext = createContext<{ isLoginAndInf: setIsLoginAndInfType, refreshLoginStatus: () => void, }>({
+const AuthenticationContext = createContext<{
+    isLoginAndInf: setIsLoginAndInfType | null,
+    refreshLoginStatus: () => void,
+    ////zare_nk_050518_added_st(ye jahaei dar safahate mokhtalef bedoone
+    ////  barresiye methode refreshLoginStatus bekhaim mostaghim IsLoginAndInf ro meghdar bedim(masalan clicke dokmeye logout ke age hatta yek saniyeye pish 
+    //// logim movaghagh dasht karbar mostaghim IsLoginAndInf ro khali koneh(dige be zamani exp va vojoode token kari nadarim ke barrasi konim ba refreshLoginStatus))
+    setIsLoginAndInf: React.Dispatch<React.SetStateAction<setIsLoginAndInfType | null>>
+    ////zare_nk_050518_added_end(ye jahaei dar safahate mokhtalef bedoone
+    ////  barresiye methode refreshLoginStatus bekhaim mostaghim IsLoginAndInf ro meghdar bedim(masalan clicke dokmeye logout ke age hatta yek saniyeye pish 
+    //// logim movaghagh dasht karbar mostaghim IsLoginAndInf ro khali koneh(dige be zamani exp va vojoode token kari nadarim ke barrasi konim ba refreshLoginStatus))
+
+
+
+}>({
     isLoginAndInf: {
         isLogin: null,
         FullName: null,
@@ -46,11 +59,12 @@ const AuthenticationContext = createContext<{ isLoginAndInf: setIsLoginAndInfTyp
         IdUser: null,
     },
     refreshLoginStatus: () => { },
+    setIsLoginAndInf: () => { },  ////zare_nk_050518_added
 });
 
 export function AuthenticationProvider({ children }: { children: React.ReactNode }) {
     console.log('050329-AuthenticationProvider rendered!!');
-    const [isLoginAndInf, setIsLoginAndInf] = useState<setIsLoginAndInfType>({
+    const [isLoginAndInf, setIsLoginAndInf] = useState<setIsLoginAndInfType|null>({
         isLogin: null,
         FullName: null,
         Mobile: null,
@@ -191,9 +205,10 @@ export function AuthenticationProvider({ children }: { children: React.ReactNode
     }, []);
 
     return (
-        <AuthenticationContext.Provider value={{ isLoginAndInf, refreshLoginStatus }}>
-            {children}
-        </AuthenticationContext.Provider>
+        
+        <AuthenticationContext.Provider value={{ isLoginAndInf: isLoginAndInf, refreshLoginStatus: refreshLoginStatus, setIsLoginAndInf: setIsLoginAndInf }}> 
+            { children }
+        </AuthenticationContext.Provider >
     );
 }
 
