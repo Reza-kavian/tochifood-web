@@ -453,7 +453,7 @@ const SwiperGetProductsInSearchResault = () => {
                                                                 fontSize: '.75rem',
                                                                 lineHeight: '1rem',
                                                             }}>
-                                                               {/* پیک تپسی&zwnj;فود: */}
+                                                               {/* پیک توچی&zwnj;فود: */}
                                                                     پیک:
                                                             </span>
 

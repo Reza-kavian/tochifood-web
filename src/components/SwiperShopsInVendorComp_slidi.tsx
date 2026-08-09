@@ -407,7 +407,7 @@ const SwiperShopsInVendorComp = () => {
                                                                 fontSize: '.75rem',
                                                             }}
                                                         >
-                                                            پیک تپسی&zwnj;فود:
+                                                            پیک توچی&zwnj;فود:
                                                         </span>
                                                         <div style={{
                                                             display: 'flex', flexFlow: 'row', alignItems: "center", gap: '.25rem',

@@ -176,7 +176,7 @@ const SwiperTapBestsComp = () => {
                 marginTop: '5px',
             }}>
                 <h2 style={{ color: '#313335', lineHeight: '1.75rem', fontSize: '1.125rem', fontWeight: '500', margin: '0px', }}>
-                    بهترین&zwnj;های تپسی&zwnj;فود
+                    بهترین&zwnj;های توچی&zwnj;فود
                 </h2>
 
                 <button id="goShoppingBacketBtn"
@@ -399,7 +399,7 @@ const SwiperTapBestsComp = () => {
                                                             color: '#878b92',
                                                             fontSize: '.75rem',
                                                         }}>
-                                                            {/* پیک تپسی&zwnj;فود: */}
+                                                            {/* پیک توچی&zwnj;فود: */}
                                                             پیک:
                                                         </span>
                                                         <div style={{
