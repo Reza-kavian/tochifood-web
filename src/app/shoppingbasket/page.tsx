@@ -448,7 +448,7 @@ export default function Shoppingbasket() {
                 setError("متاسفانه خطایی رخ داده است35");
                 ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
                 return null;
-            } 
+            }
         }
         , [isEpmtyAdressList, responsedListFromApiSelectAddressList])
 
@@ -531,7 +531,7 @@ export default function Shoppingbasket() {
                 {/* zare_k_050413_commented(SwiperThinkBanerComp nemikhaim dar sabad) */}
                 {/* <SwiperThinkBanerComp /> */}
 
-                <header style={{
+                {/* <header style={{
                     position: 'sticky',
                     top: '0px',
                     boxShadow: '0px 3px 2px -1px #d7d6d6',
@@ -543,9 +543,7 @@ export default function Shoppingbasket() {
                     zIndex: 899,
                     backgroundColor: 'white',
                 }}>
-
-                    <button
-                        id="showAddressListDrawerBtn"
+                    <button id="showAddressListDrawerBtn"
                         onClick={showAddressListDrawer}
                         style={{
                             borderRadius: 10,
@@ -557,14 +555,6 @@ export default function Shoppingbasket() {
                             fontSize: '.875rem',
                             cursor: "pointer",
                         }}>
-                        {/* <span
-                            style={{
-                                fontSize: '.875rem',
-                                lineHeight: '1.25rem',
-                                color: '#878b92',
-                                textAlign: "right",
-                            }}
-                        >ارسال به</span> */}
                         <div style={{
                             display: 'flex',
                             flexFlow: 'row',
@@ -578,8 +568,7 @@ export default function Shoppingbasket() {
                         }}>
                             <span style={{
                                 textAlign: "right", whiteSpace: 'nowrap', fontSize: '0.875rem', lineHeight: '1.25rem', color: '#8f959e'
-                            }}>
-                                {/* zare_nk_050329_nokteh(currentAddress az useState tabdil shod be useContext) */}
+                            }}>                                
                                 {mycurrentAddressState?.Adress ? mycurrentAddressState.OnvanAdress : ''}
                                 آدرس فعلی
                             </span>
@@ -604,8 +593,7 @@ export default function Shoppingbasket() {
                                 boxSizing: 'border-box', // برای اینکه بُردر (border) به ارتفاع اضافه نشود
 
                                 textAlign: 'right',
-                            }}>
-                                {/* {currentAddress?.Adress ? currentAddress.Adress : 'آدرسسس'} */}
+                            }}> 
                                 {mycurrentAddressState?.Adress ? mycurrentAddressState.Adress : ''}
                             </div>
 
@@ -613,7 +601,6 @@ export default function Shoppingbasket() {
                                 src="/images/header/getAddresses.svg"
                                 alt=" ادرس ها"
                             />
-                            {/* <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="inherit" class="size-6 shrink-0 fill-gray-950 rotate-90"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.55017 15.5355L12.085 12.0007L8.55017 8.46445L9.96438 7.05023L14.9141 12L9.96438 16.9497L8.55017 15.5355Z" fill="inherit"></path></svg> */}
                         </div>
                     </button>
 
@@ -636,7 +623,163 @@ export default function Shoppingbasket() {
                             alt="سبد خرید"
                         />
                     </button>
-                </header >
+                </header > */}
+                <header style={{
+                    position: 'sticky',
+                    top: '0px',
+                    boxShadow: '0px 4px 20px 0px #0000000f',
+                    display: 'flex',
+                    flexFlow: 'row-reverse',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    // padding: '5px',
+                    zIndex: 899,
+                    backgroundColor: 'white',
+                }}>
+                    <div onClick={showAddressListDrawer} style={{
+                        display: 'flex', flexFlow: 'column', width: '100%',
+                        backgroundColor: '#fcfcfc', justifyContent: 'space-between', alignItems: 'center',paddingBottom: '.625rem',
+                    }}>
+                        <div style={{
+                            display: 'flex',
+                            flexFlow: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            paddingRight: '1rem',
+                            paddingLeft: '1rem',
+                            width: '100%',
+                        }}>
+                            <div style={{
+                                display: 'flex',
+                                flexFlow: 'row-reverse',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                // border: '1px dashed blue',
+                                width: '100%',
+                                height: '3.5rem',
+                                position: 'relative',
+                            }}>
+                                <button id="goBackBtn" onClick={() => { router.back() }}
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        // backgroundColor: '#f2f5f7',
+                                        backgroundColor: 'inherit',
+                                        border: 'none',
+                                        // border: '1px dashed black',
+                                        fontSize: '.875rem',
+                                        width: '2rem',
+                                        height: '2rem',
+                                        borderRadius: '9999px',
+                                        cursor: 'pointer',
+                                        zIndex: 2,
+                                    }}>
+                                    <img src="/images/Icon/back-icon.svg"
+                                        alt="بازگشت"
+                                        style={{ width: '1.5rem', height: '1.5rem', }}
+                                    />
+                                </button>
+
+                                <div style={{
+                                    display: 'flex',
+                                    flexFlow: 'row',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    width: '100%',
+                                    position: 'absolute',
+                                    // border: '1px dashed orange',
+                                }}>
+                                    سبدهای خرید
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style={{
+                            display: 'flex',
+                            flexFlow: 'row',
+                            alignItems: 'center',
+                            gap: '0.5rem', ////zare_nk_050519_added
+                            paddingRight: '.625rem',
+                            paddingLeft: '.625rem',
+                            // border: '1px dashed blue',
+                            width: '100%',
+                            position: 'relative',
+                        }}>
+                            <button style={{
+                                display: 'flex',
+                                flexFlow: 'row-reverse',
+                                justifyContent: 'space-between',
+                                alignItems:'center',
+                                width: '100%',
+                                height: '40px',
+                                paddingRight: '1rem',
+                                paddingLeft: '.5rem',
+                                backgroundColor: '#eef0f1',
+                                border:'none',
+                                borderRadius: 9999,
+                                cursor: "pointer",
+                            }}>
+                                <div style={{
+                                        visibility: (mycurrentAddressState?.Adress ? 'visible' : 'hidden'),
+                                        display: 'flex',
+                                        flexFlow: 'row',
+                                        //   justifyContent: 'center',
+                                        alignItems: 'center',
+                                        direction: 'rtl',
+                                        color: '#313335',
+                                        fontSize: '.875rem', 
+                                        minWidth: '124px',
+                                        gap: '.25rem',
+                                    }}>
+                                    <span style={{ textAlign: "right",color:'#8f959e',    fontSize: '.875rem',    lineHeight: '1.25rem', whiteSpace: 'nowrap',}}>
+                                        آدرس فعلی:
+                                    </span>
+                                    <div style={{
+                                        fontSize: '0.75rem',
+                                        color: '#313335',
+
+                                        // این بخش برای سه‌نقطه و محدودیت ۲ خط
+                                        display: '-webkit-box',
+                                        WebkitLineClamp: 1,
+                                        WebkitBoxOrient: 'vertical',
+                                        overflow: 'hidden',
+
+                                        // این بخش برای تثبیت ارتفاع روی ۴۰ پیکسل 
+                                        lineHeight: '1rem',
+                                        // height: '2.5rem',
+                                        height: '1rem',
+
+                                        minHeight: '1rem',  // minHeight: '2.5rem', // اجبار به کمتر نشدن
+                                        maxHeight: '1rem',  // maxHeight: '2.5rem', // اجبار به بیشتر نشدن
+                                        boxSizing: 'border-box', // برای اینکه بُردر (border) به ارتفاع اضافه نشود
+
+                                        textAlign: 'right',
+                                    }}>
+                                        {mycurrentAddressState?.Adress ? mycurrentAddressState.Adress : ''}
+                                    </div>
+                                </div>
+                                <button id="showAddressListDrawerBtn"
+                                    onClick={showAddressListDrawer}   //zare_nk_050329_commented_nokteh(ba setState hayash baese reRendere Home mishe(bayad az reRendere farzandane birabte home jologiri beshe)) 
+                                    style={{
+                                        visibility: (mycurrentAddressState?.Adress ? 'visible' : 'hidden'),  ////zare_nk_050329_added
+                                        width:'2rem',
+                                        height:'2rem',
+                                        display: 'flex',                                        
+                                        flexFlow: 'row',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        backgroundColor: 'inherit',
+                                        border: 'none',
+                                        borderRadius:9999, 
+                                        cursor: "pointer", 
+                                    }}>
+                                    <img src="/images/header/getAddresses.svg" alt=" ادرس ها" />
+                                </button>
+                            </button>
+                        </div>
+                    </div>
+                </header>
 
                 <main
                     style={{

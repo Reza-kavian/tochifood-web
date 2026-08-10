@@ -65,7 +65,7 @@ export default function VendorList() {
     ////seState dar componente farzand baese reRendere ezafiye farzand mishe)
 
     const openCollapseForSorting = useCallback(
-        async () => {  
+        async () => {
             console.log('050401-openCollapseForSorting called!!');
             let token = await getCookie("token");
             console.log('050401-token is: ' + getCookie("token"));
@@ -82,7 +82,7 @@ export default function VendorList() {
         , [isEpmtyCollapseForSorting]);
 
     const openCollapseForRaveshErsal = useCallback(
-        async () => {   
+        async () => {
             console.log('050401-openCollapseForRaveshErsal called!!');
             let token = await getCookie("token");
             console.log('050401-token is: ' + getCookie("token"));
@@ -96,6 +96,13 @@ export default function VendorList() {
             }
         }
         , [isEpmtyCollapseForRaveshErsal]);
+
+    const goTosShoppingbasket = () => {
+        // router.push("/folder03?tab=comments2");
+        // redirect("/login"); 
+        // router.replace("/testPage");
+        router.push("/shoppingbasket");
+    };
 
     return (
         <div style={{
@@ -164,8 +171,7 @@ export default function VendorList() {
                     </div>
 
                     <button id="goShoppingBacketBtn"
-                        // onClick={showAddressListDrawer}
-                        //   onClick={() => { setError('goooo!!') }}
+                        onClick={() => { goTosShoppingbasket(); }}
                         style={{
                             display: 'flex',
                             justifyContent: 'center',
@@ -182,19 +188,17 @@ export default function VendorList() {
                         <img src="/images/header/shoppingBacket.svg" alt="سبد خرید" />
                     </button>
                 </div>
-
-                <div
-                    style={{
-                        display: 'flex',
-                        flexFlow: 'row-reverse',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        paddingRight: '0.375rem',
-                        paddingLeft: '0.375rem',
-                        // border: '1px dashed yellow',
-                        width: '100%',
-                        cursor: 'grab',
-                    }}>
+                <div style={{
+                    display: 'flex',
+                    flexFlow: 'row-reverse',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    paddingRight: '0.375rem',
+                    paddingLeft: '0.375rem',
+                    // border: '1px dashed yellow',
+                    width: '100%',
+                    cursor: 'grab',
+                }}>
                     <SwiperInVendorListHeaderComp
                         openCollapseForSorting={openCollapseForSorting}
                         openCollapseForRaveshErsal={openCollapseForRaveshErsal}
@@ -203,19 +207,19 @@ export default function VendorList() {
             </header >
 
             <main style={{
-                    backgroundColor: 'white',
-                    // height: '100dvh',   ////zare_nk_050317_commented(A001-ba A002 tadakhol dareh)
-                    width: '100%',
-                    display: "flex",
-                    flexDirection: 'column',
-                    // overflow: 'hidden',        ////zare_nk_050317_commented(A002-ba A001 tadakhol dareh)
-                    // justifyContent: 'center',  ////zare_nk_050229_nokteh(be lahaze amoodi vasat chin mikoneh mohtavaye safheh ro ke ma inro nemikhaim)
-                    alignItems: 'center',
-                    flex: '1 0 auto',
-                    // border: '3px solid orange',
-                    direction: 'rtl',
-                    // paddingTop: '10px',   
-                }}>
+                backgroundColor: 'white',
+                // height: '100dvh',   ////zare_nk_050317_commented(A001-ba A002 tadakhol dareh)
+                width: '100%',
+                display: "flex",
+                flexDirection: 'column',
+                // overflow: 'hidden',        ////zare_nk_050317_commented(A002-ba A001 tadakhol dareh)
+                // justifyContent: 'center',  ////zare_nk_050229_nokteh(be lahaze amoodi vasat chin mikoneh mohtavaye safheh ro ke ma inro nemikhaim)
+                alignItems: 'center',
+                flex: '1 0 auto',
+                // border: '3px solid orange',
+                direction: 'rtl',
+                // paddingTop: '10px',   
+            }}>
                 <div style={{ marginBottom: '.75rem' }}></div>
 
                 <SwiperShopsInVendorComp />

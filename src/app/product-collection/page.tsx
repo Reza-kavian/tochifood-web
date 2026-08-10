@@ -295,13 +295,12 @@ export default function Home() {
                     display: 'flex', flexFlow: 'column', width: '100%', color: '#878b92', padding: '1rem',
                     backgroundColor: '#fcfcfc', rowGap: '1rem', justifyContent: 'space-between', alignItems: 'center',
                 }}>
-
-
                     <div style={{
                         display: 'flex',
                         flexFlow: 'row-reverse',
-                        justifyContent: 'space-between',
+                        justifyContent: 'end',
                         alignItems: 'center',
+                        gap:'0.5rem', ////zare_nk_050519_added
                         // paddingRight: '1rem',
                         // paddingLeft: '1rem',
                         // border: '1px dashed blue',
@@ -404,7 +403,6 @@ export default function Home() {
                         </button>
                     </div>
 
-
                     <Link style={{
                         display: 'flex', flexFlow: 'row', justifyContent: 'flex-start', alignItems: 'center', width: 'calc(100% - 2rem)', height: '40px', //marginLeft: '1rem', marginRight: '1rem',
                         position: 'relative', padding: '10px 1rem', backgroundColor: '#f1f2f3', borderRadius: '9999px', gap: '0.25rem', textDecoration: 'none', direction: 'rtl',
@@ -417,8 +415,8 @@ export default function Home() {
                             جستجوی محصول
                         </p>
                     </Link>
-                    <div
-                        style={{
+
+                    <div style={{
                             display: 'flex',
                             flexFlow: 'row-reverse',
                             justifyContent: 'space-between',
@@ -435,14 +433,6 @@ export default function Home() {
                             openCollapseForRaveshErsal={openCollapseForRaveshErsal}
                         />
                     </div>
-
-
-
-
-
-
-
-
                 </div>
             </header >
 
