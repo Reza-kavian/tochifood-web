@@ -151,14 +151,14 @@ export default function Home() {
                     setError("متاسفانه خطایی رخ داده است34:" + data.errors);
                     // console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
                     ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
-                     return null;
+                    return null;
                 }
             } else {
                 // console.log("zare_nk_050110-!response.ok" + response.ok);
                 setError("متاسفانه خطایی رخ داده است35");
                 ////zare_nk_050221_nokteh(setIsEpmtyAdressList(null); ro bezarim??)
-                 return null;
-            } 
+                return null;
+            }
         }
         , [isEpmtyAdressList, responsedListFromApiSelectAddressList])
 
@@ -282,7 +282,8 @@ export default function Home() {
             <header style={{
                 position: 'sticky',
                 top: '0px',
-                boxShadow: '0px 3px 2px -1px #d7d6d6',
+                // boxShadow: '0px 3px 2px -1px #d7d6d6',  ////zare_nk_050520_commented
+                boxShadow: '0px 4px 20px 0px #0000000f',   ////zare_nk_050520_added
                 display: 'flex',
                 flexFlow: 'row-reverse',
                 justifyContent: 'space-between',
@@ -300,7 +301,7 @@ export default function Home() {
                         flexFlow: 'row-reverse',
                         justifyContent: 'end',
                         alignItems: 'center',
-                        gap:'0.5rem', ////zare_nk_050519_added
+                        gap: '0.5rem', ////zare_nk_050519_added
                         // paddingRight: '1rem',
                         // paddingLeft: '1rem',
                         // border: '1px dashed blue',
@@ -417,16 +418,16 @@ export default function Home() {
                     </Link>
 
                     <div style={{
-                            display: 'flex',
-                            flexFlow: 'row-reverse',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            // paddingRight: '0.375rem',
-                            // paddingLeft: '0.375rem',
-                            // border: '1px dashed yellow',
-                            width: '100%',
-                            cursor: 'grab',
-                        }}>
+                        display: 'flex',
+                        flexFlow: 'row-reverse',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        // paddingRight: '0.375rem',
+                        // paddingLeft: '0.375rem',
+                        // border: '1px dashed yellow',
+                        width: '100%',
+                        cursor: 'grab',
+                    }}>
 
                         <SwiperInVendorListHeaderComp
                             openCollapseForSorting={openCollapseForSorting}

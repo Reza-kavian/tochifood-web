@@ -282,7 +282,8 @@ export default function Home() {
         <header style={{
           position: 'sticky',
           top: '0px',
-          boxShadow: '0px 3px 2px -1px #d7d6d6',
+          // boxShadow: '0px 3px 2px -1px #d7d6d6',  ////zare_nk_050520_commented
+          boxShadow: '0px 4px 20px 0px #0000000f',   ////zare_nk_050520_added
           display: 'flex',
           flexFlow: 'row-reverse',
           justifyContent: 'space-between',

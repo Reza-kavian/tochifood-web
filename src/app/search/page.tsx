@@ -209,12 +209,12 @@ export default function Search() {
                 flexDirection: 'column',
                 // border: '3px solid orange',
                 flex: '1 1 auto',  ////zare_nk_050514_added
-            }}> 
+            }}>
                 <header style={{
                     position: 'sticky',
                     top: '0px',
-                    // boxShadow: '0px 3px 2px -1px #d7d6d6',
-                    boxShadow:'0px 4px 20px 0px #0000000f',
+                    // boxShadow: '0px 3px 2px -1px #d7d6d6',  ////zare_nk_050520_commented
+                    boxShadow: '0px 4px 20px 0px #0000000f',   ////zare_nk_050520_added
                     display: 'flex',
                     flexFlow: 'column',
                     justifyContent: 'space-between',
@@ -263,7 +263,7 @@ export default function Search() {
                             flexFlow: 'row',
                             justifyContent: 'space-between',
                             alignItems: 'center',
-                            flex: '1 1 auto', 
+                            flex: '1 1 auto',
                             // border: '1px dashed orange',
                         }}>
                             {/* <Link style={{
@@ -275,9 +275,9 @@ export default function Search() {
                             </Link> */}
 
                             <input placeholder="جستجوی نام محصول یا فروشگاه..." style={{
-                                    width: '100%', outline: '2px solid transparent', outlineOffset: '2px', color: '#1b1c1d',fontFamily:'inherit',
-                                    padding:'0px',border:'none', 
-                                }} dir="rtl"></input>
+                                width: '100%', outline: '2px solid transparent', outlineOffset: '2px', color: '#1b1c1d', fontFamily: 'inherit',
+                                padding: '0px', border: 'none',
+                            }} dir="rtl"></input>
 
                         </div>
 
@@ -289,15 +289,15 @@ export default function Search() {
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 backgroundColor: 'inherit',
-                                border: 'none', 
-                                fontSize: '.875rem', 
+                                border: 'none',
+                                fontSize: '.875rem',
                                 borderRadius: '9999px',
                                 cursor: 'pointer',
-                                padding:'0px',
+                                padding: '0px',
                             }}>
                             <img src="/images/header/search-icon.svg" alt="جستجو"
-                             style={{ width: '24px', height: '24px' }} />
-                            
+                                style={{ width: '24px', height: '24px' }} />
+
                         </button>
                     </div>
 
@@ -321,19 +321,19 @@ export default function Search() {
                 </header >
 
                 <main style={{
-                        backgroundColor: 'white',
-                        // height: '100dvh',   ////zare_nk_050317_commented(A001-ba A002 tadakhol dareh)
-                        width: '100%',
-                        display: "flex",
-                        flexDirection: 'column',
-                        // overflow: 'hidden',        ////zare_nk_050317_commented(A002-ba A001 tadakhol dareh)
-                        // justifyContent: 'center',  ////zare_nk_050229_nokteh(be lahaze amoodi vasat chin mikoneh mohtavaye safheh ro ke ma inro nemikhaim)
-                        alignItems: 'center',
-                        flex: '1 0 auto',
-                        // border: '3px solid orange',
-                        direction: 'rtl',
-                        paddingBottom: '96px',
-                    }}>
+                    backgroundColor: 'white',
+                    // height: '100dvh',   ////zare_nk_050317_commented(A001-ba A002 tadakhol dareh)
+                    width: '100%',
+                    display: "flex",
+                    flexDirection: 'column',
+                    // overflow: 'hidden',        ////zare_nk_050317_commented(A002-ba A001 tadakhol dareh)
+                    // justifyContent: 'center',  ////zare_nk_050229_nokteh(be lahaze amoodi vasat chin mikoneh mohtavaye safheh ro ke ma inro nemikhaim)
+                    alignItems: 'center',
+                    flex: '1 0 auto',
+                    // border: '3px solid orange',
+                    direction: 'rtl',
+                    paddingBottom: '96px',
+                }}>
 
                     <div style={{
                         display: 'flex',

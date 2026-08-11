@@ -81,9 +81,8 @@ export default function Profile() {
           flexShrink: '0px',
           width: '100%',
           top: '0px',
-          // boxShadow: '0px 3px 2px -1px #d7d6d6',
-          boxShadow: '0px 4px 20px 0px #0000000f',
-
+          // boxShadow: '0px 3px 2px -1px #d7d6d6',  ////zare_nk_050520_commented
+          boxShadow: '0px 4px 20px 0px #0000000f',   ////zare_nk_050520_added
           display: 'flex',
           flexFlow: 'column',
           justifyContent: 'space-between',
@@ -178,22 +177,22 @@ export default function Profile() {
 
                 <div style={{ width: '100%', display: "flex", flexDirection: 'column', marginTop: '1rem', }}>
                   <p style={{ color: '#63676e', fontSize: '1rem', lineHeight: '1.75rem', margin: '0px', }}>
-                    <strong style={{marginLeft:'5px',}}>الف) شرکت:</strong>
+                    <strong style={{ marginLeft: '5px', }}>الف) شرکت:</strong>
                     با توجه به اینکه خدمات هوشمند سفارش غذا از رستوران توسط شرکت توسعه تجارت الکترونیک کوروش (سهامی خاص) ارائه شده، مراد از شرکت در شرایط اختصاصی حاضر، این شرکت است.
                   </p>
 
                   <p style={{ color: '#63676e', fontSize: '1rem', lineHeight: '1.75rem', margin: '0px', marginTop: '1rem', }}>
-                    <strong style={{marginLeft:'5px',}}>ب) توچی‌فود:</strong>
+                    <strong style={{ marginLeft: '5px', }}>ب) توچی‌فود:</strong>
                     منظور، خدمات هوشمند ارائه‌شده توسط شرکت در حوزه سفارش محصولات غذایی از فروشگاه‌ها از مرحله ثبت درخواست خرید، ایجاد ارتباط بین عرضه‌کننده مواد غذایی و مشتری، قبول درخواست توسط فروشگاه مربوطه، پشتیبانی تلفنی در طول انجام سفارش، ثبت امتیاز طرفین در پایان خرید و پیگیری شکایات است که در سوپراپ ذیل عنوان سفارش غذا ارائه می‌شود.
                   </p>
 
                   <p style={{ color: '#63676e', fontSize: '1rem', lineHeight: '1.75rem', margin: '0px', marginTop: '1rem', }}>
-                    <strong style={{marginLeft:'5px',}}>ج) کاربر فروشگاه / فروشگاه:</strong>
+                    <strong style={{ marginLeft: '5px', }}>ج) کاربر فروشگاه / فروشگاه:</strong>
                     فروشنده محصولات غذایی شامل رستوران‌داران، کافه‌داران، قنادی‌ها، کافه‌قنادی‌ها، نانوایی‌ها، میوه و آبمیوه‌فروشان، ارائه‌دهندگان محصولات پروتئینی که با ایجاد حساب کاربری و رعایت شرایط اختصاصی فروشگاه، نسبت به فروش محصولات خود و حسب مورد ارسال آن به مقصد تعیین‌شده توسط مشتری اقدام می‌کنند.
                   </p>
 
                   <p style={{ color: '#63676e', fontSize: '1rem', lineHeight: '1.75rem', margin: '0px', marginTop: '1rem', }}>
-                    <strong style={{marginLeft:'5px',}}>د) کاربرمشتری / مشتری:</strong>
+                    <strong style={{ marginLeft: '5px', }}>د) کاربرمشتری / مشتری:</strong>
                     متقاضی استفاده از سرویس توچی‌فود است که با ایجاد حساب کاربری در سوپراپ و رعایت شرایط اختصاصی مشتری، نسبت به ثبت درخواست خرید محصولات غذایی از یک یا چند فروشگاه و حسب مورد درخواست ارسال آن به مقصد تعیین‌شده اقدام می‌کند.
                   </p>
 

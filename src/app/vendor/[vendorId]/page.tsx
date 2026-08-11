@@ -1128,7 +1128,7 @@ export default function VendorPage() {
             <header style={{
                 position: 'sticky',
                 top: '0px',
-                // boxShadow: '0px 3px 2px -1px #d7d6d6',
+                // boxShadow: '0px 4px 20px 0px #0000000f',
                 display: 'flex',
                 flexFlow: 'column',
                 justifyContent: 'space-between',
