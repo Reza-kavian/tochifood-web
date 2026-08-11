@@ -1,6 +1,6 @@
 "use client";  ////zare_nk_050214_okk
 import { useRouter } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef,useCallback } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -1149,22 +1149,24 @@ export default function ShallowRoutingExample() {
     }
   }
 
-  const handlerForAddClick: (
-    addRemParam: addRemParamType,
-  ) => void = (addRemParam) => {
-    addRemParam.event && addRemParam.event.stopPropagation();
-    addToCartInIndex(
-      addRemParam
-    );
-  };
+  // const handlerForAddClick: (
+  //   addRemParam: addRemParamType,
+  // ) => void = (addRemParam) => {
+  //   addRemParam.event && addRemParam.event.stopPropagation();
+  //   addToCartInIndex(
+  //     addRemParam
+  //   );
+  // };
+  const handlerForAddClick = useCallback(addToCartInIndex, [addToCartInIndex]);  ////zare_nk_050319_added_st(rahe3- tabee voroodish ke addToCartInIndex hast dige niazi be useCalback nadare)
 
-  const handlerForRemClick: (
-    addRemParam: addRemParamType,
-  ) => void = (addRemParam) => {
-    remveFromCartInIndex(
-      addRemParam
-    );
-  };
+  // const handlerForRemClick: (
+  //   addRemParam: addRemParamType,
+  // ) => void = (addRemParam) => {
+  //   remveFromCartInIndex(
+  //     addRemParam
+  //   );
+  // };
+  const handlerForRemClick = useCallback(remveFromCartInIndex, [remveFromCartInIndex]);
 
   async function ShowDetails(barcodeKala: any) {
     const token = getCookie("token");

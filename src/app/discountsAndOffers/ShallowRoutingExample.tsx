@@ -1,7 +1,7 @@
 ////zare_nk_050505_okk(1)
 "use client";
 import { useRouter } from "next/navigation";
-import { useState, useEffect, useRef, useMemo, RefObject, MouseEvent } from "react";
+import { useState, useEffect, useRef, useMemo, RefObject, MouseEvent, useCallback } from "react";
 
 // import "bootstrap/dist/css/bootstrap.min.css";  //zare_nk_040416_commented(chon enteghalesh dadam be layout.tsx)
 // import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -1824,22 +1824,24 @@ export default function ShallowRoutingExample() {
     }
   }
 
-  const handlerForAddClick: (
-    addRemParam: addRemParamType,
-  ) => void = (addRemParam) => {
-    addRemParam.event && addRemParam.event.stopPropagation();
-    addToCartInIndex(
-      addRemParam
-    );
-  };
+  // const handlerForAddClick: (
+  //   addRemParam: addRemParamType,
+  // ) => void = (addRemParam) => {
+  //   addRemParam.event && addRemParam.event.stopPropagation();
+  //   addToCartInIndex(
+  //     addRemParam
+  //   );
+  // };
+  const handlerForAddClick = useCallback(addToCartInIndex, [addToCartInIndex]);  ////zare_nk_050319_added_st(rahe3- tabee voroodish ke addToCartInIndex hast dige niazi be useCalback nadare)
 
-  const handlerForRemClick: (
-    addRemParam: addRemParamType,
-  ) => void = (addRemParam) => {
-    remveFromCartInIndex(
-      addRemParam
-    );
-  };
+  // const handlerForRemClick: (
+  //   addRemParam: addRemParamType,
+  // ) => void = (addRemParam) => {
+  //   remveFromCartInIndex(
+  //     addRemParam
+  //   );
+  // };
+  const handlerForRemClick = useCallback(remveFromCartInIndex, [remveFromCartInIndex]);
 
   return isOpenedProdDetModal == true ? (
     <div

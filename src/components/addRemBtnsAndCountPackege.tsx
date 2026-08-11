@@ -64,7 +64,7 @@ const AddRemBtnsAndCountPackege = ({
     ForCartContentsDesignType,
     bishAzMaxTedadYaMojoodi,
 }: addRemBtnsAndCountPackegeType) => {
-    console.log('ShallowRoutingExample called-MiddleCountTedadSefr-ForCartContentsDesignType: ' + ForCartContentsDesignType);
+    console.log('zare_nk_050521_AddRemBtnsAndCountPackege called!!');
     useEffect(() => {
         ////zare_nk_041120_commented_st
         // console.log('2-041119-SabadRow: ' + JSON.stringify(SabadRow));

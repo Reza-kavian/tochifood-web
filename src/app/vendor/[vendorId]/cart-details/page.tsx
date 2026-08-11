@@ -865,7 +865,6 @@ type responsedListFromApiSelectAddressListType = {
     [key: string]: any;
 };
 
-////zare_nk_050414_added_st
 type SabadTitrType = {
     IdSabadKharidTitr: number;
     SumFeeMasraf: number;
@@ -896,8 +895,6 @@ type SabadRowType = {
     ForCartContentsDesignType: number,  ////zare_nk_050416_added
     idTag: string;
 };
-////zare_nk_050414_added_end
-
 
 ////zare_nk_050416_added_st
 type addRemParamType = {
@@ -931,6 +928,7 @@ type addRemParamType = {
 ////zare_nk_050405_nokteh_end(rahe1- baraye serverComponent)
 ////zare_nk_050405_nokteh_st(rahe2- baraye serverComponent)
 export default function CartDetails() {
+    console.log('zare_nk_050521_CartDetails called!!');
     const { vendorId } = useParams();
     const params = useSearchParams();   ////zare_nk_050416_added
     const idTitr = params.get("idTitr") || "Unknown";   ////zare_nk_050416_added
@@ -1195,7 +1193,7 @@ export default function CartDetails() {
                                 else if (item.Tedad == item.ZaribForoosh) {
                                     ForCartContentsDesignTypeLet = 1;
                                 }
-                                
+
                                 return ({
                                     IdSabadKharidSatr: item.IdSabadKharidSatr,
                                     IdSabadKharidTitr: item.IdSabadKharidTitr,
@@ -1254,7 +1252,7 @@ export default function CartDetails() {
     };
 
     const [currentShobeState, setCurrentShobeState] = useState<responsedListFromApiSelectShobehAtrafUserType | null>(null);
- 
+
     ////zare_nk_050416_added_st(baraye add va rem va ...)
     async function addToCartInIndex(
         addRemParam: addRemParamType,
@@ -1542,8 +1540,9 @@ export default function CartDetails() {
             });
 
             const data = await response.json();
-            if (response.ok) {
+            if (response.ok) {                
                 var result = data;
+                console.log('041116-result.status == '+result.status);
                 if (result.status == -1000) {
                     ////zare_nk_041129_commented_st
                     // const inputGroup = document.querySelector(
@@ -1805,24 +1804,24 @@ export default function CartDetails() {
         // }  ////zare_nk_050326_commented(dar sharte token == null return gozashtim dige else nemikhaim) 
     }
 
-    const handlerForAddClick: (
-        addRemParam: addRemParamType,
-    ) => void = (addRemParam) => {
-        // addRemParam.event && addRemParam.event.stopPropagation();
-        addToCartInIndex(
-            addRemParam
-        );
-    };
-    //   const handlerForRemClick = useCallback(remveFromCartInIndex, [remveFromCartInIndex]);  ////zare_nk_050319_added_st(rahe3- tabee voroodish ke remveFromCartInIndex hast dige niazi be useCalback nadare)
+    // const handlerForAddClick: (
+    //     addRemParam: addRemParamType,
+    // ) => void = (addRemParam) => {
+    //     // addRemParam.event && addRemParam.event.stopPropagation();
+    //     addToCartInIndex(
+    //         addRemParam
+    //     );
+    // };
+    const handlerForAddClick = useCallback(addToCartInIndex, [addToCartInIndex]);  ////zare_nk_050319_added_st(rahe3- tabee voroodish ke addToCartInIndex hast dige niazi be useCalback nadare)
 
-    const handlerForRemClick: (
-        addRemParam: addRemParamType,
-    ) => void = (addRemParam) => {
-        remveFromCartInIndex(
-            addRemParam
-        );
-    };
-    // const handlerForRemClick = useCallback(remveFromCartInIndex, [remveFromCartInIndex]);
+    // const handlerForRemClick: (
+    //     addRemParam: addRemParamType,
+    // ) => void = (addRemParam) => {
+    //     remveFromCartInIndex(
+    //         addRemParam
+    //     );
+    // };
+    const handlerForRemClick = useCallback(remveFromCartInIndex, [remveFromCartInIndex]);
     ////zare_nk_050416_added_st(baraye add va rem va ...)
 
     ////zare_nk_050421_added_st
@@ -1860,20 +1859,20 @@ export default function CartDetails() {
                 zIndex: 30,
             }}>
                 <div style={{
-                        display: 'flex',
-                        flexFlow: 'row-reverse',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        paddingRight: '1rem',
-                        paddingLeft: '1rem',
-                        // border: '1px dashed blue',
-                        width: '100%',
-                        height: '3.5rem',
-                        position: 'relative',
-                    }}>
+                    display: 'flex',
+                    flexFlow: 'row-reverse',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    paddingRight: '1rem',
+                    paddingLeft: '1rem',
+                    // border: '1px dashed blue',
+                    width: '100%',
+                    height: '3.5rem',
+                    position: 'relative',
+                }}> 
                     <button id="goBackBtn" onClick={() => router.back()}
                         style={{
-                            display: 'flex',
+                            display: 'flex', 
                             justifyContent: 'center',
                             alignItems: 'center',
                             // backgroundColor: '#f2f5f7',
@@ -1887,11 +1886,8 @@ export default function CartDetails() {
                             cursor: 'pointer',
                             position: 'absolute',
                         }}>
-                        <img
-                            src="/images/Icon/back-icon.svg"
-                            alt="بازگشت"
-                            style={{ width: '1.5rem', height: '1.5rem', }}
-                        />
+                        <img src="/images/Icon/back-icon.svg" alt="بازگشت"
+                            style={{ width: '1.5rem', height: '1.5rem', }} />
                     </button>
 
                     <div style={{
@@ -1908,24 +1904,24 @@ export default function CartDetails() {
             </header >
 
             <main style={{
-                    backgroundColor: 'white',
-                    // height: '100dvh',   ////zare_nk_050317_commented(A001-ba A002 tadakhol dareh)
-                    width: '100%',
-                    display: "flex",
-                    flexDirection: 'column',
-                    overflow: 'hidden',        ////zare_nk_050317_commented(A002-ba A001 tadakhol dareh)
-                    // justifyContent: 'center',  ////zare_nk_050229_nokteh(be lahaze amoodi vasat chin mikoneh mohtavaye safheh ro ke ma inro nemikhaim)
-                    alignItems: 'center',
-                    flex: '1 0 auto',
-                    // border: '3px solid orange',
-                    direction: 'rtl',
-                    // paddingTop: '10px',     
+                backgroundColor: 'white',
+                // height: '100dvh',   ////zare_nk_050317_commented(A001-ba A002 tadakhol dareh)
+                width: '100%',
+                display: "flex",
+                flexDirection: 'column',
+                overflow: 'hidden',        ////zare_nk_050317_commented(A002-ba A001 tadakhol dareh)
+                // justifyContent: 'center',  ////zare_nk_050229_nokteh(be lahaze amoodi vasat chin mikoneh mohtavaye safheh ro ke ma inro nemikhaim)
+                alignItems: 'center',
+                flex: '1 0 auto',
+                // border: '3px solid orange',
+                direction: 'rtl',
+                // paddingTop: '10px',     
 
-                    paddingLeft: '1rem',  ////zare_nk_050416_added
-                    paddingRight: '1rem',  ////zare_nk_050416_added
+                paddingLeft: '1rem',  ////zare_nk_050416_added
+                paddingRight: '1rem',  ////zare_nk_050416_added
 
-                    paddingBottom: '96px',  ////zare_nk_050421_added
-                }}>
+                paddingBottom: '96px',  ////zare_nk_050421_added
+            }}>
 
                 {/* zare_nk_050416_added_st(inja address haro niaz nadaram felan) */}
                 {/* {isEpmtyAdressList &&   
@@ -2490,7 +2486,7 @@ export default function CartDetails() {
                 {/* zare_nk_050413_added_end(berim mohtavaye sabad) */}
                 {/* zare_nk_050420_added_st */}
                 <div className="-mx-4 my-4 h-3 bg-gray-50" style={{
-                    backgroundColor: '#f7f7f8', height: '.75rem', margin: '1rem -1rem',  width: '450px',   
+                    backgroundColor: '#f7f7f8', height: '.75rem', margin: '1rem -1rem', width: '450px',
                 }}></div>
 
                 <div className="pb-4 text-gray" style={{
@@ -2530,21 +2526,21 @@ export default function CartDetails() {
                     </div>
 
                     <div style={{
-                            display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center', margin: '.75rem 0px', position: 'relative',
-                        }}>
+                        display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center', margin: '.75rem 0px', position: 'relative',
+                    }}>
                         <div style={{
-                                width: '12px', height: '24px', backgroundColor: 'white', borderColor: '#e0e3e5', borderLeftWidth: '0px', borderWidth: '1px',
-                                borderBottomRightRadius: '9999px', borderTopRightRadius: '9999px', left: '-16px', position: 'absolute',
-                            }}>
+                            width: '12px', height: '24px', backgroundColor: 'white', borderColor: '#e0e3e5', borderLeftWidth: '0px', borderWidth: '1px',
+                            borderBottomRightRadius: '9999px', borderTopRightRadius: '9999px', left: '-16px', position: 'absolute',
+                        }}>
                         </div>
 
                         <div style={{ borderColor: '#e0e3e5', borderStyle: 'dashed', borderWidth: '1px', width: '100%', }}>
                         </div>
 
                         <div style={{
-                                width: '12px', height: '24px', backgroundColor: 'white', borderColor: '#e0e3e5', borderRightWidth: '0px', borderWidth: '1px',
-                                borderBottomLeftRadius: '9999px', borderTopLeftRadius: '9999px', right: '-16px', position: 'absolute',
-                            }}>
+                            width: '12px', height: '24px', backgroundColor: 'white', borderColor: '#e0e3e5', borderRightWidth: '0px', borderWidth: '1px',
+                            borderBottomLeftRadius: '9999px', borderTopLeftRadius: '9999px', right: '-16px', position: 'absolute',
+                        }}>
                         </div>
                     </div>
 
@@ -2670,8 +2666,8 @@ export default function CartDetails() {
 
                             <span style={{
                                 color: 'white', fontSize: '.625rem',
-                            }}>تومان</span> 
-                        </div> 
+                            }}>تومان</span>
+                        </div>
                     </button>
                 </div>
             </footer>

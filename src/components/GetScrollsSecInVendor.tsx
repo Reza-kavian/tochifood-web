@@ -487,7 +487,7 @@ const GetScrollsSecInVendor = ({
 
     async function addToCartInIndex(
         addRemParam: addRemParamType,
-    ) { 
+    ) {
         console.log('040517-addToCartInIndex called!-addRemParam is: ' + JSON.stringify(addRemParam));
         // console.log('041120-addToCartInIndex called!-addRemParam: ' + JSON.stringify(addRemParam)); //zare_nk_041120_commented(error mideh:    // console.log('041120-addToCartInIndex called!-addRemParam: ' + JSON.stringify(addRemParam)); //zare_nk_041120_commented_tahlilshe(error mideh:TypeError: Converting circular structure to JSON)
         ////zare_nk_050416_commented_st
@@ -747,7 +747,7 @@ const GetScrollsSecInVendor = ({
 
     async function remveFromCartInIndex(
         addRemParam: addRemParamType,
-    ) { 
+    ) {
         const token = getCookie("token");
         if (token == null) {
             setIsOpenedMymodalForWarning(true);
@@ -1051,24 +1051,24 @@ const GetScrollsSecInVendor = ({
         }
     }
 
-    const handlerForAddClick: (
-        addRemParam: addRemParamType,
-    ) => void = (addRemParam) => {
-        // addRemParam.event && addRemParam.event.stopPropagation();
-        addToCartInIndex(
-            addRemParam
-        );
-    };
-    //   const handlerForRemClick = useCallback(remveFromCartInIndex, [remveFromCartInIndex]);  ////zare_nk_050319_added_st(rahe3- tabee voroodish ke remveFromCartInIndex hast dige niazi be useCalback nadare)
+    // const handlerForAddClick: (
+    //     addRemParam: addRemParamType,
+    // ) => void = (addRemParam) => {
+    //     // addRemParam.event && addRemParam.event.stopPropagation();
+    //     addToCartInIndex(
+    //         addRemParam
+    //     );
+    // };
+    const handlerForAddClick = useCallback(addToCartInIndex, [addToCartInIndex]);  ////zare_nk_050319_added_st(rahe3- tabee voroodish ke addToCartInIndex hast dige niazi be useCalback nadare)
 
-    const handlerForRemClick: (
-        addRemParam: addRemParamType,
-    ) => void = (addRemParam) => {
-        remveFromCartInIndex(
-            addRemParam
-        );
-    };
-    // const handlerForRemClick = useCallback(remveFromCartInIndex, [remveFromCartInIndex]);
+    // const handlerForRemClick: (
+    //     addRemParam: addRemParamType,
+    // ) => void = (addRemParam) => {
+    //     remveFromCartInIndex(
+    //         addRemParam
+    //     );
+    // };
+    const handlerForRemClick = useCallback(remveFromCartInIndex, [remveFromCartInIndex]);
 
     return (
         <>
@@ -1081,7 +1081,7 @@ const GetScrollsSecInVendor = ({
                             }}
                             ref={el => {
                                 sectionRefs.current[idG1.toString()] = el;
-                            }} >                                
+                            }} >
                             <div style={{
                                 width: '100%',
                                 height: '82px',
@@ -1124,17 +1124,17 @@ const GetScrollsSecInVendor = ({
                                         }}>
                                             <div style={{ borderRadius: '.5rem', flexShrink: 0, width: '100px', height: '100%', position: 'relative', }}>
                                                 <img style={{
-                                                        width: '100%',
-                                                        height: '100%',
-                                                        objectFit: 'cover',
-                                                        borderRadius: '.5rem',
-                                                        zIndex: '1',
-                                                    }}
+                                                    width: '100%',
+                                                    height: '100%',
+                                                    objectFit: 'cover',
+                                                    borderRadius: '.5rem',
+                                                    zIndex: '1',
+                                                }}
                                                     // src={`https://img.tochikala.com/Product/${responsedListFromApiSelectKalaShobeh[0].IdKala}.webp`} />
                                                     src={`/images/movaghat/vendorPage/g1Img.jpg`} />
                                                 <div style={{
                                                     display: 'flex', flexDirection: 'column', position: 'absolute', right: '11px', bottom: '-1rem',
-                                                }}> 
+                                                }}>
                                                     <AddRemBtnsAndCountPackege
                                                         refForfather={refForfather}
                                                         fromShowDetails={false}
@@ -1146,19 +1146,19 @@ const GetScrollsSecInVendor = ({
                                                                 {
                                                                     tedadInSabadOrDet: item.tedadInSabadOrDet,
                                                                     ZaribForoosh: item.ZaribForoosh,
-                                                                    IdKala: item.IdKala,   
-                                                                    NameKala: item.NameKala,   
-                                                                    DarsadTakhfif: item.DarsadTakhfif,   
-                                                                    NameBerand: item.NameBerand,   
-                                                                    FeeForoosh: item.FeeForoosh,  
-                                                                    FeeMasraf: item.FeeMasraf,  
-                                                                    BarcodeKala: item.BarcodeKala,   
-                                                                    Mojoodi: item.Mojoodi, 
-                                                                    MaxTedad: item.MaxTedad,   
+                                                                    IdKala: item.IdKala,
+                                                                    NameKala: item.NameKala,
+                                                                    DarsadTakhfif: item.DarsadTakhfif,
+                                                                    NameBerand: item.NameBerand,
+                                                                    FeeForoosh: item.FeeForoosh,
+                                                                    FeeMasraf: item.FeeMasraf,
+                                                                    BarcodeKala: item.BarcodeKala,
+                                                                    Mojoodi: item.Mojoodi,
+                                                                    MaxTedad: item.MaxTedad,
                                                                     father: '',
                                                                     bishAzMaxTedadYaMojoodi: item.bishAzMaxTedadYaMojoodi,
-                                                                    fromShowDetails: item.fromShowDetails, 
-                                                                    event: null,  
+                                                                    fromShowDetails: item.fromShowDetails,
+                                                                    event: null,
                                                                 }
                                                             );
                                                         }}
@@ -1170,7 +1170,7 @@ const GetScrollsSecInVendor = ({
                                                                     IdKala: item.IdKala,
                                                                     NameKala: item.NameKala,
                                                                     DarsadTakhfif: item.DarsadTakhfif,
-                                                                    NameBerand: item.NameBerand,   
+                                                                    NameBerand: item.NameBerand,
                                                                     FeeForoosh: item.FeeForoosh,
                                                                     FeeMasraf: item.FeeMasraf,
                                                                     BarcodeKala: item.BarcodeKala,
@@ -1178,8 +1178,8 @@ const GetScrollsSecInVendor = ({
                                                                     MaxTedad: item.MaxTedad,
                                                                     father: '',
                                                                     bishAzMaxTedadYaMojoodi: item.bishAzMaxTedadYaMojoodi,
-                                                                    fromShowDetails: false, 
-                                                                    event: null,   
+                                                                    fromShowDetails: false,
+                                                                    event: null,
                                                                 }
                                                             );
                                                         }}
@@ -1269,15 +1269,15 @@ const GetScrollsSecInVendor = ({
                                         </div>
 
                                         <div style={{
-                                                width: '100%',
-                                                paddingRight: '1.75rem',
-                                                paddingLeft: '1rem',
-                                                display: "flex",
-                                                flexDirection: 'column',
-                                                justifyContent: 'space-between',
-                                                alignItems: 'center',
-                                                marginTop: '1rem',
-                                            }}>
+                                            width: '100%',
+                                            paddingRight: '1.75rem',
+                                            paddingLeft: '1rem',
+                                            display: "flex",
+                                            flexDirection: 'column',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center',
+                                            marginTop: '1rem',
+                                        }}>
                                             <div style={{
                                                 display: "flex",
                                                 gap: '.75rem', alignItems: 'center', flex: '1 1 0%', width: '100%',

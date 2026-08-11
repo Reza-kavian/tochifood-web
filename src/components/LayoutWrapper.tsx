@@ -4,16 +4,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 import { usePathname } from "next/navigation";
-import LogoutButton from "@/components/LogoutButton";
+// import LogoutButton from "@/components/LogoutButton";
 
-import { useAuthentication } from '../context/AuthenticationContext';  
+import { useAuthentication } from '../context/AuthenticationContext';
 
 ////zare_nk_050202_added_st(for use MUI)
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 ////zare_nk_050202_added_end(for use MUI)
 
-import Styles from "@/styles/components/globals.module.css"; 
+import Styles from "@/styles/components/globals.module.css";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -48,7 +48,7 @@ const theme = createTheme({
 ////zare_nk_050202_added_end(for use MUI)
 
 export default function LayoutWrapper({ children }: RootLayoutProps) {
-  console.log('050329-LayoutWrapper rendered!!');
+  console.log('zare_nk_050520_LayoutWrapper rendered!!');
   const refForBox = useRef<HTMLDivElement | null>(null);
 
   const pathname = usePathname();
@@ -65,7 +65,7 @@ export default function LayoutWrapper({ children }: RootLayoutProps) {
         style={{
           // color: "#3f3f3f",
           // fontFamily: 'IRANSansWeb_Medium(adad_fa)', 
-        }}>
+        }}> 
         {/* zare_nk_041225_commented_st(tebghe revale tapsifood header ra baraye aksare safahat motefavet ast, pas dar safahat mizaraim) */}
         {/* {!isLoginPageOrPage && (
         <div className="layoutHeader sticky-top">

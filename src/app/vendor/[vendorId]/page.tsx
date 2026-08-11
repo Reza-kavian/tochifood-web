@@ -13,9 +13,7 @@ import SwiperInVendorScrollTabComp from '../../../components/SwiperInVendorScrol
 import GetScrollsSecInVendor from '../../../components/GetScrollsSecInVendor';
 import SwiperBordBordInVendorComp from '../../../components/SwiperBordBordInVendorComp';
 
-import { NextJsApiUrl } from "../../../constants/Urls";  ////zare_nk_050407_added
-
-import AddRemBtnsAndCountPackege from '../../../components/addRemBtnsAndCountPackege';
+import { NextJsApiUrl } from "../../../constants/Urls";
 
 function getCookie(name: any) {
     ////zare_nk_050209_added_st
@@ -1096,24 +1094,24 @@ export default function VendorPage() {
     //     // }  ////zare_nk_050326_commented(dar sharte token == null return gozashtim dige else nemikhaim) 
     // }
 
-    // const handlerForAddClick: (
-    //     addRemParam: addRemParamType,
-    // ) => void = (addRemParam) => {
-    //     // addRemParam.event && addRemParam.event.stopPropagation();
-    //     addToCartInIndex(
-    //         addRemParam
-    //     );
-    // };
-    // //   const handlerForRemClick = useCallback(remveFromCartInIndex, [remveFromCartInIndex]);  ////zare_nk_050319_added_st(rahe3- tabee voroodish ke remveFromCartInIndex hast dige niazi be useCalback nadare)
+    // // const handlerForAddClick: (
+    // //     addRemParam: addRemParamType,
+    // // ) => void = (addRemParam) => {
+    // //     // addRemParam.event && addRemParam.event.stopPropagation();
+    // //     addToCartInIndex(
+    // //         addRemParam
+    // //     );
+    // // };
+    // const handlerForAddClick = useCallback(addToCartInIndex, [addToCartInIndex]);  ////zare_nk_050319_added_st(rahe3- tabee voroodish ke addToCartInIndex hast dige niazi be useCalback nadare)
 
-    // const handlerForRemClick: (
-    //     addRemParam: addRemParamType,
-    // ) => void = (addRemParam) => {
-    //     remveFromCartInIndex(
-    //         addRemParam
-    //     );
-    // };
-    // // const handlerForRemClick = useCallback(remveFromCartInIndex, [remveFromCartInIndex]);
+    // // const handlerForRemClick: (
+    // //     addRemParam: addRemParamType,
+    // // ) => void = (addRemParam) => {
+    // //     remveFromCartInIndex(
+    // //         addRemParam
+    // //     );
+    // // };
+    // const handlerForRemClick = useCallback(remveFromCartInIndex, [remveFromCartInIndex]);
     ////zare_nk_050416_added_end(baraye add va rem va ...)
 
     return (

@@ -1,11 +1,13 @@
 ////zare_nk_050510_okk(2)
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect ,memo} from "react";
 
 import Styles from "@/styles/components/LogoutButton.module.css";
 
-export default function LogoutButton() {
+// export default function LogoutButton() {  ////zare_nk_050520_commented
+const LogoutButton = function LogoutButton() {  ////zare_nk_050520_added
+  console.log('zare_nk_050520_LogoutButton rendered!!');
   const [isLogout, setIsLogout] = useState<boolean | null>(null);
   const router = useRouter();
   const pathname = usePathname();
@@ -102,3 +104,5 @@ export default function LogoutButton() {
     </>
   );
 }
+
+export default memo(LogoutButton);  ////zare_nk_050520_added

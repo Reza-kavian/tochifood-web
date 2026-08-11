@@ -526,7 +526,8 @@ function SecondPageComponent({
   );
 }
 
-export default function Toolbar() {
+export default function Login() {
+  console.log('zare_nk_050520_Login rendered!!');
   const [currentPage, setCurrentPage] = useState("firstPage");
   const [mobileVal, setMobileVal] = useState("");
   const [isMobileTextEmty, setIsMobileTextEmty] = useState(true);  //zare_nk_041227_added
@@ -1053,7 +1054,7 @@ export default function Toolbar() {
     // }
   }
 
-  // alert('Toolbar rerendered!!');
+  // alert('Login rerendered!!');
   // useEffect(() => {
   //   // if (backBtnCliked == true) {
   //   //   if (refForMobileInput.current[0]) {
