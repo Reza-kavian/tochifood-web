@@ -1,4 +1,4 @@
-////zare_nk_050510_okk(1)
+////zare_nk_050522_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -238,15 +238,11 @@ const GetScrollsSecInVendor = ({
                     return (
                         parsedList.map((item: any) => {
                             var bishAzMaxTedadYaMojoodi = 0;
-                            if (item.MaxTedad != null) {
-                                if (item.MaxTedad <= item.TedadDarSabad) {
-                                    bishAzMaxTedadYaMojoodi = 1;
-                                }
+                            if (item.MaxTedad <= item.TedadDarSabad) {
+                                bishAzMaxTedadYaMojoodi = 1;
                             }
-                            else {
-                                if (item.Mojoodi <= item.TedadDarSabad) {
-                                    bishAzMaxTedadYaMojoodi = 1;
-                                }
+                            if (item.Mojoodi <= item.TedadDarSabad) {
+                                bishAzMaxTedadYaMojoodi = 1;
                             }
 
                             let ForCartContentsDesignTypeLet = 0
@@ -392,15 +388,11 @@ const GetScrollsSecInVendor = ({
                         return (
                             result.map((item: any) => {
                                 var bishAzMaxTedadYaMojoodi = 0;
-                                if (item.MaxTedad != null) {
-                                    if (item.MaxTedad <= item.Tedad) {
-                                        bishAzMaxTedadYaMojoodi = 1;
-                                    }
+                                if (item.MaxTedad <= item.Tedad) {
+                                    bishAzMaxTedadYaMojoodi = 1;
                                 }
-                                else {
-                                    if (item.Mojoodi <= item.Tedad) {
-                                        bishAzMaxTedadYaMojoodi = 1;
-                                    }
+                                if (item.Mojoodi <= item.Tedad) {
+                                    bishAzMaxTedadYaMojoodi = 1;
                                 }
 
                                 let ForCartContentsDesignTypeLet = 0
@@ -569,8 +561,8 @@ const GetScrollsSecInVendor = ({
                     console.log("zare_nk_050416-tittrInoInResult.IdSabadKharidSatr: " + tittrInoInResult.IdSabadKharidTitr +
                         "satrInoInResult.IdSabadKharidSatr: " + satrInoInResult.IdSabadKharidSatr
                     );
-                    var bishAzMaxTedadYaMojoodi = 0;
 
+                    var bishAzMaxTedadYaMojoodi = 0;
                     if (addRemParam.MaxTedad <= Tedad) {
                         bishAzMaxTedadYaMojoodi = 1;
                     }
@@ -865,6 +857,7 @@ const GetScrollsSecInVendor = ({
                     console.log("zare_nk_050416-tittrInoInResult.IdSabadKharidSatr: " + tittrInoInResult.IdSabadKharidTitr +
                         "Tedad: " + Tedad
                     );
+
                     var bishAzMaxTedadYaMojoodi = 0;
                     if (addRemParam.MaxTedad <= Tedad) {
                         bishAzMaxTedadYaMojoodi = 1;

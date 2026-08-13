@@ -1,4 +1,4 @@
-// ////zare_nk_050428_okk(2)
+// ////zare_nk_050522_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -1139,20 +1139,18 @@ export default function VendorPage() {
                 // backgroundColor: 'white',
                 // border: '1px dashed red',
             }}>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexFlow: 'row-reverse',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        paddingRight: '1rem',
-                        paddingLeft: '1rem',
-                        // border: '1px dashed blue',
-                        width: '100%',
-                        height: '3.5rem',
-                    }}>
-                    <button
-                        id="goBackBtn"
+                <div style={{
+                    display: 'flex',
+                    flexFlow: 'row-reverse',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    paddingRight: '1rem',
+                    paddingLeft: '1rem',
+                    // border: '1px dashed blue',
+                    width: '100%',
+                    height: '3.5rem',
+                }}>
+                    <button id="goBackBtn"
                         onClick={() => router.back()}
                         style={{
                             display: 'flex',
@@ -1253,12 +1251,11 @@ export default function VendorPage() {
                 }}>
                     {/* {responsedListFromApiSelectKalaShobeh && ( */}
                     {currentShobeState && (
-                        <img
-                            style={{
-                                width: '100%',
-                                height: '230px',
-                                objectFit: 'cover',
-                            }}
+                        <img style={{
+                            width: '100%',
+                            height: '230px',
+                            objectFit: 'cover',
+                        }}
                             // src={`https://img.tochikala.com/Product/${currentShobeState.IdKala}.webp`} />   ////zare_nk_050416_nookteh(ehtemalan bayad logoye restaurant ha ro ham dashteh bashim badan)
                             src={`/images/movaghat/vendorPage/1.jpg`} />
                     )}
@@ -1313,17 +1310,16 @@ export default function VendorPage() {
                         <div style={{
                             display: 'flex', flexFlow: 'row', gap: '0.25rem', alignItems: 'center',
                         }}>
-                            <img
-                                src="/images/movaghat/SwiperTapBests/star/orange-star.svg"
-                                alt="علاقه مندی"
-                                style={{ width: '1rem', height: '1rem', }}
-                            />
+                            <img src="/images/movaghat/SwiperTapBests/star/orange-star.svg" alt="علاقه مندی"
+                                style={{ width: '1rem', height: '1rem', }} />
                             <p style={{
                                 color: '#000000',
                                 fontSize: '1rem',
                                 margin: '0px',
 
-                            }}>4.5</p>
+                            }}>
+                                4.5
+                            </p>
                         </div>
                         <div style={{
                             display: 'flex',
@@ -1343,9 +1339,8 @@ export default function VendorPage() {
                             }}>
                                 اطلاعات و نظرات
                             </span>
-                            <img
-                                src="/images/movaghat/vendorPage/inf-anf-comments.svg"
-                                alt=" ادرس ها" />
+                            <img alt=" ادرس ها"
+                                src="/images/movaghat/vendorPage/inf-anf-comments.svg" />
                         </div>
                     </div>
 
@@ -1375,7 +1370,9 @@ export default function VendorPage() {
                             <span style={{
                                 color: '#313335', fontSize: '.75rem',
                                 lineHeight: '1rem',
-                            }}>پیک توچی فود</span>
+                            }}>
+                                پیک توچی فود
+                            </span>
                             <div style={{
                                 fontSize: '.875rem',
                                 lineHeight: '1.25rem',

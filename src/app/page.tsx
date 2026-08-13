@@ -1,4 +1,4 @@
-////zare_nk_050515_okk(2)
+////zare_nk_050522_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext } from "react";
@@ -311,8 +311,9 @@ export default function Home() {
                 lineHeight: '1.25rem',
                 color: '#878b92',
                 textAlign: "right",
-              }}
-            >ارسال به</span>
+              }}>
+              ارسال به
+            </span>
             <div style={{
               display: 'flex',
               flexFlow: 'row',
@@ -379,19 +380,19 @@ export default function Home() {
         </header >
 
         <main style={{
-            backgroundColor: 'white',
-            // height: '100dvh',   ////zare_nk_050317_commented(A001-ba A002 tadakhol dareh)
-            width: '100%',
-            display: "flex",
-            flexDirection: 'column',
-            // overflow: 'hidden',        ////zare_nk_050317_commented(A002-ba A001 tadakhol dareh)
-            // justifyContent: 'center',  ////zare_nk_050229_nokteh(be lahaze amoodi vasat chin mikoneh mohtavaye safheh ro ke ma inro nemikhaim)
-            alignItems: 'center',
-            flex: '1 0 auto',
-            // border: '3px solid orange',
-            direction: 'rtl',
-            paddingBottom: '96px',
-          }}>
+          backgroundColor: 'white',
+          // height: '100dvh',   ////zare_nk_050317_commented(A001-ba A002 tadakhol dareh)
+          width: '100%',
+          display: "flex",
+          flexDirection: 'column',
+          // overflow: 'hidden',        ////zare_nk_050317_commented(A002-ba A001 tadakhol dareh)
+          // justifyContent: 'center',  ////zare_nk_050229_nokteh(be lahaze amoodi vasat chin mikoneh mohtavaye safheh ro ke ma inro nemikhaim)
+          alignItems: 'center',
+          flex: '1 0 auto',
+          // border: '3px solid orange',
+          direction: 'rtl',
+          paddingBottom: '96px',
+        }}>
           {isEpmtyAdressList &&  ////zare_nk_050329_updated(sharte isEpmtyAdressList emal shod ke isEpmtyAdressList==false bood component ra aslan seda nazanim)
             <AdressListComponent
               isEpmtyAdressList={isEpmtyAdressList}

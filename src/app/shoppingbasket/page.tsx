@@ -636,7 +636,8 @@ export default function Shoppingbasket() {
                     zIndex: 899,
                     backgroundColor: 'white',
                 }}>
-                    <div onClick={showAddressListDrawer} style={{
+                    <div //onClick={showAddressListDrawer} 
+                    style={{
                         display: 'flex', flexFlow: 'column', width: '100%',
                         backgroundColor: '#fcfcfc', justifyContent: 'space-between', alignItems: 'center',paddingBottom: '.625rem',
                     }}>
@@ -706,7 +707,8 @@ export default function Shoppingbasket() {
                             width: '100%',
                             position: 'relative',
                         }}>
-                            <button style={{
+                            <button onClick={showAddressListDrawer}                             
+                            style={{
                                 display: 'flex',
                                 flexFlow: 'row-reverse',
                                 justifyContent: 'space-between',
@@ -718,8 +720,7 @@ export default function Shoppingbasket() {
                                 backgroundColor: '#eef0f1',
                                 border:'none',
                                 borderRadius: 9999,
-                                cursor: "pointer",
-                            }}>
+                                cursor: "pointer",}}>
                                 <div style={{
                                         visibility: (mycurrentAddressState?.Adress ? 'visible' : 'hidden'),
                                         display: 'flex',
@@ -759,8 +760,7 @@ export default function Shoppingbasket() {
                                         {mycurrentAddressState?.Adress ? mycurrentAddressState.Adress : ''}
                                     </div>
                                 </div>
-                                <button id="showAddressListDrawerBtn"
-                                    onClick={showAddressListDrawer}   //zare_nk_050329_commented_nokteh(ba setState hayash baese reRendere Home mishe(bayad az reRendere farzandane birabte home jologiri beshe)) 
+                                <div id="showAddressListDrawerBtn"
                                     style={{
                                         visibility: (mycurrentAddressState?.Adress ? 'visible' : 'hidden'),  ////zare_nk_050329_added
                                         width:'2rem',
@@ -775,14 +775,13 @@ export default function Shoppingbasket() {
                                         cursor: "pointer", 
                                     }}>
                                     <img src="/images/header/getAddresses.svg" alt=" ادرس ها" />
-                                </button>
+                                </div>
                             </button>
                         </div>
                     </div>
                 </header>
 
-                <main
-                    style={{
+                <main style={{
                         backgroundColor: 'white',
                         // height: '100dvh',   ////zare_nk_050317_commented(A001-ba A002 tadakhol dareh)
                         width: '100%',
