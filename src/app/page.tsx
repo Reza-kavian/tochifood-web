@@ -417,6 +417,7 @@ export default function Home() {
           {/* zare_nk_050226_nokteh_end(dokmehaye navigation va pagination dasti(jahate olgu gozashtim)) */}
 
           <div style={{ marginBottom: '.70rem' }}></div>
+
           <Link style={{
             display: 'flex', justifyContent: 'flex-start', alignItems: 'center', width: 'calc(100% - 2rem)', height: '40px', marginLeft: '1rem', marginRight: '1rem',
             position: 'relative', padding: '10px 1rem', backgroundColor: '#f1f2f3', borderRadius: '9999px', gap: '0.25rem', textDecoration: 'none',
@@ -479,14 +480,15 @@ export default function Home() {
         </main>
 
         <footer style={{
-          maxWidth: '450px', marginLeft: 'auto', marginRight: 'auto', zIndex: 50, bottom: 0, left: 0, right: 0, position: 'fixed',
+          display: 'flex', flexFlow: 'row', maxWidth: '450px', marginLeft: 'auto', marginRight: 'auto', zIndex: 50, bottom: 0, left: 0, right: 0, position: 'fixed',
         }}>
           <div style={{
+            display: 'flex', flexFlow: 'row', width: '100%',
             position: 'relative', boxShadow: '0px -1px 5px 2px #0000000d', opacity: 1, backgroundColor: 'white',
             overflow: 'hidden', height: '100%', padding: '0px 1rem',
           }}>
             <div style={{
-              fontSize: '1rem', lineHeight: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+              fontSize: '1rem', lineHeight: '1.5rem', display: 'flex', flexFlow: 'row', justifyContent: 'space-between', alignItems: 'center',
               width: '100%', height: '4rem', position: 'relative', direction: 'rtl', border: 'none', minWidth: '.25rem',
             }}>
               <div style={{
@@ -501,11 +503,10 @@ export default function Home() {
                   //     profile: false,
                   //   })
                   // })
-                }}
-                  style={{
-                    fontSize: '.875rem', lineHeight: '1.25rem', display: 'flex', flexFlow: 'column', alignItems: 'center',
-                    gap: '.25rem', cursor: 'pointer', border: 'none', padding: '0rem', backgroundColor: 'inherit', height: '100%',
-                  }}>
+                }} style={{
+                  fontSize: '.875rem', lineHeight: '1.25rem', display: 'flex', flexFlow: 'column', alignItems: 'center',
+                  gap: '.25rem', cursor: 'pointer', border: 'none', padding: '0rem', backgroundColor: 'inherit', height: '100%',
+                }}>
                   {
                     footerBtnClicked.orders == true ?
                       <div style={{
@@ -523,7 +524,6 @@ export default function Home() {
                         }} />
                       </div>
                   }
-
                   <span style={{
                     fontSize: '.75rem', lineHeight: '1rem', textAlign: 'center',
                     ...(footerBtnClicked.orders == true ? { color: '#1b1c1d' } : { color: '#878b92' }),
