@@ -79,7 +79,6 @@ type responsedListFromApiSelectShobehAtrafUserType = {
 };
 ////zare_nk_050517_added_end(api birabt be barabt)
 
-
 const SwiperTapBestsComp = () => {
     console.log('050329-SwiperTapBestsComp rendered!!');   ////zare_nk_050329_added
     const [errorInSwiperTapBests, setErrorInSwiperTapBests] = useState<string | null>(null);

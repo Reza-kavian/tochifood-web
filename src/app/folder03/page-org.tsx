@@ -1,4 +1,4 @@
- ////zare_nk_050428_okk(1)
+ ////zare_nk_050525_okk(1)
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
