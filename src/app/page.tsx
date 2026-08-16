@@ -77,6 +77,16 @@ type responsedListFromApiSelectAddressListType = {
   [key: string]: any;
 };
 
+type responsedListFromApiSelectShobehAtrafUserType = {
+  IdShobe: number;
+  NameSobe: string;
+  KafKharid: number;
+  Fasele: number;
+  ZarfiatErsal: number;
+  Keraye: number;
+  NazdikTarinZamanErsal: string;
+};
+
 export default function Home() {
   console.log('zare_nk_050520_Home rendered!!');
   const [error, setError] = useState<string | null>(null);
@@ -90,6 +100,8 @@ export default function Home() {
   let currentAddressUseContext = useContext(currentAddressContext);
 
   const [mycurrentAddressState, setMycurrentAddressState] = useState<responsedListFromApiSelectAddressListType | null>(null);
+
+  const [currentShobeState, setCurrentShobeState] = useState<responsedListFromApiSelectShobehAtrafUserType | null>(null);  ////zare_nk_050525_added
 
   // const [currentAddress, setCurrentAddress] = useState<responsedListFromApiSelectAddressListType | null>(null);    ////zare_nk_050329_commented(currentAddress az useState 
   //// tabdil shod be createContext(ta beshe az jadde bozorgvar be nave pas dadeh beshe bedoone vasetehha!!))
@@ -111,13 +123,101 @@ export default function Home() {
     var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
 
     if (parsedChosenAddress == null) {
+      alert('1');
       showAddressListDrawer();
       return;
     }
+
     if (mycurrentAddressState == null) {
+      alert('2');
       setMycurrentAddressState(parsedChosenAddress);
     }
   }, [isEpmtyAdressList]);
+
+  ////zare_nk_050525_added_st
+  const getShobehAtrafUser = async (mycurrentAddressState: responsedListFromApiSelectAddressListType | null) => {
+    let token = await getCookie("token");
+    if (!token) {
+      return null;
+    }
+    // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented  
+    try {
+      const response = await fetch(NextJsApiUrl + "Api_SelectShobehAtrafUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        // body: JSON.stringify({}),
+        body: JSON.stringify({
+          "Id": mycurrentAddressState != null ? mycurrentAddressState.IdAdress : 1,  ////zare_nk_050416_nokteh(manzoor az Id hamoon IdAddress hast ke ya vaghei midam ya pishfarz hatman 1 mizaram(ehtemalan 1 haman meydoon saate) )
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log("zare_nk_050404-Api_SelectGoroohJson data1: " + JSON.stringify(data));
+        if (data.status == 0) {
+          if (data.data.list == undefined) {
+            return null;
+          }
+          var parsedList = JSON.parse(data.data.list);
+          if (parsedList.length == 0) {
+            return null;
+          }
+          return parsedList[0] ?? null;
+        } else {
+          console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
+          return null;
+        }
+      } else {
+        console.log("zare_nk_050110-!response.ok" + response.ok);
+        return null;
+      }
+    }
+    catch (error) {
+      return null;
+    }
+  }
+
+  useEffect(() => {
+    const tempAsync = async () => {
+      let currentShobe = await getCookie("currentShobe");
+      var parsedurrentShobe: responsedListFromApiSelectShobehAtrafUserType | null = currentShobe ? JSON.parse(currentShobe) : null;
+
+      const chosenAddress = await getCookie("chosenAddress");
+      var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
+      // setMycurrentAddressState(parsedChosenAddress);  ////zare_nk_050525_commented
+      if (parsedurrentShobe != null) {
+        alert('000: ' + JSON.stringify(parsedurrentShobe));
+        setCurrentShobeState(parsedurrentShobe);  
+        return;
+      }
+
+      // if (mycurrentAddressState != null) {   ////zare_nk_050517_commented(chon dastoore setState setMycurrentAddressState dar componente jari ke amal nemikoneh 
+      //// va meghdare jadide state mycurrentAddressState dar reRendere badidiye component tazeh emal mishe, pas az hamin parsedChosenAddress estefadeh mikonim )
+      if (parsedChosenAddress != null) {
+        alert('33');
+        parsedurrentShobe = await getShobehAtrafUser(mycurrentAddressState);
+      }
+      // else if (mycurrentAddressState == null) {   ////zare_nk_050517_commented(chon dastoore setState setMycurrentAddressState dar componente jari ke amal nemikoneh 
+      //// va meghdare jadide state mycurrentAddressState dar reRendere badidiye component tazeh emal mishe, pas az hamin parsedChosenAddress estefadeh mikonim )
+      else if (parsedChosenAddress == null) {
+        alert('44');
+        parsedurrentShobe = await getShobehAtrafUser(null);
+      }
+      alert('55: ' + JSON.stringify(parsedurrentShobe))
+      const expires = new Date();
+      expires.setFullYear(expires.getFullYear() + 5);
+      const expiresString = expires.toUTCString();
+      document.cookie = parsedurrentShobe ? (`currentShobe=${encodeURIComponent(JSON.stringify(parsedurrentShobe))}; path=/; expires=${expiresString};secure; samesite=None`) :
+        (`currentShobe=; path=/; expires=${expiresString};secure; samesite=None`);
+
+      setCurrentShobeState(parsedurrentShobe);
+    }
+    tempAsync();
+  // }, []);    ////zare_nk_050525_commented_end
+  }, [mycurrentAddressState]);   ////zare_nk_050525_added_end
+  ////zare_nk_050525_added_end
 
   const router = useRouter();
 
@@ -185,6 +285,7 @@ export default function Home() {
       if (response.ok) {
         // console.log("zare_nk_050206-data: " + JSON.stringify(data));
         if (data.status == 0) {
+          alert('1.2');
           var parsedList = JSON.parse(data.data.list);
           SetResponsedListFromApiSelectAddressList(() => {
             return parsedList
@@ -446,7 +547,9 @@ export default function Home() {
 
           <div style={{ marginBottom: '1.5rem' }}></div>
 
-          <SwiperTapTimeComp />
+          <SwiperTapTimeComp
+            currentShobeState={currentShobeState}   ////zare_nk_050525_added
+          />
 
           {/* <div style={{ marginBottom: '1.5rem' }}></div> */}
 

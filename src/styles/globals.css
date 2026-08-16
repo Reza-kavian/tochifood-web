@@ -106,13 +106,13 @@
     url("../../public/fonts/webfont(farsi_adad_hast)/eot/IRANSansWeb(FaNum).eot") format("embedded-opentype");
 }
 
-/* zare_nk_050525_added_st */
-html,
+/* zare_nk_050525_added_st(and commented(mikhaim auto bashe tebghe mohtaviat va be .section-in-LayoutWrapper min-height: 100dvh; bedim)) */
+/* html,
 body {
   margin: 0;
   min-height: 100dvh;
-}
-/* zare_nk_050525_added_end */
+} */
+/* zare_nk_050525_added_end(and commented(mikhaim auto bashe tebghe mohtaviat va be .section-in-LayoutWrapper min-height: 100dvh; bedim)) */
 
 body {
   /* zare_nk_050204_comment(baraye bazi propertyha mesle font-family barname pishfarzhaye designi baraye body lahaz mikoneh ke ehtemalan olaviate balatari ham daran
@@ -146,7 +146,8 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
+  /* zare_nk_050525_commented */
+  /* height: 100%; */
   background-color: #f1f1f2;
 }
 

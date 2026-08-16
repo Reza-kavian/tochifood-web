@@ -69,6 +69,7 @@ type AdressescomponentType = {
   setIsEpmtyShowAddRemAddress: React.Dispatch<React.SetStateAction<boolean>>;
   setIsEpmtyAdressList: React.Dispatch<React.SetStateAction<string | null>>;
   showAddressListDrawer: () =>  Promise<responsedListFromApiSelectAddressListType[] | null>; 
+  currentShobeState:responsedListFromApiSelectShobehAtrafUserType | null  ////zare_nk_050525_added
 };
 
 type responsedListFromApiSelectShobehAtrafUserType = {
@@ -86,7 +87,7 @@ const Adressescomponent = function Adressescomponent({
   isEpmtyShowAddRemAddress,
   setIsEpmtyShowAddRemAddress,
   setIsEpmtyAdressList,
-  showAddressListDrawer,
+  showAddressListDrawer, 
 }: AdressescomponentType) {
   console.log('050329-Adressescomponent rendered!!');
   const router = useRouter();
@@ -260,12 +261,14 @@ const Adressescomponent = function Adressescomponent({
       ////zare_nk_050507_added_st 
       var parsedurrentShobe: responsedListFromApiSelectShobehAtrafUserType | null = null;
       if (chosenAddressItem) {
+        alert('1.2');
         document.cookie = `chosenAddress=${encodeURIComponent(JSON.stringify(chosenAddressItem))}; path=/; expires=${expiresString}; secure; samesite=None`;
         parsedurrentShobe = await getSwiperShopsInVendorComp(chosenAddressItem);
         document.cookie = await parsedurrentShobe ? (`currentShobe=${encodeURIComponent(JSON.stringify(parsedurrentShobe))}; path=/; expires=${expiresString};secure; samesite=None`) :
           (`currentShobe=; path=/; expires=${expiresString};secure; samesite=None`);
         //setCurrentShobeState(parsedurrentShobe);   ////zare_nk_050422_commented(be useState felan niazi nadaram) 
       } else {
+        alert('1.3');
         document.cookie = `chosenAddress=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
         // document.cookie = `currentShobe=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
         parsedurrentShobe = await getSwiperShopsInVendorComp(null);
@@ -298,20 +301,23 @@ const Adressescomponent = function Adressescomponent({
       ////zare_nk_050507_commented_end
 
       // router.refresh();
-      window.location.reload();
+      
+      
+      // window.location.reload();  ////zare_nk_050525_commented
     }
     , [currentAddressUseContext])
 
   ////zare_nk_050505_added_st
   useEffect(() => {
+    alert('1.3');
     const chosenAddressCookie = getCookie("chosenAddress");
     var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddressCookie ? JSON.parse(chosenAddressCookie) : null;
 
-    if (parsedChosenAddress == null && responsedListFromApiSelectAddressList && responsedListFromApiSelectAddressList.length > 0) {
+    if (parsedChosenAddress == null && responsedListFromApiSelectAddressList && responsedListFromApiSelectAddressList.length > 0) {  
+      alert('2.1');    
       chosenAddress(responsedListFromApiSelectAddressList ? responsedListFromApiSelectAddressList[0] : null)
       return;
     }
-
   }, [responsedListFromApiSelectAddressList]);
   ////zare_nk_050505_added_end
 

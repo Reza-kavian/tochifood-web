@@ -69,7 +69,8 @@ type responsedListFromApiSelectShobehAtrafUserType = {
     NazdikTarinZamanErsal: string;
 };
 
-const SwiperTapTimeComp = () => {
+// const SwiperTapTimeComp = () => {    ////zare_nk_050525_commented
+const SwiperTapTimeComp = ({ currentShobeState }: { currentShobeState: responsedListFromApiSelectShobehAtrafUserType | null }) => {  ////zare_nk_050525_added
     console.log('050329-SwiperTapTimeComp rendered!!');
     const intervalRef = useRef<null | ReturnType<typeof setInterval>>(null);
     //// React.RefObject<NodeJS.Timeout | null>;
@@ -81,7 +82,7 @@ const SwiperTapTimeComp = () => {
     const [errorInSwiperTapTime, setErrorInSwiperTapTime] = useState<string | null>(null);
 
     const [mycurrentAddressState, setMycurrentAddressState] = useState<responsedListFromApiSelectAddressListType | null>(null);
-    const [currentShobeState, setCurrentShobeState] = useState<responsedListFromApiSelectShobehAtrafUserType | null>(null);
+    // const [currentShobeState, setCurrentShobeState] = useState<responsedListFromApiSelectShobehAtrafUserType | null>(null);  ////zare_nk_050525_commented
 
     const router = useRouter();
 
@@ -92,49 +93,90 @@ const SwiperTapTimeComp = () => {
     const [responsedListFromApiSelectShobehJashnvareh, SetResponsedListFromApiSelectShobehJashnvareh] = useState<responsedListFromApiSelectShobehJashnvarehType[] | null>(null);
     const [timer, setTimer] = useState(0);
 
-    const getShobehAtrafUser = async (mycurrentAddressState: responsedListFromApiSelectAddressListType | null) => {
-        let token = await getCookie("token");
-        if (!token) {
-            return null;
-        }
-        // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented  
-        try {
-            const response = await fetch(NextJsApiUrl + "Api_SelectShobehAtrafUser", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + token,
-                },
-                // body: JSON.stringify({}),
-                body: JSON.stringify({
-                    "Id": mycurrentAddressState != null ? mycurrentAddressState.IdAdress : 1,  ////zare_nk_050416_nokteh(manzoor az Id hamoon IdAddress hast ke ya vaghei midam ya pishfarz hatman 1 mizaram(ehtemalan 1 haman meydoon saate) )
-                }),
-            });
-            const data = await response.json();
-            if (response.ok) {
-                console.log("zare_nk_050404-Api_SelectGoroohJson data1: " + JSON.stringify(data));
-                if (data.status == 0) {
-                    if (data.data.list == undefined) {
-                        return null;
-                    }
-                    var parsedList = JSON.parse(data.data.list);
-                    if (parsedList.length == 0) {
-                        return null;
-                    }
-                    return parsedList[0] ?? null;
-                } else {
-                    console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
-                    return null;
-                }
-            } else {
-                console.log("zare_nk_050110-!response.ok" + response.ok);
-                return null;
-            }
-        }
-        catch (error) {
-            return null;
-        }
-    }
+    ////zare_nk_050525_commented_st
+    // const getShobehAtrafUser = async (mycurrentAddressState: responsedListFromApiSelectAddressListType | null) => {
+    //     let token = await getCookie("token");
+    //     if (!token) {
+    //         return null;
+    //     }
+    //     // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented  
+    //     try {
+    //         const response = await fetch(NextJsApiUrl + "Api_SelectShobehAtrafUser", {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 Authorization: "Bearer " + token,
+    //             },
+    //             // body: JSON.stringify({}),
+    //             body: JSON.stringify({
+    //                 "Id": mycurrentAddressState != null ? mycurrentAddressState.IdAdress : 1,  ////zare_nk_050416_nokteh(manzoor az Id hamoon IdAddress hast ke ya vaghei midam ya pishfarz hatman 1 mizaram(ehtemalan 1 haman meydoon saate) )
+    //             }),
+    //         });
+    //         const data = await response.json();
+    //         if (response.ok) {
+    //             console.log("zare_nk_050404-Api_SelectGoroohJson data1: " + JSON.stringify(data));
+    //             if (data.status == 0) {
+    //                 if (data.data.list == undefined) {
+    //                     return null;
+    //                 }
+    //                 var parsedList = JSON.parse(data.data.list);
+    //                 if (parsedList.length == 0) {
+    //                     return null;
+    //                 }
+    //                 return parsedList[0] ?? null;
+    //             } else {
+    //                 console.log("zare_nk_050110-data.status != 0:data.status= " + data.status + '-data.errors: ' + data.errors);
+    //                 return null;
+    //             }
+    //         } else {
+    //             console.log("zare_nk_050110-!response.ok" + response.ok);
+    //             return null;
+    //         }
+    //     }
+    //     catch (error) {
+    //         return null;
+    //     }
+    // }
+    
+    // useEffect(() => {
+    //     const tempAsync = async () => {
+    //         let currentShobe = await getCookie("currentShobe");
+    //         var parsedurrentShobe: responsedListFromApiSelectShobehAtrafUserType | null = currentShobe ? JSON.parse(currentShobe) : null;
+
+    //         const chosenAddress = await getCookie("chosenAddress");
+    //         var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
+    //         setMycurrentAddressState(parsedChosenAddress);
+    //         if (parsedurrentShobe != null) {
+    //             alert('000: '+ JSON.stringify(parsedurrentShobe));
+    //             setCurrentShobeState(parsedurrentShobe);
+    //             return;
+    //         }
+
+    //         // if (mycurrentAddressState != null) {   ////zare_nk_050517_commented(chon dastoore setState setMycurrentAddressState dar componente jari ke amal nemikoneh 
+    //         //// va meghdare jadide state mycurrentAddressState dar reRendere badidiye component tazeh emal mishe, pas az hamin parsedChosenAddress estefadeh mikonim )
+    //         if (parsedChosenAddress != null) {
+    //             alert('33');
+    //             parsedurrentShobe = await getShobehAtrafUser(mycurrentAddressState);
+    //         }
+    //         // else if (mycurrentAddressState == null) {   ////zare_nk_050517_commented(chon dastoore setState setMycurrentAddressState dar componente jari ke amal nemikoneh 
+    //         //// va meghdare jadide state mycurrentAddressState dar reRendere badidiye component tazeh emal mishe, pas az hamin parsedChosenAddress estefadeh mikonim )
+    //         else if (parsedChosenAddress == null) {
+    //             alert('44');
+    //             parsedurrentShobe = await getShobehAtrafUser(null);
+    //         }
+    //         alert('55: ' + JSON.stringify(parsedurrentShobe))
+    //         const expires = new Date();
+    //         expires.setFullYear(expires.getFullYear() + 5);
+    //         const expiresString = expires.toUTCString();
+    //         document.cookie = parsedurrentShobe ? (`currentShobe=${encodeURIComponent(JSON.stringify(parsedurrentShobe))}; path=/; expires=${expiresString};secure; samesite=None`) :
+    //             (`currentShobe=; path=/; expires=${expiresString};secure; samesite=None`);
+
+    //         setCurrentShobeState(parsedurrentShobe);
+    //     }
+    //     tempAsync();
+    // }, []);
+    ////zare_nk_050525_commented_end
+
 
     const getSwiperTapTime = async (currentShobeState: responsedListFromApiSelectShobehAtrafUserType | null) => {
         console.log("050331-getSwiperTapTime calles!!-currentShobeState: " + JSON.stringify(currentShobeState));
@@ -181,42 +223,6 @@ const SwiperTapTimeComp = () => {
             setErrorInSwiperTapTime("متاسفانه خطایی رخ داده است35");
         }
     }
-
-    useEffect(() => {
-        const tempAsync = async () => {
-            let currentShobe = await getCookie("currentShobe");
-            var parsedurrentShobe: responsedListFromApiSelectShobehAtrafUserType | null = currentShobe ? JSON.parse(currentShobe) : null;
-
-            const chosenAddress = await getCookie("chosenAddress");
-            var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
-            setMycurrentAddressState(parsedChosenAddress);
-            if (parsedurrentShobe != null) {
-                console.log('050422-parsedurrentShobe is not null');
-                setCurrentShobeState(parsedurrentShobe);
-                return;
-            }
-
-            // if (mycurrentAddressState != null) {   ////zare_nk_050517_commented(chon dastoore setState setMycurrentAddressState dar componente jari ke amal nemikoneh 
-            //// va meghdare jadide state mycurrentAddressState dar reRendere badidiye component tazeh emal mishe, pas az hamin parsedChosenAddress estefadeh mikonim )
-            if (parsedChosenAddress != null) {
-                parsedurrentShobe = await getShobehAtrafUser(mycurrentAddressState);
-            }
-            // else if (mycurrentAddressState == null) {   ////zare_nk_050517_commented(chon dastoore setState setMycurrentAddressState dar componente jari ke amal nemikoneh 
-            //// va meghdare jadide state mycurrentAddressState dar reRendere badidiye component tazeh emal mishe, pas az hamin parsedChosenAddress estefadeh mikonim )
-            else if (parsedChosenAddress == null) {
-                parsedurrentShobe = await getShobehAtrafUser(null);
-            }
-
-            const expires = new Date();
-            expires.setFullYear(expires.getFullYear() + 5);
-            const expiresString = expires.toUTCString();
-            document.cookie = parsedurrentShobe ? (`currentShobe=${encodeURIComponent(JSON.stringify(parsedurrentShobe))}; path=/; expires=${expiresString};secure; samesite=None`) :
-                (`currentShobe=; path=/; expires=${expiresString};secure; samesite=None`);
-
-            setCurrentShobeState(parsedurrentShobe);
-        }
-        tempAsync();
-    }, []);
 
     useEffect(() => {
         getSwiperTapTime(currentShobeState);
@@ -485,7 +491,7 @@ const SwiperTapTimeComp = () => {
                                                 width: '44px', height: '33px',
                                                 // border: '1px dashed red',
                                                 fontSize: '.625rem',
-                                                color: '#ffffff', 
+                                                color: '#ffffff',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
                                             }}>
@@ -523,7 +529,7 @@ const SwiperTapTimeComp = () => {
                                                 width: '44px', height: '33px',
                                                 // border: '1px dashed red',
                                                 fontSize: '.625rem',
-                                                color: '#ffffff', 
+                                                color: '#ffffff',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
                                             }}>
@@ -795,7 +801,7 @@ const SwiperTapTimeComp = () => {
                                                                 ...(currentShobeState != null && currentShobeState.Keraye == 0 ? { display: 'none' } : { display: 'inline-block' }),
                                                                 fontSize: '0.625rem',
                                                                 fontFamily: "IRANSansWeb(FaNum)_Medium", color: '#6d6d6d',
-                                                                marginRight: '2px',marginTop:'2px', ////zare_nk_050517_added
+                                                                marginRight: '2px', marginTop: '2px', ////zare_nk_050517_added
                                                             }}>
                                                                 تومان
                                                             </span>
