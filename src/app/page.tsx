@@ -406,8 +406,7 @@ export default function Home() {
               fontSize: '.875rem',
               cursor: "pointer",
             }}>
-            <span
-              style={{
+            <span style={{
                 fontSize: '.875rem',
                 lineHeight: '1.25rem',
                 color: '#878b92',
@@ -460,8 +459,7 @@ export default function Home() {
             </div>
           </button>
 
-          <button
-            id="goShoppingBacketBtn" 
+          <button id="goShoppingBacketBtn" 
             onClick={() => { goTosShoppingbasket(); }}
             style={{
               display: 'flex',

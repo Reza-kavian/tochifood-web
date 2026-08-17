@@ -31,7 +31,7 @@ function getCookie(name: any) {
     const raw = parts.pop();
     if (!raw) throw new Error("No parts found");
     const value = raw.split(";").shift();
-    if (!value) throw new Error("Invalid cookie format");
+    if (!value) throw new Error("Invalid cookie format"); 
     return decodeURIComponent(value);
   }
   return null; //اگر کوکی پیدا نشد
@@ -393,14 +393,12 @@ function SecondPageComponent({
           {
             arrayForSmsVal.map((valueAndGrad, index) => {
               return (
-                <div
-                  key={index}
+                <div key={index}
                   style={{
                     backgroundColor: 'white', border: '1px solid #e0e3e5', maxWidth: '3.5rem', display: 'flex', justifyContent: 'center',
                     alignItems: 'center', height: '3.5rem', padding: '1rem 0.75rem', borderRadius: '0.75rem',
                   }}>
-                  <input
-                    key={index}
+                  <input key={index}
                     maxLength={1}   // فقط یک کاراکتر مجاز است
                     // className={Styles.txtBox}
                     // id="smsValTxt"
@@ -418,7 +416,6 @@ function SecondPageComponent({
                       smsInputKeyDown(e, index);
                     }}
                     // onKeyDown={smsTxtKeyDown}
-
                     ref={(e) => {
                       // refForSmsInput.current[0] = e;
                       SmsInputRefs.current[index] = e;
@@ -449,55 +446,41 @@ function SecondPageComponent({
           paddingBottom: '1.25rem', paddingLeft: '1.25rem', paddingRight: '1.25rem', marginTop: '1.75rem',
         }}>
           {!isDisabledResendCode ?
-            (<button
-              id="ResendCode"
+            (<button id="ResendCode" className={`${Styles.BackBtn}  ${Styles.buttonHover}`}
               ref={refForResendCode}
               onClick={ResendCodefunc}
-              disabled={isDisabledResendCode}
-              className={`${Styles.BackBtn}  ${Styles.buttonHover}`}
-
-            >
-              <div className={`${Styles.BackImgCont} `}>
-                <img
-                  src="/images/login/request-again.svg"
-                  style={{ width: "18px" }}
-                  alt="درخواست مجدد"
-                />
+              disabled={isDisabledResendCode}>
+              <div className={`${Styles.BackImgCont}`}>
+                <img src="/images/login/request-again.svg" alt="درخواست مجدد"
+                  style={{ width: "18px" }} />
               </div>
               <div className={`${Styles.BackBtnTitleCont} `}>
-                <span style={{ color: '#ff5900' }}>درخواست دوباره</span>
+                <span style={{ color: '#ff5900' }}>
+                  درخواست دوباره
+                </span>
               </div>
             </button>
             ) :
-            (<div
+            (<div id="timermoveOpportunityCont"
               ref={refForTimerCont}
-              id="timermoveOpportunityCont"
               style={{
                 display: timerDisplay,
                 flexFlow: "row",
-              }}
-            >
-              <div
+              }}>
+              <div id="timermoveOpportunity"
                 ref={refForTimer}
-                id="timermoveOpportunity"
-                style={{ display: "flex", flexFlow: "row", color: "red" }}
-              ></div>
+                style={{ display: "flex", flexFlow: "row", color: "red" }}>
+              </div>
             </div>)
           }
           {/* zare_nk_050102_added_st */}
           {/* <div className={Styles.formsRow} style={{ direction: "rtl" }}> */}
-          <button
-            id="backToFirsPage"
-            className={`${Styles.BackBtn}  ${Styles.buttonHover}`}
-            onClick={backBtnClick}
-          >
+          <button id="backToFirsPage" className={`${Styles.BackBtn}  ${Styles.buttonHover}`}
+            onClick={backBtnClick}>
             <div className={`${Styles.BackImgCont} `}>
-              <img
-                // src="https://img.tochikala.com/tochikala/back-icon-in-cardcontainer.svg"
-                src="/images/login/return-to-mpbilenumber.svg"
-                style={{ width: "18px" }}
-                alt="ویرایش موبایل"
-              />
+              <img src="/images/login/return-to-mpbilenumber.svg" alt="ویرایش موبایل"
+                // src="https://img.tochikala.com/tochikala/back-icon-in-cardcontainer.svg" 
+                style={{ width: "18px" }} />
             </div>
             <div className={`${Styles.BackBtnTitleCont} `}>
               <span style={{ color: '#ff5900' }}>ویرایش موبایل</span>
@@ -514,11 +497,9 @@ function SecondPageComponent({
             onClick={() => {
               return setRemovTimer(true);
             }}
-            disabled={isDisabledRemovTimerBtn}
-          >
+            disabled={isDisabledRemovTimerBtn}>
             ریست تایمر
           </button> */}
-
         </div>
 
       </div>
@@ -738,7 +719,7 @@ export default function Login() {
           console.log('zare_nk_050501_DecodeToken is: ' + JSON.stringify(DecodeToken));
           const expires = (DecodeToken.exp ?? 0) * 1000; ////zare_nk_050501_nokteh(lahaz kardane expires az tokene pasokhe apiye Api_LoginUser2(chon bar hasbe saniye ast 
           //// be milisaniye tabdil kardim ba 1000 barabar kardan))    
- 
+
           ////zare_nk_040925-decodedToken: {"IdUser":"10006","Mobile":"9351091287","FullName":"رضا کاویان","Type":"User","nbf":1770193087,"exp":1772785087,"iat":1770193087}  //zare_nk_041115_nokteh(from api tochikala)
           ////zare_nk_040925-decodedToken: {"unique_name":"20109","CodeMoshtari":"20109","Mobile":"9351091287","NameMoshtari":"","nbf":1750740741,"exp":1751345541,"iat":1750740741}  //zare_nk_041115_nokteh(from api testotmapi)
           // const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString();  //zare_nk_040219-nokteh(zamane monghazi ra khodam taein kardam, 1 saate bad)   
@@ -747,11 +728,17 @@ export default function Login() {
           // const expires = data.decoded.exp * 1000;   ////zare_nk_050504_nokteh(lahaz kardane expires az tokene pasokhe apiye Api_LoginUser2(chon bar hasbe saniye ast 
 
           document.cookie = `token=${token}; path=/; expires=${expires}; secure; samesite=None`;
-          const redirect = getCookie("redirect") || "/";
+          // const redirect = getCookie("redirect") || "/";  ////zare_nk_050526_commented
+          ////zare_nk_050526_added_st
+          const cookieRedirectVar = await getCookie("redirect");
+          const redirect: string = cookieRedirectVar != null ? cookieRedirectVar : "/";
+          ////zare_nk_050526_added_end
           document.cookie = "redirect=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC"; // حذف کوکی
-          console.log('redirect iss: ' + getCookie("redirect"));
+          // alert('redirect iss: ' + redirect+ '-cookieRedirectVar: '+cookieRedirectVar);
           console.log('zare_nk_050110-token is: ' + getCookie("token"));
-          router.replace(redirect); //zare_nk_040228_commented(and zare_nk_040312 uncommented(chon safheh ro refresh nemikoneh va behtare ehtemalan))
+
+          router.replace(redirect);
+          // router.replace(redirect); //zare_nk_040228_commented(and zare_nk_040312 uncommented(chon safheh ro refresh nemikoneh va behtare ehtemalan))
           // NextResponse.redirect(new URL("/login", request.url));//zare_nk_040228_added
           // window.location.href = redirect;
           // window.location.replace(redirect); //zare_nk_040312_commented(chon router.replace ya router.push safheh ro kamel refresh nemikonam behtare)
@@ -781,13 +768,13 @@ export default function Login() {
     catch (error) {
       document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
       document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-      console.error("zare_nk_040925-❌ خطااااااااااااااااااای JWT:", error); 
+      console.error("zare_nk_040925-❌ خطااااااااااااااااااای JWT:", error);
       if (error instanceof Error) {
         setError("متاسفانه خطایی رخ داده است323:" + error.message);
       } else {
         setError("متاسفانه خطایی رخ داده است343:" + String(error));
-      } 
-    } 
+      }
+    }
   }
 
   async function ResendCodefunc() {
@@ -1136,8 +1123,7 @@ export default function Login() {
               height: '100%',
               transform: 'translate3d(0px, 0px, 0px)',
               contentVisibility: 'visible',
-            }}
-          >
+            }}>
             <defs>
               <clipPath id="__lottie_element_2">
                 <rect width="500" height="500" x="0" y="0" />
@@ -1198,21 +1184,20 @@ export default function Login() {
           </svg>
         </div>
 
-        <div
-          style={{
-            width: "100%",
-            height: '100%',
-            display: "flex",
-            flexDirection: 'column',
-            // justifyContent: "center",
-            // minHeight: "100vh",
-            alignItems: 'stretch',
-            backgroundColor: 'white',
-            // padding: '1rem',
-            position: 'relative',
-            justifyContent: 'flex-end',
-            // border: '2px dashed green',
-          }}>
+        <div style={{
+          width: "100%",
+          height: '100%',
+          display: "flex",
+          flexDirection: 'column',
+          // justifyContent: "center",
+          // minHeight: "100vh",
+          alignItems: 'stretch',
+          backgroundColor: 'white',
+          // padding: '1rem',
+          position: 'relative',
+          justifyContent: 'flex-end',
+          // border: '2px dashed green',
+        }}>
           {/* zare_nk_050102_commented_st(move to FirstPageComponent component) */}
           {/* <div style={{ position: 'absolute', padding: '1rem', width: "100%", backgroundColor: 'white', border:'3px dotted yellow', }}>
             <form
@@ -1275,8 +1260,7 @@ export default function Login() {
               setNewSmsVal={setNewSmsVal}  //zare_nk_050103_added
               newSmsTxtChanged={newSmsTxtChanged}
               smsInputKeyDown={smsInputKeyDown}  //zare_nk_050105_added
-              SmsInputRefs={SmsInputRefs}
-            ></SecondPageComponent>
+              SmsInputRefs={SmsInputRefs} />
           )}
           {/* zare_nk_050102_commented_st(move to FirstPageComponent component) */}
           {/* </form>

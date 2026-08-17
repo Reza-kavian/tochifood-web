@@ -28,45 +28,45 @@ export default function Page() {
         <div className="rotating-relative">
           <div className="rotating-div-cont">
             <div className="rotating-div rotate-0">
-              <img className="img-in-rotating-div" src="./images/pageGardoon/0.webp" />
+              <img className="img-in-rotating-div" src="/images/pageGardoon/0.webp" />
             </div>
 
             <div className="rotating-div rotate-72">
-              <img className="img-in-rotating-div" src="./images/pageGardoon/1.webp" />
+              <img className="img-in-rotating-div" src="/images/pageGardoon/1.webp" />
             </div>
 
             <div className="rotating-div rotate-144">
-              <img className="img-in-rotating-div" src="./images/pageGardoon/2.webp" />
+              <img className="img-in-rotating-div" src="/images/pageGardoon/2.webp" />
             </div>
 
             <div className="rotating-div rotate-216">
-              <img className="img-in-rotating-div" src="./images/pageGardoon/3.webp" />
+              <img className="img-in-rotating-div" src="/images/pageGardoon/3.webp" />
             </div>
 
             <div className="rotating-div rotate-288">
-              <img className="img-in-rotating-div" src="./images/pageGardoon/4.webp" />
+              <img className="img-in-rotating-div" src="/images/pageGardoon/4.webp" />
             </div>
           </div>
 
           <div className="big-rotating-div-cont">
             <div className="rotating-div rotate-0">
-              <img className="big-img-in-rotating-div" src="./images/pageGardoon/0.webp" />
+              <img className="big-img-in-rotating-div" src="/images/pageGardoon/0.webp" />
             </div>
 
             <div className="rotating-div rotate-72">
-              <img className="big-img-in-rotating-div" src="./images/pageGardoon/1.webp" />
+              <img className="big-img-in-rotating-div" src="/images/pageGardoon/1.webp" />
             </div>
 
             <div className="rotating-div rotate-144">
-              <img className="big-img-in-rotating-div" src="./images/pageGardoon/2.webp" />
+              <img className="big-img-in-rotating-div" src="/images/pageGardoon/2.webp" />
             </div>
 
             <div className="rotating-div rotate-216">
-              <img className="big-img-in-rotating-div" src="./images/pageGardoon/3.webp" />
+              <img className="big-img-in-rotating-div" src="/images/pageGardoon/3.webp" />
             </div>
 
             <div className="rotating-div rotate-288">
-              <img className="big-img-in-rotating-div" src="./images/pageGardoon/4.webp" />
+              <img className="big-img-in-rotating-div" src="/images/pageGardoon/4.webp" />
             </div>
 
           </div>

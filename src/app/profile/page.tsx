@@ -39,7 +39,7 @@ import { relative } from "node:path";
 
 // import TestComponent from '../components/TestComponent';  ////zare_nk_050327_added_movaghat(componente testi tamrini hast)
 
-import { NextJsApiUrl } from "../../constants/Urls";  ////zare_nk_050407_added
+import { NextJsApiUrl } from "../../constants/Urls";  
 
 function getCookie(name: any) {
   ////zare_nk_050209_added_st
@@ -70,30 +70,35 @@ type AddressFormInputsMatnErrorType = {
   vahed: string | null;
   addressName: string | null;
 };
+
 type IsAddressFormInputsFocusedType = {
   Address: boolean;
   pelak: boolean;
   vahed: boolean;
   addressName: boolean;
 };
+
 type IsAddressFormInputsTextType = {
   Address: boolean;
   pelak: boolean;
   vahed: boolean;
   addressName: boolean;
 };
+
 type RefForAddressFormInputsType = {
   Address: HTMLTextAreaElement | null;
   pelak: HTMLInputElement | null;
   vahed: HTMLInputElement | null;
   addressName: HTMLInputElement | null;
 };
+
 type AddressFormInputsType = {
   Address: string;
   pelak: string;
   vahed: string;
   addressName: string;
 };
+
 export default function Profile() {
   const router = useRouter();
   type footerBtnClickedType = {
@@ -178,7 +183,6 @@ export default function Profile() {
 
   const refForSaveAddressFormInputsBtn = useRef<HTMLButtonElement | null>(null);
   const [isDisabledsaveAddressFormInputsBtn, setIsDisabledsaveAddressFormInputsBtn] = useState(true);
-
 
   const [addressFormInputsVal, setAddressFormInputsVal] = useState<AddressFormInputsType>({
     Address: '',
@@ -377,7 +381,6 @@ export default function Profile() {
       // 'OnvanAdress': $('#OnvanAdress').val(),
     })
 
-
     // let ApiUrl = "https://api.tochikala.com/api/User/";  ////zare_nk_050407_commented 
     const response = await fetch(NextJsApiUrl + "Api_CreateAddress", {
       method: "POST",
@@ -515,7 +518,6 @@ export default function Profile() {
               display: 'flex', width: '100%', boxShadow: '0px 1px 3px 0px #0000001a', backgroundColor: 'white', borderRadius: '.5rem',
               justifyContent: 'space-between', alignItems: 'center',
             }}>
-
               <Link href="/profile/edit" style={{
                 padding: '1rem', justifyContent: 'space-between', alignItems: 'center', width: '100%', display: 'flex', color: 'inherit', textDecoration: 'none',
               }}>
@@ -528,7 +530,6 @@ export default function Profile() {
                     <img src="/images/homeFooter/profile-icon-kamrang.svg" alt="پروفایل" style={{
                       height: '1.5rem', width: '1.5rem',
                     }} />
-
                   </div>
 
                   <div style={{
@@ -539,24 +540,18 @@ export default function Profile() {
                     }}>
                       رضا کاویان
                     </span>
-
                     <span style={{
                       color: '#878b92', fontSize: '.75rem', lineHeight: '1rem',
                     }}>
                       09351091287
                     </span>
                   </div>
-
                 </div>
-
 
                 <img src="/images/profile/go-profile-edit.svg" alt="پروفایل" style={{
                   // height: '1.5rem', width: '1.5rem',
                 }} />
-
               </Link>
-
-
             </div>
 
             <div style={{

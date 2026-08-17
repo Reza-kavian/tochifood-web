@@ -189,7 +189,7 @@ const SwiperTopBanerComp = () => {
                                                     width: '100%',
                                                     borderRadius: '0.5rem',
                                                 }}
-                                                // src="./images/top-baner/top-baner-slide01.png" />
+                                                // src="/images/top-baner/top-baner-slide01.png" />
                                                 src={`https://img.tochikala.com/Baners/${item.AxBaner}`} />
                                         </Link> */}
                                     {/* zare_nk_050408_nokteh_end(rahe1) */}
@@ -205,7 +205,7 @@ const SwiperTopBanerComp = () => {
                                             width: '100%',
                                             borderRadius: '0.5rem',
                                         }}
-                                            // src="./images/top-baner/top-baner-slide01.png" />
+                                            // src="/images/top-baner/top-baner-slide01.png" />
                                             src={`https://img.tochikala.com/Baners/${item.AxBaner}`} />
                                     </button>
                                     {/* zare_nk_050408_nokteh_end(rahe2) */}

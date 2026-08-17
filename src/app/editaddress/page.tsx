@@ -792,7 +792,7 @@ export default function EditPage() {
               anchorXUnits: 'fraction',
               anchorYUnits: 'pixels',
               // src: "https://img.tochikala.com/Icon/location-icon.png",
-              src: "./images/Icon/location-icon.svg",
+              src: "/images/Icon/location-icon.svg",
             }),
         });
         refForStyle.current = newStyle;

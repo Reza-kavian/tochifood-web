@@ -58,7 +58,6 @@ export async function middleware(request: NextRequest) {
   //  const goo= url.searchParams.get("goo");
   //   const kolli= url.searchParams
   // console.log("zare_nk_040317-fullUrl: " + kolli);
-
   console.log(
     "zare_nk_050205-00-Middleware called!!-All cookies: " +
     request.headers.get("cookie")
@@ -70,7 +69,6 @@ export async function middleware(request: NextRequest) {
   //   return NextResponse.next();
   // }
   ////zare_nk_040419_added_end(and commented)
-
   const isPublic = publicPaths.some((path) => {
     return (
       request.nextUrl.pathname === path ||  ////yani daghighan khode /tryreact
@@ -207,7 +205,7 @@ export async function middleware(request: NextRequest) {
       httpOnly: false,
     });
     var tempTest = response.cookies.get("redirect")?.value;
-    console.log("zare_nk_050205-tempTest: " + tempTest);
+    console.log("zare_nk_050525-tempTest: " + tempTest +'-request.nextUrl.pathname: '+request.nextUrl.pathname);
 
     const fullUrl = request.nextUrl.href;
     const pathname = request.nextUrl.pathname;

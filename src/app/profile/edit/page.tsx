@@ -98,6 +98,7 @@ export default function Profile() {
     orders: boolean;
     profile: boolean;
   };
+
   const [footerBtnClicked, setFooterBtnClicked] = useState<footerBtnClickedType>({
     home: false,
     orders: false,
@@ -173,7 +174,6 @@ export default function Profile() {
   const [isDisabledsaveProfileFormInputsBtn, setIsDisabledsaveProfileFormInputsBtn] = useState(true);
 
   const refForLogOutBtn = useRef<HTMLButtonElement | null>(null);  ////zare_nk_050429_added
-
 
   const [ProfileFormInputsVal, setProfileFormInputsVal] = useState<ProfileFormInputsType>({
     Fname: '',
@@ -323,7 +323,6 @@ export default function Profile() {
     ////zare_nk_050206_nokteh_end(in dastoorat dar in makan javab dad be khoobi)
   }, [ProfileFormInputsMatnError]);
 
-
   async function saveProfile(isOnline: boolean) {
     // if (!refForFeature.current) {  //zare_nk_050213_added
     //   return;
@@ -433,7 +432,7 @@ export default function Profile() {
     //// bemooneh(baraye jahaei khobe ke masalan dar header age login boodim FullName namayesh dadeh shavad va age login naboodim FullName namayesh dadeh nashe va
     ////  faghat dokmeye Login ro karbar bebineh))
 
-    router.replace('/');
+    router.replace('/'); 
   }
 
   return (
@@ -765,50 +764,33 @@ export default function Profile() {
                 onClick={() => {
                   forlogout();
                 }}
+                // disabled={isDisabledLogOutBtn}
                 style={{
                   display: 'flex', justifyContent: 'center', alignItems: 'center',
                   width: '100%', height: '3.5rem', borderRadius: '.75rem',
-                  fontSize: '1rem', padding: '1rem',
-
-
-
-                  border: 'none',
-
-                }}
-              // disabled={isDisabledLogOutBtn}
-              >خروج از حساب</button> :
+                  fontSize: '1rem', padding: '1rem', border: 'none',
+                }}>
+                خروج از حساب
+              </button> :
               <>
                 <button ref={refForSaveProfileFormInputsBtn} id="saveProfileFormInputsBtn"
                   onClick={() => {
                     saveProfile(true);
                   }} style={{
-                    color: 'white',
-                    fontSize: '1rem',
+                    color: 'white', fontSize: '1rem',
                     lineHeight: '1.5rem', padding: '1rem', backgroundColor: '#ff5900', borderRadius: '.75rem',
                     display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '3.5rem', position: 'relative', cursor: 'pointer',
-                    direction: 'rtl', border: 'none',
-
-                    minWidth: '.25rem',
+                    direction: 'rtl', border: 'none', minWidth: '.25rem',
                   }}
-                  disabled={isDisabledsaveProfileFormInputsBtn}
-                >
+                  disabled={isDisabledsaveProfileFormInputsBtn}>
                   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', }}>
-                    <span style={{ color: "white" }}>ثبت تغییرات</span>
+                    <span style={{ color: "white" }}>
+                      ثبت تغییرات
+                    </span>
                   </div>
                 </button>
               </>
             }
-
-
-
-
-
-
-
-
-
-
-
           </div>
         </footer>
 

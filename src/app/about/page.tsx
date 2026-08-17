@@ -22,7 +22,7 @@ export default function Page() {
     <>
       {/* <title>{metadata.title}</title> */}  {/*zare_nk_040507_nokteh(neveshtane metadata dakhle tage title osooli nist va pishnahad nemishe,barnameh ham automat metadata ro beonvane mohtavaye tage title safhe dar nazar migire)*/}
       <h1 className={styles.shape}>salam 002</h1>
-      <img src="./images/002.jpg" style={{ border: "4px dashed silver" }} />
+      <img src="/images/002.jpg" style={{ border: "4px dashed silver" }} />
       <br />
       <Image alt="ggg" src={Image002} style={{ border: "7px dashed yellow" }} />   {/* zare_nk_041112_nokteh(albateh estefadeh az Image mamoolan makhsoos masir haye dakhele /src 
       hast va baraye masire /public tosiyeh nemishe az nazare standarde nextJs va hatta momkene error ham mideh va javab nadeh,baraye tasavire masire /public behtare az estafadeye
@@ -32,7 +32,7 @@ export default function Page() {
         style={{ border: "6px dotted blue" }}
       />
       <br />
-      <img src="https://www.netafraz.com//images/standard_service.png"
+      <img src="https://www.netafraz.com/images/standard_service.png"
         style={{ border: "6px dotted blue" }}
       />
       <br />

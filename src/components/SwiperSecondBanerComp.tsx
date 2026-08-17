@@ -167,7 +167,7 @@ const SwiperSecondBanerComp = () => {
                                                     width: '100%',
                                                     borderRadius: '0.5rem',
                                                 }}
-                                                src={`./images/baners/second-baner/${index}.png`} />
+                                                src={`/images/baners/second-baner/${index}.png`} />
                                             {/* src={`https://img.tochikala.com/Baners/${item.AxBaner}`} /> */}
                                         </Link>
                                     </div>
