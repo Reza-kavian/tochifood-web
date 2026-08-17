@@ -10,7 +10,7 @@ import { currentAddressContext } from '../context/currentAddressContext';  //zar
 
 import { NextJsApiUrl } from "../constants/Urls";  ////zare_nk_050407_added
 
-function getCookie(name: any) { 
+function getCookie(name: any) {
   if (typeof document === 'undefined') {
     // console.log("document === 'undefined'");
     return null; // برای جلوگیری از خطای عدم وجود document
@@ -68,8 +68,8 @@ type AdressescomponentType = {
   isEpmtyShowAddRemAddress: boolean;
   setIsEpmtyShowAddRemAddress: React.Dispatch<React.SetStateAction<boolean>>;
   setIsEpmtyAdressList: React.Dispatch<React.SetStateAction<string | null>>;
-  showAddressListDrawer: () =>  Promise<responsedListFromApiSelectAddressListType[] | null>; 
-  currentShobeState:responsedListFromApiSelectShobehAtrafUserType | null  ////zare_nk_050525_added
+  showAddressListDrawer: () => Promise<responsedListFromApiSelectAddressListType[] | null>;
+  // currentShobeState: responsedListFromApiSelectShobehAtrafUserType | null  ////zare_nk_050525_added
 };
 
 type responsedListFromApiSelectShobehAtrafUserType = {
@@ -87,7 +87,7 @@ const Adressescomponent = function Adressescomponent({
   isEpmtyShowAddRemAddress,
   setIsEpmtyShowAddRemAddress,
   setIsEpmtyAdressList,
-  showAddressListDrawer, 
+  showAddressListDrawer,
 }: AdressescomponentType) {
   console.log('050329-Adressescomponent rendered!!');
   const router = useRouter();
@@ -133,8 +133,8 @@ const Adressescomponent = function Adressescomponent({
           ////zare_nk_050507_nokteh_st(az responsedListFromApiSelectAddressListBeforeRerender estefadeh kardim, chon meghdarist ke dar hamin khatte sedazadane
           //  showAddressListDrawer() barmigardooneh vali state responsedListFromApiSelectAddressList dar rendere badiye component berooz mishe va dar in render
           //  hanooz meghdare ghabl az seda zadane tabeye showAddressListDrawer() ro dare)
-          const responsedListFromApiSelectAddressListBeforeRerender: responsedListFromApiSelectAddressListType[] | null = await showAddressListDrawer(); 
-          if (responsedListFromApiSelectAddressListBeforeRerender == null || responsedListFromApiSelectAddressListBeforeRerender[0]==undefined) {  ////zare_nk_050507_nokteh(yanai age null bashe ya age arayeye khali bashe)
+          const responsedListFromApiSelectAddressListBeforeRerender: responsedListFromApiSelectAddressListType[] | null = await showAddressListDrawer();
+          if (responsedListFromApiSelectAddressListBeforeRerender == null || responsedListFromApiSelectAddressListBeforeRerender[0] == undefined) {  ////zare_nk_050507_nokteh(yanai age null bashe ya age arayeye khali bashe)
             // alert('khaliye111!!' + responsedListFromApiSelectAddressListBeforeRerender);
             chosenAddress(null);
           }
@@ -142,8 +142,8 @@ const Adressescomponent = function Adressescomponent({
             const getchosenAddress = getCookie("chosenAddress");
             var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = getchosenAddress ? JSON.parse(getchosenAddress) : null;
             if (parsedChosenAddress?.IdAdress == IdAdress) {
-              // alert('porre111!!' + JSON.stringify( responsedListFromApiSelectAddressListBeforeRerender)); 
-              chosenAddress(responsedListFromApiSelectAddressListBeforeRerender ? responsedListFromApiSelectAddressListBeforeRerender[0] : null)            
+              //  alert('porre111!!' + JSON.stringify( responsedListFromApiSelectAddressListBeforeRerender)); 
+              chosenAddress(responsedListFromApiSelectAddressListBeforeRerender ? responsedListFromApiSelectAddressListBeforeRerender[0] : null)
             }
           }
           ////zare_nk_050507_nokteh_end(az responsedListFromApiSelectAddressListBeforeRerender estefadeh kardim, chon meghdarist ke dar hamin khatte sedazadane
@@ -235,9 +235,10 @@ const Adressescomponent = function Adressescomponent({
 
   var currentAddressUseContext = useContext(currentAddressContext);   ////zare_nk_050329_added 
 
-  const chosenAddress = useCallback(
+  // const chosenAddress = useCallback(   ////zare_nk_050526_commented(niazi be useCallback nist,chon chosenAddress ra be componente farzande in component ke pas nemidim!!)
+  const chosenAddress =     ////zare_nk_050526_added
     async (chosenAddressItem: responsedListFromApiSelectAddressListType | null) => {
-      console.log('chosenAddress called!!-chosenAddressItem: '+chosenAddressItem);
+      console.log('chosenAddress called!!-chosenAddressItem: ' + JSON.stringify(chosenAddressItem));
       // document.cookie = `chosenAddress=${JSON.stringify(chosenAddressItem)}; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;  ////zare_nk_050210_nokteh(expires=Thu, 01 Jan 1970 00:00:00 UTC baese monghazi shodane cookie dar hamin khatte tarif mishe! pas 
       //// majboorim ye tarikhe dastiy behesh badim,age mikhaim abadi basshe ye cookiye dastiye toolani behesh midim ke shabiye abadiye(age expires ra dasti nadim 
       //// behesh pishfarz SessionCookie darnazar gerefteh mishe(yani moroorgar ro bebandim cookie hazf mishe) ) )
@@ -247,28 +248,17 @@ const Adressescomponent = function Adressescomponent({
       const expiresString = expires.toUTCString();
       // document.cookie = `chosenAddress=${JSON.stringify(chosenAddressItem)}; path=/; expires=${expiresString};secure; samesite=None`;
       ////zare_nk_050210_nokteh(mamoolan JSON.stringify kefayat mikoneh, vali age matne cookie shamele characterhaye ; va ... bashe shayad barnameh eshtebahan anra 
-      //// beonvane jodakonandeh dar reshteye document.cookie darnazar begire va kharabkari koneh, pas encodeURIComponent tosiye mishavad)
-      ////zare_nk_050507_commented_st   
-      // document.cookie = await chosenAddressItem ? (
-      //   `chosenAddress=${encodeURIComponent(JSON.stringify(chosenAddressItem))}; path=/; expires=${expiresString}; secure; samesite=None`
-      // ) :
-      //   (
-      //     // `chosenAddress=; path=/; expires=${expiresString};secure; samesite=None`  ////zare_nk_050507_commented
-      //     `chosenAddress=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`  ////zare_nk_050507_added
-      //   )
-      ////zare_nk_050507_commented_end
-
-      ////zare_nk_050507_added_st 
+      //// beonvane jodakonandeh dar reshteye document.cookie darnazar begire va kharabkari koneh, pas encodeURIComponent tosiye mishavad)    
       var parsedurrentShobe: responsedListFromApiSelectShobehAtrafUserType | null = null;
       if (chosenAddressItem) {
-        alert('1.2');
+        // alert('1.2');
         document.cookie = `chosenAddress=${encodeURIComponent(JSON.stringify(chosenAddressItem))}; path=/; expires=${expiresString}; secure; samesite=None`;
         parsedurrentShobe = await getSwiperShopsInVendorComp(chosenAddressItem);
         document.cookie = await parsedurrentShobe ? (`currentShobe=${encodeURIComponent(JSON.stringify(parsedurrentShobe))}; path=/; expires=${expiresString};secure; samesite=None`) :
           (`currentShobe=; path=/; expires=${expiresString};secure; samesite=None`);
         //setCurrentShobeState(parsedurrentShobe);   ////zare_nk_050422_commented(be useState felan niazi nadaram) 
       } else {
-        alert('1.3');
+        // alert('1.3');
         document.cookie = `chosenAddress=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
         // document.cookie = `currentShobe=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
         parsedurrentShobe = await getSwiperShopsInVendorComp(null);
@@ -278,43 +268,20 @@ const Adressescomponent = function Adressescomponent({
       }
       setIsEpmtyAdressList(null);
       currentAddressUseContext?.setMycurrentAddress(chosenAddressItem);
-      ////zare_nk_050507_added_end
-
-      ////zare_nk_050507_commented_st
-      // const chosenAddress = await getCookie("chosenAddress"); 
-      // var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null; 
-      // setIsEpmtyAdressList(null);   
-      // currentAddressUseContext?.setMycurrentAddress(parsedChosenAddress); 
-
-      // var parsedurrentShobe: responsedListFromApiSelectShobehAtrafUserType | null = null;
-      // if (parsedChosenAddress != null) {
-      //   parsedurrentShobe = await getSwiperShopsInVendorComp(parsedChosenAddress);
-      // }
-      // else if (parsedChosenAddress == null) {
-      //   parsedurrentShobe = await getSwiperShopsInVendorComp(null);
-      // }
-
-      // document.cookie = await parsedurrentShobe ? (`currentShobe=${encodeURIComponent(JSON.stringify(parsedurrentShobe))}; path=/; expires=${expiresString};secure; samesite=None`) :
-      //   (`currentShobe=; path=/; expires=${expiresString};secure; samesite=None`);  
-
-      //setCurrentShobeState(parsedurrentShobe);   ////zare_nk_050422_commented(be useState felan niazi nadaram) 
-      ////zare_nk_050507_commented_end
 
       // router.refresh();
-      
-      
       // window.location.reload();  ////zare_nk_050525_commented
     }
-    , [currentAddressUseContext])
+  //  , [currentAddressUseContext]);    ////zare_nk_050526_commented(niazi be useCallback nist,chon chosenAddress ra be componente farzande in component ke pas nemidim!!)
 
   ////zare_nk_050505_added_st
   useEffect(() => {
-    alert('1.3');
+    // alert('1.3');
     const chosenAddressCookie = getCookie("chosenAddress");
     var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddressCookie ? JSON.parse(chosenAddressCookie) : null;
 
-    if (parsedChosenAddress == null && responsedListFromApiSelectAddressList && responsedListFromApiSelectAddressList.length > 0) {  
-      alert('2.1');    
+    if (parsedChosenAddress == null && responsedListFromApiSelectAddressList && responsedListFromApiSelectAddressList.length > 0) {
+      // alert('2.1');
       chosenAddress(responsedListFromApiSelectAddressList ? responsedListFromApiSelectAddressList[0] : null)
       return;
     }
@@ -380,20 +347,20 @@ const Adressescomponent = function Adressescomponent({
                 marginLeft: '.5rem',
               }}>
                 <span style={{
-                    color: '#1b1c1d',
-                    fontWeight: '500',
-                    fontSize: '.875rem',
-                    lineHeight: '1.25rem',
-                  }}>
+                  color: '#1b1c1d',
+                  fontWeight: '500',
+                  fontSize: '.875rem',
+                  lineHeight: '1.25rem',
+                }}>
                   {/* خونه */}
                   {item.OnvanAdress ? item.OnvanAdress : 'خونه'}
                 </span>
                 <p style={{
-                    color: '#1b1c1d',  //zare_nk_050206_nokteh(age entekhab nabasheh: color:#a5abb1)   
-                    fontSize: '.75rem',
-                    lineHeight: '1rem',
-                    marginBottom: '0px',
-                  }}>
+                  color: '#1b1c1d',  //zare_nk_050206_nokteh(age entekhab nabasheh: color:#a5abb1)   
+                  fontSize: '.75rem',
+                  lineHeight: '1rem',
+                  marginBottom: '0px',
+                }}>
                   {/* خ. وحدت اسلامی، نرسیده به خ. مولوی، ک. غلامرضا زندی، خ. صالح زاده */}
                   {item.Adress}
                 </p>
@@ -401,9 +368,9 @@ const Adressescomponent = function Adressescomponent({
             </div>
 
             <button id="showAddRemAddressBtn"
-              onClick={() => { 
-                setIsEpmtyShowAddRemAddress(false);   
-                setRowItem(item);  
+              onClick={() => {
+                setIsEpmtyShowAddRemAddress(false);
+                setRowItem(item);
               }}
               style={{
                 // backgroundColor: '#1b1c1d',   //zare_nk_050206_nokteh(age entekhab nabasheh: backgroundColor:#eef0f1)  
@@ -421,16 +388,16 @@ const Adressescomponent = function Adressescomponent({
         <ShowAddRemAddressComponent
           key={rowItem.IdAdress}
           refForShowAddRemAddressBox={refForShowAddRemAddressBox}
-          goToEdditAddressMap={() => { 
+          goToEdditAddressMap={() => {
             goToEdditAddressMap(rowItem.IdAdress);
           }}
-          RemoveAddress={() => { 
+          RemoveAddress={() => {
             RemoveAddress(rowItem.IdAdress);
           }}
           // responsedListFromApiEditAddress={responsedListFromApiEditAddress}  //zare_nk_050207_commented(chon aslan api editeAddresss ra dar in safhe nemizanim va dar safheye editAddress mizanim)
           responsedListFromApiRemoveAddress={responsedListFromApiRemoveAddress}
           isEpmtyShowAddRemAddress={isEpmtyShowAddRemAddress}
-          setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress} 
+          setIsEpmtyShowAddRemAddress={setIsEpmtyShowAddRemAddress}
           setRowItem={setRowItem}
         />
       }

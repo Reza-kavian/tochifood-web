@@ -123,13 +123,13 @@ export default function Home() {
     var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
 
     if (parsedChosenAddress == null) {
-      alert('1');
+      // alert('1');
       showAddressListDrawer();
       return;
     }
 
     if (mycurrentAddressState == null) {
-      alert('2');
+      // alert('2');
       setMycurrentAddressState(parsedChosenAddress);
     }
   }, [isEpmtyAdressList]);
@@ -188,7 +188,7 @@ export default function Home() {
       var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
       // setMycurrentAddressState(parsedChosenAddress);  ////zare_nk_050525_commented
       if (parsedurrentShobe != null) {
-        alert('000: ' + JSON.stringify(parsedurrentShobe));
+        // alert('000: ' + JSON.stringify(parsedurrentShobe));
         setCurrentShobeState(parsedurrentShobe);  
         return;
       }
@@ -196,16 +196,16 @@ export default function Home() {
       // if (mycurrentAddressState != null) {   ////zare_nk_050517_commented(chon dastoore setState setMycurrentAddressState dar componente jari ke amal nemikoneh 
       //// va meghdare jadide state mycurrentAddressState dar reRendere badidiye component tazeh emal mishe, pas az hamin parsedChosenAddress estefadeh mikonim )
       if (parsedChosenAddress != null) {
-        alert('33');
+        // alert('33');
         parsedurrentShobe = await getShobehAtrafUser(mycurrentAddressState);
       }
       // else if (mycurrentAddressState == null) {   ////zare_nk_050517_commented(chon dastoore setState setMycurrentAddressState dar componente jari ke amal nemikoneh 
       //// va meghdare jadide state mycurrentAddressState dar reRendere badidiye component tazeh emal mishe, pas az hamin parsedChosenAddress estefadeh mikonim )
       else if (parsedChosenAddress == null) {
-        alert('44');
+        // alert('44');
         parsedurrentShobe = await getShobehAtrafUser(null);
       }
-      alert('55: ' + JSON.stringify(parsedurrentShobe))
+      // alert('55: ' + JSON.stringify(parsedurrentShobe));
       const expires = new Date();
       expires.setFullYear(expires.getFullYear() + 5);
       const expiresString = expires.toUTCString();
@@ -263,7 +263,7 @@ export default function Home() {
         setError("lotfan avval online shid");
         return;
       }
-      setIsEpmtyAdressList('notNull');   ////zare_nk_050507_nokteh(az entehaye tabe avorder shod inja)
+      setIsEpmtyAdressList('notNull');   
 
       ////zare_nk_050506_nokteh_end(chon az componente useAuthentication dar  useEffect(() => {...}, [pathname]); ke dar rendere ebtedaeiye safhe estelam migereh baraye
       ////  estelame vojood va monghazi boodane cookiye token estefadeh kardim, age monghazi bood cookiye token ro hazf ham mikoneh, pas dar api ha hamoon 
@@ -285,7 +285,7 @@ export default function Home() {
       if (response.ok) {
         // console.log("zare_nk_050206-data: " + JSON.stringify(data));
         if (data.status == 0) {
-          alert('1.2');
+          // alert('1.12');
           var parsedList = JSON.parse(data.data.list);
           SetResponsedListFromApiSelectAddressList(() => {
             return parsedList
@@ -300,7 +300,7 @@ export default function Home() {
         return null;
       }
     }
-    , [isEpmtyAdressList, responsedListFromApiSelectAddressList])
+    , [isEpmtyAdressList, responsedListFromApiSelectAddressList]);  
 
   ////zare_nk_050226_nokteh_st(baraye dokmehaye navigation va pagination dasti(ke estefadeh nakardim))
   // const refForwiperButtonNext = useRef<HTMLButtonElement | null>(null);
@@ -461,8 +461,7 @@ export default function Home() {
           </button>
 
           <button
-            id="goShoppingBacketBtn"
-            // onClick={showAddressListDrawer}  
+            id="goShoppingBacketBtn" 
             onClick={() => { goTosShoppingbasket(); }}
             style={{
               display: 'flex',

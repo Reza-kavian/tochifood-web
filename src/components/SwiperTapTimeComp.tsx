@@ -177,7 +177,6 @@ const SwiperTapTimeComp = ({ currentShobeState }: { currentShobeState: responsed
     // }, []);
     ////zare_nk_050525_commented_end
 
-
     const getSwiperTapTime = async (currentShobeState: responsedListFromApiSelectShobehAtrafUserType | null) => {
         console.log("050331-getSwiperTapTime calles!!-currentShobeState: " + JSON.stringify(currentShobeState));
         let token = getCookie("token");
