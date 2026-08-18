@@ -21,7 +21,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",  ////zare_nk_050527_nokteh(bad az update be next16 automat az "jsx": "preserve" be "jsx": "react-jsx", virayesh shod)
     "incremental": true,
     // "baseUrl": ".",  //zare_nk_050510_nokteh(az noskheye TypeScript 4.1 be bad baseUrl mansookhe va hamoon "paths": {..} kafiyeh, manam commentesh kardam)
     "plugins": [
@@ -40,7 +40,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/types"
+    "src/types",
+    ".next/dev/types/**/*.ts"  ////zare_nk_050527_nokteh(bad az update be next16 automat be tsconfig.json ezafeh shod)
   ],
   "exclude": [
     "node_modules"
