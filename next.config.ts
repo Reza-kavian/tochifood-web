@@ -36,7 +36,21 @@ const nextConfig03: NextConfig = {
   },
 
   images: {
-    domains: ['www.w3schools.com', 'www.tutorialspoint.com', 'www.netafraz.com'],
+    // domains: ['www.w3schools.com', 'www.tutorialspoint.com', 'www.netafraz.com'],  ////zare_nk_050527_commented(bekhatere mohajerat az next15 be next 16(domains ra commentet va az remotePatterns estefadeh mikonim)) 
+    remotePatterns: [  ////zare_nk_050527_added(bekhatere mohajerat az next15 be next 16(domains ra commentet va az remotePatterns estefadeh mikonim)) 
+      {
+        protocol: "https",
+        hostname: "www.w3schools.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.tutorialspoint.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.netafraz.com",
+      },
+    ],
   },
 };
 

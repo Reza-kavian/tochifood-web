@@ -51,7 +51,9 @@ async function verifyToken(token: string) {
   }
 }
 
-export async function middleware(request: NextRequest) {
+// export async function middleware(request: NextRequest) {  ////zare_nk_050527_commented(bekhatere mohajerat az next15 be next 16(lafze Componente middleware mishe proxy, name file ham hamin tagheir ro dare, yani middleware.ts be proxy.ts))
+export async function proxy(request: NextRequest) {  ////zare_nk_050527_added(bekhatere mohajerat az next15 be next 16(lafze Componente middleware mishe proxy, name file ham hamin tagheir ro dare, yani middleware.ts be proxy.ts))
+
   //  const url = new URL(request.url);
   //  const path = url.searchParams.get("path");
   //  url.searchParams.set("goo",14);
@@ -205,7 +207,7 @@ export async function middleware(request: NextRequest) {
       httpOnly: false,
     });
     var tempTest = response.cookies.get("redirect")?.value;
-    console.log("zare_nk_050525-tempTest: " + tempTest +'-request.nextUrl.pathname: '+request.nextUrl.pathname);
+    console.log("zare_nk_050525-tempTest: " + tempTest + '-request.nextUrl.pathname: ' + request.nextUrl.pathname);
 
     const fullUrl = request.nextUrl.href;
     const pathname = request.nextUrl.pathname;
