@@ -1,34 +1,56 @@
-////zare_nk_050517_okk(1)
+////zare_nk_050605_okk(1)
 import { NextResponse, NextRequest } from "next/server";
 // import jwt from "jsonwebtoken";  ////chon middleware.ts dar Edge Runtime ejra mishavad, az majoole crypto poshtibani nemikoneh 
 // va az jsonwebtoken nemishe dar middleware.ts estefadeh kard, pas api zadim be verifytoken va dar anja az jsonwebtoken estefade kardim 
 // va natijeh ra be middleware.ts pasokh dadim.(albateh be api verifyToken ham nazadim va az jwtVerify estefadeh kardim ke moadele jwt hast)
+////zare_nk_050528_nokteh(mozhdeh ey del ke dar next16 middleware.ts be proxy.js tagheir kardeh va yeki az bartarihayah in ast ke dige 
+//// Edge Runtime nist(balkeh Node.js runtime hast) va misheh az jsonwebtoken estefadeh kard(vali dar api zadan ha hanoozam shayad mahdoodiat 
+//// haei manande edge runtime dashteh bashe va batad test gereft natijeye code ha ro))
 import { jwtVerify } from "jose"; ////zare_nk_040403_added
 
-const publicPaths = [
-  "/about",
-  "/folder01",
-  "/folder02",
-  "/folder03",
-  "/login",
-  "/signUp",
-  "/_next",
-  "/api",
-  "/static",
-  "/favicon.ico",
-  "/tryreact",
-  "/tryreact2",
-  "/tryreact3",
-  "/tryreact5",
-  "/.well-known",
-  "/images", //zare_nk_040311_nokteh(age in ro nagzarim tamame akshaye ba src="/images/..." ra barname be onvane masir dar nazar migire)
-  "/discountsAndOffers",
-  "/games",
-  "/o/oauth2",
-  "/redirect-mobile",
-  "/location",
-  "/onboarding",
+////zare_nk_050605_commented_st(for public to protected)
+// const publicPaths = [
+//   "/about",
+//   "/folder01",
+//   "/folder02",
+//   "/folder03",
+//   "/login",
+//   "/signUp",
+//   "/_next",
+//   "/api",
+//   "/static",
+//   "/favicon.ico",
+//   "/tryreact",
+//   "/tryreact2",
+//   "/tryreact3",
+//   "/tryreact5",
+//   "/.well-known",
+//   "/images", //zare_nk_040311_nokteh(age in ro nagzarim tamame akshaye ba src="/images/..." ra barname be onvane masir dar nazar migire)
+//   "/discountsAndOffers",
+//   "/games",
+//   "/o/oauth2",
+//   "/redirect-mobile",
+//   "/location",
+//   "/onboarding",
+// ];
+////zare_nk_050605_commented_end(for public to protected)
+////zare_nk_050605_added_st(for public to protected)
+const protectedPaths = [
+  "/",
+  // "/folder04",
+  "/editaddress",
+  "/orders",
+  "/ordersHistory",
+  "/product-collection",
+  "/profile",
+  "/redirecting",
+  "/search",
+  "/shoppingbasket",
+  "/terms-and-conditions",
+  "/vendor",
+  "/vendorlist",
 ];
+////zare_nk_050605_added_end(for public to protected)
 
 async function verifyToken(token: string) {
   try {
@@ -37,9 +59,9 @@ async function verifyToken(token: string) {
       "base64"
     ).toString("utf-8");  ////zare_nk_040219_added(baraye adame moshkel dar verify kardane secretKey vaghti az lafze $ estefadeh shod dar mohtavaye secretKey)
 
-    console.log(
-      "zare_nk_050205-03-POST called!!-decoded secretKey: " + secretKey
-    );
+    // console.log(  ////zare_nk_050605_commented(in log az nazare amniyati besyar khatarnake)
+    //   "zare_nk_050205-03-POST called!!-decoded secretKey: " + secretKey
+    // );
     const SECRET = new TextEncoder().encode(secretKey);
     const { payload } = await jwtVerify(token, SECRET);  //zare_nk_041009_nokteh(jwtVerify lafze payload ra barmigardooneh )
     console.log("zare_nk_050205-04-payload: " + JSON.stringify(payload));
@@ -47,7 +69,7 @@ async function verifyToken(token: string) {
     // "NameMoshtari":"","nbf":1750759349,"exp":1751364149,"iat":1750759349}
     return payload;
   } catch (error) {
-    return null;  ////zare_nk)050413_nokteh(catche marboot be verifytoken ro inja begonjoonam)
+    return null;  ////zare_nk_050413_nokteh(catche marboot be verifytoken ro inja begonjoonam)
   }
 }
 
@@ -64,31 +86,38 @@ export async function proxy(request: NextRequest) {  ////zare_nk_050527_added(be
     "zare_nk_050205-00-Middleware called!!-All cookies: " +
     request.headers.get("cookie")
   );
-  ////zare_nk_040419_added_st(and commented)
-  // const isGoogleOAuth = request.nextUrl.pathname.startsWith("/o/oauth2/");
-  // if (isGoogleOAuth) {
-  //   console.log("✅ Bypassing middleware for Google OAuth callback.");
-  //   return NextResponse.next();
-  // }
-  ////zare_nk_040419_added_end(and commented)
-  const isPublic = publicPaths.some((path) => {
+
+  ////zare_nk_050605_commented_st
+  // const isPublic = publicPaths.some((path) => {
+  //   return (
+  //     request.nextUrl.pathname === path ||  ////yani daghighan khode /tryreact
+  //     request.nextUrl.pathname.startsWith(path + "/") ////yani zir majmooe haye /tryreact, masalan /tryreact/...
+  //   );
+  // });
+  ////zare_nk_050605_added_st
+  ////zare_nk_050605_commented_st
+  const isProtected = protectedPaths.some((path) => {
     return (
       request.nextUrl.pathname === path ||  ////yani daghighan khode /tryreact
       request.nextUrl.pathname.startsWith(path + "/") ////yani zir majmooe haye /tryreact, masalan /tryreact/...
     );
   });
+  ////zare_nk_050605_added_st
 
   // if (isPublic || request.nextUrl.pathname == "/") {  ////zare_nk_050205_commented
-  if (isPublic) {
+  // if (isPublic) {   ////zare_nk_050605_commented
+  if (!isProtected) {      ////zare_nk_050605_added
     const response = NextResponse.next();
-    const fullUrl = request.nextUrl.href;
-    const pathname = request.nextUrl.pathname;
-    // ست کردن header برای استفاده در layout
-    response.headers.set("x-url", fullUrl);
-    response.headers.set("x-pathname", pathname);
-    console.log("zare_nk_050205-fullUrl001: " + fullUrl);
+    ////zare_nk_050605_commented_st
+    // const fullUrl = request.nextUrl.href;
+    // const pathname = request.nextUrl.pathname;    
+    // response.headers.set("x-url", fullUrl);
+    // response.headers.set("x-pathname", pathname);
+    // console.log("zare_nk_050205-fullUrl001: " + fullUrl);
+    ////zare_nk_050605_commented_end
     return response;
   }
+
   console.log("zare_nk_050205 from:", request.nextUrl.pathname);
 
   const token = request.cookies.get("token")?.value;  //zare_nk_050111_commented_movaghat
@@ -107,9 +136,9 @@ export async function proxy(request: NextRequest) {  ////zare_nk_050527_added(be
       ////zare_nk_040403_added_st
       const validPayload = await verifyToken(token);
 
-      console.log(
-        "zare_nk_050205-04-validPayload is: " + JSON.stringify(validPayload)
-      );
+      // console.log(    ////zare_nk_050605_commented(in log az nazare amniyati besyar khatarnake)
+      //   "zare_nk_050205-04-validPayload is: " + JSON.stringify(validPayload)
+      // );
 
       if (!validPayload) {
         var ishomePage: boolean = request.nextUrl.pathname == "/" ? true : false;
@@ -118,31 +147,34 @@ export async function proxy(request: NextRequest) {  ////zare_nk_050527_added(be
         const response = ishomePage ? NextResponse.redirect(new URL("/onboarding", request.url)) :
           NextResponse.redirect(new URL("/login", request.url));  //zare_nk_050205_added
 
-        const isValidRedirectPath = !publicPaths.some((path) =>  ////zare_nk_050506_nokteh(manzooram ine ke masire yad shodeh dar arayeye publicPaths nabashe(chon age bashe
-          //// azade va nabayad login boodanesh check beshe(albateh dar sharte if (isPublic) {... return response;} dige badesh ejra nemishe va age barnameh be khotoote badesh 
-          //// raft ya ni dar arraye nist va in check kardane mojadad ezafiyeh, vali jahate olgu gozashtam bemooneh)))
-          request.nextUrl.pathname.startsWith(path)
-        );
+        ////zare_nk_050605_commented_st(ezafiye teebghe sharthaye balatar inja oomad momidoonim dar araye hast ya na!)
+        // const isValidRedirectPath = !publicPaths.some((path) =>  ////zare_nk_050506_nokteh(manzooram ine ke masire yad shodeh dar arayeye publicPaths nabashe(chon age bashe
+        //   //// azade va nabayad login boodanesh check beshe(albateh dar sharte if (isPublic) {... return response;} dige badesh ejra nemishe va age barnameh be khotoote badesh 
+        //   //// raft ya ni dar arraye nist va in check kardane mojadad ezafiyeh, vali jahate olgu gozashtam bemooneh)))
+        //   request.nextUrl.pathname.startsWith(path)
+        // );
         // if (isValidRedirectPath) {  ////zare_nk_050205_commented
-        if (isValidRedirectPath || ishomePage) {  ////zare_nk_050205_added
-          response.cookies.set("redirect", request.nextUrl.pathname, {
-            path: "/",
-            httpOnly: false,
-          });
-        }
+        // if (isValidRedirectPath || ishomePage) {  ////zare_nk_050205_added
+        ////zare_nk_050605_commented_end(ezafiye teebghe sharthaye balatar inja oomad momidoonim dar araye hast ya na!)
+        response.cookies.set("redirect", request.nextUrl.pathname, {
+          path: "/",
+          httpOnly: false,
+        });
+        // }  ////zare_nk_050605_commented(ezafiye teebghe sharthaye balatar inja oomad momidoonim dar araye hast ya na!)
         var tempTest = response.cookies.get("redirect")?.value;
         console.log("zare_nk_050205-taghiir-tempTest: " + tempTest);
         console.log(
           "zare_nk_050205-response.Cookies(not ok) in middleware:",
           response.cookies.get("token")?.value
         );
-        //zare_nk_040228_added_st
-        const fullUrl = request.nextUrl.href;
-        const pathname = request.nextUrl.pathname;
-        // ست کردن header برای استفاده در layout
-        response.headers.set("x-url", fullUrl);
-        response.headers.set("x-pathname", pathname);
-        console.log("zare_nk_050205-fullUrl003: " + fullUrl);
+        ////zare_nk_050605_commented_st
+        // const fullUrl = request.nextUrl.href;
+        // const pathname = request.nextUrl.pathname;
+        // // ست کردن header برای استفاده در layout
+        // response.headers.set("x-url", fullUrl);
+        // response.headers.set("x-pathname", pathname);
+        // console.log("zare_nk_050205-fullUrl003: " + fullUrl);
+        ////zare_nk_050605_commented_end
         return response;
       }
       // console.log(
@@ -157,12 +189,14 @@ export async function proxy(request: NextRequest) {  ////zare_nk_050527_added(be
 
       ////zare_nk_040228_added_st
       const response = NextResponse.next();
-      const fullUrl = request.nextUrl.href;
-      const pathname = request.nextUrl.pathname;
-      // ست کردن header برای استفاده در layout
-      response.headers.set("x-url", fullUrl);
-      response.headers.set("x-pathname", pathname);
-      console.log("zare_nk_050205-fullUrl002: " + fullUrl);
+      ////zare_nk_050605_commented_st
+      // const fullUrl = request.nextUrl.href;
+      // const pathname = request.nextUrl.pathname;
+      // // ست کردن header برای استفاده در layout
+      // response.headers.set("x-url", fullUrl);
+      // response.headers.set("x-pathname", pathname);
+      // console.log("zare_nk_050205-fullUrl002: " + fullUrl);
+      ////zare_nk_050605_commented_end
       return response;
     } catch (error) {
       console.log(
@@ -183,13 +217,14 @@ export async function proxy(request: NextRequest) {  ////zare_nk_050527_added(be
       });
       var tempTest = response.cookies.get("redirect")?.value;
       console.log("zare_nk_050205-taghiir-tempTest: " + tempTest);
-
-      const fullUrl = request.nextUrl.href;
-      const pathname = request.nextUrl.pathname;
-      // ست کردن header برای استفاده در layout
-      response.headers.set("x-url", fullUrl);
-      response.headers.set("x-pathname", pathname);
-      console.log("zare_nk_050205-fullUrl004: " + fullUrl);
+      ////zare_nk_050605_commented_st
+      // const fullUrl = request.nextUrl.href;
+      // const pathname = request.nextUrl.pathname;
+      // // ست کردن header برای استفاده در layout
+      // response.headers.set("x-url", fullUrl);
+      // response.headers.set("x-pathname", pathname);
+      // console.log("zare_nk_050205-fullUrl004: " + fullUrl);
+      ////zare_nk_050605_commented_endّ
       return response;
     }
   } else {
@@ -208,13 +243,13 @@ export async function proxy(request: NextRequest) {  ////zare_nk_050527_added(be
     });
     var tempTest = response.cookies.get("redirect")?.value;
     console.log("zare_nk_050525-tempTest: " + tempTest + '-request.nextUrl.pathname: ' + request.nextUrl.pathname);
-
-    const fullUrl = request.nextUrl.href;
-    const pathname = request.nextUrl.pathname;
-    // // ست کردن header برای استفاده در layout
-    response.headers.set("x-url", fullUrl);
-    response.headers.set("x-pathname", pathname);
-
+    ////zare_nk_050605_commented_st
+    // const fullUrl = request.nextUrl.href;
+    // const pathname = request.nextUrl.pathname;
+    // // // ست کردن header برای استفاده در layout
+    // response.headers.set("x-url", fullUrl);
+    // response.headers.set("x-pathname", pathname);
+    ////zare_nk_050605_commented_ثدی
     return response;
   }
 }

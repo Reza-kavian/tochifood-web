@@ -1,12 +1,12 @@
 ////zare_nk_050510_okk(2)
 "use client";
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 
 import { usePathname } from "next/navigation";
 // import LogoutButton from "@/components/LogoutButton";
 
-import { useAuthentication } from '../context/AuthenticationContext';
+// import { useAuthentication } from '../context/AuthenticationContext';
 
 ////zare_nk_050202_added_st(for use MUI)
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -60,34 +60,7 @@ export default function LayoutWrapper({ children }: RootLayoutProps) {
     <ThemeProvider theme={theme} >
       <CssBaseline />
       {/* zare_nk_050202_added_end(for use MUI) */}
-      <body
-        className={`${Styles.ISW_Medium_fa}`}
-        style={{
-          // color: "#3f3f3f",
-          // fontFamily: 'IRANSansWeb_Medium(adad_fa)', 
-        }}> 
-        {/* zare_nk_041225_commented_st(tebghe revale tapsifood header ra baraye aksare safahat motefavet ast, pas dar safahat mizaraim) */}
-        {/* {!isLoginPageOrPage && (
-        <div className="layoutHeader sticky-top">
-          <a
-            className="headerTitle"
-            href="/"
-            style={{
-              color: "inherit",
-              textDecoration: "none",
-              fontSize: "32px",
-            }}
-          > 
-            <img
-              style={{ width: "40px", borderRadius: "7px" }}
-              src="https://img.tochikala.com/Logo/photo14359415832-Copy.jpg"
-              alt="هایپر‌کرفو"
-            />
-          </a>
-          <LogoutButton />
-        </div>
-      )} */}
-        {/* zare_nk_041225_commented_end(tebghe revale tapsifood header ra baraye aksare safahat motefavet ast,pas dar safahat mizaraim) */}
+      {/* <body className={`${Styles.ISW_Medium_fa}`}>         */}
         <main className="main-in-LayoutWrapper">
           <section className="section-in-LayoutWrapper">
             {children}
@@ -95,7 +68,7 @@ export default function LayoutWrapper({ children }: RootLayoutProps) {
             </div>
           </section>
         </main>
-      </body >
+      {/* </body > */}
       {/* zare_nk_050202_added_st(for use MUI) */}
     </ThemeProvider >
     //// zare_nk_050202_added_end(for use MUI) 

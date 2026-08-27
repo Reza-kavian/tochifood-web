@@ -1,4 +1,4 @@
-//// context/AuthenticationContext.js   ////zare_nk_050517_okk(1)
+//// context/AuthenticationContext.js   ////zare_nk_050604_okk(1)
 'use client';
 
 import { createContext, useState, useContext, useCallback } from 'react';
@@ -48,9 +48,6 @@ const AuthenticationContext = createContext<{
     ////zare_nk_050518_added_end(ye jahaei dar safahate mokhtalef bedoone
     ////  barresiye methode refreshLoginStatus bekhaim mostaghim IsLoginAndInf ro meghdar bedim(masalan clicke dokmeye logout ke age hatta yek saniyeye pish 
     //// logim movaghagh dasht karbar mostaghim IsLoginAndInf ro khali koneh(dige be zamani exp va vojoode token kari nadarim ke barrasi konim ba refreshLoginStatus))
-
-
-
 }>({
     isLoginAndInf: {
         isLogin: null,
@@ -204,8 +201,7 @@ export function AuthenticationProvider({ children }: { children: React.ReactNode
         }
     }, []);
 
-    return (
-        
+    return (        
         <AuthenticationContext.Provider value={{ isLoginAndInf: isLoginAndInf, refreshLoginStatus: refreshLoginStatus, setIsLoginAndInf: setIsLoginAndInf }}> 
             { children }
         </AuthenticationContext.Provider >

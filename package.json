@@ -9,10 +9,12 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^9.0.0",
     "@mui/material": "^9.0.0",
+    "@mui/material-nextjs": "^9.3.0",
     "@neshan-maps-platform/ol": "^1.0.5",
     "@tensorflow-models/mobilenet": "^2.1.1",
     "@tensorflow/tfjs-node": "^4.22.0",
