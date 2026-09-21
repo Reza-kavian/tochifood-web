@@ -1,4 +1,4 @@
-////zare_nk_050525_okk(1)
+////zare_nk_050610_okk(1)
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -748,6 +748,7 @@ export default function EditPage() {
       console.log('zare_nk_050505_rere_03');
       return;
     }
+
     async function tempFuncForAsync() {
       console.log('zare_nk_050505_rere_04-tempFuncForAsync called!');
 
@@ -1081,13 +1082,13 @@ export default function EditPage() {
     if (token) {
       setIsEpmtyAddressFormInputs(false);
     }
-    ////zare_nk_050213_commented_st(chon ebghe revale tapsifoodi age karbar login nabood ke dokmeye edit(baraye hedayat be safheye editaddress)
+    ////zare_nk_050213_commented_st(chon tebghe revale tapsifoodi age karbar login nabood ke dokmeye edit(baraye hedayat be safheye editaddress)
     //// namayesh dadeh nemishe, va faghat karbar mitoone address ijad koneh(dar safheye /location) ke (dar database chon jaigozine feli mishe va
     //// baraye karbarane logout faghat yek address sabt mimooneh) va edit nadareh)
     // else {
     //   saveAddress(false);  ////zare_nk_050205_nokteh(age offLine ham bood taraf address ra zakhireh kon ehtemalan ba user movaghat!!)
     // }
-    ////zare_nk_050213_commented_end(chon ebghe revale tapsifoodi age karbar login nabood ke dokmeye edit(baraye hedayat be safheye editaddress)
+    ////zare_nk_050213_commented_end(chon tebghe revale tapsifoodi age karbar login nabood ke dokmeye edit(baraye hedayat be safheye editaddress)
     //// namayesh dadeh nemishe, va faghat karbar mitoone address ijad koneh(dar safheye /location) ke (dar database chon jaigozine feli mishe va
     //// baraye karbarane logout faghat yek address sabt mimooneh) va edit nadareh)
   }

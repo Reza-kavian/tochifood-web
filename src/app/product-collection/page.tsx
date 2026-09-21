@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(2)
+////zare_nk_050610_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext } from "react";
@@ -84,8 +84,8 @@ type responsedListFromApiSelectAddressListType = {
     [key: string]: any;
 };
 
-export default function Home() {
-    console.log('050329-Home rendered!!');   ////zare_nk_050329_added
+export default function ProductCollection() {
+    console.log('050329-ProductCollection rendered!!');   ////zare_nk_050329_added
     const [error, setError] = useState<string | null>(null);
     const [isEpmtyAdressList, setIsEpmtyAdressList] = useState<string | null>(null);
     const [isEpmtyShowAddRemAddress, setIsEpmtyShowAddRemAddress] = useState(true);

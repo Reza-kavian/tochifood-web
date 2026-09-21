@@ -1,4 +1,4 @@
-////zare_nk_050605_okk(1)
+////zare_nk_050630_okk(1)
 import { NextResponse, NextRequest } from "next/server";
 // import jwt from "jsonwebtoken";  ////chon middleware.ts dar Edge Runtime ejra mishavad, az majoole crypto poshtibani nemikoneh 
 // va az jsonwebtoken nemishe dar middleware.ts estefadeh kard, pas api zadim be verifytoken va dar anja az jsonwebtoken estefade kardim 
@@ -44,11 +44,13 @@ const protectedPaths = [
   "/product-collection",
   "/profile",
   "/redirecting",
-  "/search",
-  "/shoppingbasket",
-  "/terms-and-conditions",
-  "/vendor",
-  "/vendorlist",
+  ////zare_nk_050607_commented_st
+  // "/search",
+  // "/shoppingbasket",
+  // "/terms-and-conditions",
+  // "/vendor",
+  // "/vendorlist",
+  ////zare_nk_050607_commented_end
 ];
 ////zare_nk_050605_added_end(for public to protected)
 

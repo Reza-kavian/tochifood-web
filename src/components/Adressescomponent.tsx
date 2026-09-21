@@ -1,4 +1,4 @@
-////zare_nk_050522_okk(1)
+////zare_nk_050630_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, memo, useContext, } from "react";
@@ -235,7 +235,7 @@ const Adressescomponent = function Adressescomponent({
 
   var currentAddressUseContext = useContext(currentAddressContext);   ////zare_nk_050329_added 
 
-  // const chosenAddress = useCallback(   ////zare_nk_050526_commented(niazi be useCallback nist,chon chosenAddress ra be componente farzande in component ke pas nemidim!!)
+  // const chosenAddress = useCallback(   ////zare_nk_050526_commented(niazi be useCallback nist, chon chosenAddress ra be componente farzande in component ke pas nemidim!!)
   const chosenAddress =     ////zare_nk_050526_added
     async (chosenAddressItem: responsedListFromApiSelectAddressListType | null) => {
       console.log('chosenAddress called!!-chosenAddressItem: ' + JSON.stringify(chosenAddressItem));

@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(1)
+////zare_nk_050610_okk(1)
 "use client";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -37,7 +37,6 @@ export default function RedirectingPage() {
       router.replace(redirect); // هدایت به مسیر ذخیره‌شده
     }
     asyncTempFunc();
-
   }, []);
 
   return <p>در حال هدایت...</p>; // متن موقت برای کاربر

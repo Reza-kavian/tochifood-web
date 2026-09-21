@@ -1,4 +1,4 @@
-//// context/AuthenticationContext.js   ////zare_nk_050604_okk(1)
+//// context/AuthenticationContext.js   ////zare_nk_050628_okk(1)
 'use client';
 
 import { createContext, useState, useContext, useCallback } from 'react';

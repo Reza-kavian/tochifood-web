@@ -1,4 +1,4 @@
-////zare_nk_050517_okk(1)
+////zare_nk_050529_okk(1)
 'use client' 
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor ,memo} from "react";
@@ -32,8 +32,10 @@ const TestComponent = ({ testState, SetTestState }: { testState: number, SetTest
     }
 
     useEffect(() => {
-        // SetTestState(2);  ////zare_nk_050327_nokteh(baese reRandere Pedaresh mishe ke bad az pedaresh khodesh render mishe(midoonim pedar render beshe farzandanesham reRender mishan(chon dar pedare tarif shodeh shodeh va dar propse farzand pas dadeh shodeh)))
-        // setTestStateDakheli(2); ////zare_nk_050327_nokteh(baese reRandere khodesh mishe, vali pedaresh reRender nemishe(setState dar farzand baese reRendere pedare nemishe(magar inke dar pedare tarif shodeh bashe va dar propse farzand pas bedeh)))
+        // SetTestState(2);  ////zare_nk_050327_nokteh(baese reRandere Pedaresh mishe ke bad az pedaresh khodesh render mishe(midoonim pedar render beshe farzandanesham reRender
+        ////  mishan(chon dar pedare tarif shodeh va dar propse farzand pas dadeh shodeh)))
+        // setTestStateDakheli(2);  ////zare_nk_050327_nokteh(baese reRandere khodesh mishe, vali pedaresh reRender nemishe(setState dar farzand baese reRendere pedare nemishe(magar 
+        //// inke dar pedare tarif shodeh bashe va dar propse farzand pas bedeh)))
 
         // func1();
     }, []);
