@@ -1,4 +1,4 @@
-////zare_nk_050610_okk(1)
+////zare_nk_050631_okk(1)
 "use client";
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -628,8 +628,7 @@ export default function EditPage() {
   const [mobileVal, setMobileVal] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  // const [isEpmtyHeightBox, setIsEpmtyHeightBox] = useState<boolean>(true);  ////zare_nk_050505_commented
-  const [isEpmtyAddressFormInputs, setIsEpmtyAddressFormInputs] = useState<boolean>(true);  ////zare_nk_050505_added
+  const [isEpmtyAddressFormInputs, setIsEpmtyAddressFormInputs] = useState<boolean>(true);
 
   const refForBox = useRef<HTMLDivElement | null>(null);
 
@@ -693,7 +692,7 @@ export default function EditPage() {
     ////zare_nk_050505_nokteh_st(chon az componente useAuthentication dar  useEffect(() => {...}, [pathname]); ke dar rendere ebtedaeiye safhe estelam migereh baraye
     ////  estelame vojood va monghazi boodane cookiye token estefadeh kardim, age monghazi bood cookiye token ro hazf ham mikoneh, pas dar api ha hamoon 
     //// sharte [if (!token) {... return;}] kafiye. dar zemn revale karim ine hamon estelam dar rendere ebtedaeiye safhe kafiye va baraye har api mojadad estelam nemigirim
-    ////  ta sorat bala bashe(agar ham zamani ke daghayeghi dar safheye jar hastim va token bad az vorood be in safheh monghazi shod age api bezanim bedoone estelam khode 
+    ////  ta sorat bala bashe(agar ham zamani ke daghayeghi dar safheye jari hastim va token bad az vorood be in safheh monghazi shod age api bezanim bedoone estelam khode 
     //// api .net core zahmate estelam ro mikeshe va statuse manfi mideh va moshkeli pish nemiad)) 
     // if (!token || !isLoginAndInf.isLogin) {  ////zare_nk_050506_nokteh(chon dar useAuthentication age estelam adame token ya monghazi shodan bashe ham token ro hazf
     ////  mikoneh ham isLogin ro false mikoneh pas !token va !isLoginAndInf.isLogin hamishe yek javab midan va yeki ro benevisim kafiye(hamoon !token ro tebghe gozashte mizarim basheh))
@@ -704,7 +703,7 @@ export default function EditPage() {
     ////zare_nk_050505_nokteh_end(chon az componente useAuthentication dar  useEffect(() => {...}, [pathname]); ke dar rendere ebtedaeiye safhe estelam migereh baraye
     ////  estelame vojood va monghazi boodane cookiye token estefadeh kardim, age monghazi bood cookiye token ro hazf ham mikoneh, pas dar api ha hamoon 
     //// sharte [if (!token) {... return;}] kafiye. dar zemn revale karim ine hamon estelam dar rendere ebtedaeiye safhe kafiye va baraye har api mojadad estelam nemigirim
-    ////  ta sorat bala bashe(agar ham zamani ke daghayeghi dar safheye jar hastim va token bad az vorood be in safheh monghazi shod age api bezanim bedoone estelam khode 
+    ////  ta sorat bala bashe(agar ham zamani ke daghayeghi dar safheye jari hastim va token bad az vorood be in safheh monghazi shod age api bezanim bedoone estelam khode 
     //// api .net core zahmate estelam ro mikeshe va statuse manfi mideh va moshkeli pish nemiad)) 
     console.log('zare_nk_050505_isLoginAndInf: ' + JSON.stringify(isLoginAndInf));
 
@@ -936,7 +935,7 @@ export default function EditPage() {
   let longitude = useRef<number | null | undefined>(null);
   let latitude = useRef<number | null | undefined>(null);
 
-  async function showPosition(position: PositionType) {    ////zare_nk_050208_nokteh(tabee showPosition barasase parametre voroodish(position) refhaye longitude va 
+  async function showPosition(position: PositionType) {    ////zare_nk_050208_nokteh(tabee showPosition bar asase parametre voroodish(position) refhaye longitude va 
     //// latitude ro meghdar mideh va state feature ra ham ba hamin position meghdar mideh) )
     if (Array.isArray(position)) {
       // اگر آرایه بود، مستقیماً از عناصرش استفاده کن

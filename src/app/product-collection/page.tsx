@@ -1,4 +1,4 @@
-////zare_nk_050610_okk(2)
+////zare_nk_050631_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext } from "react";
@@ -473,8 +473,6 @@ export default function ProductCollection() {
                 }}>
                     {
                         [...Array(9)].map((_, index) => {
-
-
                             return (<div key={index} style={{
                                 paddingBottom: '.25rem', padding: '.5rem', backgroundColor: 'white', borderRadius: '.5rem', gap: '.25rem', justifyContent: 'space-between',
                                 flexDirection: 'column', height: 'fit-content', display: 'flex', border: '1px solid #ebeef3',

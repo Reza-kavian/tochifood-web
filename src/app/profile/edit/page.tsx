@@ -1,4 +1,4 @@
-////zare_nk_050610_okk(2)
+////zare_nk_050631_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext } from "react";
@@ -644,9 +644,6 @@ export default function Profile() {
                     fontSize: '.875rem',
                   }}
                 />
-
-
-
               </div>
 
               <div style={{

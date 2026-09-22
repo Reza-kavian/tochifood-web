@@ -1,4 +1,4 @@
-////zare_nk_050428_okk(2)
+////zare_nk_050631_okk(2)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, RefObject, ReactNode, ChangeEvent, MouseEvent, createContext, useContext } from "react";
@@ -65,7 +65,6 @@ export default function Profile() {
 
   return (
     <>
-
       <div style={{
         // backgroundColor: 'white', 
         width: '100%',

@@ -1,4 +1,4 @@
-////zare_nk_050610_okk(1)
+////zare_nk_050631_okk(1)
 "use client";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -26,7 +26,7 @@ export default function RedirectingPage() {
   useEffect(() => {
     const asyncTempFunc = async () => {
       // const token = getCookie("token");  //zare_nk_040118_added(inja niazi nist hamintori neveshtam)
-      // //zare_nk_031221_commented_st(chon  tasmime nahaei estefadeh az cookie shod)
+      // //zare_nk_031221_commented_st(chon tasmime nahaei estefadeh az cookie shod)
       // const redirect = sessionStorage.getItem("redirect") || "/";
       // sessionStorage.removeItem("redirect"); // مقدار را حذف کن تا در آینده تداخل ایجاد نکند
       // router.replace(redirect); // هدایت به مسیر ذخیره‌شده

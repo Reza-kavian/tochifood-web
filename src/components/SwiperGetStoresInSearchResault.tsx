@@ -1,4 +1,4 @@
-////zare_nk_050510_okk(1)
+////zare_nk_050631_okk(1)
 'use client'
 
 import { useState, useEffect, useRef, useCallback, JSXElementConstructor, memo, RefObject, ReactNode, ChangeEvent, MouseEvent } from "react";
@@ -75,7 +75,7 @@ const SwiperGetStoresInSearchResault = () => {
         ////zare_nk_050510_added_st
         const chosenAddress = await getCookie("chosenAddress");
         var parsedChosenAddress: responsedListFromApiSelectAddressListType | null = chosenAddress ? JSON.parse(chosenAddress) : null;
-        // setMycurrentAddressState(parsedChosenAddress);  ////zare_nk_050510_commented(chon dar in file,dar haminja faghat be parsedChosenAddress niaz darim va dar jahaye dige va
+        // setMycurrentAddressState(parsedChosenAddress);  ////zare_nk_050510_commented(chon dar in file, dar haminja faghat be parsedChosenAddress niaz darim va dar jahaye dige va
         ////  jsx niazi be estefadeh azash nist dakhele setState negahesh nadashtam(age dar tavabehe digeh mikham azash estefadeh konam(albateh dar in file felan hich ja azash estefadeh
         ////  nemikonam), vali dar jsx(dar dome html) nemikham azash etefadeh konam mamoolan useRef behtare nesbat be useState ke(useState baese reRender mishe)))
         ////zare_nk_050510_added_end
