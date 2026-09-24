@@ -1,4 +1,4 @@
-//src\app\api\auth\callback\google  ////zare_nk_050505_okk(1)
+//src\app\api\auth\callback\google  ////zare_nk_050701_okk(1)
 import { NextRequest, NextResponse } from "next/server";  ////zare_nk_041013_nokteh(cookies marboot be NextResponse(mesle res.cookies.set("token", "123");) ham khandani va ham neveshtani hastan )
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { cookies } from "next/headers";  ////zare_nk_041013_nokteh(cookies import shodeh az next/headers faghat khandani hast, va marboot be cooki haei ke az samte karbar ba request mian)
@@ -108,7 +108,9 @@ export async function GET(req: NextRequest) {
     /* ---------------- Cancel or Error ---------------- */
     if (!code || error) {
       if (source === "mobile") {
-        const url = new URL("https://testotm.sarinmehr.com/redirect-mobile");
+        const url = new URL("https://testotm.sarinmehr.com/redirect-mobile");  ////zare_nk_050701_nokteh(darvaghe manzoor haman masire /redirect-mobile dar hamin projeh hast ke 
+        //// testotm.sarinmehr.com ham addrese in projeh dar abrarvan hast(felen dar in addresse testiye testotm enteshar dadim) ke badan ba name doroste masallan tochifood.com 
+        //// enteshar midim va in const url ham be name jadid virayesh mishe )
         url.searchParams.set("error", error ?? "google_login_failed");
         url.searchParams.set("verified", "1");
         const res = NextResponseRedirect(url.toString());

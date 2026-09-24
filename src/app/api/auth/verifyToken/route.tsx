@@ -1,4 +1,4 @@
-////zare_nk_050505_okk(1)
+////zare_nk_050701_okk(1)
 //src\app\api\auth\verifyToken\  
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
@@ -36,7 +36,8 @@ export async function POST(req: NextRequest) {
     let errorCode = "";  //zare_nk_041108_added(ijadesh kardam vali estefadehi nakardam azash, mitooneh beonvane code sakhtegiye tekyekalam haye man baraye tafkike tasmimgiri dar request estefadeh beshe,
     // masalan age token monghazi shod che konim ya age token token namotabar ast che konim)
     if (error.name == "TokenExpiredError") {
-      tokenErroeMessage = "token monghazi shodeh ast";
+      tokenErroeMessage = "token monghazi shodeh ast";  ////zare_nk_050701_nkteh(dastoore jwt.verify az rooye meghdare exp dar token mifahme token monghazi 
+      //// shedh ya na, va in exp dar zamane sakhte token che ba js va che ba c# bayad meghdar dadeh beshe(masalan man dar sakhte tokenha ba jwt.sign expiresIn ra meghdar midam))
       errorCode = "TOKEN_EXPIRED";//zare_nk_041108_added
     } else {
       tokenErroeMessage = "token namotabar ast";

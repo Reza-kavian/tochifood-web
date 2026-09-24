@@ -169,10 +169,10 @@ const SwiperGetStoresInSearchResault = () => {
                         //// barnameh moshakhas she(pishfarz slidesPerView={1} hast))
                         // centeredSlides={true}
                         navigation={false}
-                        ////zare_nk_050511_added_st(basteh be tarrahimoon yejooraei mokammele spaceBetween baraye avalin va akharin slai hast)
+                        ////zare_nk_050511_added_st(basteh be tarrahimoon yejooraei mokammele spaceBetween baraye avalin va akharin Slide hast)
                         slidesOffsetBefore={12}
                         slidesOffsetAfter={12}
-                        ////zare_nk_050511_added_end(basteh be tarrahimoon yejooraei mokammele spaceBetween baraye avalin va akharin slai hast)
+                        ////zare_nk_050511_added_end(basteh be tarrahimoon yejooraei mokammele spaceBetween baraye avalin va akharin Slide hast)
 
                         className="SwiperBordBord"
                         style={{
